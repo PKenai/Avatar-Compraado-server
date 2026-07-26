@@ -1,0 +1,10 @@
+^C:\USERS\IMFIS\DESKTOP\COMPILAR EM 32\SERVER\SOURCES\BUILD\CMAKEFILES\5D73C26136B9E0720A73423A6F670778\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/imfis/Desktop/Compilar em 32/server/sources" "-BC:/Users/imfis/Desktop/Compilar em 32/server/sources/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/imfis/Desktop/Compilar em 32/server/sources/build/theforgottenserver.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

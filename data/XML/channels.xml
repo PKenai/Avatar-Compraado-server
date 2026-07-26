@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channels>
+	<!-- README:
+		0 - dynamic, reserved for guilds
+		1 - always acts as Party channel, only "name" tag available
+		6 - acts as Help channel- clientsided message
+		65535 - DO NOT CHANGE THE ID- only "name", "enabled", "active" and "logged" tags available
+	 -->
+	<channel id="1" name="Party"/>
+	<channel id="2" name="Counselor" access="1"/>
+	<channel id="3" name="Chat Geral" level="20" access="5"/>
+	<channel id="4" name="Main Channel" level="20" muted="5" conditionId="4" conditionMessage="Somente uma mensagem a cada 5 segundos."/>
+	<channel id="5" name="Staff" access="3"/>
+	<channel id="6" name="Trade" level="20" muted="60" conditionId="3" conditionMessage="Somente uma mensagem a cada 1 minuto."/>
+	<channel id="7" name="English Chat" level="20" access="5"/>
+	<channel id="65535" name="Private Chat Channel"/>
+</channels>

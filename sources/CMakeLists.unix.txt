@@ -1,0 +1,97 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+
+PROJECT(theforgottenserver)
+
+IF(NOT CMAKE_BUILD_TYPE)
+    SET(CMAKE_BUILD_TYPE Release)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+
+INCLUDE_DIRECTORIES(/usr/include/libxml2 /usr/include/lua5.1)
+
+ADD_DEFINITIONS(-D_THREAD_SAFE -D_REENTRANT -D__ENABLE_SERVER_DIAGNOSTIC__ -D__NO_CRYPTOPP__ -D__USE_MYSQL__)
+
+SET(CMAKE_CXX_FLAGS_DEBUG "-O1 -ggdb -fno-inline ")
+SET(CMAKE_CXX_FLAGS_RELEASE "-O2 -ggdb -rdynamic")
+SET(CMAKE_CXX_FLAGS "-Wall -Wno-strict-aliasing -Wno-unknown-pragmas")
+
+#set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -Wl,-rpath,./lib")
+
+ADD_EXECUTABLE(theforgottenserver
+weapons.cpp
+waitlist.cpp
+vocation.cpp
+trashholder.cpp
+tools.cpp
+tile.cpp
+thing.cpp
+textlogger.cpp
+teleport.cpp
+talkaction.cpp
+spectators.cpp
+status.cpp
+spells.cpp
+spawn.cpp
+server.cpp
+scriptmanager.cpp
+scheduler.cpp
+raids.cpp
+quests.cpp
+protocolold.cpp
+protocollogin.cpp
+protocolhttp.cpp
+protocolgame.cpp
+protocol.cpp
+position.cpp
+player.cpp
+party.cpp
+outputmessage.cpp
+outfit.cpp
+otserv.cpp
+npc.cpp
+networkmessage.cpp
+movement.cpp
+mounts.cpp
+monsters.cpp
+monster.cpp
+map.cpp
+manager.cpp
+mailbox.cpp
+luascript.cpp
+items.cpp
+itemattributes.cpp
+item.cpp
+#iomarket.cpp
+iomapserialize.cpp
+iomap.cpp
+iologindata.cpp
+ioguild.cpp
+ioban.cpp
+housetile.cpp
+house.cpp
+group.cpp
+globalevent.cpp
+gameservers.cpp
+game.cpp
+fileloader.cpp
+exception.cpp
+dispatcher.cpp
+depot.cpp
+databasemysql.cpp
+databasemanager.cpp
+database.cpp
+cylinder.cpp
+creatureevent.cpp
+creature.cpp
+container.cpp
+connection.cpp
+configmanager.cpp
+condition.cpp
+combat.cpp
+chat.cpp
+beds.cpp
+baseevents.cpp
+allocator.cpp
+admin.cpp
+actions.cpp)
+
+TARGET_LINK_LIBRARIES(theforgottenserver lua5.1 crypto boost_system boost_thread boost_regex boost_filesystem mysqlclient xml2 pthread)

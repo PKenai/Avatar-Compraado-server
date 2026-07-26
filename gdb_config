@@ -1,0 +1,8 @@
+set $_exitcode = 999
+run
+if $_exitcode != 0
+	call g_game.saveGameState()
+	thread apply all bt full
+	generate-core-file
+end
+quit

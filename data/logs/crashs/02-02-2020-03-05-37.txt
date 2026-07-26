@@ -1,0 +1,34 @@
+---------------------------------------------------
+Signal caught: SIGSEGV in 02/02/2020 - 03:05:37
+
+Thread 4 (Thread 0x682076d89700 (LWP 13578)):
+#0  pthread_cond_timedwait@@GLIBC_2.3.2 () at ../nptl/sysdeps/unix/sysv/linux/x86_64/pthread_cond_timedwait.S:238
+No locals.
+#1  0x00000000004f1689 in do_wait_until (timeout=..., m=..., this=0x92ab38 <Scheduler::getInstance()::scheduler+120>) at /usr/include/boost/thread/pthread/condition_variable.hpp:108
+        check_for_interruption = {thread_info = 0x682073452360, m = 0x92ab38 <Scheduler::getInstance()::scheduler+120>, set = true}
+        guard = {m = 0x682076d88de0}
+        cond_res = <optimised out>
+#2  timed_wait (wait_until=..., m=..., this=0x92ab38 <Scheduler::getInstance()::scheduler+120>) at /usr/include/boost/thread/pthread/condition_variable_fwd.hpp:108
+        timeout = {tv_sec = 1580619937, tv_nsec = 382677000}
+#3  Scheduler::schedulerThread (this=0x92aac0 <Scheduler::getInstance()::scheduler>) at /home/otserv/raava/sources/scheduler.cpp:50
+        task = 0x0
+        run = false
+        action = false
+        eventLockUnique = {m = 0x92ab10 <Scheduler::getInstance()::scheduler+80>, is_locked = false}
+#4  0x000068207b9d2a4a in ?? () from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+No symbol table info available.
+#5  0x000068207a9f4184 in start_thread (arg=0x682076d89700) at pthread_create.c:312
+        __res = <optimised out>
+        pd = 0x682076d89700
+        now = <optimised out>
+        unwind_buf = {cancel_jmp_buf = {{jmp_buf = {114488642148096, 2811996951592803229, 1, 114488530660288, 114488642148800, 114488642148096, -628579917693740131, -628589239806616675}, mask_was_saved = 0}}, priv = {pad = {0x0, 0x0, 0x0, 0x0}, data = {prev = 0x0, cleanup = 0x0, canceltype = 0}}}
+        not_first_call = <optimised out>
+        pagesize_m1 = <optimised out>
+        sp = <optimised out>
+        freesize = <optimised out>
+        __PRETTY_FUNCTION__ = "start_thread"
+#6  0x0000682079f0103d in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:111
+No locals.
+
+Thread 2 (Thread 0x6820775c8700 (LWP 13576)):
+#0  _M_lower_bound (this=this@entry=0x6820775c6f48, __k=@0x6820775c7d6c: 1001, __k@entry=@0x6820775c7d2c: 2002550124, __y=0x6820775c6f50, __x=0x46) at /usr/include/c++/4.8/bits/stl_tree.h:1141

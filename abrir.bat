@@ -1,0 +1,2 @@
+pythonw openserver.py
+pause

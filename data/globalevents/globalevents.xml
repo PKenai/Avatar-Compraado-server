@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<globalevents>
+	<globalevent name="save" interval="1800000" event="script" value="save.lua"/>
+	<!-- <globalevent name="onThink" interval="4000" event="script" value="checkLag.lua"/> -->
+
+	<globalevent name="Shop" interval="30000" event="script" value="shop.lua"/>
+	<globalevent name="Donate" interval="30000" event="script" value="donate.lua"/>
+	<globalevent name="onStart" type="start" event="script" value="onStart.lua"/>
+
+	<globalevent name="init" type="startup" event="script" value="init.lua"/>
+	<globalevent name="globalsave" type="globalsave" event="script" value="init.lua"/>
+	<globalevent name="record" type="record" event="script" value="record.lua"/>
+	<globalevent name="market" type="startup" event="script" value="market.lua"/>
+	
+	<globalevent name="castviewers" interval="60000" event="script" value="castviewers.lua"/>
+	<globalevent name="global_msg" interval="120000" event="script" value="site_msg.lua"/>
+	<globalevent name="global_msg_player" interval="120000" event="script" value="site_msg_player.lua"/>
+
+	<globalevent name="globalsave" time="03:00" event="script" value="globalsave.lua"/>
+
+
+	<globalevent name="bloodCastleA" time="17:50" event="script" value="bloodCastle.lua"/>
+	<globalevent name="bloodCastleB" time="21:50" event="script" value="bloodCastle.lua"/>
+	<globalevent name="warGroundA" time="17:50" event="script" value="warGround.lua"/>
+	<globalevent name="warGroundB" time="21:50" event="script" value="warGround.lua"/>
+
+
+	
+	<globalevent name="HouseClean" interval="5850000" event="script" value="houseclean.lua"/> 
+	
+	
+	<globalevent name="castleWar" time="20:50" event="script" value="castleWar.lua"/>
+
+
+	<globalevent name="invadeA" time="12:00" event="script" value="invade.lua"/>
+	<globalevent name="invadeB" time="14:00" event="script" value="invade.lua"/>
+	<globalevent name="invadeC" time="17:00" event="script" value="invade.lua"/>
+	<globalevent name="invadeD" time="20:00" event="script" value="invade.lua"/>
+	<globalevent name="invadeE" time="17:00" event="script" value="invade.lua"/>
+	<globalevent name="invadeF" time="23:00" event="script" value="invade.lua"/>
+	<globalevent name="invadeG" time="22:00" event="script" value="invade.lua"/>
+
+
+	 
+	<globalevent name="avatarA" time="05:00" event="script" value="avatar.lua"/>
+	<globalevent name="avatarB" time="09:00" event="script" value="avatar.lua"/>
+	<globalevent name="avatarC" time="13:00" event="script" value="avatar.lua"/>
+	<globalevent name="avatarD" time="18:00" event="script" value="avatar.lua"/>
+	<globalevent name="avatarE" time="21:00" event="script" value="avatar.lua"/>
+	<globalevent name="avatarF" time="23:00" event="script" value="avatar.lua"/> 
+	<globalevent name="Avaoff" interval="180000" event="script" value="avataroff.lua"/> 
+
+
+
+</globalevents>

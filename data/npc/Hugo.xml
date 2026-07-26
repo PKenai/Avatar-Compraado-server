@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<npc name="Hugo" script="data/npc/scripts/magicSuport.lua" access="3" walkinterval="0" lookdir="1">
+	<health now="1000" max="1000"/>
+	<look type="130" head="0" body="119" legs="100" feet="28" addons="1" corpse="3128"/>
+</npc>

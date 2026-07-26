@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<outfits>
+
+
+
+
+
+	<outfit id="1" default="0">
+		<list gender="0" lookType="1020" name="Fire Apprentice"/>
+		<list gender="1" lookType="1025" name="Fire Apprentice"/>
+	</outfit>
+
+	<outfit id="2" default="0">
+		<list gender="0" lookType="1021" name="Fire Warrior"/>
+		<list gender="1" lookType="1026" name="Fire Warrior"/>
+	</outfit>
+
+	<outfit id="3" default="0">
+		<list gender="0" lookType="1022" name="Fire Masked Warrior"/>
+		<list gender="1" lookType="1027" name="Fire Masked Warrior"/>
+	</outfit>
+
+	<outfit id="4" default="0">
+		<list gender="0" lookType="1023" name="Fire General"/>
+		<list gender="1" lookType="1028" name="Fire General"/>
+	</outfit>
+
+	<outfit id="5" default="0">
+		<list gender="0" lookType="1024" name="Fire Assassin"/>
+		<list gender="1" lookType="1029" name="Fire Assassin"/>
+	</outfit>
+
+	<outfit id="21" default="0">
+		<list gender="0" lookType="1030" name="Fire Republican"/>
+		<list gender="1" lookType="1031" name="Fire Republican"/>
+	</outfit>
+
+	<outfit id="25" default="0">
+		<list gender="0" lookType="1094" name="Fire Ultimate"/>
+		<list gender="1" lookType="1095" name="Fire Ultimate"/>
+	</outfit>
+
+	<outfit id="29" default="0">
+		<list gender="0" lookType="1135" name="Fire Royalty Warrior"/>
+		<list gender="1" lookType="1136" name="Fire Royalty Warrior"/>
+	</outfit>
+
+	<outfit id="30" default="0">
+		<list gender="0" lookType="1137" name="Fire Elite Gladiator"/>
+		<list gender="1" lookType="1138" name="Fire Elite Gladiator"/>
+	</outfit>
+
+	<outfit id="31" default="0">
+		<list gender="0" lookType="1139" name="Fire Diamond"/>
+		<list gender="1" lookType="1140" name="Fire Diamond"/>
+	</outfit>
+
+	<outfit id="41" default="0">
+		<list gender="0" lookType="1153" name="Fire Prestige"/>
+		<list gender="1" lookType="1154" name="Fire Prestige"/>
+	</outfit>
+
+
+
+
+
+
+	<outfit id="6" default="0">
+		<list gender="0" lookType="1040" name="Water Apprentice"/>
+		<list gender="1" lookType="1045" name="Water Apprentice"/>
+	</outfit>
+
+	<outfit id="7" default="0">
+		<list gender="0" lookType="1041" name="Southern Water Warrior"/>
+		<list gender="1" lookType="1046" name="Southern Water Warrior"/>
+	</outfit>
+
+	<outfit id="8" default="0">
+		<list gender="0" lookType="1042" name="Northern Water Warrior"/>
+		<list gender="1" lookType="1047" name="Northern Water Warrior"/>
+	</outfit>
+
+	<outfit id="9" default="0">
+		<list gender="0" lookType="1043" name="Royalty Water Warrior"/>
+		<list gender="1" lookType="1048" name="Royalty Water Warrior"/>
+	</outfit>
+
+	<outfit id="10" default="0">
+		<list gender="0" lookType="1044" name="Water Hunter"/>
+		<list gender="1" lookType="1049" name="Water Hunter"/>
+	</outfit>
+
+	<outfit id="22" default="0">
+		<list gender="0" lookType="1050" name="Water Republican"/>
+		<list gender="1" lookType="1051" name="Water Republican"/>
+	</outfit>
+
+	<outfit id="26" default="0">
+		<list gender="0" lookType="1096" name="Water Ultimate"/>
+		<list gender="1" lookType="1097" name="Water Ultimate"/>
+	</outfit>
+
+	<outfit id="32" default="0">
+		<list gender="0" lookType="1141" name="Masked Water Warrior"/>
+		<list gender="1" lookType="1142" name="Masked Water Warrior"/>
+	</outfit>
+
+	<outfit id="33" default="0">
+		<list gender="0" lookType="1143" name="Water Adventurer"/>
+		<list gender="1" lookType="1144" name="Water Adventurer"/>
+	</outfit>
+	
+	<outfit id="34" default="0">
+		<list gender="0" lookType="1145" name="Water Diamond"/>
+		<list gender="1" lookType="1146" name="Water Diamond"/>
+	</outfit>
+
+	<outfit id="42" default="0">
+		<list gender="0" lookType="1155" name="Water Prestige"/>
+		<list gender="1" lookType="1156" name="Water Prestige"/>
+	</outfit>
+
+
+
+
+
+	<outfit id="11" default="0">
+		<list gender="0" lookType="1060" name="Air Apprentice"/>
+		<list gender="1" lookType="1065" name="Air Apprentice"/>
+	</outfit>
+
+	<outfit id="12" default="0">
+		<list gender="0" lookType="1061" name="Air Warrior"/>
+		<list gender="1" lookType="1066" name="Air Warrior"/>
+	</outfit>
+
+	<outfit id="13" default="0">
+		<list gender="0" lookType="1062" name="Air Master"/>
+		<list gender="1" lookType="1067" name="Air Master"/>
+	</outfit>
+
+	<outfit id="14" default="0">
+		<list gender="0" lookType="1063" name="Ancient of the Air"/>
+		<list gender="1" lookType="1068" name="Ancient of the Air"/>
+	</outfit>
+
+	<outfit id="15" default="0">
+		<list gender="0" lookType="1064" name="Air Adventurer"/>
+		<list gender="1" lookType="1069" name="Air Adventurer"/>
+	</outfit>
+
+	<outfit id="23" default="0">
+		<list gender="0" lookType="1070" name="Air Republican"/>
+		<list gender="1" lookType="1071" name="Air Republican"/>
+	</outfit>
+
+	<outfit id="27" default="0">
+		<list gender="0" lookType="1098" name="Air Ultimate"/>
+		<list gender="1" lookType="1099" name="Air Ultimate"/>
+	</outfit>
+
+	<outfit id="35" default="0">
+		<list gender="0" lookType="1123" name="Trained Air Warrior"/>
+		<list gender="1" lookType="1124" name="Trained Air Warrior"/>
+	</outfit>
+
+	<outfit id="36" default="0">
+		<list gender="0" lookType="1125" name="Air Diamond"/>
+		<list gender="1" lookType="1126" name="Air Diamond"/>
+	</outfit>
+	
+	<outfit id="37" default="0">
+		<list gender="0" lookType="1127" name="Air Hood Killer"/>
+		<list gender="1" lookType="1128" name="Air Hood Killer"/>
+	</outfit>
+
+	<outfit id="43" default="0">
+		<list gender="0" lookType="1149" name="Air Prestige"/>
+		<list gender="1" lookType="1150" name="Air Prestige"/>
+	</outfit>
+
+
+
+
+
+	<outfit id="16" default="0">
+		<list gender="0" lookType="1080" name="Earth Apprentice"/>
+		<list gender="1" lookType="1085" name="Earth Apprentice"/>
+	</outfit>
+
+	<outfit id="17" default="0">
+		<list gender="0" lookType="1081" name="Earth Warrior"/>
+		<list gender="1" lookType="1086" name="Earth Warrior"/>
+	</outfit>
+
+	<outfit id="18" default="0">
+		<list gender="0" lookType="1082" name="Heavy Earth Warrior"/>
+		<list gender="1" lookType="1087" name="Heavy Earth Warrior"/>
+	</outfit>
+
+	<outfit id="19" default="0">
+		<list gender="0" lookType="1083" name="Royalty Earth Warrior"/>
+		<list gender="1" lookType="1088" name="Royalty Earth Warrior"/>
+	</outfit>
+
+	<outfit id="20" default="0">
+		<list gender="0" lookType="1084" name="Earth Slayer"/>
+		<list gender="1" lookType="1089" name="Earth Slayer"/>
+	</outfit>
+
+	<outfit id="24" default="0">
+		<list gender="0" lookType="1090" name="Earth Republican"/>
+		<list gender="1" lookType="1091" name="Earth Republican"/>
+	</outfit>
+
+	<outfit id="28" default="0">
+		<list gender="0" lookType="1100" name="Earth Ultimate"/>
+		<list gender="1" lookType="1101" name="Earth Ultimate"/>
+	</outfit>
+
+	<outfit id="38" default="0">
+		<list gender="0" lookType="1129" name="Earth Tribe Bender"/>
+		<list gender="1" lookType="1130" name="Earth Tribe Bender"/>
+	</outfit>
+
+	<outfit id="39" default="0">
+		<list gender="0" lookType="1131" name="Earth Diamond"/>
+		<list gender="1" lookType="1132" name="Earth Diamond"/>
+	</outfit>
+	
+	<outfit id="40" default="0">
+		<list gender="0" lookType="1133" name="Trained Earth Republican"/>
+		<list gender="1" lookType="1134" name="Trained Earth Republican"/>
+	</outfit>
+
+	<outfit id="44" default="0">
+		<list gender="0" lookType="1151" name="Earth Prestige"/>
+		<list gender="1" lookType="1152" name="Earth Prestige"/>
+	</outfit>
+
+
+
+
+
+	<outfit id="46" access="3">
+		<list gender="0-3" lookType="75" name="Gamemaster"/>
+	</outfit>
+
+	<outfit id="47" access="4">
+		<list gender="0-3" lookType="266" name="Community Manager"/>
+	</outfit>
+
+	<outfit id="48" access="5">
+		<list gender="0-3" lookType="302" name="God"/>
+	</outfit>
+	
+</outfits>

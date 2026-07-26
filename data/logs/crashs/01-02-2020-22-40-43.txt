@@ -1,0 +1,96 @@
+---------------------------------------------------
+Signal caught: SIGABRT in 01/02/2020 - 22:40:43
+
+Thread 5 (Thread 0x6c40d7984700 (LWP 27113)):
+#0  0x00006c4132142c37 in __GI_raise (sig=sig@entry=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:56
+        resultvar = 0
+        pid = 27096
+        selftid = 27113
+#1  0x00006c4132146028 in __GI_abort () at abort.c:89
+        save_stage = 2
+        act = {__sigaction_handler = {sa_handler = 0x5590f3bf, sa_sigaction = 0x5590f3bf}, sa_mask = {__val = {16, 6722920, 119027308443127, 119026428674053, 0, 119027272579176, 119027268660528, 119027272579176, 6722920, 119024012791280, 119027308471717, 119025750787800, 119027269612509, 1, 49075664, 119024012828512}}, sa_flags = 10, sa_restorer = 0x6c40d7984700}
+        sigs = {__val = {32, 0 <repeats 15 times>}}
+#2  0x00006c4132a51535 in __gnu_cxx::__verbose_terminate_handler() () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+No symbol table info available.
+#3  0x00006c4132a4f6d6 in ?? () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+No symbol table info available.
+#4  0x00006c4132a4f703 in std::terminate() () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+No symbol table info available.
+#5  0x00006c4132a4f922 in __cxa_throw () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+No symbol table info available.
+#6  0x00000000004e22ff in boost::throw_exception<boost::bad_weak_ptr> (e=...) at /usr/include/boost/throw_exception.hpp:67
+No locals.
+#7  0x00000000004e8ea5 in shared_count (r=..., this=<optimised out>) at /usr/include/boost/smart_ptr/detail/shared_count.hpp:580
+No locals.
+#8  shared_ptr<ServicePort> (r=..., this=<optimised out>) at /usr/include/boost/smart_ptr/shared_ptr.hpp:404
+No locals.
+#9  boost::enable_shared_from_this<ServicePort>::shared_from_this (this=<optimised out>) at /usr/include/boost/smart_ptr/enable_shared_from_this.hpp:49
+        p = <optimised out>
+#10 0x00000000004e4766 in ServicePort::handle (this=0x6c40c45092e0, acceptor=..., socket=0x6c4070008d10, error=...) at /home/otserv/raava/sources/server.cpp:167
+        error = {m_val = 0, m_cat = <optimised out>}
+        ip = {impl_ = {data_ = {base = {sa_family = <optimised out>, sa_data = {<optimised out>, <optimised out>, -65 '\277', -13 '\363', -112 '\220', 85 'U', <optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>}}, v4 = {sin_family = <optimised out>, sin_port = <optimised out>, sin_addr = {s_addr = 1435562943}, sin_zero = {<optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>}}, v6 = {sin6_family = <optimised out>, sin6_port = <optimised out>, sin6_flowinfo = 1435562943, sin6_addr = {__in6_u = {__u6_addr8 = {<optimised out> <repeats 16 times>}, __u6_addr16 = {<optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>, <optimised out>}, __u6_addr32 = {<optimised out>, <optimised out>, <optimised out>, <optimised out>}}}, sin6_scope_id = <optimised out>}}}}
+        remoteIp = 1435562943
+        connection = {px = 0x0, pn = {pi_ = 0x0}}
+#11 0x00000000004e5ec8 in operator() (a3=..., a2=<optimised out>, a1=..., p=<optimised out>, this=0x6c40d7983ce0) at /usr/include/boost/bind/mem_fn_template.hpp:393
+No locals.
+#12 operator()<boost::_mfi::mf3<void, ServicePort, boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp> >, boost::asio::basic_stream_socket<boost::asio::ip::tcp>*, const boost::system::error_code&>, boost::_bi::list1<const boost::system::error_code&> > (a=<synthetic pointer>, f=..., this=0x6c40d7983cf0) at /usr/include/boost/bind/bind.hpp:457
+No locals.
+#13 operator()<boost::system::error_code> (a1=..., this=0x6c40d7983ce0) at /usr/include/boost/bind/bind_template.hpp:47
+No locals.
+#14 operator() (this=0x6c40d7983ce0) at /usr/include/boost/asio/detail/bind_handler.hpp:47
+No locals.
+#15 asio_handler_invoke<boost::asio::detail::binder1<boost::_bi::bind_t<void, boost::_mfi::mf3<void, ServicePort, boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp> >, boost::asio::basic_stream_socket<boost::asio::ip::tcp>*, boost::system::error_code const&>, boost::_bi::list4<boost::_bi::value<ServicePort*>, boost::_bi::value<boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp> > >, boost::_bi::value<boost::asio::basic_stream_socket<boost::asio::ip::tcp>*>, boost::arg<1> (*)()> >, boost::system::error_code> > (function=<error reading variable: access outside bounds of object referenced via synthetic pointer>) at /usr/include/boost/asio/handler_invoke_hook.hpp:64
+No locals.
+#16 invoke<boost::asio::detail::binder1<boost::_bi::bind_t<void, boost::_mfi::mf3<void, ServicePort, boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp> >, boost::asio::basic_stream_socket<boost::asio::ip::tcp>*, boost::system::error_code const&>, boost::_bi::list4<boost::_bi::value<ServicePort*>, boost::_bi::value<boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp> > >, boost::_bi::value<boost::asio::basic_stream_socket<boost::asio::ip::tcp>*>, boost::arg<1> (*)()> >, boost::system::error_code>, boost::_bi::bind_t<void, boost::_mfi::mf3<void, ServicePort, boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp> >, boost::asio::basic_stream_socket<boost::asio::ip::tcp>*, boost::system::error_code const&>, boost::_bi::list4<boost::_bi::value<ServicePort*>, boost::_bi::value<boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp> > >, boost::_bi::value<boost::asio::basic_stream_socket<boost::asio::ip::tcp>*>, boost::arg<1> (*)()> > > (context=..., function=...) at /usr/include/boost/asio/detail/handler_invoke_helpers.hpp:37
+No locals.
+#17 boost::asio::detail::reactive_socket_accept_op<boost::asio::basic_socket<boost::asio::ip::tcp, boost::asio::stream_socket_service<boost::asio::ip::tcp> >, boost::asio::ip::tcp, boost::_bi::bind_t<void, boost::_mfi::mf3<void, ServicePort, boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp, boost::asio::socket_acceptor_service<boost::asio::ip::tcp> > >, boost::asio::basic_stream_socket<boost::asio::ip::tcp, boost::asio::stream_socket_service<boost::asio::ip::tcp> >*, boost::system::error_code const&>, boost::_bi::list4<boost::_bi::value<ServicePort*>, boost::_bi::value<boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp, boost::asio::socket_acceptor_service<boost::asio::ip::tcp> > > >, boost::_bi::value<boost::asio::basic_stream_socket<boost::asio::ip::tcp, boost::asio::stream_socket_service<boost::asio::ip::tcp> >*>, boost::arg<1> (*)()> > >::do_complete (owner=<optimised out>, base=<optimised out>) at /usr/include/boost/asio/detail/reactive_socket_accept_op.hpp:123
+        o = <optimised out>
+        p = {h = 0x6c40d7983ca0, v = 0x0, p = 0x0}
+        handler = {handler_ = {f_ = {f_ = (void (ServicePort::*)(ServicePort * const, boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp, boost::asio::socket_acceptor_service<boost::asio::ip::tcp> > >, boost::asio::basic_stream_socket<boost::asio::ip::tcp, boost::asio::stream_socket_service<boost::asio::ip::tcp> > *, const boost::system::error_code &)) 0x4e3d90 <ServicePort::handle(boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp, boost::asio::socket_acceptor_service<boost::asio::ip::tcp> > >, boost::asio::basic_stream_socket<boost::asio::ip::tcp, boost::asio::stream_socket_service<boost::asio::ip::tcp> >*, boost::system::error_code const&)>}, l_ = {<boost::_bi::storage4<boost::_bi::value<ServicePort*>, boost::_bi::value<boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp, boost::asio::socket_acceptor_service<boost::asio::ip::tcp> > > >, boost::_bi::value<boost::asio::basic_stream_socket<boost::asio::ip::tcp, boost::asio::stream_socket_service<boost::asio::ip::tcp> >*>, boost::arg<1> (*)()>> = {<boost::_bi::storage3<boost::_bi::value<ServicePort*>, boost::_bi::value<boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp, boost::asio::socket_acceptor_service<boost::asio::ip::tcp> > > >, boost::_bi::value<boost::asio::basic_stream_socket<boost::asio::ip::tcp, boost::asio::stream_socket_service<boost::asio::ip::tcp> >*> >> = {<boost::_bi::storage2<boost::_bi::value<ServicePort*>, boost::_bi::value<boost::shared_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp, boost::asio::socket_acceptor_service<boost::asio::ip::tcp> > > > >> = {<boost::_bi::storage1<boost::_bi::value<ServicePort*> >> = {a1_ = {t_ = 0x6c40c45092e0}}, a2_ = {t_ = {px = 0x6c40c4509380, pn = {pi_ = 0x6c40c4509450}}}}, a3_ = {t_ = 0x6c4070008d10}}, <No data fields>}, <No data fields>}}, arg1_ = {m_val = 0, m_cat = 0x6c41340e90d0}}
+#18 0x00000000004ea147 in complete (bytes_transferred=1, ec=..., owner=..., this=0x6c40c45093b0) at /usr/include/boost/asio/detail/task_io_service_operation.hpp:37
+No locals.
+#19 do_run_one (ec=..., this_thread=..., lock=..., this=0x2ee6390) at /usr/include/boost/asio/detail/impl/task_io_service.ipp:384
+        task_result = 1
+        on_exit = {task_io_service_ = 0x2ee6390, lock_ = 0x6c40d7983d60, this_thread_ = 0x6c40d7983de0}
+        more_handlers = true
+#20 boost::asio::detail::task_io_service::run (this=0x2ee6390, ec=...) at /usr/include/boost/asio/detail/impl/task_io_service.ipp:153
+        this_thread = {<boost::asio::detail::thread_info_base> = {<boost::asio::detail::noncopyable> = {<No data fields>}, reusable_memory_ = 0x6c4070008f90}, wakeup_event = 0x6c40d7983e10, private_op_queue = {<boost::asio::detail::noncopyable> = {<No data fields>}, front_ = 0x0, back_ = 0x0}, private_outstanding_work = 0, next = 0x0}
+        wakeup_event = {<boost::asio::detail::noncopyable> = {<No data fields>}, cond_ = {__data = {__lock = 0, __futex = 0, __total_seq = 0, __wakeup_seq = 0, __woken_seq = 0, __mutex = 0x0, __nwaiters = 0, __broadcast_seq = 0}, __size = '\000' <repeats 47 times>, __align = 0}, signalled_ = false}
+        ctx = {<boost::asio::detail::noncopyable> = {<No data fields>}, key_ = 0x2ee6390, value_ = 0x6c40d7983de0, next_ = 0x0}
+        lock = {<boost::asio::detail::noncopyable> = {<No data fields>}, mutex_ = @0x2ee63c0, locked_ = false}
+        n = 1127
+#21 0x00000000004ea625 in boost::asio::io_service::run (this=0x79af0e9be6e8) at /usr/include/boost/asio/impl/io_service.ipp:59
+        ec = {m_val = 0, m_cat = 0x6c41340e90d0}
+        s = <optimised out>
+#22 0x00006c4133cdba4a in ?? () from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+No symbol table info available.
+#23 0x00006c4132cfd184 in start_thread (arg=0x6c40d7984700) at pthread_create.c:312
+        __res = <optimised out>
+        pd = 0x6c40d7984700
+        now = <optimised out>
+        unwind_buf = {cancel_jmp_buf = {{jmp_buf = {119025750787840, 7551573027026039934, 1, 0, 119025750788544, 119025750787840, -5742867326184786818, -5742381755112557442}, mask_was_saved = 0}}, priv = {pad = {0x0, 0x0, 0x0, 0x0}, data = {prev = 0x0, cleanup = 0x0, canceltype = 0}}}
+        not_first_call = <optimised out>
+        pagesize_m1 = <optimised out>
+        sp = <optimised out>
+        freesize = <optimised out>
+        __PRETTY_FUNCTION__ = "start_thread"
+#24 0x00006c413220a03d in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:111
+No locals.
+
+Thread 1 (Thread 0x6c41348fd780 (LWP 27096)):
+#0  pthread_cond_wait@@GLIBC_2.3.2 () at ../nptl/sysdeps/unix/sysv/linux/x86_64/pthread_cond_wait.S:185
+No locals.
+#1  0x00006c4133cdf96b in boost::condition_variable::wait(boost::unique_lock<boost::mutex>&) () from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+No symbol table info available.
+#2  0x00006c4133cdc0b4 in boost::thread::join_noexcept() () from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+No symbol table info available.
+#3  0x00000000004e2ad2 in join (this=0x2ee66e0) at /usr/include/boost/thread/detail/thread.hpp:756
+No locals.
+#4  ServiceManager::run (this=this@entry=0x79af0e9be6e0) at /home/otserv/raava/sources/server.cpp:249
+        it = {px = , pn = {pi_ = }}
+        threads = std::vector of length 1, capacity 1 = {{px = 0x2ee66e0, pn = {pi_ = 0x2ecd700}}}
+        __PRETTY_FUNCTION__ = "void ServiceManager::run()"
+#5  0x00000000004a5244 in main (argc=1, argv=<optimised out>) at /home/otserv/raava/sources/otserv.cpp:326
+        args = std::vector of length 1, capacity 1 = {"/home/otserv/raava/theforgottenserver"}
+        servicer = {<boost::noncopyable_::noncopyable> = {<No data fields>}, _vptr.ServiceManager = 0x679930 <vtable for ServiceManager+16>, m_io_service = {<boost::asio::detail::noncopyable> = {<No data fields>}, service_registry_ = 0x2ee6340, impl_ = @0x2ee6390}, deathTimer = {<boost::asio::basic_io_object<boost::asio::deadline_timer_service<boost::posix_time::ptime, boost::asio::time_traits<boost::posix_time::ptime> > >> = {service = @0x2ee6440, implementation = {<boost::asio::detail::noncopyable> = {<No data fields>}, expiry = {<boost::date_time::base_time<boost::posix_time::ptime, boost::date_time::counted_time_system<boost::date_time::counted_time_rep<boost::posix_time::millisec_posix_time_system_config> > >> = {<boost::less_than_comparable<boost::posix_time::ptime, boost::equality_comparable<boost::posix_time::ptime, boost::posix_time::ptime, boost::detail::empty_base<boost::posix_time::ptime>, boost::detail::false_t>, boost::detail::empty_base<boost::posix_time::ptime>, boost::detail::true_t>> = {<boost::less_than_comparable1<boost::posix_time::ptime, boost::equality_comparable<boost::posix_time::ptime, boost::posix_time::ptime, boost::detail::empty_base<boost::posix_time::ptime>, boost::detail::false_t> >> = {<boost::equality_comparable<boost::posix_time::ptime, boost::posix_time::ptime, boost::detail::empty_base<boost::posix_time::ptime>, boost::detail::false_t>> = {<boost::equality_comparable1<boost::posix_time::ptime, boost::detail::empty_base<boost::posix_time::ptime> >> = {<boost::detail::empty_base<boost::posix_time::ptime>> = {<No data fields>}, <No data fields>}, <No data fields>}, <No data fields>}, <No data fields>}, time_ = {time_count_ = {value_ = 212447407246455559}}}, <No data fields>}, might_have_pending_waits = true, timer_data = {op_queue_ = {<boost::asio::detail::noncopyable> = {<No data fields>}, front_ = 0x6c40b069ae30, back_ = 0x6c40b069ae30}, heap_index_ = 0, next_ = 0x0, prev_ = 0x0}}}, <No data fields>}, running = false, m_acceptors = std::map with 0 elements}
+        sigh = {__sigaction_handler = {sa_handler = 0x1, sa_sigaction = 0x1}, sa_mask = {__val = {0 <repeats 16 times>}}, sa_flags = 0, sa_restorer = 0x79af0e9be918}

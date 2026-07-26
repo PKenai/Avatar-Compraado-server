@@ -1,0 +1,142 @@
+---------------------------------------------------
+Signal caught: SIGSEGV in 14/01/2020 - 16:42:25
+
+Thread 5 (Thread 0x6b81c7f94700 (LWP 27533)):
+#0  0x00006b827ebc36d3 in epoll_wait () at ../sysdeps/unix/syscall-template.S:81
+No locals.
+#1  0x00000000004e6575 in boost::asio::detail::epoll_reactor::run (this=0xef67a0, block=<optimised out>, ops=...) at /usr/include/boost/asio/detail/impl/epoll_reactor.ipp:392
+        timeout = <optimised out>
+        events = {{events = 778770, data = {ptr = 0x519af800000000, fd = 0, u32 = 0, u64 = 22969863056130048}}, {events = 0, data = {ptr = 0x6b81c0212008, fd = -1071570936, u32 = 3223396360, u64 = 118205018349576}}, {events = 5348088, data = {ptr = 0x2584ef00000000, fd = 0, u32 = 0, u64 = 10560736170344448}}, {events = 0, data = {ptr = 0x20, fd = 32, u32 = 32, u64 = 32}}, {events = 9614976, data = {ptr = 0xc000002000000000, fd = 0, u32 = 0, u64 = 13835058192721117184}}, {events = 27521, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 0, data = {ptr = 0xc014c8b000000000, fd = 0, u32 = 0, u64 = 13840908213056176128}}, {events = 27521, data = {ptr = 0x92a678 <Dispatcher::getInstance()::dispatcher+152>, fd = 9610872, u32 = 9610872, u64 = 9610872}}, {events = 9610872, data = {ptr = 0x4f25a800000000, fd = 0, u32 = 0, u64 = 22277926644875264}}, {events = 0, data = {ptr = 0xfae1f0852, fd = -1373697966, u32 = 2921269330, u64 = 67345778770}}, {events = 24, data = {ptr = 0x92a5f800000000, fd = 0, u32 = 0, u64 = 41277831170228224}}, {events = 0, data = {ptr = 0x6b81c7f93838, fd = -939968456, u32 = 3354998840, u64 = 118205149952056}}, {events = 568, data = {ptr = 0x14700000000, fd = 0, u32 = 0, u64 = 1404454305792}}, {events = 0, data = {ptr = 0xbd6, fd = 3030, u32 = 3030, u64 = 3030}}, {events = 3224633344, data = {ptr = 0x100320ad00006b81, fd = 27521, u32 = 27521, u64 = 1153801856938437505}}, {events = 0, data = {ptr = 0x512bcd <boost::detail::function::functor_manager<boost::_bi::bind_t<bool, boost::_mfi::mf8<bool, Game, unsigned int, Position const&, short, unsigned short, Position const&, short, unsigned short, bool>, boost::_bi::list9<boost::_bi::value<Game*>, boost::_bi::value<unsigned int>, boost::_bi::value<Position>, boost::_bi::value<short>, boost::_bi::value<unsigned short>, boost::_bi::value<Position>, boost::_bi::value<short>, boost::_bi::value<unsigned short>, boost::_bi::value<bool> > > >::manage(boost::detail::function::function_buffer const&, boost::detail::function::function_buffer&, boost::detail::function::functor_manager_operation_type)+125>, fd = 5319629, u32 = 5319629, u64 = 5319629}}, {events = 568, data = {ptr = 0xc7f9383000000000, fd = 0, u32 = 0, u64 = 14409610261558198272}}, {events = 27521, data = {ptr = 0x238, fd = 568, u32 = 568, u64 = 568}}, {events = 5004794, data = {ptr = 0xc014c8b000000000, fd = 0, u32 = 0, u64 = 13840908213056176128}}, {events = 27521, data = {ptr = 0x6b827f6bd8b9 <recvmsg+57>, fd = 2137774265, u32 = 2137774265, u64 = 118208227694777}}, {events = 0, data = {ptr = 0x63dac300000000, fd = 0, u32 = 0, u64 = 28106553747832832}}, {events = 0, data = {ptr = 0x100000000000002, fd = 2, u32 = 2, u64 = 72057594037927938}}, {events = 0, data = {ptr = 0xc034aa5400000054, fd = 84, u32 = 84, u64 = 13849882031825092692}}, {events = 27521, data = {ptr = 0x2, fd = 2, u32 = 2, u64 = 2}}, {events = 2, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 0, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 0, data = {ptr = 0xc7f9382000000000, fd = 0, u32 = 0, u64 = 14409610192838721536}}, {events = 27521, data = {ptr = 0x1, fd = 1, u32 = 1, u64 = 1}}, {events = 0, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 0, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 459320, data = {ptr = 0xc014d200083e0002, fd = 138280962, u32 = 138280962, u64 = 13840918452396490754}}, {events = 27521, data = {ptr = 0x6b81c01fba80, fd = -1071662464, u32 = 3223304832, u64 = 118205018258048}}, {events = 3222590080, data = {ptr = 0xc003270800006b81, fd = 27521, u32 = 27521, u64 = 13835945395525544833}}, {events = 27521, data = {ptr = 0xef67a0, fd = 15689632, u32 = 15689632, u64 = 15689632}}, {events = 0, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 0, data = {ptr = 0x63dc1b <boost::asio::detail::epoll_reactor::start_op(int, int, boost::asio::detail::epoll_reactor::descriptor_state*&, boost::asio::detail::reactor_op*, bool, bool)+155>, fd = 6544411, u32 = 6544411, u64 = 6544411}}, {events = 1, data = {ptr = 0x54, fd = 84, u32 = 84, u64 = 84}}, {events = 0, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 2125757152, data = {ptr = 0xef67a000006b82, fd = 27522, u32 = 27522, u64 = 67386456326302594}}, {events = 0, data = {ptr = 0x6b81c01fba80, fd = -1071662464, u32 = 3223304832, u64 = 118205018258048}}, {events = 3222582288, data = {ptr = 0xc014d27000006b81, fd = 27521, u32 = 27521, u64 = 13840918933294574465}}, {events = 27521, data = {ptr = 0x2, fd = 2, u32 = 2, u64 = 2}}, {events = 3223304832, data = {ptr = 0xc014b41000006b81, fd = 27521, u32 = 27521, u64 = 13840885535628880769}}, {events = 27521, data = {ptr = 0x63e6bf <boost::asio::detail::read_op<boost::asio::basic_stream_socket<boost::asio::ip::tcp, boost::asio::stream_socket_service<boost::asio::ip::tcp> >, boost::asio::mutable_buffers_1, boost::asio::detail::transfer_all_t, boost::_bi::bind_t<void, boost::_mfi::mf1<void, Connection, boost::system::error_code const&>, boost::_bi::list2<boost::_bi::value<boost::shared_ptr<Connection> >, boost::arg<1> (*)()> > >::operator()(boost::system::error_code const&, unsigned long, int)+623>, fd = 6547135, u32 = 6547135, u64 = 6547135}}, {events = 1, data = {ptr = 0x100512fa00000000, fd = 0, u32 = 0, u64 = 1154349744441524224}}, {events = 27521, data = {ptr = 0x54145bcd52, fd = 341560658, u32 = 341560658, u64 = 361118813522}}, {events = 3224676948, data = {ptr = 0x8000001b00006b81, fd = 27521, u32 = 27521, u64 = 9223372152818920321}}, {events = 341560624, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 3354999152, data = {ptr = 0xc01fba8000006b81, fd = 27521, u32 = 27521, u64 = 13843988838478801793}}, {events = 27521, data = {ptr = 0x6b81c01fba80, fd = -1071662464, u32 = 3223304832, u64 = 118205018258048}}, {events = 3354999344, data = {ptr = 0xc014d27000006b81, fd = 27521, u32 = 27521, u64 = 13840918933294574465}}, {events = 27521, data = {ptr = 0x6b81c034aa54, fd = -1070290348, u32 = 3224676948, u64 = 118205019630164}}, {events = 2, data = {ptr = 0x100000000, fd = 0, u32 = 0, u64 = 4294967296}}, {events = 27521, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 6537312, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 0, data = {ptr = 0x6b81c034aa30, fd = -1070290384, u32 = 3224676912, u64 = 118205019630128}}, {events = 3222582288, data = {ptr = 0x53db2b00006b81, fd = 27521, u32 = 27521, u64 = 23603400797088641}}, {events = 0, data = {ptr = 0x6b81c034aa30, fd = -1070290384, u32 = 3224676912, u64 = 118205019630128}}, {events = 3222582288, data = {ptr = 0xc034aa3000006b81, fd = 27521, u32 = 27521, u64 = 13849881877206297473}}, {events = 27521, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 6537312, data = {ptr = 0xc014b41000000000, fd = 0, u32 = 0, u64 = 13840885535628853248}}, {events = 27521, data = {ptr = 0x6b81c034aa30, fd = -1070290384, u32 = 3224676912, u64 = 118205019630128}}, {events = 6547841, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 27521, data = {ptr = 0x6b8280aa20d0, fd = -2136334128, u32 = 2158633168, u64 = 118208248553680}}, {events = 3222590064, data = {ptr = 0xc034aa5400006b81, fd = 27521, u32 = 27521, u64 = 13849882031825120129}}, {events = 27521, data = {ptr = 0x2, fd = 2, u32 = 2, u64 = 2}}, {events = 1, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 0, data = {ptr = 0x63c060 <Connection::parseHeader(boost::system::error_code const&)>, fd = 6537312, u32 = 6537312, u64 = 6537312}}, {events = 0, data = {ptr = 0xc034aa3000000000, fd = 0, u32 = 0, u64 = 13849881877206269952}}, {events = 27521, data = {ptr = 0x6b81c014b410, fd = -1072385008, u32 = 3222582288, u64 = 118205017535504}}, {events = 3222582288, data = {ptr = 0xc7f93b2000006b81, fd = 27521, u32 = 27521, u64 = 14409613491373632385}}, {events = 27521, data = {ptr = 0x6b81c034aa30, fd = -1070290384, u32 = 3224676912, u64 = 118205019630128}}, {events = 3224709912, data = {ptr = 0xc7f93b2000006b81, fd = 27521, u32 = 27521, u64 = 14409613491373632385}}, {events = 27521, data = {ptr = 0x6b81c034aa38, fd = -1070290376, u32 = 3224676920, u64 = 118205019630136}}, {events = 3224676912, data = {ptr = 0xc0352b1800006b81, fd = 27521, u32 = 27521, u64 = 13850023611127065473}}, {events = 27521, data = {ptr = 0x63c5f0 <Connection::parsePacket(boost::system::error_code const&)+528>, fd = 6538736, u32 = 6538736, u64 = 6538736}}, {events = 24, data = {ptr = 0x100000000, fd = 0, u32 = 0, u64 = 4294967296}}, {events = 0, data = {ptr = 0x6b8100000000, fd = 0, u32 = 0, u64 = 118201794953216}}, {events = 9610872, data = {ptr = 0x92a67800000000, fd = 0, u32 = 0, u64 = 41278380926042112}}, {events = 0, data = {ptr = 0x4f25a8 <boost::mutex::unlock()+24>, fd = 5186984, u32 = 5186984, u64 = 5186984}}, {events = 3224676912, data = {ptr = 0xc014b41000006b81, fd = 27521, u32 = 27521, u64 = 13840885535628880769}}, {events = 27521, data = {ptr = 0x6b81c034aa30, fd = -1070290384, u32 = 3224676912, u64 = 118205019630128}}, {events = 3222582288, data = {ptr = 0xc034aa3000006b81, fd = 27521, u32 = 27521, u64 = 13849881877206297473}}, {events = 27521, data = {ptr = 0x6b81c014b410, fd = -1072385008, u32 = 3222582288, u64 = 118205017535504}}, {events = 3224676948, data = {ptr = 0x200006b81, fd = 27521, u32 = 27521, u64 = 8589962113}}, {events = 0, data = {ptr = 0x6b81c014b410, fd = -1072385008, u32 = 3222582288, u64 = 118205017535504}}, {events = 3355000304, data = {ptr = 0x63c06000006b81, fd = 27521, u32 = 27521, u64 = 28077541243775873}}, {events = 0, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 3224676912, data = {ptr = 0xc014b41000006b81, fd = 27521, u32 = 27521, u64 = 13840885535628880769}}, {events = 27521, data = {ptr = 0xef6670, fd = 15689328, u32 = 15689328, u64 = 15689328}}, {events = 0, data = {ptr = 0xc01fba8000000000, fd = 0, u32 = 0, u64 = 13843988838478774272}}, {events = 27521, data = {ptr = 0x6b81c7f93de0, fd = -939967008, u32 = 3355000288, u64 = 118205149953504}}, {events = 3355000304, data = {ptr = 0x63e70800006b81, fd = 27521, u32 = 27521, u64 = 28120044240137089}}, {events = 0, data = {ptr = 0x7ffffffffffffffe, fd = -2, u32 = 4294967294, u64 = 9223372036854775806}}, {events = 2125766391, data = {ptr = 0x6b82, fd = 27522, u32 = 27522, u64 = 27522}}, {events = 0, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 3355000288, data = {ptr = 0xc7f93df000006b81, fd = 27521, u32 = 27521, u64 = 14409616583750085505}}, {events = 27521, data = {ptr = 0x53c5c0 <OutputMessagePool::internalReleaseMessage(OutputMessage*)>, fd = 5490112, u32 = 5490112, u64 = 5490112}}, {events = 0, data = {ptr = 0x92a7a000000000, fd = 0, u32 = 0, u64 = 41279652236361728}}, {events = 0, data = {ptr = 0x6b81ab4039a0, fd = -1421854304, u32 = 2873112992, u64 = 118204668066208}}, {events = 4294967294, data = {ptr = 0xc7f93c787fffffff, fd = 2147483647, u32 = 2147483647, u64 = 14409614970989838335}}, {events = 27521, data = {ptr = 0x100000000, fd = 0, u32 = 0, u64 = 4294967296}}, {events = 293287344, data = {ptr = 0xc7f93de000006b82, fd = 27522, u32 = 27522, u64 = 14409616515030608770}}, {events = 27521, data = {ptr = 0x6b81c7f93df0, fd = -939966992, u32 = 3355000304, u64 = 118205149953520}}, {events = 3355002625, data = {ptr = 0x63ddc700006b81, fd = 27521, u32 = 27521, u64 = 28109869462612865}}, {events = 0, data = {ptr = 0x6b81c7f93de0, fd = -939967008, u32 = 3355000288, u64 = 118205149953504}}, {events = 2137774265, data = {ptr = 0x6b82, fd = 27522, u32 = 27522, u64 = 27522}}, {events = 0, data = {ptr = 0xef6670, fd = 15689328, u32 = 15689328, u64 = 15689328}}, {events = 0, data = {ptr = 0xc01fba8000000000, fd = 0, u32 = 0, u64 = 13843988838478774272}}, {events = 27521, data = {ptr = 0x6b81c7f93de0, fd = -939967008, u32 = 3355000288, u64 = 118205149953504}}, {events = 15689328, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 0, data = {ptr = 0x63ebac <boost::asio::detail::reactive_socket_recv_op<boost::asio::mutable_buffers_1, boost::asio::detail::read_op<boost::asio::basic_stream_socket<boost::asio::ip::tcp, boost::asio::stream_socket_service<boost::asio::ip::tcp> >, boost::asio::mutable_buffers_1, boost::asio::detail::transfer_all_t, boost::_bi::bind_t<void, boost::_mfi::mf1<void, Connection, boost::system::error_code const&>, boost::_bi::list2<boost::_bi::value<boost::shared_ptr<Connection> >, boost::arg<1> (*)()> > > >::do_complete(boost::asio::detail::task_io_service*, boost::asio::detail::task_io_service_operation*, boost::system::error_code const&, unsigned long)+492>, fd = 6548396, u32 = 6548396, u64 = 6548396}}, {events = 3354999920, data = {ptr = 0x6b81, fd = 27521, u32 = 27521, u64 = 27521}}, {events = 0, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 6533153, data = {ptr = 0xc014d27000000000, fd = 0, u32 = 0, u64 = 13840918933294546944}}, {events = 27521, data = {ptr = 0x6b81c7f93cc0, fd = -939967296, u32 = 3355000000, u64 = 118205149953216}}, {events = 15689328, data = {ptr = 0x63d89200000000, fd = 0, u32 = 0, u64 = 28104144271179776}}, {events = 0, data = {ptr = 0x6b81c034aa30, fd = -1070290384, u32 = 3224676912, u64 = 118205019630128}}, {events = 3222582288, data = {ptr = 0xc7f93cc000006b81, fd = 27521, u32 = 27521, u64 = 14409615278080027521}}, {events = 27521, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 0, data = {ptr = 0x0, fd = 0, u32 = 0, u64 = 0}}, {events = 0, data = {ptr = 0x63b010 <Connection::handleReadTimeout(boost::weak_ptr<Connection>, boost::system::error_code const&)>, fd = 6533136, u32 = 6533136, u64 = 6533136}}, {events = 3224676912, data = {ptr = 0xc014b41000006b81, fd = 27521, u32 = 27521, u64 = 13840885535628880769}}, {events = 27521, data = {ptr = 0x6b810000007d, fd = 125, u32 = 125, u64 = 118201794953341}}, {events = 2158633168, data = {ptr = 0x6b82, fd = 27522, u32 = 27522, u64 = 27522}}, {events = 27521, data = {ptr = 0x63b010 <Connection::handleReadTimeout(boost::weak_ptr<Connection>, boost::system::error_code const&)>, fd = 6533136, u32 = 6533136, u64 = 6533136}}, {events = 3224676912, data = {ptr = 0xc014b41000006b81, fd = 27521, u32 = 27521, u64 = 13840885535628880769}}, {events = 27521, data = {ptr = 0x6b810000007d, fd = 125, u32 = 125, u64 = 118201794953341}}}
+        num_events = <optimised out>
+        check_timers = <optimised out>
+#2  0x00000000004e9f02 in do_run_one (ec=..., this_thread=..., lock=..., this=0xef6670) at /usr/include/boost/asio/detail/impl/task_io_service.ipp:368
+        on_exit = {task_io_service_ = 0xef6670, lock_ = 0x6b81c7f93d60, this_thread_ = 0x6b81c7f93de0}
+        more_handlers = false
+#3  boost::asio::detail::task_io_service::run (this=0xef6670, ec=...) at /usr/include/boost/asio/detail/impl/task_io_service.ipp:153
+        this_thread = {<boost::asio::detail::thread_info_base> = {<boost::asio::detail::noncopyable> = {<No data fields>}, reusable_memory_ = 0x6b8218803930}, wakeup_event = 0x6b81c7f93e10, private_op_queue = {<boost::asio::detail::noncopyable> = {<No data fields>}, front_ = 0x0, back_ = 0x0}, private_outstanding_work = 0, next = 0x0}
+        wakeup_event = {<boost::asio::detail::noncopyable> = {<No data fields>}, cond_ = {__data = {__lock = 0, __futex = 0, __total_seq = 0, __wakeup_seq = 0, __woken_seq = 0, __mutex = 0x0, __nwaiters = 0, __broadcast_seq = 0}, __size = '\000' <repeats 47 times>, __align = 0}, signalled_ = false}
+        ctx = {<boost::asio::detail::noncopyable> = {<No data fields>}, key_ = 0xef6670, value_ = 0x6b81c7f93de0, next_ = 0x0}
+        lock = {<boost::asio::detail::noncopyable> = {<No data fields>}, mutex_ = @0xef66a0, locked_ = false}
+        n = 134692584
+#4  0x00000000004ea625 in boost::asio::io_service::run (this=0x7885efd15ad8) at /usr/include/boost/asio/impl/io_service.ipp:59
+        ec = {m_val = 0, m_cat = 0x6b8280aa20d0}
+        s = <optimised out>
+#5  0x00006b8280694a4a in ?? () from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+No symbol table info available.
+#6  0x00006b827f6b6184 in start_thread (arg=0x6b81c7f94700) at pthread_create.c:312
+        __res = <optimised out>
+        pd = 0x6b81c7f94700
+        now = <optimised out>
+        unwind_buf = {cancel_jmp_buf = {{jmp_buf = {118205149955840, 2498228595340257570, 1, 0, 118205149956544, 118205149955840, -745079271491720926, -743230840156149470}, mask_was_saved = 0}}, priv = {pad = {0x0, 0x0, 0x0, 0x0}, data = {prev = 0x0, cleanup = 0x0, canceltype = 0}}}
+        not_first_call = <optimised out>
+        pagesize_m1 = <optimised out>
+        sp = <optimised out>
+        freesize = <optimised out>
+        __PRETTY_FUNCTION__ = "start_thread"
+#7  0x00006b827ebc303d in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:111
+No locals.
+
+Thread 4 (Thread 0x6b827b9c2700 (LWP 27527)):
+#0  pthread_cond_timedwait@@GLIBC_2.3.2 () at ../nptl/sysdeps/unix/sysv/linux/x86_64/pthread_cond_timedwait.S:238
+No locals.
+#1  0x00000000004f1689 in do_wait_until (timeout=..., m=..., this=0x92ab38 <Scheduler::getInstance()::scheduler+120>) at /usr/include/boost/thread/pthread/condition_variable.hpp:108
+        check_for_interruption = {thread_info = 0x6b827745ec30, m = 0x92ab38 <Scheduler::getInstance()::scheduler+120>, set = true}
+        guard = {m = 0x6b827b9c1de0}
+        cond_res = <optimised out>
+#2  timed_wait (wait_until=..., m=..., this=0x92ab38 <Scheduler::getInstance()::scheduler+120>) at /usr/include/boost/thread/pthread/condition_variable_fwd.hpp:108
+        timeout = {tv_sec = 1579027345, tv_nsec = 779366000}
+#3  Scheduler::schedulerThread (this=0x92aac0 <Scheduler::getInstance()::scheduler>) at /home/otserv/raava/sources/scheduler.cpp:50
+        task = 0x0
+        run = false
+        action = false
+        eventLockUnique = {m = 0x92ab10 <Scheduler::getInstance()::scheduler+80>, is_locked = false}
+#4  0x00006b8280694a4a in ?? () from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+No symbol table info available.
+#5  0x00006b827f6b6184 in start_thread (arg=0x6b827b9c2700) at pthread_create.c:312
+        __res = <optimised out>
+        pd = 0x6b827b9c2700
+        now = <optimised out>
+        unwind_buf = {cancel_jmp_buf = {{jmp_buf = {118208163751680, 2498228595340257570, 1, 118208039447488, 118208163752384, 118208163751680, -743223045682190046, -743230840156149470}, mask_was_saved = 0}}, priv = {pad = {0x0, 0x0, 0x0, 0x0}, data = {prev = 0x0, cleanup = 0x0, canceltype = 0}}}
+        not_first_call = <optimised out>
+        pagesize_m1 = <optimised out>
+        sp = <optimised out>
+        freesize = <optimised out>
+        __PRETTY_FUNCTION__ = "start_thread"
+#6  0x00006b827ebc303d in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:111
+No locals.
+
+Thread 2 (Thread 0x6b827c267700 (LWP 27516)):
+#0  _M_lower_bound (this=0x6b8202000105, __k=..., __y=0x6b820200010d, __x=0x25000000) at /usr/include/c++/4.8/bits/stl_tree.h:1141
+No locals.
+#1  std::_Rb_tree<std::string, std::pair<std::string const, ItemAttribute>, std::_Select1st<std::pair<std::string const, ItemAttribute> >, std::less<std::string>, std::allocator<std::pair<std::string const, ItemAttribute> > >::find (this=0x6b8202000105, __k="uid") at /usr/include/c++/4.8/bits/stl_tree.h:1792
+        __j = <optimised out>
+#2  0x00000000005b8d7a in find (__x=..., this=<optimised out>) at /usr/include/c++/4.8/bits/stl_map.h:822
+No locals.
+#3  ItemAttributes::getIntegerAttribute (this=0x6b81ab709a60, key=..., ok=@0x6b827c266aed: 107) at /home/otserv/raava/sources/itemattributes.cpp:110
+        it = <optimised out>
+#4  0x000000000065e7d8 in getUniqueId (this=0x6b81ab709a60) at /home/otserv/raava/sources/item.h:610
+        ok = 107
+        v = <optimised out>
+#5  Actions::getAction (this=0x6b8276819e10, item=0x6b81ab709a60, type=ACTION_RUNEID) at /home/otserv/raava/sources/actions.cpp:400
+No locals.
+#6  0x000000000065f14e in Actions::internalUseItemEx (this=this@entry=0x6b8276819e10, player=player@entry=0x6b81b9801790, fromPosEx=..., toPosEx=..., item=item@entry=0x6b81ab709a60, isHotkey=isHotkey@entry=false, creatureId=creatureId@entry=0) at /home/otserv/raava/sources/actions.cpp:616
+        action = <optimised out>
+#7  0x000000000065f376 in Actions::useItemEx (this=0x6b8276819e10, player=player@entry=0x6b81b9801790, fromPos=..., toPos=..., toStackPos=toStackPos@entry=2 '\002', item=item@entry=0x6b81ab709a60, isHotkey=isHotkey@entry=false, creatureId=creatureId@entry=0) at /home/otserv/raava/sources/actions.cpp:658
+        fromStackPos = <optimised out>
+        fromPosEx = {<Position> = {x = 65535, y = 65, z = 0}, stackpos = 0}
+        toPosEx = {<Position> = {x = 327, y = 568, z = 7}, stackpos = 2}
+        ret = <optimised out>
+#8  0x000000000060d312 in Game::playerUseItemEx (this=0x92b680 <g_game>, playerId=268640429, fromPos=..., fromStackpos=0, fromSpriteId=<optimised out>, toPos=..., toStackpos=2, toSpriteId=2110, isHotkey=false) at /home/otserv/raava/sources/game.cpp:2977
+        ret = <optimised out>
+        player = 0x6b81b9801790
+        thing = <optimised out>
+        item = <optimised out>
+        walkToPos = {x = 65535, y = 65, z = 0}
+#9  0x0000000000513f2c in operator() (a8=false, a7=2110, a6=<optimised out>, a5=..., a4=<optimised out>, a3=<optimised out>, a2=..., a1=<optimised out>, p=<optimised out>, this=<optimised out>) at /usr/include/boost/bind/mem_fn_template.hpp:958
+No locals.
+#10 operator()<bool, boost::_mfi::mf8<bool, Game, unsigned int, const Position&, short int, short unsigned int, const Position&, short int, short unsigned int, bool>, boost::_bi::list0> (a=<synthetic pointer>, f=..., this=<optimised out>) at /usr/include/boost/bind/bind.hpp:817
+No locals.
+#11 operator() (this=<optimised out>) at /usr/include/boost/bind/bind_template.hpp:20
+No locals.
+#12 boost::detail::function::void_function_obj_invoker0<boost::_bi::bind_t<bool, boost::_mfi::mf8<bool, Game, unsigned int, Position const&, short, unsigned short, Position const&, short, unsigned short, bool>, boost::_bi::list9<boost::_bi::value<Game*>, boost::_bi::value<unsigned int>, boost::_bi::value<Position>, boost::_bi::value<short>, boost::_bi::value<unsigned short>, boost::_bi::value<Position>, boost::_bi::value<short>, boost::_bi::value<unsigned short>, boost::_bi::value<bool> > >, void>::invoke (function_obj_ptr=...) at /usr/include/boost/function/function_template.hpp:153
+        f = <optimised out>
+#13 0x000000000061685d in operator() (this=0x6b81c014c8c0) at /usr/include/boost/function/function_template.hpp:767
+No locals.
+#14 operator() (this=0x6b81c014c8b0) at /home/otserv/raava/sources/dispatcher.h:34
+No locals.
+#15 Dispatcher::dispatcherThread (this=0x92a5e0 <Dispatcher::getInstance()::dispatcher>) at /home/otserv/raava/sources/dispatcher.cpp:71
+        task = 0x6b81c014c8b0
+        outputPool = <optimised out>
+        taskLockUnique = {m = 0x92a5f8 <Dispatcher::getInstance()::dispatcher+24>, is_locked = false}
+#16 0x00006b8280694a4a in ?? () from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+No symbol table info available.
+#17 0x00006b827f6b6184 in start_thread (arg=0x6b827c267700) at pthread_create.c:312
+        __res = <optimised out>
+        pd = 0x6b827c267700
+        now = <optimised out>
+        unwind_buf = {cancel_jmp_buf = {{jmp_buf = {118208172816128, 2498228595340257570, 1, 0, 118208172816832, 118208172816128, -743228186221172446, -743230840156149470}, mask_was_saved = 0}}, priv = {pad = {0x0, 0x0, 0x0, 0x0}, data = {prev = 0x0, cleanup = 0x0, canceltype = 0}}}
+        not_first_call = <optimised out>
+        pagesize_m1 = <optimised out>
+        sp = <optimised out>
+        freesize = <optimised out>
+        __PRETTY_FUNCTION__ = "start_thread"
+#18 0x00006b827ebc303d in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:111
+No locals.
+
+Thread 1 (Thread 0x6b82812b6780 (LWP 27512)):
+#0  pthread_cond_wait@@GLIBC_2.3.2 () at ../nptl/sysdeps/unix/sysv/linux/x86_64/pthread_cond_wait.S:185
+No locals.
+#1  0x00006b828069896b in boost::condition_variable::wait(boost::unique_lock<boost::mutex>&) () from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+No symbol table info available.
+#2  0x00006b82806950b4 in boost::thread::join_noexcept() () from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+No symbol table info available.
+#3  0x00000000004e2ad2 in join (this=0xef69c0) at /usr/include/boost/thread/detail/thread.hpp:756
+No locals.
+#4  ServiceManager::run (this=this@entry=0x7885efd15ad0) at /home/otserv/raava/sources/server.cpp:249
+        it = {px = , pn = {pi_ = }}
+        threads = std::vector of length 1, capacity 1 = {{px = 0xef69c0, pn = {pi_ = 0xedd9e0}}}
+        __PRETTY_FUNCTION__ = "void ServiceManager::run()"
+#5  0x00000000004a5244 in main (argc=1, argv=<optimised out>) at /home/otserv/raava/sources/otserv.cpp:326
+        args = std::vector of length 1, capacity 1 = {"/home/otserv/raava/theforgottenserver"}
+        servicer = {<boost::noncopyable_::noncopyable> = {<No data fields>}, _vptr.ServiceManager = 0x679930 <vtable for ServiceManager+16>, m_io_service = {<boost::asio::detail::noncopyable> = {<No data fields>}, service_registry_ = 0xef6620, impl_ = @0xef6670}, deathTimer = {<boost::asio::basic_io_object<boost::asio::deadline_timer_service<boost::posix_time::ptime, boost::asio::time_traits<boost::posix_time::ptime> > >> = {service = @0xef6720, implementation = {<boost::asio::detail::noncopyable> = {<No data fields>}, expiry = {<boost::date_time::base_time<boost::posix_time::ptime, boost::date_time::counted_time_system<boost::date_time::counted_time_rep<boost::posix_time::millisec_posix_time_system_config> > >> = {<boost::less_than_comparable<boost::posix_time::ptime, boost::equality_comparable<boost::posix_time::ptime, boost::posix_time::ptime, boost::detail::empty_base<boost::posix_time::ptime>, boost::detail::false_t>, boost::detail::empty_base<boost::posix_time::ptime>, boost::detail::true_t>> = {<boost::less_than_comparable1<boost::posix_time::ptime, boost::equality_comparable<boost::posix_time::ptime, boost::posix_time::ptime, boost::detail::empty_base<boost::posix_time::ptime>, boost::detail::false_t> >> = {<boost::equality_comparable<boost::posix_time::ptime, boost::posix_time::ptime, boost::detail::empty_base<boost::posix_time::ptime>, boost::detail::false_t>> = {<boost::equality_comparable1<boost::posix_time::ptime, boost::detail::empty_base<boost::posix_time::ptime> >> = {<boost::detail::empty_base<boost::posix_time::ptime>> = {<No data fields>}, <No data fields>}, <No data fields>}, <No data fields>}, <No data fields>}, time_ = {time_count_ = {value_ = 9223372036854775806}}}, <No data fields>}, might_have_pending_waits = false, timer_data = {op_queue_ = {<boost::asio::detail::noncopyable> = {<No data fields>}, front_ = 0x0, back_ = 0x0}, heap_index_ = 0, next_ = 0x0, prev_ = 0x0}}}, <No data fields>}, running = true, m_acceptors = std::map with 4 elements = {[9191] = {px = 0x6b82145bcc60, pn = {pi_ = 0x6b82145bcce0}}, [9192] = {px = 0x6b82145bd2e0, pn = {pi_ = 0x6b82145bd2a0}}, [9194] = {px = 0x6b82145bc1d0, pn = {pi_ = 0x6b821459c600}}, [9195] = {px = 0x6b82145bc720, pn = {pi_ = 0x6b82145a33c0}}}}
+        sigh = {__sigaction_handler = {sa_handler = 0x1, sa_sigaction = 0x1}, sa_mask = {__val = {0 <repeats 16 times>}}, sa_flags = 0, sa_restorer = 0x7885efd15d08}
