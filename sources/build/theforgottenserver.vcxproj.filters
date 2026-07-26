@@ -1,241 +1,241 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\weapons.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\weapons.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\waitlist.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\waitlist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\vocation.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\vocation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\trashholder.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\trashholder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\tools.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\tools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\tile.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\thing.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\thing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\textlogger.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\textlogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\teleport.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\teleport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\talkaction.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\talkaction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\spectators.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\spectators.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\status.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\status.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\spells.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\spells.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\spawn.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\spawn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\server.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\scriptmanager.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\scriptmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\scheduler.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\scheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\raids.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\raids.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\quests.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\quests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\protocolold.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\protocolold.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\protocollogin.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\protocollogin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\protocolhttp.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\protocolhttp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\protocolgame.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\protocolgame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\protocol.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\protocol.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\position.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\player.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\party.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\party.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\outputmessage.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\outputmessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\outfit.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\outfit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\otserv.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\otserv.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\npc.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\npc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\networkmessage.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\networkmessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\movement.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\movement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\mounts.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\mounts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\monsters.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\monsters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\monster.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\monster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\map.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\manager.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\mailbox.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\mailbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\luascript.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\luascript.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\items.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\items.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\itemattributes.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\itemattributes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\item.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\iomapserialize.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\iomapserialize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\iomap.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\iomap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\iologindata.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\iologindata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\ioguild.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\ioguild.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\ioban.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\ioban.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\housetile.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\housetile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\house.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\house.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\group.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\group.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\globalevent.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\globalevent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\gameservers.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\gameservers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\game.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\fileloader.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\fileloader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\exception.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\exception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\dispatcher.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\dispatcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\depot.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\depot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\databasemysql.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\databasemysql.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\databasemanager.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\databasemanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\database.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\database.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\cylinder.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\cylinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\creatureevent.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\creatureevent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\creature.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\creature.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\container.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\container.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\connection.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\connection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\configmanager.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\configmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\condition.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\condition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\combat.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\combat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\chat.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\chat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\beds.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\beds.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\baseevents.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\baseevents.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\allocator.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\allocator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\admin.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\admin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\actions.cpp">
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\actions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\imfis\Desktop\Compilar em 32\server\sources\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="C:\vcpkg\installed\x86-windows\share\boost-1.90.0\assert\boost_assert.natvis" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{3F79DC50-2376-3D85-AFD9-F6606DD68177}</UniqueIdentifier>
+      <UniqueIdentifier>{02F27970-9D49-3F39-9910-4612C000E95A}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

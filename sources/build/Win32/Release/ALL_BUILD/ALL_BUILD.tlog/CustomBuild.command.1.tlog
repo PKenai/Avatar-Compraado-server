@@ -1,6 +1,6 @@
-^C:\USERS\IMFIS\DESKTOP\COMPILAR EM 32\SERVER\SOURCES\CMAKELISTS.TXT
+^C:\USERS\IMFIS\DESKTOP\AVATAR-COMPRAADO-SERVER\SOURCES\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/imfis/Desktop/Compilar em 32/server/sources" "-BC:/Users/imfis/Desktop/Compilar em 32/server/sources/build" --check-stamp-file "C:/Users/imfis/Desktop/Compilar em 32/server/sources/build/CMakeFiles/generate.stamp"
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/imfis/Desktop/Avatar-Compraado-server/sources -BC:/Users/imfis/Desktop/Avatar-Compraado-server/sources/build --check-stamp-file C:/Users/imfis/Desktop/Avatar-Compraado-server/sources/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

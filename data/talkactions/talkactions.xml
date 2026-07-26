@@ -3,6 +3,7 @@
 	<talkaction log="no" words="!avatar" event="script" value="avatar.lua"/>
 	<talkaction log="no" words="!dominantguildcastle" event="script" value="castle.lua"/>
 	<talkaction log="no" words="!loot;/loot" event="script" value="loot.lua"/>
+	<talkaction log="no" words="!inspect" event="script" value="inspect.lua"/>
 	
 	<!--<talkaction words="/recipelist" event="script" value="recipelist.lua"/>-->
 	<talkaction words="/recipeshelmet" event="script" value="recipeshelmet.lua"/>

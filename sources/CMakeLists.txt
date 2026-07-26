@@ -117,7 +117,11 @@ target_compile_definitions(theforgottenserver PRIVATE
 if(MSVC)
     # 2013-era code is not conformance-clean; relax the front-end.
     # /Zi generates debug symbols so the crash handler can resolve function names.
+    # vcpkg forces `/external:I` for its own include dir, which the PCH can't
+    # resolve.  Override with a plain `/I` so `#include <libxml/xmlmemory.h>`
+    # is found normally.
     target_compile_options(theforgottenserver PRIVATE
+        "/I${LIBXML2_INCLUDE_DIR}"
         /permissive- /EHsc /bigobj /MP /Zi
         /wd4996 /wd4267 /wd4244 /wd4018 /wd4309 /wd4250 /wd4244
     )
