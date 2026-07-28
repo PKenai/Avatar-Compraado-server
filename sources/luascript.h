@@ -373,6 +373,11 @@ class LuaInterface
 		static int32_t luaDoCreatureSay(lua_State* L);
 		static int32_t luaGetLostExp(lua_State* L);
 		static int32_t luaGetItemIdByClientId(lua_State* L);
+		// ItemType(serverId) -- returns a Lua object with getClientId/getServerId/isNull methods
+		static int32_t luaItemType(lua_State* L);
+		static int32_t luaItemTypeGetClientId(lua_State* L);
+		static int32_t luaItemTypeGetServerId(lua_State* L);
+		static int32_t luaItemTypeIsNull(lua_State* L);
 		static int32_t luaDoPlayerAddMagLevel(lua_State* L);
 		static int32_t luaDoPlayerAddSkillTry(lua_State* L);
 		static int32_t luaDoCreatureAddHealth(lua_State* L);

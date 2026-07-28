@@ -60,7 +60,7 @@ local AgricultureConfig = {
             stages = {
                 [1] = {name = "Air Seedling",   clientId = 18221},
                 [2] = {name = "Air Plant",       clientId = 18223},
-                [3] = {name = "Air Fruit Plant", clientId = 18227}
+                [3] = {name = "Air Fruit Plant", clientId = 18228}
             }
         }
     }
@@ -78,13 +78,15 @@ local function getMyPlantsStr(cid)
     if r:getID() ~= -1 then
         repeat
             local id        = r:getDataInt("id")
-            local baseName  = r:getData("creature_name")
-            local customName= r:getData("custom_name")
+            local baseName  = r:getDataString("creature_name")
+            local customName= r:getDataString("custom_name")
             local stage     = r:getDataInt("stage")
             local lastWater = r:getDataInt("last_train")
             local cfg = AgricultureConfig.plants[baseName]
             if cfg then
-                local stageClientId = cfg.stages[stage] and cfg.stages[stage].clientId or 18221
+                local sId = cfg.stages[stage] and cfg.stages[stage].clientId or 18221
+                local stageClientId = ItemType(sId):getClientId()
+                if stageClientId == 0 then stageClientId = sId end
                 -- id~baseName~customName~stage~maxStage~lastWater~cooldown~stageClientId~harvestName
                 table.insert(parts,
                     id .."~".. baseName .."~".. customName .."~".. stage
@@ -101,9 +103,11 @@ end
 local function getStorePlantsStr()
     local parts = {}
     for baseName, cfg in pairs(AgricultureConfig.plants) do
+        local seedClientId = ItemType(cfg.seedClientId):getClientId()
+        if seedClientId == 0 then seedClientId = cfg.seedClientId end
         -- baseName~seedClientId~price~harvestName
         table.insert(parts,
-            baseName .."~".. cfg.seedClientId .."~".. cfg.price .."~".. cfg.harvestName
+            baseName .."~".. seedClientId .."~".. cfg.price .."~".. cfg.harvestName
         )
     end
     return table.concat(parts, ";")
@@ -134,7 +138,7 @@ function handleFarmOpcode(cid, buffer)
         if action == "fetch" then
             sendFarmUpdate(cid)
 
-        -- ── WATER (rega gratuita) ─────────────────────────────────
+        -- ── WATER (rega gratuita - diminui 5-15 min, 1x por estágio) ─
         elseif action == "water" then
             if getPlayerStorageValue(cid, QUEST_STORAGE) < 1 then
                 doPlayerSendTextMessage(cid, MESSAGE_STATUS_SMALL, "You must buy your farm from the Farmer first!")
@@ -144,15 +148,38 @@ function handleFarmOpcode(cid, buffer)
             if not farmId then return end
 
             local r = db.getResult(
-                "SELECT `creature_name`, `custom_name` FROM `player_creature_manager`" ..
+                "SELECT `creature_name`, `custom_name`, `stage`, `last_train`, `watered_stage` FROM `player_creature_manager`" ..
                 " WHERE `id` = " .. farmId .. " AND `player_id` = " .. guid
             )
             if r:getID() ~= -1 then
-                local customName = r:getData("custom_name")
+                local baseName     = r:getDataString("creature_name")
+                local customName   = r:getDataString("custom_name")
+                local stage        = r:getDataInt("stage")
+                local lastWater    = r:getDataInt("last_train")
+                local wateredStage = r:getDataInt("watered_stage")
                 r:free()
-                doSendMagicEffect(getCreaturePosition(cid), CONST_ME_WATERSPLASH)
-                doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "You watered your " .. customName .. ".")
-                sendFarmUpdate(cid)
+                local cfg = AgricultureConfig.plants[baseName]
+                if cfg then
+                    if stage >= #cfg.stages then
+                        doPlayerSendTextMessage(cid, MESSAGE_STATUS_SMALL,
+                            "This plant is fully grown. Harvest it!")
+                    elseif wateredStage >= stage then
+                        doPlayerSendTextMessage(cid, MESSAGE_STATUS_SMALL,
+                            "You have already watered this plant in its current stage!")
+                    else
+                        local minutes = math.random(5, 15)
+                        local reduceSeconds = minutes * 60
+                        local newLastTrain = lastWater - reduceSeconds
+                        db.query(string.format(
+                            "UPDATE `player_creature_manager` SET `last_train` = %d, `watered_stage` = %d WHERE `id` = %d",
+                            newLastTrain, stage, farmId
+                        ))
+                        doSendMagicEffect(getCreaturePosition(cid), CONST_ME_WATERSPLASH)
+                        doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE,
+                            string.format("You watered your %s! Growth time reduced by %d minutes.", customName, minutes))
+                        sendFarmUpdate(cid)
+                    end
+                end
             end
 
         -- ── GROW (avança estágio) ────────────────────────────────
@@ -169,8 +196,8 @@ function handleFarmOpcode(cid, buffer)
                 " WHERE `id` = " .. farmId .. " AND `player_id` = " .. guid
             )
             if r:getID() ~= -1 then
-                local baseName   = r:getData("creature_name")
-                local customName = r:getData("custom_name")
+                local baseName   = r:getDataString("creature_name")
+                local customName = r:getDataString("custom_name")
                 local stage      = r:getDataInt("stage")
                 local lastWater  = r:getDataInt("last_train")
                 r:free()
@@ -217,8 +244,8 @@ function handleFarmOpcode(cid, buffer)
                 " WHERE `id` = " .. farmId .. " AND `player_id` = " .. guid
             )
             if r:getID() ~= -1 then
-                local baseName   = r:getData("creature_name")
-                local customName = r:getData("custom_name")
+                local baseName   = r:getDataString("creature_name")
+                local customName = r:getDataString("custom_name")
                 local stage      = r:getDataInt("stage")
                 local lastWater  = r:getDataInt("last_train")
                 r:free()
@@ -254,7 +281,7 @@ function handleFarmOpcode(cid, buffer)
                 " WHERE `id` = " .. farmId .. " AND `player_id` = " .. guid
             )
             if r:getID() ~= -1 then
-                local customName = r:getData("custom_name")
+                local customName = r:getDataString("custom_name")
                 r:free()
                 db.query("DELETE FROM `player_creature_manager` WHERE `id` = " .. farmId)
                 doSendMagicEffect(getCreaturePosition(cid), CONST_ME_POFF)

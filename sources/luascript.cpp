@@ -2472,6 +2472,9 @@ void LuaInterface::registerFunctions()
 	//getItemInfo(itemid)
 	lua_register(m_luaState, "getItemInfo", LuaInterface::luaGetItemInfo);
 
+	//ItemType(serverId) -- returns a Lua object with :getClientId(), :getServerId(), :isNull()
+	lua_register(m_luaState, "ItemType", LuaInterface::luaItemType);
+
 	//getItemAttribute(uid, key)
 	lua_register(m_luaState, "getItemAttribute", LuaInterface::luaGetItemAttribute);
 
@@ -3775,6 +3778,58 @@ int32_t LuaInterface::luaGetItemIdByClientId(lua_State* L)
 	}
 	else
 		lua_pushnumber(L, it.id);
+
+	return 1;
+}
+
+// ─── ItemType helpers (upvalue-based closures) ───────────────────────────────
+int32_t LuaInterface::luaItemTypeGetClientId(lua_State* L)
+{
+	// upvalue 1 = clientId as number
+	lua_pushnumber(L, lua_tonumber(L, lua_upvalueindex(1)));
+	return 1;
+}
+
+int32_t LuaInterface::luaItemTypeGetServerId(lua_State* L)
+{
+	// upvalue 1 = serverId as number
+	lua_pushnumber(L, lua_tonumber(L, lua_upvalueindex(1)));
+	return 1;
+}
+
+int32_t LuaInterface::luaItemTypeIsNull(lua_State* L)
+{
+	// upvalue 1 = isNull as bool
+	lua_pushboolean(L, lua_toboolean(L, lua_upvalueindex(1)));
+	return 1;
+}
+
+int32_t LuaInterface::luaItemType(lua_State* L)
+{
+	//ItemType(serverId)
+	uint32_t serverId = (uint32_t)popNumber(L);
+	const ItemType* item = Item::items.getElement(serverId);
+	bool isNull = (!item || !item->loaded || item->id == 0);
+
+	uint16_t clientId = isNull ? 0 : item->clientId;
+	uint32_t srvId    = isNull ? 0 : item->id;
+
+	lua_newtable(L); // push the proxy object
+
+	// :getClientId() method
+	lua_pushnumber(L, (double)clientId);
+	lua_pushcclosure(L, LuaInterface::luaItemTypeGetClientId, 1);
+	lua_setfield(L, -2, "getClientId");
+
+	// :getServerId() method
+	lua_pushnumber(L, (double)srvId);
+	lua_pushcclosure(L, LuaInterface::luaItemTypeGetServerId, 1);
+	lua_setfield(L, -2, "getServerId");
+
+	// :isNull() method
+	lua_pushboolean(L, isNull ? 1 : 0);
+	lua_pushcclosure(L, LuaInterface::luaItemTypeIsNull, 1);
+	lua_setfield(L, -2, "isNull");
 
 	return 1;
 }

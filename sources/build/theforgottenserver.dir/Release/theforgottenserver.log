@@ -47,18 +47,6 @@
   otserv.cpp
   outfit.cpp
   outputmessage.cpp
-C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\monster.cpp(162,19): error C2084: function 'uint64_t Monster::getLostExperience(void) const' already has a body
-      C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\monster.h(207,20):
-      see previous definition of 'Monster::getLostExperience'
-  
-C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\monster.cpp(1390,29): error C2039: 'getFirstItem': is not a member of 'Container'
-      C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\container.h(55,7):
-      see declaration of 'Container'
-  
-C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\monster.cpp(1390,64): error C2039: 'getNextItem': is not a member of 'Item'
-      C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\item.h(142,7):
-      see declaration of 'Item'
-  
   party.cpp
   player.cpp
   position.cpp
@@ -86,3 +74,6 @@ C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\monster.cpp(1390,64): err
   vocation.cpp
   waitlist.cpp
   weapons.cpp
+  theforgottenserver.vcxproj -> C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\build\Release\theforgottenserver.exe
+  'pwsh.exe' não é reconhecido como um comando interno
+  ou externo, um programa operável ou um arquivo em lotes.
