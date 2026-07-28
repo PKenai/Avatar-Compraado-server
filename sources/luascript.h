@@ -356,6 +356,7 @@ class LuaInterface
 		static int32_t luaDoCreateItemEx(lua_State* L);
 		static int32_t luaDoCreateTeleport(lua_State* L);
 		static int32_t luaDoCreateMonster(lua_State* L);
+		static int32_t luaDoCreateSpiritualMonster(lua_State* L);
 		static int32_t luaDoCreateNpc(lua_State* L);
 		static int32_t luaDoSummonMonster(lua_State* L);
 		static int32_t luaDoConvinceCreature(lua_State* L);
@@ -717,6 +718,7 @@ class LuaInterface
 		static int32_t luaGetConfigFile(lua_State* L);
 		static int32_t luaGetConfigValue(lua_State* L);
 		static int32_t luaGetModList(lua_State* L);
+		static int32_t luaGetMonsterTypeList(lua_State* L);
 		static int32_t luaDoPlayerSetWalkthrough(lua_State* L);
 
 		static int32_t luaDoPlayerAddMount(lua_State* L);

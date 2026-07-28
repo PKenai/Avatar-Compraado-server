@@ -1,0 +1,10 @@
+^C:\USERS\IMFIS\DESKTOP\AVATAR-COMPRAADO-SERVER\SOURCES\BUILD\CMAKEFILES\48C3B1EB6D17282C4341EEDC34B02BD0\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/imfis/Desktop/Avatar-Compraado-server/sources -BC:/Users/imfis/Desktop/Avatar-Compraado-server/sources/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/imfis/Desktop/Avatar-Compraado-server/sources/build/theforgottenserver.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

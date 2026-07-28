@@ -163,15 +163,24 @@ bool MonsterType::createChildLoot(Container* parent, const LootBlock& lootBlock)
 	return !parent->empty();
 }
 
+std::vector<std::string> Monsters::getMonsterTypeList() const
+{
+	std::vector<std::string> names;
+	names.reserve(monsterNames.size());
+	for (MonsterNameMap::const_iterator it = monsterNames.begin(); it != monsterNames.end(); ++it)
+		names.push_back(it->first);
+	return names;
+}
+
 uint16_t Monsters::getLootRandom(bool lootPercent)
 {
 
 	if(!lootPercent)
 		return (uint16_t)std::ceil((double)random_range(0, MAX_LOOTCHANCE) / g_config.getDouble(ConfigManager::RATE_LOOT));
 
-	//Modificação para mudar porcentagem de loot para (1% até 100%)
-	//Só funciona quando tem lootPercent="true" no xml do monstro
-	//Modificação by Mirto (milton33b@hotmail.com) 30-06-14
+	//Modificaï¿½ï¿½o para mudar porcentagem de loot para (1% atï¿½ 100%)
+	//Sï¿½ funciona quando tem lootPercent="true" no xml do monstro
+	//Modificaï¿½ï¿½o by Mirto (milton33b@hotmail.com) 30-06-14
 	return (uint16_t)std::ceil((double)random_range(0, MAX_LOOTCHANCE) / g_config.getDouble(ConfigManager::RATE_LOOT_PERCENT));
 }
 
@@ -1387,9 +1396,9 @@ bool Monsters::loadMonster(const std::string& file, const std::string& monsterNa
 		}
 		else if(!xmlStrcmp(p->name, (const xmlChar*)"loot"))
 		{
-			//Modificação para mudar porcentagem de loot para (1% até 100%)
-			//Só funciona quando tem lootPercent="true" no xml do monstro
-			//Modificação by Mirto (milton33b@hotmail.com) 30-06-14
+			//Modificaï¿½ï¿½o para mudar porcentagem de loot para (1% atï¿½ 100%)
+			//Sï¿½ funciona quando tem lootPercent="true" no xml do monstro
+			//Modificaï¿½ï¿½o by Mirto (milton33b@hotmail.com) 30-06-14
 			std::string percent;
 			if(readXMLString(root, "lootPercent", percent))
 				if(percent == "true")

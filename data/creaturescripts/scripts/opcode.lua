@@ -1,3 +1,5 @@
+dofile(getDataDir().."creaturescripts/scripts/creature_manager.lua")
+
 local function changeAutoloot(cid, value)
 	if type(value) ~= "string" or (value ~= "false" and value ~= "true") then
 		return true
@@ -74,10 +76,23 @@ function onExtendedOpcode(cid, opcode, buffer)
 		  end
 		elseif opcode == 131 then
 			changeAutoloot(cid, buffer)
+		elseif opcode == 210 then
+			-- Water Heal target: client envia o nome do player antes de castar
+			if type(buffer) == "string" and #buffer > 0 then
+				local target = getPlayerByNameWildcard(buffer)
+				if target and isPlayer(target) then
+					setPlayerStorageValue(cid, 87654, target)
+				end
+			end
 		elseif opcode == 6 then
 			-- MapShader / Appa flight fade sync from client
 			if appaFlightOnFadeDone and (buffer == "fade_out_done" or buffer == "exit_fade_done" or buffer == "fade_in_done") then
 				appaFlightOnFadeDone(cid, buffer)
+			end
+		elseif opcode == 135 then
+			-- Farm System (Creature Manager)
+			if type(handleFarmOpcode) == "function" then
+				handleFarmOpcode(cid, buffer)
 			end
 		elseif opcode > 0 and opcode < 4 then
 			local handler = onReceiveOpCode and onReceiveOpCode[opcode]

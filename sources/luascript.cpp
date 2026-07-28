@@ -1861,6 +1861,9 @@ void LuaInterface::registerFunctions()
 	//doCreateMonster(name, pos[, extend = false[, force = false]])
 	lua_register(m_luaState, "doCreateMonster", LuaInterface::luaDoCreateMonster);
 
+	//doCreateSpiritualMonster(name, pos[, extend = false[, force = false]])
+	lua_register(m_luaState, "doCreateSpiritualMonster", LuaInterface::luaDoCreateSpiritualMonster);
+
 	//doCreateNpc(name, pos)
 	lua_register(m_luaState, "doCreateNpc", LuaInterface::luaDoCreateNpc);
 
@@ -2646,6 +2649,9 @@ void LuaInterface::registerFunctions()
 
 	//std table
 	luaL_register(m_luaState, "std", LuaInterface::luaStdTable);
+
+	//getMonsterTypeList()
+	lua_register(m_luaState, "getMonsterTypeList", LuaInterface::luaGetMonsterTypeList);
 }
 
 const luaL_Reg LuaInterface::luaSystemTable[] =
@@ -5678,6 +5684,46 @@ int32_t LuaInterface::luaDoCreateMonster(lua_State* L)
 		if(luaError)
 			errorEx("Cannot create monster: " + name);
 
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	ScriptEnviroment* env = getEnv();
+	lua_pushnumber(L, env->addThing((Thing*)monster));
+	return 1;
+}
+
+
+int32_t LuaInterface::luaDoCreateSpiritualMonster(lua_State* L)
+{
+	//doCreateSpiritualMonster(name, pos[, extend = false[, force = false]])
+	bool force = false, extend = false;
+	int32_t params = lua_gettop(L);
+
+	if(params > 3)
+		force = popBoolean(L);
+
+	if(params > 2)
+		extend = popBoolean(L);
+
+	PositionEx pos;
+	popPosition(L, pos);
+
+	std::string name = popString(L);
+	Monster* monster = Monster::createMonster(name.c_str());
+	if(!monster)
+	{
+		errorEx("Monster with name '" + name + "' not found");
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	monster->setSpiritual(true);
+
+	if(!g_game.placeCreature(monster, pos, extend, force))
+	{
+		delete monster;
+		errorEx("Cannot create monster: " + name);
 		lua_pushboolean(L, false);
 		return 1;
 	}
@@ -11868,6 +11914,20 @@ int32_t LuaInterface::luaGetModList(lua_State* L)
 		pushTable(L);
 	}
 
+	return 1;
+}
+
+int32_t LuaInterface::luaGetMonsterTypeList(lua_State* L)
+{
+	//getMonsterTypeList()
+	std::vector<std::string> names = g_monsters.getMonsterTypeList();
+	lua_createtable(L, names.size(), 0);
+	for (size_t i = 0; i < names.size(); ++i)
+	{
+		lua_pushnumber(L, i + 1);
+		lua_pushstring(L, names[i].c_str());
+		lua_settable(L, -3);
+	}
 	return 1;
 }
 

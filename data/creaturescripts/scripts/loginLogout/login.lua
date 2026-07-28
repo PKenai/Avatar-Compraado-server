@@ -588,6 +588,8 @@ function onLogin(cid)
     setPlayerStorageValue(cid, "timeLogin", os.time())      --Registra data ultimo login;
     registerCreatureEvent(cid, "Inquisition")
     registerCreatureEvent(cid, "mobsKill")
+    registerCreatureEvent(cid, "DailyHunt")
+    registerCreatureEvent(cid, "DailyHuntOpcode")
     sendOpCode(cid, 19, tostring(getPlayerVocation(cid)))
  
     if getPlayerStorageValue(cid, "hasActiveInQuest") == 1 then
@@ -632,5 +634,12 @@ function onLogin(cid)
 			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, getLangString(cid, "There are 100 players online and all players received +10% exp bonus to celebrate!", "A meta de 100 jogadores online foi atingida e agora os jogadores est�o com +10% de experi�ncia b�nus!"))
 		end
 	end
+    -- Send Daily Hunt data shortly after login
+    addEvent(function(cid)
+        if isCreature(cid) then
+            DailyHunt.sendDataToClient(cid)
+        end
+    end, 1000, cid)
+
     return true
 end

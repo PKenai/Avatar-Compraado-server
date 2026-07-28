@@ -138,6 +138,8 @@ class Monsters
 		bool isLoaded() const {return loaded;}
 		static uint16_t getLootRandom(bool lootPercent);
 
+	std::vector<std::string> getMonsterTypeList() const;
+
 	private:
 		bool loaded;
 

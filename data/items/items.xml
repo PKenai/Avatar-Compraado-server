@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <items>
 	<!-- README:
 		We really appreciate if someone could help us
@@ -15534,4 +15534,22 @@
 	<item id="20042" name="health potion" />
 	<item id="20043" name="spirit potion" />
 	<item id="20047" name="mana potion" />
+	<!-- Agriculture System - Seeds -->
+	<item id="18216" article="a" name="fire seed" />
+	<item id="18217" article="an" name="earth seed" />
+	<item id="18218" article="a" name="water seed" />
+	<item id="18219" article="an" name="air seed" />
+	<!-- Agriculture System - Stages -->
+	<item id="18221" article="a" name="seedling" />
+	<item id="18223" article="a" name="growing plant" />
+	<!-- Agriculture System - Stage 3 (complete plants) -->
+	<item id="18225" article="a" name="fire fruit plant" />
+	<item id="18226" article="a" name="water fruit plant" />
+	<item id="18227" article="an" name="earth fruit plant" />
+	<item id="18228" article="an" name="air fruit plant" />
+	<!-- Agriculture System - Harvest fruits -->
+	<item id="18231" article="a" name="water fruit" />
+	<item id="18232" article="a" name="fire fruit" />
+	<item id="18233" article="an" name="air fruit" />
+	<item id="18234" article="an" name="earth fruit" />
 </items>

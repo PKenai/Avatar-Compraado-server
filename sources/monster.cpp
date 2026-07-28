@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ////////////////////////////////////////////////////////////////////////
 #include "otpch.h"
+#include <vector>
 
 #include "monster.h"
 #include "spawn.h"
@@ -97,6 +98,8 @@ Monster::Monster(MonsterType* _mType):
 	defenseTicks = 0;
 	yellTicks = 0;
 	extraMeleeAttack = false;
+	m_spiritual = false;
+	m_spiritualName = "";
 
 	// register creature events
 	for(StringVec::iterator it = mType->scriptList.begin(); it != mType->scriptList.end(); ++it)
@@ -120,6 +123,50 @@ Monster::~Monster()
 		raid = NULL;
 	}
 }
+
+const std::string& Monster::getName() const
+{
+	if(m_spiritual)
+		return m_spiritualName;
+	return mType->name;
+}
+
+void Monster::setSpiritual(bool v)
+{
+	m_spiritual = v;
+	if(v)
+	{
+		m_spiritualName = "Spiritual " + mType->name;
+		health = (int32_t)(health * 1.5);
+		healthMax = (int32_t)(healthMax * 1.5);
+		baseSpeed = (int32_t)(baseSpeed * 1.5);
+	}
+}
+
+int32_t Monster::getArmor() const
+{
+	int32_t a = mType->armor;
+	if(m_spiritual)
+		a = (int32_t)(a * 1.5);
+	return a;
+}
+
+int32_t Monster::getDefense() const
+{
+	int32_t d = mType->defense;
+	if(m_spiritual)
+		d = (int32_t)(d * 1.5);
+	return d;
+}
+
+uint64_t Monster::getLostExperience() const
+{
+	uint64_t exp = (skillLoss ? mType->experience : 0);
+	if(m_spiritual)
+		exp *= 2;
+	return exp;
+}
+
 
 void Monster::onTarget(Creature* target)
 {
@@ -670,8 +717,6 @@ void Monster::doAttacking(uint32_t interval)
 				maxCombatValue = (int32_t)(it->maxCombatValue * multiplier);
 
 				it->spell->castSpell(this, attackedCreature);
-				if(it->isMelee)
-					extraMeleeAttack = false;
 #ifdef __DEBUG__
 
 				static uint64_t prevTicks = OTSYS_TIME();
@@ -1271,6 +1316,11 @@ bool Monster::getCombatValues(int32_t& min, int32_t& max)
 
 	min = (int32_t)(minCombatValue * multiplier);
 	max = (int32_t)(maxCombatValue * multiplier);
+	if(m_spiritual)
+	{
+		min = (int32_t)(min * 1.5);
+		max = (int32_t)(max * 1.5);
+	}
 	return true;
 }
 
@@ -1332,7 +1382,25 @@ void Monster::updateLookDirection()
 void Monster::dropLoot(Container* corpse)
 {
 	if(corpse && lootDrop == LOOT_DROP_FULL)
+	{
 		mType->dropLoot(corpse);
+		if(m_spiritual)
+		{
+			// Duplicate items with 50% chance for 50% more loot
+			std::vector<Item*> items;
+			for(ItemList::const_iterator it = corpse->getItems(); it != corpse->getEnd(); ++it)
+				items.push_back(*it);
+			for(std::vector<Item*>::iterator it = items.begin(); it != items.end(); ++it)
+			{
+				if(random_range(1, 100) <= 50)
+				{
+					Item* clone = Item::CreateItem((*it)->getID(), (*it)->getItemCount());
+					if(clone)
+						corpse->addItem(clone);
+				}
+			}
+		}
+	}
 }
 
 bool Monster::isAttackable() const

@@ -60,19 +60,22 @@ class Monster : public Creature
 		void addList() {autoList[id] = this;}
 		void removeList() {autoList.erase(id);}
 
-		virtual const std::string& getName() const {return mType->name;}
+		virtual const std::string& getName() const;
 		virtual const std::string& getNameDescription() const {return mType->nameDescription;}
 		virtual std::string getDescription(int32_t) const {return mType->nameDescription + ".";}
 
 		virtual RaceType_t getRace() const {return mType->race;}
-		virtual int32_t getArmor() const {return mType->armor;}
+		virtual int32_t getArmor() const;
 		virtual int32_t getDodge() const {return mType->dodge;}
-		virtual int32_t getDefense() const {return mType->defense;}
+		virtual int32_t getDefense() const;
 		virtual MonsterType* getMonsterType() const {return mType;}
 		virtual bool isPushable() const;
 		virtual bool isAttackable() const;
 		virtual bool isImmune(CombatType_t type) const;
 		bool isEliminable() const {return mType->eliminable;}
+
+		void setSpiritual(bool v);
+		bool isSpiritual() const {return m_spiritual;}
 
 		bool canPushItems() const {return mType->canPushItems;}
 		bool canPushCreatures() const {return mType->canPushCreatures;}
@@ -153,6 +156,10 @@ class Monster : public Creature
 		bool isMasterInRange;
 		bool teleportToMaster;
 
+		// Spiritual monster system
+		bool m_spiritual;
+		std::string m_spiritualName;
+
 		virtual void onCreatureEnter(Creature* creature);
 		virtual void onCreatureLeave(Creature* creature);
 		void onCreatureFound(Creature* creature, bool pushFront = false);
@@ -197,7 +204,7 @@ class Monster : public Creature
 		bool isFriend(const Creature* creature);
 		bool isOpponent(const Creature* creature);
 
-		virtual uint64_t getLostExperience() const {return ((skillLoss ? mType->experience : 0));}
+		virtual uint64_t getLostExperience() const;
 		virtual void dropLoot(Container* corpse);
 		virtual uint32_t getDamageImmunities() const {return mType->damageImmunities;}
 		virtual uint32_t getConditionImmunities() const {return mType->conditionImmunities;}

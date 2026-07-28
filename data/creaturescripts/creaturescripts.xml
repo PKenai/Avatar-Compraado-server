@@ -78,6 +78,9 @@
 	<event type="outfit" name="onChangeOutfit" event="script" value="changeOutfit.lua"/>
 	<event type="preparedeath" name="prepareCheck" event="script" value="prepareCheck.lua"/>
 
+	<event type="kill" name="DailyHunt" event="script" value="dailyHunt.lua"/>
+	<event type="extendedopcode" name="DailyHuntOpcode" event="script" value="dailyHunt.lua"/>
+
 	<event type="extendedopcode" name="ExtendedOpcode" event="script" value="opcode.lua"/>
 	<event type="castspell" name="castSpell" event="script" value="onUseSpell.lua"/>
 	<!-- <event type="ongainexp" name="onGainExp" event="script" value="onGainExperience.lua"/> -->

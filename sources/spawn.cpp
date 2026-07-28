@@ -307,7 +307,10 @@ bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& p
         return true;
     }
  
-        monster->setSpawn(this);
+        if(random_range(1, 1000) == 1)
+        monster->setSpiritual(true);
+ 
+    monster->setSpawn(this);
         monster->setMasterPosition(pos, radius);
         monster->setDirection(dir);
  

@@ -1,10 +1,5 @@
 local InspectOpcode = 164
 
--- Debug: escreve no terminal do servidor
-local function dbg(msg)
-  print("[InspectServer] " .. msg)
-end
-
 local forbiddenNames = {
   "Draptor", "Tyrn", "Devil Skeleton", "Kraken", "Death Wing",
   "The Duke Of The Depths", "Mouth of Hell", "Marsh Prince",
@@ -29,32 +24,22 @@ local function spairs(t, order)
 end
 
 function onSay(cid, words, param, channel)
-  dbg("=== onSay called ===")
-  dbg("words: '" .. tostring(words) .. "'")
-  dbg("param: '" .. tostring(param) .. "'")
-  dbg("channel: " .. tostring(channel))
-
   if param == nil or param:trim() == "" then
-    dbg("ERROR: Empty parameter!")
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE,
       "Usage: !inspect MonsterName")
     return true
   end
 
   param = param:trim()
-  dbg("Looking up monster: '" .. param .. "'")
 
   local monster = getMonsterInfo(param)
   if not monster then
-    dbg("ERROR: Monster '" .. param .. "' not found!")
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE,
       param .. " does not exist.")
     return true
   end
-  dbg("Monster found! Name: '" .. tostring(monster.name) .. "'")
 
   if isInArray(forbiddenNames, param) then
-    dbg("Monster is forbidden!")
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE,
       monster.name .. " information is locked.")
     return true
@@ -62,19 +47,15 @@ function onSay(cid, words, param, channel)
 
   -- Get loot if not already loaded
   if not monster.loot then
-    dbg("Loading loot list...")
     monster.loot = getMonsterLootList(param)
-    dbg("Loot loaded, items: " .. tostring(#monster.loot))
   end
 
   local monsterData = {}
   monsterData.name = monster.name
-  dbg("Building monster data for: " .. monster.name)
 
   -- Try to get outfit from spawned creature
   local creature = getCreatureByName(monster.name)
   if creature then
-    dbg("Creature found in world, getting outfit")
     local outfit = getCreatureOutfit(creature)
     if outfit then
       monsterData.outfit = {
@@ -86,10 +67,7 @@ function onSay(cid, words, param, channel)
         head = outfit.lookHead or 0,
         body = outfit.lookBody or 0
       }
-      dbg("Outfit obtained from creature")
     end
-  else
-    dbg("Creature not found in world, using XML look")
   end
 
   -- Fallback: use look type from monster info
@@ -103,14 +81,11 @@ function onSay(cid, words, param, channel)
       head = monster.look.head or monster.look.lookHead or 0,
       body = monster.look.body or monster.look.lookBody or 0
     }
-    dbg("Fallback outfit used")
   end
 
   monsterData.loot = {}
 
   if monster.loot then
-    dbg("Processing " .. #monster.loot .. " loot items")
-
     -- Collect all loot items including children
     local allLoot = {}
     local count = 0
@@ -125,10 +100,8 @@ function onSay(cid, words, param, channel)
         end
       end
     end
-    dbg("Total loot entries (with children): " .. #allLoot)
 
     -- Sort by chance descending
-    local itemsAdded = 0
     for _, item in spairs(allLoot, function(t, a, b)
       return t[b].chance and t[a].chance and t[b].chance < t[a].chance
     end) do
@@ -161,18 +134,12 @@ function onSay(cid, words, param, channel)
           count = item.countMax or item.count or 0,
           chance = rarity
         })
-        itemsAdded = itemsAdded + 1
       end
     end
-    dbg("Items added to loot list: " .. itemsAdded)
   end
 
-  dbg("Sending data via extended opcode " .. InspectOpcode .. "...")
   local dataString = table.tostring(monsterData)
-  dbg("Data string length: " .. #dataString)
-  dbg("First 100 chars: " .. dataString:sub(1, 100))
   doSendPlayerExtendedOpcode(cid, InspectOpcode, dataString)
-  dbg("=== onSay COMPLETE ===")
 
   return true
 end
