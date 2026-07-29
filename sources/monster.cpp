@@ -181,7 +181,7 @@ void Monster::onTargetDisappear(bool)
 	std::clog << "Attacked creature disappeared." << std::endl;
 #endif
 	attackTicks = 0;
-	extraMeleeAttack = true;
+	// Do NOT set extraMeleeAttack=true here - it causes instant re-attack (fast attack bug)
 	if(g_config.getBool(ConfigManager::MONSTER_SPAWN_WALKBACK))
 		g_game.steerCreature(this, masterPosition, 5000);
 }
@@ -766,6 +766,14 @@ bool Monster::canUseSpell(const Position& pos, const Position& targetPos,
 
 		if(attackTicks % sb.speed >= interval) //already used this spell for this round
 			return false;
+	}
+	else if(sb.isMelee && extraMeleeAttack)
+	{
+		// After firing the extra melee, reset flag and set attackTicks to half
+		// the swing speed so the NEXT attack happens on schedule (avoids double-tap)
+		extraMeleeAttack = false;
+		resetTicks = false; // don't zero attackTicks at end of doAttacking
+		attackTicks = sb.speed / 2;
 	}
 
 	if(!sb.range || std::max(std::abs(pos.x - targetPos.x), std::abs(pos.y - targetPos.y)) <= (int32_t)sb.range)

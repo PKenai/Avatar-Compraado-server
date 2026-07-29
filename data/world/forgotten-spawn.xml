@@ -861,9 +861,6 @@
 	<spawn centerx="443" centery="334" centerz="5" radius="1">
 		<monster name="Cyclops Smith" x="0" y="0" z="5" spawntime="40" />
 	</spawn>
-	<spawn centerx="511" centery="365" centerz="5" radius="1">
-		<npc name="Banker" x="0" y="0" z="5" spawntime="40" />
-	</spawn>
 	<spawn centerx="582" centery="368" centerz="5" radius="5">
 		<monster name="Rat" x="0" y="5" z="5" spawntime="40" />
 	</spawn>
@@ -2210,9 +2207,6 @@
 	</spawn>
 	<spawn centerx="556" centery="364" centerz="6" radius="1">
 		<npc name="dink" x="0" y="0" z="6" spawntime="40" />
-	</spawn>
-	<spawn centerx="517" centery="365" centerz="6" radius="1">
-		<npc name="Benjamin" x="0" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="512" centery="370" centerz="6" radius="1">
 		<npc name="fizz" x="0" y="0" z="6" spawntime="40" />

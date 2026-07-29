@@ -15552,4 +15552,18 @@
 	<item id="18232" article="a" name="fire fruit" />
 	<item id="18233" article="an" name="air fruit" />
 	<item id="18234" article="an" name="earth fruit" />
+
+	<!-- Custom Stairs (Floor Change) -->
+	<item id="18322" name="stairs">
+		<attribute key="floorchange" value="east" />
+	</item>
+	<item id="18324" name="stairs">
+		<attribute key="floorchange" value="west" />
+	</item>
+	<item id="18326" name="stairs">
+		<attribute key="floorchange" value="south" />
+	</item>
+	<item id="18328" name="stairs">
+		<attribute key="floorchange" value="north" />
+	</item>
 </items>

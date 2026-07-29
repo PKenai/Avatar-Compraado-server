@@ -2362,6 +2362,9 @@ void ProtocolGame::sendAddCreature(const Creature* creature, const Position& pos
 	if(creature != player)
 	{
 		AddTileCreature(msg, pos, stackpos, creature);
+		if (const Player* targetPlayer = creature->getPlayer()) {
+			sendStreamerTag(targetPlayer);
+		}
 		return;
 	}
 
@@ -2397,6 +2400,8 @@ void ProtocolGame::sendAddCreature(const Creature* creature, const Position& pos
 			sendVIP((*it), vipName, (tmpPlayer && player->canSeeCreature(tmpPlayer)));
 		}
 	}
+	
+	syncStreamerTags();
 }
 
 void ProtocolGame::sendRemoveCreature(const Creature*, const Position& pos, uint32_t stackpos)
@@ -2510,6 +2515,10 @@ void ProtocolGame::sendMoveCreature(const Creature* creature, const Tile*, const
 
 			TRACK_MESSAGE(msg);
 			AddTileCreature(msg, newPos, newStackpos, creature);
+	}
+	
+	if (creature == player) {
+		syncStreamerTags();
 	}
 }
 
@@ -3302,4 +3311,41 @@ void ProtocolGame::sendExtendedOpcode(uint8_t opcode, const std::string& buffer)
          msg->put<char>(opcode);
          msg->putString(buffer);
      }
+}
+
+void ProtocolGame::sendStreamerTag(const Player* targetPlayer)
+{
+	if(!targetPlayer || !player || !player->isUsingOtclient()) return;
+
+	uint32_t voc = targetPlayer->getVocationId();
+	std::string color1 = "";
+	std::string color2 = "";
+	if (voc == 1 || voc == 5) {
+		color1 = "#FF0000"; color2 = "#880000";
+	} else if (voc == 2 || voc == 6) {
+		color1 = "#0000FF"; color2 = "#000088";
+	} else if (voc == 3 || voc == 7) {
+		color1 = "#FFFFFF"; color2 = "#AAAAAA";
+	} else if (voc == 4 || voc == 8) {
+		color1 = "#8B4513"; color2 = "#A0522D";
+	}
+
+	if (!color1.empty()) {
+		char buffer[256];
+		sprintf(buffer, "{\"cid\": %u, \"voc\": %d, \"hColor1\": \"%s\", \"hColor2\": \"%s\"}", targetPlayer->getID(), voc, color1.c_str(), color2.c_str());
+		sendExtendedOpcode(119, buffer);
+	}
+}
+
+void ProtocolGame::syncStreamerTags()
+{
+	if(!player || !player->isUsingOtclient()) return;
+	
+	SpectatorVec spectators;
+	g_game.getSpectators(spectators, player->getPosition(), false, true);
+	for(Creature* c : spectators) {
+		if (const Player* targetPlayer = c->getPlayer()) {
+			sendStreamerTag(targetPlayer);
+		}
+	}
 }
