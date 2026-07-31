@@ -1,7 +1,7 @@
 local events = {"hasImuneable", "onAdvancePoint", "flySystem", "GuildEvents",
                 "killTask", "loot", "onMoveItem", "onSee", "deathChecks", "deathGamesCheck", 
                 "onDirection", "onTextEdit", "Idle", "Mail", "ReportBug", "SkullCheck", "onAddInjustInPlayer",
-                "onGainExp", "castSpell", "onChangeOutfit", "combats", "pushs", "onmount", "prepareCheck", "combatss", "ExtendedOpcode", "onTradeStart", "onjogar", "trainer", "onAttackAvatar"}
+                "onGainExp", "castSpell", "onChangeOutfit", "combats", "pushs", "onmount", "prepareCheck", "combatss", "ExtendedOpcode", "onTradeStart", "onjogar", "trainer", "onAttackAvatar", "PartyDamageMeter"}
 
 
 
@@ -54,7 +54,7 @@ function sendTestEquipamentsIfActive(cid)
     --[[
     if serverInTest then
         if getPlayerStorageValue(cid, "testMoney") == -1 then
-            sendBlueMessage(cid, "Atenção! Servidor em teste, você recebeu 1kk e 30 dias de premium account. Qualquer informação sobre balanceamento e bugs é util para nós. Servidor está com rate 3x.")
+            sendBlueMessage(cid, "Atenï¿½ï¿½o! Servidor em teste, vocï¿½ recebeu 1kk e 30 dias de premium account. Qualquer informaï¿½ï¿½o sobre balanceamento e bugs ï¿½ util para nï¿½s. Servidor estï¿½ com rate 3x.")
             doPlayerAddItem(cid, 2160, 100)
             doPlayerAddPremiumDays(cid, 30)
             setPlayerStorageValue(cid, "testMoney", 1)
@@ -82,10 +82,10 @@ function sendBlessIfActive(cid)
             doPlayerAddExperience(cid, math.floor(expToWin))
 			if supremeBless > 0 then 
 				setPlayerStorageValue(cid, "playerWithSupremeBless", -1)
-				local text = getLangString(cid, "You have lost the supreme bless, but all your experience lost has been recovered!", "Você acabou de perder a benção suprema, entretanto você teve toda sua exp perdida recuperada!")
+				local text = getLangString(cid, "You have lost the supreme bless, but all your experience lost has been recovered!", "Vocï¿½ acabou de perder a benï¿½ï¿½o suprema, entretanto vocï¿½ teve toda sua exp perdida recuperada!")
 				doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, text)
 			else
-				local text = getLangString(cid, "You has lost the bless of %s, but half of experience lost has been recovered!", "Você acabou de perder a benção de %s, entretanto você teve metade da exp perdida recuperada.")
+				local text = getLangString(cid, "You has lost the bless of %s, but half of experience lost has been recovered!", "Vocï¿½ acabou de perder a benï¿½ï¿½o de %s, entretanto vocï¿½ teve metade da exp perdida recuperada.")
 				doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, string.format(text, getPlayerStorageValue(cid, "blessExpName")))
 			end
             setPlayerStorageValue(cid, "blessExp", -1)
@@ -203,11 +203,11 @@ local function returnStatsPoints(cid)
 
             if pointsUsed < totalPoints then
                 msg.en = "BUG Correct: "..(totalPoints-pointsUsed).." elemental points returned to you, use in NPC Sthuart."
-                msg.pt = "Correção BUG: "..(totalPoints-pointsUsed).." ponto(s) elementa(is) foram devolvidos á você, use no NPC Sthuart." 
+                msg.pt = "Correï¿½ï¿½o BUG: "..(totalPoints-pointsUsed).." ponto(s) elementa(is) foram devolvidos ï¿½ vocï¿½, use no NPC Sthuart." 
                 doPlayerSetElementPoints(cid, playerElement, getPlayerElementPoints(cid, playerElement)+(totalPoints-pointsUsed))
             else
                 msg.en = "BUG Correct: All your stats have been reset, please go to NPC Sthuart for redistribute it."
-                msg.pt = "Correção BUG: Todos seus stats foram resetados, por favor vá até o NPC Sthuart para redistribuir."
+                msg.pt = "Correï¿½ï¿½o BUG: Todos seus stats foram resetados, por favor vï¿½ atï¿½ o NPC Sthuart para redistribuir."
 
                 setPlayerMagLevel(cid, 10)
 

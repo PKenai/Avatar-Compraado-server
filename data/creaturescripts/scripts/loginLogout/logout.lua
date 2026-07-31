@@ -1,4 +1,8 @@
 function onLogout(cid, forceLogout)
+	-- Clean up party damage meter data (DPS) when a party leader logs out
+	if type(g_partyDamage) == "table" and type(partyDamageCleanup) == "function" then
+		partyDamageCleanup(cid)
+	end
 	if not getTileInfo(getCreaturePosition(cid)).protection and exhaustion.check(cid, "npodedeslogar") and getPlayerGroupId(cid) <= 4 then 
 		doPlayerSendCancel(cid, "You cant logout now.")
 		return false 

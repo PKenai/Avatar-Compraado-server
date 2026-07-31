@@ -82,6 +82,8 @@
 	<event type="extendedopcode" name="DailyHuntOpcode" event="script" value="dailyHunt.lua"/>
 
 	<event type="extendedopcode" name="ExtendedOpcode" event="script" value="opcode.lua"/>
+	<event type="statschange" name="PartyDamageMeter" event="script" value="partydamage.lua"/>
+	<event type="spawnall" name="PartyDamageSpawn" event="script" value="partydamage.lua"/>
 	<event type="castspell" name="castSpell" event="script" value="onUseSpell.lua"/>
 	<!-- <event type="ongainexp" name="onGainExp" event="script" value="onGainExperience.lua"/> -->
 </creaturescripts>

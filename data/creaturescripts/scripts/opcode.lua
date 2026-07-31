@@ -74,6 +74,11 @@ function onExtendedOpcode(cid, opcode, buffer)
 		  elseif ( buffer == "date" ) then
 		    Reward.sendRewards(cid)
 		  end
+		elseif opcode == 115 then
+			-- Party Damage Meter (DPS) - request/reset
+			if type(partyDamageOnOpcode) == "function" then
+				partyDamageOnOpcode(cid, buffer)
+			end
 		elseif opcode == 131 then
 			changeAutoloot(cid, buffer)
 		elseif opcode == 210 then
