@@ -1040,6 +1040,10 @@ if(Modules == nil) then
       function(cid, itemid, subType, amount, ignoreCap, inBackpacks) module.npcHandler:onBuy(cid, itemid, subType, amount, ignoreCap, inBackpacks) end,
       function(cid, itemid, subType, amount, ignoreCap, inBackpacks) module.npcHandler:onSell(cid, itemid, subType, amount, ignoreCap, inBackpacks) end)
     module.npcHandler:say(msg, cid)
+
+    if(getCreatureName(getNpcId()) == "Koin") then
+      doSendPlayerExtendedOpcode(cid, 101, "Moedas Avatar")
+    end
     return true
   end
 

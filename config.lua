@@ -10,7 +10,7 @@ newPlayerChooseVoc = true
 newPlayerSpawnPosX = 500
 newPlayerSpawnPosY = 500
 newPlayerSpawnPosZ = 7
-newPlayerTownId = 2
+newPlayerTownId = 1
 newPlayerLevel = 8
 newPlayerMagicLevel = 0
 generateAccountNumber = false
@@ -39,7 +39,7 @@ ipBanLength = 1 * 24 * 60 * 60
 allowedMaxSizePackets = 20
 
 worldType = "open"
-protectionLevel = 50
+protectionLevel = 30
 pvpTileIgnoreLevelAndVocationProtection = true
 pzLocked = 1 * 60 * 1000
 huntingDuration = 1 * 1000

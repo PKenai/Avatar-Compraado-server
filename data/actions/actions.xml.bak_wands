@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+
+
+	 <action itemid="4846" event="script" value="ironfor.lua"/>
+<!-- <action itemid="2422" event="script" value="forge.lua"/> -->
+
+	<action itemid="2007" event="script" value="questnova2.lua"/>
+	<action actionid="62127" event="script" value="questnova2.lua"/>
+	<action actionid="62128" event="script" value="questnova3.lua"/>
+	<action actionid="62129" event="script" value="questnova4.lua"/>
+	
+
+	<action actionid="37856" event="script" value="hp1.lua"/>
+	<action actionid="37857" event="script" value="hp2.lua"/>
+	<action actionid="37858" event="script" value="hp3.lua"/>
+	<action actionid="37859" event="script" value="hp4.lua"/>
+	<action actionid="37860" event="script" value="hp5.lua"/>
+	<action actionid="37861" event="script" value="hp6.lua"/>
+	<action actionid="37862" event="script" value="hp7.lua"/>
+	<action actionid="37863" event="script" value="hp8.lua"/>
+	<action actionid="37864" event="script" value="duke.lua"/>
+
+	<action actionid="37855" event="script" value="marsh.lua"/>
+
+	<action actionid="47869" event="script" value="ilhaterra.lua"/>
+	<action actionid="47870" event="script" value="ilhaterra1.lua"/>
+
+	<action actionid="47867" event="script" value="ilhanovagelo.lua"/>
+	<action actionid="47868" event="script" value="ilhanovagelo1.lua"/>
+	<action actionid="37854" event="script" value="arachnophobica.lua"/>
+	
+	<action itemid="18166" event="script" value="slotmachine.lua"/>
+	<action itemid="18167" event="script" value="slotmachineVermelho.lua"/>
+	<action itemid="18193-18196" event="script" value="spiritualTotem.lua"/>
+
+
+	<action actionid="27642" event="script" value="muniz/egg.lua"/>
+	<action actionid="27643" event="script" value="muniz/chest.lua"/>
+
+	<action itemid="18099-18102;18104-18107;18109-18112;18130-18133" event="script" value="runes.lua"/>
+	<action itemid="18114-18115" event="script" value="runeRemover.lua"/>
+	<action itemid="18121-18122;18124-18125;18127-18128" event="script" value="runesWeapon.lua"/>
+	<action actionid="43888" event="script" value="electricReward.lua"/>
+
+	<action actionid="49631" event="script" value="autoloot.lua"/>
+
+	<action actionid="36241" event="script" value="darkSubsolo/start.lua"/>
+	<action actionid="53614-53615" event="script" value="darkSubsolo/chest.lua"/>
+
+	<action actionid="47861" event="script" value="promote/lever.lua"/>
+	<action actionid="47862" event="script" value="promote/stone.lua"/>
+	<action actionid="47863" event="script" value="promote/reward.lua"/>
+	<action actionid="47864" event="script" value="promote/alavancaUm.lua"/>
+	<action actionid="47865" event="script" value="promote/alavancaDois.lua"/>
+	<action actionid="47866" event="script" value="promote/livro.lua"/>
+
+	<action actionid="41082" event="script" value="spectreReward.lua"/>
+	<action actionid="32099" event="script" value="destroyerReward.lua"/>
+	<action actionid="32098" event="script" value="destroyerQuest.lua"/>
+
+	<action actionid="29079" event="script" value="leverWar.lua"/>
+	<action actionid="40295" event="script" value="energyReward.lua"/>
+	<action actionid="40291-40293" event="script" value="energyAction.lua"/>
+	<action actionid="52138" event="script" value="trezentosStart.lua"/>
+	<action actionid="52139" event="script" value="trezentosChest.lua"/>
+	<action actionid="46140" event="script" value="leviathan quest.lua"/>
+
+	<action actionid="27603" event="script" value="tyrnReward.lua"/>
+	<action actionid="27515" event="script" value="seaReward.lua"/>
+
+	<action actionid="37853" event="script" value="kollosReward.lua"/>
+	<action itemid="12686-12689" event="script" value="stone action.lua"/>
+	<action itemid="17970" event="script" value="mountBonification.lua"/>
+	<action itemid="17961" event="script" value="mountBonif2.lua"/>
+	<action actionid="39245;39246" event="script" value="ghastlyQuest.lua"/>
+	<action actionid="39248" event="script" value="ghastlyReward.lua"/>
+	
+	<action actionid="23562" event="script" value="leverWar.lua"/>
+	<action actionid="16492" event="script" value="lostavatar.lua"/>
+	<action itemid="11259" event="script" value="elemental coin.lua"/>
+	<action itemid="6527" event="script" value="event coin.lua"/>
+	<action itemid="12828" event="script" value="change sex.lua"/>
+	<action itemid="12830" event="script" value="supreme bless.lua"/>
+	<action itemid="12831" event="script" value="belze elixir.lua"/>
+	<action itemid="12753" event="script" value="stamina.lua"/>
+
+	<action uniqueid="13050" event="script" value="blood_castle.lua"/>
+
+	<!-- Scripts 2016 -->
+	<action actionid="37912" event="script" value="rewardZuko.lua"/>
+	<action actionid="29711" event="script" value="ogreQuest/start.lua"/>
+	<action actionid="43897;43898;43899" event="script" value="ogreQuest/alavancas.lua"/>
+	<action actionid="45316" event="script" value="elementsQuest.lua"/>
+	<action actionid="43902" event="script" value="ogreQuest/reward.lua"/>
+	<action actionid="25841;25842" event="script" value="academy door.lua"/>
+	<action actionid="31654" event="script" value="rotworm door.lua"/>
+	<action itemid="1740;13625;13083" event="script" value="reward system.lua" />
+	<action itemid="9969" event="script" value="remove skull.lua" />
+	<action itemid="9693" event="script" value="mount doll.lua" />
+	<action itemid="15009" event="script" value="mountmaster.lua" />
+		
+	<!-- Scripts Tunico -->
+
+		
+		
+		<action actionid="45102" event="script" value="quests/New/rewards.lua"/>
+		<action actionid="45103" event="script" value="quests/New/rewards.lua"/>
+		<action actionid="45104" event="script" value="quests/New/rewards.lua"/>
+		<action actionid="45105" event="script" value="quests/New/rewards.lua"/>
+
+	<!-- Scripts Tn -->
+
+		<action itemid="2091" event="script" value="portas.lua" />
+		<action uniqueid="62121" event="script" value="darkey.lua" />
+		<action uniqueid="62118" event="script" value="darpick.lua" />
+		<action uniqueid="62110" event="script" value="darItens.lua" />
+
+		<action uniqueid="2012" event="script" value="inqchests.lua" />
+		<action uniqueid="2013" event="script" value="inqchests.lua" />
+		<action actionid="27337" event="script" value="inquistatue.lua"/>
+		<action uniqueid="45100" event="script" value="quests/New/alavancas_fire.lua"/>
+		<action uniqueid="45101" event="script" value="quests/New/alavanca_water.lua"/>
+		<action uniqueid="48235" event="script" value="quests/New/guzzlemaw.lua"/>
+
+	<!-- Scripts Mirto -->
+		<!-- Mini Games -->
+		<action uniqueid="5151" event="script" value="games/shootingOne.lua"/>
+    	<action uniqueid="5152" event="script" value="games/shootingTwo.lua"/>
+    	<action uniqueid="5155" event="script" value="games/ringOne.lua"/>
+    	<action uniqueid="5156" event="script" value="games/ringTwo.lua"/>
+    	<action uniqueid="5552;5551" event="script" value="games/arenaDeath/main.lua"/>
+    	<action uniqueid="5553" event="script" value="games/snake.lua"/>
+    	<action actionid="10252;10256;10257" event="script" value="games/killPayLever.lua"/>
+
+    	<action uniqueid="5554" event="script" value="games/genius.lua"/>
+
+    	<!-- Tools City -->
+    	<action uniqueid="7626" event="script" value="tools/ba-sing-seTown.lua"/>
+    	<action uniqueid="5532" event="script" value="tools/ba-sing-seOrb.lua"/>
+    	<action uniqueid="5533" event="script" value="tools/recruitCenterOrb.lua"/>
+    	<action uniqueid="5534" event="script" value="tools/iceOrb.lua"/>
+    	<action uniqueid="5535" event="script" value="tools/fireOrb.lua"/>
+    	<action uniqueid="5536" event="script" value="tools/airOrb.lua"/>
+    	<action actionid="61542" event="script" value="tools/iceTown.lua"/>
+    	<action actionid="61544" event="script" value="tools/fireTown.lua"/>
+    	<action actionid="61543" event="script" value="tools/airTown.lua"/>
+    	<action actionid="9293;9294" event="script" value="other/basingseGate.lua"/>
+
+    	<!-- Other Actions -->
+    	<action actionid="55690" event="script" value="other/catapulta.lua"/>
+    	<action uniqueid="5432-5435" event="script" value="initialItens.lua"/>
+    	<action itemid="2650" event="script" value="teste.lua"/>
+    	<action actionid="62124" event="script" value="pick.lua"/>
+    	<action itemid="4856" event="script" value="pick.lua"/>
+    	<action itemid="2177" event="script" value="other/lifeCrystal.lua"/>
+    	<action itemid="12754" event="script" value="other/potExp.lua"/>
+        <action itemid="13041" event="script" value="other/premiumScroll.lua"/>
+        <action itemid="18057" event="script" value="other/premiumScroll2.lua"/>
+        <action itemid="17820" event="script" value="starterPackage.lua"/>
+        <action itemid="17822" event="script" value="mistery.lua"/>
+        <action itemid="12466" event="script" value="resetStatus.lua"/>
+        <action itemid="10503" event="script" value="luckybox.lua"/>
+        <action actionid="2772;2773" event="script" value="other/cycTeleport.lua"/>
+
+
+        <action actionid="55691" event="script" value="other/enterCastle.lua"/>
+        <action actionid="55692" event="script" value="other/exitCastle.lua"/>
+
+    	<!-- Blood Room -->
+    	<action itemid="13021;13020" event="script" value="bloodRoom/potBlood.lua"/>
+    	<action itemid="7635;7634;7636" event="script" value="bloodRoom/potionEmpty.lua"/>
+    	<action itemid="8473;7588;7618;13368;13367;13366;15014" event="script" value="bloodRoom/fullPotion.lua"/>
+
+        <!-- RESET QUEST -->
+        <action actionid="3470" event="script" value="quests/resetquest/guardRoom.lua"/>
+        <action itemid="9662" event="script" value="quests/resetquest/guardRoom.lua"/>
+        <action actionid="3485;3486" event="script" value="quests/resetquest/leverDL.lua"/>
+        <action itemid="3957" event="script" value="quests/resetquest/warHorn.lua"/>
+        <action actionid="3495-3503" event="script" value="quests/resetquest/bossRoom.lua"/>
+        <action actionid="3504-3507" event="script" value="quests/resetquest/elementalRoom.lua"/>
+        <action actionid="3508" event="script" value="quests/resetquest/limboScape.lua"/>
+        <action itemid="2416" event="script" value="quests/resetquest/quebrarPorta.lua"/>
+        <action itemid="2558" event="script" value="quests/resetquest/quebrarEstante.lua"/>
+        <action itemid="5468" event="script" value="quests/resetquest/bossFinal.lua"/> 
+        <action actionid="3511" event="script" value="quests/resetquest/bauFinal.lua"/>
+        <action uniqueid="8922" event="script" value="quests/resetquest/enter.lua"/>
+
+        <!-- POI QUEST -->
+        <action actionid="8732" event="script" value="quests/poi/preEnter.lua"/>
+        <action actionid="8712;8713" event="script" value="quests/poi/openLeverFirst.lua"/>
+        <action actionid="8714-8717" event="script" value="quests/poi/openStones.lua"/>
+        <action actionid="8726-8730" event="script" value="quests/poi/reward1.lua"/>
+        <action itemid="12832" event="script" value="quests/poi/supremeElixir.lua"/>
+
+
+    	<!-- Other Liquids -->
+    	<action itemid="4863;4864" event="script" value="liquids/waterPouch/pouchs.lua"/>
+    	<action itemid="7620;7589;7590" event="script" value="liquids/manaPotions.lua"/>
+
+    	<!-- Quests -->
+    	<action uniqueid="3973" event="script" value="quests/demonSkeletonBoss.lua"/>
+    	<action uniqueid="3975" event="script" value="quests/expIce.lua"/>
+    	<action uniqueid="3970" event="script" value="quests/expWater.lua"/>
+    	<action uniqueid="5556" event="script" value="quests/anihilator.lua"/>
+   		<action uniqueid="5557" event="script" value="quests/anihilatorChest.lua"/>
+
+	<!-- Default script, responsible for destroyItem -->
+	<action default="yes" event="script" value="default.lua"/>
+
+	<!-- Decay To -->
+	<action fromid="2041" toid="2042" event="script" value="other/decayto.lua"/>
+	<action fromid="2044" toid="2045" event="script" value="other/decayto.lua"/>
+	<action fromid="2047" toid="2048" event="script" value="other/decayto.lua"/>
+	<action fromid="2050" toid="2055" event="script" value="other/decayto.lua"/>
+	<action fromid="5812" toid="5813" event="script" value="other/decayto.lua"/>
+	<action itemid="7183" event="script" value="other/decayto.lua"/>
+	<action fromid="9976" toid="9979" event="script" value="other/decayto.lua"/>
+
+	<!-- Quests -->
+
+	<!-- Weapons enchanting (Gems) -->
+	<!--action itemid="2146-2147;2149-2150;7759-7762" event="script" value="other/enchanting.lua"/-->
+
+	<!-- Change gold -->
+	<action itemid="2148;2152;2160" event="script" value="other/changegold.lua"/>
+
+	<!-- Tools -->
+	<action itemid="2420;2442" event="script" value="tools/machete.lua"/>
+	<action itemid="2550" event="script" value="tools/scythe.lua"/>
+	<action itemid="2580;10223" event="script" value="tools/fishing.lua" allowfaruse="1"/>
+	<action itemid="2554;5710" event="script" value="tools/shovel.lua"/>
+	<action itemid="2120;7731" event="script" value="tools/rope.lua"/>
+	<action itemid="5908;5942" event="script" value="tools/skinning.lua"/>
+	<action itemid="10511;10513;10515" event="script" value="tools/squeeze.lua"/>
+
+	<!-- Consumables (Liquids+Foods) -->
+	<action itemid="1775;2005-2006;2008-2009;2011-2015;2023;2031-2034;2562;2574-2577;3941-3942;5553;10150" event="script" value="liquids/containers.lua"/>
+	<action itemid="6558" event="script" value="liquids/demonic_blood.lua"/>
+	<!--<action itemid="7588-7591;8472-8473;7618;7620;8704" event="script" value="liquids/potions.lua"/> -->
+	<action itemid="7439" event="script" value="liquids/berserk_potion.lua"/>
+	<action itemid="7440" event="script" value="liquids/mastermind_potion.lua"/>
+	<action itemid="7443" event="script" value="liquids/bullseye_potion.lua"/>
+	<action itemid="8474" event="script" value="liquids/antidote_potion.lua"/>
+	<action itemid="2328;2362;2666-2691;2695-2696;2787-2796;5097;5678;6125;6278-6279;6393-6394;6501;6541-6545;6569;6574;7158-7159;7245;7372-7377;7909;7963;8112;8838-8845;8847;9005;9114;10454;11246;11429;12415-12418;12637-12639" event="script" value="foods/food.lua"/>
+	<action itemid="9992" event="script" value="foods/rotworm_stew.lua"/>
+	<action itemid="9993" event="script" value="foods/hydra_tongue_salad.lua"/>
+	<action itemid="9994" event="script" value="foods/roasted_dragon_wings.lua"/>
+	<action itemid="9995" event="script" value="foods/fried_tropical_terrorbird.lua"/>
+	<action itemid="9996" event="script" value="foods/banana_chocolate_shake.lua"/>
+	<action itemid="9997" event="script" value="foods/veggie_casserole.lua"/>
+	<action itemid="9998" event="script" value="foods/filled_jalapeno_peppers.lua"/>
+	<action itemid="9999" event="script" value="foods/blessed_steak.lua"/>
+	<action itemid="10000" event="script" value="foods/carrot_cake.lua"/>
+	<action itemid="10001" event="script" value="foods/northern_fishburger.lua"/>
+	<action itemid="12540" event="script" value="foods/coconut_shrimp_bake.lua"/>
+	<action itemid="12542" event="script" value="foods/pot_of_blackjack.lua"/>
+	<action itemid="12543" event="script" value="foods/demonic_candy_ball.lua"/>
+	<action itemid="12544" event="script" value="foods/sweet_mangonaise_elixir.lua"/>
+
+	<!-- Spellbooks -->
+	<action itemid="2175;6120;8900-8904;8918;12647;16112;18401" event="script" value="other/spellbook.lua"/>
+
+	<!-- Construction kits -->
+	<!-- Construction kits -->
+	<action fromid="3901" toid="3938" event="script" value="other/constructionkits.lua"/>
+	<action fromid="5086" toid="5088" event="script" value="other/constructionkits.lua"/>
+	<action fromid="6114" toid="6115" event="script" value="other/constructionkits.lua"/>
+	<action fromid="6372" toid="6373" event="script" value="other/constructionkits.lua"/>
+	<action itemid="7700" event="script" value="other/constructionkits.lua"/>
+	<action itemid="7503" event="script" value="other/constructionkits.lua"/>
+	<action fromid="7960" toid="7962" event="script" value="other/constructionkits.lua"/>
+	<action fromid="8692" toid="8693" event="script" value="other/constructionkits.lua"/>
+	<action itemid="7904-7907" event="script" value="other/furniturebeds.lua"/>
+
+	<!-- Music, instruments -->
+	<action itemid="2070-2085;2095;2332;2364;2367-2374;3951-3953;5786;6572" event="script" value="other/music.lua"/>
+
+	<!-- Teleport (stairs, ladders) -->
+	<action itemid="430;13849;1369;1386;3678;5543;8580;8599;10035;13010" event="script" value="other/teleport.lua"/>
+
+	<!-- Bread Creating -->
+	<action itemid="2692;2694" event="script" value="other/createbread.lua"/>
+
+	<!-- Doors -->
+		<!-- Doors -->
+	<action itemid="1209-1214;1219-1262;1539-1542;3535-3552;4913-4918;5082-5085;5098-5145;5278-5295;5515-5518;5732-5737;5745-5749;6192-6209;6249-6266;6795-6802;6891-6908;7033-7050;7054-7057;8541-8558;9165-9184;9267-9284;10268-10285;10468-10486;10775-10777;10780-10786;10789-10792;12092-12105;12188-12190;12193-12199;12202-12205;14996-14999;16463-16464;17398-17399;17314-17315;15994-15995;16456-16457;17400-17401;17309-17310;15985-15986" event="script" value="other/doors.lua"/>
+
+		<!-- Keys -->
+	<action itemid="2086;2087;2088;2089;2090;2092;10032;10091" event="script" value="other/keys.lua"/>
+		<!-- Windows -->
+	<action itemid="5303-5305;6436-6473;6788-6791;7025-7032;10264-10267;10488-10491" event="script" value="other/windows.lua"/>
+
+	<!-- Watches -->
+	<action itemid="1728-1731;2036;6091-6092;8187" event="script" value="other/watch.lua"/>
+
+	<!-- Dolls -->
+	<action itemid="5080;5669;6566;6512;6388;8974;8977;8981-8982" event="script" value="other/dolls.lua"/>
+
+	<!-- Other -->
+	<action itemid="2566;2096" event="script" value="other/pumpkinhead.lua"/>
+	<action itemid="2114" event="script" value="other/piggybank.lua"/>
+	<action fromid="6570" toid="6571" event="script" value="other/surprisebag.lua"/>
+	<action fromid="5792" toid="5797" event="script" value="other/dice.lua"/>
+	<action itemid="6576" event="script" value="other/fireworksrocket.lua"/>
+	<action itemid="6578" event="script" value="other/partyhat.lua"/>
+	<action itemid="2785" event="script" value="other/blueberrybush.lua"/>
+	<action itemid="8110" event="script" value="other/present.lua"/>
+	<action itemid="7735" event="script" value="other/spellwand.lua"/>
+	<action itemid="7537;7585" event="script" value="other/spideregg.lua" />
+	<action itemid="6561;12424" event="script" value="other/blessings.lua"/>
+</actions>

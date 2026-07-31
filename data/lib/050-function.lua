@@ -1948,11 +1948,14 @@ function selectLang(cid)
   end
 end
 
-function doPlayerResetMagicLevel(cid)
+function doPlayerResetMagicLevel(cid, keepBend)
   local paragonBend = getParagonExtraBend(cid)
+  if type(keepBend) ~= "number" or keepBend < 0 then
+    keepBend = 0
+  end
   local guid = getPlayerGUID(cid)
   doRemoveCreature(cid)
-  db.executeQuery('UPDATE `players` SET `maglevel` = "'..paragonBend..'" WHERE `id` = "'..guid..'"')
+  db.executeQuery('UPDATE `players` SET `maglevel` = "'..(paragonBend + keepBend)..'", `manaspent` = "0" WHERE `id` = "'..guid..'"')
 end
 
 function getPlayerItens(cid, itens) --itens = {itemid = x, amount = x}

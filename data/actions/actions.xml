@@ -309,4 +309,5 @@
 	<action itemid="7735" event="script" value="other/spellwand.lua"/>
 	<action itemid="7537;7585" event="script" value="other/spideregg.lua" />
 	<action itemid="6561;12424" event="script" value="other/blessings.lua"/>
+	<action itemid="18336-18339" event="script" value="exercise_wands.lua"/>
 </actions>

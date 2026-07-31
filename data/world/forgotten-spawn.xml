@@ -2133,6 +2133,7 @@
 		<monster name="Cave Rat" x="23" y="0" z="6" spawntime="40" />
 		<monster name="Rat" x="-3" y="1" z="6" spawntime="40" />
 		<monster name="Rat" x="25" y="1" z="6" spawntime="40" />
+		<npc name="mithlock" x="-5" y="25" z="6" spawntime="40" direction="3" />
 	</spawn>
 	<spawn centerx="531" centery="315" centerz="6" radius="30">
 		<monster name="Rat" x="4" y="-1" z="6" spawntime="40" />
@@ -2179,6 +2180,7 @@
 	<spawn centerx="120" centery="340" centerz="6" radius="1">
 		<monster name="Diremaw" x="0" y="-1" z="6" spawntime="40" />
 	</spawn>
+	<spawn centerx="496" centery="340" centerz="6" radius="1" />
 	<spawn centerx="83" centery="341" centerz="6" radius="1">
 		<monster name="Diremaw" x="0" y="-1" z="6" spawntime="40" />
 	</spawn>
@@ -2193,8 +2195,8 @@
 		<monster name="Tunnel Tyrant" x="1" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="502" centery="345" centerz="6" radius="1" />
-	<spawn centerx="496" centery="346" centerz="6" radius="1">
-		<npc name="kurt" x="-1" y="0" z="6" spawntime="40" />
+	<spawn centerx="494" centery="347" centerz="6" radius="1">
+		<npc name="kurt" x="1" y="1" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="574" centery="350" centerz="6" radius="1">
 		<npc name="capitain leopoldo sing" x="-1" y="0" z="6" spawntime="40" />
@@ -2204,6 +2206,9 @@
 	</spawn>
 	<spawn centerx="94" centery="357" centerz="6" radius="1">
 		<monster name="Tunnel Tyrant" x="0" y="1" z="6" spawntime="40" />
+	</spawn>
+	<spawn centerx="515" centery="360" centerz="6" radius="1">
+		<npc name="Farmer" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="556" centery="364" centerz="6" radius="1">
 		<npc name="dink" x="0" y="0" z="6" spawntime="40" />
@@ -5132,11 +5137,13 @@
 	<spawn centerx="85" centery="347" centerz="7" radius="1">
 		<monster name="Diremaw" x="0" y="1" z="7" spawntime="40" />
 	</spawn>
+	<spawn centerx="496" centery="347" centerz="7" radius="1">
+		<npc name="Koin" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="688" centery="348" centerz="7" radius="1">
 		<monster name="Mutated Human" x="1" y="1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="486" centery="352" centerz="7" radius="30">
-		<npc name="mithlock" x="6" y="-8" z="7" spawntime="40" />
 		<npc name="astor" x="28" y="-8" z="7" spawntime="40" />
 		<monster name="Wolf" x="-4" y="24" z="7" spawntime="40" />
 	</spawn>

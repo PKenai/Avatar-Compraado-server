@@ -143,6 +143,7 @@ class ItemType
 			usable, movable, pickupable, rotable, replacable, lookThrough, walkStack, hasHeight, blockSolid,
 			blockPickupable, blockProjectile, blockPathFind, allowPickupable, alwaysOnTop, floorChange[CHANGE_LAST],
 			isAnimation, specialDoor, closingDoor, cache;
+	bool sendCharges;
 
 		MagicEffect_t magicEffect;
 		FluidTypes_t fluidSource;

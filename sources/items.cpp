@@ -88,7 +88,7 @@ ItemType::ItemType()
 	writeOnceItemId = wareId = 0;
 
 	transformEquipTo = transformDeEquipTo = transformUseTo = 0;
-	showDuration = showCharges = showAttributes = dualWield = false;
+	showDuration = showCharges = showAttributes = dualWield = sendCharges = false;
 	charges	= 0;
 	hitChance = maxHitChance = breakChance = -1;
 	shootRange = 1;
@@ -1096,6 +1096,11 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 		{
 			if(readXMLInteger(itemAttributesNode, "value", intValue))
 				it.showCharges = (intValue != 0);
+		}
+		else if(tmpStrValue == "sendcharges")
+		{
+			if(readXMLInteger(itemAttributesNode, "value", intValue))
+				it.sendCharges = (intValue != 0);
 		}
 		else if(tmpStrValue == "showattributes")
 		{

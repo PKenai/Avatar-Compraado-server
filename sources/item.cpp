@@ -190,7 +190,14 @@ Item::Item(const uint16_t type, uint16_t amount/* = 0*/):
 			setItemCount(it.charges);
 	}
 	else if(it.charges)
-		setCharges(amount ? amount : it.charges);
+	{
+		// Avatar: varinhas de treino (sendcharges) sempre nascem com o total do
+		// items.xml (3500), ignorando amount (ex.: o comando /i usa default 100).
+		if(it.sendCharges)
+			setCharges(it.charges);
+		else
+			setCharges(amount ? amount : it.charges);
+	}
 }
 
 Item* Item::clone() const
@@ -1547,6 +1554,16 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 
 	if(it.showCharges)
 		s << " that has " << subType << " charge" << (subType != 1 ? "s" : "") << " left";
+
+	// Avatar: varinhas de treino (flag sendcharges) - as cargas vivem no atributo
+	// "charges" (o exercise_wands.lua decrementa a cada acerto). Mostra no look.
+	if(it.sendCharges && item)
+	{
+		bool hasCharges = false;
+		int32_t charges = item->getIntegerAttribute("charges", hasCharges);
+		if(hasCharges)
+			s << " that has " << charges << " charge" << (charges != 1 ? "s" : "") << " left";
+	}
 
 	if(it.showDuration)
 	{

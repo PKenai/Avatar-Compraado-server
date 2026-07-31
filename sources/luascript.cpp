@@ -24,6 +24,7 @@
 #include <iomanip>
 
 #include "player.h"
+#include "container.h"
 #include "item.h"
 #include "teleport.h"
 #include "beds.h"
@@ -2480,6 +2481,7 @@ void LuaInterface::registerFunctions()
 
 	//doItemSetAttribute(uid, key, value)
 	lua_register(m_luaState, "doItemSetAttribute", LuaInterface::luaDoItemSetAttribute);
+	lua_register(m_luaState, "doSendItemUpdate", LuaInterface::luaDoSendItemUpdate);
 
 	//doItemEraseAttribute(uid, key)
 	lua_register(m_luaState, "doItemEraseAttribute", LuaInterface::luaDoItemEraseAttribute);
@@ -11309,6 +11311,83 @@ int32_t LuaInterface::luaGetItemAttribute(lua_State* L)
 		lua_pushnil(L);
 
 	return 1;
+}
+
+int32_t LuaInterface::luaDoSendItemUpdate(lua_State* L)
+{
+	//doSendItemUpdate(cid, uid) -- reenvia o item pro client (contagem atualizada)
+	//se o item tiver a flag sendCharges (varinhas de treino), tambem envia as cargas
+	//via extended opcode 0xF8: [containerId u8 (0xFF = inventario)][index u8][cargas u16 LE]
+	uint32_t uid = popNumber(L);
+	uint32_t cid = popNumber(L);
+
+	ScriptEnviroment* env = getEnv();
+	Player* player = env->getPlayerByUID(cid);
+	if(!player)
+		return 0;
+
+	Item* item = env->getItemByUID(uid);
+	if(!item)
+		return 0;
+
+	Cylinder* parent = item->getParent();
+	if(!parent)
+		return 0;
+
+	int32_t containerId = 0xFF; // 0xFF = inventario
+	int32_t index = -1;
+
+	// item num slot do inventario (o pai e o proprio jogador)
+	if(parent == player)
+	{
+		for(uint8_t slot = 1; slot <= 10; ++slot)
+		{
+			if(player->getInventoryItem((slots_t)slot) == item)
+			{
+				index = slot;
+				break;
+			}
+		}
+	}
+	// item dentro de um container aberto (ex.: mochila)
+	else
+	{
+		Container* container = dynamic_cast<Container*>(parent);
+		if(container)
+		{
+			for(uint32_t i = 0; i < 1000; ++i)
+			{
+				Item* slotItem = container->getItem(i);
+				if(!slotItem)
+					break;
+				if(slotItem == item)
+				{
+					containerId = player->getContainerID(container);
+					index = i;
+					break;
+				}
+			}
+		}
+	}
+
+	// containerId 0xFF = inventario (valido); container ABERTO >= 0; container
+	// fechado = -1 -> nao enviar (o client nao tem ele aberto; evitaria 0xFF fake)
+	if(index >= 0 && containerId >= 0 && Item::items[item->getID()].sendCharges)
+	{
+		// as cargas vivem no atributo "charges" (o script decrementa a cada acerto)
+		bool hasCharges = false;
+		int32_t charges = item->getIntegerAttribute("charges", hasCharges);
+		if(hasCharges && charges >= 0)
+		{
+			std::string payload;
+			payload.push_back((char)containerId);
+			payload.push_back((char)index);
+			payload.push_back((char)(charges & 0xFF));
+			payload.push_back((char)((charges >> 8) & 0xFF));
+			player->sendExtendedOpcode(0xF8, payload);
+		}
+	}
+	return 0;
 }
 
 int32_t LuaInterface::luaDoItemSetAttribute(lua_State* L)

@@ -35,6 +35,16 @@ function resetAtributos(cid)
 		end 
 		setCreatureMaxMana(cid, novaMana)
 	end 
+	-- Avatar: bend de TREINO (varinha) e independente do bend de STATUS (pontos).
+	-- Preserva o ml ganho treinando; so o bend comprado com pontos e resetado.
+	local statusBend = getPlayerStorageValue(cid, "bendvalue")
+	if type(statusBend) ~= "number" or statusBend < 0 then
+		statusBend = 0
+	end
+	local trainingBend = getPlayerMagLevel(cid, true) - statusBend - getParagonExtraBend(cid)
+	if trainingBend < 0 then
+		trainingBend = 0
+	end
 	local atributosList = {"speed", "health", "bend", "dodge"}
 	for i = 1, #atributosList do 
 		local storageAtributo = atributosList[i] .. "value"
@@ -48,7 +58,7 @@ function resetAtributos(cid)
 		--exhaustion.set(cid, "lastReset", (60*60)*24)
 		--doSendMagicEffect(getCreaturePosition(cid), 29)
 		--doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Seus atributos foram resetados.")
-		doPlayerResetMagicLevel(cid)
+		doPlayerResetMagicLevel(cid, trainingBend)
 return true
 end 
 

@@ -3303,14 +3303,20 @@ void ProtocolGame::sendExtendedOpcode(uint8_t opcode, const std::string& buffer)
      if(player && !player->isUsingOtclient())
          return;
 
-     NetworkMessage_ptr msg = getOutputBuffer();
-     if(msg)
-     {
-         TRACK_MESSAGE(msg);
-         msg->put<char>(0x32);
-         msg->put<char>(opcode);
-         msg->putString(buffer);
-     }
+     // Avatar: envia como mensagem IMEDIATA propria (nao no buffer compartilhado).
+     // Este fork reusa o mesmo m_outputBuffer ate o flush: se outro opcode (ex. 0x28
+     // text / 0x83 effect) entrar antes no mesmo tick, o client so despacharia o
+     // primeiro e engoliria o 0x32. getOutputMessage(this, false) + send() garante
+     // pacote isolado para o ext opcode (cargas das varinhas chegam sempre).
+     OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false);
+     if(!output)
+         return;
+
+     TRACK_MESSAGE(output);
+     output->put<char>(0x32);
+     output->put<char>(opcode);
+     output->putString(buffer);
+     OutputMessagePool::getInstance()->send(output);
 }
 
 void ProtocolGame::sendStreamerTag(const Player* targetPlayer)

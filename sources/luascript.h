@@ -708,6 +708,7 @@ class LuaInterface
 		static int32_t luaGetItemParent(lua_State* L);
 		static int32_t luaGetItemAttribute(lua_State* L);
 		static int32_t luaDoItemSetAttribute(lua_State* L);
+	static int32_t luaDoSendItemUpdate(lua_State* L);
 		static int32_t luaDoItemEraseAttribute(lua_State* L);
 		static int32_t luaGetVocationList(lua_State* L);
 		static int32_t luaGetGroupList(lua_State* L);

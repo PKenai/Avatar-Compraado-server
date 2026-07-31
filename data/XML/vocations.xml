@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vocations>
 	
-	<vocation id="0" name="None" description="none" needpremium="0" gaincap="50" gainhp="30" gainmana="0" gainhpticks="1" gainhpamount="5" gainmanaticks="1" gainmanaamount="0" manamultiplier="4.0" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="0" droploot="yes">
+	<vocation id="0" name="None" description="none" needpremium="0" gaincap="50" gainhp="30" gainmana="0" gainhpticks="1" gainhpamount="5" gainmanaticks="1" gainmanaamount="0" manamultiplier="1.1" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="0" droploot="yes">
 		<formula meleeDamage="1.0" distDamage="1.0" wandDamage="1.0" magDamage="1.0" magHealingDamage="1.0" defense="1.0" magDefense="1.0" armor="1.0"/>
 		<skill fist="1.0" club="1.0" sword="1.0" axe="1.0" distance="1.1" shielding="1.5" fishing="1.1" experience="1.0"/>
 	</vocation>
 
-	<vocation id="1" name="fire" description="a Fire Bender" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="4.0" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="1" droploot="yes">
+	<vocation id="1" name="fire" description="a Fire Bender" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="1.1" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="1" droploot="yes">
 		<formula meleeDamage="1.0" distDamage="1.0" wandDamage="1.0" magDamage="1.0" magHealingDamage="1.0" defense="1.0" magDefense="1.0" armor="1.0"/>
 		<skill fist="1.1" club="1.1" sword="1.1" axe="1.1" distance="1.1" shielding="1.1" fishing="1.1" experience="1.0"/>
 	</vocation>
 
-	<vocation id="2" name="water" description="a Water Bender" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="4.0" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="2" droploot="yes">
+	<vocation id="2" name="water" description="a Water Bender" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="1.1" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="2" droploot="yes">
 		<formula meleeDamage="1.0" distDamage="1.0" wandDamage="1.0" magDamage="1.0" magHealingDamage="1.0" defense="1.0" magDefense="1.0" armor="1.0"/>
 		<skill fist="1.1" club="1.1" sword="1.1" axe="1.1" distance="1.1" shielding="1.1" fishing="1.1" experience="1.0"/>
 	</vocation>
 
-	<vocation id="3" name="air" description="an Air Bender" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="4.0" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="3" droploot="yes">
+	<vocation id="3" name="air" description="an Air Bender" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="1.1" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="3" droploot="yes">
 		<formula meleeDamage="1.0" distDamage="1.0" wandDamage="1.0" magDamage="1.0" magHealingDamage="1.0" defense="1.0" magDefense="1.0" armor="1.0"/>
 		<skill fist="1.1" club="1.1" sword="1.1" axe="1.1" distance="1.1" shielding="1.1" fishing="1.1" experience="1.0"/>
 	</vocation>
 
-	<vocation id="4" name="earth" description="an Earth Bender" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="4.0" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="4" droploot="yes">
+	<vocation id="4" name="earth" description="an Earth Bender" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="1.1" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="4" droploot="yes">
 		<formula meleeDamage="1.0" distDamage="1.0" wandDamage="1.0" magDamage="1.0" magHealingDamage="1.0" defense="1.4" magDefense="1.0" armor="1.4"/>
 		<skill fist="1.1" club="1.1" sword="1.1" axe="1.1" distance="1.1" shielding="1.1" fishing="1.1" experience="1.0"/>
 	</vocation>
 
-	<vocation id="5" name="fire" description="a Fire Lord" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="4.0" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="1" droploot="yes">
+	<vocation id="5" name="fire" description="a Fire Lord" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="1.1" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="1" droploot="yes">
 		<formula meleeDamage="1.0" distDamage="1.0" wandDamage="1.0" magDamage="1.0" magHealingDamage="1.0" defense="1.0" magDefense="1.0" armor="1.0"/>
 		<skill fist="1.1" club="1.1" sword="1.1" axe="1.1" distance="1.1" shielding="1.1" fishing="1.1" experience="1.0"/>
 	</vocation>
 
-	<vocation id="6" name="water" description="a Tribal Chief Water" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="4.0" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="2" droploot="yes">
+	<vocation id="6" name="water" description="a Tribal Chief Water" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="1.1" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="2" droploot="yes">
 		<formula meleeDamage="1.0" distDamage="1.0" wandDamage="1.0" magDamage="1.0" magHealingDamage="1.0" defense="1.0" magDefense="1.0" armor="1.0"/>
 		<skill fist="1.1" club="1.1" sword="1.1" axe="1.1" distance="1.1" shielding="1.1" fishing="1.1" experience="1.0"/>
 	</vocation>
 
-	<vocation id="7" name="air" description="a Air Monk" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="4.0" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="3" droploot="yes">
+	<vocation id="7" name="air" description="a Air Monk" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="1.1" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="3" droploot="yes">
 		<formula meleeDamage="1.0" distDamage="1.0" wandDamage="1.0" magDamage="1.0" magHealingDamage="1.0" defense="1.0" magDefense="1.0" armor="1.0"/>
 		<skill fist="1.1" club="1.1" sword="1.1" axe="1.1" distance="1.1" shielding="1.1" fishing="1.1" experience="1.0"/>
 	</vocation>
 
-	<vocation id="8" name="earth" description="a Dai Li Earth" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="4.0" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="4" droploot="yes">
+	<vocation id="8" name="earth" description="a Dai Li Earth" needpremium="0" gaincap="25" gainhp="30" gainmana="5" gainhpticks="1" gainhpamount="5" gainmanaticks="2" gainmanaamount="5" manamultiplier="1.1" attackspeed="2000" soulmax="100" gainsoulticks="120" fromvoc="4" droploot="yes">
 		<formula meleeDamage="1.0" distDamage="1.0" wandDamage="1.0" magDamage="1.0" magHealingDamage="1.0" defense="1.4" magDefense="1.0" armor="1.4"/>
 		<skill fist="1.1" club="1.1" sword="1.1" axe="1.1" distance="1.1" shielding="1.1" fishing="1.1" experience="1.0"/>
 	</vocation>

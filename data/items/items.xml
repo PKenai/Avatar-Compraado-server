@@ -15566,4 +15566,40 @@
 	<item id="18328" name="stairs">
 		<attribute key="floorchange" value="north" />
 	</item>
+	<item id="18334" article="a" name="Exercise Dummy">
+		<attribute key="description" value="A training dummy. Use a training wand on it to train your skills."/>
+		<attribute key="weight" value="50000"/>
+	</item>
+	<item id="18335" article="a" name="Exercise Dummy">
+		<attribute key="description" value="A training dummy. Use a training wand on it to train your skills."/>
+		<attribute key="weight" value="50000"/>
+	</item>
+	<item id="18336" article="a" name="Water Training Wand">
+		<attribute key="description" value="Use it on an Exercise Dummy to train your magic level. Consumes 1 charge per hit."/>
+		<attribute key="charges" value="3500"/>
+		<attribute key="sendcharges" value="1"/>
+		<attribute key="weight" value="1200"/>
+	</item>
+	<item id="18337" article="a" name="Fire Training Wand">
+		<attribute key="description" value="Use it on an Exercise Dummy to train your magic level. Consumes 1 charge per hit."/>
+		<attribute key="charges" value="3500"/>
+		<attribute key="sendcharges" value="1"/>
+		<attribute key="weight" value="1200"/>
+	</item>
+	<item id="18338" article="a" name="Air Training Wand">
+		<attribute key="description" value="Use it on an Exercise Dummy to train your magic level. Consumes 1 charge per hit."/>
+		<attribute key="charges" value="3500"/>
+		<attribute key="sendcharges" value="1"/>
+		<attribute key="weight" value="1200"/>
+	</item>
+	<item id="18339" article="a" name="Earth Training Wand">
+		<attribute key="description" value="Use it on an Exercise Dummy to train your magic level. Consumes 1 charge per hit."/>
+		<attribute key="charges" value="3500"/>
+		<attribute key="sendcharges" value="1"/>
+		<attribute key="weight" value="1200"/>
+	</item>
+	<item id="18340" article="a" name="Moeda Avatar" plural="Moedas Avatar">
+		<attribute key="weight" value="10"/>
+		<attribute key="description" value="Uma moeda especial usada para comprar itens de treino."/>
+	</item>
 </items>
