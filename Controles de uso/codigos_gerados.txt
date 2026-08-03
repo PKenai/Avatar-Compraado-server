@@ -1,0 +1,25 @@
+    ["bruna123"] = {
+      storage = 920100,
+      expire = 1785700290,
+      items = { {8787, 1} }
+    },
+
+    CodeRedeemData["PEDROTESTE"] = {
+      storage = 920101,
+      expire = 1785701789,
+      items = { {13142, 1} }
+    }
+
+    CodeRedeemData["BRUNA123"] = {
+      storage = 920102,
+      expire = 1785802973,
+      items = { {2520, 1} }
+    }
+
+    CodeRedeemData["TESTE"] = {
+      storage = 920103,
+      expire = 1785806741,
+      maxUses = 2,
+      items = { {13412, 1} }
+    }
+

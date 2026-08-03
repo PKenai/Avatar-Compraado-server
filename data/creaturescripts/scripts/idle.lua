@@ -65,12 +65,18 @@ end
 
 local function marketCheck(cid)
     local balance = db.getResult("SELECT `auction_balance` FROM `players` WHERE `id` = " .. getPlayerGUID(cid) .. ";")
-    if(balance:getDataInt("auction_balance") < 1) then
+    -- Guard: if the query failed (e.g. missing column) getID() == -1 and
+    -- getDataInt would return false - never compare/compute on a bad result.
+    if balance:getID() == -1 then
+        return true
+    end
+    local amount = balance:getDataLong("auction_balance")
+    if amount < 1 then
         balance:free()
         return true
-   end
-    doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você recebeu " .. balance:getDataInt("auction_balance") .. " gold coins por ter vendido algum item no mercado!")
-   doPlayerAddMoney(cid, balance:getDataInt("auction_balance"))
+    end
+    doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você recebeu " .. string.format("%.0f", amount) .. " gold coins por ter vendido algum item no mercado!")
+    doPlayerAddMoney(cid, amount)
     db.executeQuery("UPDATE `players` SET `auction_balance` = '0' WHERE `id` = " .. getPlayerGUID(cid) .. ";")
     balance:free()
 end

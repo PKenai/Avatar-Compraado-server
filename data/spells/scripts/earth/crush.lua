@@ -49,11 +49,12 @@ for x = 1, 2 do
 end
 
 local function earthCrush(cid, times)
-if times == 0 or not isCreature(cid) or isInPz(cid) or getTileInfo(getCreatureLookPosition(cid)).protection then 
-	return false 
-end
-doCombat(cid, t[times], {type=2, pos=getCreatureLookPosition(cid)})
-addEvent(earthCrush, 500, cid, times-1)
+	local lookPos = getCreatureLookPosition(cid)
+	if times == 0 or not isCreature(cid) or isInPz(cid) or (lookPos and hasSqm(lookPos) and getTileInfo(lookPos).protection) then 
+		return false 
+	end
+	doCombat(cid, t[times], {type=2, pos=lookPos})
+	addEvent(earthCrush, 500, cid, times-1)
 end 
 
 

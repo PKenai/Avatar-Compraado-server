@@ -47,7 +47,10 @@ return getPlayerCanWalk({player = cid, position = pos, checkPZ = true, checkHous
 end 
 
 local function isProjectable(pos)
-return isSightClear({x=pos.x-1, y=pos.y, z=pos.z}, {x=pos.x+1, y=pos.y, z=pos.z}, true) and not getTileInfo(pos).protection
+	if not pos or not hasSqm(pos) then
+		return false
+	end
+	return isSightClear({x=pos.x-1, y=pos.y, z=pos.z}, {x=pos.x+1, y=pos.y, z=pos.z}, true) and not getTileInfo(pos).protection
 end 
 
 local function getAnotherDirs(dir)
@@ -67,7 +70,13 @@ local function getGrowPositions(mypos, dir)
 end
 
 function workGrow(cid, fromPos, nextPos, dir, times)
-	if times == 0 or not isCreature(cid) or getTileInfo(getCreaturePosition(cid)).protection or getTileInfo(nextPos).protection or not isProjectable(nextPos) then return false end
+	if times == 0 or not isCreature(cid) then
+		return false
+	end
+	local myPos = getCreaturePosition(cid)
+	if not hasSqm(nextPos) or (myPos and hasSqm(myPos) and getTileInfo(myPos).protection) or not isProjectable(nextPos) then
+		return false
+	end
 	doSendDistanceShoot(fromPos, nextPos, 38)
 	doSendMagicEffect(nextPos, 34)
 	doCombat(cid, combat, {type=2, pos=nextPos})
