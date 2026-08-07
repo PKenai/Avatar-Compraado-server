@@ -37,6 +37,7 @@
 	<talkaction log="yes" words="/s" access="5" event="script" value="summon.lua"/>
 	<talkaction log="yes" words="/n" access="5" event="script" value="creature.lua"/>
 	<talkaction log="yes" words="/m" access="5" event="script" value="creature.lua"/>
+	<talkaction log="yes" words="/multi" access="5" event="script" value="multispawn.lua"/>
 	<talkaction log="yes" words="/spawnspiritual" access="5" event="script" value="spawnspiritual.lua"/>
 	<talkaction log="yes" words="/reload" access="5" event="script" value="reload.lua"/>
 	<talkaction log="yes" words="/raid" access="5" event="script" value="raid.lua"/>

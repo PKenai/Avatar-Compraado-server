@@ -647,6 +647,12 @@ enum item_t
 
 	ITEM_DEPOT				= 2594,
 	ITEM_LOCKER				= 2589,
+	ITEM_REWARD_BOX			= 18358,
+
+	// id de "depot" especial usado para persistir a reward mailbox quando ela
+	// ainda nao foi anexada a nenhum locker (valor alto: fora da faixa de
+	// depots de cidade 0-99 e distante de sids realistas de itens)
+	REWARD_DEPOT_ID			= 65000,
 
 	ITEM_MALE_CORPSE		= 3058,
 	ITEM_FEMALE_CORPSE		= 3065,

@@ -365,7 +365,13 @@ class Player : public Creature, public Cylinder
 
 		Depot* getDepot(uint32_t depotId, bool autoCreateDepot);
 		bool addDepot(Depot* depot, uint32_t depotId);
+		const DepotMap& getDepots() const { return depots; }
 		void useDepot(uint32_t depotId, bool value);
+
+		// Reward Mailbox (item 18358): caixa de recompensas do sistema
+		Reward* getRewardBox(bool autoCreate = true);
+		void setRewardBox(Reward* rewardBox) {this->rewardBox = rewardBox;}
+		Depot* getPrimaryDepot();
 
 		virtual bool canSee(const Position& pos) const;
 		virtual bool canSeeCreature(const Creature* creature) const;
@@ -488,6 +494,10 @@ class Player : public Creature, public Cylinder
 		virtual int32_t getDefense() const;
 		virtual float getAttackFactor() const;
 		virtual float getDefenseFactor() const;
+		int32_t getStanceDamagePct() const;
+		int32_t getStanceDamageReceivedPct() const;
+		int32_t getStanceHealingReceivedPct() const;
+		int32_t getStanceManaCostPct() const;
 		
 		void addRevenge(uint32_t playerGUID) {revengeList.push_back(playerGUID);}
 		bool canRevenge(uint32_t playerGUID) const
@@ -769,6 +779,7 @@ class Player : public Creature, public Cylinder
 		InvitationsList invitationsList;
 		ConditionList storedConditionList;
 		DepotMap depots;
+		Reward* rewardBox;
 		Container transferContainer;
 
 		// TODO: make it private?

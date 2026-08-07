@@ -13,6 +13,9 @@ end
 
 local opcodeMarket = 230
 local opcodeReward = 247
+local opcodeTutorial = 220
+local opcodeDepotSearch = 233
+local storageTutorial = 42001
 
 function onExtendedOpcode(cid, opcode, buffer)
 	-- Defensive: bad/partial packets must never take the server down.
@@ -80,6 +83,24 @@ function onExtendedOpcode(cid, opcode, buffer)
 			-- Farm System (Creature Manager)
 			if type(handleFarmOpcode) == "function" then
 				handleFarmOpcode(cid, buffer)
+			end
+		elseif opcode == opcodeDepotSearch then
+			-- Busca de itens no depósito / pegar item (client: container nativo)
+			local parts = buffer:explode(">")
+			if parts[1] == "search" and type(DepotSearch) == "table" and type(DepotSearch.search) == "function" then
+				DepotSearch.search(cid, parts[2] or "")
+			elseif parts[1] == "take" and type(DepotSearch) == "table" and type(DepotSearch.take) == "function" then
+				DepotSearch.take(cid, tonumber(parts[2]), tonumber(parts[3]))
+			end
+		elseif opcode == opcodeTutorial then
+			-- Tutorial do primeiro login (client: modules/Game_firstlogin)
+			if buffer == "get" then
+				local done = getPlayerStorageValue(cid, storageTutorial)
+				doSendPlayerExtendedOpcode(cid, opcodeTutorial, done > 0 and "1" or "0")
+			elseif buffer == "set" then
+				setPlayerStorageValue(cid, storageTutorial, 1)
+			elseif buffer == "reset" then
+				setPlayerStorageValue(cid, storageTutorial, -1)
 			end
 		elseif opcode > 0 and opcode < 4 then
 			local handler = onReceiveOpCode and onReceiveOpCode[opcode]

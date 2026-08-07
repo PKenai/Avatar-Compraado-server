@@ -23,6 +23,7 @@
 #include "manager.h"
 
 #include "iologindata.h"
+#include "reward.h"
 #include "ioban.h"
 
 #include "town.h"
@@ -93,6 +94,7 @@ Player::Player(const std::string& _name, ProtocolGame* p):
 	tradePartner = NULL;
 	walkTask = NULL;
 	weapon = NULL;
+	rewardBox = NULL;
 
 	setVocation(0);
 	setParty(NULL);
@@ -148,6 +150,10 @@ Player::~Player()
 
 	setWriteItem(NULL);
 	setNextWalkActionTask(NULL);
+
+	// reward mailbox sem parent (nunca anexada a um locker): libera a referencia
+	if(rewardBox && !rewardBox->getParent())
+		rewardBox->unRef();
 
 	transferContainer.setParent(NULL);
 	for(DepotMap::iterator it = depots.begin(); it != depots.end(); ++it)
@@ -495,43 +501,74 @@ int32_t Player::getDefense() const
 
 float Player::getAttackFactor() const
 {
-	switch(fightMode)
-	{
-		case FIGHTMODE_BALANCED:
-			return 1.2f;
-
-		case FIGHTMODE_DEFENSE:
-			return 2.0f;
-
-		case FIGHTMODE_ATTACK:
-		default:
-			break;
-	}
-
+	// O sistema de posturas nao modifica mais o fator base de ataque.
 	return 1.0f;
 }
 
 float Player::getDefenseFactor() const
 {
+	// O sistema de posturas nao modifica mais o fator base de defesa.
+	return 1.0f;
+}
+
+int32_t Player::getStanceDamagePct() const
+{
 	switch(fightMode)
 	{
-		case FIGHTMODE_BALANCED:
-			return 1.2f;
-
-		case FIGHTMODE_DEFENSE:
-		{
-			if((OTSYS_TIME() - lastAttack) < getAttackSpeed()) //attacking will cause us to get into normal defense
-				return 1.0f;
-
-			return 2.0f;
-		}
-
 		case FIGHTMODE_ATTACK:
+			return 115; // Furia: +15% dano causado
+
+		case FIGHTMODE_BALANCED:
+		case FIGHTMODE_DEFENSE:
+			return 85; // Fortaleza/Canalizacao: -15% dano causado
+
 		default:
 			break;
 	}
 
-	return 1.0f;
+	return 100;
+}
+
+int32_t Player::getStanceDamageReceivedPct() const
+{
+	switch(fightMode)
+	{
+		case FIGHTMODE_BALANCED:
+			return 85; // Fortaleza: -15% dano recebido
+
+		default:
+			break;
+	}
+
+	return 100;
+}
+
+int32_t Player::getStanceHealingReceivedPct() const
+{
+	switch(fightMode)
+	{
+		case FIGHTMODE_ATTACK:
+			return 80; // Furia: -20% cura recebida
+
+		default:
+			break;
+	}
+
+	return 100;
+}
+
+int32_t Player::getStanceManaCostPct() const
+{
+	switch(fightMode)
+	{
+		case FIGHTMODE_DEFENSE:
+			return 80; // Canalizacao: -20% custo de mana
+
+		default:
+			break;
+	}
+
+	return 100;
 }
 
 void Player::sendIcons() const
@@ -979,12 +1016,22 @@ Depot* Player::getDepot(uint32_t depotId, bool autoCreateDepot)
 		Item* locker = Item::CreateItem(ITEM_LOCKER);
 		if(Container* container = locker->getContainer())
 		{
-			if(Depot* depot = container->getDepot())
+		if(Depot* depot = container->getDepot())
+		{
+			// Reward mailbox PRIMEIRO, DEPOIS o bau: como o __internalAddThing
+			// usa push_front, a ordem final dentro do locker fica [bau, reward].
+			// (o bau no slot 0, a caixa de recompensas no slot 1)
+			if(Reward* box = getRewardBox())
 			{
-				container->__internalAddThing(Item::CreateItem(ITEM_DEPOT));
-				internalAddDepot(depot, depotId);
-				return depot;
+				if(!box->getParent())
+					container->__internalAddThing(box);
 			}
+
+			container->__internalAddThing(Item::CreateItem(ITEM_DEPOT));
+
+			internalAddDepot(depot, depotId);
+			return depot;
+		}
 		}
 
 		g_game.freeThing(locker);
@@ -1004,10 +1051,92 @@ bool Player::addDepot(Depot* depot, uint32_t depotId)
 	return true;
 }
 
+Depot* Player::getPrimaryDepot()
+{
+	// locker principal = o de menor id (normalmente a cidade do player)
+	Depot* primary = NULL;
+	uint32_t minId = 0;
+	for(DepotMap::iterator it = depots.begin(); it != depots.end(); ++it)
+	{
+		if(!primary || it->first < minId)
+		{
+			primary = it->second.first;
+			minId = it->first;
+		}
+	}
+	return primary;
+}
+
+Reward* Player::getRewardBox(bool autoCreate)
+{
+	if(rewardBox)
+		return rewardBox;
+
+	if(!autoCreate)
+		return NULL;
+
+	// 1) procura a reward mailbox carregada do banco (anexada a algum locker)
+	for(DepotMap::iterator it = depots.begin(); it != depots.end(); ++it)
+	{
+		Container* locker = it->second.first;
+		for(ItemList::const_iterator cit = locker->getItems(); cit != locker->getEnd(); ++cit)
+		{
+			if(Container* c = (*cit)->getContainer())
+			{
+				if(Reward* reward = c->getReward())
+				{
+					rewardBox = reward;
+					return reward;
+				}
+			}
+		}
+	}
+
+	// 2) nao existe ainda: cria e anexa ao locker principal (se houver)
+	Item* tmp = Item::CreateItem(ITEM_REWARD_BOX);
+	if(!tmp)
+		return NULL;
+
+	Container* container = tmp->getContainer();
+	if(!container)
+	{
+		g_game.freeThing(tmp);
+		return NULL;
+	}
+
+	Reward* reward = container->getReward();
+	if(!reward)
+	{
+		g_game.freeThing(tmp);
+		return NULL;
+	}
+
+	rewardBox = reward;
+	if(Depot* primary = getPrimaryDepot())
+		primary->addItem(reward); // addItem = push_back, mantem [bau, reward]
+
+	return reward;
+}
+
 void Player::internalAddDepot(Depot* depot, uint32_t depotId)
 {
 	depots[depotId] = std::make_pair(depot, false);
-	depot->setMaxDepotLimit((group != NULL ? group->getDepotLimit(isPremium()) : 1000));
+
+	uint32_t depotLimit = (group != NULL ? group->getDepotLimit(isPremium()) : 1000);
+	depot->setMaxDepotLimit(depotLimit);
+
+	// Depot chest (2594): o bau e um Container comum (nao um Depot), entao a
+	// capacidade dele precisa ser aplicada aqui - o limite do grupo define o
+	// numero total de slots (30 por pagina no client, ex: 2000 = ~66 paginas).
+	for(ItemList::const_iterator cit = depot->getItems(); cit != depot->getEnd(); ++cit)
+	{
+		if((*cit)->getID() == ITEM_DEPOT)
+		{
+			if(Container* chest = (*cit)->getContainer())
+				chest->setCapacity(depotLimit);
+			break;
+		}
+	}
 }
 
 void Player::useDepot(uint32_t depotId, bool value)

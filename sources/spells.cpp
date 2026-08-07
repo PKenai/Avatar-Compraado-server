@@ -1082,10 +1082,17 @@ void Spell::postSpell(Player* player, uint32_t manaCost, uint32_t soulCost) cons
 
 int32_t Spell::getManaCost(const Player* player) const
 {
+	int32_t manaCost = 0;
 	if(player && manaPercent)
-		return (int32_t)std::floor((double)(player->getMaxMana() * manaPercent) / 100.);
+		manaCost = (int32_t)std::floor((double)(player->getMaxMana() * manaPercent) / 100.);
+	else
+		manaCost = mana;
 
-	return mana;
+	// Postura Canalizacao: -20% custo de mana
+	if(player)
+		manaCost = (manaCost * player->getStanceManaCostPct() + 50) / 100;
+
+	return manaCost;
 }
 
 ReturnValue Spell::CreateIllusion(Creature* creature, const Outfit_t& outfit, int32_t time)
@@ -1459,6 +1466,7 @@ bool InstantSpell::SummonMonster(const InstantSpell* spell, Creature* creature, 
 	}
 
 	int32_t manaCost = (int32_t)(mType->manaCost * g_config.getDouble(ConfigManager::RATE_MONSTER_MANA));
+	manaCost = (manaCost * player->getStanceManaCostPct() + 50) / 100;
 	if(!player->hasFlag(PlayerFlag_CanSummonAll))
 	{
 		if(player->getSkull() == SKULL_BLACK)
@@ -1907,6 +1915,8 @@ bool RuneSpell::Convince(const RuneSpell* spell, Creature* creature, Item*, cons
 	int32_t manaCost = 0;
 	if(Monster* monster = convinceCreature->getMonster())
 		manaCost = (int32_t)(monster->getManaCost() * g_config.getDouble(ConfigManager::RATE_MONSTER_MANA));
+
+	manaCost = (manaCost * player->getStanceManaCostPct() + 50) / 100;
 
 	if(!player->hasFlag(PlayerFlag_HasInfiniteMana) && player->getMana() < manaCost)
 	{

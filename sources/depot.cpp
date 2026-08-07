@@ -20,7 +20,11 @@
 
 Depot::Depot(uint16_t type):
 	Container(type), depotLimit(1000)
-{}
+{
+	// O depot chest (2594) e um Container COMUM (nao um Depot), criado em
+	// Player::getDepot. A capacidade dele ("paginas" de 30 slots) e definida
+	// em Player::internalAddDepot usando o depotLimit do grupo.
+}
 
 Attr_ReadValue Depot::readAttr(AttrTypes_t attr, PropStream& propStream)
 {

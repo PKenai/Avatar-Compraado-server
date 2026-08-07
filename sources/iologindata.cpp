@@ -19,6 +19,7 @@
 #include <iomanip>
 
 #include "iologindata.h"
+#include "reward.h"
 #include "tools.h"
 
 #ifdef __LOGIN_SERVER__
@@ -743,7 +744,32 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 		{
 			Item* item = rit->second.first;
 			int32_t pid = rit->second.second;
-			if(pid >= 0 && pid < 100)
+			if(pid == REWARD_DEPOT_ID)
+			{
+				// reward mailbox standalone (solta, ainda nao anexada a um locker)
+				if(Container* c = item->getContainer())
+				{
+					if(Reward* reward = c->getReward())
+					{
+						player->setRewardBox(reward);
+					}
+					else if((it = itemMap.find(pid)) != itemMap.end())
+					{
+						if(Container* container = it->second.first->getContainer())
+							container->__internalAddThing(item);
+					}
+					else
+						std::clog << "[Error - IOLoginData::loadPlayer] Cannot load reward mailbox for player " << name << std::endl;
+				}
+				else if((it = itemMap.find(pid)) != itemMap.end())
+				{
+					if(Container* container = it->second.first->getContainer())
+						container->__internalAddThing(item);
+				}
+				else
+					std::clog << "[Error - IOLoginData::loadPlayer] Cannot load reward mailbox for player " << name << std::endl;
+			}
+			else if(pid >= 0 && pid < 100)
 			{
 				if(Container* c = item->getContainer())
 				{
@@ -759,6 +785,18 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 			{
 				if(Container* container = it->second.first->getContainer())
 					container->__internalAddThing(item);
+			}
+		}
+
+		// reward mailbox: anexa ao locker principal se ainda estiver solta,
+		// e garante que todos os players tenham a caixa disponivel.
+		// addItem = push_back, mantem a ordem [bau, reward] dentro do locker.
+		if(Reward* box = player->getRewardBox())
+		{
+			if(!box->getParent())
+			{
+				if(Depot* primary = player->getPrimaryDepot())
+					primary->addItem(box);
 			}
 		}
 
@@ -1008,6 +1046,13 @@ bool IOLoginData::savePlayer(Player* player, bool preSave/* = true*/, bool shall
 			ss << it->first << ",";*/
 			itemList.push_back(itemBlock(it->first, it->second.first));
 		// }
+	}
+
+	// reward mailbox solta (ainda nao anexada a um locker): salva como pid proprio
+	if(Reward* box = player->getRewardBox(false))
+	{
+		if(!box->getParent())
+			itemList.push_back(itemBlock(REWARD_DEPOT_ID, box));
 	}
 
 	/*std::string s = ss.str();

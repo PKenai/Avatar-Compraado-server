@@ -3,6 +3,14 @@
 
 
 	 <action itemid="4846" event="script" value="ironfor.lua"/>
+
+
+	<action itemid="18356" script="pergaminhotask.lua"/>
+	<action itemid="18355" script="pergaminhotask2.lua"/>
+
+	<!-- Linked Tasks: displays das tasks (46011-46057) e baus centrais (46101-46105) -->
+	<action actionid="46011-46057" event="script" value="linkedTasks.lua" allowfaruse="1"/>
+	<action actionid="46101-46105" event="script" value="linkedTasks.lua" allowfaruse="1"/>
 <!-- <action itemid="2422" event="script" value="forge.lua"/> -->
 
 	<action itemid="2007" event="script" value="questnova2.lua"/>

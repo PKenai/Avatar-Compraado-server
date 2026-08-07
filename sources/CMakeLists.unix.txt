@@ -76,6 +76,7 @@ fileloader.cpp
 exception.cpp
 dispatcher.cpp
 depot.cpp
+reward.cpp
 databasemysql.cpp
 databasemanager.cpp
 database.cpp

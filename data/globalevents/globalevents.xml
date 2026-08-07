@@ -6,6 +6,7 @@
 	<globalevent name="Shop" interval="30000" event="script" value="shop.lua"/>
 	<globalevent name="Donate" interval="30000" event="script" value="donate.lua"/>
 	<globalevent name="onStart" type="start" event="script" value="onStart.lua"/>
+	<globalevent name="LinkedTasksInit" type="start" event="script" value="linkedTasksInit.lua"/>
 
 	<globalevent name="init" type="startup" event="script" value="init.lua"/>
 	<globalevent name="globalsave" type="globalsave" event="script" value="init.lua"/>

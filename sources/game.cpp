@@ -4889,8 +4889,31 @@ bool Game::combatBlockHit(CombatType_t combatType, Creature* attacker, Creature*
 	}
 
 	int32_t damage = -healthChange;
+
+	// Posturas: multiplicador de dano causado (Furia/Fortaleza/Canalizacao)
+	if(combatType != COMBAT_MANADRAIN)
+	{
+		if(Player* attackerPlayer = attacker ? attacker->getPlayer() : NULL)
+		{
+			int32_t stancePct = attackerPlayer->getStanceDamagePct();
+			if(stancePct != 100)
+				damage = (damage * stancePct + 50) / 100;
+		}
+	}
+
 	BlockType_t blockType = target->blockHit(attacker, combatType,
 		damage, checkDefense, checkArmor, !field, field, element);
+
+	// Posturas: multiplicador de dano recebido (Fortaleza)
+	if(combatType != COMBAT_MANADRAIN)
+	{
+		if(Player* targetPlayer = target->getPlayer())
+		{
+			int32_t stancePct = targetPlayer->getStanceDamageReceivedPct();
+			if(stancePct != 100)
+				damage = (damage * stancePct + 50) / 100;
+		}
+	}
 
 	healthChange = -damage;
 	if(blockType == BLOCK_DEFENSE)
@@ -4971,6 +4994,14 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 
 		if(deny)
 			return false;
+
+		// Posturas: multiplicador de cura recebida (Furia -20%)
+		if(Player* targetPlayer = target->getPlayer())
+		{
+			int32_t stancePct = targetPlayer->getStanceHealingReceivedPct();
+			if(stancePct != 100)
+				healthChange = (healthChange * stancePct + 50) / 100;
+		}
 
 		int32_t oldHealth = target->getHealth();
 		target->gainHealth(attacker, healthChange);

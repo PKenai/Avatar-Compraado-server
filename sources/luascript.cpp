@@ -26,6 +26,7 @@
 #include "player.h"
 #include "container.h"
 #include "item.h"
+#include "reward.h"
 #include "teleport.h"
 #include "beds.h"
 
@@ -1572,6 +1573,10 @@ void LuaInterface::registerFunctions()
 
 	//getPlayerDepotItems(cid, depotid)
 	lua_register(m_luaState, "getPlayerDepotItems", LuaInterface::luaGetPlayerDepotItems);
+	//getPlayerDepotContent(cid)
+	lua_register(m_luaState, "getPlayerDepotContent", LuaInterface::luaGetPlayerDepotContent);
+	//takePlayerDepotItem(cid, itemid, count)
+	lua_register(m_luaState, "takePlayerDepotItem", LuaInterface::luaTakePlayerDepotItem);
 
 	//getPlayerGuildId(cid)
 	lua_register(m_luaState, "getPlayerGuildId", LuaInterface::luaGetPlayerGuildId);
@@ -1802,6 +1807,12 @@ void LuaInterface::registerFunctions()
 
 	//doPlayerAddItemEx(cid, uid[, canDropOnMap = false[, slot = 0]])
 	lua_register(m_luaState, "doPlayerAddItemEx", LuaInterface::luaDoPlayerAddItemEx);
+
+	//doPlayerAddItemToDepot(cid, depotid, itemid[, count = 1])
+	lua_register(m_luaState, "doPlayerAddItemToDepot", LuaInterface::luaDoPlayerAddItemToDepot);
+
+	//doPlayerAddItemToRewardBox(cid, itemid[, count = 1])
+	lua_register(m_luaState, "doPlayerAddItemToRewardBox", LuaInterface::luaDoPlayerAddItemToRewardBox);
 
 	//doPlayerSendTextMessage(cid, MessageClasses, message[, value[, color[, position]]])
 	lua_register(m_luaState, "doPlayerSendTextMessage", LuaInterface::luaDoPlayerSendTextMessage);
@@ -4335,6 +4346,162 @@ int32_t LuaInterface::luaDoPlayerAddItemEx(lua_State* L)
 	else
 		lua_pushboolean(L, false);
 
+	return 1;
+}
+
+int32_t LuaInterface::luaDoPlayerAddItemToDepot(lua_State* L)
+{
+	//doPlayerAddItemToDepot(cid, depotid, itemid[, count = 1])
+	//Entrega itens DIRETAMENTE no deposito do player (depot persistente).
+	//Retorna true se ao menos 1 item foi adicionado.
+	uint32_t count = 1;
+	if(lua_gettop(L) > 3)
+		count = popNumber(L);
+
+	uint16_t itemId = popNumber(L);
+	uint32_t depotid = popNumber(L);
+
+	ScriptEnviroment* env = getEnv();
+	Player* player = env->getPlayerByUID(popNumber(L));
+	if(!player)
+	{
+		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	Depot* depot = player->getDepot(depotid, true);
+	if(!depot)
+	{
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	const ItemType& it = Item::items[itemId];
+	if(!it.id)
+	{
+		errorEx(getError(LUA_ERROR_ITEM_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	int32_t itemCount = 1, subType = 1;
+	if(it.hasSubType())
+	{
+		// itens com subtipo (empilhaveis OU carregaveis ex: runas):
+		// divide em stacks/charges de ate 100 e decrementa o subtipo sempre
+		itemCount = (int32_t)std::ceil((float)count / 100);
+		subType = count;
+	}
+	else
+		itemCount = std::max((uint32_t)1, count);
+
+	uint32_t added = 0;
+	while(itemCount > 0)
+	{
+		int32_t stackCount = std::min(100, subType);
+		Item* newItem = Item::CreateItem(itemId, stackCount);
+		if(!newItem)
+		{
+			errorEx(getError(LUA_ERROR_ITEM_NOT_FOUND));
+			lua_pushboolean(L, false);
+			return 1;
+		}
+
+		if(it.hasSubType())
+			subType -= stackCount;
+
+		uint32_t dummy = 0;
+		Item* stackItem = NULL;
+		if(g_game.internalAddItem(NULL, depot, newItem, INDEX_WHEREEVER, FLAG_NOLIMIT, false, dummy, &stackItem) != RET_NOERROR)
+		{
+			delete newItem;
+			break;
+		}
+
+		++added;
+		--itemCount;
+	}
+
+	lua_pushboolean(L, added > 0);
+	return 1;
+}
+
+int32_t LuaInterface::luaDoPlayerAddItemToRewardBox(lua_State* L)
+{
+	//doPlayerAddItemToRewardBox(cid, itemid[, count = 1])
+	//Entrega itens DIRETAMENTE na reward mailbox (item 18358) do player.
+	//Retorna true se ao menos 1 item foi adicionado.
+	uint32_t count = 1;
+	if(lua_gettop(L) > 2)
+		count = popNumber(L);
+
+	uint16_t itemId = popNumber(L);
+
+	ScriptEnviroment* env = getEnv();
+	Player* player = env->getPlayerByUID(popNumber(L));
+	if(!player)
+	{
+		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	Reward* reward = player->getRewardBox(true);
+	if(!reward)
+	{
+		errorEx(getError(LUA_ERROR_ITEM_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	const ItemType& it = Item::items[itemId];
+	if(!it.id)
+	{
+		errorEx(getError(LUA_ERROR_ITEM_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	int32_t itemCount = 1, subType = 1;
+	if(it.hasSubType())
+	{
+		// itens com subtipo (empilhaveis OU carregaveis ex: runas):
+		// divide em stacks/charges de ate 100 e decrementa o subtipo sempre
+		itemCount = (int32_t)std::ceil((float)count / 100);
+		subType = count;
+	}
+	else
+		itemCount = std::max((uint32_t)1, count);
+
+	uint32_t added = 0;
+	while(itemCount > 0)
+	{
+		int32_t stackCount = std::min(100, subType);
+		Item* newItem = Item::CreateItem(itemId, stackCount);
+		if(!newItem)
+		{
+			errorEx(getError(LUA_ERROR_ITEM_NOT_FOUND));
+			lua_pushboolean(L, false);
+			return 1;
+		}
+
+		if(it.hasSubType())
+			subType -= stackCount;
+
+		uint32_t dummy = 0;
+		Item* stackItem = NULL;
+		if(g_game.internalAddItem(NULL, reward, newItem, INDEX_WHEREEVER, FLAG_NOLIMIT, false, dummy, &stackItem) != RET_NOERROR)
+		{
+			delete newItem;
+			break;
+		}
+
+		++added;
+		--itemCount;
+	}
+
+	lua_pushboolean(L, added > 0);
 	return 1;
 }
 
@@ -8258,6 +8425,164 @@ int32_t LuaInterface::luaGetPlayerDepotItems(lua_State* L)
 	{
 		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
 		lua_pushboolean(L, false);
+	}
+
+	return 1;
+}
+
+static void collectContainerItems(Container* container, std::map<uint32_t, uint32_t>& items)
+{
+	if(!container)
+		return;
+
+	for(ItemList::const_iterator cit = container->getItems(); cit != container->getEnd(); ++cit)
+	{
+		Item* item = *cit;
+		if(!item)
+			continue;
+
+		uint32_t id = item->getID();
+		// o bau do deposito (2594) e a reward mailbox (18358) em si nao sao resultados
+		if(id == ITEM_DEPOT || id == ITEM_REWARD_BOX)
+			continue;
+
+		if(item->isStackable())
+			items[id] += item->getItemCount();
+		else
+			items[id] += 1;
+
+		// desce dentro de containers aninhados (mochilas, etc)
+		if(Container* subContainer = item->getContainer())
+			collectContainerItems(subContainer, items);
+	}
+}
+
+int32_t LuaInterface::luaGetPlayerDepotContent(lua_State* L)
+{
+	//getPlayerDepotContent(cid) -> tabela { {itemid=.., count=..}, ... } com todos
+	//os itens de todos os lockers/depots + reward mailbox do player (agregado por id)
+	ScriptEnviroment* env = getEnv();
+	if(Player* player = env->getPlayerByUID(popNumber(L)))
+	{
+		std::map<uint32_t, uint32_t> items;
+
+		const DepotMap& depots = player->getDepots();
+		for(DepotMap::const_iterator it = depots.begin(); it != depots.end(); ++it)
+			collectContainerItems(it->second.first, items);
+
+		if(Reward* rewardBox = player->getRewardBox(false))
+			collectContainerItems(rewardBox, items);
+
+		lua_createtable(L, items.size(), 0);
+		int32_t index = 1;
+		for(std::map<uint32_t, uint32_t>::iterator it = items.begin(); it != items.end(); ++it)
+		{
+			lua_createtable(L, 0, 2);
+			lua_pushnumber(L, it->first);
+			lua_setfield(L, -2, "itemid");
+			lua_pushnumber(L, it->second);
+			lua_setfield(L, -2, "count");
+			lua_rawseti(L, -2, index++);
+		}
+		return 1;
+	}
+	else
+	{
+		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+	}
+
+	return 1;
+}
+
+static bool findDepotItem(Container* container, uint32_t itemid, Container*& source, Item*& found)
+{
+	if(!container)
+		return false;
+
+	for(ItemList::const_iterator cit = container->getItems(); cit != container->getEnd(); ++cit)
+	{
+		Item* item = *cit;
+		if(!item)
+			continue;
+
+		if(item->getID() == itemid && itemid != ITEM_DEPOT && itemid != ITEM_REWARD_BOX)
+		{
+			source = container;
+			found = item;
+			return true;
+		}
+
+		if(Container* subContainer = item->getContainer())
+		{
+			if(findDepotItem(subContainer, itemid, source, found))
+				return true;
+		}
+	}
+
+	return false;
+}
+
+int32_t LuaInterface::luaTakePlayerDepotItem(lua_State* L)
+{
+	//takePlayerDepotItem(cid, itemid[, count]) -> quantidade movida (0 = falhou)
+	//count <= 0 pega tudo que tiver do item no depósito
+	uint32_t count = 0;
+	if(lua_gettop(L) >= 3)
+		count = popNumber(L);
+	uint32_t itemid = popNumber(L);
+
+	ScriptEnviroment* env = getEnv();
+	if(Player* player = env->getPlayerByUID(popNumber(L)))
+	{
+		// procura e move em loop: honra o count agregado mesmo que o item
+		// esteja espalhado em varias stacks/containers (count 0 = pega tudo)
+		uint32_t remaining = count;
+		uint32_t totalMoved = 0;
+
+		while(true)
+		{
+			Container* source = NULL;
+			Item* found = NULL;
+
+			const DepotMap& depots = player->getDepots();
+			for(DepotMap::const_iterator it = depots.begin(); it != depots.end() && !found; ++it)
+				findDepotItem(it->second.first, itemid, source, found);
+
+			if(!found)
+			{
+				if(Reward* rewardBox = player->getRewardBox(false))
+					findDepotItem(rewardBox, itemid, source, found);
+			}
+
+			if(!found || !source)
+				break;
+
+			uint32_t available = found->isStackable() ? found->getItemCount() : 1;
+			uint32_t takeCount = (count == 0 || remaining > available) ? available : remaining;
+
+			Item* movedItem = NULL;
+			ReturnValue ret = g_game.internalMoveItem(player, source, player, INDEX_WHEREEVER,
+				found, takeCount, &movedItem, FLAG_NOLIMIT);
+			if(ret != RET_NOERROR || !movedItem)
+				break;
+
+			totalMoved += takeCount;
+			if(count != 0)
+			{
+				remaining -= takeCount;
+				if(remaining == 0)
+					break;
+			}
+		}
+
+		lua_pushnumber(L, (int32_t)totalMoved);
+		return 1;
+	}
+	else
+	{
+		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushnumber(L, 0);
 	}
 
 	return 1;

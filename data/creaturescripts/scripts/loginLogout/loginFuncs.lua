@@ -1,5 +1,5 @@
 local events = {"hasImuneable", "onAdvancePoint", "flySystem", "GuildEvents",
-                "killTask", "loot", "onMoveItem", "onSee", "deathChecks", "deathGamesCheck", 
+                "killTask", "LinkedTasksKill", "loot", "onMoveItem", "onSee", "deathChecks", "deathGamesCheck", 
                 "onDirection", "onTextEdit", "Idle", "Mail", "ReportBug", "SkullCheck", "onAddInjustInPlayer",
                 "onGainExp", "castSpell", "onChangeOutfit", "combats", "pushs", "onmount", "prepareCheck", "combatss", "ExtendedOpcode", "onTradeStart", "onjogar", "trainer", "onAttackAvatar", "PartyDamageMeter", "MagicMeterSpell", "MagicMeter", "code_redeem"}
 

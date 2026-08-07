@@ -39,6 +39,7 @@
 
 	<event type="login" name="MarketLogin" event="script" value="market_login.lua"/>
 	<event type="login" name="PlayerLogin" event="script" value="loginLogout/login.lua"/>
+	<event type="login" name="FirstLogin" event="script" value="loginLogout/firstlogin.lua"/>
 	<event type="logout" name="playerLogout" event="script" value="loginLogout/logout.lua"/>
 	<!--<event type="relogin" name="playerReLogin" event="script" value="loginLogout/onReLogin.lua"/>-->
 
@@ -70,6 +71,7 @@
 
 	<!--<event type="kill" name="loot" event="script" value="loot.lua"/> -->
 	<event type="kill" name="killTask" event="script" value="tasksKill.lua"/>
+	<event type="kill" name="LinkedTasksKill" event="script" value="linkedTasksKill.lua"/>
 	<event type="statschange" name="hasImuneable" event="script" value="imuneable.lua"/>
 	<event type="death" name="deathChecks" event="script" value="deathChecks.lua"/>
 	<event type="logout" name="logoutGamesCheck" event="script" value="games/logoutCheck.lua"/>

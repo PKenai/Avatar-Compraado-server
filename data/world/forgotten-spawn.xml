@@ -2139,7 +2139,6 @@
 		<monster name="Rat" x="4" y="-1" z="6" spawntime="40" />
 		<npc name="toxic sing" x="22" y="27" z="6" spawntime="40" />
 		<npc name="Appa" x="24" y="28" z="6" spawntime="40" />
-		<npc name="sony" x="-29" y="30" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="885" centery="317" centerz="6" radius="1">
 		<monster name="Insectoid Scout" x="-1" y="-1" z="6" spawntime="40" />
@@ -2194,7 +2193,6 @@
 	<spawn centerx="74" centery="345" centerz="6" radius="1">
 		<monster name="Tunnel Tyrant" x="1" y="0" z="6" spawntime="40" />
 	</spawn>
-	<spawn centerx="502" centery="345" centerz="6" radius="1" />
 	<spawn centerx="494" centery="347" centerz="6" radius="1">
 		<npc name="kurt" x="1" y="1" z="6" spawntime="40" />
 	</spawn>
@@ -3563,6 +3561,27 @@
 	</spawn>
 	<spawn centerx="431" centery="1487" centerz="6" radius="1">
 		<monster name="Dark Warlock" x="-1" y="0" z="6" spawntime="40" />
+	</spawn>
+	<spawn centerx="1323" centery="66" centerz="7" radius="1">
+		<monster name="Rotworm" x="1" y="0" z="7" spawntime="60" direction="1" />
+	</spawn>
+	<spawn centerx="1339" centery="66" centerz="7" radius="1">
+		<monster name="Destroyer" x="-1" y="0" z="7" spawntime="60" direction="3" />
+	</spawn>
+	<spawn centerx="1347" centery="70" centerz="7" radius="1">
+		<monster name="Gargoyle" x="-1" y="0" z="7" spawntime="60" direction="3" />
+	</spawn>
+	<spawn centerx="1313" centery="72" centerz="7" radius="1">
+		<monster name="Dwarve" x="1" y="0" z="7" spawntime="60" direction="1" />
+	</spawn>
+	<spawn centerx="1346" centery="76" centerz="7" radius="1">
+		<monster name="Terror Bird" x="-1" y="0" z="7" spawntime="60" direction="3" />
+	</spawn>
+	<spawn centerx="1326" centery="81" centerz="7" radius="1">
+		<monster name="Elf" x="1" y="0" z="7" spawntime="60" direction="1" />
+	</spawn>
+	<spawn centerx="1344" centery="82" centerz="7" radius="1">
+		<monster name="Cyclops" x="-1" y="0" z="7" spawntime="60" direction="3" />
 	</spawn>
 	<spawn centerx="331" centery="95" centerz="7" radius="1">
 		<monster name="Ice Golem" x="-1" y="1" z="7" spawntime="40" />

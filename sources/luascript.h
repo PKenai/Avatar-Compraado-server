@@ -29,12 +29,17 @@ extern "C"
 #else
 extern "C"
 {
+	#ifdef __LUAJIT__
+	// Caminho explicito do LuaJIT (vcpkg: include/luajit/...) para nunca colidir
+	// com um lua.h generico de outra versao que esteja antes no include path.
+	#include <luajit/lua.h>
+	#include <luajit/lauxlib.h>
+	#include <luajit/lualib.h>
+	#include <luajit/luajit.h>
+	#else
 	#include <lua.h>
 	#include <lauxlib.h>
 	#include <lualib.h>
-
-	#ifdef __LUAJIT__
-	#include <luajit.h>
 	#endif
 }
 #endif
@@ -389,6 +394,8 @@ class LuaInterface
 		static int32_t luaItemHasBlockable(lua_State* L);
 		static int32_t luaDoPlayerAddItem(lua_State* L);
 		static int32_t luaDoPlayerAddItemEx(lua_State* L);
+		static int32_t luaDoPlayerAddItemToDepot(lua_State* L);
+		static int32_t luaDoPlayerAddItemToRewardBox(lua_State* L);
 		static int32_t luaDoTileAddItemEx(lua_State* L);
 		static int32_t luaDoAddContainerItemEx(lua_State* L);
 		static int32_t luaDoRelocate(lua_State* L);
@@ -549,6 +556,8 @@ class LuaInterface
 		static int32_t luaGetPlayerAccountId(lua_State* L);
 		static int32_t luaGetPlayerAccount(lua_State* L);
 		static int32_t luaGetPlayerDepotItems(lua_State* L);
+		static int32_t luaGetPlayerDepotContent(lua_State* L);
+		static int32_t luaTakePlayerDepotItem(lua_State* L);
 		static int32_t luaGetPlayerGuildId(lua_State* L);
 		static int32_t luaGetPlayerGuildName(lua_State* L);
 		static int32_t luaGetPlayerGuildRank(lua_State* L);

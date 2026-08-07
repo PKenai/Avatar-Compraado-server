@@ -175,6 +175,9 @@
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\depot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\reward.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\databasemysql.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

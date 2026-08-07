@@ -636,10 +636,17 @@ void Weapon::onUsedAmmo(Player* player, Item* item, Tile* destTile) const
 
 int32_t Weapon::getManaCost(const Player* player) const
 {
+	int32_t manaCost = 0;
 	if(mana)
-		return mana;
+		manaCost = mana;
+	else
+		manaCost = manaPercent ? (player->getMaxMana() * manaPercent) / 100 : 0;
 
-	return manaPercent ? (player->getMaxMana() * manaPercent) / 100 : 0;
+	// Postura Canalizacao: -20% custo de mana
+	if(player)
+		manaCost = (manaCost * player->getStanceManaCostPct() + 50) / 100;
+
+	return manaCost;
 }
 
 bool Weapon::executeUseWeapon(Player* player, const LuaVariant& var) const

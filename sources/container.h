@@ -23,6 +23,7 @@
 #include "item.h"
 
 class Depot;
+class Reward;
 class Container;
 
 class ContainerIterator
@@ -65,6 +66,9 @@ class Container : public Item, public Cylinder
 		virtual Depot* getDepot() {return NULL;}
 		virtual const Depot* getDepot() const {return NULL;}
 
+		virtual Reward* getReward() {return NULL;}
+		virtual const Reward* getReward() const {return NULL;}
+
 		Attr_ReadValue readAttr(AttrTypes_t attr, PropStream& propStream);
 		bool unserializeItemNode(FileLoader& f, NODE node, PropStream& propStream);
 
@@ -73,6 +77,7 @@ class Container : public Item, public Cylinder
 		virtual double getWeight() const;
 
 		uint32_t capacity() const {return maxSize ? maxSize : std::min(255, (int32_t)itemlist.size() + 1);}
+		void setCapacity(uint32_t cap) {maxSize = cap;}
 		uint32_t size() const {return (uint32_t)itemlist.size();}
 		bool full() const
 		{
