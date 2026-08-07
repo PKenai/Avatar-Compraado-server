@@ -590,6 +590,9 @@ function onLogin(cid)
     registerCreatureEvent(cid, "mobsKill")
     registerCreatureEvent(cid, "DailyHunt")
     registerCreatureEvent(cid, "DailyHuntOpcode")
+    registerCreatureEvent(cid, "KnockoutLog")
+    registerCreatureEvent(cid, "KnockoutLogPrep")
+    registerCreatureEvent(cid, "KnockoutCombat")
     sendOpCode(cid, 19, tostring(getPlayerVocation(cid)))
  
     if getPlayerStorageValue(cid, "hasActiveInQuest") == 1 then

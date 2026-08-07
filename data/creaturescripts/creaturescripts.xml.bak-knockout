@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creaturescripts>
+	<event type="death" name="Insects_Quest" event="script" value="insects.lua"/>
+
+	<event type="death" name="Demon_Quest" event="script" value="demonSource.lua"/>
+	<event type="death" name="Seacrest_Quest" event="script" value="seacrest.lua"/>
+	<event type="death" name="Rarods_Quest" event="script" value="rarodsQuest.lua"/>
+	<event type="death" name="Zuko_Quest" event="script" value="zuko.lua"/>
+	<event type="death" name="LostAvatar_Quest" event="script" value="lostavatar.lua"/>
+	
+	
+
+
+	<event type="moveitem" name="onjogar" event="script" value="onthrow.lua"/>
+	
+	<event type="target" name="trainer" event="script" value="trainer.lua"/>
+	
+	<event type="death" name="Guarda_Blood" event="script" value="bloodcastle/guard.lua"/>
+	<event type="death" name="Boss_Blood" event="script" value="bloodcastle/boss.lua"/>
+	<event type="death" name="morrerblood" event="script" value="bloodcastle/player.lua"/>
+	<event type="death" name="loginblood" event="script" value="bloodcastle/player.lua"/>
+	<event type="kill" name="bloodKill" event="script" value="bloodcastle/bloodKill.lua"/>
+	<event type="kill" name="warKill" event="script" value="warKill.lua"/>
+	<event type="combat" name="combats" event="script" value="combats.lua"/>
+	<event type="combat" name="combatss" event="script" value="combatWar.lua"/>
+	<event type="combat" name="combatMan" event="script" value="combatMan.lua"/>
+	<event type="push" name="pushs" event="script" value="onpush.lua"/>
+	<event type="mount" name="onmount" event="script" value="onMount.lua"/>
+	
+	
+	<event type="death" name="mobsKill" event="script" value="mobsKill.lua"/>
+
+	<event type="death" name="Rarod_kill" event="script" value="rarodKill.lua"/>
+
+
+	<event type="statschange" name="reflect" event="script" value="reflect.lua"/>
+	<!--<event type="login" name="PlayerMessages" event="script" value="loginLogout/login_popup.lua"/>-->
+
+
+	<event type="login" name="MarketLogin" event="script" value="market_login.lua"/>
+	<event type="login" name="PlayerLogin" event="script" value="loginLogout/login.lua"/>
+	<event type="login" name="FirstLogin" event="script" value="loginLogout/firstlogin.lua"/>
+	<event type="logout" name="playerLogout" event="script" value="loginLogout/logout.lua"/>
+	<!--<event type="relogin" name="playerReLogin" event="script" value="loginLogout/onReLogin.lua"/>-->
+
+	<event type="channelrequest" name="Ban_Type" event="script" value="ban/type.lua"/>
+	<event type="channelrequest" name="Ban_Action" event="script" value="ban/action.lua"/>
+	<event type="textedit" name="Ban_Finish" event="script" value="ban/finish.lua"/>
+
+	<event type="channeljoin" name="GuildEvents" event="script" value="guild.lua"/>
+	<event type="mailreceive" name="Mail" event="script" value="mail.lua"/>
+	<event type="reportbug" name="ReportBug" script="reportbug.lua"/>
+
+	<event type="think" name="Idle" event="script" value="idle.lua"/>
+	<event type="think" name="SkullCheck" event="script" value="skullcheck.lua"/>
+
+	<!-- Inquisition Full Quest -->
+	<event type="kill" name="Inquisition" event="script" value="inquisition.lua"/>
+
+	<!--coisas Mirto-->
+	<event type="move" name="onMove" event="script" value="flyAndSurf/onMove.lua"/>
+	<event type="advance" name="onAdvancePoint" event="script" value="onAdvance.lua"/>
+	<event type="look" name="onSee" event="script" value="seeLook/onSee.lua"/>
+	<event type="think" name="flySystem" event="script" value="flyAndSurf/onThink.lua"/>
+	<event type="traderequest" name="onTradeStart" event="script" value="onTradeRequest.lua"/>
+	<event type="direction" name="onDirection" event="script" value="onDirection.lua"/>
+	<event type="moveitem" name="onMoveItem" event="script" value="onMoveItems/maxValueInParcel.lua"/>
+	<event type="textedit" name="onTextEdit" event="script" value="exivaPlayer.lua"/>
+	<event type="attack" name="onAttackCritical" event="script" value="criticalOnAttack.lua"/>
+	<event type="attack" name="onAttackAvatar" event="script" value="avatarAttack.lua"/>
+
+	<!--<event type="kill" name="loot" event="script" value="loot.lua"/> -->
+	<event type="kill" name="killTask" event="script" value="tasksKill.lua"/>
+	<event type="kill" name="LinkedTasksKill" event="script" value="linkedTasksKill.lua"/>
+	<event type="statschange" name="hasImuneable" event="script" value="imuneable.lua"/>
+	<event type="death" name="deathChecks" event="script" value="deathChecks.lua"/>
+	<event type="logout" name="logoutGamesCheck" event="script" value="games/logoutCheck.lua"/>
+	<event type="preparedeath" name="deathGamesCheck" event="script" value="games/deathCheck.lua"/>
+	<event type="injustkill" name="onAddInjustInPlayer" event="script" value="frags.lua"/>
+	<event type="outfit" name="onChangeOutfit" event="script" value="changeOutfit.lua"/>
+	<event type="preparedeath" name="prepareCheck" event="script" value="prepareCheck.lua"/>
+
+	<event type="kill" name="DailyHunt" event="script" value="dailyHunt.lua"/>
+	<event type="extendedopcode" name="DailyHuntOpcode" event="script" value="dailyHunt.lua"/>
+
+	<event type="extendedopcode" name="ExtendedOpcode" event="script" value="opcode.lua"/>
+	<event type="extendedopcode" name="code_redeem" event="script" value="code.lua"/>
+	<event type="statschange" name="PartyDamageMeter" event="script" value="partydamage.lua"/>
+	<event type="spawnall" name="PartyDamageSpawn" event="script" value="partydamage.lua"/>
+	<event type="castspell" name="castSpell" event="script" value="onUseSpell.lua"/>
+	<event type="castspell" name="MagicMeterSpell" event="script" value="magicmeter.lua"/>
+	<event type="statschange" name="MagicMeter" event="script" value="magicmeter.lua"/>
+	<event type="spawnall" name="MagicMeterSpawn" event="script" value="magicmeter.lua"/>
+	<!-- <event type="ongainexp" name="onGainExp" event="script" value="onGainExperience.lua"/> -->
+</creaturescripts>

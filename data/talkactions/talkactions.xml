@@ -5,6 +5,7 @@
 	<talkaction log="no" words="!loot;/loot" event="script" value="loot.lua"/>
 	<talkaction log="no" words="!inspect" event="script" value="inspect.lua"/>
 	<talkaction log="no" words="!dailyhunt" event="script" value="dailyhunt.lua"/>
+<talkaction log="no" words="/testknockout" event="script" value="knockout.lua"/>
 	
 	<!--<talkaction words="/recipelist" event="script" value="recipelist.lua"/>-->
 	<talkaction words="/recipeshelmet" event="script" value="recipeshelmet.lua"/>

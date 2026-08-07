@@ -66630,3 +66630,5 @@
 [6/8/2026 13:49:51] error.
 [6/8/2026 13:49:51] error.
 [6/8/2026 13:54:57] ranks` WHERE `players`.`id` = 
+[7/8/2026 20:22:10] ine unambiguous.  This exception is thrown to prevent "eternal" matches that take an indefinite period time to locate.
+[7/8/2026 20:48:9] ::loadItems] Unserialization error [0] for item type 

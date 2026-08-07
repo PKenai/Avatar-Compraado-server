@@ -79,6 +79,9 @@
 	<event type="injustkill" name="onAddInjustInPlayer" event="script" value="frags.lua"/>
 	<event type="outfit" name="onChangeOutfit" event="script" value="changeOutfit.lua"/>
 	<event type="preparedeath" name="prepareCheck" event="script" value="prepareCheck.lua"/>
+<event type="preparedeath" name="KnockoutLogPrep" event="script" value="knockout.lua"/>
+<event type="death" name="KnockoutLog" event="script" value="knockout.lua"/>
+<event type="combat" name="KnockoutCombat" event="script" value="knockout.lua"/>
 
 	<event type="kill" name="DailyHunt" event="script" value="dailyHunt.lua"/>
 	<event type="extendedopcode" name="DailyHuntOpcode" event="script" value="dailyHunt.lua"/>
