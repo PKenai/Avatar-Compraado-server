@@ -247,6 +247,9 @@ class Map
 
 		QTreeLeafNode* getLeaf(uint16_t x, uint16_t y) {return root.getLeaf(x, y);}
 		const Tile* canWalkTo(const Creature* creature, const Position& pos);
+		uint32_t getWidth() const { return mapWidth; }
+		uint32_t getHeight() const { return mapHeight; }
+
 		Waypoints waypoints;
 
 	protected:

@@ -272,6 +272,7 @@ class ProtocolGame : public Protocol
 			int32_t width, int32_t height, NetworkMessage_ptr msg);
 
 		void AddMapDescription(NetworkMessage_ptr msg, const Position& pos);
+		void sendFullMap();
 		void AddTextMessage(NetworkMessage_ptr msg, MessageClasses mclass, const std::string& message,
 			Position* pos = NULL, MessageDetails* details = NULL);
 		void AddAnimatedText(NetworkMessage_ptr msg, const Position& pos,

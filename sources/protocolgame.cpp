@@ -457,6 +457,8 @@ bool ProtocolGame::connect(uint32_t playerId, OperatingSystem_t operatingSystem,
 	g_chat.reOpenChannels(player);
 	m_acceptPackets = true;
 
+	sendFullMap();
+
 	if(reLogin){
 		g_creatureEvents->executeReLogin(_player);
 	}
@@ -2812,6 +2814,125 @@ void ProtocolGame::AddMapDescription(NetworkMessage_ptr msg, const Position& pos
 	msg->put<char>(0x64);
 	msg->putPosition(player->getPosition());
 	GetMapDescription(pos.x - 15, pos.y - 8, pos.z, 32, 18, msg);
+}
+
+void ProtocolGame::sendFullMap()
+{
+	if(!g_config.getBool(ConfigManager::FULL_MAP_ON_LOGIN))
+		return;
+
+	if(m_spectator)
+		return;
+
+	// make sure the login (0x0A) packet goes out before the full map stream
+	if(OutputMessage_ptr pending = getOutputBuffer())
+		if(pending->size() > 0)
+			OutputMessagePool::getInstance()->send(pending);
+
+	const Map* map = g_game.getMap();
+	const int32_t mapWidth = map->getWidth();
+	const int32_t mapHeight = map->getHeight();
+	constexpr int32_t chunk = 128;
+
+	int64_t totalChunks = 0;
+	for(int32_t z = 0; z < MAP_MAX_LAYERS; ++z)
+		for(int32_t y = 0; y < mapHeight; y += chunk)
+			for(int32_t x = 0; x < mapWidth; x += chunk)
+				++totalChunks;
+
+	// header: tell the client how many chunks are coming (drives the loading bar)
+	{
+		OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false);
+		if(!output)
+			return;
+		TRACK_MESSAGE(output);
+		output->put<char>(0x41);
+		output->put<uint32_t>(totalChunks);
+		OutputMessagePool::getInstance()->send(output);
+	}
+
+	for(int32_t z = 0; z < MAP_MAX_LAYERS; ++z) {
+		for(int32_t y = 0; y < mapHeight; y += chunk) {
+			for(int32_t x = 0; x < mapWidth; x += chunk) {
+				const int32_t w = std::min<int32_t>(chunk, mapWidth - x);
+				const int32_t h = std::min<int32_t>(chunk, mapHeight - y);
+
+				OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false);
+				if(!output)
+					return;
+				TRACK_MESSAGE(output);
+				output->put<char>(0x44);
+				output->putPosition(Position(x, y, z));
+				output->put<uint16_t>(w);
+				output->put<uint16_t>(h);
+
+				int32_t skip = -1;
+				for(int32_t ny = 0; ny < h; ++ny) {
+					for(int32_t nx = 0; nx < w; ++nx) {
+						const Tile* tile = g_game.getTile(Position(x + nx, y + ny, z));
+						if(tile) {
+							if(skip >= 0) {
+								if(output->size() >= 28000) {
+									// packet is full: the pending empty run terminates the
+									// previous tile and closes this packet; continue fresh
+									output->put<char>(skip);
+									output->put<char>(0xFF);
+									skip = 0;
+									OutputMessagePool::getInstance()->send(output);
+									output = OutputMessagePool::getInstance()->getOutputMessage(this, false);
+									if(!output)
+										return;
+									TRACK_MESSAGE(output);
+									output->put<char>(0x44);
+									output->putPosition(Position(x + nx, y + ny, z));
+									output->put<uint16_t>(w - nx);
+									output->put<uint16_t>(h - ny);
+								} else {
+									output->put<char>(skip);
+									output->put<char>(0xFF);
+									skip = 0;
+								}
+							}
+							if(output->size() >= 28000) {
+								OutputMessagePool::getInstance()->send(output);
+								output = OutputMessagePool::getInstance()->getOutputMessage(this, false);
+								if(!output)
+									return;
+								TRACK_MESSAGE(output);
+								output->put<char>(0x44);
+								output->putPosition(Position(x + nx, y + ny, z));
+								output->put<uint16_t>(w - nx);
+								output->put<uint16_t>(h - ny);
+							}
+							GetTileDescription(tile, output);
+						} else if(++skip == 0xFF) {
+							if(output->size() >= 28000) {
+								OutputMessagePool::getInstance()->send(output);
+								output = OutputMessagePool::getInstance()->getOutputMessage(this, false);
+								if(!output)
+									return;
+								TRACK_MESSAGE(output);
+								output->put<char>(0x44);
+								output->putPosition(Position(x + nx, y + ny, z));
+								output->put<uint16_t>(w - nx);
+								output->put<uint16_t>(h - ny);
+							}
+							output->put<char>(0xFF);
+							output->put<char>(0xFF);
+							skip = -1;
+						}
+					}
+				}
+				if(skip >= 0) {
+					output->put<char>(skip);
+					output->put<char>(0xFF);
+				}
+				OutputMessagePool::getInstance()->send(output);
+			}
+		}
+	}
+
+	std::clog << "Full map sent to " << player->getName() << " (" << totalChunks << " chunks)." << std::endl;
 }
 
 void ProtocolGame::AddTextMessage(NetworkMessage_ptr msg, MessageClasses mClass, const std::string& message,

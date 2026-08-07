@@ -123,6 +123,7 @@ bool ConfigManager::load()
 		m_confBool[GUILD_HALLS] = getGlobalBool("guildHalls", false);
 		#ifndef __LOGIN_SERVER__
 		m_confBool[LOGIN_ONLY_LOGINSERVER] = getGlobalBool("loginOnlyWithLoginServer", false);
+	m_confBool[FULL_MAP_ON_LOGIN] = getGlobalBool("fullMapOnLogin", false);
 		#endif
 		m_confString[ENCRYPTION_TYPE] = getGlobalString("encryptionType", "sha256");
 		m_confString[RSA_PRIME1] = getGlobalString("rsaPrime1", "14299623962416399520070177382898895550795403345466153217470516082934737582776038882967213386204600674145392845853859217990626450972452084065728686565928113");

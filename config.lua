@@ -74,6 +74,7 @@ optionalWarAttackableAlly = false
 worldId = 0
 ip = "127.0.0.1"
 bindOnlyGlobalAddress = true
+fullMapOnLogin = true
 loginPort = 9191
 gamePort = "9192"
 loginTries = 10

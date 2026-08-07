@@ -329,6 +329,7 @@ class ConfigManager
 			ALLOW_MOUNTS,
 			UNMOUNT_PLAYER_IN_PZ,
 			ENABLE_LIVE_CASTING,
+			FULL_MAP_ON_LOGIN,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

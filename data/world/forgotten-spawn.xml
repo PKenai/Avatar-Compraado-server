@@ -9472,18 +9472,18 @@
 	<spawn centerx="217" centery="353" centerz="8" radius="1">
 		<monster name="Lizard Zaogun" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
-	<spawn centerx="517" centery="357" centerz="8" radius="5" />
 	<spawn centerx="540" centery="358" centerz="8" radius="5" />
 	<spawn centerx="505" centery="359" centerz="8" radius="5">
 		<monster name="Rotworm" x="-2" y="0" z="8" spawntime="40" />
+		<monster name="Rotworm" x="3" y="2" z="8" spawntime="60" direction="2" />
+		<monster name="Rotworm" x="4" y="2" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="539" centery="362" centerz="8" radius="5">
 		<monster name="Rotworm" x="4" y="2" z="8" spawntime="40" />
 	</spawn>
-	<spawn centerx="511" centery="364" centerz="8" radius="1">
-		<npc name="Edward Colin" x="0" y="0" z="8" spawntime="40" />
-	</spawn>
 	<spawn centerx="522" centery="365" centerz="8" radius="5">
+		<monster name="Rotworm" x="-5" y="-3" z="8" spawntime="60" direction="2" />
+		<monster name="Rotworm" x="-4" y="-2" z="8" spawntime="60" direction="2" />
 		<monster name="Rotworm" x="-1" y="-2" z="8" spawntime="40" />
 		<monster name="Rotworm" x="2" y="3" z="8" spawntime="40" />
 	</spawn>
