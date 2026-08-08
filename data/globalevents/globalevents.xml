@@ -13,6 +13,9 @@
 	<globalevent name="record" type="record" event="script" value="record.lua"/>
 	<globalevent name="market" type="startup" event="script" value="market.lua"/>
 	
+	<!-- Bomberman Event -->
+	<globalevent name="BombermanInit" type="startup" event="script" value="bomberman.lua"/>
+	
 	<globalevent name="castviewers" interval="60000" event="script" value="castviewers.lua"/>
 	<globalevent name="global_msg" interval="120000" event="script" value="site_msg.lua"/>
 	<globalevent name="global_msg_player" interval="120000" event="script" value="site_msg_player.lua"/>

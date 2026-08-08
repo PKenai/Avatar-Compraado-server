@@ -83,6 +83,12 @@
 <event type="death" name="KnockoutLog" event="script" value="knockout.lua"/>
 <event type="combat" name="KnockoutCombat" event="script" value="knockout.lua"/>
 
+	<!-- Bomberman Event -->
+	<event type="login" name="BombermanLogin" event="script" value="bomberman.lua"/>
+	<event type="logout" name="BombermanLogout" event="script" value="bomberman.lua"/>
+	<event type="death" name="BombermanDeath" event="script" value="bomberman.lua"/>
+	<event type="extendedopcode" name="BombermanOpcode" event="script" value="bomberman.lua"/>
+
 	<event type="kill" name="DailyHunt" event="script" value="dailyHunt.lua"/>
 	<event type="extendedopcode" name="DailyHuntOpcode" event="script" value="dailyHunt.lua"/>
 

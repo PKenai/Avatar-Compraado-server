@@ -98,6 +98,9 @@
 	<talkaction words="!apostar" event="script" value="slotmachine.lua"/>
 	<talkaction words="!apostarvermelho" event="script" value="slotmachineVermelho.lua"/>
 
+	<!-- Bomberman Event -->
+	<talkaction log="no" words="!joinbombermanevent;!leavebombermanevent;!bomb" event="script" value="bomberman.lua"/>
+
 	<!-- Magias -->
 	<talkaction words="air ball" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/air ball.lua"/>
 	<talkaction words="earth crush" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/earth crush.lua"/>

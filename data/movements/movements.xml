@@ -426,8 +426,11 @@
     <movevent type="StepOut" itemid="4608-4625;4820-4825;4664;4665;4666" event="script" value="surfMonster.lua"/>
 
     <movevent type="StepIn" actionid="14199" event="script" value="initialItens.lua"/>
-	<movevent type="StepIn" actionid="58880;58881" event="script" value="catapultaDown.lua"/>
-    <movevent type="Equip" itemid="4864;4863" slot="ammo" event="script" value="waterPounch.lua"/>
+	<movevent type="StepIn" actionid="58880;58881" event="script" value="catapultaDown.lua"/>	<movevent type="Equip" itemid="4864;4863" slot="ammo" event="script" value="waterPounch.lua"/>
+
+	<!-- Bomberman Event: power-ups (18373-18377) e chute da bomba (18372) -->
+	<movevent type="StepIn" itemid="18372" script="bomberman.lua"/>
+	<movevent type="StepIn" itemid="18373-18377" script="bomberman.lua"/>
 
 	<!-- Decaying tiles -->
 	<movevent type="StepIn" itemid="293" event="script" value="decay.lua"/>
