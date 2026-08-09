@@ -2762,6 +2762,18 @@ bool Game::playerCloseChannel(uint32_t playerId, uint16_t channelId)
 
 	g_chat.removeUserFromChannel(player, channelId);
 	player->client->chat(channelId);
+
+	// Camera: fechar a aba do canal de transmissao (0xFFFF) encerra o cast,
+	// igual ao cameraOff() do data/lib/camera.lua (idempotente).
+	if(channelId == 0xFFFF && player->client && player->client->isBroadcasting())
+	{
+		player->client->setBroadcast(false);
+		player->client->mute(StringVec());
+		DBQuery query;
+		query << "UPDATE `players` SET `broadcasting` = 0, `viewers` = 0 WHERE `id` = " << player->getGUID();
+		Database::getInstance()->query(query.str());
+		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "You have disabled your live stream.");
+	}
 	return true;
 }
 

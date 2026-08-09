@@ -9,3 +9,61 @@
   7: [ntdll.dll] RtlInitializeExceptionChain +0x6b
   8: [ntdll.dll] RtlGetAppContainerNamedObjectPath +0x231
 
+== ACCESS VIOLATION at 0x0
+
+== ACCESS VIOLATION at 0xb01fa0
+  0: [theforgottenserver.exe] Player::onCreatureAppear +0x60
+  1: [theforgottenserver.exe] Game::placeCreature +0x37c
+  2: [theforgottenserver.exe] ProtocolGame::login +0xe21
+  3: [theforgottenserver.exe] boost::detail::function::void_function_obj_invoker<boost::_bi::bind_t<boost::_bi::unspecified,boost::_mfi::mf<bool (__thiscall ProtocolGame::*)(std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned int,std::basic_string<chaÎ!4uC:\Users\imfis\Desktop\Avatar-Compraado-server\theforgottenserver.exe +0x2a
+  4: [theforgottenserver.exe] boost::function_n<void>::operator() +0x37
+  5: [theforgottenserver.exe] Dispatcher::dispatcherThread +0x1a2
+  6: [boost_thread-vc143-mt-x32-1_90.dll] boost::`anonymous namespace'::thread_start_function +0x5e
+  7: [ucrtbase.dll] isgraph +0x21b
+  8: [KERNEL32.DLL] BaseThreadInitThunk +0x19
+  9: [ntdll.dll] RtlInitializeExceptionChain +0x6b
+  10: [ntdll.dll] RtlGetAppContainerNamedObjectPath +0x231
+
+== ACCESS VIOLATION at 0xce1523
+  0: [theforgottenserver.exe] std::_Tree<std::_Tmap_traits<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,TalkAction *,std::less<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >,std::allocator<std::pair<std::basic_string<char,std::char_trait +0x3
+  1: [theforgottenserver.exe] ItemAttributes::getIntegerAttribute +0x1d
+  2: [theforgottenserver.exe] Item::getUniqueId +0x68
+  3: [theforgottenserver.exe] MoveEvents::getEvent +0x15
+  4: [theforgottenserver.exe] MoveEvents::hasEquipEvent +0x10
+  5: [theforgottenserver.exe] Player::increaseCombatValues +0xc0
+  6: [theforgottenserver.exe] ValueCallback::getMinMaxValues +0x413
+  7: [theforgottenserver.exe] Combat::getMinMaxValues +0x56
+  8: [theforgottenserver.exe] Combat::doCombat +0x6d
+  9: [theforgottenserver.exe] LuaInterface::luaDoCombat +0x369
+  10: [lua51.dll] lj_BC_FUNCC +0x32
+  11: [lua51.dll] lj_alloc_f +0x2b
+  12: [lua51.dll] lua_pcall +0x56
+  13: [theforgottenserver.exe] LuaInterface::callFunction +0x74
+
+== ACCESS VIOLATION at 0x821fa0
+  0: [theforgottenserver.exe] Player::onCreatureAppear +0x60
+  1: [theforgottenserver.exe] Game::placeCreature +0x37c
+  2: [theforgottenserver.exe] ProtocolGame::login +0xe21
+  3: [theforgottenserver.exe] boost::detail::function::void_function_obj_invoker<boost::_bi::bind_t<boost::_bi::unspecified,boost::_mfi::mf<bool (__thiscall ProtocolGame::*)(std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned int,std::basic_string<cha +0x2a
+  4: [theforgottenserver.exe] boost::function_n<void>::operator() +0x37
+  5: [theforgottenserver.exe] Dispatcher::dispatcherThread +0x1a2
+  6: [boost_thread-vc143-mt-x32-1_90.dll] boost::`anonymous namespace'::thread_start_function +0x5e
+  7: [ucrtbase.dll] isgraph +0x21b
+  8: [KERNEL32.DLL] BaseThreadInitThunk +0x19
+  9: [ntdll.dll] RtlInitializeExceptionChain +0x6b
+  10: [ntdll.dll] RtlGetAppContainerNamedObjectPath +0x231
+
+== ACCESS VIOLATION at 0x8c0823
+  0: [theforgottenserver.exe] Item::getLight +0x3
+  1: [theforgottenserver.exe] Player::updateItemsLight +0x31
+  2: [theforgottenserver.exe] IOLoginData::loadPlayer +0x2745
+  3: [theforgottenserver.exe] ProtocolGame::login +0xcb1
+  4: [theforgottenserver.exe] boost::detail::function::void_function_obj_invoker<boost::_bi::bind_t<boost::_bi::unspecified,boost::_mfi::mf<bool (__thiscall ProtocolGame::*)(std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned int,std::basic_string<cha +0x2a
+  5: [theforgottenserver.exe] boost::function_n<void>::operator() +0x37
+  6: [theforgottenserver.exe] Dispatcher::dispatcherThread +0x1a2
+  7: [boost_thread-vc143-mt-x32-1_90.dll] boost::`anonymous namespace'::thread_start_function +0x5e
+  8: [ucrtbase.dll] isgraph +0x21b
+  9: [KERNEL32.DLL] BaseThreadInitThunk +0x19
+  10: [ntdll.dll] RtlInitializeExceptionChain +0x6b
+  11: [ntdll.dll] RtlGetAppContainerNamedObjectPath +0x231
+

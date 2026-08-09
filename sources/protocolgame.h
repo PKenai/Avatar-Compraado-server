@@ -70,6 +70,7 @@ class ProtocolGame : public Protocol
 			OperatingSystem_t operatingSystem, uint16_t version, bool gamemaster);
 		bool logout(bool displayEffect, bool forceLogout);
 		void chat(uint16_t channelId);
+		void sendClosePrivate(uint16_t channelId);
 
 		void setPlayer(Player* p);
 		Player* getPlayer() const {return player;}
@@ -172,7 +173,6 @@ class ProtocolGame : public Protocol
 
 		//Send functions
 		void sendChannelMessage(std::string author, std::string text, MessageClasses type, uint16_t channel);
-		void sendClosePrivate(uint16_t channelId);
 		void sendCreatePrivateChannel(uint16_t channelId, const std::string& channelName);
 		void sendChannelsDialog(const ChannelsList& channels);
 		void sendChannel(uint16_t channelId, const std::string& channelName);

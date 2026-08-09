@@ -872,7 +872,7 @@ class Player : public Creature, public Cylinder
 
 	private:
 		bool talkState[13];
-		bool inventoryAbilities[SLOT_LAST];
+		bool inventoryAbilities[SLOT_LAST + 1];
 		bool pzLocked;
 		bool saving;
 		bool isConnecting;
@@ -971,7 +971,7 @@ class Player : public Creature, public Cylinder
 		SchedulerTask* walkTask;
 		Party* party;
 		Group* group;
-		Item* inventory[SLOT_LAST];
+		Item* inventory[SLOT_LAST + 1];
 		Player* tradePartner;
 		Item* tradeItem;
 		Item* writeItem;

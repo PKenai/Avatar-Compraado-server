@@ -717,7 +717,7 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 		{
 			Item* item = rit->second.first;
 			int32_t pid = rit->second.second;
-			if(pid > 0 && pid < 11)
+			if(pid > 0 && pid < SLOT_LAST)
 				player->__internalAddThing(pid, item);
 			else
 			{
@@ -1025,7 +1025,7 @@ bool IOLoginData::savePlayer(Player* player, bool preSave/* = true*/, bool shall
 		return false;
 
 	ItemBlockList itemList;
-	for(int32_t slotId = 1; slotId < 11; ++slotId)
+	for(int32_t slotId = SLOT_FIRST; slotId < SLOT_LAST; ++slotId)
 	{
 		if(Item* item = player->inventory[slotId])
 			itemList.push_back(itemBlock(slotId, item));

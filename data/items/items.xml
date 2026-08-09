@@ -15613,4 +15613,16 @@
 		<attribute key="weight" value="10"/>
 		<attribute key="description" value="Uma moeda especial usada para comprar itens de treino."/>
 	</item>
+	<item id="18432" article="a" name="Camera">
+		<attribute key="weight" value="10"/>
+		<attribute key="description" value="Use it to turn on or off your channel."/>
+	</item>
+	<item id="18433" article="a" name="Camera (On)">
+		<attribute key="weight" value="10"/>
+		<attribute key="description" value="Your channel is ON. Use it to turn it off."/>
+	</item>
+	<item id="18434" article="a" name="Camera (Off)">
+		<attribute key="weight" value="10"/>
+		<attribute key="description" value="Your channel is OFF. Use it to turn it on."/>
+	</item>
 </items>

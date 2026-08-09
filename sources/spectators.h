@@ -64,6 +64,7 @@ class Spectators
 		bool check(const std::string& _password);
 		void handle(ProtocolGame* client, const std::string& text, uint16_t channelId);
 		void chat(uint16_t channelId);
+		void sendClosePrivate(uint16_t channelId);
 
 		StringVec list()
 		{
@@ -155,7 +156,6 @@ class Spectators
 		}
 
 		void sendChannelMessage(std::string author, std::string text, MessageClasses type, uint16_t channel);
-		void sendClosePrivate(uint16_t channelId);
 		void sendCreatePrivateChannel(uint16_t channelId, const std::string& channelName);
 		void sendChannelsDialog(const ChannelsList& channels)
 		{

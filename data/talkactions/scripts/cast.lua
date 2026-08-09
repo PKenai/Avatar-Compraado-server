@@ -11,6 +11,7 @@ if isPremium(cid) then
                 doPlayerSetSpectators(cid, data)
  
                 db.executeQuery("UPDATE `players` SET `broadcasting` = 0, `viewers` = 0 WHERE `id` = " .. getPlayerGUID(cid))
+                doPlayerClosePrivateChannel(cid)
                 doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "You have disabled your live stream.")
         elseif(isInArray({'on', 'yes', 'enable'}, t[1])) then
                 data.broadcast = true

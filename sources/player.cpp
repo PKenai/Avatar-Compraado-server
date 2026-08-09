@@ -100,7 +100,7 @@ Player::Player(const std::string& _name, ProtocolGame* p):
 	setParty(NULL);
 
 	transferContainer.setParent(NULL);
-	for(int32_t i = 0; i < 11; ++i)
+	for(int32_t i = 0; i < SLOT_LAST; ++i)
 	{
 		inventory[i] = NULL;
 		inventoryAbilities[i] = false;
@@ -136,7 +136,7 @@ Player::~Player()
 	playerCount--;
 #endif
 	delete client;
-	for(int32_t i = 0; i < 11; ++i)
+	for(int32_t i = 0; i < SLOT_LAST; ++i)
 	{
 		if(!inventory[i])
 			continue;
@@ -871,6 +871,9 @@ void Player::dropLoot(Container* corpse)
 	uint32_t itemLoss = (uint32_t)std::floor((5. + loss) * lossPercent[LOSS_ITEMS] / 1000.);
 	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
 	{
+		if(i == SLOT_CAMERA) // a camera nunca pode ser dropada
+			continue;
+
 		Item* item = inventory[i];
 		if(!item)
 			continue;
@@ -2690,6 +2693,8 @@ bool Player::onDeath()
 
 				for(uint32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
 				{
+					if(i == SLOT_CAMERA) // a camera nunca pode ser removida na morte
+						continue;
 					if(inventory[i])
 						g_game.internalRemoveItem(NULL, inventory[i]);
 				}
@@ -3016,8 +3021,20 @@ ReturnValue Player::__queryAdd(int32_t index, const Thing* thing, uint32_t count
 	else if((item->getSlotPosition() & SLOTP_RIGHT) || (item->getSlotPosition() & SLOTP_LEFT))
 		ret = RET_PUTTHISOBJECTINYOURHAND;
 
-	switch(index)
+		// Camera (18432/18433/18434): so pode ser equipada no slot SLOT_CAMERA, e
+		// nesse slot so a camera pode ser equipada.
+		const int32_t itemId = item->getID();
+		const bool isCameraItem = (itemId == 18432 || itemId == 18433 || itemId == 18434);
+		if(isCameraItem && index >= SLOT_FIRST && index < SLOT_LAST && index != SLOT_CAMERA)
+			ret = RET_NOTPOSSIBLE;
+		else switch(index)
 	{
+		case SLOT_CAMERA:
+			if(isCameraItem)
+				ret = RET_NOERROR;
+			else
+				ret = RET_NOTPOSSIBLE;
+			break;
 		case SLOT_HEAD:
 			if(item->getSlotPosition() & SLOTP_HEAD)
 				ret = RET_NOERROR;
@@ -3805,10 +3822,10 @@ void Player::__internalAddThing(uint32_t index, Thing* thing)
 	std::clog << "[Player::__internalAddThing] index: " << index << std::endl;
 
 #endif
-	if(!index || index > 11)
+	if(!index || index >= SLOT_LAST)
 	{
 #ifdef __DEBUG_MOVESYS__
-		std::clog << "Failure: [Player::__internalAddThing] index == 0 || index > 11" << std::endl;
+		std::clog << "Failure: [Player::__internalAddThing] index == 0 || index >= SLOT_LAST" << std::endl;
 #endif
 		return;
 	}

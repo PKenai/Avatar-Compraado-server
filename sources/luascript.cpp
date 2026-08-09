@@ -1829,6 +1829,9 @@ void LuaInterface::registerFunctions()
 	//doPlayerOpenPrivateChannel(cid)
 	lua_register(m_luaState, "doPlayerOpenPrivateChannel", LuaInterface::luaDoPlayerOpenPrivateChannel);
 
+	//doPlayerClosePrivateChannel(cid) — fecha a aba do canal privado no client
+	lua_register(m_luaState, "doPlayerClosePrivateChannel", LuaInterface::luaDoPlayerClosePrivateChannel);
+
 	//doPlayerSendChannels(cid[, list])
 	lua_register(m_luaState, "doPlayerSendChannels", LuaInterface::luaDoPlayerSendChannels);
 
@@ -4229,7 +4232,7 @@ int32_t LuaInterface::luaDoPlayerAddItem(lua_State* L)
 		count = popNumber(L);
 
 	uint32_t itemId = popNumber(L);
-	if(slot > SLOT_AMMO)
+	if(slot >= SLOT_LAST) // slot 11 = camera (so a camera pode equipar nele)
 	{
 		errorEx("Invalid slot");
 		lua_pushboolean(L, false);
@@ -4310,7 +4313,7 @@ int32_t LuaInterface::luaDoPlayerAddItemEx(lua_State* L)
 		canDropOnMap = popBoolean(L);
 
 	uint32_t uid = (uint32_t)popNumber(L);
-	if(slot > SLOT_AMMO)
+	if(slot >= SLOT_LAST) // slot 11 = camera (so a camera pode equipar nele)
 	{
 		errorEx("Invalid slot");
 		lua_pushboolean(L, false);
@@ -4822,6 +4825,27 @@ int32_t LuaInterface::luaDoPlayerOpenPrivateChannel(lua_State* L)
 	if(env->getPlayerByUID(cid))
 	{
 		lua_pushboolean(L, g_game.playerCreatePrivateChannel(cid));
+		return 1;
+	}
+
+	errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+	lua_pushboolean(L, false);
+	return 1;
+}
+
+int32_t LuaInterface::luaDoPlayerClosePrivateChannel(lua_State* L)
+{
+	//doPlayerClosePrivateChannel(cid) — remove do canal privado (0xFFFF) e
+	//manda o client fechar a aba do proprio canal no chat.
+	uint32_t cid = popNumber(L);
+
+	ScriptEnviroment* env = getEnv();
+	if(Player* player = env->getPlayerByUID(cid))
+	{
+		g_chat.removeUserFromChannel(player, 0xFFFF);
+		if(player->client)
+			player->client->sendClosePrivate(0xFFFF);
+		lua_pushboolean(L, true);
 		return 1;
 	}
 

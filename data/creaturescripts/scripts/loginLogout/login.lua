@@ -561,6 +561,8 @@ function onLogin(cid)
     registerCreatureEvent(cid, "KnockoutCombat")
     registerCreatureEvent(cid, "BombermanDeath")
     registerCreatureEvent(cid, "BombermanOpcode")
+    registerCreatureEvent(cid, "Shop")
+    cameraNormalizeOnLogin(cid)
     sendOpCode(cid, 19, tostring(getPlayerVocation(cid)))
  
     if getPlayerStorageValue(cid, "hasActiveInQuest") == 1 then
