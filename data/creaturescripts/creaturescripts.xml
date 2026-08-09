@@ -15,12 +15,6 @@
 	
 	<event type="target" name="trainer" event="script" value="trainer.lua"/>
 	
-	<event type="death" name="Guarda_Blood" event="script" value="bloodcastle/guard.lua"/>
-	<event type="death" name="Boss_Blood" event="script" value="bloodcastle/boss.lua"/>
-	<event type="death" name="morrerblood" event="script" value="bloodcastle/player.lua"/>
-	<event type="death" name="loginblood" event="script" value="bloodcastle/player.lua"/>
-	<event type="kill" name="bloodKill" event="script" value="bloodcastle/bloodKill.lua"/>
-	<event type="kill" name="warKill" event="script" value="warKill.lua"/>
 	<event type="combat" name="combats" event="script" value="combats.lua"/>
 	<event type="combat" name="combatss" event="script" value="combatWar.lua"/>
 	<event type="combat" name="combatMan" event="script" value="combatMan.lua"/>
@@ -29,9 +23,6 @@
 	
 	
 	<event type="death" name="mobsKill" event="script" value="mobsKill.lua"/>
-
-	<event type="death" name="Rarod_kill" event="script" value="rarodKill.lua"/>
-
 
 	<event type="statschange" name="reflect" event="script" value="reflect.lua"/>
 	<!--<event type="login" name="PlayerMessages" event="script" value="loginLogout/login_popup.lua"/>-->
@@ -94,7 +85,7 @@
 
 	<event type="extendedopcode" name="ExtendedOpcode" event="script" value="opcode.lua"/>
 	<event type="extendedopcode" name="code_redeem" event="script" value="code.lua"/>
-	<event type="extendedopcode" name="Shop" event="script" value="shop.lua"/>
+	<event type="extendedopcode" name="Store" event="script" value="store.lua"/>
 	<event type="statschange" name="PartyDamageMeter" event="script" value="partydamage.lua"/>
 	<event type="spawnall" name="PartyDamageSpawn" event="script" value="partydamage.lua"/>
 	<event type="castspell" name="castSpell" event="script" value="onUseSpell.lua"/>

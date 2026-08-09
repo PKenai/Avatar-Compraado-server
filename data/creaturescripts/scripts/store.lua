@@ -1,11 +1,14 @@
 -- ============================================================================
--- GAME SHOP (server side) — adaptado para o Avatar (API TFS 0.4-style)
+-- GAME STORE (server side) — adaptado para o Avatar (API TFS 0.4-style)
 -- ----------------------------------------------------------------------------
--- Evento: <event type="extendedopcode" name="Shop" event="script" value="shop.lua"/>
--- Registro no login: registerCreatureEvent(cid, "Shop")
+-- Evento: <event type="extendedopcode" name="Store" event="script" value="store.lua"/>
+-- Registro no login: registerCreatureEvent(cid, "Store")
 --
 -- As ofertas ficam em data/lib/shop_offers.lua (use o BAT de MARKET para
 -- adicionar itens/outfits sem editar codigo).
+--
+-- Outfits que o player ja possui nao aparecem na lista (evita comprar duas
+-- vezes o mesmo outfit). Itens podem ser comprados quantas vezes quiser.
 -- ============================================================================
 
 local SHOP_EXTENDED_OPCODE = 205
@@ -29,16 +32,29 @@ function initShop(player)
     for _, offer in ipairs(ShopOffers or {}) do
         local offerClass = offer.class or "all"
         if offerClass == "all" or offerClass == element then
-            local catIndex = categoriesByName[offer.category]
-            if not catIndex then
-                table.insert(SHOP_CATEGORIES, {type = offer.type, name = offer.category, offers = {}})
-                table.insert(SHOP_CALLBACKS, {})
-                catIndex = #SHOP_CATEGORIES
-                categoriesByName[offer.category] = catIndex
+            -- outfits que o player ja possui ficam escondidos da Store
+            local hide = offer.type == "outfit" and playerOwnsOfferOutfit(player, offer, pSex)
+            if not hide then
+                local catIndex = categoriesByName[offer.category]
+                if not catIndex then
+                    table.insert(SHOP_CATEGORIES, {type = offer.type, name = offer.category, offers = {}})
+                    table.insert(SHOP_CALLBACKS, {})
+                    catIndex = #SHOP_CATEGORIES
+                    categoriesByName[offer.category] = catIndex
+                end
+                addOffer(SHOP_CATEGORIES[catIndex], SHOP_CALLBACKS[catIndex], offer, pSex)
             end
-            addOffer(SHOP_CATEGORIES[catIndex], SHOP_CALLBACKS[catIndex], offer, pSex)
         end
     end
+end
+
+-- Retorna true se o player ja pode vestir o outfit da oferta (lookType do sexo dele).
+function playerOwnsOfferOutfit(player, offer, pSex)
+    local lookType = (pSex == PLAYERSEX_FEMALE and offer.outfitFemale) or offer.outfitMale
+    if not lookType or lookType <= 0 then
+        return false
+    end
+    return canPlayerWearOutfit(player, lookType, 0) == true
 end
 
 -- Converte uma oferta do shop_offers.lua no formato enviado ao client.
@@ -211,7 +227,14 @@ end
 
 function defaultOutfitBuyAction(cid, offer)
     local outfit = offer.outfit
-    if outfit.type > 0 then doPlayerAddOutfitId(cid, outfit.type, outfit.addons or 0) end
+    if outfit.type > 0 then
+        -- adiciona pelo lookType (doPlayerAddOutfit); se o lookType nao estiver
+        -- registrado no outfits.xml a compra falha e os pontos nao sao debitados
+        local added = doPlayerAddOutfit(cid, outfit.type, outfit.addons or 0)
+        if not added then
+            return "Could not add the outfit to your character. Please contact a staff member."
+        end
+    end
     if outfit.mount and outfit.mount > 0 then doPlayerAddMount(cid, outfit.mount) end
     return true
 end

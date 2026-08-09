@@ -1,20 +1,28 @@
 ========================================
-  MARKET - adicionar ofertas na loja (game_shop)
+  MARKET - gerenciar ofertas na loja (game_shop)
 ========================================
 
 COMO USAR
 ---------
 1. Dê dois cliques em  adicionar_loja.bat
-2. Escolha o que adicionar:
-     [I] Item    -> digite o ID do item (server), nome e quantidade
-     [O] Outfit  -> digite os IDs dos outfits masculino/feminino (e addons 0-3)
+2. Escolha o que fazer:
+     [I] Item    -> adiciona um item
+     [O] Outfit  -> adiciona um outfit
+     [R] Remover -> remove ofertas existentes
      [S] Sair
-3. Informe:
+3. Adicionar:
      Classe   -> T = todas / W = water / F = fire / A = air / E = earth
      Valor    -> preco em premium_points (pontos da conta)
      Categoria-> se digitar uma categoria nova, ela sera criada na loja
      Descricao-> opcional (Enter usa o padrao)
-4. Pode adicionar quantas ofertas quiser na mesma sessao.
+4. Remover:
+     O BAT lista as ofertas numeradas (1, 2, 3...).
+     Digite os numeros das ofertas que quer remover:
+       - separados por espaco ou virgula:  2 5 7   ou   2,5,7
+       - faixas:                            1-3
+       - misturado:                         1-3 6 9
+     Confirme com [S] para remover.
+     Um backup do arquivo e salvo como shop_offers.lua.bak antes de remover.
 5. Ao terminar, REINICIE O SERVIDOR para as ofertas aparecerem.
 
 ONDE FICAM AS OFERTAS
@@ -32,3 +40,6 @@ OBS
 ---
 - O ID do item deve ser o ID usado pelo SERVIDOR (nao o do client).
 - A classe filtra quem pode ver/comprar a oferta (elemento do personagem).
+- O remover funciona linha a linha: cada oferta deve estar em UMA unica linha
+  (formato gerado pelo BAT). Ofertas escritas a mao em varias linhas nao sao
+  reconhecidas pela listagem.

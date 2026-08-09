@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-title MARKET - Adicionar ofertas na loja (game_shop)
+title MARKET - Gerenciar ofertas da loja (game_shop)
 cd /d "%~dp0..\.."
 
 set "FILE=data\lib\shop_offers.lua"
@@ -29,19 +29,21 @@ set "CATEG="
 set "DESC="
 set "LINHA="
 echo ==================================================
-echo   ADICIONAR OFERTAS NA LOJA  (game_shop)
+echo   GERENCIAR OFERTAS DA LOJA  (game_shop)
 echo ==================================================
 echo.
-echo O que deseja adicionar?
-echo   [I] Item
-echo   [O] Outfit
+echo O que deseja fazer?
+echo   [I] Adicionar Item
+echo   [O] Adicionar Outfit
+echo   [R] Remover ofertas
 echo   [S] Sair
 echo.
 set /p "TIPO=> "
 if /i "%TIPO%"=="S" goto fim
 if /i "%TIPO%"=="I" goto item
 if /i "%TIPO%"=="O" goto outfit
-echo Opcao invalida. Use I, O ou S.
+if /i "%TIPO%"=="R" goto remover
+echo Opcao invalida. Use I, O, R ou S.
 pause
 goto inicio
 
@@ -146,6 +148,110 @@ echo   [N] Nao (encerrar)
 echo.
 set /p "MAIS=> "
 if /i "%MAIS%"=="S" goto inicio
+goto fim
+
+:remover
+cls
+echo ==================================================
+echo   REMOVER OFERTAS DA LOJA  (game_shop)
+echo ==================================================
+if not exist "%FILE%" (
+  echo Nenhuma oferta encontrada. Arquivo %FILE% nao existe.
+  pause
+  goto inicio
+)
+
+set "N=0"
+echo.
+echo Ofertas atuais:
+echo.
+for /f "usebackq delims=" %%L in ("%FILE%") do (
+  echo(%%L| findstr /b /c:"table.insert(ShopOffers" >nul
+  if not errorlevel 1 (
+    set /a N+=1
+    echo [!N!] %%L
+  )
+)
+if %N% EQU 0 (
+  echo.
+  echo Nenhuma oferta encontrada no arquivo.
+  pause
+  goto inicio
+)
+
+echo.
+set "REMOVER="
+set /p "REMOVER=> Numeros para remover (ex: 2 5 7  ou  1-3)  [Enter = voltar]: "
+if "%REMOVER%"=="" goto inicio
+
+rem -- converte virgulas em espacos e expande faixas tipo 1-3
+set "REMLIST="
+for %%t in (%REMOVER:,= %) do (
+  for /f "tokens=1,2 delims=-" %%a in ("%%t") do (
+    if "%%b"=="" (
+      set "REMLIST=!REMLIST! %%a"
+    ) else (
+      set /a RANGE_A=%%a
+      set /a RANGE_B=%%b
+      if !RANGE_A! GTR !RANGE_B! (set /a RANGE_A=%%b & set /a RANGE_B=%%a)
+      for /l %%i in (!RANGE_A!,1,!RANGE_B!) do set "REMLIST=!REMLIST! %%i"
+    )
+  )
+)
+
+rem -- valida os numeros
+set "VALID=1"
+for %%x in (%REMLIST%) do (
+  if %%x LSS 1 set "VALID=0"
+  if %%x GTR %N% set "VALID=0"
+)
+if not "%VALID%"=="1" (
+  echo Numero invalido. Use numeros de 1 a %N%.
+  pause
+  goto remover
+)
+
+echo.
+echo Removendo as ofertas: %REMLIST%
+set /p "CONF=> Confirmar? [S]im / [N]ao: "
+if /i not "%CONF%"=="S" goto remover
+
+rem -- backup antes de alterar
+set "BAK=%FILE%.bak"
+copy /y "%FILE%" "%BAK%" >nul
+
+rem -- reescreve o arquivo sem as ofertas escolhidas
+set "TMP=%TEMP%\market_offers_%RANDOM%.lua"
+findstr /n "^" "%FILE%" > "%TMP%"
+set "N=0"
+set "REM_COUNT=0"
+(for /f "usebackq tokens=1,* delims=:" %%a in ("%TMP%") do (
+  echo(%%b| findstr /b /c:"table.insert(ShopOffers" >nul
+  if errorlevel 1 (
+    echo(%%b
+  ) else (
+    set /a N+=1
+    set "REMOVER_ESTE="
+    for %%x in (%REMLIST%) do if %%x EQU !N! set "REMOVER_ESTE=1"
+    if defined REMOVER_ESTE (
+      set /a REM_COUNT+=1
+    ) else (
+      echo(%%b
+    )
+  )
+)) > "%FILE%"
+del "%TMP%" >nul 2>nul
+
+echo.
+echo %REM_COUNT% oferta(s) removida(s) com sucesso!
+echo Backup salvo em: %BAK%
+echo.
+echo Remover mais algo?
+echo   [S] Sim
+echo   [N] Nao (encerrar)
+echo.
+set /p "MAIS=> "
+if /i "%MAIS%"=="S" goto remover
 goto fim
 
 :fim

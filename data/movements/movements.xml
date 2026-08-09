@@ -260,9 +260,6 @@
 	<movevent type="StepIn" actionid="39621" script="demonSource.lua"/>
 	<movevent type="StepIn" actionid="50468" script="seacrest.lua"/>
 
-	<movevent type="StepIn" actionid="58977" script="warCastleEnter.lua"/>
-	<movevent type="StepIn" actionid="43277" script="warGround.lua"/>
-
 	<movevent type="StepIn" actionid="27867" script="trezentosQuest.lua"/>
 	<movevent type="StepIn" actionid="52139" script="trezentosQuestBack.lua"/>
 	
@@ -319,10 +316,7 @@
 	<movevent type="StepIn" actionid="62437" script="ogreQuest.lua"/>
 	<movevent type="StepIn" actionid="62339" script="bonequest.lua"/>
 	<movevent type="StepIn" actionid="62340" script="poiquest.lua"/>
-	<movevent type="StepIn" actionid="58914" script="bloodEnter.lua"/>
 	<movevent type="StepIn" actionid="28402" script="lostAvatarEnter.lua"/>
-	<movevent type="StepIn" actionid="32361" script="enterWar.lua"/>
-	<movevent type="StepIn" actionid="32362" script="castleWarMovement.lua"/>
 
 	<movevent type="Equip" itemid="13630" level="70" slot="head" event="function" value="onEquipItem" />
 	<movevent type="DeEquip" itemid="13630" level="70" slot="head" event="function" value="onDeEquipItem" />

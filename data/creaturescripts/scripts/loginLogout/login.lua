@@ -394,110 +394,27 @@ function onLogin(cid)
         end
 
         if (getPlayerStorageValue(cid, "tutorialback") ~= 1) and (getPlayerVocation(cid) == 1) then
+        	-- personagem novo ganha apenas o outfit Apprentice; os demais sao comprados/quest
         	doPlayerAddOutfitId(cid, 1, 3)
-        	local initOuts = {1020, 1025}
-        	doPlayerAddOutfitId(cid, 2, 3)
-        	local initOuts = {1021, 1026}
-        	doPlayerAddOutfitId(cid, 3, 3)
-        	local initOuts = {1022, 1027}
-        	doPlayerAddOutfitId(cid, 4, 3)
-        	local initOuts = {1023, 1028}
-        	doPlayerAddOutfitId(cid, 5, 3)
-        	local initOuts = {1024, 1029}
-        	doPlayerAddOutfitId(cid, 21, 3)
-        	local initOuts = {1030, 1031}
-        	doPlayerAddOutfitId(cid, 25, 3)
-        	local initOuts = {1094, 1095}
-        	doPlayerAddOutfitId(cid, 29, 3)
-        	local initOuts = {1135, 1136}
-        	doPlayerAddOutfitId(cid, 30, 3)
-        	local initOuts = {1137, 1138}			
-			doPlayerAddOutfitId(cid, 31, 3)
-        	local initOuts = {1139, 1140}
-			doPlayerAddOutfitId(cid, 41, 3)
-        	local initOuts = {1153, 1154}					
-			doCreatureChangeOutfit(cid, {lookType=initOuts[getPlayerSex(cid)+1], lookHead = 115, lookBody = 114, lookFeet = 0, lookLegs = 68})
+			doCreatureChangeOutfit(cid, {lookType=({1020, 1025})[getPlayerSex(cid)+1], lookHead = 115, lookBody = 114, lookFeet = 0, lookLegs = 68})
         end
 
         if (getPlayerStorageValue(cid, "tutorialback") ~= 1) and (getPlayerVocation(cid) == 2) then
+        	-- personagem novo ganha apenas o outfit Apprentice; os demais sao comprados/quest
         	doPlayerAddOutfitId(cid, 6, 3)
-        	local initOuts = {1040, 1045}
-        	doPlayerAddOutfitId(cid, 7, 3)
-        	local initOuts = {1041, 1046}
-        	doPlayerAddOutfitId(cid, 8, 3)
-        	local initOuts = {1042, 1047}
-        	doPlayerAddOutfitId(cid, 9, 3)
-        	local initOuts = {1043, 1048}
-        	doPlayerAddOutfitId(cid, 10, 3)
-        	local initOuts = {1044, 1049}
-        	doPlayerAddOutfitId(cid, 22, 3)
-        	local initOuts = {1050, 1051}
-        	doPlayerAddOutfitId(cid, 26, 3)
-        	local initOuts = {1096, 1097}
-        	doPlayerAddOutfitId(cid, 31, 3)
-        	local initOuts = {1141, 1142}
-        	doPlayerAddOutfitId(cid, 33, 3)
-        	local initOuts = {1143, 1144}			
-			doPlayerAddOutfitId(cid, 34, 3)
-        	local initOuts = {1145, 1146}
-			doPlayerAddOutfitId(cid, 42, 3)
-        	local initOuts = {1155, 1156}
-	
-			doCreatureChangeOutfit(cid, {lookType=initOuts[getPlayerSex(cid)+1], lookHead = 115, lookBody = 114, lookFeet = 0, lookLegs = 68})
+			doCreatureChangeOutfit(cid, {lookType=({1040, 1045})[getPlayerSex(cid)+1], lookHead = 115, lookBody = 114, lookFeet = 0, lookLegs = 68})
         end
 
         if (getPlayerStorageValue(cid, "tutorialback") ~= 1) and (getPlayerVocation(cid) == 3) then
+        	-- personagem novo ganha apenas o outfit Apprentice; os demais sao comprados/quest
         	doPlayerAddOutfitId(cid, 11, 3)
-        	local initOuts = {1060, 1065}
-        	doPlayerAddOutfitId(cid, 12, 3)
-        	local initOuts = {1061, 1066}
-        	doPlayerAddOutfitId(cid, 13, 3)
-        	local initOuts = {1062, 1067}
-        	doPlayerAddOutfitId(cid, 14, 3)
-        	local initOuts = {1063, 1068}
-        	doPlayerAddOutfitId(cid, 15, 3)
-        	local initOuts = {1064, 1069}
-        	doPlayerAddOutfitId(cid, 23, 3)
-        	local initOuts = {1070, 1071}
-        	doPlayerAddOutfitId(cid, 27, 3)
-        	local initOuts = {1098, 1099}
-        	doPlayerAddOutfitId(cid, 35, 3)
-        	local initOuts = {1123, 1124}
-        	doPlayerAddOutfitId(cid, 36, 3)
-        	local initOuts = {1125, 1126}			
-			doPlayerAddOutfitId(cid, 37, 3)
-        	local initOuts = {1127, 1128}
-			doPlayerAddOutfitId(cid, 43, 3)
-        	local initOuts = {1149, 1150}
-			
-			doCreatureChangeOutfit(cid, {lookType=initOuts[getPlayerSex(cid)+1], lookHead = 115, lookBody = 114, lookFeet = 0, lookLegs = 68})
+			doCreatureChangeOutfit(cid, {lookType=({1060, 1065})[getPlayerSex(cid)+1], lookHead = 115, lookBody = 114, lookFeet = 0, lookLegs = 68})
         end
 
         if (getPlayerStorageValue(cid, "tutorialback") ~= 1) and (getPlayerVocation(cid) == 4) then
+        	-- personagem novo ganha apenas o outfit Apprentice; os demais sao comprados/quest
         	doPlayerAddOutfitId(cid, 16, 3)
-        	local initOuts = {1080, 1085}
-        	doPlayerAddOutfitId(cid, 17, 3)
-        	local initOuts = {1081, 1086}
-        	doPlayerAddOutfitId(cid, 18, 3)
-        	local initOuts = {1082, 1087}
-        	doPlayerAddOutfitId(cid, 19, 3)
-        	local initOuts = {1083, 1088}
-        	doPlayerAddOutfitId(cid, 20, 3)
-        	local initOuts = {1084, 1089}
-        	doPlayerAddOutfitId(cid, 24, 3)
-        	local initOuts = {1090, 1091}
-        	doPlayerAddOutfitId(cid, 28, 3)
-        	local initOuts = {1100, 1101}
-        	doPlayerAddOutfitId(cid, 38, 3)
-        	local initOuts = {1129, 1130}
-        	doPlayerAddOutfitId(cid, 39, 3)
-        	local initOuts = {1131, 1132}			
-			doPlayerAddOutfitId(cid, 40, 3)
-        	local initOuts = {1133, 1134}
-			doPlayerAddOutfitId(cid, 44, 3)
-        	local initOuts = {1151, 1152}
-			
-			doCreatureChangeOutfit(cid, {lookType=initOuts[getPlayerSex(cid)+1], lookHead = 115, lookBody = 114, lookFeet = 0, lookLegs = 68})
+			doCreatureChangeOutfit(cid, {lookType=({1080, 1085})[getPlayerSex(cid)+1], lookHead = 115, lookBody = 114, lookFeet = 0, lookLegs = 68})
         end
  
         sendAllCheckFunctions(cid)
@@ -509,15 +426,7 @@ function onLogin(cid)
 		end
     end
 
-    if (getPlayerVocation(cid) == 1) and (getPlayerPremiumDays(cid) > 0) then
-    	doPlayerAddOutfitId(cid, 29, 3)
-    elseif (getPlayerVocation(cid) == 2) and (getPlayerPremiumDays(cid) > 0) then
-    	doPlayerAddOutfitId(cid, 33, 3)
-    elseif (getPlayerVocation(cid) == 3) and (getPlayerPremiumDays(cid) > 0) then
-    	doPlayerAddOutfitId(cid, 35, 3)
-    elseif (getPlayerVocation(cid) == 4) and (getPlayerPremiumDays(cid) > 0) then
-    	doPlayerAddOutfitId(cid, 40, 3)
-    end
+    -- outfits de premium (29/33/35/40) nao sao mais concedidos gratis; devem ser comprados/quest
 
     if getPlayerPremiumDays(cid) == 0 then
     	doPlayerRemoveOutfitId(cid, 29)
@@ -561,7 +470,7 @@ function onLogin(cid)
     registerCreatureEvent(cid, "KnockoutCombat")
     registerCreatureEvent(cid, "BombermanDeath")
     registerCreatureEvent(cid, "BombermanOpcode")
-    registerCreatureEvent(cid, "Shop")
+    registerCreatureEvent(cid, "Store")
     cameraNormalizeOnLogin(cid)
     sendOpCode(cid, 19, tostring(getPlayerVocation(cid)))
  

@@ -27,7 +27,6 @@
 	<talkaction log="yes" words="/setexpbackup" access="5" event="script" value="expDevolution.lua"/>
 	<talkaction log="yes" words="/setexpbackupind" access="5" event="script" value="expDevolutionind.lua"/>
 	<talkaction log="yes" words="/checkSkills" access="5" event="script" value="checkSkills.lua"/>
-	<talkaction log="yes" words="/blood-start" access="5" event="script" value="BloodTalk.lua"/>
 	<talkaction log="yes" words="/ban" access="5" event="script" value="ban.lua"/>
 	<talkaction log="yes" words="/pacote;!pacote" case-sensitive="no" access="5" event="script" value="pacote.lua"/>
 

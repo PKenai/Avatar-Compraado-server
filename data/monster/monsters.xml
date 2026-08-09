@@ -57,7 +57,7 @@
 
 	  <!-- Annelids -->
 	<monster name="Clawed Rotworm"                       file="Annelids/clawed rotworm.xml"/>
-	<monster name="Rotworm"                              file="Annelids/rotworm.xml"/>	
+	<monster name="Cockroach"                              file="Annelids/cockroach.xml"/>	
 	
 	  <!-- Apes -->
 	<monster name="Kongra"                               file="Apes/kongra.xml"/>
@@ -430,7 +430,6 @@
 	<monster name="Blue Butterfly"                      file="Insects/blue butterfly.xml"/>
 	<monster name="Bug"                                 file="Insects/bug.xml"/>
 	<monster name="Centipede"                           file="Insects/centipede.xml"/>
-	<monster name="Cockroach"                           file="Insects/cockroach.xml"/>
 	<monster name="Larva"                               file="Insects/larva.xml"/>
 	<monster name="Purple Butterfly"                    file="Insects/purple butterfly.xml"/>
 	<monster name="Red Butterfly"                       file="Insects/red butterfly.xml"/>
@@ -650,9 +649,6 @@
 	<monster name="Swamp Rarod"                         file="Rarods/Swamp Rarod.xml"/>
 	<monster name="Frozen Rarod"                        file="Rarods/Frozen Rarod.xml"/>
 	<monster name="Flaming Rarod"                       file="Rarods/Flaming Rarod.xml"/>
-	<monster name="Swamp Rarod Invade"                  file="Rarods/Swamp Rarod Invade.xml"/>
-	<monster name="Frozen Rarod Invade"                 file="Rarods/Frozen Rarod Invade.xml"/>
-	<monster name="Flaming Rarod Invade"                file="Rarods/Flaming Rarod Invade.xml"/>
 	
 	  <!-- Rats -->
 	<monster name="Cave Rat"                            file="Rats/cave rat.xml"/>

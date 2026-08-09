@@ -67,7 +67,6 @@
 	<action actionid="32099" event="script" value="destroyerReward.lua"/>
 	<action actionid="32098" event="script" value="destroyerQuest.lua"/>
 
-	<action actionid="29079" event="script" value="leverWar.lua"/>
 	<action actionid="40295" event="script" value="energyReward.lua"/>
 	<action actionid="40291-40293" event="script" value="energyAction.lua"/>
 	<action actionid="52138" event="script" value="trezentosStart.lua"/>
@@ -84,7 +83,6 @@
 	<action actionid="39245;39246" event="script" value="ghastlyQuest.lua"/>
 	<action actionid="39248" event="script" value="ghastlyReward.lua"/>
 	
-	<action actionid="23562" event="script" value="leverWar.lua"/>
 	<action actionid="16492" event="script" value="lostavatar.lua"/>
 	<action itemid="11259" event="script" value="elemental coin.lua"/>
 	<action itemid="6527" event="script" value="event coin.lua"/>
@@ -92,8 +90,6 @@
 	<action itemid="12830" event="script" value="supreme bless.lua"/>
 	<action itemid="12831" event="script" value="belze elixir.lua"/>
 	<action itemid="12753" event="script" value="stamina.lua"/>
-
-	<action uniqueid="13050" event="script" value="blood_castle.lua"/>
 
 	<!-- Scripts 2016 -->
 	<action actionid="37912" event="script" value="rewardZuko.lua"/>
