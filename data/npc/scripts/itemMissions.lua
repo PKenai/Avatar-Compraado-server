@@ -138,9 +138,6 @@ function canDoMission(cid, tabela)
 	if tabela.storage and tabela.storage ~= 0 and getPlayerStorageValue(cid, tabela.storage) ~= 1 then 
 		return false 
 	end 
-	if tabela.dailyTasks and getPlayerDailysCompleted(cid) < tabela.dailyTasks then 
-		return false
-	end 
 	if tabela.normalTasks and getTasksCompleted(cid) < tabela.normalTasks then 
 		return false 
 	end 

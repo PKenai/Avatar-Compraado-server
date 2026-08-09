@@ -5,10 +5,8 @@ local config = {
   memberCount = 10
 }
 
-dofile(getDataDir().."lib/isoled/153-npcTaskDaily.lua")
 function onStartup()
 --doSetGameState(GAMESTATE_CLOSED)
-randomizeDailyTasks()
   local guildName = getStorage(winnerStorage)
   --doSetItemText(getTileItemById({x=1149, y=940, z=4}, 1441).uid, guildName)
   doSetStorage(391895, 0)

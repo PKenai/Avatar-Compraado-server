@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<npc name="Fizz" script="data/npc/scripts/dailyTask.lua" access="3" walkinterval="0" lookdir="1">
-	<health now="1000" max="1000"/>
-	<look addons="2" type="128" head="0" legs="126" body="87" feet="0" corpse="3128"/>
-</npc>

@@ -2,7 +2,6 @@ local npcGen = newNpc("npcPOI")
 
 local config = {
     levelMin = 100,
-    dailyTasks = 5,
     posEnter = {x=802, y=1102, z=9}
 }
 

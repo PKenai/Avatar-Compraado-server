@@ -4,7 +4,6 @@ local timeToBye = 15 --tempo (seg) que npc encerrará msg
 
 dofile(getDataDir().."lib/isoled/150-npcSystem.lua")
 dofile(getDataDir().."lib/isoled/152-npcTaskSystem.lua")
-dofile(getDataDir().."lib/isoled/153-npcTaskDaily.lua")
 
 dofile(getDataDir() .. 'npc/lib/npc.lua')
 

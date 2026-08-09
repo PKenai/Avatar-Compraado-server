@@ -1,5 +1,4 @@
 dofile(getDataDir().."lib/isoled/152-npcTaskSystem.lua")
-dofile(getDataDir().."lib/isoled/153-npcTaskDaily.lua")
 
 local hasDestroyed = false
 local gatePosesO = {{x = 1150, y = 945, z = 4},
@@ -97,25 +96,6 @@ function onKill(cid, target, lastHit)
 
             hasDestroyed = true
         end
-    end
-
-    if getDailyCourse(cid) < 4 and getPlayerStorageValue(cid, "isInDailyTask") == 1 then
-      local infos = getDailyTaskInfos(cid)
-      if monsterName == infos.monster:lower() then
-       -- if not getPlayerParty(cid) then
-          local currentCount = addDailyMonsterCount(cid)
-          local number = (infos.count-currentCount)
-
-          if number > 0 then
-          --  doPlayerSendCancel(cid, getLangString(cid, ""..(getDailyCourse(cid)+1).."º Daily Task: "..(number).." "..infos.monster.."(s) left to kill.", ""..(getDailyCourse(cid)+1).."º Task Díaria: Falta matar "..(number).." "..infos.monster.."(s)."))
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, getLangString(cid, ""..(getDailyCourse(cid)+1).."º Daily Task: "..(number).." "..infos.monster.."(s) left to kill.", ""..(getDailyCourse(cid)+1).."º Task Diária: Falta matar "..(number).." "..infos.monster.."(s)."))
-      return true
-       elseif number == 0 then
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, getLangString(cid, ""..(getDailyCourse(cid)+1).."º Daily Task: Finished!", ""..(getDailyCourse(cid)+1).."º Task Diária: Completada!"))
-      return true
-          end
-       -- end
-      end
     end
 
     local identifier = getTaskIdentifierByMonster(getCreatureName(target))

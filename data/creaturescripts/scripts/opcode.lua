@@ -12,7 +12,6 @@ local function changeAutoloot(cid, value)
 end
 
 local opcodeMarket = 230
-local opcodeReward = 247
 local opcodeTutorial = 220
 local opcodeDepotSearch = 233
 local storageTutorial = 42001
@@ -46,14 +45,6 @@ function onExtendedOpcode(cid, opcode, buffer)
 				doSendPlayerExtendedOpcode(cid, 91, "ativo")
 			end
 			doSendPlayerExtendedOpcode(cid, 40, getAtributosString(cid))
-		elseif opcode == opcodeReward then
-			if ( buffer == "send" ) then
-				Reward.sendRewards(cid)
-			elseif ( buffer == "get" ) then
-				Reward.getReward(cid)
-			elseif ( buffer == "date" ) then
-				Reward.sendRewards(cid)
-			end
 		elseif opcode == 115 then
 			-- Party Damage Meter (DPS) - request/reset
 			if type(partyDamageOnOpcode) == "function" then

@@ -1,6 +1,5 @@
 dofile(getDataDir().."creaturescripts/scripts/loginLogout/loginFuncs.lua")
 dofile(getDataDir().."lib/isoled/152-npcTaskSystem.lua")
-dofile(getDataDir().."lib/isoled/153-npcTaskDaily.lua")
  
 local config = {
     loginMessageEN = getConfigValue('loginMessageEN'),
@@ -147,7 +146,6 @@ local function normalizeNumberStorage(cid)
             pointsMore = result:getDataInt("produto_quantidade")
         end
  
-        pointsMore = pointsMore+getPlayerDailysCompleted(cid)
         addPointsInSkill(cid, "stones", pointsMore)
  
         setPlayerStorageValue(cid, "addedPointsMore2", 1)
@@ -159,21 +157,6 @@ local function checkArchangel(cid)
 	return true
 end 
  
-function getDailysByTime(cid)
---    local canDoAgain = checkDelayIsFree(cid)
---    if canDoAgain.state then
---		return 0 
---	end 
-local total = 0
-local storages = {"TimeDailyUm", "TimeDailyDois", "TimeDailyTres", "TimeDailyQuatro"}
-for i = 1, #storages do 
-	if os.time() < getPlayerStorageValue(cid, storages[i]) then 
-		total = total+1
-	end
-end 
-return total
-end
-
 local conditionE = createConditionObject(CONDITION_INFIGHT)
 setConditionParam(conditionE, CONDITION_PARAM_TICKS, 6000)
 
@@ -271,9 +254,6 @@ function onLogin(cid)
 		end
 	end
 	
-	Reward.setTime(cid)
-	Reward.sendRewards(cid)
-
 	
 --	if getPlayerGroupId(cid) <= 3 then
 --		doCreatureSetGuildEmblem(cid, getPlayerVocation(cid))
@@ -363,20 +343,6 @@ function onLogin(cid)
 	--end 
 	--doAddCondition(cid, conditionE)
 	exhaustion.set(cid, "npodedeslogar", 6)
-	if getPlayerStorageValue(cid, "getCompletedDaily"..getDayID()) == -1 then 
-		if getStorage("GlobalSaveDays") ~= getPlayerStorageValue(cid, "lastGlobalSaveLogin") then 
-			setPlayerStorageValue(cid, "lastGlobalSaveLogin", getStorage("GlobalSaveDays"))
-			setPlayerStorageValue(cid, "getCompletedDaily"..getDayID(), 0)
-			setPlayerStorageValue(cid, "dailyTaskColdown", os.time())
-			local storagesTimes = {"TimeDailyUm", "TimeDailyDois", "TimeDailyTres", "TimeDailyQuatro"}
-			for i = 1, #storagesTimes do 
-				setPlayerStorageValue(cid, storagesTimes[i], 0)
-			end 
-		else
-			setPlayerStorageValue(cid, "getCompletedDaily"..getDayID(), getDailysByTime(cid))
-		end
-		setPlayerStorageValue(cid, "isInDailyTask", 0)
-	end 
 	   	doPlayerSetLossPercent(cid, PLAYERLOSS_ITEMS, 0)
 		doPlayerSetLossPercent(cid, PLAYERLOSS_CONTAINERS, 100)
 		    doCreatureAddHealth(cid, getCreatureMaxHealth(cid) - getCreatureHealth(cid), 1)
