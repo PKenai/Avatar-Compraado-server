@@ -463,6 +463,7 @@ function onLogin(cid)
     setPlayerStorageValue(cid, "timeLogin", os.time())      --Registra data ultimo login;
     registerCreatureEvent(cid, "Inquisition")
     registerCreatureEvent(cid, "mobsKill")
+    registerCreatureEvent(cid, "MomoKill")
     registerCreatureEvent(cid, "DailyHunt")
     registerCreatureEvent(cid, "DailyHuntOpcode")
     registerCreatureEvent(cid, "KnockoutLog")

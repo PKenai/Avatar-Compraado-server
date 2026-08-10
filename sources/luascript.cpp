@@ -4232,7 +4232,7 @@ int32_t LuaInterface::luaDoPlayerAddItem(lua_State* L)
 		count = popNumber(L);
 
 	uint32_t itemId = popNumber(L);
-	if(slot >= SLOT_LAST) // slot 11 = camera (so a camera pode equipar nele)
+	if(slot >= SLOT_LAST) // slots especiais: 11 = camera, 12 = momo pouch
 	{
 		errorEx("Invalid slot");
 		lua_pushboolean(L, false);
@@ -4313,7 +4313,7 @@ int32_t LuaInterface::luaDoPlayerAddItemEx(lua_State* L)
 		canDropOnMap = popBoolean(L);
 
 	uint32_t uid = (uint32_t)popNumber(L);
-	if(slot >= SLOT_LAST) // slot 11 = camera (so a camera pode equipar nele)
+	if(slot >= SLOT_LAST) // slots especiais: 11 = camera, 12 = momo pouch
 	{
 		errorEx("Invalid slot");
 		lua_pushboolean(L, false);

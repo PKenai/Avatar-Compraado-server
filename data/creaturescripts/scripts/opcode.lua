@@ -57,6 +57,11 @@ function onExtendedOpcode(cid, opcode, buffer)
 			end
 		elseif opcode == 131 then
 			changeAutoloot(cid, buffer)
+		elseif opcode == 212 then
+			-- Momo Pouch: get / toggle / setitem (client: modules/game_momo)
+			if type(momoHandleOpcode) == "function" then
+				momoHandleOpcode(cid, buffer)
+			end
 		elseif opcode == 210 then
 			-- Water Heal target: client envia o nome do player antes de castar
 			if type(buffer) == "string" and #buffer > 0 then

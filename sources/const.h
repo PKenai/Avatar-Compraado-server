@@ -648,6 +648,7 @@ enum item_t
 	ITEM_DEPOT				= 2594,
 	ITEM_LOCKER				= 2589,
 	ITEM_REWARD_BOX			= 18358,
+	MOMO_POUCH_ITEM_ID		= 18435,
 
 	// id de "depot" especial usado para persistir a reward mailbox quando ela
 	// ainda nao foi anexada a nenhum locker (valor alto: fora da faixa de

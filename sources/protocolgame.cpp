@@ -1938,13 +1938,13 @@ void ProtocolGame::sendContainer(uint32_t cid, const Container* container, bool 
 
 	msg->putItem(container);
 	msg->putString(container->getName());
-	msg->put<char>(container->capacity());
+	msg->put<uint16_t>(container->capacity());
 
 	msg->put<char>(hasParent ? 0x01 : 0x00);
-	msg->put<char>(std::min(container->size(), 255U));
+	msg->put<uint16_t>(std::min(container->size(), 65535U));
 
 	ItemList::const_iterator cit = container->getItems();
-	for(uint32_t i = 0; cit != container->getEnd() && i < 255; ++cit, ++i)
+	for(uint32_t i = 0; cit != container->getEnd() && i < std::min<uint32_t>(container->size(), 65535U); ++cit, ++i)
 		msg->putItem(*cit);
 }
 
@@ -2566,7 +2566,7 @@ void ProtocolGame::sendAddContainerItem(uint8_t cid, const Item* item)
 	AddContainerItem(msg, cid, item);
 }
 
-void ProtocolGame::sendUpdateContainerItem(uint8_t cid, uint8_t slot, const Item* item)
+void ProtocolGame::sendUpdateContainerItem(uint8_t cid, uint16_t slot, const Item* item)
 {
 	NetworkMessage_ptr msg = getOutputBuffer();
 	if(!msg)
@@ -2576,7 +2576,7 @@ void ProtocolGame::sendUpdateContainerItem(uint8_t cid, uint8_t slot, const Item
 	UpdateContainerItem(msg, cid, slot, item);
 }
 
-void ProtocolGame::sendRemoveContainerItem(uint8_t cid, uint8_t slot)
+void ProtocolGame::sendRemoveContainerItem(uint8_t cid, uint16_t slot)
 {
 	NetworkMessage_ptr msg = getOutputBuffer();
 	if(!msg)
@@ -3357,19 +3357,19 @@ void ProtocolGame::AddContainerItem(NetworkMessage_ptr msg, uint8_t cid, const I
 	msg->putItem(item);
 }
 
-void ProtocolGame::UpdateContainerItem(NetworkMessage_ptr msg, uint8_t cid, uint8_t slot, const Item* item)
+void ProtocolGame::UpdateContainerItem(NetworkMessage_ptr msg, uint8_t cid, uint16_t slot, const Item* item)
 {
 	msg->put<char>(0x71);
 	msg->put<char>(cid);
-	msg->put<char>(slot);
+	msg->put<uint16_t>(slot);
 	msg->putItem(item);
 }
 
-void ProtocolGame::RemoveContainerItem(NetworkMessage_ptr msg, uint8_t cid, uint8_t slot)
+void ProtocolGame::RemoveContainerItem(NetworkMessage_ptr msg, uint8_t cid, uint16_t slot)
 {
 	msg->put<char>(0x72);
 	msg->put<char>(cid);
-	msg->put<char>(slot);
+	msg->put<uint16_t>(slot);
 }
 
 void ProtocolGame::sendChannelMessage(std::string author, std::string text, MessageClasses type, uint16_t channel)

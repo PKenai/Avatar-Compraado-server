@@ -38,42 +38,42 @@
 		<monster name="Ice Witch" x="0" y="1" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="437" centery="383" centerz="3" radius="2">
-		<monster name="Cyclops" x="1" y="0" z="3" spawntime="40" />
-		<monster name="Cyclops Drone" x="0" y="2" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="0" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="2" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="431" centery="386" centerz="3" radius="2" />
 	<spawn centerx="435" centery="386" centerz="3" radius="2" />
 	<spawn centerx="429" centery="390" centerz="3" radius="2">
-		<monster name="Cyclops Drone" x="1" y="0" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="0" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="422" centery="392" centerz="3" radius="2">
-		<monster name="Cyclops Drone" x="2" y="1" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="1" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="430" centery="396" centerz="3" radius="2">
-		<monster name="Cyclops" x="-1" y="1" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="1" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="426" centery="397" centerz="3" radius="2">
-		<monster name="Cyclops" x="1" y="1" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="1" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="407" centery="404" centerz="3" radius="1">
-		<monster name="Cyclops Drone" x="-1" y="0" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="0" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="410" centery="408" centerz="3" radius="2">
-		<monster name="Cyclops" x="-2" y="0" z="3" spawntime="40" />
-		<monster name="Cyclops Drone" x="1" y="0" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="0" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="0" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="407" centery="414" centerz="3" radius="2">
-		<monster name="Cyclops" x="-1" y="-2" z="3" spawntime="40" />
-		<monster name="Cyclops Drone" x="-1" y="0" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="-2" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="0" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="417" centery="424" centerz="3" radius="2">
-		<monster name="Cyclops Smith" x="0" y="-2" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="-2" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="390" centery="427" centerz="3" radius="2">
-		<monster name="Cyclops Smith" x="1" y="0" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="0" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="410" centery="433" centerz="3" radius="2">
-		<monster name="Cyclops Smith" x="-1" y="1" z="3" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="1" z="3" spawntime="40" />
 	</spawn>
 	<spawn centerx="236" centery="553" centerz="3" radius="30" />
 	<spawn centerx="474" centery="625" centerz="3" radius="2">
@@ -160,39 +160,9 @@
 	<spawn centerx="244" centery="203" centerz="4" radius="1">
 		<monster name="Frost Giant" x="0" y="-1" z="4" spawntime="40" />
 	</spawn>
-	<spawn centerx="347" centery="210" centerz="4" radius="1">
-		<monster name="Target" x="0" y="0" z="4" spawntime="40" />
-	</spawn>
-	<spawn centerx="353" centery="210" centerz="4" radius="1">
-		<monster name="Target" x="0" y="0" z="4" spawntime="40" />
-	</spawn>
-	<spawn centerx="345" centery="211" centerz="4" radius="1">
-		<monster name="Target" x="0" y="0" z="4" spawntime="40" />
-	</spawn>
-	<spawn centerx="355" centery="211" centerz="4" radius="1">
-		<monster name="Target" x="0" y="0" z="4" spawntime="40" />
-	</spawn>
 	<spawn centerx="638" centery="216" centerz="4" radius="5">
 		<monster name="Merlkin" x="0" y="0" z="4" spawntime="40" />
 		<monster name="Kongra" x="3" y="2" z="4" spawntime="40" />
-	</spawn>
-	<spawn centerx="345" centery="218" centerz="4" radius="1">
-		<monster name="Target" x="0" y="0" z="4" spawntime="40" />
-	</spawn>
-	<spawn centerx="349" centery="218" centerz="4" radius="1">
-		<monster name="Target" x="0" y="0" z="4" spawntime="40" />
-	</spawn>
-	<spawn centerx="351" centery="218" centerz="4" radius="1">
-		<monster name="Target" x="0" y="0" z="4" spawntime="40" />
-	</spawn>
-	<spawn centerx="355" centery="218" centerz="4" radius="1">
-		<monster name="Target" x="0" y="0" z="4" spawntime="40" />
-	</spawn>
-	<spawn centerx="347" centery="219" centerz="4" radius="1">
-		<monster name="Target" x="0" y="0" z="4" spawntime="40" />
-	</spawn>
-	<spawn centerx="353" centery="219" centerz="4" radius="1">
-		<monster name="Target" x="0" y="0" z="4" spawntime="40" />
 	</spawn>
 	<spawn centerx="638" centery="229" centerz="4" radius="15">
 		<monster name="Sibang" x="-2" y="5" z="4" spawntime="40" />
@@ -202,52 +172,52 @@
 	</spawn>
 	<spawn centerx="636" centery="234" centerz="4" radius="5" />
 	<spawn centerx="447" centery="381" centerz="4" radius="2">
-		<monster name="Cyclops" x="-1" y="-1" z="4" spawntime="40" />
-		<monster name="Cyclops Drone" x="1" y="-1" z="4" spawntime="40" />
-		<monster name="Cyclops Drone" x="-1" y="2" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="-1" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="-1" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="2" z="4" spawntime="40" />
 	</spawn>
 	<spawn centerx="434" centery="392" centerz="4" radius="10">
-		<monster name="Cyclops" x="-6" y="-10" z="4" spawntime="40" />
-		<monster name="Cyclops" x="9" y="-9" z="4" spawntime="40" />
-		<monster name="Cyclops" x="6" y="-3" z="4" spawntime="40" />
-		<monster name="Cyclops" x="3" y="4" z="4" spawntime="40" />
-		<monster name="Cyclops" x="1" y="7" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-6" y="-10" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="9" y="-9" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="6" y="-3" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="3" y="4" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="7" z="4" spawntime="40" />
 	</spawn>
 	<spawn centerx="414" centery="394" centerz="4" radius="10">
-		<monster name="Cyclops Drone" x="9" y="-10" z="4" spawntime="40" />
-		<monster name="Cyclops" x="-2" y="-2" z="4" spawntime="40" />
-		<monster name="Cyclops" x="-6" y="-1" z="4" spawntime="40" />
-		<monster name="Cyclops" x="-2" y="2" z="4" spawntime="40" />
-		<monster name="Cyclops Drone" x="3" y="8" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="9" y="-10" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="-2" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-6" y="-1" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="2" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="3" y="8" z="4" spawntime="40" />
 	</spawn>
 	<spawn centerx="427" centery="404" centerz="4" radius="2" />
 	<spawn centerx="396" centery="405" centerz="4" radius="10">
-		<monster name="Cyclops Drone" x="-8" y="4" z="4" spawntime="40" />
-		<monster name="Cyclops" x="2" y="5" z="4" spawntime="40" />
-		<monster name="Cyclops" x="5" y="6" z="4" spawntime="40" />
-		<monster name="Cyclops" x="-2" y="8" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-8" y="4" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="5" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="6" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="8" z="4" spawntime="40" />
 	</spawn>
 	<spawn centerx="419" centery="405" centerz="4" radius="2" />
 	<spawn centerx="416" centery="417" centerz="4" radius="10">
-		<monster name="Cyclops" x="4" y="-6" z="4" spawntime="40" />
-		<monster name="Cyclops" x="2" y="-1" z="4" spawntime="40" />
-		<monster name="Cyclops" x="-9" y="4" z="4" spawntime="40" />
-		<monster name="Cyclops" x="-7" y="5" z="4" spawntime="40" />
-		<monster name="Cyclops" x="6" y="6" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="4" y="-6" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="-1" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-9" y="4" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-7" y="5" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="6" y="6" z="4" spawntime="40" />
 	</spawn>
 	<spawn centerx="397" centery="427" centerz="4" radius="10">
-		<monster name="Cyclops" x="-8" y="-7" z="4" spawntime="40" />
-		<monster name="Cyclops Drone" x="-9" y="-5" z="4" spawntime="40" />
-		<monster name="Cyclops" x="2" y="-3" z="4" spawntime="40" />
-		<monster name="Cyclops Drone" x="1" y="2" z="4" spawntime="40" />
-		<monster name="Cyclops" x="-8" y="8" z="4" spawntime="40" />
-		<monster name="Cyclops" x="5" y="9" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-8" y="-7" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-9" y="-5" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="-3" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="2" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="-8" y="8" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="9" z="4" spawntime="40" />
 	</spawn>
 	<spawn centerx="414" centery="435" centerz="4" radius="10">
-		<monster name="Cyclops" x="0" y="-6" z="4" spawntime="40" />
-		<monster name="Cyclops" x="2" y="-3" z="4" spawntime="40" />
-		<monster name="Cyclops" x="2" y="8" z="4" spawntime="40" />
-		<monster name="Cyclops Drone" x="5" y="9" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="-6" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="-3" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="8" z="4" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="9" z="4" spawntime="40" />
 	</spawn>
 	<spawn centerx="546" centery="527" centerz="4" radius="30" />
 	<spawn centerx="729" centery="532" centerz="4" radius="1">
@@ -663,12 +633,6 @@
 	<spawn centerx="676" centery="210" centerz="5" radius="1">
 		<monster name="Tilehorned" x="0" y="0" z="5" spawntime="40" />
 	</spawn>
-	<spawn centerx="345" centery="211" centerz="5" radius="1">
-		<monster name="Target" x="0" y="0" z="5" spawntime="40" />
-	</spawn>
-	<spawn centerx="355" centery="211" centerz="5" radius="1">
-		<monster name="Target" x="0" y="0" z="5" spawntime="40" />
-	</spawn>
 	<spawn centerx="533" centery="213" centerz="5" radius="1">
 		<monster name="Hydramat" x="1" y="-1" z="5" spawntime="40" />
 	</spawn>
@@ -693,24 +657,6 @@
 	</spawn>
 	<spawn centerx="680" centery="217" centerz="5" radius="1">
 		<monster name="Tilehorned" x="-1" y="-1" z="5" spawntime="40" />
-	</spawn>
-	<spawn centerx="345" centery="218" centerz="5" radius="1">
-		<monster name="Target" x="0" y="0" z="5" spawntime="40" />
-	</spawn>
-	<spawn centerx="349" centery="218" centerz="5" radius="1">
-		<monster name="Target" x="0" y="0" z="5" spawntime="40" />
-	</spawn>
-	<spawn centerx="351" centery="218" centerz="5" radius="1">
-		<monster name="Target" x="0" y="0" z="5" spawntime="40" />
-	</spawn>
-	<spawn centerx="355" centery="218" centerz="5" radius="1">
-		<monster name="Target" x="0" y="0" z="5" spawntime="40" />
-	</spawn>
-	<spawn centerx="347" centery="219" centerz="5" radius="1">
-		<monster name="Target" x="0" y="0" z="5" spawntime="40" />
-	</spawn>
-	<spawn centerx="353" centery="219" centerz="5" radius="1">
-		<monster name="Target" x="0" y="0" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="504" centery="222" centerz="5" radius="1">
 		<monster name="Hydramat" x="1" y="0" z="5" spawntime="40" />
@@ -823,7 +769,7 @@
 		<monster name="Tunnel Tyrant" x="0" y="1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="448" centery="305" centerz="5" radius="1">
-		<monster name="Cyclops Smith" x="0" y="-1" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="-1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="113" centery="310" centerz="5" radius="1">
 		<monster name="Tunnel Tyrant" x="1" y="0" z="5" spawntime="40" />
@@ -832,7 +778,7 @@
 		<monster name="Tunnel Tyrant" x="0" y="-1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="433" centery="313" centerz="5" radius="1">
-		<monster name="Cyclops Smith" x="0" y="-1" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="-1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="513" centery="314" centerz="5" radius="30">
 		<monster name="Cave Rat" x="-9" y="0" z="5" spawntime="40" />
@@ -841,7 +787,7 @@
 		<monster name="Cave Rat" x="5" y="1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="463" centery="318" centerz="5" radius="1">
-		<monster name="Cyclops Smith" x="1" y="-1" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="-1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="115" centery="319" centerz="5" radius="1">
 		<monster name="Tunnel Tyrant" x="1" y="0" z="5" spawntime="40" />
@@ -853,13 +799,13 @@
 		<monster name="Diremaw" x="1" y="0" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="454" centery="327" centerz="5" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="431" centery="328" centerz="5" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="443" centery="334" centerz="5" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="582" centery="368" centerz="5" radius="5">
 		<monster name="Rat" x="0" y="5" z="5" spawntime="40" />
@@ -875,17 +821,17 @@
 	</spawn>
 	<spawn centerx="582" centery="381" centerz="5" radius="5" />
 	<spawn centerx="438" centery="383" centerz="5" radius="5">
-		<monster name="Cyclops" x="2" y="-2" z="5" spawntime="40" />
-		<monster name="Cyclops" x="1" y="-1" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="-2" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="-1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="427" centery="386" centerz="5" radius="5">
-		<monster name="Cyclops" x="4" y="3" z="5" spawntime="40" />
-		<monster name="Cyclops" x="-4" y="4" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="4" y="3" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="-4" y="4" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="573" centery="389" centerz="5" radius="5" />
 	<spawn centerx="416" centery="390" centerz="5" radius="5">
-		<monster name="Cyclops" x="5" y="-1" z="5" spawntime="40" />
-		<monster name="Cyclops Drone" x="3" y="0" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="-1" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="3" y="0" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="541" centery="390" centerz="5" radius="5">
 		<monster name="Rat" x="4" y="-1" z="5" spawntime="40" />
@@ -893,21 +839,21 @@
 	</spawn>
 	<spawn centerx="556" centery="390" centerz="5" radius="5" />
 	<spawn centerx="438" centery="394" centerz="5" radius="5">
-		<monster name="Cyclops" x="-4" y="-3" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="-4" y="-3" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="405" centery="396" centerz="5" radius="5">
-		<monster name="Cyclops Drone" x="3" y="-4" z="5" spawntime="40" />
-		<monster name="Cyclops" x="5" y="0" z="5" spawntime="40" />
-		<monster name="Cyclops" x="1" y="1" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="3" y="-4" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="0" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="427" centery="397" centerz="5" radius="5">
-		<monster name="Cyclops" x="0" y="4" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="4" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="611" centery="400" centerz="5" radius="15" />
 	<spawn centerx="415" centery="401" centerz="5" radius="5">
-		<monster name="Cyclops" x="1" y="-2" z="5" spawntime="40" />
-		<monster name="Cyclops" x="-1" y="0" z="5" spawntime="40" />
-		<monster name="Cyclops" x="-3" y="4" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="-2" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="0" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="-3" y="4" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="448" centery="402" centerz="5" radius="1">
 		<monster name="Orc Berserker" x="0" y="1" z="5" spawntime="40" />
@@ -918,41 +864,41 @@
 		<monster name="Orc Warlord" x="-1" y="1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="402" centery="408" centerz="5" radius="5">
-		<monster name="Cyclops" x="-3" y="-3" z="5" spawntime="40" />
-		<monster name="Cyclops" x="-5" y="-2" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="-3" y="-3" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="-5" y="-2" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="392" centery="411" centerz="5" radius="5">
-		<monster name="Cyclops" x="-1" y="0" z="5" spawntime="40" />
-		<monster name="Cyclops" x="1" y="2" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="0" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="2" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="412" centery="414" centerz="5" radius="5">
-		<monster name="Cyclops" x="5" y="3" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="3" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="399" centery="418" centerz="5" radius="5">
-		<monster name="Cyclops" x="5" y="-4" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="-4" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="831" centery="418" centerz="5" radius="1">
 		<monster name="Grimeleech" x="0" y="-1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="416" centery="423" centerz="5" radius="5">
-		<monster name="Cyclops" x="-1" y="-3" z="5" spawntime="40" />
-		<monster name="Cyclops Drone" x="2" y="1" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="-3" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="822" centery="424" centerz="5" radius="1">
 		<monster name="Grimeleech" x="0" y="-1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="399" centery="428" centerz="5" radius="5" />
 	<spawn centerx="392" centery="429" centerz="5" radius="5">
-		<monster name="Cyclops" x="-1" y="-4" z="5" spawntime="40" />
-		<monster name="Cyclops" x="-3" y="0" z="5" spawntime="40" />
-		<monster name="Cyclops" x="0" y="0" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="-4" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="-3" y="0" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="830" centery="429" centerz="5" radius="1">
 		<monster name="Grimeleech" x="0" y="-1" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="411" centery="433" centerz="5" radius="5">
-		<monster name="Cyclops" x="2" y="-1" z="5" spawntime="40" />
-		<monster name="Cyclops" x="1" y="3" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="-1" z="5" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="3" z="5" spawntime="40" />
 	</spawn>
 	<spawn centerx="411" centery="439" centerz="5" radius="5" />
 	<spawn centerx="642" centery="442" centerz="5" radius="5">
@@ -1220,8 +1166,7 @@
 	<spawn centerx="493" centery="680" centerz="5" radius="1">
 		<npc name="Edward Colin" x="0" y="0" z="5" spawntime="40" />
 	</spawn>
-	<spawn centerx="530" centery="681" centerz="5" radius="1">
-	</spawn>
+	<spawn centerx="530" centery="681" centerz="5" radius="1" />
 	<spawn centerx="120" centery="683" centerz="5" radius="1">
 		<monster name="Shaper Matriarch" x="0" y="1" z="5" spawntime="40" />
 	</spawn>
@@ -1857,12 +1802,6 @@
 	<spawn centerx="656" centery="208" centerz="6" radius="1">
 		<monster name="Tilehorned" x="0" y="0" z="6" spawntime="40" />
 	</spawn>
-	<spawn centerx="347" centery="210" centerz="6" radius="1">
-		<monster name="Target" x="0" y="0" z="6" spawntime="40" />
-	</spawn>
-	<spawn centerx="353" centery="210" centerz="6" radius="1">
-		<monster name="Target" x="0" y="0" z="6" spawntime="40" />
-	</spawn>
 	<spawn centerx="623" centery="210" centerz="6" radius="15">
 		<monster name="Sibang" x="3" y="5" z="6" spawntime="40" />
 		<monster name="Kongra" x="15" y="5" z="6" spawntime="40" />
@@ -1870,14 +1809,7 @@
 		<monster name="Sibang" x="14" y="8" z="6" spawntime="40" />
 		<monster name="Sibang" x="4" y="9" z="6" spawntime="40" />
 	</spawn>
-	<spawn centerx="345" centery="211" centerz="6" radius="1">
-		<monster name="Target" x="0" y="0" z="6" spawntime="40" />
-	</spawn>
-	<spawn centerx="355" centery="211" centerz="6" radius="1">
-		<monster name="Target" x="0" y="0" z="6" spawntime="40" />
-	</spawn>
-	<spawn centerx="333" centery="212" centerz="6" radius="1">
-	</spawn>
+	<spawn centerx="333" centery="212" centerz="6" radius="1" />
 	<spawn centerx="534" centery="212" centerz="6" radius="5">
 		<monster name="Hydra" x="0" y="0" z="6" spawntime="40" />
 	</spawn>
@@ -1906,24 +1838,6 @@
 	<spawn centerx="641" centery="214" centerz="6" radius="5">
 		<monster name="Sibang" x="4" y="1" z="6" spawntime="40" />
 		<monster name="Kongra" x="4" y="2" z="6" spawntime="40" />
-	</spawn>
-	<spawn centerx="345" centery="218" centerz="6" radius="1">
-		<monster name="Target" x="0" y="0" z="6" spawntime="40" />
-	</spawn>
-	<spawn centerx="349" centery="218" centerz="6" radius="1">
-		<monster name="Target" x="0" y="0" z="6" spawntime="40" />
-	</spawn>
-	<spawn centerx="351" centery="218" centerz="6" radius="1">
-		<monster name="Target" x="0" y="0" z="6" spawntime="40" />
-	</spawn>
-	<spawn centerx="355" centery="218" centerz="6" radius="1">
-		<monster name="Target" x="0" y="0" z="6" spawntime="40" />
-	</spawn>
-	<spawn centerx="347" centery="219" centerz="6" radius="1">
-		<monster name="Target" x="0" y="0" z="6" spawntime="40" />
-	</spawn>
-	<spawn centerx="353" centery="219" centerz="6" radius="1">
-		<monster name="Target" x="0" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="563" centery="220" centerz="6" radius="5" />
 	<spawn centerx="673" centery="221" centerz="6" radius="1">
@@ -2112,7 +2026,7 @@
 		<monster name="Hydra" x="-1" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="450" centery="309" centerz="6" radius="1">
-		<monster name="Cyclops Drone" x="0" y="-1" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="-1" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="90" centery="311" centerz="6" radius="1">
 		<monster name="Tunnel Tyrant" x="0" y="-1" z="6" spawntime="40" />
@@ -2157,7 +2071,7 @@
 		<monster name="Tunnel Tyrant" x="1" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="446" centery="328" centerz="6" radius="1">
-		<monster name="Cyclops" x="-1" y="0" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="111" centery="329" centerz="6" radius="1">
 		<monster name="Diremaw" x="1" y="1" z="6" spawntime="40" />
@@ -2209,8 +2123,7 @@
 	<spawn centerx="556" centery="364" centerz="6" radius="1">
 		<npc name="dink" x="0" y="0" z="6" spawntime="40" />
 	</spawn>
-	<spawn centerx="512" centery="370" centerz="6" radius="1">
-	</spawn>
+	<spawn centerx="512" centery="370" centerz="6" radius="1" />
 	<spawn centerx="556" centery="372" centerz="6" radius="1">
 		<npc name="Maria" x="0" y="0" z="6" spawntime="40" />
 	</spawn>
@@ -2218,21 +2131,21 @@
 		<npc name="Fung" x="0" y="-1" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="442" centery="381" centerz="6" radius="5">
-		<monster name="Cyclops" x="1" y="-1" z="6" spawntime="40" />
-		<monster name="Cyclops" x="2" y="1" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="-1" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="1" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="422" centery="382" centerz="6" radius="5">
-		<monster name="Cyclops" x="2" y="2" z="6" spawntime="40" />
-		<monster name="Cyclops" x="-1" y="3" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="2" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="3" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="432" centery="387" centerz="6" radius="5" />
 	<spawn centerx="788" centery="390" centerz="6" radius="1">
 		<monster name="Grimeleech" x="-1" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="405" centery="393" centerz="6" radius="5">
-		<monster name="Cyclops" x="0" y="-2" z="6" spawntime="40" />
-		<monster name="Cyclops" x="1" y="1" z="6" spawntime="40" />
-		<monster name="Cyclops" x="-4" y="4" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="-2" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="1" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="-4" y="4" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="416" centery="393" centerz="6" radius="5" />
 	<spawn centerx="781" centery="394" centerz="6" radius="1">
@@ -2248,9 +2161,9 @@
 		<monster name="Bloody Hunter" x="8" y="7" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="427" centery="398" centerz="6" radius="5">
-		<monster name="Cyclops" x="-5" y="0" z="6" spawntime="40" />
-		<monster name="Cyclops" x="2" y="2" z="6" spawntime="40" />
-		<monster name="Cyclops" x="3" y="4" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="-5" y="0" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="2" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="3" y="4" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="416" centery="404" centerz="6" radius="5" />
 	<spawn centerx="449" centery="405" centerz="6" radius="1">
@@ -2270,29 +2183,29 @@
 		<monster name="Grimeleech" x="-1" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="392" centery="410" centerz="6" radius="5">
-		<monster name="Cyclops" x="1" y="-3" z="6" spawntime="40" />
-		<monster name="Cyclops" x="2" y="0" z="6" spawntime="40" />
-		<monster name="Cyclops" x="0" y="4" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="-3" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="0" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="4" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="464" centery="412" centerz="6" radius="1">
 		<monster name="Orc" x="0" y="-1" z="6" spawntime="40" />
 		<monster name="Orc" x="0" y="1" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="411" centery="417" centerz="6" radius="5">
-		<monster name="Cyclops" x="-1" y="-5" z="6" spawntime="40" />
-		<monster name="Cyclops" x="-1" y="1" z="6" spawntime="40" />
-		<monster name="Cyclops" x="-2" y="3" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="-5" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="1" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="3" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="416" centery="417" centerz="6" radius="5">
-		<monster name="Cyclops Drone" x="3" y="0" z="6" spawntime="40" />
-		<monster name="Cyclops" x="1" y="4" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="3" y="0" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="4" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="783" centery="417" centerz="6" radius="1">
 		<monster name="Grimeleech" x="1" y="-1" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="390" centery="419" centerz="6" radius="5" />
 	<spawn centerx="400" centery="420" centerz="6" radius="5">
-		<monster name="Cyclops" x="-1" y="1" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="1" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="493" centery="420" centerz="6" radius="5">
 		<monster name="Beast of Earth" x="2" y="2" z="6" spawntime="40" />
@@ -2304,14 +2217,14 @@
 		<monster name="Wolf" x="-1" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="415" centery="426" centerz="6" radius="5">
-		<monster name="Cyclops" x="3" y="1" z="6" spawntime="40" />
-		<monster name="Cyclops" x="-2" y="3" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="3" y="1" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="3" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="224" centery="429" centerz="6" radius="8">
 		<npc name="Iroh" x="-2" y="3" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="402" centery="431" centerz="6" radius="5">
-		<monster name="Cyclops" x="1" y="0" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="816" centery="431" centerz="6" radius="1">
 		<monster name="Grimeleech" x="0" y="0" z="6" spawntime="40" />
@@ -2320,16 +2233,16 @@
 		<monster name="Wolf" x="0" y="-1" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="390" centery="432" centerz="6" radius="5">
-		<monster name="Cyclops" x="1" y="-3" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="-3" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="644" centery="437" centerz="6" radius="5">
 		<monster name="Dragon Hatchling" x="-5" y="-2" z="6" spawntime="40" />
 		<monster name="Dragon Hatchling" x="0" y="-1" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="413" centery="438" centerz="6" radius="5">
-		<monster name="Cyclops" x="2" y="-1" z="6" spawntime="40" />
-		<monster name="Cyclops" x="1" y="2" z="6" spawntime="40" />
-		<monster name="Cyclops" x="5" y="3" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="-1" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="1" y="2" z="6" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="3" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="585" centery="438" centerz="6" radius="6">
 		<monster name="Terror Bird" x="-1" y="-3" z="6" spawntime="40" />
@@ -5057,7 +4970,7 @@
 		<monster name="Insectoid Scout" x="0" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="445" centery="311" centerz="7" radius="1">
-		<monster name="Cyclops" x="0" y="-1" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="96" centery="312" centerz="7" radius="1">
 		<monster name="Diremaw" x="-1" y="1" z="7" spawntime="40" />
@@ -5066,16 +4979,16 @@
 		<monster name="Spitter" x="0" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="454" centery="318" centerz="7" radius="1">
-		<monster name="Cyclops" x="0" y="-1" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="881" centery="318" centerz="7" radius="1">
 		<monster name="Insectoid Scout" x="1" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="443" centery="319" centerz="7" radius="1">
-		<monster name="Cyclops" x="0" y="-1" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="-1" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="898" centery="319" centerz="7" radius="1">
-		<monster name="Insectoid Scout" x="0" y="0" z="7" spawntime="40" />
+	<spawn centerx="899" centery="319" centerz="7" radius="1">
+		<monster name="Insectoid Scout" x="-1" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="870" centery="320" centerz="7" radius="1">
 		<monster name="Insectoid Scout" x="0" y="0" z="7" spawntime="40" />
@@ -5185,8 +5098,8 @@
 	</spawn>
 	<spawn centerx="444" centery="378" centerz="7" radius="5">
 		<monster name="Wolf" x="5" y="-4" z="7" spawntime="40" />
-		<monster name="Cyclops" x="-2" y="1" z="7" spawntime="40" />
-		<monster name="Cyclops" x="5" y="4" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="1" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="4" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="826" centery="381" centerz="7" radius="1">
 		<monster name="Defiler" x="1" y="1" z="7" spawntime="40" />
@@ -5196,10 +5109,10 @@
 		<monster name="Plaguesmith" x="1" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="420" centery="386" centerz="7" radius="5">
-		<monster name="Cyclops" x="2" y="1" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="2" y="1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="431" centery="386" centerz="7" radius="5">
-		<monster name="Cyclops" x="-1" y="-4" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="-4" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="799" centery="386" centerz="7" radius="1">
 		<monster name="Defiler" x="1" y="0" z="7" spawntime="40" />
@@ -5219,8 +5132,8 @@
 		<monster name="Plaguesmith" x="1" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="407" centery="393" centerz="7" radius="5">
-		<monster name="Grudgan" x="2" y="-1" z="7" spawntime="900" />
-		<monster name="Cyclops" x="-3" y="0" z="7" spawntime="40" />
+		<monster name="Sanguessuga Rainha" x="2" y="-1" z="7" spawntime="900" />
+		<monster name="Sanguessuga" x="-3" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="461" centery="393" centerz="7" radius="9">
 		<monster name="Bear" x="9" y="-7" z="7" spawntime="40" />
@@ -5254,8 +5167,8 @@
 		<monster name="Defiler" x="1" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="401" centery="396" centerz="7" radius="5">
-		<monster name="Cyclops Smith" x="0" y="-4" z="7" spawntime="40" />
-		<monster name="Cyclops Smith" x="-2" y="5" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="-4" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="5" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="589" centery="396" centerz="7" radius="2">
 		<monster name="Deer" x="-1" y="1" z="7" spawntime="40" />
@@ -5264,16 +5177,16 @@
 		<monster name="Defiler" x="0" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="436" centery="397" centerz="7" radius="5">
-		<monster name="Cyclops" x="-2" y="-5" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="-5" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="843" centery="397" centerz="7" radius="1">
 		<monster name="Defiler" x="1" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="414" centery="399" centerz="7" radius="5">
-		<monster name="Cyclops" x="5" y="0" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="425" centery="400" centerz="7" radius="5">
-		<monster name="Cyclops" x="5" y="0" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="449" centery="402" centerz="7" radius="1">
 		<monster name="Orc" x="-1" y="0" z="7" spawntime="40" />
@@ -5331,7 +5244,7 @@
 		<monster name="Spider" x="2" y="2" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="402" centery="411" centerz="7" radius="5">
-		<monster name="Cyclops" x="3" y="-1" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="3" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="518" centery="411" centerz="7" radius="9">
 		<monster name="Wolf" x="2" y="-9" z="7" spawntime="40" />
@@ -5357,7 +5270,7 @@
 		<monster name="Defiler" x="1" y="1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="392" centery="415" centerz="7" radius="5">
-		<monster name="Cyclops" x="-2" y="0" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="602" centery="415" centerz="7" radius="2">
 		<monster name="Poison Spider" x="2" y="0" z="7" spawntime="40" />
@@ -5374,7 +5287,7 @@
 		<monster name="Spider" x="2" y="1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="418" centery="418" centerz="7" radius="5">
-		<monster name="Cyclops" x="-2" y="-1" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="-2" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="571" centery="420" centerz="7" radius="2">
 		<monster name="Spider" x="1" y="1" z="7" spawntime="40" />
@@ -5407,7 +5320,7 @@
 		<monster name="Deer" x="-2" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="396" centery="428" centerz="7" radius="5">
-		<monster name="Cyclops" x="-4" y="1" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="-4" y="1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="473" centery="428" centerz="7" radius="9">
 		<monster name="Bear" x="-9" y="-8" z="7" spawntime="40" />
@@ -5416,8 +5329,8 @@
 	</spawn>
 	<spawn centerx="392" centery="429" centerz="7" radius="5" />
 	<spawn centerx="408" centery="429" centerz="7" radius="5">
-		<monster name="Cyclops" x="-5" y="-2" z="7" spawntime="40" />
-		<monster name="Cyclops" x="5" y="3" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="-5" y="-2" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="5" y="3" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="526" centery="429" centerz="7" radius="2">
 		<monster name="Deer" x="1" y="-1" z="7" spawntime="40" />
@@ -5456,7 +5369,7 @@
 		<monster name="Plaguesmith" x="0" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="411" centery="439" centerz="7" radius="5">
-		<monster name="Cyclops" x="0" y="0" z="7" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="616" centery="439" centerz="7" radius="6">
 		<monster name="Terror Bird" x="3" y="-6" z="7" spawntime="40" />
@@ -5599,8 +5512,7 @@
 		<npc name="Banker" x="-2" y="0" z="7" spawntime="40" />
 		<npc name="Benjamin" x="3" y="0" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="225" centery="461" centerz="7" radius="1">
-	</spawn>
+	<spawn centerx="225" centery="461" centerz="7" radius="1" />
 	<spawn centerx="478" centery="461" centerz="7" radius="1">
 		<monster name="Bear" x="0" y="0" z="7" spawntime="40" />
 	</spawn>
@@ -6779,24 +6691,6 @@
 	<spawn centerx="716" centery="640" centerz="7" radius="1">
 		<monster name="Energy Elemental" x="0" y="0" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="529" centery="641" centerz="7" radius="1">
-		<monster name="Target" x="0" y="1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="531" centery="641" centerz="7" radius="1">
-		<monster name="Target" x="0" y="1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="533" centery="641" centerz="7" radius="1">
-		<monster name="Target" x="0" y="1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="535" centery="641" centerz="7" radius="1">
-		<monster name="Target" x="0" y="1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="537" centery="641" centerz="7" radius="1">
-		<monster name="Target" x="0" y="1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="539" centery="641" centerz="7" radius="1">
-		<monster name="Target" x="0" y="1" z="7" spawntime="40" />
-	</spawn>
 	<spawn centerx="747" centery="641" centerz="7" radius="1">
 		<monster name="Energy Elemental" x="0" y="0" z="7" spawntime="40" />
 	</spawn>
@@ -6818,19 +6712,6 @@
 	<spawn centerx="742" centery="648" centerz="7" radius="1">
 		<monster name="Energy Elemental" x="0" y="0" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="529" centery="649" centerz="7" radius="1">
-		<monster name="Target" x="0" y="-1" z="7" spawntime="40" />
-		<monster name="Target" x="-1" y="1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="531" centery="649" centerz="7" radius="1">
-		<monster name="Target" x="0" y="-1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="533" centery="649" centerz="7" radius="1">
-		<monster name="Target" x="0" y="-1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="535" centery="649" centerz="7" radius="1">
-		<monster name="Target" x="0" y="-1" z="7" spawntime="40" />
-	</spawn>
 	<spawn centerx="757" centery="649" centerz="7" radius="1">
 		<monster name="Energy Elemental" x="0" y="0" z="7" spawntime="40" />
 	</spawn>
@@ -6847,16 +6728,6 @@
 	</spawn>
 	<spawn centerx="912" centery="652" centerz="7" radius="30">
 		<monster name="Ogre Brute" x="-5" y="16" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="529" centery="653" centerz="7" radius="1">
-		<monster name="Target" x="-1" y="-1" z="7" spawntime="40" />
-		<monster name="Target" x="0" y="1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="531" centery="653" centerz="7" radius="1">
-		<monster name="Target" x="0" y="1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="539" centery="653" centerz="7" radius="1">
-		<monster name="Target" x="0" y="1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="697" centery="653" centerz="7" radius="1">
 		<monster name="Energy Elemental" x="0" y="0" z="7" spawntime="40" />
@@ -6875,24 +6746,6 @@
 	</spawn>
 	<spawn centerx="741" centery="659" centerz="7" radius="1">
 		<monster name="Energy Elemental" x="0" y="0" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="529" centery="661" centerz="7" radius="1">
-		<monster name="Target" x="0" y="-1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="531" centery="661" centerz="7" radius="1">
-		<monster name="Target" x="0" y="-1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="533" centery="661" centerz="7" radius="1">
-		<monster name="Target" x="0" y="-1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="535" centery="661" centerz="7" radius="1">
-		<monster name="Target" x="0" y="-1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="537" centery="661" centerz="7" radius="1">
-		<monster name="Target" x="0" y="-1" z="7" spawntime="40" />
-	</spawn>
-	<spawn centerx="539" centery="661" centerz="7" radius="1">
-		<monster name="Target" x="0" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="43" centery="663" centerz="7" radius="1">
 		<monster name="Orclops Doomhauler" x="0" y="1" z="7" spawntime="40" />
@@ -7707,8 +7560,7 @@
 	<spawn centerx="688" centery="853" centerz="7" radius="1">
 		<monster name="Ice Witch" x="0" y="0" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="474" centery="854" centerz="7" radius="1">
-	</spawn>
+	<spawn centerx="474" centery="854" centerz="7" radius="1" />
 	<spawn centerx="467" centery="855" centerz="7" radius="1">
 		<monster name="Penguin" x="0" y="1" z="7" spawntime="40" />
 	</spawn>
@@ -9120,7 +8972,7 @@
 		<monster name="Tunnel Tyrant" x="0" y="1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="461" centery="277" centerz="8" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="62" centery="278" centerz="8" radius="1">
 		<monster name="Diremaw" x="0" y="-1" z="8" spawntime="40" />
@@ -9135,7 +8987,7 @@
 		<monster name="Diremaw" x="1" y="-1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="461" centery="288" centerz="8" radius="1">
-		<monster name="Cyclops" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="189" centery="290" centerz="8" radius="1">
 		<monster name="Lizard Chosen" x="0" y="0" z="8" spawntime="40" />
@@ -9165,13 +9017,13 @@
 		<monster name="Diremaw" x="1" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="454" centery="295" centerz="8" radius="1">
-		<monster name="Cyclops" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="100" centery="296" centerz="8" radius="1">
 		<monster name="Tunnel Tyrant" x="1" y="-1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="468" centery="297" centerz="8" radius="1">
-		<monster name="Cyclops" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="874" centery="297" centerz="8" radius="1">
 		<monster name="Spitter" x="-1" y="0" z="8" spawntime="40" />
@@ -9186,7 +9038,7 @@
 		<monster name="Lizard Legionnaire" x="1" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="440" centery="302" centerz="8" radius="1">
-		<monster name="Cyclops Drone" x="-1" y="-1" z="8" spawntime="40" />
+		<monster name="Sanguessuga" x="-1" y="-1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="593" centery="302" centerz="8" radius="1">
 		<monster name="Hydra" x="0" y="0" z="8" spawntime="40" />
@@ -9201,7 +9053,7 @@
 		<monster name="Diremaw" x="0" y="-1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="449" centery="304" centerz="8" radius="1">
-		<monster name="Cyclops" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="71" centery="305" centerz="8" radius="1">
 		<monster name="Diremaw" x="-1" y="-1" z="8" spawntime="40" />
@@ -9232,7 +9084,7 @@
 		<monster name="Lizard High Guard" x="0" y="1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="437" centery="310" centerz="8" radius="1">
-		<monster name="Cyclops" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="895" centery="310" centerz="8" radius="1">
 		<monster name="Spidris" x="0" y="0" z="8" spawntime="40" />
@@ -9250,7 +9102,7 @@
 		<monster name="Hydra" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="454" centery="314" centerz="8" radius="1">
-		<monster name="Cyclops" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="66" centery="315" centerz="8" radius="1">
 		<monster name="Diremaw" x="0" y="-1" z="8" spawntime="40" />
@@ -9268,10 +9120,10 @@
 		<monster name="Tunnel Tyrant" x="1" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="445" centery="317" centerz="8" radius="1">
-		<monster name="Cyclops" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="463" centery="317" centerz="8" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="882" centery="317" centerz="8" radius="1">
 		<monster name="Spitter" x="1" y="0" z="8" spawntime="40" />
@@ -9585,15 +9437,15 @@
 		<monster name="Orc Berserker" x="0" y="1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="501" centery="395" centerz="8" radius="5">
-		<monster name="Gargoyle" x="-1" y="-2" z="8" spawntime="40" />
-		<monster name="Gargoyle" x="-1" y="5" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="-1" y="-2" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="-1" y="5" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="535" centery="395" centerz="8" radius="6">
 		<monster name="Cockroach" x="3" y="2" z="8" spawntime="40" />
 		<monster name="Cockroach" x="0" y="3" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="479" centery="398" centerz="8" radius="5">
-		<monster name="Gargoyle" x="4" y="-1" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="4" y="-1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="550" centery="399" centerz="8" radius="6">
 		<monster name="Cockroach" x="-2" y="0" z="8" spawntime="40" />
@@ -9637,8 +9489,8 @@
 	</spawn>
 	<spawn centerx="493" centery="403" centerz="8" radius="5" />
 	<spawn centerx="471" centery="404" centerz="8" radius="5">
-		<monster name="Gargoyle" x="3" y="0" z="8" spawntime="40" />
-		<monster name="Gargoyle" x="-5" y="5" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="3" y="0" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="-5" y="5" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="526" centery="404" centerz="8" radius="6">
 		<monster name="Cockroach" x="2" y="-3" z="8" spawntime="40" />
@@ -9691,10 +9543,10 @@
 		<monster name="Cockroach" x="-1" y="2" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="484" centery="408" centerz="8" radius="5">
-		<monster name="Gargoyle" x="1" y="-1" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="1" y="-1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="506" centery="408" centerz="8" radius="5">
-		<monster name="Gargoyle" x="1" y="-1" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="1" y="-1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="581" centery="408" centerz="8" radius="12">
 		<monster name="Tarantula" x="6" y="11" z="8" spawntime="40" />
@@ -9705,11 +9557,11 @@
 		<monster name="Orc Berserker" x="1" y="1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="470" centery="414" centerz="8" radius="5">
-		<monster name="Gargoyle" x="2" y="3" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="2" y="3" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="492" centery="414" centerz="8" radius="5">
-		<monster name="Gargoyle" x="5" y="-2" z="8" spawntime="40" />
-		<monster name="Gargoyle" x="-5" y="4" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="5" y="-2" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="-5" y="4" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="951" centery="417" centerz="8" radius="1">
 		<monster name="Quara Mantassin" x="0" y="-1" z="8" spawntime="40" />
@@ -9763,7 +9615,7 @@
 	</spawn>
 	<spawn centerx="455" centery="425" centerz="8" radius="5">
 		<monster name="Stone Golem" x="-1" y="-1" z="8" spawntime="40" />
-		<monster name="Gargoyle" x="1" y="5" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="1" y="5" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="535" centery="425" centerz="8" radius="5">
 		<monster name="Troll" x="2" y="-2" z="8" spawntime="40" />
@@ -9802,7 +9654,7 @@
 		<monster name="Tarantula" x="-1" y="-1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="475" centery="431" centerz="8" radius="5">
-		<monster name="Gargoyle" x="5" y="-2" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="5" y="-2" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="404" centery="432" centerz="8" radius="5">
 		<monster name="Dwarve" x="-5" y="2" z="8" spawntime="40" />
@@ -9818,7 +9670,7 @@
 	<spawn centerx="939" centery="433" centerz="8" radius="1">
 		<monster name="Skullfrost" x="0" y="0" z="8" spawntime="14400" />
 	</spawn>
-	<spawn centerx="433" centery="434" centerz="8" radius="5" />
+	<spawn centerx="439" centery="434" centerz="8" radius="5" />
 	<spawn centerx="456" centery="434" centerz="8" radius="5" />
 	<spawn centerx="532" centery="434" centerz="8" radius="5">
 		<monster name="Troll" x="-1" y="-3" z="8" spawntime="40" />
@@ -9900,8 +9752,8 @@
 		<monster name="Quara Mantassin" x="1" y="1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="472" centery="441" centerz="8" radius="5">
-		<monster name="Gargoyle" x="-5" y="0" z="8" spawntime="40" />
-		<monster name="Gargoyle" x="5" y="4" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="-5" y="0" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="5" y="4" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="182" centery="443" centerz="8" radius="5">
 		<monster name="Cockroach" x="-4" y="-4" z="8" spawntime="40" />
@@ -9919,11 +9771,11 @@
 	</spawn>
 	<spawn centerx="450" centery="443" centerz="8" radius="5">
 		<monster name="Stone Golem" x="-1" y="4" z="8" spawntime="40" />
-		<monster name="Gargoyle" x="2" y="5" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="2" y="5" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="461" centery="444" centerz="8" radius="5">
-		<monster name="Gargoyle" x="-3" y="-4" z="8" spawntime="40" />
-		<monster name="Gargoyle" x="2" y="-1" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="-3" y="-4" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="2" y="-1" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="523" centery="444" centerz="8" radius="5">
 		<monster name="Troll" x="-3" y="-2" z="8" spawntime="40" />
@@ -9990,7 +9842,7 @@
 	</spawn>
 	<spawn centerx="489" centery="453" centerz="8" radius="5">
 		<monster name="Stone Golem" x="0" y="-1" z="8" spawntime="40" />
-		<monster name="Gargoyle" x="0" y="2" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="0" y="2" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="433" centery="454" centerz="8" radius="5">
 		<monster name="Dwarve" x="1" y="3" z="8" spawntime="40" />
@@ -10010,7 +9862,7 @@
 		<monster name="Cockroach" x="-3" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="466" centery="456" centerz="8" radius="1">
-		<monster name="Gargoyle" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="956" centery="456" centerz="8" radius="1">
 		<monster name="Quara Predator" x="1" y="0" z="8" spawntime="40" />
@@ -10041,7 +9893,7 @@
 	</spawn>
 	<spawn centerx="437" centery="460" centerz="8" radius="5" />
 	<spawn centerx="459" centery="460" centerz="8" radius="1">
-		<monster name="Gargoyle" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="945" centery="460" centerz="8" radius="1">
 		<monster name="Quara Predator" x="1" y="0" z="8" spawntime="40" />
@@ -10073,7 +9925,7 @@
 		<monster name="Cockroach" x="2" y="3" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="472" centery="462" centerz="8" radius="1">
-		<monster name="Gargoyle" x="0" y="0" z="8" spawntime="40" />
+		<monster name="Gilacorn" x="0" y="0" z="8" spawntime="40" />
 	</spawn>
 	<spawn centerx="546" centery="463" centerz="8" radius="5">
 		<monster name="Slime" x="2" y="4" z="8" spawntime="40" />
@@ -12995,10 +12847,12 @@
 		<monster name="Sea Serpent" x="0" y="0" z="9" spawntime="40" />
 	</spawn>
 	<spawn centerx="407" centery="81" centerz="9" radius="1">
+		<monster name="Frost Dragon" x="-1" y="-1" z="9" spawntime="40" />
 		<monster name="Sea Serpent" x="0" y="0" z="9" spawntime="40" />
 	</spawn>
 	<spawn centerx="406" centery="84" centerz="9" radius="1">
 		<monster name="Sea Serpent" x="0" y="-1" z="9" spawntime="40" />
+		<monster name="Frost Dragon" x="0" y="1" z="9" spawntime="40" />
 	</spawn>
 	<spawn centerx="406" centery="90" centerz="9" radius="1">
 		<monster name="Sea Serpent" x="1" y="1" z="9" spawntime="40" />
@@ -13567,10 +13421,10 @@
 		<monster name="Waspoid" x="0" y="1" z="9" spawntime="40" />
 	</spawn>
 	<spawn centerx="456" centery="299" centerz="9" radius="1">
-		<monster name="Cyclops" x="0" y="0" z="9" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="9" spawntime="40" />
 	</spawn>
 	<spawn centerx="467" centery="299" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="9" spawntime="40" />
 	</spawn>
 	<spawn centerx="877" centery="300" centerz="9" radius="1">
 		<monster name="Spidris" x="0" y="-1" z="9" spawntime="40" />
@@ -13594,7 +13448,7 @@
 		<monster name="Mutated Bat" x="0" y="0" z="9" spawntime="40" />
 	</spawn>
 	<spawn centerx="454" centery="307" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="9" spawntime="40" />
 	</spawn>
 	<spawn centerx="919" centery="308" centerz="9" radius="1">
 		<monster name="Waspoid" x="1" y="1" z="9" spawntime="40" />
@@ -13609,7 +13463,7 @@
 		<monster name="Tunnel Tyrant" x="1" y="0" z="9" spawntime="40" />
 	</spawn>
 	<spawn centerx="461" centery="311" centerz="9" radius="1">
-		<monster name="Cyclops" x="0" y="0" z="9" spawntime="40" />
+		<monster name="Sanguessuga" x="0" y="0" z="9" spawntime="40" />
 	</spawn>
 	<spawn centerx="547" centery="311" centerz="9" radius="1">
 		<monster name="Clawed Rotworm" x="-1" y="0" z="9" spawntime="40" />

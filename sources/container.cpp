@@ -232,14 +232,14 @@ void Container::onUpdateContainerItem(uint32_t index, Item* oldItem, const ItemT
 	for(it = list.begin(); it != list.end(); ++it)
 	{
 		if((player = (*it)->getPlayer()))
-			player->sendUpdateContainerItem(this, index, oldItem, newItem);
+			player->sendUpdateContainerItem(this, (uint16_t)index, oldItem, newItem);
 	}
 
 	//event methods
 	for(it = list.begin(); it != list.end(); ++it)
 	{
 		if((player = (*it)->getPlayer()))
-			player->onUpdateContainerItem(this, index, oldItem, oldType, newItem, newType);
+			player->onUpdateContainerItem(this, (uint16_t)index, oldItem, oldType, newItem, newType);
 	}
 }
 
@@ -256,14 +256,14 @@ void Container::onRemoveContainerItem(uint32_t index, Item* item)
 	for(it = list.begin(); it != list.end(); ++it)
 	{
 		if((player = (*it)->getPlayer()))
-			player->sendRemoveContainerItem(this, index, item);
+			player->sendRemoveContainerItem(this, (uint16_t)index, item);
 	}
 
 	//event methods
 	for(it = list.begin(); it != list.end(); ++it)
 	{
 		if((player = (*it)->getPlayer()))
-			player->onRemoveContainerItem(this, index, item);
+			player->onRemoveContainerItem(this, (uint16_t)index, item);
 	}
 }
 

@@ -94,4 +94,6 @@
 	<event type="spawnall" name="MagicMeterSpawn" event="script" value="magicmeter.lua"/>
 	<!-- <event type="ongainexp" name="onGainExp" event="script" value="onGainExperience.lua"/> -->
 	<event type="death" name="Camera" event="script" value="cameraDeath.lua"/>
+	<event type="death" name="Momo" event="script" value="momoDeath.lua"/>
+	<event type="kill" name="MomoKill" event="script" value="momoKill.lua"/>
 </creaturescripts>

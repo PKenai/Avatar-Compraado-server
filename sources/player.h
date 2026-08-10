@@ -601,8 +601,8 @@ class Player : public Creature, public Cylinder
 
 		//container
 		void sendAddContainerItem(const Container* container, const Item* item);
-		void sendUpdateContainerItem(const Container* container, uint8_t slot, const Item* oldItem, const Item* newItem);
-		void sendRemoveContainerItem(const Container* container, uint8_t slot, const Item* item);
+		void sendUpdateContainerItem(const Container* container, uint16_t slot, const Item* oldItem, const Item* newItem);
+		void sendRemoveContainerItem(const Container* container, uint16_t slot, const Item* item);
 		void sendContainer(uint32_t cid, const Container* container, bool hasParent)
 			{if(client) client->sendContainer(cid, container, hasParent);}
 		void sendContainers(ProtocolGame* target);
@@ -651,9 +651,9 @@ class Player : public Creature, public Cylinder
 
 		//container
 		void onAddContainerItem(const Container* container, const Item* item);
-		void onUpdateContainerItem(const Container* container, uint8_t slot,
+		void onUpdateContainerItem(const Container* container, uint16_t slot,
 			const Item* oldItem, const ItemType& oldType, const Item* newItem, const ItemType& newType);
-		void onRemoveContainerItem(const Container* container, uint8_t slot, const Item* item);
+		void onRemoveContainerItem(const Container* container, uint16_t slot, const Item* item);
 
 		void onCloseContainer(const Container* container);
 		void onSendContainer(const Container* container);

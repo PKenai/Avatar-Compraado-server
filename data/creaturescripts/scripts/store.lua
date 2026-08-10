@@ -32,8 +32,10 @@ function initShop(player)
     for _, offer in ipairs(ShopOffers or {}) do
         local offerClass = offer.class or "all"
         if offerClass == "all" or offerClass == element then
-            -- outfits que o player ja possui ficam escondidos da Store
-            local hide = offer.type == "outfit" and playerOwnsOfferOutfit(player, offer, pSex)
+            -- outfits que o player ja possui ficam escondidos da Store;
+            -- ofertas com hideIfOwned (ex: Momo Pouch) somem para quem ja tem o item
+            local hide = (offer.type == "outfit" and playerOwnsOfferOutfit(player, offer, pSex))
+                or (offer.type == "item" and offer.hideIfOwned and playerOwnsMomo(player))
             if not hide then
                 local catIndex = categoriesByName[offer.category]
                 if not catIndex then
@@ -218,11 +220,27 @@ function defaultItemBuyAction(cid, offer)
         end
         return "Could not equip the Camera."
     end
+    if offer.itemId == MOMO_ITEM_ID then
+        local slotItem = getPlayerSlotItem(cid, MOMO_SLOT)
+        if slotItem and slotItem.itemid ~= 0 then
+            return "You already have a Momo Pouch equipped."
+        end
+        local ok = doPlayerAddItem(cid, offer.itemId, offer.count or 1, false, 1, MOMO_SLOT)
+        if ok then
+            return true
+        end
+        return "Could not equip the Momo Pouch."
+    end
     if getPlayerFreeCap(cid) < getItemWeightById(offer.itemId, offer.count) then
         return "You don't have enough capacity."
     end
-    doPlayerAddItem(cid, offer.itemId, offer.count)
-    return true
+    -- canDropOnMap = false: itens comprados NUNCA caem no chao nem entram no Momo Pouch
+    -- (o pouch so recebe loot de monstro). Se o inventario estiver cheio, a compra falha.
+    local ok = doPlayerAddItem(cid, offer.itemId, offer.count, false)
+    if ok then
+        return true
+    end
+    return "Your inventory is full."
 end
 
 function defaultOutfitBuyAction(cid, offer)

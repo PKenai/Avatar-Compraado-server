@@ -55,7 +55,7 @@ function autoLootContainer(cid, container)
 	local golded = false
 	local toRemove = {}
     local sendLootScreen = {}
-	for x=0, (getContainerSize(container.uid)) do
+	for x=0, (getContainerSize(container.uid) - 1) do
 		local candidato = getContainerItem(container.uid, x)
 		
 		if candidato.itemid == 1987 then
@@ -99,12 +99,31 @@ function onUse(cid, item)
 		return true
 	end
 	doSetItemActionId(item.uid, 0)
+	-- Momo Pouch: sistema personalizado de coleta. Se ativo, as regras de
+	-- elegibilidade (maior causador de dano / lider de party) e a lista de
+	-- itens configurada decidem o que e coletado.
+	if momoIsActive(cid) then
+		if not momoIsEligible(cid, item.uid) then
+			-- nao foi o maior causador de dano (e nao e lider com pouch):
+			-- sem coleta automatica, loot manual normalmente
+			return false
+		end
+		local looted, failed = momoAutoLootContainer(cid, item)
+		if looted then
+			doPlayerSendTextMessage(cid, MESSAGE_STATUS_SMALL, getLangString(cid, "You looted some items.", "Vocï¿½ coletou alguns itens."))
+		end
+		if failed then
+			-- aviso VERMELHO no centro da tela (MESSAGE_STATUS_WARNING -> MessageWarning -> centerRed)
+			doPlayerSendTextMessage(cid, MESSAGE_STATUS_WARNING, getLangString(cid, "Your capacity has been exceeded. Some items were left on the corpse.", "Sua capacidade se excedeu! Alguns itens ficaram no corpo."))
+		end
+		return looted
+	end
 	if getPlayerStorageValue(cid, "autolootdesativo") == 1 then
 		return false
 	end
 	local looted = autoLootContainer(cid, item)
 	if looted then
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_SMALL, getLangString(cid, "You looted some items.", "Você coletou alguns itens."))
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_SMALL, getLangString(cid, "You looted some items.", "Vocï¿½ coletou alguns itens."))
 		return true
 	else
 		return false

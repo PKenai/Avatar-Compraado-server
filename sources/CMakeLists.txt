@@ -34,7 +34,7 @@ set(SRC
     mailbox.cpp luascript.cpp items.cpp itemattributes.cpp item.cpp
     iomapserialize.cpp iomap.cpp iologindata.cpp ioguild.cpp ioban.cpp
     housetile.cpp house.cpp group.cpp globalevent.cpp gameservers.cpp game.cpp
-    fileloader.cpp exception.cpp dispatcher.cpp depot.cpp reward.cpp databasemysql.cpp
+    fileloader.cpp exception.cpp dispatcher.cpp depot.cpp reward.cpp momopouch.cpp databasemysql.cpp
     databasemanager.cpp database.cpp cylinder.cpp creatureevent.cpp
     creature.cpp container.cpp connection.cpp configmanager.cpp condition.cpp
     combat.cpp chat.cpp beds.cpp baseevents.cpp allocator.cpp admin.cpp

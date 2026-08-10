@@ -59,6 +59,7 @@
   dispatcher.cpp
   depot.cpp
   reward.cpp
+  momopouch.cpp
   databasemysql.cpp
   databasemanager.cpp
   database.cpp

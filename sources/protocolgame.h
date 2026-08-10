@@ -246,8 +246,8 @@ class ProtocolGame : public Protocol
 
 		//containers
 		void sendAddContainerItem(uint8_t cid, const Item* item);
-		void sendUpdateContainerItem(uint8_t cid, uint8_t slot, const Item* item);
-		void sendRemoveContainerItem(uint8_t cid, uint8_t slot);
+		void sendUpdateContainerItem(uint8_t cid, uint16_t slot, const Item* item);
+		void sendRemoveContainerItem(uint8_t cid, uint16_t slot);
 
 		void sendContainer(uint32_t cid, const Container* container, bool hasParent);
 		void sendCloseContainer(uint32_t cid);
@@ -302,8 +302,8 @@ class ProtocolGame : public Protocol
 
 		//container
 		void AddContainerItem(NetworkMessage_ptr msg, uint8_t cid, const Item* item);
-		void UpdateContainerItem(NetworkMessage_ptr msg, uint8_t cid, uint8_t slot, const Item* item);
-		void RemoveContainerItem(NetworkMessage_ptr msg, uint8_t cid, uint8_t slot);
+		void UpdateContainerItem(NetworkMessage_ptr msg, uint8_t cid, uint16_t slot, const Item* item);
+		void RemoveContainerItem(NetworkMessage_ptr msg, uint8_t cid, uint16_t slot);
 
 		//inventory
 		void AddInventoryItem(NetworkMessage_ptr msg, slots_t slot, const Item* item);

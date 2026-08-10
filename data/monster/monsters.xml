@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <monsters>
-
+	<monster name="Momo"                            file="customava/Momo.xml"/>
 
            <!-- Air Update -->
 	<monster name="Air Beast"                            file="Air Update/air beast.xml"/>
@@ -358,6 +358,7 @@
 	<monster name="Earth Elemental"                     file="Geo-Elementals/earth elemental.xml"/>
 	<monster name="Earth Overlord"                      file="Geo-Elementals/earth overlord.xml"/>
 	<monster name="Gargoyle"                            file="Geo-Elementals/gargoyle.xml"/>
+	<monster name="Gilacorn"                            file="Geo-Elementals/gilacorn.xml"/>
 	<monster name="Jagged Earth Elemental"              file="Geo-Elementals/jagged earth elemental.xml"/>
 	<monster name="Massive Earth Elemental"             file="Geo-Elementals/massive earth elemental.xml"/>
 	<monster name="Medusa"                              file="Geo-Elementals/medusa.xml"/>
@@ -378,7 +379,8 @@
 	<monster name="Cyclops"                             file="Giants/cyclops.xml"/>
 	<monster name="Cyclops Drone"                       file="Giants/cyclops drone.xml"/>
 	<monster name="Cyclops Smith"                       file="Giants/cyclops smith.xml"/>
-	<monster name="Grudgan"                             file="Giants/grudgan.xml"/>
+	<monster name="Sanguessuga"                         file="Giants/sanguessuga.xml"/>
+	<monster name="Sanguessuga Rainha"                   file="Giants/grudgan.xml"/>
 	<monster name="Frost Giant"                         file="Giants/frost giant.xml"/>
 	<monster name="Frost Giantess"                      file="Giants/frost giantess.xml"/>
 	<monster name="Yeti"                                file="Giants/yeti.xml"/>	

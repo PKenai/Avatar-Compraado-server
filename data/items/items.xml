@@ -15625,4 +15625,9 @@
 		<attribute key="weight" value="10"/>
 		<attribute key="description" value="Your channel is OFF. Use it to turn it on."/>
 	</item>
+	<item id="18435" article="a" name="Momo Pouch">
+		<attribute key="weight" value="10"/>
+		<attribute key="containerSize" value="1"/>
+		<attribute key="description" value="A special pouch that can only be equipped in its own slot. It collects your loot and never runs out of slots."/>
+	</item>
 </items>

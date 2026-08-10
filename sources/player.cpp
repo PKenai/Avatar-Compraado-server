@@ -871,7 +871,7 @@ void Player::dropLoot(Container* corpse)
 	uint32_t itemLoss = (uint32_t)std::floor((5. + loss) * lossPercent[LOSS_ITEMS] / 1000.);
 	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
 	{
-		if(i == SLOT_CAMERA) // a camera nunca pode ser dropada
+		if(i == SLOT_CAMERA || i == SLOT_MOMO) // camera e momo pouch nunca podem ser dropados
 			continue;
 
 		Item* item = inventory[i];
@@ -1500,7 +1500,7 @@ void Player::sendAddContainerItem(const Container* container, const Item* item)
 	}
 }
 
-void Player::sendUpdateContainerItem(const Container* container, uint8_t slot, const Item*, const Item* newItem)
+void Player::sendUpdateContainerItem(const Container* container, uint16_t slot, const Item*, const Item* newItem)
 {
 	if(!client)
 		return;
@@ -1512,7 +1512,7 @@ void Player::sendUpdateContainerItem(const Container* container, uint8_t slot, c
 	}
 }
 
-void Player::sendRemoveContainerItem(const Container* container, uint8_t slot, const Item*)
+void Player::sendRemoveContainerItem(const Container* container, uint16_t slot, const Item*)
 {
 	if(!client)
 		return;
@@ -1834,7 +1834,7 @@ void Player::onAddContainerItem(const Container* container, const Item* item)
 		backpack.first = NULL;
 }
 
-void Player::onUpdateContainerItem(const Container* container, uint8_t,
+void Player::onUpdateContainerItem(const Container* container, uint16_t,
 	const Item* oldItem, const ItemType&, const Item* newItem, const ItemType&)
 {
 	if(tradeState == TRADE_TRANSFER)
@@ -1851,7 +1851,7 @@ void Player::onUpdateContainerItem(const Container* container, uint8_t,
 		checkTradeState(oldItem);
 }
 
-void Player::onRemoveContainerItem(const Container* container, uint8_t, const Item* item)
+void Player::onRemoveContainerItem(const Container* container, uint16_t, const Item* item)
 {
 	backpack.first = NULL;
 	if(tradeState == TRADE_TRANSFER)
@@ -2693,7 +2693,7 @@ bool Player::onDeath()
 
 				for(uint32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
 				{
-					if(i == SLOT_CAMERA) // a camera nunca pode ser removida na morte
+					if(i == SLOT_CAMERA || i == SLOT_MOMO) // camera e momo pouch nunca podem ser removidos na morte
 						continue;
 					if(inventory[i])
 						g_game.internalRemoveItem(NULL, inventory[i]);
@@ -3022,15 +3022,24 @@ ReturnValue Player::__queryAdd(int32_t index, const Thing* thing, uint32_t count
 		ret = RET_PUTTHISOBJECTINYOURHAND;
 
 		// Camera (18432/18433/18434): so pode ser equipada no slot SLOT_CAMERA, e
-		// nesse slot so a camera pode ser equipada.
+		// nesse slot so a camera pode ser equipada. Momo Pouch (18435): mesma
+		// regra, no slot SLOT_MOMO.
 		const int32_t itemId = item->getID();
 		const bool isCameraItem = (itemId == 18432 || itemId == 18433 || itemId == 18434);
-		if(isCameraItem && index >= SLOT_FIRST && index < SLOT_LAST && index != SLOT_CAMERA)
+		const bool isMomoItem = (itemId == 18435);
+		if((isCameraItem && index >= SLOT_FIRST && index < SLOT_LAST && index != SLOT_CAMERA) ||
+			(isMomoItem && index >= SLOT_FIRST && index < SLOT_LAST && index != SLOT_MOMO))
 			ret = RET_NOTPOSSIBLE;
 		else switch(index)
 	{
 		case SLOT_CAMERA:
 			if(isCameraItem)
+				ret = RET_NOERROR;
+			else
+				ret = RET_NOTPOSSIBLE;
+			break;
+		case SLOT_MOMO:
+			if(isMomoItem)
 				ret = RET_NOERROR;
 			else
 				ret = RET_NOTPOSSIBLE;
@@ -3214,6 +3223,9 @@ ReturnValue Player::__queryMaxCount(int32_t index, const Thing* thing, uint32_t 
 		uint32_t n = 0;
 		for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
 		{
+			if(i == SLOT_MOMO) // Momo Pouch so recebe loot de monstro (via doAddContainerItem direto).
+				continue; // Itens comprados/pickup NUNCA entram nele (nao conta como mochila).
+
 			if(Item* inventoryItem = inventory[i])
 			{
 				if(Container* subContainer = inventoryItem->getContainer())
@@ -3326,6 +3338,9 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 		std::list<std::pair<Cylinder*, int32_t> > freeSlots;
 		for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
 		{
+			if(i == SLOT_MOMO) // Momo Pouch so recebe loot de monstro. Itens comprados/pickup
+				continue; // nunca sao colocados nele automaticamente (so drag manual).
+
 			if(Item* invItem = inventory[i])
 			{
 				if(invItem == item || invItem == tradeItem)
@@ -3465,10 +3480,10 @@ void Player::__addThing(Creature* actor, Thing* thing)
 
 void Player::__addThing(Creature*, int32_t index, Thing* thing)
 {
-	if(index < 0 || index > 11)
+	if(index < 0 || index >= SLOT_LAST)
 	{
 #ifdef __DEBUG_MOVESYS__
-		std::clog << "Failure: [Player::__addThing], " << "player: " << getName() << ", index: " << index << ", index < 0 || index > 11" << std::endl;
+		std::clog << "Failure: [Player::__addThing], " << "player: " << getName() << ", index: " << index << ", index < 0 || index >= SLOT_LAST" << std::endl;
 #endif
 		return /*RET_NOTPOSSIBLE*/;
 	}
@@ -3533,10 +3548,10 @@ void Player::__updateThing(Thing* thing, uint16_t itemId, uint32_t count)
 
 void Player::__replaceThing(uint32_t index, Thing* thing)
 {
-	if(index > 11)
+	if(index >= SLOT_LAST)
 	{
 #ifdef __DEBUG_MOVESYS__
-		std::clog << "Failure: [Player::__replaceThing], " << "player: " << getName() << ", index: " << index << ", index < 0 || index > 11" << std::endl;
+		std::clog << "Failure: [Player::__replaceThing], " << "player: " << getName() << ", index: " << index << ", index < 0 || index >= SLOT_LAST" << std::endl;
 #endif
 		return /*RET_NOTPOSSIBLE*/;
 	}

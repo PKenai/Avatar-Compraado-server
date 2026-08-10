@@ -413,6 +413,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\dispatcher.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\depot.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\reward.cpp" />
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\momopouch.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\databasemysql.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\databasemanager.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\database.cpp" />
