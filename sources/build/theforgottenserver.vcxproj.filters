@@ -82,6 +82,9 @@
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\party.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\spiritualrift.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\outputmessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

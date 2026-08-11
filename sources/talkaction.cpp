@@ -44,6 +44,7 @@
 #include "game.h"
 #include "chat.h"
 #include "tools.h"
+#include "spiritualrift.h"
 
 extern ConfigManager g_config;
 extern Game g_game;
@@ -340,6 +341,8 @@ bool TalkAction::loadFunction(const std::string& functionName)
 		m_function = ghost;
 	else if(m_functionName == "software")
 		m_function = software;
+	else if(m_functionName == "tprift")
+		m_function = tpRift;
 	else
 	{
 		std::clog << "[Warning - TalkAction::loadFunction] Function \"" << m_functionName << "\" does not exist." << std::endl;
@@ -1254,6 +1257,36 @@ bool TalkAction::diagnostics(Creature* creature, const std::string&, const std::
 #else
 	player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Command not available, please rebuild your software with -D__ENABLE_SERVER_DIAG__");
 #endif
+	return true;
+}
+
+bool TalkAction::tpRift(Creature* creature, const std::string&, const std::string&)
+{
+	Player* player = creature->getPlayer();
+	if(!player)
+		return false;
+
+	if(!SpiritualRifts::getInstance()->hasActiveRift())
+	{
+		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "There is no open Spiritual Rift right now.");
+		return true;
+	}
+
+	Position destPos = SpiritualRifts::getInstance()->getRiftTeleportPosition(player);
+	if(destPos.x == 0 && destPos.y == 0 && destPos.z == 0)
+	{
+		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Could not find a free tile next to the Spiritual Rift.");
+		return true;
+	}
+
+	if(g_game.internalTeleport(player, destPos, false) == RET_NOERROR)
+	{
+		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "You were teleported next to a Spiritual Rift.");
+		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_TELEPORT);
+	}
+	else
+		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Could not teleport you next to the Spiritual Rift.");
+
 	return true;
 }
 

@@ -40,6 +40,7 @@
 #include "configmanager.h"
 #include "game.h"
 #include "chat.h"
+#include "spiritualrift.h"
 
 extern ConfigManager g_config;
 extern Game g_game;
@@ -1801,6 +1802,10 @@ void Player::onCreatureMove(const Creature* creature, const Tile* newTile, const
 	Creature::onCreatureMove(creature, newTile, newPos, oldTile, oldPos, teleport);
 	if(creature != this)
 		return;
+
+	// Spiritual Rift: stepping on an open rift triggers its waves
+	if(SpiritualRifts::getInstance()->triggerAt(newPos))
+		sendTextMessage(MSG_STATUS_SMALL, "You stepped on a Spiritual Rift!");
 
 	if(party)
 		party->updateSharedExperience();

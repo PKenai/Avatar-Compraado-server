@@ -381,6 +381,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\position.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\player.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\party.cpp" />
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\spiritualrift.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\outputmessage.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\outfit.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\otserv.cpp" />

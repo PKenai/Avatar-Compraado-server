@@ -29,6 +29,7 @@ set(SRC
     status.cpp spells.cpp spawn.cpp server.cpp scriptmanager.cpp scheduler.cpp
     raids.cpp quests.cpp protocolold.cpp protocollogin.cpp protocolhttp.cpp
     protocolgame.cpp protocol.cpp position.cpp player.cpp party.cpp
+    spiritualrift.cpp
     outputmessage.cpp outfit.cpp otserv.cpp npc.cpp networkmessage.cpp
     movement.cpp mounts.cpp monsters.cpp monster.cpp map.cpp manager.cpp
     mailbox.cpp luascript.cpp items.cpp itemattributes.cpp item.cpp

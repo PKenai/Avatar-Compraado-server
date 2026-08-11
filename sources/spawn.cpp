@@ -26,6 +26,7 @@
 
 #include "configmanager.h"
 #include "game.h"
+#include "spiritualrift.h"
 
 extern ConfigManager g_config;
 extern Monsters g_monsters;
@@ -203,6 +204,11 @@ void Spawns::startup()
 		g_game.placeCreature((*it), (*it)->getMasterPosition(), false, true);
 
 	npcList.clear();
+
+	// Spiritual Rift: the first rifts take the place of their creatures before
+	// any monster is placed (if there is a rift, there is no creature)
+	SpiritualRifts::getInstance()->openStartupRifts();
+
 	for(SpawnList::iterator it = spawnList.begin(); it != spawnList.end(); ++it)
 		(*it)->startup();
 
@@ -212,6 +218,8 @@ void Spawns::startup()
 void Spawns::clear()
 {
 	started = false;
+	// close every open Spiritual Rift before the Spawn objects are destroyed
+	SpiritualRifts::getInstance()->shutdown();
 	for(SpawnList::iterator it = spawnList.begin(); it != spawnList.end(); ++it)
 		delete (*it);
 
@@ -326,6 +334,9 @@ void Spawn::startup()
 	spawnBlock_t sb;
 	for(SpawnMap::iterator it = spawnMap.begin(); it != spawnMap.end(); ++it)
 	{
+		if(it->second.riftHeld)
+			continue; // a Spiritual Rift took this creature's place
+
 		sb = it->second;
 		spawnMonster(it->first, sb.mType, sb.pos, sb.direction, false);
 	}
@@ -363,9 +374,25 @@ void Spawn::checkSpawn()
 		if(OTSYS_TIME() < sb.lastSpawn + sb.interval)
 			continue;
 
+		if(sb.riftHeld)
+			continue;
+
 		if(g_config.getBool(ConfigManager::ALLOW_BLOCK_SPAWN) && findPlayer(sb.pos) && sb.mType->manaCost != 3910)
 		{
 			sb.lastSpawn = OTSYS_TIME();
+			continue;
+		}
+
+		// Spiritual Rift: the rift TAKES the creature's respawn. If the rift pool
+		// is not full, a Spiritual Rift opens at this square instead of the
+		// creature (which then does not spawn while the rift holds the spot).
+		if(SpiritualRifts::getInstance()->tryOpenRift(this, it->first, sb))
+		{
+			uint32_t minSpawnCount = g_config.getNumber(ConfigManager::RATE_SPAWN_MIN),
+				maxSpawnCount = g_config.getNumber(ConfigManager::RATE_SPAWN_MAX);
+			if(++spawnCount >= (uint32_t)random_range(minSpawnCount, maxSpawnCount))
+				break;
+
 			continue;
 		}
 
@@ -408,10 +435,74 @@ bool Spawn::addMonster(const std::string& _name, const Position& _pos, Direction
 	sb.direction = _dir;
 	sb.interval = _interval;
 	sb.lastSpawn = 0;
+	sb.riftHeld = false;
 
 	uint32_t spawnId = (int32_t)spawnMap.size() + 1;
 	spawnMap[spawnId] = sb;
 	return true;
+}
+
+bool Spawns::getRiftBlock(Spawn*& outSpawn, uint32_t& outSpawnId, spawnBlock_t*& outBlock)
+{
+	typedef std::pair<Spawn*, std::pair<uint32_t, spawnBlock_t*> > RiftCandidate;
+	std::vector<RiftCandidate> candidates;
+	for(SpawnList::iterator it = spawnList.begin(); it != spawnList.end(); ++it)
+	{
+		uint32_t tmpId = 0;
+		spawnBlock_t* tmpBlock = NULL;
+		if((*it)->getRiftBlock(tmpId, tmpBlock))
+			candidates.push_back(RiftCandidate(*it, std::make_pair(tmpId, tmpBlock)));
+	}
+
+	if(candidates.empty())
+		return false;
+
+	size_t index = (size_t)random_range(0, (int32_t)candidates.size() - 1);
+	outSpawn = candidates[index].first;
+	outSpawnId = candidates[index].second.first;
+	outBlock = candidates[index].second.second;
+	return true;
+}
+
+bool Spawn::getRiftBlock(uint32_t& spawnId, spawnBlock_t*& block)
+{
+	std::vector<uint32_t> ids;
+	for(SpawnMap::iterator it = spawnMap.begin(); it != spawnMap.end(); ++it)
+	{
+		if(it->second.riftHeld)
+			continue;
+
+		SpawnedMap::iterator smIt = spawnedMap.find(it->first);
+		if(smIt != spawnedMap.end() && smIt->second && !smIt->second->isRemoved())
+			continue; // creature still alive: the rift cannot take this respawn yet
+
+		ids.push_back(it->first);
+	}
+
+	if(ids.empty())
+		return false;
+
+	size_t index = (size_t)random_range(0, (int32_t)ids.size() - 1);
+	spawnId = ids[index];
+	block = &spawnMap[spawnId];
+	return true;
+}
+
+void Spawn::releaseSpawn(uint32_t spawnId, bool forceRespawn)
+{
+	SpawnMap::iterator it = spawnMap.find(spawnId);
+	if(it == spawnMap.end())
+		return;
+
+	spawnBlock_t& sb = it->second;
+	sb.riftHeld = false;
+
+	if(forceRespawn)
+	{
+		// the rift closed without being triggered: spawn the creature that was
+		// supposed to be there
+		spawnMonster(spawnId, sb.mType, sb.pos, sb.direction, 0);
+	}
 }
 
 void Spawn::removeMonster(Monster* monster)

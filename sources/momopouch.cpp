@@ -56,8 +56,16 @@ void MomoPouch::__removeThing(Thing* thing, uint32_t count)
 ReturnValue MomoPouch::__queryAdd(int32_t index, const Thing* thing, uint32_t count,
 	uint32_t flags, Creature* actor) const
 {
-	// Sem o FLAG_NOLIMIT, o Container::__queryAdd delega pro Player (top parent),
-	// que checa a capacidade do char (hasCapacity) — pouch = mochila normal.
+	// Somente o SISTEMA pode colocar itens dentro do pouch (o auto-loot usa
+	// FLAG_NOLIMIT). Qualquer adicao iniciada pelo jogador (arrastar item para
+	// dentro, usar item sobre o pouch, etc.) e bloqueada: o player apenas
+	// RETIRA itens de dentro do pouch.
+	if(!hasBitSet(FLAG_NOLIMIT, flags))
+		return RET_NOTPOSSIBLE;
+
+	// Adicoes do sistema continuam respeitando a capacidade do char (mochila
+	// normal): remove o FLAG_NOLIMIT antes de consultar, entao o Container::
+	// __queryAdd delega pro Player (top parent), que checa a capacidade.
 	return Container::__queryAdd(index, thing, count, flags & ~FLAG_NOLIMIT, actor);
 }
 

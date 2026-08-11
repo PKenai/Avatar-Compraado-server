@@ -22,8 +22,8 @@
 // Momo Pouch (item 18435) - bolsa de loot com slots INFINITOS.
 // - Capacidade DINAMICA: comeca com 1 slot e cresce conforme itens entram
 //   (capacity = itens + 1, sempre 1 slot vazio), ate 5000 slots.
-// - Diferente da Reward mailbox, o jogador pode adicionar/remover itens
-//   normalmente (e a propria bolsa e o destino do loot automatico).
+// - SOMENTE O SISTEMA coloca itens dentro (auto-loot, via FLAG_NOLIMIT). O
+//   jogador NAO pode adicionar nada: so pode RETIRAR itens de dentro.
 class MomoPouch : public Container
 {
 	public:
@@ -38,10 +38,11 @@ class MomoPouch : public Container
 		virtual void __internalAddThing(uint32_t index, Thing* thing);
 		virtual void __removeThing(Thing* thing, uint32_t count);
 
-		// O pouch se comporta como mochila NORMAL: remove o FLAG_NOLIMIT antes
-		// de consultar, entao a capacidade do char e respeitada em QUALQUER caminho
-		// (o doAddContainerItem do loot passa FLAG_NOLIMIT, que no Player::__queryAdd
-		// com childOwner pulava a checagem de cap).
+		// Bloqueia QUALQUER adicao que nao venha do sistema (jogador arrastando
+		// item passa sem FLAG_NOLIMIT -> RET_NOTPOSSIBLE). Para as adicoes do
+		// sistema (auto-loot com FLAG_NOLIMIT) o pouch se comporta como mochila
+		// NORMAL: remove o FLAG_NOLIMIT antes de consultar, entao a capacidade
+		// do char e respeitada.
 		virtual ReturnValue __queryAdd(int32_t index, const Thing* thing, uint32_t count,
 			uint32_t flags, Creature* actor = NULL) const;
 
