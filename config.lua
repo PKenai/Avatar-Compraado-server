@@ -75,6 +75,11 @@ worldId = 0
 ip = "127.0.0.1"
 bindOnlyGlobalAddress = true
 fullMapOnLogin = true
+-- Envia o effect id dos magic effects com 2 bytes (0-65535) no lugar de 1 byte
+-- (0-255). Use SOMENTE se o seu client tiver a feature OTC 'GameMagicEffectU16'
+-- habilitada (g_game.enableFeature(GameMagicEffectU16)) - se o client nao tiver,
+-- todos os effects quebram. Habilita effects custom acima de 255 (ex.: 183+).
+magicEffectU16 = true
 loginPort = 9191
 gamePort = "9192"
 loginTries = 10

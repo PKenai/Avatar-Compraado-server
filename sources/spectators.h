@@ -204,7 +204,7 @@ class Spectators
 			for(SpectatorList::iterator it = spectators.begin(); it != spectators.end(); ++it)
 				it->first->sendDistanceShoot(from, to, type);
 		}
-		void sendMagicEffect(const Position& pos, uint8_t type)
+		void sendMagicEffect(const Position& pos, uint16_t type)
 		{
 			if(!owner)
 				return;

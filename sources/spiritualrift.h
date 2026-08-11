@@ -44,6 +44,8 @@ struct spawnBlock_t;
 #define SPIRITUAL_RIFT_PULSE_INTERVAL 1000 // how often the pulsing effect is re-sent (effect 183 lasts ~1 second, so re-send every 1s)
 #define SPIRITUAL_RIFT_PULSE_EFFECT 183    // effect id shown while the rift is open
 #define SPIRITUAL_RIFT_SPAWN_EFFECT 38     // effect id released when a monster is summoned
+#define SPIRITUAL_RIFT_BLOCK_COOLDOWN 1800000 // min time before the same spawn square can host a rift again (30 min, in ms)
+#define SPIRITUAL_RIFT_REFILL_RETRY 15000   // how often the pool retries to refill when it could not fill right away (15 s, in ms)
 
 class SpiritualRift
 {
@@ -88,6 +90,7 @@ class SpiritualRifts
 
 		bool tryOpenRift(Spawn* spawn, uint32_t spawnId, spawnBlock_t& sb); // called when a creature is about to respawn
 		void openStartupRifts(); // opens the first rifts before the creatures are placed (no creature where there is a rift)
+		void refillPool(); // opens rifts until the pool is full again (called when one closes)
 		bool triggerAt(const Position& pos); // a player stepped on a rift tile
 		SpiritualRift* getRiftAt(const Position& pos);
 
@@ -105,5 +108,6 @@ class SpiritualRifts
 
 		typedef std::list<SpiritualRift*> RiftList;
 		RiftList riftList;
+		uint32_t refillEvent;
 };
 #endif

@@ -436,6 +436,7 @@ bool Spawn::addMonster(const std::string& _name, const Position& _pos, Direction
 	sb.interval = _interval;
 	sb.lastSpawn = 0;
 	sb.riftHeld = false;
+	sb.lastRift = 0;
 
 	uint32_t spawnId = (int32_t)spawnMap.size() + 1;
 	spawnMap[spawnId] = sb;
@@ -462,23 +463,40 @@ bool Spawns::getRiftBlock(Spawn*& outSpawn, uint32_t& outSpawnId, spawnBlock_t*&
 	outSpawnId = candidates[index].second.first;
 	outBlock = candidates[index].second.second;
 	return true;
-}
-
-bool Spawn::getRiftBlock(uint32_t& spawnId, spawnBlock_t*& block)
+}bool Spawn::getRiftBlock(uint32_t& spawnId, spawnBlock_t*& block)
 {
-	std::vector<uint32_t> ids;
+	// dead creatures first (the rift takes the respawn naturally); if there is
+	// none available (e.g. right after a server boot everything is alive) the
+	// rift may take an alive creature's place instead, so the pool is ALWAYS
+	// full - if there is a rift, there is no creature.
+	std::vector<uint32_t> deadIds, aliveIds;
 	for(SpawnMap::iterator it = spawnMap.begin(); it != spawnMap.end(); ++it)
 	{
 		if(it->second.riftHeld)
 			continue;
 
-		SpawnedMap::iterator smIt = spawnedMap.find(it->first);
-		if(smIt != spawnedMap.end() && smIt->second && !smIt->second->isRemoved())
-			continue; // creature still alive: the rift cannot take this respawn yet
+		// a square that hosted a rift recently must not host another one: after a
+		// rift is stepped on it relocates to another corner (you can only step on
+		// each rift once)
+		if(it->second.lastRift && OTSYS_TIME() < it->second.lastRift + SPIRITUAL_RIFT_BLOCK_COOLDOWN)
+			continue;
 
-		ids.push_back(it->first);
+		SpawnedMap::iterator smIt = spawnedMap.find(it->first);
+		if(smIt == spawnedMap.end() || !smIt->second || smIt->second->isRemoved())
+			deadIds.push_back(it->first);
+		else
+		{
+			// an alive creature may only be consumed by a rift when NO player can
+			// see it (it would be weird for a creature to vanish in front of a
+			// player); "on screen" = within the player viewport (getSpectators)
+			SpectatorVec list;
+			g_game.getSpectators(list, smIt->second->getPosition(), false, true);
+			if(list.empty())
+				aliveIds.push_back(it->first);
+		}
 	}
 
+	std::vector<uint32_t>& ids = deadIds.empty() ? aliveIds : deadIds;
 	if(ids.empty())
 		return false;
 
@@ -486,6 +504,18 @@ bool Spawn::getRiftBlock(uint32_t& spawnId, spawnBlock_t*& block)
 	spawnId = ids[index];
 	block = &spawnMap[spawnId];
 	return true;
+}
+
+void Spawn::consumeCreature(uint32_t spawnId)
+{
+	SpawnedMap::iterator it = spawnedMap.find(spawnId);
+	if(it == spawnedMap.end() || !it->second || it->second->isRemoved())
+		return;
+
+	// the Spiritual Rift takes this creature's place: remove the live creature
+	// from the map. The spawnedMap entry is cleaned up by checkSpawn (like a
+	// normal death), and this also schedules the spawn's checkSpawn event.
+	g_game.removeCreature(it->second, false);
 }
 
 void Spawn::releaseSpawn(uint32_t spawnId, bool forceRespawn)

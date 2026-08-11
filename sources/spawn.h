@@ -75,6 +75,7 @@ struct spawnBlock_t
 	uint32_t interval;
 	int64_t lastSpawn;
 	bool riftHeld; // spawn square is currently held by a Spiritual Rift
+	int64_t lastRift; // when a Spiritual Rift last opened here (cooldown so a rift never stays on the same square)
 };
 
 class Spawn
@@ -86,7 +87,8 @@ class Spawn
 		bool addMonster(const std::string& _name, const Position& _pos, Direction _dir, uint32_t _interval);
 		void removeMonster(Monster* monster);
 		void releaseSpawn(uint32_t spawnId, bool forceRespawn); // releases a Spiritual Rift hold
-		bool getRiftBlock(uint32_t& spawnId, spawnBlock_t*& block); // random dead, non-held block for a rift
+		bool getRiftBlock(uint32_t& spawnId, spawnBlock_t*& block); // random non-held block for a rift (dead preferred)
+		void consumeCreature(uint32_t spawnId); // Spiritual Rift: removes a live creature so the rift takes its place
 
 		Position getPosition() const {return centerPos;}
 		uint32_t getInterval() const {return interval;}

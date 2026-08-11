@@ -24,6 +24,30 @@
 #include "tile.h"
 #include "player.h"
 
+#if defined(_WIN32) || defined(WINDOWS)
+#include <windows.h>
+
+static void setConsoleColor(WORD color)
+{
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	if(h != INVALID_HANDLE_VALUE && h != NULL)
+		SetConsoleTextAttribute(h, color);
+}
+
+static void setConsoleBlue()
+{
+	setConsoleColor(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+}
+
+static void setConsoleDefault()
+{
+	setConsoleColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+}
+#else
+static void setConsoleBlue() {}
+static void setConsoleDefault() {}
+#endif
+
 extern Game g_game;
 
 SpiritualRift::SpiritualRift(Spawn* _spawn, uint32_t _spawnId, MonsterType* _mType,
@@ -50,9 +74,11 @@ SpiritualRift::~SpiritualRift()
 
 void SpiritualRift::open()
 {
-	std::clog << "[Spiritual Rift] A Spiritual Rift of \"" << mType->name << "\" has opened at "
-		<< pos << "! It will summon spiritual creatures if someone steps on it (waves 3/6/12, "
-		<< SPIRITUAL_RIFT_DURATION / 60000 << " minutes)." << std::endl;
+	// short blue console line: [RIFT] "Weeper" opened (225/593/8)
+	setConsoleBlue();
+	std::clog << "[RIFT] \"" << mType->name << "\" opened ("
+		<< pos.x << "/" << pos.y << "/" << pos.z << ")" << std::endl;
+	setConsoleDefault();
 
 	// immediate pulse so the rift is visible right away
 	g_game.addMagicEffect(pos, SPIRITUAL_RIFT_PULSE_EFFECT);
@@ -83,8 +109,10 @@ void SpiritualRift::trigger()
 	// the pulsing indicator stops as soon as someone steps on the rift
 	Scheduler::getInstance().stopEvent(pulseEvent);
 	pulseEvent = 0;
-	std::clog << "[Spiritual Rift] The Spiritual Rift of \"" << mType->name << "\" at " << pos
-		<< " has been activated! Summoning spiritual creatures..." << std::endl;
+	setConsoleBlue();
+	std::clog << "[RIFT] \"" << mType->name << "\" activated ("
+		<< pos.x << "/" << pos.y << "/" << pos.z << ")" << std::endl;
+	setConsoleDefault();
 	spawnWave(0);
 }
 
@@ -170,10 +198,15 @@ void SpiritualRift::close(bool forceRespawn)
 
 	releaseSpawnHold(forceRespawn);
 	SpiritualRifts::getInstance()->removeRift(this);
+
+	// keep the pool full: a new rift opens right away on ANOTHER square, so a
+	// stepped-on rift never stays in the same place (each rift is stepped once)
+	SpiritualRifts::getInstance()->refillPool();
 }
 
 SpiritualRifts::SpiritualRifts()
 {
+	refillEvent = 0;
 }
 
 SpiritualRifts::~SpiritualRifts()
@@ -185,6 +218,10 @@ bool SpiritualRifts::tryOpenRift(Spawn* spawn, uint32_t spawnId, spawnBlock_t& s
 	if(getActiveCount() >= SPIRITUAL_RIFT_MAX_ACTIVE)
 		return false;
 
+	// this square recently hosted a rift: it must go to another corner
+	if(sb.lastRift && OTSYS_TIME() < sb.lastRift + SPIRITUAL_RIFT_BLOCK_COOLDOWN)
+		return false;
+
 	openRiftAt(spawn, spawnId, sb);
 	return true;
 }
@@ -194,6 +231,12 @@ void SpiritualRifts::openStartupRifts()
 	// the very first rifts also take the place of their creatures: they are
 	// picked before the monsters are placed, so those creatures never spawn
 	// (if there is a rift, there is no creature)
+	refillPool();
+}
+
+void SpiritualRifts::refillPool()
+{
+	refillEvent = 0;
 	while(getActiveCount() < SPIRITUAL_RIFT_MAX_ACTIVE)
 	{
 		Spawn* spawn = NULL;
@@ -204,13 +247,25 @@ void SpiritualRifts::openStartupRifts()
 
 		openRiftAt(spawn, spawnId, *block);
 	}
+
+	// the pool must ALWAYS have 5 rifts: if it could not be filled right now
+	// (e.g. the only alive creatures are visible to players, so none could be
+	// consumed), retry shortly instead of leaving the pool short
+	if(getActiveCount() < SPIRITUAL_RIFT_MAX_ACTIVE && refillEvent == 0)
+		refillEvent = Scheduler::getInstance().addEvent(createSchedulerTask(
+			SPIRITUAL_RIFT_REFILL_RETRY, boost::bind(&SpiritualRifts::refillPool, this)));
 }
 
 void SpiritualRifts::openRiftAt(Spawn* spawn, uint32_t spawnId, spawnBlock_t& sb)
 {
+	// the rift takes the creature's place: if a creature is still alive on this
+	// square it is consumed (removed) - if there is a rift, there is no creature
+	spawn->consumeCreature(spawnId);
+
 	// the rift takes the creature's respawn: the creature does not spawn
 	sb.riftHeld = true;
 	sb.lastSpawn = OTSYS_TIME();
+	sb.lastRift = OTSYS_TIME();
 	SpiritualRift* rift = new SpiritualRift(spawn, spawnId, sb.mType, sb.pos, sb.direction);
 	riftList.push_back(rift);
 	rift->open();
@@ -239,12 +294,18 @@ SpiritualRift* SpiritualRifts::getRiftAt(const Position& pos)
 
 Position SpiritualRifts::getRiftTeleportPosition(Player* player)
 {
-	// pick the active rift closest to the player
+	// pick the closest rift that can still be triggered. Rifts that were already
+	// stepped on are still summoning their waves (they stay in the list for a
+	// few seconds before closing) - skipping them makes !tprift always send the
+	// player to a DIFFERENT rift instead of back to the one just activated.
 	SpiritualRift* bestRift = NULL;
 	int32_t bestDistance = 0;
 	for(RiftList::iterator it = riftList.begin(); it != riftList.end(); ++it)
 	{
 		SpiritualRift* rift = *it;
+		if(rift->isTriggered())
+			continue;
+
 		int32_t distance = std::max(std::abs(rift->getPosition().x - player->getPosition().x),
 			std::abs(rift->getPosition().y - player->getPosition().y))
 			+ std::abs(rift->getPosition().z - player->getPosition().z);
@@ -259,11 +320,19 @@ Position SpiritualRifts::getRiftTeleportPosition(Player* player)
 		return Position(0, 0, 0);
 
 	const Position& riftPos = bestRift->getPosition();
+	// ring around the rift (radius 1..2), shuffled; never the rift square itself
+	// (landing on the rift would trigger it instantly on arrival)
 	std::vector<Position> candidates;
-	candidates.push_back(Position(riftPos.x - 1, riftPos.y, riftPos.z));
-	candidates.push_back(Position(riftPos.x + 1, riftPos.y, riftPos.z));
-	candidates.push_back(Position(riftPos.x, riftPos.y - 1, riftPos.z));
-	candidates.push_back(Position(riftPos.x, riftPos.y + 1, riftPos.z));
+	for(int32_t dx = -2; dx <= 2; ++dx)
+	{
+		for(int32_t dy = -2; dy <= 2; ++dy)
+		{
+			if(dx == 0 && dy == 0)
+				continue;
+
+			candidates.push_back(Position(riftPos.x + dx, riftPos.y + dy, riftPos.z));
+		}
+	}
 	std::random_shuffle(candidates.begin(), candidates.end());
 
 	for(std::vector<Position>::iterator it = candidates.begin(); it != candidates.end(); ++it)
@@ -280,8 +349,8 @@ Position SpiritualRifts::getRiftTeleportPosition(Player* player)
 		return *it;
 	}
 
-	// fallback: any free tile near the rift
-	return g_game.getClosestFreeTile(player, riftPos, true, false);
+	// no free tile around the rift
+	return Position(0, 0, 0);
 }
 
 void SpiritualRifts::removeRift(SpiritualRift* rift)
@@ -292,6 +361,8 @@ void SpiritualRifts::removeRift(SpiritualRift* rift)
 
 void SpiritualRifts::shutdown()
 {
+	Scheduler::getInstance().stopEvent(refillEvent);
+	refillEvent = 0;
 	while(!riftList.empty())
 	{
 		SpiritualRift* rift = riftList.front();

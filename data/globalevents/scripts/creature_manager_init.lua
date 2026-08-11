@@ -12,9 +12,19 @@ function onStartup()
             FOREIGN KEY (`player_id`) REFERENCES `players`(`id`) ON DELETE CASCADE
         );
     ]])
-    pcall(function()
+    -- o CREATE TABLE acima ja inclui `watered_stage`; o ALTER so e necessario
+    -- para bancos criados antes dessa coluna existir. Checamos antes de rodar
+    -- para o ALTER nunca falhar (e nao imprimir o erro "Duplicate column name"
+    -- no console a cada startup).
+    local result = db.getResult("SELECT COUNT(*) AS `count` FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'player_creature_manager' AND COLUMN_NAME = 'watered_stage'")
+    local hasColumn = false
+    if result then
+        hasColumn = result:getDataInt("count") > 0
+        result:free()
+    end
+    if not hasColumn then
         db.query("ALTER TABLE `player_creature_manager` ADD COLUMN `watered_stage` INT NOT NULL DEFAULT 0")
-    end)
+    end
     print("[FarmSystem] Tabela player_creature_manager verificada/criada com sucesso.")
     return true
 end

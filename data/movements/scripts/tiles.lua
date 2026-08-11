@@ -5,7 +5,16 @@ local config = {
 }
  
 local checkCreature = {isPlayer, isMonster, isNpc}
+-- guard against infinite recursion: when two protected tiles are adjacent, the
+-- creature is teleported back onto the other protected tile, which teleports it
+-- back again... (Call stack overflow). Only one push-back per second per creature.
+local lastPushBack = {}
 local function pushBack(cid, position, fromPosition, displayMessage)
+  local now = os.time()
+  if(lastPushBack[cid] and now - lastPushBack[cid] < 1) then
+    return
+  end
+  lastPushBack[cid] = now
   doTeleportThing(cid, fromPosition, false)
   doSendMagicEffect(position, CONST_ME_MAGIC_BLUE)
   if(displayMessage) then

@@ -1,6 +1,13 @@
 local SPECIAL_QUESTS = {2001}
 
 function onStepIn(cid, item, position, lastPosition, fromPosition, toPosition, actor)
+  -- quest doors/chests only push PLAYERS back; monsters (ex.: creatures spawned
+  -- by a Spiritual Rift) must not be teleported by them (can cause infinite
+  -- ping-pong between adjacent tiles = Call stack overflow)
+  if(isMonster(cid) or isNpc(cid)) then
+    return true
+  end
+
   local container = isContainer(item.uid)
   if((container and not isInArray(SPECIAL_QUESTS, item.actionid) and
     item.uid > 65535) or (fromPosition.x ~= 0 and getTileInfo(fromPosition).floorChange[9])

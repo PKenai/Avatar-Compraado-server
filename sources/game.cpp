@@ -5497,7 +5497,7 @@ void Game::addAnimatedText(const SpectatorVec& list, const Position& pos, uint8_
 	}
 }
 
-void Game::addMagicEffect(const Position& pos, uint8_t effect, bool ghostMode/* = false*/)
+void Game::addMagicEffect(const Position& pos, uint16_t effect, bool ghostMode/* = false*/)
 {
 	if(ghostMode)
 		return;
@@ -5506,7 +5506,7 @@ void Game::addMagicEffect(const Position& pos, uint8_t effect, bool ghostMode/* 
 	addMagicEffect(list, pos, effect);
 }
 
-void Game::addMagicEffect(const SpectatorVec& list, const Position& pos, uint8_t effect,
+void Game::addMagicEffect(const SpectatorVec& list, const Position& pos, uint16_t effect,
 	bool ghostMode/* = false*/)
 {
 	if(ghostMode)

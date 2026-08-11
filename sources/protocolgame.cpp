@@ -2230,9 +2230,19 @@ void ProtocolGame::sendDistanceShoot(const Position& from, const Position& to, u
 	AddDistanceShoot(msg, from, to, type);
 }
 
-void ProtocolGame::sendMagicEffect(const Position& pos, uint8_t type)
+void ProtocolGame::sendMagicEffect(const Position& pos, uint16_t type)
 {
-	if(type > MAGIC_EFFECT_LAST || !canSee(pos))
+	if(!canSee(pos))
+		return;
+
+	// com o client U16 (OTC GameMagicEffectU16) o effect id pode passar de 255
+	// (ex.: 183+ do Spiritual Rift); sem ele, mantem o filtro dos effects antigos
+	if(!g_config.getBool(ConfigManager::MAGIC_EFFECT_U16))
+	{
+		if(type > MAGIC_EFFECT_LAST || type == MAGIC_EFFECT_NONE)
+			return;
+	}
+	else if(type == MAGIC_EFFECT_NONE || type == MAGIC_EFFECT_UNKNOWN)
 		return;
 
 	NetworkMessage_ptr msg = getOutputBuffer();
@@ -2965,11 +2975,16 @@ void ProtocolGame::AddAnimatedText(NetworkMessage_ptr msg, const Position& pos,
 	msg->putString(text);
 }
 
-void ProtocolGame::AddMagicEffect(NetworkMessage_ptr msg, const Position& pos, uint8_t type)
+void ProtocolGame::AddMagicEffect(NetworkMessage_ptr msg, const Position& pos, uint16_t type)
 {
 	msg->put<char>(0x83);
 	msg->putPosition(pos);
-	msg->put<char>(type + 1);
+	// este client OTC trabalha com o protocolo classico (effect id + 1):
+	// o effect 183 do .dat e enviado como 184 (que o .dat ganhou via patch)
+	if(g_config.getBool(ConfigManager::MAGIC_EFFECT_U16))
+		msg->put<uint16_t>(type + 1);
+	else
+		msg->put<char>(type + 1);
 }
 
 void ProtocolGame::AddDistanceShoot(NetworkMessage_ptr msg, const Position& from, const Position& to,

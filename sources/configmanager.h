@@ -330,6 +330,7 @@ class ConfigManager
 			UNMOUNT_PLAYER_IN_PZ,
 			ENABLE_LIVE_CASTING,
 			FULL_MAP_ON_LOGIN,
+			MAGIC_EFFECT_U16, // client uses 16-bit magic effect ids (OTC GameMagicEffectU16)
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 
