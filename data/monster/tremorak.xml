@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Tremorak" nameDescription="Tremorak" race="undead" experience="10000000" speed="600" manacost="0">
+	<health now="1000000" max="1000000"/>
+	<look type="285" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="10000" chance="30"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="0"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1500" skill="100" attack="140"/>
+		<attack name="earth quake" interval="7000" chance="40" min="-210" max="-340"/>
+		<attack name="earth crush" interval="4000" chance="75" min="-390" max="-535"/>
+		<attack name="earth punch" interval="4300" chance="75" min="-290" max="-435"/>
+		<attack name="earth rock" interval="4700" chance="75" min="-490" max="-655"/>
+		<attack name="earth cataclysm" interval="10700" range="5" chance="50" min="-790" max="-955"/>
+		<attack name="earth aura" interval="13124" range="3" chance="50" min="-40" max="-100"/>
+		<attack name="speed" interval="3000" chance="40" range="7" duration="3000" speedchange="-400">
+			<attribute key="areaEffect" value="redshimmer"/>
+		</attack>
+	</attacks>
+	<defenses armor="100" defense="50">
+		<defense name="healing" interval="1000" chance="30" min="600" max="800">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<summons maxSummons="1">
+		<summon name="Split Tremorak" interval="5000" chance="50" max="3"/>
+	</summons>
+	
+</monster>

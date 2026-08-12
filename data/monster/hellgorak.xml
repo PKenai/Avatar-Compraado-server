@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Hellgorak" nameDescription="a hellgorak" race="undead" experience="245700" speed="500" manacost="0">
+    <health now="250000" max="250000"/>
+    <look type="12" head="19" body="96" legs="21" feet="81" corpse="18160"/>
+        <script>
+<event name="mobsKill"/>
+</script>
+    <targetchange interval="5000" chance="8"/>
+    <flags>
+        <flag summonable="0"/>
+        <flag attackable="1"/>
+        <flag hostile="1"/>
+        <flag illusionable="0"/>
+        <flag convinceable="0"/>
+        <flag pushable="0"/>
+        <flag canpushitems="1"/>
+        <flag canpushcreatures="1"/>
+        <flag targetdistance="1"/>
+        <flag staticattack="85"/>
+        <flag runonhealth="0"/>
+    </flags>
+    <attacks>
+        <attack name="melee" interval="2500" skill="200" attack="200"/>
+        <attack name="energy" interval="3000" chance="50" length="8" spread="0" min="-1350" max="-1519">
+            <attribute key="areaEffect" value="purpleenergy"/>
+        </attack>
+        <attack name="manadrain" interval="2000" chance="40" radius="5" target="0" min="-60" max="-110">
+            <attribute key="areaEffect" value="stun"/>
+        </attack>
+        <attack name="fire" interval="1000" chance="50" radius="5" target="1" min="-750" max="-920">
+            <attribute key="areaEffect" value="firearea"/>
+        </attack>
+        <attack name="lifedrain" interval="2000" chance="55" radius="7" target="0" min="-800" max="-1100">
+            <attribute key="areaEffect" value="poff"/>
+        </attack>
+    </attacks>
+    <defenses armor="70" defense="65">
+        <defense name="healing" interval="1000" chance="11" min="400" max="900">
+            <attribute key="areaEffect" value="greenshimmer"/>
+        </defense>
+    </defenses>
+    <voices interval="5000" chance="0">
+        <voice sentence="I'll sacrifice yours souls to seven!"/>
+    </voices>
+    
+</monster>

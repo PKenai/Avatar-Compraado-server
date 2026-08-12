@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Deep Terror" nameDescription="a deep terror" race="undead" experience="48655" speed="260" manacost="0">
+	<health now="12650" max="12650"/>
+	<look type="711" corpse="18160"/>
+	<targetchange interval="5000" chance="8"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="2000" skill="50" attack="60"/>
+		<attack name="speed" interval="4000" chance="12" radius="6" target="0" speedchange="-200" duration="1500">
+			<attribute key="areaEffect" value="poison"/>
+		</attack>
+		<attack name="physical" interval="4000" chance="99" range="7" min="-200" max="-300">
+			<attribute key="shootEffect" value="poison"/>
+		</attack>
+		</attacks>
+	<defenses armor="15" defense="15">
+		<defense name="healing" interval="5000" chance="50" min="75" max="225">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<voices interval="5000" chance="10">
+		<voice sentence="Blubb"/>
+	</voices>
+	
+</monster>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Elder Wyrm" nameDescription="a elder wyrm" race="undead" experience="440000" speed="600" manacost="0">
+	<health now="90500" max="90500"/>
+	<look type="736" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" skill="155" attack="155"/>
+		<attack name="fire lightning" interval="3000" chance="100" radius="3" min="-1910" max="-2375"/>
+		<attack name="air ball" interval="2000" chance="100" range="5" min="-385" max="-465"/>
+		<attack name="air force" interval="7000" chance="40" range="5" min="-375" max="-485"/>
+		<attack name="air gust" interval="7000" chance="40" range="4" min="-325" max="-395"/>
+	</attacks>
+	<defenses armor="60" defense="60">
+		<defense name="healing" interval="1100" chance="5" min="360" max="700">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<voices interval="2000" chance="5">
+		<voice sentence="GRRR!"/>
+		<voice sentence="GROOOOAAAAAAAAR!"/>
+	</voices>
+	
+</monster>

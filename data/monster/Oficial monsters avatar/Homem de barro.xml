@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Homem de barro" nameDescription="a homem de barro" race="undead" experience="1250" speed="250" manacost="0">
+	<health now="110" max="110"/>
+	<look type="1249" corpse="18160"/>
+	<targetchange interval="5000" chance="10"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="30" attack="25"/>
+	</attacks>
+	<defenses armor="0" defense="0"/>
+	<loot>
+		<item id="2148" countmax="50" chance="100000"/><!-- moedas -->
+	</loot>
+</monster>

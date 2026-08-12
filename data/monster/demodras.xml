@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Demodras" nameDescription="a demodras" race="undead" experience="600000" speed="430" manacost="0">
+	<health now="100000" max="100000"/>
+	<look type="437" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="2000" chance="50"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1500" skill="110" attack="110"/>
+		<attack name="fire bomb" interval="4000" chance="25" min="-550" max="-680"/>
+		<attack name="fire star" interval="3000" chance="50" min="-150" max="-190"/>
+		<attack name="fire kick" interval="3000" chance="65" min="-250" max="-390"/>
+	</attacks>
+	<defenses armor="100" defense="50">
+		<defense name="healing" interval="3000" chance="25" min="400" max="600">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	
+</monster>

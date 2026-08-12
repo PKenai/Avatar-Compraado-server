@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<monster name="The Duke Of The Depths" nameDescription="a the duke of the depths" race="undead" experience="2401520" speed="1000" manacost="0">
+	<health now="1500000" max="1500000"/>
+	<look type="1107" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="0"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1500" skill="195" attack="195"/>
+		<attack name="water bloodcontrol" interval="4000" chance="90" min="-1430" max="-1610"/>
+		<attack name="Mass Blood" interval="5000" chance="75" min="-1530" max="-1710"/>
+	</attacks>
+	<defenses armor="75" defense="75">
+	</defenses>
+	
+</monster>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Spidris" nameDescription="a spidris" race="undead" experience="315686" speed="500" manacost="0">
+	<health now="43900" max="43900"/>
+	<look type="551" corpse="18160"/>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="0"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="1000" skill="130" attack="130" poison="80"/>
+		<attack name="earth punch" interval="3300" chance="75" min="-360" max="-410"/>
+		<attack name="earth" interval="2300" chance="75" range="7" radius="3" min="-385" max="-495">
+			<attribute key="areaEffect" value="poison"/>
+			<attribute key="shootEffect" value="poison"/>
+		</attack>
+		<attack name="poisoncondition" interval="3000" chance="60" radius="5" target="0" min="-460" max="-530"/>
+	</attacks>
+	<defenses armor="60" defense="60">
+		<defense name="healing" interval="1100" chance="10" min="500" max="1080">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	
+</monster>

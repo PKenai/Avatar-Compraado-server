@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Orclops Doomhauler" nameDescription="a orclops doomhauler" race="undead" experience="450000" speed="400" manacost="0">
+	<health now="85000" max="85000"/>
+	<look type="939" corpse="18160"/>
+	<targetchange interval="4000" chance="30"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag runonhealth="0"/>
+	</flags>
+<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="2000" skill="145" attack="145"/>
+		<attack name="fire" interval="3000" chance="80" length="8" spread="0" min="-915" max="-970">
+			<attribute key="areaEffect" value="explosion"/>
+		</attack>
+		<attack name="fire lightning" interval="4000" chance="75" min="-750" max="-845"/>
+	</attacks>
+	<defenses armor="40" defense="40">
+		<defense name="healing" interval="1100" chance="15" min="790" max="1100">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	
+</monster>

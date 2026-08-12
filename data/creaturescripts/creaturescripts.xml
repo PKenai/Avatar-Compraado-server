@@ -82,6 +82,7 @@
 
 	<event type="kill" name="DailyHunt" event="script" value="dailyHunt.lua"/>
 	<event type="extendedopcode" name="DailyHuntOpcode" event="script" value="dailyHunt.lua"/>
+	<event type="extendedopcode" name="HuntWaypointOpcode" event="script" value="huntWaypoint.lua"/>
 
 	<event type="extendedopcode" name="ExtendedOpcode" event="script" value="opcode.lua"/>
 	<event type="extendedopcode" name="code_redeem" event="script" value="code.lua"/>

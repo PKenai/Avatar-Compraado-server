@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Sanguessuga Rainha" nameDescription="a sanguessuga rainha" race="undead" experience="18400" speed="220" manacost="0">
+	<health now="4000" max="4000"/>
+	<look type="1238" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="2000" chance="5"/>
+	<strategy attack="70" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1050" skill="55" attack="40"/>
+		<attack name="earth punch" interval="3000" chance="50" min="-66" max="-84"/>
+		<attack name="physical" interval="1500" chance="30" range="7" min="-106" max="-114">
+			<attribute key="shootEffect" value="whirlwindclub"/>
+		</attack>
+		<attack name="drunk" interval="1000" chance="10"/>
+	</attacks>
+	<defenses armor="50" defense="60"/>
+	<voices interval="5000" chance="10">
+		<voice sentence="Outis emoi g' onoma."/>
+		<voice sentence="Whack da humy!"/>
+		<voice sentence="Ai humy phary ty kaynon"/>
+	</voices>
+	
+</monster>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Lizard Chosen" nameDescription="a lizard chosen" race="undead" experience="23984" speed="420" manacost="0">
+	<health now="5550" max="5550"/>
+	<look type="344" corpse="18160"/>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+        <flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="80"/>
+		<flag runonhealth="50"/>
+	</flags>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="2000" skill="80" attack="50"/>
+		<attack name="poisoncondition" interval="3000" chance="25" length="3" spread="3" min="-140" max="-220">
+			<attribute key="areaEffect" value="poison"/>
+		</attack>
+		<attack name="poison" interval="3000" chance="25" target="0" radius="5" min="-90" max="-240">
+			<attribute key="areaEffect" value="greenspark"/>
+		</attack>
+		<attack name="poison" interval="3000" chance="20" length="8" spread="2" min="-90" max="-180">
+			<attribute key="areaEffect" value="greenbubble"/>
+		</attack>
+	</attacks>
+	<defenses armor="45" defense="40">
+		<defense name="healing" interval="2000" chance="10" min="375" max="725">
+			<attribute key="areaEffect" value="greenshimmer"/>
+		</defense>
+	</defenses>
+	<voices interval="5000" chance="10">
+		<voice sentence="Grzzzzzzz!"/>
+		<voice sentence="Garrrblarrrrzzzz!"/>
+		<voice sentence="Kzzzzzz!"/>
+	</voices>
+	
+</monster>

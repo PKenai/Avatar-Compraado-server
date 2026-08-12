@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Sandking" nameDescription="a sandking" race="undead" experience="15000000" speed="400" manacost="0">
+	<health now="1000000" max="1000000"/>
+	<look type="943" corpse="18160"/>
+	<targetchange interval="4000" chance="30"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag runonhealth="0"/>
+	</flags>
+<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="2000" skill="135" attack="135"/>
+		<attack name="earth" interval="1500" chance="100" target="1" range="5" min="-1085" max="-1290">
+			<attribute key="shootEffect" value="poison"/>
+			<attribute key="areaEffect" value="poison"/>
+		</attack>
+		<attack name="earth" interval="3000" chance="85" radius="5" min="-1120" max="-1220">
+			<attribute key="areaEffect" value="poison"/>
+		</attack>
+		<attack name="earth" interval="4000" chance="65" length="7" spread="0" min="-1650" max="-1760">
+			<attribute key="areaEffect" value="poison"/>
+		</attack>
+	</attacks>
+	<defenses armor="100" defense="100">
+		<defense name="healing" interval="1000" chance="30" min="1500" max="2000">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+		<defense name="checkSand" interval="1000" chance="100"/>
+	</defenses>
+	
+</monster>

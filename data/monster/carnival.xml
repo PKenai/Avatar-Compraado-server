@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Carnival" nameDescription="a carnival" race="undead" experience="415686" speed="550" manacost="0">
+	<health now="65900" max="65900"/>
+	<look type="1111" corpse="18160"/>
+	<targetchange interval="4000" chance="30"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="0"/>
+		<flag runonhealth="0"/>
+	</flags>
+<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="1000" skill="145" attack="145" poison="90"/>
+		<attack name="earth punch" interval="3300" chance="75" min="-450" max="-510"/>
+		<attack name="earth" interval="2300" chance="75" range="7" radius="3" min="-515" max="-610">
+			<attribute key="areaEffect" value="poison"/>
+			<attribute key="shootEffect" value="poison"/>
+		</attack>
+		<attack name="poisoncondition" interval="3000" chance="60" radius="5" target="0" min="-520" max="-620"/>
+	</attacks>
+	<defenses armor="70" defense="70">
+		<defense name="healing" interval="1100" chance="25" min="1200" max="1600">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	
+</monster>

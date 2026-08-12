@@ -1,0 +1,8 @@
+Cockroach;1220;clawed rotworm.xml;
+Terra beetle;1245;larva.xml;
+Joaninha da terra;1246;swamp troll.xml;
+Abelha de barro;1247;crocodile.xml;
+Tarantula de pedra;1248;tarantula.xml;
+Homem de barro;1249;elf.xml;
+Leao de ba sin se;1250;minotaur.xml;
+Pica-pau da terra;1242;stone golem.xml;

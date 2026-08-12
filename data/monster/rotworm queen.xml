@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Rotworm Queen" nameDescription="a rotworm queen" race="undead" experience="12699" speed="265" manacost="0">
+	<health now="4150" max="4150"/>
+	<look type="295" corpse="18160"/>
+		<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="5000" chance="8"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+			<flag attackable="1"/>
+			<flag hostile="1"/>
+			<flag illusionable="0"/>
+			<flag convinceable="1"/>
+			<flag pushable="0"/>
+			<flag canpushitems="1"/>
+			<flag canpushcreatures="0"/>
+			<flag targetdistance="1"/>
+			<flag staticattack="90"/>
+			<flag runonhealth="0"/>
+		</flags>
+	<attacks>
+		<attack name="melee" interval="1500" min="-38" max="-68"/>
+		<attack name="earth growth" interval="6000" chance="100" min="-5" max="-10"/>
+	</attacks>
+	<defenses armor="50" defense="50"/>
+	<voices interval="5000" chance="10">
+		<voice sentence="FCHHHHH"/>
+	</voices>
+	
+</monster>

@@ -466,6 +466,7 @@ function onLogin(cid)
     registerCreatureEvent(cid, "MomoKill")
     registerCreatureEvent(cid, "DailyHunt")
     registerCreatureEvent(cid, "DailyHuntOpcode")
+    registerCreatureEvent(cid, "HuntWaypointOpcode")
     registerCreatureEvent(cid, "KnockoutLog")
     registerCreatureEvent(cid, "KnockoutLogPrep")
     registerCreatureEvent(cid, "KnockoutCombat")
@@ -521,6 +522,14 @@ function onLogin(cid)
     addEvent(function(cid)
         if isCreature(cid) then
             DailyHunt.sendDataToClient(cid)
+        end
+    end, 1000, cid)
+
+    -- Send Hunt Waypoint list shortly after login
+    addEvent(function(cid)
+        if isCreature(cid) then
+            HuntWaypoint.loadConfigs()
+            HuntWaypoint.sendList(cid)
         end
     end, 1000, cid)
 

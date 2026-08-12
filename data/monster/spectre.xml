@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Spectre" nameDescription="a spectre" race="undead" experience="300000" speed="600" manacost="0">
+	<health now="300000" max="300000"/>
+	<look type="235" corpse="18160"/>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="2000" skill="130" attack="130"/>
+		<attack name="water wave" interval="4000" chance="50" min="-400" max="-500"/>
+		<attack name="water punch" interval="4000" chance="60" min="-55" max="-70"/>
+		<attack name="water dragon" interval="7000" chance="60" min="-150" max="-225"/>
+		<attack name="water bloodcontrol" interval="3000" chance="60" min="-50" max="-60"/>
+		<attack name="water bubbles" interval="3000" chance="60" min="-75" max="-105"/>
+		<attack name="water clock" interval="6000" chance="50" min="-350" max="-400"/>
+		<attack name="water icebolt" interval="4000" chance="50" min="-360" max="-490"/>
+		<attack name="lifedrain" interval="2000" chance="100" radius="8" length="8" target="0" min="-210" max="-250">
+			<attribute key="areaEffect" value="bluenote"/>
+		</attack>
+		<attack name="drown" interval="4000" target="1" chance="100" range="8" radius="4" min="-500" max="-600">
+			<attribute key="areaEffect" value="watersplash"/>
+			<attribute key="shootEffect" value="smallice"/>
+		</attack>
+	</attacks>
+	<defenses armor="100" defense="50">
+		<defense name="healing" interval="3000" chance="25" min="550" max="650">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	
+	<summons maxSummons="2">
+		<summon name="Split Spectre" interval="5000" chance="40" max="2"/>
+	</summons>
+	<voices interval="5000" chance="30">
+		<voice sentence="Get out!"/>
+		<voice sentence="Dance for me your dance of death!"/>
+	</voices>
+	
+</monster>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Nightstalker" nameDescription="a nightstalker" experience="180000" speed="460" race="undead">
+        <health now="9200" max="9200"/>
+        <look type="320" corpse="18160"/>
+        <script>
+<event name="mobsKill"/>
+</script>
+        <targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag staticattack="50"/>
+		<flag lightlevel="0"/>
+		<flag lightcolor="0"/>
+		<flag targetdistance="1"/>
+		<flag runonhealth="1"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" skill="125" attack="105"/>
+		<attack name="energy" interval="3000" chance="45" radius="3" min="-270" max="-470">
+			<attribute key="areaEffect" value="yellowenergy"/>
+		</attack>
+	</attacks>
+	<defenses armor="80" defense="35">
+		<defense name="healing" interval="3000" chance="50" min="325" max="575">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+        
+</monster>

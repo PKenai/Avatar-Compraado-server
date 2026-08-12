@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Mouth of Hell" nameDescription="a mouth of hell" race="undead" experience="1000000" speed="600" manacost="0">
+	<health now="300000" max="300000"/>
+	<look type="1109" corpse="18160"/>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="0"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="1500" skill="145" attack="145"/>
+		<attack name="earth lavaball" interval="3000" chance="90" min="-790" max="-875"/>
+		<attack name="earth cataclysm" interval="5000" chance="40" min="-1550" max="-1875"/>
+	</attacks>
+	<defenses armor="45" defense="55">
+		<defense name="healing" interval="2000" chance="15" min="800" max="1200">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	
+</monster>

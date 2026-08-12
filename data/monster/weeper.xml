@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Weeper" nameDescription="a weeper" race="undead" experience="33840" speed="250" manacost="0">
+	<health now="9200" max="9200"/>
+	<look type="558" corpse="18160"/>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="80"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="fire" interval="2000" chance="35" range="7" radius="4" target="1" min="-145" max="-265">
+			<attribute key="shootEffect" value="fire"/>
+			<attribute key="areaEffect" value="firearea"/>
+		</attack>
+		<attack name="fire wave" interval="2000" chance="20" min="-195" max="-365"/>
+		<attack name="fire bomb" interval="15000" chance="10" min="-150" max="-275"/>
+		<attack name="fire" interval="3000" chance="25" length="8" spread="3" min="-290" max="-350">
+			<attribute key="areaEffect" value="firearea"/>
+		</attack>	
+	</attacks>
+	<defenses armor="65" defense="35">
+	</defenses>
+	
+</monster>

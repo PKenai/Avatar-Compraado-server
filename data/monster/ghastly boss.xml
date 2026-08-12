@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Medreth" nameDescription="the medreth" race="undead" experience="686170" speed="570" manacost="0">
+	<health now="250500" max="250500"/>
+	<look type="351" corpse="18160"/>
+	<targetchange interval="5000" chance="8"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="1800" skill="120" attack="120"/>
+		<attack name="death" interval="3000" chance="40" target="1" range="5" min="-755" max="-900">
+			<attribute key="shootEffect" value="suddendeath"/>
+			<attribute key="areaEffect" value="mortarea"/>
+		</attack>
+		<attack name="death" interval="4000" chance="40" length="4" spread="3" radius="2" min="-910" max="-1110">
+			<attribute key="areaEffect" value="mortarea"/>
+		</attack>
+		<attack name="death" interval="3000" chance="50" length="3" spread="2" min="-940" max="-1220">
+			<attribute key="areaEffect" value="mortarea"/>
+		</attack>
+	</attacks>
+
+	<defenses armor="25" defense="55">
+		<defense name="healing" interval="1100" chance="25" min="500" max="1280">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<voices interval="5000" chance="10">
+		<voice sentence="EMBRACE MY GIFTS!" yell="1"/>
+		<voice sentence="I WILL FEAST ON YOUR SOUL!" yell="1"/>
+	</voices>
+
+	
+</monster>

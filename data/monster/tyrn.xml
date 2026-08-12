@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Tyrn" nameDescription="a tyrn" race="undead" experience="4455126" speed="600" manacost="0">
+	<health now="1903900" max="1903900"/>
+	<look type="739" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" skill="170" attack="170"/>
+		<attack name="fire lightning" interval="4000" chance="90" radius="3" min="-1910" max="-2575"/>
+		<attack name="air ball" interval="3000" chance="75" range="5" min="-575" max="-850"/>
+		<attack name="air force" interval="6000" chance="75" range="5" min="-475" max="-635"/>
+		<attack name="air gust" interval="7500" chance="75" range="4" min="-375" max="-515"/>
+		<attack name="air windstorm" interval="12137" chance="75" range="4" min="-150" max="-245"/>
+		<attack name="air stormcall" interval="13137" chance="65" range="4" min="-150" max="-245"/>
+	</attacks>
+	<defenses armor="60" defense="60">
+		<defense name="healing" interval="1100" chance="40" min="420" max="810">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<voices interval="2000" chance="5">
+		<voice sentence="GRRR!"/>
+		<voice sentence="GROOOOAAAAAAAAR!"/>
+	</voices>
+	
+</monster>

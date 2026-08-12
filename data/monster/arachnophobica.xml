@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Arachnophobica" nameDescription="a arachnophobica" race="undead" experience="1401520" speed="700" manacost="0">
+	<health now="1903900" max="1903900"/>
+	<look type="1120" corpse="18160"/>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="0"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="1500" skill="135" attack="135"/>
+		<attack name="earth curse" interval="3000" chance="90" min="-790" max="-875"/>
+		<attack name="earth petrify" interval="2000" chance="90" min="-1010" max="-1210"/>
+	</attacks>
+	<defenses armor="25" defense="45">
+		<defense name="healing" interval="1100" chance="15" min="500" max="1080">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	
+</monster>

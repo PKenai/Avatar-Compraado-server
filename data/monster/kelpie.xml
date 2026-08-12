@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Kelpie" nameDescription="a kelpie" race="undead" experience="2056860" speed="700" manacost="0">
+	<health now="879000" max="879000"/>
+	<look type="738" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="0"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1500" skill="170" attack="170"/>
+		<attack name="water bubbles" interval="3000" chance="100" min="-640" max="-870"/>
+		<attack name="water clock" interval="4000" chance="15" min="-1235" max="-1455"/>
+		<attack name="drown" interval="1000" chance="100" range="4" radius="2" min="-880" max="-995">
+			<attribute key="areaEffect" value="watersplash"/>
+			<attribute key="shootEffect" value="smallice"/>
+		</attack>
+		<attack name="drowncondition" interval="2000" chance="60" radius="3" target="0" min="-830" max="-940"/>
+	</attacks>
+	<defenses armor="60" defense="60">
+		<defense name="healing" interval="1100" chance="40" min="500" max="1080">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	
+</monster>

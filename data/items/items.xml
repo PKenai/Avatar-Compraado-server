@@ -15630,4 +15630,30 @@
 		<attribute key="containerSize" value="1"/>
 		<attribute key="description" value="A special pouch that can only be equipped in its own slot. It collects your loot and never runs out of slots."/>
 	</item>
+
+	<!-- ===== Escadas custom (Avatar) ===== -->
+	<item id="18425" name="Escada subindo norte">
+		<attribute key="floorChange" value="north"/>
+	</item>
+	<item id="18427" name="Escada subindo oeste">
+		<attribute key="floorChange" value="west"/>
+	</item>
+	<item id="18748" name="Escada subindo leste">
+		<attribute key="floorChange" value="east"/>
+	</item>
+	<item id="18438" name="Escada subindo sul">
+		<attribute key="floorChange" value="south"/>
+	</item>
+	<item id="18618" name="Escada caindo norte">
+		<attribute key="floorChange" value="down"/>
+	</item>
+	<item id="18617" name="Escada caindo oeste">
+		<attribute key="floorChange" value="down"/>
+	</item>
+	<item id="18616" name="Escada caindo sul">
+		<attribute key="floorChange" value="down"/>
+	</item>
+	<item id="18615" name="Escada caindo leste">
+		<attribute key="floorChange" value="down"/>
+	</item>
 </items>

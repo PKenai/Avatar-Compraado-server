@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Mazoran" nameDescription="a mazoran" race="undead" experience="5000000" speed="500" manacost="0">
+	<health now="750000" max="750000"/>
+	<look type="703" corpse="18160"/>
+	<targetchange interval="4000" chance="20"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag runonhealth="0"/>
+	</flags>
+<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="1000" skill="150" attack="150"/>
+		<attack name="fire" interval="1500" chance="80" length="8" spread="0" min="-975" max="-1235">
+			<attribute key="areaEffect" value="explosion"/>
+		</attack>
+		<attack name="fire thunderbolt" interval="2000" chance="75" min="-960" max="-1115"/>
+	</attacks>
+	<defenses armor="40" defense="40">
+		<defense name="healing" interval="1100" chance="15" min="760" max="1300">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	
+</monster>

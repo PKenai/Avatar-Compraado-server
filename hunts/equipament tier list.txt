@@ -1,0 +1,175 @@
+============================================================
+   EQUIPMENT TIER LIST  -  Avatar Server (guia de level)
+============================================================
+
+Tiers estimados a partir dos stats dos itens (armor/defense/attack) do
+data/items/items.xml, alinhados com as faixas de level do guia de caça.
+Os itens NAO tem nivel minimo definido no items.xml, entao os niveis abaixo
+sao uma referencia de "poder": criaturas low level dropam Tiers baixos e
+criaturas high level dropam Tiers altos. Ajuste quando for montar cada criatura.
+
+rateExperience = 1.5 (config.lua)
+
+------------------------------------------------------------
+  Tier 1  (Level 8-20)  |  faixa de level p/ drop
+------------------------------------------------------------
+
+  ARMADURAS:   spectral dress, simple dress, white dress, ball gown, hibiscus dress, summer dress, tunic, girl's dress, jacket, coat, green tunic, cape, red robe, doublet, red tunic, pirate shirt, leather armor, studded armor, chain armor, magician's robe, heavy metal t-shirt
+  CALÇAS:      pirate knee breeches, bast skirt, mammoth fur shorts, leather legs, studded legs, chain legs, bronze legs
+  BOTAS:       boots of waterwalking, boots of haste, sandals, bunny slippers, faster boots, strange boots of haste, zaoan shoes, leather boots, crocodile boots, bronze boots
+  CAPACETES:   earmuffs, mining helmet, leather helmet, bandana, ferumbras' hat, magician hat, mystic turban, post officers hat, mage hat, jester hat, party hat, santa hat, tribal mask, feather headdress, charmer tiara, helmet of the deep, chain helmet, studded helmet, cowl
+  ESCUDOS:     wooden shield, spellbook, studded shield, brass shield, plate shield
+  ESPADAS:     knife, combat knife, dagger, silver dagger, rapier, machete, ron the ripper's sabre, short sword, sabre, bone sword, poison dagger, heavy machete, sword
+  MAÇAS:       jester staff, crowbar, club, studded club, bone club, light mace, stale bread of ancientness, mace
+  MACHADOS:    sickle, scythe, hand axe, axe, golden sickle, hatchet, daramian axe
+  DISTÂNCIA:   modified crossbow, yol's bow, silkweaver bow, elvish bow, snowball, crossbow, bow, arbalest, chain bolter, ironworker, warsinger bow, composite hornbow, headedness bow, small stone, royal crossbow, elethriel's elemental bow, decapitate crossbow, beauty bow, iced bow, ogre crossbow, devileye, hive crossbow, hive bow
+  AMULETOS:    crystal necklace, bronzen necklace, golden amulet, star amulet, silver necklace, scarab amulet, ancient tiara, amulet of loss, ancient amulet, broken amulet, garlic necklace, strange symbol, ceiron's wolf tooth chain, wailing widow necklace, beetle necklace, lucky clover amulet
+  ANEIS:       distance ring, mana ring, life ring, time ring, sword ring, axe ring, club ring, ring of healing
+
+------------------------------------------------------------
+  Tier 2  (Level 21-35)  |  faixa de level p/ drop
+------------------------------------------------------------
+
+  ARMADURAS:   native armor, ranger's cloak, oriental robe, bronze armor, brass armor, leopard armor, scale armor
+  CALÇAS:      ranger legs, brass legs
+  BOTAS:       frozen boots, patched boots, fur boots, soft boots, pirate boots, terra boots, magma boots, glacier shoes, lightning boots, dragon scale boots
+  CAPACETES:   helmet of ultimate terror, brass helmet, redhot hat, pirate hat, witch hat, fur cap, viking helmet, legion helmet, air cap, earth cap, water cap, fire cap, bronze helmet, iron helmet, soldier helmet, odd hat, lightning headband, terra hood, damaged helmet
+  ESCUDOS:     black shield, bronze shield, copper shield, spellbook of lost souls, bone shield, steel shield, sentinel shield, ornamented shield, viking shield, battle shield
+  ESPADAS:     katana, carlin sword, longsword, scimitar, jagged sword, templar scytheblade
+  MAÇAS:       iron hammer, daramian mace, staff, morning star, giant smithhammer, battle hammer, banana staff, mammoth whopper, brutetamer's staff
+  MACHADOS:    steel axe, battle axe, orcish axe, ripper lance
+  DISTÂNCIA:   bow of destruction, spear, legendary crossbow, throwing knife, mitologic crossbow, royal spear, hunting spear, throwing star
+  AMULETOS:    bending amulet, wolf tooth chain, scarf
+  ANEIS:       (nada nesta faixa)
+
+------------------------------------------------------------
+  Tier 3  (Level 36-50)  |  faixa de level p/ drop
+------------------------------------------------------------
+
+  ARMADURAS:   dwarven armor, plate armor, mammoth fur cape, dark armor, noble armor, blue robe, witchhunter's cloak, glacier robe, lightning robe, magma coat, terra mantle, dark lord's cape, wyrmhunter robe, knight armor, serpent coat, velvet mantle, greenwood coat, focus cape, robe of the underworld
+  CALÇAS:      windy kilt, dwarven legs, plate legs
+  BOTAS:       steel boots, firewalker boots, guardian boots
+  CAPACETES:   dwarven helmet, krimhorn helmet, ragnir helmet, mighty helm of green sparks, horseman helmet, steel helmet, dark helmet, magic plate helmet, magma monocle, amazon helmet, beholder helmet, devil helmet, strange helmet, crown helmet, vampire helmet, firely hat
+  ESCUDOS:     dark shield, scarab shield, salamander shield, tortoise shield, dwarven shield, tusk shield, rose shield, ancient shield, norse shield, foldbook of warding, beholder shield, castle shield, griffin shield, rainbow shield, guardian shield, eagle shield, dominant shield
+  ESPADAS:     serpent sword, spike sword, crimson sword, broadsword, wyvern fang, assassin dagger, haunted blade, fire sword, two handed sword
+  MAÇAS:       clerical mace, taurus mace, skull staff, furry club, diamond sceptre, dragon hammer, dragonbone staff, crystal mace, war hammer, sapphire hammer
+  MACHADOS:    obsidian lance, barbarian axe, double axe, beastslayer axe, halberd, dwarven axe, zaoan halberd, stoned cleaver, twin hooks, knight axe, fire axe, daramian waraxe
+  DISTÂNCIA:   viper star, enchanted spear, southern tribe boomerang
+  AMULETOS:    glacier amulet, earth amulet, sacred life amulet, blindage amulet, overcharged amulet, godless amulet, arkenstone amulet
+  ANEIS:       spark ring
+
+------------------------------------------------------------
+  Tier 4  (Level 51-70)  |  faixa de level p/ drop
+------------------------------------------------------------
+
+  ARMADURAS:   amazon armor, zaoan armor, crown armor, belted cape, lavos armor, voltage armor, swamplair armor, divine plate, molten plate, frozen plate, dragonhunter robe, firely armor, vulcan robe, bloody robe, skullcracker armor, wyvern armor, golden armor, windy robe
+  CALÇAS:      zaoan legs, frozen legs, heavy legs, vulcan legs, knight legs, crown legs, primate legs, magma legs, lightning legs, glacier kilt, terra legs, blue legs, boggy legs, yalahari leg piece, windy legs
+  BOTAS:       (nada nesta faixa)
+  CAPACETES:   zaoan helmet, frozen helmet, skull helmet, crusader helmet, warrior helmet, barbarian curse elmo, glacier mask, stoned elmo, windy hat
+  ESCUDOS:     dragon shield, book of the bending secrets, crown shield, tower shield, amazon shield, shield of honour, medusa shield
+  ESPADAS:     djinn blade, epee, ice rapier, zaoan sword, savage sword, crystal sword, blacksteel sword, bloody edge, pharaoh sword, relic sword, bright sword, yellow sword, giant sword, mystic blade, berserker, nightmare blade, demonrage sword, mercenary sword
+  MAÇAS:       shadow sceptre, heavy mace, northern star, orcish maul, hammer of wrath, bonebreaker, spiked squelcher, queen's sceptre, onyx flail, cranial basher, lunar staff, chaos mace, jade hammer, amber staff, blessed sceptre, abyss hammer, lich staff
+  MACHADOS:    war axe, dreaded cleaver, noble axe, guardian halberd, headchopper, vile axe, glorious axe, dragon lance, ravager's axe, ornamented axe, naginata, butcher's axe, ruthless axe, drakinata, ravenwing, vulcan axe, heroic axe, angelic axe, crystalline axe, heavy war axe, twin axe, heavy axe, vampire chopper
+  DISTÂNCIA:   (nada nesta faixa)
+  AMULETOS:    vulcan amulet, dark lord amulet, windy amulet
+  ANEIS:       (nada nesta faixa)
+
+------------------------------------------------------------
+  Tier 5  (Level 71-90)  |  faixa de level p/ drop
+------------------------------------------------------------
+
+  ARMADURAS:   dragon scale mail, elven armor, fireborn giant armor, earthborn titan armor, windborn colossus armor, oceanborn leviathan armor, master archer's armor, darkred armor, haringer harash
+  CALÇAS:      demon legs, great dragon legs, spawn legs, golden legs
+  BOTAS:       golden boots
+  CAPACETES:   heavy helmet, royal helmet, ceremonial mask, demon helmet, olympus helmet, dragon scale helmet, winged helmet
+  ESCUDOS:     dark lord shield, vampire shield, phoenix shield, dragonbone shield, demon shield, ancient earth shield, goldensilver shield, windy shield, guardian angel shield, fiery rainbow shield, sparking rainbow shield, necromancer shield, tempest shield
+  ESPADAS:     justice seeker, sais, dragon slayer, thaian sword, runed sword, electric sword, firelywood sword, emerald sword, havoc blade, magic sword
+  MAÇAS:       stomper, drachaku, skullcrusher, silver mace, heavy war hammer, club of dragonbreath, crystalline club, heavy hammer, obsidian truncheon, arcane staff, dark trinity mace, thunder hammer, enchanted staff
+  MACHADOS:    reaper's axe, executioner, reapering, royal axe, demonwing axe, titan axe, hellforged axe, impaler, great axe, golden slim axe, lava axe, mythril axe, stonecutter axe, solar axe, jungle axe, hecrass axe
+  DISTÂNCIA:   assassin star
+  AMULETOS:    fury amulet, ruby necklace, demonbone amulet, starlight amulet, platinum amulet
+  ANEIS:       southern ring, death ring, power source ring
+
+------------------------------------------------------------
+  Tier 6  (Level 91-130)  |  faixa de level p/ drop
+------------------------------------------------------------
+
+  ARMADURAS:   demon armor, heavy chest, vulcan armor, horned armor, yalahari armor, magic plate armor, umbral fire robe, gladiator armor
+  CALÇAS:      dark lord legs, dragon scale legs
+  BOTAS:       (nada nesta faixa)
+  CAPACETES:   horned helmet, helmet of the ancients
+  ESCUDOS:     icy shield, terran rainbow shield, nightmare shield, mastermind shield
+  ESPADAS:     the epiphany, calamity, firely sword, crystalline sword, umbral fire sword, avenger, heavy blade, warlord sword, magic longsword, heavy war blade, undead power blade, golden sword
+  MAÇAS:       spawn hammer, demonbone, dead hammer
+  MACHADOS:    metal axe
+  DISTÂNCIA:   (nada nesta faixa)
+  AMULETOS:    (nada nesta faixa)
+  ANEIS:       (nada nesta faixa)
+
+------------------------------------------------------------
+  Tier 7  (Level 131-200)  |  faixa de level p/ drop
+------------------------------------------------------------
+
+  ARMADURAS:   olympus chest, great dragon armor, hive plate, vampire coat, legendary dragon armor, dark lord armor, medreth chest
+  CALÇAS:      (nada nesta faixa)
+  BOTAS:       (nada nesta faixa)
+  CAPACETES:   golden helmet
+  ESCUDOS:     crystal shield, great shield
+  ESPADAS:     flame sword, frozen sword, ogre sword, hive sword, blade of destruction
+  MAÇAS:       ice hammer, constrictor hammer, ogre hammer, hive hammer, mace of destruction
+  MACHADOS:    ice axe, frozen axe, ogre axe, hive axe, axe of destruction
+  DISTÂNCIA:   (nada nesta faixa)
+  AMULETOS:    (nada nesta faixa)
+  ANEIS:       (nada nesta faixa)
+
+------------------------------------------------------------
+  Tier 8  (Level 201-400)  |  faixa de level p/ drop
+------------------------------------------------------------
+
+  ARMADURAS:   dominant armor, crystal chest, moon chest, alloy chest, incan armor, hunter armor, aquazar armor, coroak armor, illusion chest
+  CALÇAS:      alloy legs, dominant legs, incan legs, hunter legs, aquazar legs, coroak legs, illusion legs, crystal legs, moon legs
+  BOTAS:       alloy boots, dominant boots, incan boots, hunter boots, aquazar boots, coroak boots, illusion boots, crystal boots, moon boots
+  CAPACETES:   alloy hat, dominat helmet, incan helmet, hunter helmet, aquazar helmet, coroak helmet, illusion hat, crystal helmet, moon helmet
+  ESCUDOS:     blessed shield
+  ESPADAS:     (nada nesta faixa)
+  MAÇAS:       (nada nesta faixa)
+  MACHADOS:    (nada nesta faixa)
+  DISTÂNCIA:   (nada nesta faixa)
+  AMULETOS:    (nada nesta faixa)
+  ANEIS:       (nada nesta faixa)
+
+------------------------------------------------------------
+  Tier 9  (Level 400+)  |  faixa de level p/ drop
+------------------------------------------------------------
+
+  ARMADURAS:   crystalline armor, falcon armor, ancient falmer armor, benemold armor, deadric chest, solar armor, imperial armor, eruption armor, infernat gold armor
+  CALÇAS:      falcon legs, ancient falmer legs, benemold legs, deadric legs, solar legs, imperial legs, eruption legs, crystalline legs, infernat gold legs
+  BOTAS:       falcon boots, ancient falmer boots, benemold boots, deadric boots, solar boots, imperial boots, eruption boots, crystalline boots, infernat gold boots
+  CAPACETES:   falcon helmet, ancient falmer helmet, benemold helmet, deadric hat, solar helmet, imperial helmet, eruption helmet, crystalline helmet, infernat gold helmet
+  ESCUDOS:     (nada nesta faixa)
+  ESPADAS:     legendary slayer, mitologic sword
+  MAÇAS:       legendary hammer, mitologic flail
+  MACHADOS:    legendary chopper, mitologic axe
+  DISTÂNCIA:   (nada nesta faixa)
+  AMULETOS:    (nada nesta faixa)
+  ANEIS:       (nada nesta faixa)
+
+------------------------------------------------------------
+  NOTAS / ITENS FORA DA TIER LIST
+------------------------------------------------------------
+
+- MUNIÇÃO (nao listada por tier - sem stats no items.xml):
+  bolt, arrow, poison arrow, burst arrow, power bolt, infernal bolt,
+  sandstone, sniper arrow, onyx arrow, shiver arrow, flaming arrow, earth arrow,
+  obsidian statue (13 itens)
+
+- MOCHILAS/BACKPACKS (46 itens): nao contam como equipamento de combate.
+
+- ITENS DECORATIVOS/DE QUEST excluidos:
+  moon Shield (id 13405, slot bota errado), loot bag (id 9775),
+  magical torch (id 9956, defesa 25, decorativo).
+
+- COBERTURA: a tier list inclui todos os itens de equipamento com slot ou
+  weapontype do data/items/items.xml (armaduras, calcas, botas, capacetes,
+  escudos, armas 1h/2h, amuletos e aneis), deduplicados por nome (itens
+  repetidos com ids diferentes aparecem uma unica vez, com o melhor stat).

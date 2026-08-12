@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Quara Mantassin" nameDescription="a quara mantassin" race="undead" experience="150000" speed="300" manacost="0">
+	<health now="30000" max="30000"/>
+	<look type="72" corpse="18160"/>
+	<targetchange interval="4000" chance="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="melee" interval="2000" skill="100" attack="100"/>
+		<attack name="water bubbles" interval="7000" chance="75" min="-90" max="-130"/>
+		<attack name="water wave" interval="3000" chance="75" min="-480" max="-570"/>
+		<attack name="water punch" interval="6000" chance="100" min="-50" max="-100"/>
+	</attacks>
+	<defenses armor="80" defense="80"/>
+	
+</monster>

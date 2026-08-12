@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- novo formato AVATAR, monstro com dificuldade facil, lv 1 -->
+<monster name="Cockroach" nameDescription="a Cockroach" race="undead" experience="625" speed="176" manacost="305">
+	<health now="100" max="100"/>
+	<look type="1220" corpse="18160"/>
+	<targetchange interval="2000" chance="0"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag convinceable="1"/>
+		<flag pushable="0"/>
+		<flag canpushitems="0"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="30" attack="19"/>
+	</attacks>
+	<defenses armor="8" defense="11"/>
+<script>
+<event name="mobsKill"/>
+</script>
+	
+</monster>

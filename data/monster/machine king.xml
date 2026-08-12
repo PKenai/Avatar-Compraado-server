@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Machine King" nameDescription="a machine king" race="undead" experience="1000000" speed="1000" manacost="0">
+	<health now="300000" max="300000"/>
+	<look type="1121" corpse="18160"/>
+	<targetchange interval="4000" chance="50"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag runonhealth="0"/>
+	</flags>
+<script>
+<event name="mobsKill"/>
+</script>
+	<attacks>
+		<attack name="fire discharge" interval="3000" chance="75" min="-1215" max="-1355"/>
+		<attack name="fire thunderbolt" interval="2000" chance="100" min="-915" max="-1125"/>
+		<attack name="fire overload" interval="4000" chance="40" min="-715" max="-985"/>
+	</attacks>
+	<defenses armor="80" defense="80">
+		<defense name="healing" interval="3000" chance="30" min="1500" max="2000">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	
+</monster>
