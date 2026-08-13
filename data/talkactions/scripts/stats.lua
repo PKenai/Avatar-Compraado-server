@@ -260,7 +260,7 @@ function onSay(cid, words, param, channel)
         lastDobra = "Error - Reportar à administração do jogo."
     end
     
-    local stringEN = "Paragon: "..getPlayerResets(cid)..".\nElemental Coins: "..coins..".\nBlessing: "..getBlessString(cid)..""..getArchangelString(cid)..".\nÚltima dobra aprimorada: "..lastDobra.."."
+    local stringEN = "Elemental Coins: "..coins..".\nBlessing: "..getBlessString(cid)..""..getArchangelString(cid)..".\nÚltima dobra aprimorada: "..lastDobra.."."
     local CDPassive, potExp, potRed = getColdownPassive(cid), getPotionExpString(cid), getPotionRedString(cid)
     local info = stringEN..CDPassive..potExp..potRed, stringEN..CDPassive..potExp..potRed
     

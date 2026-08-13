@@ -1148,8 +1148,7 @@
         <attribute key="lifesteal" value="20" />
 	</item>
 	
-<!-- heavy set -->
-	<item id="12785" article="a" name="heavy legs">
+	<item id="18872" article="a" name="Saia de penas">
 		<attribute key="weight" value="3500" />
 		<attribute key="absorbPercentAll" value="3"/>
 		<attribute key="armor" value="8" />
@@ -4730,7 +4729,7 @@
 			<attribute key="armor" value="16" />
 			<attribute key="slotType" value="body" />
 		</item>
-	<item id="12810" article="a" name="haringer harash">
+	<item id="12810" article="a" name="Armadura do Rugido">
 			<attribute key="weight" value="5800" />
 			<attribute key="armor" value="15" />
 			<attribute key="maxhealthpoints" value="100"/>
@@ -15655,5 +15654,11 @@
 	</item>
 	<item id="18615" name="Escada caindo leste">
 		<attribute key="floorChange" value="down"/>
+	</item>
+	<item id="18869" article="a" name="Colmeia de barro">
+		<attribute key="weight" value="5" />
+	</item>
+	<item id="18873" article="a" name="pena de pica-pau da terra">
+		<attribute key="weight" value="10" />
 	</item>
 </items>

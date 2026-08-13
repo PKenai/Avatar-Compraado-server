@@ -4,9 +4,9 @@ function onStepIn(cid, item, position, fromPosition)
 		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You cant pass with battle locked.")
 		return false
 	 end
-	if getPlayerLevel(cid) < 200 or getPlayerResets(cid) < 90 then
+	if getPlayerLevel(cid) < 200  then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 200+ e Paragon 90+ para entrar na Tyrn Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "Você precisa de Level 200+  para entrar na Tyrn Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else
 		doTeleportThing(cid, {x = 544, y = 620, z = 12}, false)

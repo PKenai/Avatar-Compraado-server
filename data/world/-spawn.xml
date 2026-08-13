@@ -218,7 +218,4 @@
   <spawn centerx="406" centery="673" centerz="10" radius="1">
     <npc name="Tunico" x="1" y="0" z="10" spawntime="40"/>
   </spawn>
-  <spawn centerx="496" centery="175" centerz="12" radius="1">
-    <npc name="leviathan quest" x="0" y="-1" z="12" spawntime="40"/>
-  </spawn>
 </spawns>

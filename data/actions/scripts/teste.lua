@@ -22,7 +22,6 @@ function()
   print("printando")
 end, 5000)
 
-dofile(getDataDir().."lib/isoled/152-npcTaskSystem.lua")
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
   if not serverInTest then

@@ -23,8 +23,8 @@ function creatureSayCallback(cid, type, msg)
     if not talkState[talkUser] or talkState[talkUser] <= 0 then
         talkState[talkUser] = 1 
     end
-	if getPlayerLevel(cid) < 230 or getPlayerResets(cid) < 110 then
-		selfSay(getLangString(cid, "You need Level 230+ and Paragon 110+ to help me.", "Você precisa de Level 230+ e Paragon 110+ para me ajudar."), cid)
+	if getPlayerLevel(cid) < 230  then
+		selfSay(getLangString(cid, "You need Level 230+  to help me.", "Você precisa de Level 230+  para me ajudar."), cid)
 		return true
 	end
 	if getPlayerStorageValue(cid, "demonAccess") == 2 then

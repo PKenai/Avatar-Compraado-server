@@ -19,6 +19,7 @@
 	</flags>
 	<attacks>
 		<attack name="melee" interval="2000" skill="80" attack="80"/>
+		<attack name="poison" interval="2000" chance="20" range="7" min="-90" max="-170"/>
 	</attacks>
 	<defenses armor="0" defense="0"/>
 	<loot>

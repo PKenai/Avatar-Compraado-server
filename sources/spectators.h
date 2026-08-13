@@ -692,6 +692,16 @@ class Spectators
 			for(SpectatorList::iterator it = spectators.begin(); it != spectators.end(); ++it)
 				it->first->sendRemoveInventoryItem(slot);
 		}
+
+		void sendProgressbar(uint32_t id, uint32_t duration, bool ltr = true)
+		{
+			if(!owner)
+				return;
+
+			owner->sendProgressbar(id, duration, ltr);
+			for(SpectatorList::iterator it = spectators.begin(); it != spectators.end(); ++it)
+				it->first->sendProgressbar(id, duration, ltr);
+		}
 };
 #endif
 

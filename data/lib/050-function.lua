@@ -1949,13 +1949,12 @@ function selectLang(cid)
 end
 
 function doPlayerResetMagicLevel(cid, keepBend)
-  local paragonBend = getParagonExtraBend(cid)
   if type(keepBend) ~= "number" or keepBend < 0 then
     keepBend = 0
   end
   local guid = getPlayerGUID(cid)
   doRemoveCreature(cid)
-  db.executeQuery('UPDATE `players` SET `maglevel` = "'..(paragonBend + keepBend)..'", `manaspent` = "0" WHERE `id` = "'..guid..'"')
+  db.executeQuery('UPDATE `players` SET `maglevel` = "'..(keepBend)..'", `manaspent` = "0" WHERE `id` = "'..guid..'"')
 end
 
 function getPlayerItens(cid, itens) --itens = {itemid = x, amount = x}
@@ -1979,38 +1978,6 @@ function doPlayerRemoveItens(cid, itens)
   end
 end
 
-
-function doPlayerAddReset(cid, bonusHealth, bonusMana, bonusPoints)
-  local resetToDo = getPlayerResets(cid)+1
-  local playerLevel = getPlayerLevel(cid)
-  local playerElement = getPlayerElement(cid)
-  local playerHealth, playerMana = getCreatureHealth(cid), getCreatureMana(cid)
-  local playerHealthBonus = math.max(getPlayerStorageValue(cid, "pointsUsedInLifeCrystal")+1, 1)-1 --Referente ao crystal que dá vida.
-
-  setPlayerResets(cid, resetToDo)
-  setPlayerMagLevel(cid, 10)
-  setCreatureMaxHealth(cid, 300+(bonusHealth*resetToDo)+playerHealthBonus)
-  setCreatureMaxMana(cid, 100+(bonusMana*resetToDo))
-  doCreatureAddHealth(cid, -playerHealth+(300+(bonusHealth*resetToDo)))
-  doCreatureAddMana(cid, -playerMana+(100+(bonusMana*resetToDo)))
-  setPlayerLevelOne(cid)
-  doPlayerSetElementPoints(cid, playerElement, (playerLevel-1)+getPointsUsedInSkill(cid, "stones")+(bonusPoints*resetToDo))
-
-  setPlayerStorageValue(cid, "getPointsInDodge", -1)
-  setPlayerStorageValue(cid, "getPointsInHealth", -1)
-  setPlayerStorageValue(cid, "getPointsInMana", -1)
-  setPlayerStorageValue(cid, "getPointsInBendLevel", -1)
-  --setPlayerStorageValue(cid, "getPointsInStones", -1) (isso não pode resetar)
-
-  for x = 1, playerLevel+10 do
-    setPlayerStorageValue(cid, "onGainPointsLv"..x, -1)
-  end
-
-
-  doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "You were downgraded from Level "..playerLevel.." to Level 1.")
-  doPlayerSave(cid, true)
-  return true
-end
 
 function addPlayerTimeOnline(cid, secs)
   local guid = getPlayerGUID(cid)

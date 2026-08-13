@@ -63,7 +63,7 @@ rateExperience = 1.5 (config.lua)
 ------------------------------------------------------------
 
   ARMADURAS:   amazon armor, zaoan armor, crown armor, belted cape, lavos armor, voltage armor, swamplair armor, divine plate, molten plate, frozen plate, dragonhunter robe, firely armor, vulcan robe, bloody robe, skullcracker armor, wyvern armor, golden armor, windy robe
-  CALÇAS:      zaoan legs, frozen legs, heavy legs, vulcan legs, knight legs, crown legs, primate legs, magma legs, lightning legs, glacier kilt, terra legs, blue legs, boggy legs, yalahari leg piece, windy legs
+  CALÇAS:      zaoan legs, frozen legs, Saia de penas, vulcan legs, knight legs, crown legs, primate legs, magma legs, lightning legs, glacier kilt, terra legs, blue legs, boggy legs, yalahari leg piece, windy legs
   BOTAS:       (nada nesta faixa)
   CAPACETES:   zaoan helmet, frozen helmet, skull helmet, crusader helmet, warrior helmet, barbarian curse elmo, glacier mask, stoned elmo, windy hat
   ESCUDOS:     dragon shield, book of the bending secrets, crown shield, tower shield, amazon shield, shield of honour, medusa shield
@@ -78,7 +78,7 @@ rateExperience = 1.5 (config.lua)
   Tier 5  (Level 71-90)  |  faixa de level p/ drop
 ------------------------------------------------------------
 
-  ARMADURAS:   dragon scale mail, elven armor, fireborn giant armor, earthborn titan armor, windborn colossus armor, oceanborn leviathan armor, master archer's armor, darkred armor, haringer harash
+  ARMADURAS:   dragon scale mail, elven armor, fireborn giant armor, earthborn titan armor, windborn colossus armor, oceanborn leviathan armor, master archer's armor, darkred armor, Armadura do Rugido
   CALÇAS:      demon legs, great dragon legs, spawn legs, golden legs
   BOTAS:       golden boots
   CAPACETES:   heavy helmet, royal helmet, ceremonial mask, demon helmet, olympus helmet, dragon scale helmet, winged helmet

@@ -77,16 +77,10 @@ return TRUE
 end
 
 function remakeAirEarth(cid, value)
-	if cid and isCreature(cid) and getPlayerResets(cid) >= 750 then
-		value = value * 1.15
-	end
 	return value
 end
 
 function remakeValue(vocation, value, cid)
-	if cid and isCreature(cid) and getPlayerResets(cid) >= 750 then
-		value = value * 1.15
-	end
 	if cid and isCreature(cid) and type(getPlayerStorageValue(cid, "jumpdebuff")) == "number" and exhaustion.check(cid, "jumpdebuff") and type(getPlayerStorageValue(cid, "debuffValue")) == "number" and getPlayerStorageValue(cid, "debuffValue") > 0 then
 		value = value*((100-getPlayerStorageValue(cid, "debuffValue"))*0.01)
 	end

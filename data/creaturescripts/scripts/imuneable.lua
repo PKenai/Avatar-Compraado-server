@@ -339,9 +339,6 @@ local function executePassive(cid, attacker)
 		hpRec = 0.5
 		passiveCd = 2 * 60 * 60
 	end
-	if getPlayerResets(cid) >= 140 then
-		passiveCd = passiveCd - (30 * 60)
-	end
 
     doCreatureAddHealth(cid, getCreatureMaxHealth(cid)*hpRec)
     setPlayerStorageValue(cid, "hasPassiveDeathActive", os.time()+passiveCd)

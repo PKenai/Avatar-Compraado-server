@@ -40,6 +40,7 @@
 	
 	<action itemid="18166" event="script" value="slotmachine.lua"/>
 	<action itemid="18167" event="script" value="slotmachineVermelho.lua"/>
+	<action itemid="18875" event="script" value="potionCraftAction.lua"/>
 	<action itemid="18193-18196" event="script" value="spiritualTotem.lua"/>
 
 
@@ -71,7 +72,6 @@
 	<action actionid="40291-40293" event="script" value="energyAction.lua"/>
 	<action actionid="52138" event="script" value="trezentosStart.lua"/>
 	<action actionid="52139" event="script" value="trezentosChest.lua"/>
-	<action actionid="46140" event="script" value="leviathan quest.lua"/>
 
 	<action actionid="27603" event="script" value="tyrnReward.lua"/>
 	<action actionid="27515" event="script" value="seaReward.lua"/>
@@ -176,26 +176,6 @@
     	<action itemid="7635;7634;7636" event="script" value="bloodRoom/potionEmpty.lua"/>
     	<action itemid="8473;7588;7618;13368;13367;13366;15014" event="script" value="bloodRoom/fullPotion.lua"/>
 
-        <!-- RESET QUEST -->
-        <action actionid="3470" event="script" value="quests/resetquest/guardRoom.lua"/>
-        <action itemid="9662" event="script" value="quests/resetquest/guardRoom.lua"/>
-        <action actionid="3485;3486" event="script" value="quests/resetquest/leverDL.lua"/>
-        <action itemid="3957" event="script" value="quests/resetquest/warHorn.lua"/>
-        <action actionid="3495-3503" event="script" value="quests/resetquest/bossRoom.lua"/>
-        <action actionid="3504-3507" event="script" value="quests/resetquest/elementalRoom.lua"/>
-        <action actionid="3508" event="script" value="quests/resetquest/limboScape.lua"/>
-        <action itemid="2416" event="script" value="quests/resetquest/quebrarPorta.lua"/>
-        <action itemid="2558" event="script" value="quests/resetquest/quebrarEstante.lua"/>
-        <action itemid="5468" event="script" value="quests/resetquest/bossFinal.lua"/> 
-        <action actionid="3511" event="script" value="quests/resetquest/bauFinal.lua"/>
-        <action uniqueid="8922" event="script" value="quests/resetquest/enter.lua"/>
-
-        <!-- POI QUEST -->
-        <action actionid="8732" event="script" value="quests/poi/preEnter.lua"/>
-        <action actionid="8712;8713" event="script" value="quests/poi/openLeverFirst.lua"/>
-        <action actionid="8714-8717" event="script" value="quests/poi/openStones.lua"/>
-        <action actionid="8726-8730" event="script" value="quests/poi/reward1.lua"/>
-        <action itemid="12832" event="script" value="quests/poi/supremeElixir.lua"/>
 
 
     	<!-- Other Liquids -->
@@ -203,7 +183,6 @@
     	<action itemid="7620;7589;7590" event="script" value="liquids/manaPotions.lua"/>
 
     	<!-- Quests -->
-    	<action uniqueid="3973" event="script" value="quests/demonSkeletonBoss.lua"/>
     	<action uniqueid="3975" event="script" value="quests/expIce.lua"/>
     	<action uniqueid="3970" event="script" value="quests/expWater.lua"/>
     	<action uniqueid="5556" event="script" value="quests/anihilator.lua"/>
@@ -317,4 +296,5 @@
 	<action itemid="18432" event="script" value="camera.lua"/>
 	<action itemid="18433" event="script" value="camera.lua"/>
 	<action itemid="18434" event="script" value="camera.lua"/>
+	<action actionid="49175" event="script" value="katataChest.lua"/>
 </actions>

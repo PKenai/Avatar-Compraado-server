@@ -4,18 +4,13 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
   end
 
   if itemEx.actionid == 62126 and item.itemid == 2147 then
-    local counter = getPlayerResets(cid)
-    if type(counter) ~= "number" then
-      counter = 0
-    end
-
     if isPlayerPzLocked(cid) then
       doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You cant pass with battle locked.")
       return false
     end
 
-    if getPlayerLevel(cid) < 250 or getPlayerResets(cid) < 120 then
-      doCreatureSay(cid, "Você precisa de Level 250+ e Paragon 120+ para entrar na Draptor Quest.", TALKTYPE_ORANGE_1, false, cid)
+    if getPlayerLevel(cid) < 250  then
+      doCreatureSay(cid, "Você precisa de Level 250+  para entrar na Draptor Quest.", TALKTYPE_ORANGE_1, false, cid)
       return false
     end
 

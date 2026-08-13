@@ -119,16 +119,10 @@ function canBuyUltimateFold(cid, words, sequencia)
             if not hasFoldIsBuy(cid, element.." "..words) then
                 if level >= info.level then
                     local reqStones = 2
-					local reqTasks = 100
 					if sequencia == 13 then
 						reqStones = 5
-						reqTasks = 150
 					end
-					local counter = getPlayerResets(cid)
-					if type(counter) ~= "number" then
-						counter = 0
-					end
-					if (counter >= reqTasks) and (doPlayerRemoveItem(cid, theStones[getPlayerVocation(cid)], reqStones)) then
+					if (doPlayerRemoveItem(cid, theStones[getPlayerVocation(cid)], reqStones)) then
 						setFoldBuy(cid, element.." "..words)
 
                         if spells[x].var then

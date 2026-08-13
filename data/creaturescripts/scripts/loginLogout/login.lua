@@ -1,5 +1,4 @@
 dofile(getDataDir().."creaturescripts/scripts/loginLogout/loginFuncs.lua")
-dofile(getDataDir().."lib/isoled/152-npcTaskSystem.lua")
  
 local config = {
     loginMessageEN = getConfigValue('loginMessageEN'),
@@ -369,7 +368,7 @@ function onLogin(cid)
 		end
 		local agi = getPlayerStorageValue(cid, "getPointsInDodge")
 		agi = agi ~= -1 and agi or 0
-		doChangeSpeed(cid, (agi*6) + getParagonExtraSpeed(cid))
+		doChangeSpeed(cid, agi*6)
        
     if getPlayerAccess(cid) >= 5 then
 		vocId = vocId +1
@@ -473,6 +472,8 @@ function onLogin(cid)
     registerCreatureEvent(cid, "BombermanDeath")
     registerCreatureEvent(cid, "BombermanOpcode")
     registerCreatureEvent(cid, "Store")
+    registerCreatureEvent(cid, "QuestKill")
+    registerCreatureEvent(cid, "QuestsOpcode")
     cameraNormalizeOnLogin(cid)
     sendOpCode(cid, 19, tostring(getPlayerVocation(cid)))
  

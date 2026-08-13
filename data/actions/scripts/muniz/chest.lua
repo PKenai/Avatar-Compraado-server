@@ -5,8 +5,8 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
 		return true
 	end 
-	if getPlayerLevel(cid) < 150 or getPlayerResets(cid) < 70 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa de Level 150+ e Paragon 70+ para adquirir esta recompensa.")
+	if getPlayerLevel(cid) < 150  then
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa de Level 150+ e Reset 70+ para adquirir esta recompensa.")
 		return true
 	end 
 	if not isCreature(lastBossCid) then 

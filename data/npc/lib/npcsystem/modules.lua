@@ -889,9 +889,6 @@ if(Modules == nil) then
       return false
     end
 	local theBuyPrice = self.npcHandler.shopItems[itemid].buyPrice
-	if (getCreatureName(getNpcId()) == "Edward Colin" or getCreatureName(getNpcId()) == "Hugo" or getCreatureName(getNpcId()) == "Borkas") and getPlayerResets(cid) >= 50 then
-		theBuyPrice = theBuyPrice*0.8
-	end
 
     local backpack = 1988
     local totalCost = amount * theBuyPrice
@@ -964,9 +961,6 @@ if(Modules == nil) then
       return false
     end
 	local theSellPrice = self.npcHandler.shopItems[itemid].sellPrice
-	if (getCreatureName(getNpcId()) == "Mithlock" or getCreatureName(getNpcId()) == "Kurt") and getPlayerResets(cid) >= 20 then
-		theSellPrice = theSellPrice*1.2
-	end
     local parseInfo = {
       [TAG_PLAYERNAME] = getPlayerName(cid),
       [TAG_ITEMCOUNT] = amount,
@@ -1009,12 +1003,6 @@ if(Modules == nil) then
     end
 	local desconto = false
 	local descontoBuy = false
-	if (getCreatureName(getNpcId()) == "Mithlock" or getCreatureName(getNpcId()) == "Kurt") and getPlayerResets(cid) >= 20 then
-		desconto = true
-	end
-	if (getCreatureName(getNpcId()) == "Edward Colin" or getCreatureName(getNpcId()) == "Hugo" or getCreatureName(getNpcId()) == "Borkas") and getPlayerResets(cid) >= 50 then
-		descontoBuy = true
-	end
     local itemWindow = {}
     for itemid, attr in pairs(module.npcHandler.shopItems) do
       local item = {id = itemid, buy = attr.buyPrice, sell = attr.sellPrice, subType = attr.subType, name = attr.realName}
@@ -1064,10 +1052,6 @@ if(Modules == nil) then
 
 	local theCost = parentParameters.cost
     if(parentParameters.eventType == SHOPMODULE_SELL_ITEM) then
-      if (getCreatureName(getNpcId()) == "Mithlock" or getCreatureName(getNpcId()) == "Kurt") and getPlayerResets(cid) >= 20 then
-		theCost = theCost * 1.2
-		parseInfo[TAG_TOTALCOST] = theCost * module.amount
-	  end
       local ret = doPlayerSellItem(cid, parentParameters.itemid, module.amount, theCost * module.amount)
       if(ret) then
         local msg = module.npcHandler:getMessage(MESSAGE_ONSELL)
@@ -1079,10 +1063,6 @@ if(Modules == nil) then
         module.npcHandler:say(msg, cid)
       end
     elseif(parentParameters.eventType == SHOPMODULE_BUY_ITEM) then
-      if (getCreatureName(getNpcId()) == "Edward Colin" or getCreatureName(getNpcId()) == "Hugo" or getCreatureName(getNpcId()) == "Borkas") and getPlayerResets(cid) >= 50 then
-		theCost = theCost * 0.8
-		parseInfo[TAG_TOTALCOST] = theCost * module.amount
-	  end
       local ret = doPlayerBuyItem(cid, parentParameters.itemid, module.amount, theCost * module.amount, parentParameters.subType)
       if(ret) then
         if parentParameters.itemid == ITEM_PARCEL then
@@ -1097,10 +1077,6 @@ if(Modules == nil) then
         module.npcHandler:say(msg, cid)
       end
     elseif(parentParameters.eventType == SHOPMODULE_BUY_ITEM_CONTAINER) then
-      if (getCreatureName(getNpcId()) == "Edward Colin" or getCreatureName(getNpcId()) == "Hugo" or getCreatureName(getNpcId()) == "Borkas") and getPlayerResets(cid) >= 50 then
-		theCost = theCost * 0.8
-		parseInfo[TAG_TOTALCOST] = theCost * module.amount
-	  end
       local ret = doPlayerBuyItemContainer(cid, parentParameters.container, parentParameters.itemid, module.amount, parentParameters.cost * module.amount, parentParameters.subType)
       if(ret) then
         local msg = module.npcHandler:getMessage(MESSAGE_ONBUY)
@@ -1155,23 +1131,14 @@ if(Modules == nil) then
     }
 
     if(parameters.eventType == SHOPMODULE_SELL_ITEM) then
-		if (getCreatureName(getNpcId()) == "Kurt" or getCreatureName(getNpcId()) == "Mithlock") and getPlayerResets(cid) >= 20 then
-			parseInfo[TAG_TOTALCOST] = parseInfo[TAG_TOTALCOST]*1.2
-		end
       local msg = module.npcHandler:getMessage(MESSAGE_SELL)
       msg = module.npcHandler:parseMessage(msg, parseInfo)
       module.npcHandler:say(msg, cid)
     elseif(parameters.eventType == SHOPMODULE_BUY_ITEM) then
-		if (getCreatureName(getNpcId()) == "Edward Colin" or getCreatureName(getNpcId()) == "Hugo" or getCreatureName(getNpcId()) == "Borkas") and getPlayerResets(cid) >= 50 then
-			parseInfo[TAG_TOTALCOST] = parseInfo[TAG_TOTALCOST]*0.8
-		end
       local msg = module.npcHandler:getMessage(MESSAGE_BUY)
       msg = module.npcHandler:parseMessage(msg, parseInfo)
       module.npcHandler:say(msg, cid)
     elseif(parameters.eventType == SHOPMODULE_BUY_ITEM_CONTAINER) then
-		if (getCreatureName(getNpcId()) == "Edward Colin" or getCreatureName(getNpcId()) == "Hugo" or getCreatureName(getNpcId()) == "Borkas") and getPlayerResets(cid) >= 50 then
-			parseInfo[TAG_TOTALCOST] = parseInfo[TAG_TOTALCOST]*0.8
-		end
       local msg = module.npcHandler:getMessage(MESSAGE_BUY)
       msg = module.npcHandler:parseMessage(msg, parseInfo)
       module.npcHandler:say(msg, cid)

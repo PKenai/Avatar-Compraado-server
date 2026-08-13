@@ -6,9 +6,9 @@ function onStepIn(cid, item, position, fromPosition)
       	doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You cant pass with battle locked.")
 		return false
 	end
-	if getPlayerLevel(cid) < 130 or getPlayerResets(cid) < 60 then
+	if getPlayerLevel(cid) < 130  then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 130+ e Paragon 60+ para entrar na Medreth Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "Você precisa de Level 130+  para entrar na Medreth Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else 
 		doTeleportThing(cid, {x=292, y=840, z=11}, false)

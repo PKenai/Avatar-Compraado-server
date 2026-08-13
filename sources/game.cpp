@@ -1196,6 +1196,12 @@ bool Game::playerMoveCreature(uint32_t playerId, uint32_t movingCreatureId,
 
 	if(player != movingCreature)
 	{
+		if(movingCreature->getPlayer() && !player->hasFlag(PlayerFlag_CanPushAllCreatures))
+		{
+			player->sendCancelMessage(RET_NOTPOSSIBLE);
+			return false;
+		}
+
 		if(!player->hasFlag(PlayerFlag_IgnoreProtectionZone) && (movingCreature->getZone() == ZONE_PROTECTION
 			|| movingCreature->getZone() == ZONE_OPTIONAL) && !toTile->hasFlag(TILESTATE_OPTIONALZONE)
 			&& !toTile->hasFlag(TILESTATE_PROTECTIONZONE))
@@ -6791,3 +6797,16 @@ void Game::parsePlayerExtendedOpcode(uint32_t playerId, uint8_t opcode, const st
 	for(CreatureEventList::iterator it = extendedOpcodeEvents.begin(); it != extendedOpcodeEvents.end(); ++it)
 		(*it)->executeExtendedOpcode(player, opcode, buffer);
 }
+
+void Game::startProgressbar(Creature* creature, uint32_t duration, bool ltr)
+{
+	const SpectatorVec& list = getSpectators(creature->getPosition());
+
+	Player* tmpPlayer = NULL;
+	for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
+	{
+		if((tmpPlayer = (*it)->getPlayer()))
+			tmpPlayer->sendProgressbar(creature->getID(), duration, ltr);
+	}
+}
+

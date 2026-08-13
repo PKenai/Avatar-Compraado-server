@@ -1,5 +1,3 @@
-dofile(getDataDir().."creaturescripts/scripts/onMoveItems/resetQuest.lua")
-
 local parcelId = 2595
 local mailId = 2334
 local maxItens = 150
@@ -13,17 +11,6 @@ function onMoveItem(cid, item, formPosition, toPosition, fromItem, toItem, fromG
     doPlayerSendCancel(cid, getLangString(cid, "You are unable to move any item now.", "Você está, impossibilitado de mover qualquer item agora."))
     return false
   end
-
-  if item.itemid == 12325 then --item do reset
-    doPlayerSendCancel(cid, getLangString(cid, "You can't move this item.", "Você não pode mover esse item."))
-    return false
-  end
-
-  --Reset Quest (logica fica no resetQuest.lua)
-  if sendResetQuestRequisitions(item, toPosition) then
-    return true
-  end
-  --Fim--
 
   if item.itemid == parcelId then
     local itemInPos = getTileItemById(toPosition, mailId)

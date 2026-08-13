@@ -319,6 +319,8 @@ class ProtocolGame : public Protocol
 		void sendStreamerTag(const Player* targetPlayer);
 		void syncStreamerTags();
 
+		void sendProgressbar(uint32_t id, uint32_t duration, bool ltr = true);
+
 		#define addGameTask(f, ...) addGameTaskInternal(0, boost::bind(f, &g_game, __VA_ARGS__))
 		#define addGameTaskTimed(delay, f, ...) addGameTaskInternal(delay, boost::bind(f, &g_game, __VA_ARGS__))
 		template<class FunctionType>

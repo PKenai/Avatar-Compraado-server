@@ -45,11 +45,11 @@ function creatureSayCallback(cid, type, msg)
 				if getPlayerStorageValue(cid, Huahua) >= 1 then
 					selfSay(getLangString(cid, "You've helped me enough.", "Você já me ajudou o suficiente."), cid)
 					talkState[talkUser] = 1         
-				elseif ((getPlayerLevel(cid) >= 120) and (getPlayerResets(cid) >= 50)) then
+				elseif (getPlayerLevel(cid) >= 120) then
 					selfSay(getLangString(cid, "Would you like to help me?", "Você gostaria de me ajudar?"), cid)
 					talkState[talkUser] = 2
 				else
-					selfSay(getLangString(cid, "You need Level 120+ and Paragon 50+ to help me.", "Você precisa de Level 120+ e Paragon 50+ para me ajudar."), cid)
+					selfSay(getLangString(cid, "You need Level 120+  to help me.", "Você precisa de Level 120+  para me ajudar."), cid)
 					talkState[talkUser] = 1
 				end
 			end

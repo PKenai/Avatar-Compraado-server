@@ -29,9 +29,9 @@ function onStepIn(cid, item, position, fromPosition)
       	doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You cant pass with battle locked.")
 		return false
 	end
-	if getPlayerLevel(cid) < 150 or getPlayerResets(cid) < 70 then
+	if getPlayerLevel(cid) < 150  then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 150+ e Paragon 70+ para entrar na Evil Zuko Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "Você precisa de Level 150+  para entrar na Evil Zuko Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	elseif getPlayerStorageValue(cid, "90509") == 1 then 
 		doTeleportThing(cid, fromPosition, false)

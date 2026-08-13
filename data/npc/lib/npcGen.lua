@@ -3,7 +3,6 @@
 local timeToBye = 15 --tempo (seg) que npc encerrará msg
 
 dofile(getDataDir().."lib/isoled/150-npcSystem.lua")
-dofile(getDataDir().."lib/isoled/152-npcTaskSystem.lua")
 
 dofile(getDataDir() .. 'npc/lib/npc.lua')
 
@@ -344,7 +343,7 @@ function Npc:loadShipRoutes(msg)
 end
 
 function Npc:isPlayerStageFree()
-  return self.buyable == 0 and self.sellable == 0 and self.boatStage == nil and self.taskStage == nil and self.taskItemStage == nil
+  return self.buyable == 0 and self.sellable == 0 and self.boatStage == nil and self.taskStage == nil
 end
 
 function Npc:addOptionInNpc(msg, awnser)
@@ -372,140 +371,6 @@ end
 
 function Npc:getRoutesString()
   return self.stringBoat
-end
-
-function Npc:setTasks(identifier)
-  self.tasks = getTasksInNpc(identifier)
-end
-
-function Npc:getTasksString()
-  if isPlayer(self.client) then
-    local playerLevel = getPlayerLevel(self.client)
-    local taskDisp = {}
-
-    for k, v in pairs(self.tasks) do
-          if v.lvMin <= playerLevel then
-              if not getPlayerHasEndTask(self.client, v.identifier) then
-                  table.insert(taskDisp, v.name)
-                end
-            end
-        end
-
-    if #taskDisp > 0 then
-      if #taskDisp == 1 then
-        return {"To your level, I've this task: "..orgazineStrings(taskDisp)..". You want to get some?", "Para o seu level, eu tenho essa unica task: "..orgazineStrings(taskDisp)..". Deseja inicia-la?"}
-      else
-        return {"To your level, I've these tasks: "..orgazineStrings(taskDisp)..". You want to get some?", "Para o seu level, eu tenho essas tasks: "..orgazineStrings(taskDisp)..". Deseja iniciar alguma?"}
-      end
-    else
-      return {"I don't have tasks for you right now, come back when you have more level.", "Eu não tenho nenhuma task para você nesse momento, volte quando tiver mais level."}
-    end
-  end
-  return {"erro", "erro"}
-end
-
-function Npc:setTaskItens(identifier, msgFinalEN, msgFinalPT)
-  self.taskItemIdentifier = identifier
-  self.taskItemMsgs = {msgFinalEN, msgFinalPT}
-end
-
-function Npc:loadTasksItens(msg)
-  if self.taskItemStage == nil then
-
-    if msgcontains(msg, "help") or msgcontains(msg, "ajuda") or msgcontains(msg, "ajude") then
-      if getStageItensTask(self.client, self.taskItemIdentifier) == -1 then
-        self:say("I need that you bring me "..getItensNameByNpc(self.taskItemIdentifier).." to receive "..getMoneyInItemTask(self.taskItemIdentifier).." gold coins, are you interresed?", "Eu preciso que você me traga "..getItensNameByNpc(self.taskItemIdentifier).." para receber "..getMoneyInItemTask(self.taskItemIdentifier).." gold coins, você está interessado?")
-        self.taskItemStage = 1
-      elseif getStageItensTask(self.client, self.taskItemIdentifier) == 1 then
-        self:say("You're with all the items there?", "Você está com todos os itens aí?")
-        self.taskItemStage = 2
-      else
-        self:say("Sorry, you already did this task.", "Desculpe, você já terminou essa task.")
-        self.taskItemStage = nil
-      end
-    end
-
-  elseif self.taskItemStage == 1 then
-    if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
-      self:say("OK! Come back when you have this items.", "OK! Volte aqui quando você tiver os items.")
-      activeTaskInPlayer(self.client, self.taskItemIdentifier)
-    else
-      self:say("Ok, I think...", "OK então...")
-    end
-    self.taskItemStage = nil
-
-  elseif self.taskItemStage == 2 then
-    if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
-      if doPlayerRemoveItens(self.client, getItensFromTask(self.taskItemIdentifier)) then
-        self:say(self.taskItemMsgs[1], self.taskItemMsgs[2])
-        endTaskItemInPlayer(self.client, self.taskItemIdentifier)
-      else
-        self:say("Sorry, you don't have "..getItensNameByNpc(self.taskItemIdentifier)..".", "Desculpe, você não tem "..getItensNameByNpc(self.taskItemIdentifier)..".")
-      end
-    else
-      self:say("Ok, I think...", "OK então...")
-    end
-    self.taskItemStage = nil
-  end
-end
-
-function Npc:loadTasks(msg)
-  if self.taskStage == nil then
-    local playerLevel = getPlayerLevel(self.client)
-
-    for k, v in pairs(self.tasks) do
-      if msgcontains(msg, v.name) then
-        if v.lvMin <= playerLevel then
-          if not getPlayerHasEndTask(self.client, v.identifier) then
-            if playerHasTaskInProgress(self.client, v.identifier) then
-              self:say("Huum... Did you kill all "..v.monsterName.."(s)?", "Huum... Você já matou todos "..v.monsterName.."(s)?")
-              self.taskStage = 2
-              self.currentTask = v.identifier
-            else
-              self:say("In this task you need kill "..v.amount.." "..v.monsterName.."(s), and you gain some experience and money when you complete this, do you accept?", "Nessa task você precisa matar "..v.amount.." "..v.monsterName.."(s), completando-a você ganhará expêriencia e dinheiro, você aceita?")
-              self.taskStage = 1
-              self.currentTask = v.identifier
-            end
-            return true
-          end
-        end
-      end
-    end
-
-  elseif self.taskStage == 1 then
-    if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
-      if playerHasTaskInProgress(self.client, self.currentTask) == false and getPlayerHasEndTask(self.client, self.currentTask) == false then
-        local taskInfo = getTaskInfosByIdentifier(self.currentTask)
-        self:say("Huum..., you need kill "..taskInfo.amount.." "..taskInfo.monsterName.."(s), when you finish back here to get your reward.", "Huum..., você precisa matar "..taskInfo.amount.." "..taskInfo.monsterName.."(s), quando você terminar volte aqui para pegar sua recompensa.")
-        startTaskInPlayer(self.client, self.currentTask, getNpcName())
-
-        local warningEN, warningPT = "", ""
-        if getTaskInfosByIdentifier(self.currentTask).cantDoInParty then
-          warningEN, warningPT = " Attention: You can't do this task in Party.", " Atenção: Você não pode fazer essa task em Party."
-        end
-
-        sendBlueMessage(self.client, getLangString(self.cliente, "New task added. For more information type !tasks."..warningEN, "Nova task adicionada. Para mais informações digite !tasks."..warningPT))
-      else
-        self:say("You already started/finished this task, please try again.", "Você já começou/terminou essa task, por favor tente novamente.")
-      end
-    else
-      self:say("Ok, I think...", "OK então...")
-    end
-    self.taskStage = nil
-
-  elseif self.taskStage == 2 then
-    if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
-      if endTaskInPlayer(self.client, self.currentTask) then
-        self:say("Good service brave adventurer, here's your reward, if you prepared again to do more tasks talk with me.", "Bom trabalho bravo aventureiro, aqui está sua recompensa, quando você estiver preparado para mais tasks, volte a falar comigo.")
-      else
-        local taskInfo = getTaskInfosByIdentifier(self.currentTask)
-        self:say("You haven't done this task, you need kill more "..taskInfo.amount-getMonstersHasKilled(self.client, self.currentTask).. " "..taskInfo.monsterName.."(s) to complete this.", "Você ainda não terminou essa task, você precisa matar mais "..taskInfo.amount-getMonstersHasKilled(self.client, self.currentTask).. " "..taskInfo.monsterName.."(s) para termina-la.")
-      end
-    else
-      self:say("Ok, I think...", "OK então...")
-    end
-    self.taskStage = nil
-  end
 end
 
 function Npc:loadFoldNPC(cid, msg)
@@ -678,7 +543,6 @@ function Npc:onSay(cid, type, msg, func)
         self.sellable = 0
         self.taskStage = nil
         self.boatStage = nil
-        self.taskItemStage = nil
       end
     end
     return true

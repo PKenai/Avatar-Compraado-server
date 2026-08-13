@@ -47,7 +47,7 @@ npcHandler:addModule(FocusModule:new())
     shopModule:addSellableItem('windy shield', 12000, 13300, '')
     shopModule:addSellableItem('heavy helmet', 30000, 12946, '')
     shopModule:addSellableItem('heavy chest', 30000, 12792, '')
-    shopModule:addSellableItem('heavy legs', 30000, 12785, '')
+    shopModule:addSellableItem('saia de penas', 30000, 18872, '')
   shopModule:addSellableItem('spellbook of lost souls', 9000, 8903, '')
   shopModule:addSellableItem('ruby necklace', 2000, 2133, '')
   shopModule:addSellableItem('golden legs', 10000, 2470, '')
@@ -142,7 +142,7 @@ npcHandler:addModule(FocusModule:new())
 
 
   shopModule:addSellableItem('barbarian curse elmo', 6050, 12791, '')
-  shopModule:addSellableItem('haringer harash', 5100, 12810, '')
+  shopModule:addSellableItem('armadura do rugido', 5100, 12810, '')
 
   shopModule:addSellableItem('scarf', 200, 2661, '')
 

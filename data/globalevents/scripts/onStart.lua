@@ -39,16 +39,11 @@ local function change()
   end
 end
 
-dofile(getDataDir().."lib/isoled/152-npcTaskSystem.lua")
-
 function onStartup()
   addEvent(change, 1000, nil)
   setNewDay()
   
-  doSetStorage("resetQuestBauOpen", -1) --Locka bau reset quest.
-  doSetStorage("resetQuestClosed", -1) --abre a quest quando servidor está on
 
-  refleshTasksInBD()
   return true
 end
 

@@ -41,7 +41,7 @@ function resetAtributos(cid)
 	if type(statusBend) ~= "number" or statusBend < 0 then
 		statusBend = 0
 	end
-	local trainingBend = getPlayerMagLevel(cid, true) - statusBend - getParagonExtraBend(cid)
+	local trainingBend = getPlayerMagLevel(cid, true) - statusBend
 	if trainingBend < 0 then
 		trainingBend = 0
 	end
@@ -53,7 +53,7 @@ function resetAtributos(cid)
 		setPlayerStorageValue(cid, "getPointsInDodge", 0)
 		local lastLevel = getPlayerStorageValue(cid, 188100)
 		lastLevel = lastLevel > 0 and lastLevel or 1
-		setPlayerStorageValue(cid, "pendentes", lastLevel+4+getParagonExtraPoints(cid))
+		setPlayerStorageValue(cid, "pendentes", lastLevel+4)
 		--doSendPlayerExtendedOpcode(cid, 40, getAtributosString(cid))
 		--exhaustion.set(cid, "lastReset", (60*60)*24)
 		--doSendMagicEffect(getCreaturePosition(cid), 29)

@@ -47,150 +47,6 @@ exhaustion =
 	end
 }
 
-paragonRewards = 
-{
-	[5] = {reward = "bend", values = {1}},
-	[10] = {reward = "health", values = {100, 40}},
-	[15] = {reward = "speed", values = {20}},
-	[20] = {reward = "text", values = {"Trade items with Mithlock and Kurt will give you 20% more gold for each.", "Negociar itens com os NPCs Mithlock e Kurt dar� 20% a mais de dinheiro por item."}},
-	[25] = {reward = "itemElement", values = {18104, 18105, 18106, 18107, 2}},
-	[30] = {reward = "points", values = {2}},
-	[35] = {reward = "itemElement", values = {12686, 12688, 12689, 12687, 1}},
-	[40] = {reward = "health", values = {200, 80}},
-	[45] = {reward = "speed", values = {40}},
-	[50] = {reward = "text", values = {"Buying items from Edward Colin, Hugo and Borkas will be 20% more cheap.", "20% de desconto ao comprar itens com os NPCs Edward Colin, Hugo e Borkas."}},
-	[60] = {reward = "points", values = {4}},
-	[70] = {reward = "item", values = {12754, 2}},
-	[80] = {reward = "itemElement", values = {18109, 18110, 18111, 18112, 2}},
-	[90] = {reward = "health", values = {300, 140}},
-	[100] = {reward = "bend", values = {2}},
-	[120] = {reward = "item", values = {11259, 25}},
-	[140] = {reward = "text", values = {"30 minutes cooldown reduction in the Passive Resurrectione. ", "Redu��o de 30 minutos no cooldown da Passiva de Ressurrei��o."}},
-	[160] = {reward = "itemElement", values = {12686, 12688, 12689, 12687, 2}},
-	[180] = {reward = "itemElement", values = {18130, 18131, 18132, 18133, 2}},
-	[200] = {reward = "bend", values = {3}},
-	[220] = {reward = "speed", values = {80}},
-	[250] = {reward = "health", values = {500, 200}},
-	[300] = {reward = "points", values = {8}},
-	[350] = {reward = "bend", values = {5}},
-	[450] = {reward = "itemElement", values = {12686, 12688, 12689, 12687, 7}},
-	[500] = {reward = "item", values = {11259, 75}},
-	[750] = {reward = "text", values = {"15% damage increase on all bends.", "Aumento de 15% no dano causado de todas as dobras."}},
-}
-
-function onUpgradeParagon(cid, newParagon)
-	if paragonRewards[newParagon] then
-		local paragon = paragonRewards[newParagon]
-		if paragon.reward == "bend" then
-			doPlayerAddMagicLevel(cid, paragon.values[1])
-			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Paragon " .. newParagon .. " reward: +"..paragon.values[1].." Bend Level.")
-		elseif paragon.reward == "health" then
-			setCreatureMaxMana(cid, getCreatureMaxMana(cid, true)+paragon.values[2])     
-			setCreatureMaxHealth(cid, getCreatureMaxHealth(cid, true)+paragon.values[1])
-			doCreatureAddHealth(cid, 1)
-			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Paragon " .. newParagon .. " reward: +"..paragon.values[1].." Max Health, +"..paragon.values[2].." Max Mana.")
-		elseif paragon.reward == "speed" then
-			doChangeSpeed(cid, paragon.values[1])
-			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Paragon " .. newParagon .. " reward: +"..paragon.values[1].." Speed.")
-		elseif paragon.reward == "points" then
-			local pendentes = getPlayerStorageValue(cid, "pendentes")+paragon.values[1]
-			setPlayerStorageValue(cid, "pendentes", pendentes)
-			doSendPlayerExtendedOpcode(cid, 41, pendentes)
-			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Paragon " .. newParagon .. " reward: +"..paragon.values[1].." Elemental Points.")
-		elseif paragon.reward == "text" then
-			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Paragon " .. newParagon .. " reward: " .. getLangString(cid, paragon.values[1], paragon.values[2]))
-		elseif paragon.reward == "itemElement" then
-			doPlayerAddItem(cid, paragon.values[getPlayerVocation(cid)], paragon.values[5])
-			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Paragon " .. newParagon .. " reward: " .. paragon.values[5] .. "x "..getItemNameById(paragon.values[getPlayerVocation(cid)])..".")
-		elseif paragon.reward == "item" then
-			if #paragon.values >= 4 then
-				doPlayerAddItem(cid, paragon.values[1], paragon.values[2])
-				doPlayerAddItem(cid, paragon.values[3], paragon.values[4])
-				doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Paragon " .. newParagon .. " reward: " .. paragon.values[2] .. "x "..getItemNameById(paragon.values[1])..", " .. paragon.values[4] .. "x "..getItemNameById(paragon.values[3])..".")
-			else
-				doPlayerAddItem(cid, paragon.values[1], paragon.values[2])
-				doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Paragon " .. newParagon .. " reward: " .. paragon.values[2] .. "x "..getItemNameById(paragon.values[1])..".")
-			end
-		end
-		return true
-	end
-end
-
-function getParagonExtraSpeed(cid)
-	local bonusSpeed = 0
-	local levelBonuses = {15, 45, 220}
-	local paragonToSpeed = {20, 40, 80}
-	local resets = getPlayerResets(cid)
-	for i = 1, #levelBonuses do
-		if resets >= levelBonuses[i] then
-			bonusSpeed = bonusSpeed + paragonToSpeed[i]
-		else
-			break
-		end
-	end
-	return bonusSpeed
-end
-
-function getParagonExtraHp(cid)
-	local bonusHealth = 0
-	local levelBonuses = {10, 40, 90, 250}
-	local paragonToHealth = {100, 200, 300, 500}
-	local resets = getPlayerResets(cid)
-	for i = 1, #levelBonuses do
-		if resets >= levelBonuses[i] then
-			bonusHealth = bonusHealth + paragonToHealth[i]
-		else
-			break
-		end
-	end
-	return bonusHealth
-end
-
-function getParagonExtraMana(cid)
-	local bonusMana = 0
-	local levelBonuses = {10, 40, 90, 250}
-	local paragonToMana = {40, 80, 140, 200}
-	local resets = getPlayerResets(cid)
-	for i = 1, #levelBonuses do
-		if resets >= levelBonuses[i] then
-			bonusMana = bonusMana + paragonToMana[i]
-		else
-			break
-		end
-	end
-	return bonusMana
-end
-
-function getParagonExtraBend(cid)
-	local bonusBend = 0
-	local levelBonuses = {5, 100, 200, 350}
-	local paragonToBend = {1, 2, 3, 5}
-	local resets = getPlayerResets(cid)
-	for i = 1, #levelBonuses do
-		if resets >= levelBonuses[i] then
-			bonusBend = bonusBend + paragonToBend[i]
-		else
-			break
-		end
-	end
-	return bonusBend
-end
-
-function getParagonExtraPoints(cid)
-	local bonusPoints = 0
-	local levelBonuses = {30, 60, 300}
-	local paragonToPoints = {2, 4, 8}
-	local resets = getPlayerResets(cid)
-	for i = 1, #levelBonuses do
-		if resets >= levelBonuses[i] then
-			bonusPoints = bonusPoints + paragonToPoints[i]
-		else
-			break
-		end
-	end
-	return bonusPoints
-end
-
 function getPlayerCoins(cid)
 if not isPlayer(cid) then return false end 
 local coins = db.getResult("SELECT `premium_points` FROM `accounts` WHERE `id` = "..getPlayerAccountId(cid)..";")
@@ -348,7 +204,7 @@ if fromCrystal <= 0 then
 	fromCrystal = 0
 end
 
-return base + fromLevel + fromVit + fromCrystal + getParagonExtraHp(cid)
+return base + fromLevel + fromVit + fromCrystal
 end
 
 function getRealMaxMana(cid)
@@ -358,5 +214,5 @@ local vitality = getPlayerStorageValue(cid, "speedvalue")
 if vitality <= 0 then vitality = 0 end
 local fromVit = vitality*20
 
-return base + fromLevel + fromVit + getParagonExtraMana(cid)
+return base + fromLevel + fromVit
 end

@@ -113,7 +113,7 @@ function creatureSayCallback(cid, type, msg)
                         totaltasks = 150
 						sequenciaAtual[cid] = 13
 					end
-					selfSay(getLangString(cid, "Hmm, the Earth "..list[x].." bend costs {"..stones.." Earth Stones} and require {Paragon "..totaltasks.."} or higher to learn, do you have the stones and the required Paragon level?", "Hum, a dobra Earth "..list[x].." custa {"..stones.." Earth Stones} e requer {Paragon "..totaltasks.."} ou superior para ser aprendida, você tem as stones e possui o level de Paragon necessário?"), cid)			
+					selfSay(getLangString(cid, "Hmm, the Earth "..list[x].." bend costs {"..stones.." Earth Stones} and require {Reset "..totaltasks.."} or higher to learn, do you have the stones and the required Reset level?", "Hum, a dobra Earth "..list[x].." custa {"..stones.." Earth Stones} e requer {Reset "..totaltasks.."} ou superior para ser aprendida, você tem as stones e possui o level de Reset necessário?"), cid)			
 					dobraAtual[cid] = list[x]
 					talkState[talkUser] = 5
 					return true

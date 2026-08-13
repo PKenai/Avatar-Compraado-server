@@ -27,6 +27,7 @@
   position.cpp
   player.cpp
   party.cpp
+  spiritualrift.cpp
   outputmessage.cpp
   outfit.cpp
   otserv.cpp

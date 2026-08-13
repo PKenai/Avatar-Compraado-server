@@ -2671,6 +2671,9 @@ void LuaInterface::registerFunctions()
 
 	//getMonsterTypeList()
 	lua_register(m_luaState, "getMonsterTypeList", LuaInterface::luaGetMonsterTypeList);
+
+	//doCreatureSendProgressbar(cid, duration, ltr)
+	lua_register(m_luaState, "doCreatureSendProgressbar", LuaInterface::luaCreatureSendProgressbar);
 }
 
 const luaL_Reg LuaInterface::luaSystemTable[] =
@@ -12813,3 +12816,25 @@ SHIFT_OPERATOR(uint32_t, ULeftShift, <<)
 SHIFT_OPERATOR(uint32_t, URightShift, >>)
 
 #undef SHIFT_OPERATOR
+
+int32_t LuaInterface::luaCreatureSendProgressbar(lua_State* L)
+{
+	// doCreatureSendProgressbar(cid, duration, leftToRight)
+	bool ltr = lua_toboolean(L, -1) != 0;
+	lua_pop(L, 1);
+	uint32_t duration = (uint32_t)lua_tonumber(L, -1);
+	lua_pop(L, 1);
+	uint32_t cid = (uint32_t)lua_tonumber(L, -1);
+	lua_pop(L, 1);
+	Creature* creature = g_game.getCreatureByID(cid);
+	if(creature)
+	{
+		g_game.startProgressbar(creature, duration, ltr);
+		lua_pushboolean(L, true);
+	}
+	else
+	{
+		lua_pushboolean(L, false);
+	}
+	return 1;
+}

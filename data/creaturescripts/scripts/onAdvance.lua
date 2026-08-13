@@ -43,7 +43,6 @@ function onAdvance(cid, skill, oldLevel, newLevel)
 			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Voce ganhou " .. gained .. " attribute point(s). Total pendente: " .. pendentes .. ".")
 		end
 
-		addNewTasks(cid, newLevel)
 	end
 
 	return true

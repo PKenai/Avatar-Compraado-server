@@ -20,6 +20,8 @@
 #define __CONST__
 #include "definitions.h"
 
+#define PROGRESSBAR
+
 enum OperatingSystem_t
 {
 	CLIENTOS_LINUX				= 0x01,

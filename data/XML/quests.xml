@@ -25,8 +25,6 @@
 		</mission>
 		<mission name="Blood Knight Quest" storageid="questChests25471" startvalue="-1" endvalue="1">
 		</mission>
-		<mission name="Devil Skeleton Quest" storageid="taskInCourse8" startvalue="-1" endvalue="1">
-		</mission>
 		<mission name="Ethern Quest" storageid="questChests25462" startvalue="-1" endvalue="1">
 		</mission>
 		<mission name="Barbarian Headsplitter Quest" storageid="questChests25487" startvalue="-1" endvalue="1">
@@ -36,8 +34,6 @@
 		<mission name="Vampire Quest" storageid="questChests25463" startvalue="-1" endvalue="1">
 		</mission>
 		<mission name="Wailing Widow Quest" storageid="questChests25494" startvalue="-1" endvalue="1">
-		</mission>
-		<mission name="Hydra Quest" storageid="questChests25457" startvalue="-1" endvalue="1">
 		</mission>
 		<mission name="Quara Pincher Quest" storageid="questChests25472" startvalue="-1" endvalue="1">
 		</mission>
@@ -91,8 +87,6 @@
 	<quest name="Hard Quests">
 		<mission name="Four Elements Quest" storageid="90500" startvalue="-1" endvalue="1">
 		</mission>
-		<mission name="Survival Quest" storageid="905018730" startvalue="-1" endvalue="1">
-		</mission>
 		<mission name="Profaned Quest" storageid="90502" startvalue="-1" endvalue="1">
 		</mission>
 		<mission name="Spark of Destruction Quest" storageid="90503" startvalue="-1" endvalue="1">
@@ -144,8 +138,6 @@
 		<mission name="The Duke Of The Depths Quest" storageid="90524" startvalue="-1" endvalue="1">
 		</mission>
 		<mission name="The Bosses Quest" storageid="90520" startvalue="-1" endvalue="1">
-		</mission>
-		<mission name="Spirit World Quest" storageid="90521" startvalue="-1" endvalue="1">
 		</mission>
 	</quest>
 </quests>

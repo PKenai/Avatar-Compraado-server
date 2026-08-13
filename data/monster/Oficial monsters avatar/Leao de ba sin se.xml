@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Leao de ba sin se" nameDescription="a leao de ba sin se" race="undead" experience="1250" speed="170" manacost="0">
-	<health now="100" max="100"/>
+<monster name="Leao de ba sin se" nameDescription="a leao de ba sin se" race="undead" experience="2500" speed="350" manacost="0">
+	<health now="2000" max="2000"/>
 	<look type="1250" corpse="18160"/>
 	<targetchange interval="5000" chance="10"/>
 	<strategy attack="100" defense="0"/>
@@ -18,10 +18,11 @@
 		<flag runonhealth="0"/>
 	</flags>
 	<attacks>
-		<attack name="melee" interval="2000" skill="30" attack="15"/>
+		<attack name="melee" interval="2000" skill="80" attack="90"/>
+		<attack name="fire" interval="2000" chance="25" range="7" min="-100" max="-200"/>
 	</attacks>
 	<defenses armor="0" defense="0"/>
 	<loot>
-		<item id="2148" countmax="50" chance="100000"/><!-- moedas -->
+		<item id="2148" countmax="100" chance="100000"/><!-- moedas -->
 	</loot>
 </monster>

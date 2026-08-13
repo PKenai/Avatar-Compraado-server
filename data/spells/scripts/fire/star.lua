@@ -123,14 +123,12 @@ function onTargetTile(cid, pos)
             if isPlayer(cid) then
                 if getPlayerCanWalk({player = cid, position = pos, checkPZ = true, checkHouse = true, checkWater = true}) then
 
-                    if not getPlayerHasInQuest(cid, "resetQuest") then
                        -- doCombat(cid, combat2, {type=2, pos=pos})
                     end
                 end
             end
         end
     end
-end
 setCombatCallback(combat1, CALLBACK_PARAM_TARGETTILE, "onTargetTile")
 
 function onTargetTileFocus(cid, pos)
@@ -143,13 +141,11 @@ function onTargetTileFocus(cid, pos)
         end
         if randThree == 1 then
             if getPlayerCanWalk({player = cid, position = pos, checkPZ = true, checkHouse = true, checkWater = true}) then
-                if not getPlayerHasInQuest(cid, "resetQuest") then
                     --doCombat(cid, combat2, {type=2, pos=pos})
                 end
             end
         end
     end
-end
 setCombatCallback(combat1Focus, CALLBACK_PARAM_TARGETTILE, "onTargetTileFocus")
 
 local function removeTable(cid)

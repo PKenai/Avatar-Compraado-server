@@ -12,10 +12,6 @@ end
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	--doTeleportThing(cid, {x=311, y=835, z=12})
 	--doSendMagicEffect(getThingPos(cid), CONST_ME_TELEPORT)
-	if getPlayerResets(cid) < 70 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa de Paragon 70+ para adquirir esta recompensa.")
-		return true
-	end
 	if getPlayerStorageValue(cid, "90511") == 1 then 	
 		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
 		return true

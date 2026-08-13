@@ -9,6 +9,7 @@
 	<globalevent name="LinkedTasksInit" type="start" event="script" value="linkedTasksInit.lua"/>
 
 	<globalevent name="init" type="startup" event="script" value="init.lua"/>
+	<globalevent name="QuestSystemInit" type="startup" event="script" value="questSystemInit.lua"/>
 	<globalevent name="globalsave" type="globalsave" event="script" value="init.lua"/>
 	<globalevent name="record" type="record" event="script" value="record.lua"/>
 	<globalevent name="market" type="startup" event="script" value="market.lua"/>

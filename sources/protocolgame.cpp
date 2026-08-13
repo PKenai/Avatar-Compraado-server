@@ -3458,7 +3458,7 @@ void ProtocolGame::sendExtendedOpcode(uint8_t opcode, const std::string& buffer)
 void ProtocolGame::sendStreamerTag(const Player* targetPlayer)
 {
 	if(!targetPlayer || !player || !player->isUsingOtclient()) return;
-
+	
 	uint32_t voc = targetPlayer->getVocationId();
 	std::string color1 = "";
 	std::string color2 = "";
@@ -3491,3 +3491,17 @@ void ProtocolGame::syncStreamerTags()
 		}
 	}
 }
+
+void ProtocolGame::sendProgressbar(uint32_t id, uint32_t duration, bool ltr)
+{
+	NetworkMessage_ptr msg = getOutputBuffer();
+	if(!msg)
+		return;
+
+	TRACK_MESSAGE(msg);
+	msg->put<char>(0x3b);
+	msg->put<uint32_t>(id);
+	msg->put<uint32_t>(duration);
+	msg->put<char>(ltr ? 1 : 0);
+}
+

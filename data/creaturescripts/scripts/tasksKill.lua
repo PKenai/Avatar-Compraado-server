@@ -1,4 +1,4 @@
-dofile(getDataDir().."lib/isoled/152-npcTaskSystem.lua")
+
 
 local hasDestroyed = false
 local gatePosesO = {{x = 1150, y = 945, z = 4},
@@ -54,9 +54,9 @@ function onKill(cid, target, lastHit)
       if killsCount < pascoaMissions[atual].count then
         setPlayerStorageValue(cid, "easter2018Kills", killsCount+1)
         if killsCount+1 == pascoaMissions[atual].count then
-          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, getLangString(cid, atual .. "º Christmas Mission completed! Please, report to NPC Santa Claus.", atual .. "º Missão de Natal completada! Por favor, reporte ao NPC Santa Claus."))
+          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, getLangString(cid, atual .. "ï¿½ Christmas Mission completed! Please, report to NPC Santa Claus.", atual .. "ï¿½ Missï¿½o de Natal completada! Por favor, reporte ao NPC Santa Claus."))
         else            
-          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, getLangString(cid, "Christmas Mission - Progress: "..(killsCount+1).."/"..pascoaMissions[atual].count.." "..monsterNameNormal.."(s).", "Missão de Natal - Progresso: "..(killsCount+1).."/"..pascoaMissions[atual].count.." "..monsterNameNormal.."(s)."))
+          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, getLangString(cid, "Christmas Mission - Progress: "..(killsCount+1).."/"..pascoaMissions[atual].count.." "..monsterNameNormal.."(s).", "Missï¿½o de Natal - Progresso: "..(killsCount+1).."/"..pascoaMissions[atual].count.." "..monsterNameNormal.."(s)."))
         end
         
       end
@@ -78,12 +78,7 @@ function onKill(cid, target, lastHit)
       end 
     end
     return true
-  end
-    if monsterName == "elemental" then
-      doSetStorage("resetQuestBauOpen", 1)
-      return true
-
-    elseif monsterName == "supreme abadeer" then
+  elseif monsterName == "supreme abadeer" then
       if not hasDestroyed then
         local stoneId = 1304
         local firstPos = {x=682,y=467,z=9}
@@ -96,54 +91,6 @@ function onKill(cid, target, lastHit)
 
             hasDestroyed = true
         end
-    end
-
-    local identifier = getTaskIdentifierByMonster(getCreatureName(target))
-    if #identifier > 0 then
-      for k, v in pairs(identifier) do
-        if playerHasTaskInProgress(cid, v) then
-          local taskInfo = getTaskInfosByIdentifier(v)
-
-         -- if taskInfo.cantDoInParty then
-          --  if getPlayerParty(cid) then
-           --   return true
-          --  end
-          --end
-
-          addMonsterInTaskCourse(cid, v)
-          if getMonstersHasKilled(cid, v) < taskInfo.amount then
-            local number, monsterName = taskInfo.amount-getMonstersHasKilled(cid, v), taskInfo.monsterName
-      local ttInfo = getTaskInfosByIdentifier(v)
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, getLangString(cid, "General Task - "..ttInfo.name..": "..number.." "..monsterName.."(s) left to kill.", "Task Geral - "..ttInfo.name..": Falta matar "..number.." "..monsterName.."(s)."))
-          else
-            --if taskInfo.endAutomatic then
-            if not getPlayerHasEndTask(cid, v) then
-                endTaskInPlayer(cid, v)
-        addEvent(doSendAnimatedText, 50, getThingPos(cid), "Task completed!", 215)
-        local ttInfo = getTaskInfosByIdentifier(v)
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, getLangString(cid, "General Tasks: "..ttInfo.name.." completed!", "Tasks Gerais: "..ttInfo.name.." completada!"))
-
-        if ttInfo.customParagon then
-          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Task Reward: You gained +"..ttInfo.customParagon.." Paragon Level.")
-          local oldParagon = getPlayerResets(cid)
-          local newParagon = oldParagon + ttInfo.customParagon
-          setPlayerResets(cid, newParagon)
-          for i = 1, ttInfo.customParagon do
-            onUpgradeParagon(cid, oldParagon + i)
-          end
-        else
-          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Task Reward: You gained +1 Paragon Level.")
-          local newParagonDois = getPlayerResets(cid)+1
-          setPlayerResets(cid, newParagonDois)
-          onUpgradeParagon(cid, newParagonDois)
-        end
-            end
-            --end
-          end
-
-          break
-        end
-      end
     end
   end
 

@@ -98,6 +98,11 @@ function onExtendedOpcode(cid, opcode, buffer)
 			elseif buffer == "reset" then
 				setPlayerStorageValue(cid, storageTutorial, -1)
 			end
+		elseif opcode == 215 then
+			-- Potion Craft System
+			if type(PotionCraft) == "table" and type(PotionCraft.onOpcode) == "function" then
+				PotionCraft.onOpcode(cid, buffer)
+			end
 		elseif opcode > 0 and opcode < 4 then
 			local handler = onReceiveOpCode and onReceiveOpCode[opcode]
 			if type(handler) == "function" then

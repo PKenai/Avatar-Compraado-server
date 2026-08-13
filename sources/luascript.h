@@ -697,6 +697,7 @@ class LuaInterface
 		static int32_t luaGetTownTemplePosition(lua_State* L);
 		static int32_t luaGetTownHouses(lua_State* L);
 		static int32_t luaGetSpectators(lua_State* L);
+		static int32_t luaCreatureSendProgressbar(lua_State* L);
 		static int32_t luaGetGameState(lua_State* L);
 		static int32_t luaDoSetGameState(lua_State* L);
 		static int32_t luaGetChannelUsers(lua_State* L);

@@ -567,6 +567,8 @@ class Game
 		void updateCreatureVocationEmblem(Creature* creature);
 		void updateCreatureWalkthrough(Creature* creature);
 
+		void startProgressbar(Creature* creature, uint32_t duration, bool ltr = true);
+
 		GameState_t getGameState() const {return gameState;}
 		void setGameState(GameState_t newState);
 

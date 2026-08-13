@@ -11,8 +11,8 @@ local specs = getSpectators({x=892, y=148, z=10}, 30, 30)
 end 
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
-	if getPlayerLevel(cid) < 150 or getPlayerResets(cid) < 70 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa de Level 150+ e Paragon 70+ para adquirir esta recompensa.")
+	if getPlayerLevel(cid) < 150  then
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa de Level 150+ e Reset 70+ para adquirir esta recompensa.")
 		return true
 	end
 	if getPlayerStorageValue(cid, "90508") == 1 then 	

@@ -13,8 +13,8 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if getPlayerStorageValue(cid, "90512") == 1 then 	
 		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
 		return true
-	elseif getPlayerLevel(cid) < 170 or getPlayerResets(cid) < 80 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa de Level 170+ e Paragon 80+ para adquirir esta recompensa.")
+	elseif getPlayerLevel(cid) < 170  then
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa de Level 170+  para adquirir esta recompensa.")
 		return true
 	elseif checkBossAlive() then 	
 		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa derrotar o Mad Mage.")

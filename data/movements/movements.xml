@@ -264,7 +264,6 @@
 	<movevent type="StepIn" actionid="52139" script="trezentosQuestBack.lua"/>
 	
 
-	<movevent type="StepIn" actionid="46131-46139" script="leviathan quest.lua"/>
 
 	<movevent type="StepIn" actionid="27514" script="seaEnter.lua"/>
 	
@@ -315,7 +314,6 @@
 	<movevent type="StepIn" actionid="62337;62338" script="bonelord.lua"/>
 	<movevent type="StepIn" actionid="62437" script="ogreQuest.lua"/>
 	<movevent type="StepIn" actionid="62339" script="bonequest.lua"/>
-	<movevent type="StepIn" actionid="62340" script="poiquest.lua"/>
 	<movevent type="StepIn" actionid="28402" script="lostAvatarEnter.lua"/>
 
 	<movevent type="Equip" itemid="13630" level="70" slot="head" event="function" value="onEquipItem" />
@@ -352,8 +350,8 @@
 	<movevent type="DeEquip" itemid="12886" slot="armor" event="function" value="onDeEquipItem" />
 	<movevent type="Equip" itemid="13914" slot="legs" event="function" value="onEquipItem" />
 	<movevent type="DeEquip" itemid="13914" slot="legs" event="function" value="onDeEquipItem" />
-	<movevent type="Equip" itemid="12785" level="80" slot="legs" event="function" value="onEquipItem" />
-	<movevent type="DeEquip" itemid="12785" level="80" slot="legs" event="function" value="onDeEquipItem" />
+	<movevent type="Equip" itemid="18872" level="80" slot="legs" event="function" value="onEquipItem" />
+	<movevent type="DeEquip" itemid="18872" level="80" slot="legs" event="function" value="onDeEquipItem" />
 	<movevent type="Equip" itemid="12792" level="80" slot="armor" event="function" value="onEquipItem" />
 	<movevent type="DeEquip" itemid="12792" level="80" slot="armor" event="function" value="onDeEquipItem" />
 	<movevent type="Equip" itemid="12946" level="80" slot="head" event="function" value="onEquipItem" />
@@ -404,13 +402,8 @@
     <movevent type="StepIn" actionid="10253" event="script" value="monsterCantWalk.lua"/>
     <movevent type="StepOut" actionid="10253" event="script" value="monsterCantWalk.lua"/>
     <movevent type="StepIn" actionid="10255" event="script" value="goDown.lua"/>
-    <movevent type="StepIn" actionid="15256" event="script" value="newRespHydra.lua"/>
     <movevent type="StepIn" actionid="15257" event="script" value="games/arenaDeath.lua"/>
 
-    <movevent type="StepIn" actionid="3493" event="script" value="resetQuest.lua"/>
-    <movevent type="StepIn" actionid="8718" event="script" value="poi/dragonLordEnter.lua"/>
-    <movevent type="StepIn" actionid="8719" event="script" value="poi/enterReward.lua"/>
-    <movevent type="StepIn" actionid="8720-8725" event="script" value="poi/rooms.lua"/>
 
     <movevent type="StepIn" actionid="4972-4973" event="script" value="games/genius1.lua"/>
     <movevent type="StepIn" actionid="4974-4975" event="script" value="games/genius2.lua"/>
@@ -1297,7 +1290,7 @@
 	<movevent type="Equip" itemid="12936" level="80" slot="legs" event="function" value="onEquipItem"/>
 	<movevent type="DeEquip" itemid="12936" level="80" slot="legs" event="function" value="onDeEquipItem"/>
 
-	<!-- haringer harash -->
+	<!-- Armadura do Rugido -->
 	<movevent type="Equip" itemid="12810" level="65" slot="armor" event="function" value="onEquipItem">
 	</movevent>
 	<movevent type="DeEquip" itemid="12810" level="65" slot="armor" event="function" value="onDeEquipItem"/>

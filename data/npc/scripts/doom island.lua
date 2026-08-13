@@ -24,8 +24,8 @@ function creatureSayCallback(cid, type, msg)
 	end
     local msg = msg:lower()
     if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "viagem") or msgcontains(msg, "interested") then
-		if getPlayerLevel(cid) < 175 or getPlayerResets(cid) < 80 then
-			selfSay(getLangString(cid, "You need Level 175+ and Paragon 80+ to start this quest.", "Você precisa de Level 175+ e Paragon 80+ para iniciar esta missão."), cid)
+		if getPlayerLevel(cid) < 175  then
+			selfSay(getLangString(cid, "You need Level 175+  to start this quest.", "Você precisa de Level 175+  para iniciar esta missão."), cid)
 		elseif doPlayerRemoveMoney(cid, 50000) then
 			selfSay(getLangString(cid, "Thank you. Get ready, this will be a dangerous trip!", "Obrigado. Se segure, será uma viagem perigosa!"), cid)
 			doTeleportThing(cid, {x = 1120, y = 691, z = 7})

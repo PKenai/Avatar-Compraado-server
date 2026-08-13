@@ -8,9 +8,9 @@ function onStepIn(cid, item, position, fromPosition)
       	doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You cant pass with battle locked.")
 		return false
 	end
-	if getPlayerLevel(cid) < 250 or getPlayerResets(cid) < 120 then
+	if getPlayerLevel(cid) < 250  then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 250+ e Paragon 120+ para entrar na Evil Avatar Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "Você precisa de Level 250+  para entrar na Evil Avatar Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else 
 		doTeleportThing(cid, {x = 506, y = 156, z = 12}, false)

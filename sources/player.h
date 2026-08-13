@@ -684,6 +684,8 @@ class Player : public Creature, public Cylinder
 		void sendQuestInfo(Quest* quest) const {if(client) client->sendQuestInfo(quest);}
 		void sendCreatureSkull(const Creature* creature) const
 			{if(client) client->sendCreatureSkull(creature);}
+		void sendProgressbar(uint32_t id, uint32_t duration, bool ltr = true)
+			{if(client) client->sendProgressbar(id, duration, ltr);}
 		void sendFYIBox(std::string message)
 			{if(client) client->sendFYIBox(message);}
 		void sendCreatePrivateChannel(uint16_t channelId, const std::string& channelName)
