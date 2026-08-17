@@ -474,6 +474,9 @@ function onLogin(cid)
     registerCreatureEvent(cid, "Store")
     registerCreatureEvent(cid, "QuestKill")
     registerCreatureEvent(cid, "QuestsOpcode")
+    registerCreatureEvent(cid, "AchievementsKill")
+    registerCreatureEvent(cid, "AchievementsAdvance")
+    registerCreatureEvent(cid, "AchievementsOpcode")
     cameraNormalizeOnLogin(cid)
     sendOpCode(cid, 19, tostring(getPlayerVocation(cid)))
  
@@ -525,6 +528,13 @@ function onLogin(cid)
             DailyHunt.sendDataToClient(cid)
         end
     end, 1000, cid)
+
+    -- Send Achievements data shortly after login
+    addEvent(function(cid)
+        if isCreature(cid) then
+            Achievements.onLogin(cid)
+        end
+    end, 1500, cid)
 
     -- Send Hunt Waypoint list shortly after login
     addEvent(function(cid)

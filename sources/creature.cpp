@@ -146,7 +146,7 @@ bool Creature::canWalkthrough(const Creature* creature) const
 {
 	if (!creature) { return false; }
 	
-	// Qual criatura esta utilizando este método?
+	// Qual criatura esta utilizando este mï¿½todo?
 	// std::clog << creature->getName() << " canWalkthrough." << creature->getPosition() << std::endl;
 	
 	if(creature == this)
@@ -230,7 +230,7 @@ void Creature::onThink(uint32_t interval)
 #endif
 	executeConditions(interval);
 
-	//OnThinkg FlySystem// Mod by Mirto, ele checa se o player está em solo e tira storage.
+	//OnThinkg FlySystem// Mod by Mirto, ele checa se o player estï¿½ em solo e tira storage.
 	/*if(this->getPlayer()){
 		if(Tile* tile = g_game.getMap()->getTile(this->getPosition())){
 			if(Thing* thing = tile->__getThing(0)){
@@ -568,7 +568,7 @@ void Creature::onCreatureMove(const Creature* creature, const Tile* newTile, con
 		if(!teleport)
 		{
 			if(std::abs(newPos.x - oldPos.x) >= 1 && std::abs(newPos.y - oldPos.y) >= 1)
-				lastStepCost = 2;
+				lastStepCost = 1.5; // diagonal extra cost: 1.5x the orthogonal duration (matches the client)
 		}
 		else
 			stopEventWalk();
@@ -1376,7 +1376,7 @@ void Creature::onGainExperience(double& gainExp, Creature* target, bool multipli
 
 	if(master)
 	{
-		gainExp = gainExp; //Modificação mirto para ganhar exp integral com summon
+		gainExp = gainExp; //Modificaï¿½ï¿½o mirto para ganhar exp integral com summon
 		master->onGainExperience(gainExp, target, multiplied);
 		return;
 	}
@@ -1690,7 +1690,7 @@ std::string Creature::getDescription(int32_t) const
 int32_t Creature::getStepDuration(Direction dir) const
 {
 	if(dir == NORTHWEST || dir == NORTHEAST || dir == SOUTHWEST || dir == SOUTHEAST)
-		return getStepDuration() << 1;
+		return (int32_t)(getStepDuration() * 1.5); // diagonal extra cost: 1.5x the orthogonal duration
 
 	return getStepDuration();
 }

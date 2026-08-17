@@ -2,9 +2,9 @@ local MyLocal = {}
 MyLocal.players = {}
 
 MyLocal.potions = {
-  [7620] = {delayTime = 2000, times = 3, manaEachTime = 35, animation = "Aaaah..."},
-  [7589] = {delayTime = 2000, times = 3, manaEachTime = 70, animation = "Aaaah..."},
-  [7590] = {delayTime = 2000, times = 3, manaEachTime = 140, animation = "Aaaah..."}
+  [7620] = {delayTime = 333, times = 3, manaEachTime = 35, animation = "Aaaah..."},
+  [7589] = {delayTime = 333, times = 3, manaEachTime = 70, animation = "Aaaah..."},
+  [7590] = {delayTime = 333, times = 3, manaEachTime = 140, animation = "Aaaah..."}
 }
 
 local function removeTable(cid)

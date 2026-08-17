@@ -28,17 +28,17 @@
 -->
 <quests>
 
-    <quest name="Caçada de Alcion" id="15" looktype="1169" startstorageid="49150" startstoragevalue="1">
-        <description>Alcion precisa de ajuda para conter a invasão das Tarântulas de pedra na região.</description>
-        <mission name="Eliminar Tarântulas" storageid="49150" startvalue="1" endvalue="2" progressstorageid="49151">
-            <description>Mate 250 Tarântulas de pedra e volte ao Alcion para receber sua recompensa.</description>
+    <quest name="Caï¿½ada de Alcion" id="15" looktype="1169" startstorageid="49150" startstoragevalue="1">
+        <description>Alcion precisa de ajuda para conter a invasï¿½o das Tarï¿½ntulas de pedra na regiï¿½o.</description>
+        <mission name="Eliminar Tarï¿½ntulas" storageid="49150" startvalue="1" endvalue="2" progressstorageid="49151">
+            <description>Mate 250 Tarï¿½ntulas de pedra e volte ao Alcion para receber sua recompensa.</description>
             <monster name="Tarantula de pedra" count="250" />
             <reward id="2152" count="30" />
         </mission>
     </quest>
 
-    <quest name="Infestação no Bueiro" id="16" looktype="1172" startstorageid="49160" startstoragevalue="1">
-        <description>Astro está sofrendo com uma infestação de Terra beetles no bueiro na frente da casa dele.</description>
+    <quest name="Infestaï¿½ï¿½o no Bueiro" id="16" looktype="1172" startstorageid="49160" startstoragevalue="1">
+        <description>Astro estï¿½ sofrendo com uma infestaï¿½ï¿½o de Terra beetles no bueiro na frente da casa dele.</description>
         <mission name="Exterminar Terra beetles" storageid="49160" startvalue="1" endvalue="2" progressstorageid="49161">
             <description>Mate 150 Terra beetles no bueiro e volte ao Astro para receber sua recompensa.</description>
             <monster name="Terra beetle" count="150" />
@@ -47,7 +47,7 @@
     </quest>
 
     <quest name="O Mel de Katata" id="17" looktype="1179" startstorageid="49170" startstoragevalue="1">
-        <description>Katata teve sua colmeia de mel roubada pelas abelhas de barro e precisa dela de volta para não passar fome.</description>
+        <description>Katata teve sua colmeia de mel roubada pelas abelhas de barro e precisa dela de volta para nï¿½o passar fome.</description>
         <mission name="Recuperar a Colmeia de barro" storageid="49170" startvalue="1" endvalue="2" progressstorageid="49171" maxprogress="1">
             <description>Encontre a Colmeia de barro na toca das abelhas de barro e devolva ao Katata.</description>
             <reward id="2152" count="20" />
@@ -70,6 +70,31 @@
         <mission name="Entregar a pena" storageid="49190" startvalue="1" endvalue="2" maxprogress="1">
             <description>Consiga uma pena de pica-pau da terra e entregue ao John.</description>
             <reward id="18872" count="1" />
+        </mission>
+    </quest>
+
+    <quest name="As Fotos de Rogerio" id="20" looktype="1263" startstorageid="49200" startstoragevalue="1">
+        <description>Rogerio estava fotografando as paisagens quando um Mordecasca da terra roubou todas as suas fotos. Ajuda a recupera-las (level 115+).</description>
+        <mission name="Recuperar as fotos roubadas" storageid="49200" startvalue="1" endvalue="2" progressstorageid="49201" maxprogress="3">
+            <description>Mate Mordecascas da terra para recuperar as 3 fotos roubadas e devolva ao Rogerio.</description>
+            <reward id="2152" count="100" />
+        </mission>
+    </quest>
+
+
+
+    <quest name="Massacre dos Traidores" id="21" looktype="1286" startstorageid="49210" startstoragevalue="1">
+        <description>Um homem estranho roubou o dinheirinho do pirulito do Felipinho e ainda deu um soco na cara dele. Massacre a familia desse homem, os Traidores, e recupere os 100k de gold.</description>
+        <mission name="Massacre a familia do Traidor" storageid="49210" startvalue="1" endvalue="2" progressstorageid="49211">
+            <description>Mate 800 Traidores e volte ao Felipinho com 100k de gold para receber uma peca do Set de um traidor (a sua escolha).</description>
+            <monster name="Traidor" count="800" />
+        </mission>
+    </quest>
+
+    <quest name="O Tesouro do Defensor da Montanha" id="22" looktype="1285" startstorageid="49220" startstoragevalue="1">
+        <description>Aiano estava subindo a montanha quando encontrou um monstro enorme e branco, o Defensor da montanha, que guarda um tesouro. Derrote-o e roube uma peca do tesouro.</description>
+        <mission name="Roubar o tesouro do guardiao" storageid="49220" startvalue="1" endvalue="2" progressstorageid="49221" maxprogress="1">
+            <description>Derrote o Defensor da montanha, pegue o bau do tesouro e volte ao Aiano para escolher uma peca do Set da montanha.</description>
         </mission>
     </quest>
 

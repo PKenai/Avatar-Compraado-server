@@ -33,14 +33,23 @@ struct spawnBlock_t;
 // rift opens at that creature's square instead of the creature spawning (the
 // creature does not respawn while the rift holds the spot). The rift is a
 // step-in: when a player walks over it, waves of spiritual creatures of the
-// replaced type are summoned around it (3 -> 6 -> 12, one wave every 10
-// seconds). If nobody steps on the rift within 5 minutes it closes and the
-// creature that was supposed to spawn appears instead. Every creature born
-// from a rift is spiritual (see Monster::setSpiritual).
+// replaced type are summoned around it (5 creatures per wave, one wave every
+// minute, 3 waves total). If nobody steps on it within 5 minutes it closes
+// and the creature that was supposed to spawn appears instead. Every creature
+// born from a rift is spiritual (see Monster::setSpiritual).
+//
+// Rifts never open close to each other: a position is rejected if it is
+// within SPIRITUAL_RIFT_MIN_DISTANCE of another open rift, or of a rift that
+// appeared there within the last SPIRITUAL_RIFT_SAFE_ZONE_COOLDOWN (the
+// 400-SQM area around a spawned rift stays rift-free for 15 minutes).
 
 #define SPIRITUAL_RIFT_MAX_ACTIVE 5        // maximum rifts open at the same time
 #define SPIRITUAL_RIFT_DURATION 300000     // how long an untouched rift stays open (5 minutes, in ms)
-#define SPIRITUAL_RIFT_WAVE_INTERVAL 10000 // delay between waves (10 seconds, in ms)
+#define SPIRITUAL_RIFT_WAVE_INTERVAL 60000 // delay between waves (1 minute, in ms)
+#define SPIRITUAL_RIFT_WAVE_COUNT 5        // creatures summoned per wave
+#define SPIRITUAL_RIFT_WAVES 3             // total waves per triggered rift
+#define SPIRITUAL_RIFT_MIN_DISTANCE 400    // minimum distance between a new rift and any other rift / recent rift spot (SQM)
+#define SPIRITUAL_RIFT_SAFE_ZONE_COOLDOWN 900000 // 400-SQM area around a spawned rift stays rift-free (15 minutes, in ms)
 #define SPIRITUAL_RIFT_PULSE_INTERVAL 1000 // how often the pulsing effect is re-sent (effect 183 lasts ~1 second, so re-send every 1s)
 #define SPIRITUAL_RIFT_PULSE_EFFECT 183    // effect id shown while the rift is open
 #define SPIRITUAL_RIFT_SPAWN_EFFECT 38     // effect id released when a monster is summoned
@@ -100,14 +109,18 @@ class SpiritualRifts
 
 		void shutdown(); // closes every open rift (server shutdown / map reload)
 		void removeRift(SpiritualRift* rift); // removes and deletes an expired/closed rift
+		void noteSafeZone(const Position& pos); // marks a spot as a rift-free zone for 15 minutes
 
 	private:
 		SpiritualRifts();
 
 		void openRiftAt(Spawn* spawn, uint32_t spawnId, spawnBlock_t& sb); // holds the block and opens the rift
+		bool isPositionBlocked(const Position& pos); // too close to an open rift or a recent rift spot
 
 		typedef std::list<SpiritualRift*> RiftList;
 		RiftList riftList;
+		typedef std::list<std::pair<Position, int64_t> > RiftZoneList;
+		RiftZoneList safeZones; // every spot a rift appeared, with the time (blocks new rifts for 15 minutes)
 		uint32_t refillEvent;
 };
 #endif

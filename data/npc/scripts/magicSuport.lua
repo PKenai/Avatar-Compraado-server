@@ -4,12 +4,12 @@ npcHandler.talkRadius = 4
 NpcSystem.parseParameters(npcHandler)
 local talkState = {}
 
-function onCreatureAppear(cid)				npcHandler:onCreatureAppear(cid) 			end
-function onCreatureDisappear(cid) 			npcHandler:onCreatureDisappear(cid) 		end
-function onCreatureSay(cid, type, msg) 		npcHandler:onCreatureSay(cid, type, msg) 	end
-function onThink() 							npcHandler:onThink() 						end
-function onPlayerEndTrade(cid)				npcHandler:onPlayerEndTrade(cid)			end
-function onPlayerCloseChannel(cid)			npcHandler:onPlayerCloseChannel(cid)		end
+function onCreatureAppear(cid)			npcHandler:onCreatureAppear(cid) 		end
+function onCreatureDisappear(cid) 		npcHandler:onCreatureDisappear(cid) 	end
+function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg) end
+function onThink() 						npcHandler:onThink() 					end
+function onPlayerEndTrade(cid)			npcHandler:onPlayerEndTrade(cid)		end
+function onPlayerCloseChannel(cid)		npcHandler:onPlayerCloseChannel(cid)	end
 npcHandler:setMessage(MESSAGE_GREET, "")
 
 local shopModule = ShopModule:new()
@@ -24,7 +24,7 @@ function creatureSayCallback(cid, type, msg)
 	return true
 end
 function onGreet(cid) 
-	selfSay(getLangString(cid, "Hello "..getCreatureName(cid).."! How can i help you? Do you want to see my {offers}?", "Olá "..getCreatureName(cid).."! Você deseja ver minhas {ofertas}?"), cid)
+	selfSay(getLangString(cid, "Hello "..getCreatureName(cid).."! How can i help you? Do you want to see my {offers}?", "OlÃ¡ "..getCreatureName(cid).."! VocÃª deseja ver minhas {ofertas}?"), cid)
 	return true
 end
 
@@ -40,3 +40,9 @@ shopModule:addBuyableItem('elemental wall rune', 215, 18146, '') -- magic suppor
 shopModule:addBuyableItem('great mana potion', 240, 7590, '') -- magic support
 shopModule:addBuyableItem('mana ring', 3000, 2204, '') -- magic support
 shopModule:addBuyableItem('mana potion', 35, 7620, '') -- magic support
+
+-- health potions
+shopModule:addBuyableItem('health potion', 45, 7618, '') -- magic support
+shopModule:addBuyableItem('strong health potion', 100, 7588, '') -- magic support
+shopModule:addBuyableItem('great health potion', 200, 7591, '') -- magic support (7591: unico compravel - clientId 239 e compartilhado com 8473)
+shopModule:addBuyableItem('ultimate health potion', 310, 15014, '') -- magic support

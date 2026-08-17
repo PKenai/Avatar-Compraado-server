@@ -334,7 +334,7 @@ function qsOnKillMonster(cid, monsterName)
                                 end
                             else
                                 -- Rastreamento padrao da missao
-                                local progress = qsGetMissionProgress(cid, quest.id, mission.id)
+                                local progress = qsGetMissionProgress(cid, quest.id, mission.id or 0)
                                 progress = progress + 1
                                 qsSetMissionProgress(cid, quest.id, mission.id, progress)
                             end
@@ -578,7 +578,7 @@ function qsSendQuestList(cid)
                     if mStatus == MISSION_STATUS.COMPLETED then
                         missionProgress = maxProgress
                     else
-                        missionProgress = math.min(qsGetMissionProgress(cid, quest.id, mission.id), maxProgress)
+                        missionProgress = math.min(qsGetMissionProgress(cid, quest.id, mission.id or 0), maxProgress)
                     end
 
                     totalMax = totalMax + maxProgress

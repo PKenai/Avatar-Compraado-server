@@ -770,6 +770,20 @@
 	<monster name="Abelha de barro" file="Oficial monsters avatar/Abelha de barro.xml"/>
 	<monster name="Tarantula de pedra" file="Oficial monsters avatar/Tarantula de pedra.xml"/>
 	<monster name="Homem de barro" file="Oficial monsters avatar/Homem de barro.xml"/>
+	<monster name="Mordecasca da terra" file="Oficial monsters avatar/mordecasca da terra.xml"/>
 	<monster name="Leao de ba sin se" file="Oficial monsters avatar/Leao de ba sin se.xml"/>
 	<monster name="Pica-pau da terra" file="Oficial monsters avatar/Pica-pau da terra.xml"/>
+
+	<!-- Animais decorativos (1 HP, sem loot, passivos) -->
+	<monster name="Cisne" file="Oficial monsters avatar/Cisne.xml"/>
+	<monster name="Sapo" file="Oficial monsters avatar/Sapo.xml"/>
+	<monster name="Ovelha" file="Oficial monsters avatar/Ovelha.xml"/>
+	<monster name="Abelha" file="Oficial monsters avatar/Abelha.xml"/>
+	<monster name="Coelho" file="Oficial monsters avatar/Coelho.xml"/>
+	<monster name="Galinha" file="Oficial monsters avatar/Galinha.xml"/>
+	<monster name="Caranguejo" file="Oficial monsters avatar/Caranguejo.xml"/>
+	<monster name="Lobo selvagem" file="Oficial monsters avatar/Lobo selvagem.xml"/>
+
+	<monster name="Defensor da montanha" file="Oficial monsters avatar/Defensor da montanha.xml"/>
+	<monster name="Traidor" file="Oficial monsters avatar/Traidor.xml"/>
 </monsters>

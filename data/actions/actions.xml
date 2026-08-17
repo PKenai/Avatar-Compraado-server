@@ -297,4 +297,10 @@
 	<action itemid="18433" event="script" value="camera.lua"/>
 	<action itemid="18434" event="script" value="camera.lua"/>
 	<action actionid="49175" event="script" value="katataChest.lua"/>
+
+	<!-- Barreira da montanha (item 1290 em 640,441,5 some por 5 min) -->
+	<action actionid="50000" event="script" value="montanhaBarreira.lua"/>
+
+	<!-- Recompensa 100k (level 120+, uso unico) -->
+	<action actionid="50001" event="script" value="recompensa100k.lua"/>
 </actions>

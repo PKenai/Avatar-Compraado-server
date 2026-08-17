@@ -113,6 +113,9 @@ void SpiritualRift::trigger()
 	std::clog << "[RIFT] \"" << mType->name << "\" activated ("
 		<< pos.x << "/" << pos.y << "/" << pos.z << ")" << std::endl;
 	setConsoleDefault();
+
+	// a stepped-on rift leaves a 400-SQM rift-free zone for 15 minutes
+	SpiritualRifts::getInstance()->noteSafeZone(pos);
 	spawnWave(0);
 }
 
@@ -121,11 +124,8 @@ void SpiritualRift::spawnWave(uint32_t wave)
 	if(closing)
 		return;
 
-	uint32_t count = 3;
-	if(wave == 1)
-		count = 6;
-	else if(wave == 2)
-		count = 12;
+	// 5 creatures per wave, one wave every minute, 3 waves total
+	uint32_t count = SPIRITUAL_RIFT_WAVE_COUNT;
 
 	std::vector<Position> candidates = getSpawnCandidates();
 	for(uint32_t i = 0; i < count; ++i)
@@ -150,7 +150,7 @@ void SpiritualRift::spawnWave(uint32_t wave)
 			delete monster;
 	}
 
-	if(wave < 2)
+	if(wave + 1 < SPIRITUAL_RIFT_WAVES)
 		waveEvent = Scheduler::getInstance().addEvent(createSchedulerTask(
 			SPIRITUAL_RIFT_WAVE_INTERVAL, boost::bind(&SpiritualRift::spawnWave, this, wave + 1)));
 	else
@@ -222,6 +222,10 @@ bool SpiritualRifts::tryOpenRift(Spawn* spawn, uint32_t spawnId, spawnBlock_t& s
 	if(sb.lastRift && OTSYS_TIME() < sb.lastRift + SPIRITUAL_RIFT_BLOCK_COOLDOWN)
 		return false;
 
+	// too close to another rift or to a recent rift spot: the creature just spawns normally
+	if(isPositionBlocked(sb.pos))
+		return false;
+
 	openRiftAt(spawn, spawnId, sb);
 	return true;
 }
@@ -237,13 +241,21 @@ void SpiritualRifts::openStartupRifts()
 void SpiritualRifts::refillPool()
 {
 	refillEvent = 0;
-	while(getActiveCount() < SPIRITUAL_RIFT_MAX_ACTIVE)
+	int32_t attempts = 0;
+	while(getActiveCount() < SPIRITUAL_RIFT_MAX_ACTIVE && attempts < 8)
 	{
 		Spawn* spawn = NULL;
 		uint32_t spawnId = 0;
 		spawnBlock_t* block = NULL;
 		if(!Spawns::getInstance()->getRiftBlock(spawn, spawnId, block))
 			break;
+
+		// this spot is inside a 400-SQM rift-free zone: try another one
+		if(isPositionBlocked(block->pos))
+		{
+			++attempts;
+			continue;
+		}
 
 		openRiftAt(spawn, spawnId, *block);
 	}
@@ -269,6 +281,37 @@ void SpiritualRifts::openRiftAt(Spawn* spawn, uint32_t spawnId, spawnBlock_t& sb
 	SpiritualRift* rift = new SpiritualRift(spawn, spawnId, sb.mType, sb.pos, sb.direction);
 	riftList.push_back(rift);
 	rift->open();
+
+	// wherever a rift appears, the 400-SQM area around it stays rift-free for 15 minutes
+	noteSafeZone(sb.pos);
+}
+
+bool SpiritualRifts::isPositionBlocked(const Position& pos)
+{
+	// prune safe zones that already expired
+	int64_t now = OTSYS_TIME();
+	for(RiftZoneList::iterator it = safeZones.begin(); it != safeZones.end(); )
+	{
+		if(now >= it->second + SPIRITUAL_RIFT_SAFE_ZONE_COOLDOWN)
+			it = safeZones.erase(it);
+		else
+			++it;
+	}
+
+	for(RiftZoneList::const_iterator it = safeZones.begin(); it != safeZones.end(); ++it)
+	{
+		int32_t dist = std::max(std::abs(pos.x - it->first.x), std::abs(pos.y - it->first.y))
+			+ std::abs(pos.z - it->first.z);
+		if(dist < SPIRITUAL_RIFT_MIN_DISTANCE)
+			return true;
+	}
+
+	return false;
+}
+
+void SpiritualRifts::noteSafeZone(const Position& pos)
+{
+	safeZones.push_back(std::make_pair(pos, OTSYS_TIME()));
 }
 
 bool SpiritualRifts::triggerAt(const Position& pos)
@@ -370,4 +413,5 @@ void SpiritualRifts::shutdown()
 		rift->releaseSpawnHold(false);
 		delete rift;
 	}
+	safeZones.clear();
 }

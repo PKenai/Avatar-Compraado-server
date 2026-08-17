@@ -26,7 +26,7 @@ local function heal(cid, amount)
 		amount = amount*1.2
 	end 
   local health = getCreatureHealth(cid)
-  addEvent(function() config.cidUsing[cid] = nil end, 2000)
+  addEvent(function() config.cidUsing[cid] = nil end, 1000)
 
   if exhaustion.check(cid, "isInCombat") then
  --   doSendAnimatedText(getThingPos(cid), "Interrupted!", COLOR_RED)
@@ -41,7 +41,7 @@ end
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
   if config.cidUsing[cid] ~= nil then
-    doPlayerSendCancel(cid, "You can only use one potion every 2 seconds.")
+    doPlayerSendCancel(cid, "You can only use one potion every second.")
     return true
   end
 
@@ -55,5 +55,4 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
   doRemoveItem(item.uid, 1)
   return true
 end
-
 

@@ -139,6 +139,16 @@ function sendInitialItens(cid)
         return true
     end
 
+    -- Seguranca: se o jogador ja logou antes (storage 42001, setado no
+    -- primeiro login) ou ja passou do nivel inicial, nunca despir os
+    -- equipamentos e dar o kit de novo. Isso evita o bug de "personagem
+    -- novo" quando o storage se perde (ex: outro servidor gravou por cima
+    -- da tabela de storages).
+    if getPlayerStorageValue(cid, 42001) == 1 or getPlayerLevel(cid) > 8 then
+        setPlayerStorageValue(cid, "playerHasGetInitialItens", 1)
+        return true
+    end
+
     --doPlayerAddOutfit(cid, initialItens.vocOutfits[playerVoc][getPlayerSex(cid)+1], 0)
 
 

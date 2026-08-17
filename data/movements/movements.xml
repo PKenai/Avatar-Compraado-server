@@ -9,32 +9,34 @@
 	<movevent type="StepOut" pos="24,11,6" script="appaCloudShader.lua"/>
 
 <!-- Helmet  -->
-<movevent type="Equip" itemid="13401" level="250" slot="head" event="function" value="onEquipItem" />
-<movevent type="DeEquip" itemid="13401" level="250" slot="head" event="function" value="onDeEquipItem" />
+<movevent type="Equip" itemid="13401" level="150" slot="head" event="function" value="onEquipItem" />
+<movevent type="DeEquip" itemid="13401" level="150" slot="head" event="function" value="onDeEquipItem" />
 <!-- Armor  -->
-<movevent type="Equip" itemid="13402" level="250" slot="armor" event="function" value="onEquipItem" />
-<movevent type="DeEquip" itemid="13402" level="250" slot="armor" event="function" value="onDeEquipItem" />
+<movevent type="Equip" itemid="13402" level="150" slot="armor" event="function" value="onEquipItem" />
+<movevent type="DeEquip" itemid="13402" level="150" slot="armor" event="function" value="onDeEquipItem" />
 <!-- Shield  -->
-<movevent type="Equip" itemid="13405" level="220" slot="shield" event="function" value="onEquipItem"/>
-<movevent type="DeEquip" itemid="13405" level="220" slot="shield" event="function" value="onDeEquipItem"/>
+<movevent type="Equip" itemid="13405" level="150" slot="shield" event="function" value="onEquipItem"/>
+<movevent type="DeEquip" itemid="13405" level="150" slot="shield" event="function" value="onDeEquipItem"/>
 <!-- Legs  -->
-<movevent type="Equip" itemid="13403" level="250" slot="legs" event="function" value="onEquipItem" />
-<movevent type="DeEquip" itemid="13403" level="250" slot="legs" event="function" value="onDeEquipItem" />
+<movevent type="Equip" itemid="13403" level="150" slot="legs" event="function" value="onEquipItem" />
+<movevent type="DeEquip" itemid="13403" level="150" slot="legs" event="function" value="onDeEquipItem" />
 <!-- boots  -->
-<movevent type="Equip" itemid="13404" level="250" slot="feet" event="function" value="onEquipItem" />
-<movevent type="DeEquip" itemid="13404" level="250" slot="feet" event="function" value="onDeEquipItem" />
+<movevent type="Equip" itemid="13404" level="150" slot="feet" event="function" value="onEquipItem" />
+<movevent type="DeEquip" itemid="13404" level="150" slot="feet" event="function" value="onDeEquipItem" />
+<!-- Set da Montanha (lvl 150) -->
+
 
 <!-- Dominate Set  Falta arrumar o lvl -->  
-<movevent type="Equip" itemid="13636" level="250" slot="head" event="function" value="onEquipItem" />
-<movevent type="DeEquip" itemid="13636" level="250" slot="head" event="function" value="onDeEquipItem" />
-<movevent type="Equip" itemid="13638" level="50" slot="legs" event="function" value="onEquipItem" />
-<movevent type="DeEquip" itemid="13638" level="50" slot="legs" event="function" value="onDeEquipItem" />
-<movevent type="Equip" itemid="13637" level="50" slot="armor" event="function" value="onEquipItem" />
-<movevent type="DeEquip" itemid="13637" level="50" slot="armor" event="function" value="onDeEquipItem" />
-<movevent type="Equip" itemid="13639" level="250" slot="feet" event="function" value="onEquipItem" />
-<movevent type="DeEquip" itemid="13639" level="250" slot="feet" event="function" value="onDeEquipItem" />
-<movevent type="Equip" itemid="13640" level="50" slot="shield" event="function" value="onEquipItem" />
-<movevent type="DeEquip" itemid="13640" level="50" slot="shield" event="function" value="onDeEquipItem" />
+<movevent type="Equip" itemid="13636" level="155" slot="head" event="function" value="onEquipItem" />
+<movevent type="DeEquip" itemid="13636" level="155" slot="head" event="function" value="onDeEquipItem" />
+<movevent type="Equip" itemid="13638" level="155" slot="legs" event="function" value="onEquipItem" />
+<movevent type="DeEquip" itemid="13638" level="155" slot="legs" event="function" value="onDeEquipItem" />
+<movevent type="Equip" itemid="13637" level="155" slot="armor" event="function" value="onEquipItem" />
+<movevent type="DeEquip" itemid="13637" level="155" slot="armor" event="function" value="onDeEquipItem" />
+<movevent type="Equip" itemid="13639" level="155" slot="feet" event="function" value="onEquipItem" />
+<movevent type="DeEquip" itemid="13639" level="155" slot="feet" event="function" value="onDeEquipItem" />
+<movevent type="Equip" itemid="13640" level="155" slot="shield" event="function" value="onEquipItem" />
+<movevent type="DeEquip" itemid="13640" level="155" slot="shield" event="function" value="onDeEquipItem" />
 
 <!-- Incan Set  -->
 <!-- Helmet  -->

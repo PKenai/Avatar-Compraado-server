@@ -5094,8 +5094,8 @@
 		
 <!-- principais sets -->		
 		
-<!-- MoonSeT -->
-	<item id="13401" article="a" name="moon helmet">
+<!-- Set da Montanha (renomeado do MoonSet) -->
+	<item id="13401" article="a" name="Elmo da montanha">
 		<attribute key="description" value="[+5% Bend Damage]. " />
 		<attribute key="weight" value="4400" />
 		<attribute key="armor" value="15" />
@@ -5105,7 +5105,7 @@
 		<attribute key="increasemagicpercent" value="105" />
 		<attribute key="slotType" value="head" />
 	</item>	
-	<item id="13402" article="a" name="moon chest">
+	<item id="13402" article="a" name="Armadura da montanha">
 		<attribute key="description" value="[+12% Bend Damage] [+750 health]. A strong elemental power protects your user. With the full moon set, its even more powerful. " />
 		<attribute key="maxhealthpoints" value="750"/>
 		<attribute key="speed" value="20" />
@@ -5117,7 +5117,7 @@
 		<attribute key="increasemagicpercent" value="112" />
 		<attribute key="slotType" value="body" />
 	</item>
-	<item id="13403" article="a" name="moon legs">
+	<item id="13403" article="a" name="Calca da montanha">
 		<attribute key="description" value="[+6% Bend Damage]. " />
 		<attribute key="weight" value="2200" />
 		<attribute key="armor" value="15" />
@@ -5128,7 +5128,7 @@
 		<attribute key="speed" value="30" />
 		<attribute key="increasemagicpercent" value="106" />
 	</item>
-	<item id="13404" article="a" name="moon boots">
+	<item id="13404" article="a" name="Botas da montanha">
 		<attribute key="description" value="[+5% Bend Damage]. " />
 		<attribute key="weight" value="1000" />
 		<attribute key="armor" value="5" />
@@ -5139,7 +5139,7 @@
 		<attribute key="speed" value="40" />
 		<attribute key="increasemagicpercent" value="105" />
 	</item>
-	<item id="13405" article="a" name="moon Shield">
+	<item id="13405" article="a" name="Escudo da montanha">
 		<attribute key="description" value="[+5% Bend Damage]. " />
 		<attribute key="weight" value="1000" />
 		<attribute key="defense" value="35" />
@@ -5191,44 +5191,50 @@
 	</item>
 
 <!-- Dominate set completo !  Falta ageitar os status -->
-	<item id="13636" article="a" name="dominat helmet">
-		<attribute key="description" value="[+2% Bend Damage]. " />
+	<item id="13636" article="a" name="Elmo de um traidor">
+		<attribute key="description" value="[+5% Bend Damage]. " />
 		<attribute key="weight" value="4400" />
-		<attribute key="armor" value="12" />
-		<attribute key="increasemagicpercent" value="110" />
+		<attribute key="armor" value="16" />
+		<attribute key="absorbPercentAll" value="4"/>
+		<attribute key="manaGain" value="8" />
+		<attribute key="manaTicks" value="2000" />
+		<attribute key="increasemagicpercent" value="105" />
 		<attribute key="slotType" value="head" />
 	</item>
-	<item id="13638" article="a" name="dominant legs">
+	<item id="13638" article="a" name="Calca de um traidor">
+		<attribute key="description" value="[+5% Bend Damage]. " />
 		<attribute key="weight" value="2300" />
-		<attribute key="absorbPercentAll" value="2"/>
-		<attribute key="armor" value="8" />
+		<attribute key="absorbPercentAll" value="3"/>
+		<attribute key="armor" value="16" />
+		<attribute key="speed" value="30" />
+		<attribute key="increasemagicpercent" value="105" />
 		<attribute key="slotType" value="legs" />
 	</item>
-	<item id="13637" article="a" name="dominant armor">
-		<attribute key="description" value="[+1% Bend Damage]. " />
-		<attribute key="absorbPercentAll" value="1"/>
-		<attribute key="maxhealthpoints" value="50"/>
-		<attribute key="description" value="[+50 health]. "/>
+	<item id="13637" article="a" name="Armadura de um traidor">
+		<attribute key="description" value="[+4% Bend Damage] [+700 health]. " />
+		<attribute key="absorbPercentAll" value="3"/>
+		<attribute key="maxhealthpoints" value="700"/>
 		<attribute key="weight" value="3200" />
-		<attribute key="armor" value="14" />
-		<attribute key="increasemagicpercent" value="101" />
+		<attribute key="armor" value="18" />
+		<attribute key="increasemagicpercent" value="105" />
 		<attribute key="slotType" value="body" />
 	</item>
-	<item id="13639" article="a" name="dominant boots">
-		<attribute key="description" value="[+2% Bend Damage]. " />
+	<item id="13639" article="a" name="Botas de um traidor">
+		<attribute key="description" value="[+5% Bend Damage]. " />
 		<attribute key="weight" value="800" />
-		<attribute key="armor" value="3" />
+		<attribute key="armor" value="6" />
 		<attribute key="slotType" value="feet" />
-		<attribute key="manaGain" value="2"/>
-		<attribute key="manaTicks" value="1000"/>
-		<attribute key="speed" value="40" />
-		<attribute key="increasemagicpercent" value="102" />
+		<attribute key="manaGain" value="12"/>
+		<attribute key="manaTicks" value="3000"/>
+		<attribute key="speed" value="45" />
+		<attribute key="increasemagicpercent" value="105" />
 	</item>
-	<item id="13640" article="a" name="dominant shield">
-		<attribute key="description" value="[+2% Bend Damage]. " />
+	<item id="13640" article="a" name="Escudo de um traidor">
+		<attribute key="description" value="[+5% Bend Damage]. " />
 		<attribute key="weight" value="2800" />
-		<attribute key="defense" value="30" />
-		<attribute key="increasemagicpercent" value="102" />
+		<attribute key="defense" value="38" />
+		<attribute key="absorbPercentAll" value="2"/>
+		<attribute key="increasemagicpercent" value="105" />
 		<attribute key="weaponType" value="shield" />
 	</item>
 
@@ -15661,4 +15667,8 @@
 	<item id="18873" article="a" name="pena de pica-pau da terra">
 		<attribute key="weight" value="10" />
 	</item>
+	<item id="18877" article="a" name="Foto">
+		<attribute key="weight" value="5" />
+	</item>
+
 </items>

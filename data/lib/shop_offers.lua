@@ -31,3 +31,4 @@ table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Earth
 table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Fire avatar state", outfitMale = 1225, outfitFemale = 1225, addons = 0, cost = 10, class = "fire", description = "Feel the fire avatar state" })
 table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Air avatar state", outfitMale = 1226, outfitFemale = 1226, addons = 0, cost = 10, class = "air", description = "Feel the air avatar state" })
 table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Full Avatar State", outfitMale = 1224, outfitFemale = 1224, addons = 0, cost = 100, class = "all", description = "Feel the power of becoming an true avatar" })
+table.insert(ShopOffers, { category = "Others", type = "item", title = "Bender Scroll", itemId = 13848, count = 1, cost = 2, class = "all", description = "Entregue a um mestre de dobra para aprender a dobra desejada" })

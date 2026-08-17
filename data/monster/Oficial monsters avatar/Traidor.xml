@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Traidor" nameDescription="um Traidor" race="undead" experience="5400" speed="520" manacost="0">
+	<health now="4200" max="4200"/>
+	<look type="1286" corpse="18160"/>
+	<targetchange interval="5000" chance="10"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="120" attack="138"/>
+		<attack name="earth" interval="2000" chance="25" range="7" min="-260" max="-300"/>
+		<attack name="poison" interval="2000" chance="15" range="3" min="-120" max="-150"/>
+	</attacks>
+	<defenses armor="20" defense="10"/>
+	<loot>
+		<item id="2148" countmax="438" chance="100000"/><!-- moedas (25% a mais que a Mordecasca) -->
+	</loot>
+	<script>
+		<event name="TraidorDeath"/>
+	</script>
+</monster>
