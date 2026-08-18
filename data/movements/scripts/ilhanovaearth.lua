@@ -6,7 +6,7 @@ function onStepIn(cid, item, position, fromPosition)
 	end
 	if getPlayerLevel(cid) < 240 then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 240+  para entrar na Marsh Prince Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de Level 240+  para entrar na Marsh Prince Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else
 		doTeleportThing(cid, {x=827, y=976, z=6})	

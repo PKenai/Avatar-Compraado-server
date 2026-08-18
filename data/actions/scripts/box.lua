@@ -1,4 +1,4 @@
--- vai ser random entre um dos 10, e cada um tem sub chances fazendo no final ser aquela chance que j· tinhamos concordado, exemplo 0.5% cada parte do moon etc
+-- vai ser random entre um dos 10, e cada um tem sub chances fazendo no final ser aquela chance que j√° tinhamos concordado, exemplo 0.5% cada parte do moon etc
 local possibleItems = 
 {
 	[1] = {13635, 13830, 13853, 13435}, -- uma arma frozen
@@ -20,9 +20,9 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	doPlayerAddItem(cid, finalItem, 1)
 	local itemName = getItemNameById(finalItem)
 	if random <= 4 then  
-		sendBlueMessage(cid, getLangString(cid, "You won 1x "..itemName..". Check your backpack!", "VocÍ ganhou 1x "..itemName..". Cheque sua backpack!"))
+		sendBlueMessage(cid, getLangString(cid, "You won 1x "..itemName..". Check your backpack!", "Voc√™ ganhou 1x "..itemName..". Cheque sua backpack!"))
 	else 
-		sendBlueMessage(cid, getLangString(cid, "Congratulations! You won 1x "..itemName..". Check your backpack!", "ParabÈns! VocÍ ganhou 1x "..itemName..". Cheque sua backpack!"))
+		sendBlueMessage(cid, getLangString(cid, "Congratulations! You won 1x "..itemName..". Check your backpack!", "Parab√©ns! Voc√™ ganhou 1x "..itemName..". Cheque sua backpack!"))
 	end
 	doSendMagicEffect(getCreaturePosition(cid), 28)
   return true

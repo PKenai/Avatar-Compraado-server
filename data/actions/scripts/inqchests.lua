@@ -8,7 +8,7 @@ local storage = 100166
    			setPlayerStorageValue(cid,storage,1)
 			doSendMagicEffect(getCreaturePosition(cid), 29)
    		else
-   			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The chest is empty.", "Esse chest est· vazio."))
+   			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The chest is empty.", "Esse chest est√° vazio."))
    		end
    	elseif item.uid == 2013 then
 		queststatus = getPlayerStorageValue(cid,storage)
@@ -18,7 +18,7 @@ local storage = 100166
    			setPlayerStorageValue(cid,storage,1)
 			doSendMagicEffect(getCreaturePosition(cid), 29)
    		else
-   			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The chest is empty.", "Esse chest est· vazio."))
+   			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The chest is empty.", "Esse chest est√° vazio."))
    		end
 	end
    	return true

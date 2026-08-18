@@ -1,4 +1,4 @@
---j· est· na ordem das vocations.
+--j√° est√° na ordem das vocations.
 
 local config = {
    

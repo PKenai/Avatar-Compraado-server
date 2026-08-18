@@ -8,7 +8,7 @@ serverInTest = getServerInTest()
 clientVersion = "5.2"
 
 WITHOUTPREMIUM = "You need have premium account to use this feature."
-WITHOUTPREMIUMBR = "Você precisa ser premium account para usar essa ferramenta."
+WITHOUTPREMIUMBR = "VocÃª precisa ser premium account para usar essa ferramenta."
 
 NORTH = 0
 EAST = 1

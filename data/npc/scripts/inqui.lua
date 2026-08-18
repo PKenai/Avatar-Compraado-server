@@ -39,23 +39,23 @@ function creatureSayCallback(cid, type, msg)
         if talkState[talkUser] == 1 then
             if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "entrar") or msgcontains(msg, "join") then
                 if getPlayerStorageValue(cid, Huahua) < 1 then
-                    selfSay(getLangString(cid, "You need to talk to the old man Clerical Jorge before coming to me.", "Você precisa falar com o ancião Clerical Jorge, antes de vir até mim."), cid)
+                    selfSay(getLangString(cid, "You need to talk to the old man Clerical Jorge before coming to me.", "VocÃª precisa falar com o anciÃ£o Clerical Jorge, antes de vir atÃ© mim."), cid)
                     talkState[talkUser] = 1         
                 elseif getPlayerStorageValue(cid, Ahu) >= 2 then
-                    selfSay(getLangString(cid, "You are already free to go.", "Você já está liberado para passar."), cid)
+                    selfSay(getLangString(cid, "You are already free to go.", "VocÃª jÃ¡ estÃ¡ liberado para passar."), cid)
                     talkState[talkUser] = 1
                 elseif getPlayerLevel(cid) >= 120 then
-                    selfSay(getLangString(cid, "Ok, I see you're already listed, however, I need you to help me with one more thing. Are you willing?", "Ok, vejo que você já está alistado, no entanto, preciso que você me ajude com mais uma coisa. Você está disposto?"), cid)
+                    selfSay(getLangString(cid, "Ok, I see you're already listed, however, I need you to help me with one more thing. Are you willing?", "Ok, vejo que vocÃª jÃ¡ estÃ¡ alistado, no entanto, preciso que vocÃª me ajude com mais uma coisa. VocÃª estÃ¡ disposto?"), cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay(getLangString(cid, "You are not strong enough to help me.", "Você não é forte o suficiente para me ajudar."), cid)
+                    selfSay(getLangString(cid, "You are not strong enough to help me.", "VocÃª nÃ£o Ã© forte o suficiente para me ajudar."), cid)
                     talkState[talkUser] = 1
                 end
             end
         elseif talkState[talkUser] == 2 then
             if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
                 it = "Preciso que me traga 5 life crystal"
-                it = it .. ". Você já coletou todos?"
+                it = it .. ". VocÃª jÃ¡ coletou todos?"
                 selfSay(getLangString(cid, "I need you to bring me 5 life crystal. You've collected all?", it), cid)
                 talkState[talkUser] = 3         
             end
@@ -66,11 +66,11 @@ function creatureSayCallback(cid, type, msg)
                     for i,v in pairs(items) do
                         doPlayerRemoveItem(cid, i, v)
                     end
-                    selfSay(getLangString(cid, "Thanks for your help, you're free to go. Be careful!", "Obrigado por sua ajuda, você já está liberado para passar. Tenha cuidado!"), cid)
+                    selfSay(getLangString(cid, "Thanks for your help, you're free to go. Be careful!", "Obrigado por sua ajuda, vocÃª jÃ¡ estÃ¡ liberado para passar. Tenha cuidado!"), cid)
                     setPlayerStorageValue(cid, Ahu, 2)
                     talkState[talkUser] = 1
                 else
-                    selfSay(getLangString(cid, "You did not collect anything yet.", "Você não coletou tudo ainda."), cid)
+                    selfSay(getLangString(cid, "You did not collect anything yet.", "VocÃª nÃ£o coletou tudo ainda."), cid)
                     talkState[talkUser] = 1
                 end
             end
@@ -80,7 +80,7 @@ end
 
 function onGreet(cid) 
     talkState[cid] = 1  
-	selfSay(getLangString(cid, "Hello, "..getCreatureName(cid)..". Would you like to {join} the Profaned Quest?", "Olá, "..getCreatureName(cid)..". Você deseja {entrar} na Profaned Quest?"), cid)
+	selfSay(getLangString(cid, "Hello, "..getCreatureName(cid)..". Would you like to {join} the Profaned Quest?", "OlÃ¡, "..getCreatureName(cid)..". VocÃª deseja {entrar} na Profaned Quest?"), cid)
 	return true
 end
 

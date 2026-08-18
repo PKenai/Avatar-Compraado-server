@@ -1,9 +1,9 @@
 local npcGen = newNpc("NpcRecepconistFire")
 local storageRegister = 8933
 
-npcGen:setHiMsg("Hello %s, Welcome to trainer room of Fire Academy, I can help you with REGISTERs.", "Olá %s, seja bem vindo a sala de treinamento da Fire Academy, eu posso lhe ajudar com os REGISTROs?")
-npcGen:addOptionInNpc("job", {"I'm the receptionist at this academy, my job is to be very polite to all customers.", "Eu sou a recepcionista dessa academia, meu trabalho é ser muito educada com todos os clientes."})
-npcGen:addOptionInNpc("help", {"I have a loooot of work, but I don't need help, ty.", "Eu tenho muuuuito trabalho a fazer, porém não posso aceitar ajuda, muito obrigada."})
+npcGen:setHiMsg("Hello %s, Welcome to trainer room of Fire Academy, I can help you with REGISTERs.", "OlÃ¡ %s, seja bem vindo a sala de treinamento da Fire Academy, eu posso lhe ajudar com os REGISTROs?")
+npcGen:addOptionInNpc("job", {"I'm the receptionist at this academy, my job is to be very polite to all customers.", "Eu sou a recepcionista dessa academia, meu trabalho Ã© ser muito educada com todos os clientes."})
+npcGen:addOptionInNpc("help", {"I have a loooot of work, but I don't need help, ty.", "Eu tenho muuuuito trabalho a fazer, porÃ©m nÃ£o posso aceitar ajuda, muito obrigada."})
 npcGen:needPremium(true)
 
 function onCreatureSay(cid, type, msg)
@@ -13,10 +13,10 @@ function onCreatureSay(cid, type, msg)
         if stage == 1 then
             if msgcontains(msg, "register") or msgcontains(msg, "registro") then
                 if getPlayerStorageValue(cid, storageRegister) == -1 then
-                    npcGen:say("Huum, you are a new here, to enter in the Academy, you need only a once payment, so you can enter in academy when you want, it's costs 5.000 gold coins, you want to join?", "Huum, você é novo por aqui? Para entrar na academia você precisa fazer um pagamento único, então você poderá entrar aqui quando quiser, esse pagamento custa 5.000 gold coins, você deseja se inscrever?")
+                    npcGen:say("Huum, you are a new here, to enter in the Academy, you need only a once payment, so you can enter in academy when you want, it's costs 5.000 gold coins, you want to join?", "Huum, vocÃª Ã© novo por aqui? Para entrar na academia vocÃª precisa fazer um pagamento Ãºnico, entÃ£o vocÃª poderÃ¡ entrar aqui quando quiser, esse pagamento custa 5.000 gold coins, vocÃª deseja se inscrever?")
                     npcGen:setStage(2)
                 else
-                    npcGen:say("Let's me see... You was already registered in academy, enter and enjoy!", "Deixe-me ver... Você já é membro da academia, entre e aproveite!")
+                    npcGen:say("Let's me see... You was already registered in academy, enter and enjoy!", "Deixe-me ver... VocÃª jÃ¡ Ã© membro da academia, entre e aproveite!")
                 end
             end
 
@@ -24,16 +24,16 @@ function onCreatureSay(cid, type, msg)
             if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
                 if getPlayerStorageValue(cid, storageRegister) == -1 then
                     if doPlayerRemoveMoney(cid, 5000) then
-                        npcGen:say("CONGRATULATIONS! Now you are a member of Fire Academy, enjoy it.", "Parábens! Você é o mais novo membro de nossa academia, entre e aproveite!")
+                        npcGen:say("CONGRATULATIONS! Now you are a member of Fire Academy, enjoy it.", "ParabÃ©ns! VocÃª Ã© o mais novo membro de nossa academia, entre e aproveite!")
                         setPlayerStorageValue(cid, storageRegister, 1)
                     else
-                        npcGen:say("Sorry sir, you don't have money for it, please come back when you have the money.", "Desculpe, mas você não tem o dinheiro necessário para isso, porfavor volte quando tiver.")
+                        npcGen:say("Sorry sir, you don't have money for it, please come back when you have the money.", "Desculpe, mas vocÃª nÃ£o tem o dinheiro necessÃ¡rio para isso, porfavor volte quando tiver.")
                     end
                 else
-                    npcGen:say("Sorry sir but you was already registered in academy, enter and enjoy!", "Desculpe, mas você já é membro de nossa academia, entre e aproveite!")
+                    npcGen:say("Sorry sir but you was already registered in academy, enter and enjoy!", "Desculpe, mas vocÃª jÃ¡ Ã© membro de nossa academia, entre e aproveite!")
                 end
             else
-                npcGen:say("Ok, I think...", "Ok então...") 
+                npcGen:say("Ok, I think...", "Ok entÃ£o...") 
             end
             npcGen:setStage(1)
         end

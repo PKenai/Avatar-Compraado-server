@@ -13,16 +13,16 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	doTeleportThing(cid, {x=311, y=835, z=12})
 	doSendMagicEffect(getThingPos(cid), CONST_ME_TELEPORT)
 	if getPlayerStorageValue(cid, "90505") == 1 then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ pegou esta recompensa.")
 		return true
 	elseif checkBossAlive() then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Algum monstro continua vivo, não houve recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Algum monstro continua vivo, nÃ£o houve recompensa.")
 		return true
 	end 
     setPlayerStorageValue(cid, "90505", 1)
    doPlayerAddItem(cid, 12939, 1)
    doSendMagicEffect(getThingPos(cid), 29)
    
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Ao derrotar o Medreth, você conquistou o medreth chest.")
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! Ao derrotar o Medreth, vocÃª conquistou o medreth chest.")
     return true
 end

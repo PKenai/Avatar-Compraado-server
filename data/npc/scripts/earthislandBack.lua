@@ -27,16 +27,16 @@ function creatureSayCallback(cid, type, msg)
         if talkState[talkUser] == 1 then
     		if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "viajar") or msgcontains(msg, "travel") then
 				if getPlayerStorageValue(cid, "tutorialback") ~= 1 then
-					selfSay(getLangString(cid, "You didn't spoke with the commander Kuvira yet. Follow the north path, you'll find her.", "VocÍ ainda n„o falou com a comandante Kuvira. Siga ao norte para encontr·-la."), cid)
+					selfSay(getLangString(cid, "You didn't spoke with the commander Kuvira yet. Follow the north path, you'll find her.", "Voc√™ ainda n√£o falou com a comandante Kuvira. Siga ao norte para encontr√°-la."), cid)
 					talkState[talkUser] = 1         
 				else
-					selfSay(getLangString(cid, "I see that you are already fit to {travel}. It will be a long trip, are you ready?", "Vejo que vocÍ j· est· apto para {viajar}. Ser· uma viagem longa, est· preparado?"), cid)
+					selfSay(getLangString(cid, "I see that you are already fit to {travel}. It will be a long trip, are you ready?", "Vejo que voc√™ j√° est√° apto para {viajar}. Ser√° uma viagem longa, est√° preparado?"), cid)
 					talkState[talkUser] = 2
             	end
 			end
 		elseif talkState[talkUser] == 2 then
     		if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "viajar") or msgcontains(msg, "travel") then
-				selfSay(getLangString(cid, "Alright then, get ready, we are leaving!", "Certo ent„o, se segure, estamos saindo!"), cid)
+				selfSay(getLangString(cid, "Alright then, get ready, we are leaving!", "Certo ent√£o, se segure, estamos saindo!"), cid)
 				doTeleportThing(cid, {x = 505, y = 342, z = 7})
 				doSendMagicEffect(getCreaturePosition(cid), CONST_ME_TELEPORT)
 				--sendInitialItens(cid)
@@ -49,10 +49,10 @@ end
 
 function onGreet(cid) 
 	if getPlayerStorageValue(cid, "tutorialback") ~= 1 then
-		selfSay(getLangString(cid, "You didn't spoke with the commander Kuvira yet. Follow the north path, you'll find her.", "VocÍ ainda n„o falou com a comandante Kuvira. Siga ao norte para encontr·-la."), cid)
+		selfSay(getLangString(cid, "You didn't spoke with the commander Kuvira yet. Follow the north path, you'll find her.", "Voc√™ ainda n√£o falou com a comandante Kuvira. Siga ao norte para encontr√°-la."), cid)
 		talkState[cid] = 1         
 	else
-		selfSay(getLangString(cid, "I see that you are already fit to {travel}. It will be a long trip, are you ready?", "Vejo que vocÍ j· est· apto para {viajar}. Ser· uma viagem longa, est· preparado?"), cid)
+		selfSay(getLangString(cid, "I see that you are already fit to {travel}. It will be a long trip, are you ready?", "Vejo que voc√™ j√° est√° apto para {viajar}. Ser√° uma viagem longa, est√° preparado?"), cid)
 		talkState[cid] = 2
     end
 	return true

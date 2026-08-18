@@ -6,7 +6,7 @@ function onStepIn(cid, item, position, fromPosition)
 	end
 	if getPlayerLevel(cid) < 135 then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 135+  para entrar na Rarods Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de Level 135+  para entrar na Rarods Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else
 		doTeleportThing(cid, {x=886, y=559, z=9})	

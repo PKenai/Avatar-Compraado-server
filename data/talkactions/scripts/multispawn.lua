@@ -30,7 +30,7 @@ function onSay(cid, words, param, channel)
   -- nao spawna dentro de zona de protecao
   local info = getTileInfo(pos)
   if info and info.protection then
-    doPlayerSendCancel(cid, "Voce esta numa zona de protecao. Saia dela para spawnar criaturas.")
+    doPlayerSendCancel(cid, "Você está numa zona de proteção. Saia dela para spawnar criaturas.")
     return true
   end
 
@@ -49,7 +49,7 @@ function onSay(cid, words, param, channel)
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Spawnado " .. spawned .. "x " .. monsterName .. " no seu tile.")
     doSendMagicEffect(pos, CONST_ME_MAGIC_RED)
   else
-    doPlayerSendCancel(cid, "Criatura nao encontrada: " .. monsterName)
+    doPlayerSendCancel(cid, "Criatura não encontrada: " .. monsterName)
   end
 
   return true

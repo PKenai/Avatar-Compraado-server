@@ -26,14 +26,14 @@ function warCreateEvent()
 	doContagemRegressiva(warconfig.posPedras[3], 180)
 	doSetItemActionId(tp, 43277)
 	addEvent(warStart, 180000)
-	doBroadcastMessage("[Evento - War Ground] O War Ground foi aberto por 3 minutos! Para todos que desejam participar, o portal se localiza no depot de Ba Sing Se. Somente dobradores com nível maior ou igual à 50 podem entrar!")
+	doBroadcastMessage("[Evento - War Ground] O War Ground foi aberto por 3 minutos! Para todos que desejam participar, o portal se localiza no depot de Ba Sing Se. Somente dobradores com nÃ­vel maior ou igual Ã  50 podem entrar!")
 end
 
 function warStart()
 	doSetStorage("comecouWar", 1)
 	warRemoveTpa()
     warRemoveStones()
-	doBroadcastMessage("[Evento - War Ground] O Evento começou. Boa sorte aos times!")
+	doBroadcastMessage("[Evento - War Ground] O Evento comeÃ§ou. Boa sorte aos times!")
 end
 
 function getComecou()
@@ -77,7 +77,7 @@ function warRegister(cid)
 --		end
 
 		local teamName = {"Raava", "Vaatu"}
-		doPlayerSendTextMessage(cid, 22, "Você entrou para o time "..teamName[team]..", boa sorte!")
+		doPlayerSendTextMessage(cid, 22, "VocÃª entrou para o time "..teamName[team]..", boa sorte!")
 		local totalPlayers = #getParticipantes()
 		if not totalPlayers or totalPlayers < 3 then 
 			doSetStorage("lider" .. team, cid)
@@ -112,20 +112,20 @@ function rewardWarplayer(cid)
 	setPlayerStorageValue(cid, "timeWar", 0)
 	local warKills = getPlayerStorageValue(cid, "warKills")
 	if warKills <= 50000 then 
-		--doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você não matou ninguém no War Ground, portanto não receberá recompensa. Boa sorte na próxima vez!")
+		--doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÃª nÃ£o matou ninguÃ©m no War Ground, portanto nÃ£o receberÃ¡ recompensa. Boa sorte na prÃ³xima vez!")
 		local myLevel = getPlayerLevel(cid)
 		local finalExp = myLevel * 35
 		finalExp = finalExp * 75
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Pela sua participação no War Ground, você recebeu "..finalExp.." pontos de EXP!")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Pela sua participaÃ§Ã£o no War Ground, vocÃª recebeu "..finalExp.." pontos de EXP!")
 	else 
 		local myLevel = getPlayerLevel(cid)
 		local finalExp = myLevel * 35
 		finalExp = finalExp * (warKills+5)
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você derrotou "..warKills.." jogadores no War Ground e recebeu "..finalExp.." pontos de EXP!")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÃª derrotou "..warKills.." jogadores no War Ground e recebeu "..finalExp.." pontos de EXP!")
 	 end 
 --	if getPlayerStorageValue(cid, "estavaNon") == 1 then 
 --		setPlayerStorageValue(cid, "estavaNon", 0)

@@ -6,19 +6,19 @@ local config = {
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
   if getPlayerLevel(cid) < config.levelMin then
-    doPlayerSendCancel(cid, getLangString(cid, "You need have level "..config.levelMin.." to do this quest.", "Você precisa ter level "..config.levelMin.." para fazer essa quest."))
+    doPlayerSendCancel(cid, getLangString(cid, "You need have level "..config.levelMin.." to do this quest.", "VocÃª precisa ter level "..config.levelMin.." para fazer essa quest."))
     return true
   end
 
   if getPlayerStorageValue(cid, "hasDoWaterQuestExp") == 1 then
-    doPlayerSendCancel(cid, getLangString(cid, "Sorry, you already did this quest.", "Desculpe, você já completou essa quest."))
+    doPlayerSendCancel(cid, getLangString(cid, "Sorry, you already did this quest.", "Desculpe, vocÃª jÃ¡ completou essa quest."))
     return true
   end
 
   doSendMagicEffect(getThingPos(cid), 12)
   doPlayerAddExperience(cid, config.exp)
   setPlayerStorageValue(cid, "hasDoWaterQuestExp", 1)
-  sendBlueMessage(cid, getLangString("You have received "..config.exp.." points of experience.", "Você ganhou "..config.exp.." pontos de experiencia."))
+  sendBlueMessage(cid, getLangString("You have received "..config.exp.." points of experience.", "VocÃª ganhou "..config.exp.." pontos de experiÃªncia."))
 
   return true
 end

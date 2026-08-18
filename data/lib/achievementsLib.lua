@@ -20,16 +20,16 @@
  *  - Ao equipar/remover o titulo, o servidor faz broadcast para todos
  *    os players na tela (getSpectators).
  *  - No login, o servidor envia os titulos dos players vizinhos como
- *    fallback (caso o onAppear do map description nao dispare).
+ *    fallback (caso o onAppear do map description não dispare).
  *
  * STORAGES (por player, string keys - persistem no banco):
  *  - achTotalKills       -> total de criaturas derrotadas
  *  - achCreatureKill_<id> -> kills da criatura da conquista <id>
  *  - achUnlocked_<id>    -> 1 quando a conquista foi desbloqueada
- *  - achEquipped         -> id da conquista cujo titulo esta equipado (-1 = nenhum)
+ *  - achEquipped         -> id da conquista cujo título está equipado (-1 = nenhum)
  *
- * OBS: use apenas caracteres ASCII nos textos (sem acentos) para nao
- * quebrar a exibicao no client.
+ * OBS: os textos aceitam acentos normalmente (UTF-8 no client), desde que
+ * o arquivo esteja salvo em UTF-8.
  *]]
 
 ACHIEVEMENTS_OPCODE = 172
@@ -48,26 +48,32 @@ local function storageCreatureKill(id)
     return "achCreatureKill_" .. id
 end
 
--- Definicoes: id, tipo (level/kills/creature), target, nome, titulo, descricao
+-- Definições: id, tipo (level/kills/creature), target, nome, título, descrição
 -- Para tipo "creature", o campo `creature` e o nome da criatura (minusculo).
 local defs = {
-    { id = 1,  type = "level", target = 10,    name = "Atingiu level 10",             title = "Iniciante em acao",     description = "Alcance o level 10." },
+    { id = 1,  type = "level", target = 10,    name = "Atingiu level 10",             title = "Iniciante em ação",     description = "Alcance o level 10." },
     { id = 2,  type = "level", target = 25,    name = "Atingiu level 25",             title = "Aventureiro promissor",  description = "Alcance o level 25." },
-    { id = 3,  type = "level", target = 50,    name = "Atingiu level 50",             title = "Heroi em ascensao",      description = "Alcance o level 50." },
+    { id = 3,  type = "level", target = 50,    name = "Atingiu level 50",             title = "Herói em ascensão",      description = "Alcance o level 50." },
     { id = 4,  type = "level", target = 100,   name = "Atingiu level 100",            title = "Lenda viva",             description = "Alcance o level 100." },
     { id = 5,  type = "level", target = 200,   name = "Atingiu level 200",            title = "Semideus",               description = "Alcance o level 200." },
-    { id = 6,  type = "kills", target = 10,    name = "Derrotou 10 criaturas",        title = "Cacador iniciante",      description = "Derrote 10 criaturas." },
-    { id = 7,  type = "kills", target = 100,   name = "Derrotou 100 criaturas",       title = "Cacador experiente",     description = "Derrote 100 criaturas." },
+    { id = 6,  type = "kills", target = 10,    name = "Derrotou 10 criaturas",        title = "Caçador iniciante",      description = "Derrote 10 criaturas." },
+    { id = 7,  type = "kills", target = 100,   name = "Derrotou 100 criaturas",       title = "Caçador experiente",     description = "Derrote 100 criaturas." },
     { id = 8,  type = "kills", target = 1000,  name = "Derrotou 1.000 criaturas",     title = "Exterminador",           description = "Derrote 1.000 criaturas." },
     { id = 9,  type = "kills", target = 5000,  name = "Derrotou 5.000 criaturas",     title = "Lenda do massacre",      description = "Derrote 5.000 criaturas." },
     { id = 10, type = "kills", target = 10000, name = "Derrotou 10.000 criaturas",    title = "Deus da guerra",         description = "Derrote 10.000 criaturas." },
     -- Matar criatura especifica (zoeiras)
-    { id = 11, type = "creature", creature = "pica-pau da terra", target = 500, name = "Derrotou 500 pica-paus da terra", title = "Cacador de paus",       description = "Derrote 500 pica-paus da terra." },
+    { id = 11, type = "creature", creature = "pica-pau da terra", target = 500, name = "Derrotou 500 pica-paus da terra", title = "Caçador de paus",       description = "Derrote 500 pica-paus da terra." },
     { id = 13, type = "creature", creature = "cockroach",         target = 300, name = "Derrotou 300 baratas",            title = "Inseticida humano",      description = "Derrote 300 baratas." },
     { id = 14, type = "creature", creature = "chicken",           target = 200, name = "Derrotou 200 galinhas",           title = "Nuggets de frango",      description = "Derrote 200 galinhas." },
-    { id = 17, type = "creature", creature = "tarantula de pedra", target = 500, name = "Derrotou 500 tarantulas de pedra", title = "Amigo do Homem-Aranha", description = "Derrote 500 tarantulas de pedra." },
+    { id = 17, type = "creature", creature = "tarantula de pedra", target = 500, name = "Derrotou 500 tarântulas de pedra", title = "Amigo do Homem-Aranha", description = "Derrote 500 tarântulas de pedra." },
     { id = 18, type = "creature", creature = "defensor da montanha", target = 1, name = "Derrotou o Defensor da montanha", title = "Alpinista", description = "Derrote o Defensor da montanha." },
     { id = 19, type = "creature", creature = "traidor", target = 2000, name = "Derrotou 2.000 Traidores", title = "Fiel", description = "Derrote 2.000 Traidores." },
+    -- Quest: desbloqueada manualmente pelo NPC (a criatura e o nome do NPC da
+    -- quest, nunca e matavel, entao o onKill nunca dispara sozinho).
+    { id = 20, type = "creature", creature = "coelho da margarida", target = 1, name = "Resgatou o Coelho da Margarida", title = "Amigo dos animais", description = "Complete a quest O Coelho da Margarida." },
+    { id = 21, type = "creature", creature = "urso feroz", target = 150, name = "Derrotou 150 ursos ferozes", title = "Abraça urso", description = "Derrote 150 ursos ferozes." },
+    -- Quest: desbloqueada manualmente pelo NPC (criatura sentinela, nunca matavel)
+    { id = 22, type = "creature", creature = "rafinha", target = 1, name = "Pescou o anel do Rafinha", title = "Pescador nato", description = "Complete a quest O Anel do Rafinha." },
 }
 
 for _, def in ipairs(defs) do
@@ -215,7 +221,7 @@ function Achievements.equip(cid, id)
     end
 
     if not Achievements.isUnlocked(cid, id) then
-        doPlayerSendCancel(cid, "Voce ainda nao desbloqueou essa conquista.")
+        doPlayerSendCancel(cid, "Você ainda não desbloqueou essa conquista.")
         return
     end
 

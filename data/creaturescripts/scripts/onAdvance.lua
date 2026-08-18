@@ -4,14 +4,14 @@ function onAdvance(cid, skill, oldLevel, newLevel)
 	-- SKILL__LEVEL = 8 (level up). Also accept raw 8 if constant is missing.
 	if (skill == SKILL__LEVEL or skill == 8) and newLevel > oldLevel then
 		if getPlayerStorageValue(cid, "getTurnMsgPoints") ~= 1 then
-			local string = getLangString(cid, "Congratulations! You have gained element points.\nYou can use these element points for change with more stats as Bend Level, Speed, Hitpoints and Dodge Chance. Type CTRL + E.", "Parabens! Voce ganhou pontos.\nVoce pode utilizar esses pontos para trocar por stats como Bend Level, Mana, Health e Speed. Use CTRL + E.")
+			local string = getLangString(cid, "Congratulations! You have gained element points.\nYou can use these element points for change with more stats as Bend Level, Speed, Hitpoints and Dodge Chance. Type CTRL + E.", "Parabens! Você ganhou pontos.\nVoce pode utilizar esses pontos para trocar por stats como Bend Level, Mana, Health e Speed. Use CTRL + E.")
 			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, string)
 			setPlayerStorageValue(cid, "getTurnMsgPoints", 1)
 		elseif newLevel >= 50 and getPlayerStorageValue(cid, "pvpLevelMessage") ~= 1 then
 			setPlayerStorageValue(cid, "pvpLevelMessage", 1)
-			local string = getLangString(cid, "Congratulations! You have reached level 50.\nYou are now blessed and will not lose items until your next death.\nYou can now attack others players of level 50 or higher.", "Parabens! Voce alcancou o nivel 50.\nSeu personagem foi abencoado e nao perdera nenhum item em sua proxima morte.\nAgora voce pode atacar e ser atacado por outros jogadores de nivel 50 ou superior, mas existe penalidades (skull system).")
+			local string = getLangString(cid, "Congratulations! You have reached level 50.\nYou are now blessed and will not lose items until your next death.\nYou can now attack others players of level 50 or higher.", "Parabens! Você alcancou o nível 50.\nSeu personagem foi abencoado e não perdera nenhum item em sua próxima morte.\nAgora você pode atacar e ser atacado por outros jogadores de nível 50 ou superior, mas existe penalidades (skull system).")
 			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, string)
-			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, getLangString(cid, "Now you'll lose your backpack on death (you can use an amulet of loss or buy blessing to prevent this). If you die while you're red skulled, you'll lose all your items (there's no prevent for that).", "Agora voce podera perder sua backpack em uma eventual morte (seja para monstro ou para um jogador, caso nao esteja utilizando amulet of loss ou nao esteja abencoado para prevenir). Caso morra estando com red skull (adquirido apos matar muitos jogadores injustificadamente), perdera todos os itens, sem direito a prevencao."))
+			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, getLangString(cid, "Now you'll lose your backpack on death (you can use an amulet of loss or buy blessing to prevent this). If you die while you're red skulled, you'll lose all your items (there's no prevent for that).", "Agora você podera perder sua backpack em uma eventual morte (seja para monstro ou para um jogador, caso não esteja utilizando amulet of loss ou não esteja abencoado para prevenir). Caso morra estando com red skull (adquirido após matar muitos jogadores injustificadamente), perdera todos os itens, sem direito a prevenção."))
 			setPlayerStorageValue(cid, "playerWithBless", 1)
 			setPlayerStorageValue(cid, "blessExpName", "Sony")
 		end
@@ -40,7 +40,7 @@ function onAdvance(cid, skill, oldLevel, newLevel)
 			if getAtributosString then
 				doSendPlayerExtendedOpcode(cid, 40, getAtributosString(cid))
 			end
-			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Voce ganhou " .. gained .. " attribute point(s). Total pendente: " .. pendentes .. ".")
+			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você ganhou " .. gained .. " attribute point(s). Total pendente: " .. pendentes .. ".")
 		end
 
 	end

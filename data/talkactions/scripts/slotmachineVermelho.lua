@@ -1,7 +1,7 @@
 
 local opcode      = 202
 local apostaValue = 20000
-local msg         = "VocÍ n„o possui dinheiro suficiente para jogar."
+local msg         = "Voc√™ n√£o possui dinheiro suficiente para jogar."
 local slotMachineVermelho = {
 	['fire']  = { money = 400000},
 	['water'] = { money = 200000},
@@ -33,13 +33,13 @@ if (getPlayerInPos(cid, {x=512,y=357}, {x=512,y=357}, 5) or getPlayerInPos(cid, 
       if ( element ~= 'none' ) then	    
         doPlayerAddMoney(cid, slotMachineVermelho[element].money)
         if (element == 'fire') then
-		      doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÍ ganhou 400k (400.000 gps).")
+		      doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Voc√™ ganhou 400k (400.000 gps).")
         elseif (element == 'water') then
-          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÍ ganhou 200k (200.000 gps).")
+          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Voc√™ ganhou 200k (200.000 gps).")
         elseif (element == 'air') then
-          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÍ ganhou 100k (100.000 gps).")
+          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Voc√™ ganhou 100k (100.000 gps).")
         else
-          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÍ ganhou 50k (50.000 gps).")
+          doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Voc√™ ganhou 50k (50.000 gps).")
         end
       end
         doSendPlayerExtendedOpcode(cid, opcode, 'start>'..element)
@@ -51,6 +51,6 @@ if (getPlayerInPos(cid, {x=512,y=357}, {x=512,y=357}, 5) or getPlayerInPos(cid, 
   end	
   return true
 else
-  doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Utilize a m·quina do cassino para apostas.")
+  doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Utilize a m√°quina do cassino para apostas.")
 end
 end

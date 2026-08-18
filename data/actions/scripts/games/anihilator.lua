@@ -68,7 +68,7 @@ function config.start(cid)
 
         if possiblePlayer > 0 then
             if getPlayerStorageValue(possiblePlayer, config.storageCompleted) == 1 then
-                doPlayerSendCancel(cid, getLangString(cid, "Someone on your team has already completed this quest.", "Alguém do seu time já completou essa quest."))
+                doPlayerSendCancel(cid, getLangString(cid, "Someone on your team has already completed this quest.", "AlguÃ©m do seu time jÃ¡ completou essa quest."))
                 return false
             else
                 players[x] = possiblePlayer
@@ -108,7 +108,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
             doTransformLever(item)
         end
     else
-        doPlayerSendCancel(cid, getLangString(cid, "You need wait "..getSecsString(dVar.timeToDoAgain-currentTime).." to start anihilator.", "Você precisa esperar "..getSecsString(dVar.timeToDoAgain-currentTime).." para iniciar a Anihilator."))
+        doPlayerSendCancel(cid, getLangString(cid, "You need wait "..getSecsString(dVar.timeToDoAgain-currentTime).." to start anihilator.", "VocÃª precisa esperar "..getSecsString(dVar.timeToDoAgain-currentTime).." para iniciar a Anihilator."))
     end
 
     return true

@@ -19,12 +19,12 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
     end
 
     if getPlayerStorageValue(cid, STORAGE_USED) == 1 then
-        doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce ja usou esta recompensa.")
+        doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você já usou esta recompensa.")
         return true
     end
 
     if getPlayerLevel(cid) < MIN_LEVEL then
-        doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce precisa de level 120 para usar isto.")
+        doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você precisa de level 120 para usar isto.")
         return true
     end
 
@@ -32,7 +32,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
     setPlayerStorageValue(cid, "aianoChest", 1) -- quest do Aiano: pegou o bau do tesouro
     doPlayerAddItem(cid, GOLD_ID, GOLD_AMOUNT)
     doSendMagicEffect(getThingPos(cid), 38) -- gold rings
-    doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce recebeu 10 crystal coins!")
+    doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você recebeu 10 crystal coins!")
 
     return true
 end

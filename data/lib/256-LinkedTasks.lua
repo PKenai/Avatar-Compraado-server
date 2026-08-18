@@ -101,13 +101,13 @@ linkedTasksRooms = {
       {{2148, 250000}}
     },
     tasks = {
-      {name = "Cacador de Rotworms",     storage = 45001, monster = "Rotworm",        amount = 250,  reward = {{2148, 20000}}, exp = 10000,  repeatable = true, maxRepeats = 2},
-      {name = "Cacador de Anoes",        storage = 45006, monster = "Enslaved Dwarf", amount = 300,  reward = {{-1, 1}}},
-      {name = "Cacador de Elfos",        storage = 45011, monster = "Elf",            amount = 500,  reward = {{2148, 30000}}, exp = 25000},
-      {name = "Cacador de Ciclopes",     storage = 45016, monsters = {"Cyclops", "Cyclops Smith", "Cyclops Drone"}, amount = 1000, reward = {{2148, 60000}}, exp = 35000},
-      {name = "Cacador de Terror Birds", storage = 45021, monster = "Terror Bird",    amount = 500,  reward = {{2148, 40000}}, exp = 70000,  repeatable = true, maxRepeats = 2},
-      {name = "Cacador de Gargoyles",    storage = 45026, monster = "Gargoyle",       amount = 1000, reward = {{-1, 1}}},
-      {name = "Cacador de Destroyers",   storage = 45031, monster = "Destroyer",      amount = 1500, reward = {},            exp = 800000, repeatable = true, maxRepeats = 2}
+      {name = "Caçador de Rotworms",     storage = 45001, monster = "Rotworm",        amount = 250,  reward = {{2148, 20000}}, exp = 10000,  repeatable = true, maxRepeats = 2},
+      {name = "Caçador de Anoes",        storage = 45006, monster = "Enslaved Dwarf", amount = 300,  reward = {{-1, 1}}},
+      {name = "Caçador de Elfos",        storage = 45011, monster = "Elf",            amount = 500,  reward = {{2148, 30000}}, exp = 25000},
+      {name = "Caçador de Ciclopes",     storage = 45016, monsters = {"Cyclops", "Cyclops Smith", "Cyclops Drone"}, amount = 1000, reward = {{2148, 60000}}, exp = 35000},
+      {name = "Caçador de Terror Birds", storage = 45021, monster = "Terror Bird",    amount = 500,  reward = {{2148, 40000}}, exp = 70000,  repeatable = true, maxRepeats = 2},
+      {name = "Caçador de Gargoyles",    storage = 45026, monster = "Gargoyle",       amount = 1000, reward = {{-1, 1}}},
+      {name = "Caçador de Destroyers",   storage = 45031, monster = "Destroyer",      amount = 1500, reward = {},            exp = 800000, repeatable = true, maxRepeats = 2}
     }
   },
 
@@ -131,13 +131,13 @@ linkedTasksRooms = {
       {{2160, 10}}
     },
     tasks = {
-      {name = "Cacador de Minotauros",   storage = 45036, monster = "Minotaur",      amount = 40, reward = {{2152, 8000}},  exp = 2500, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Elfos",        storage = 45041, monster = "Elf",           amount = 40, reward = {{2152, 8000}},  exp = 2500, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Ghouls",       storage = 45046, monster = "Ghoul",         amount = 40, reward = {{2152, 9000}},  exp = 3000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Berserkers",   storage = 45051, monster = "Orc Berserker", amount = 45, reward = {{2152, 10000}}, exp = 3500, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Terror Birds", storage = 45056, monster = "Terror Bird",   amount = 45, reward = {{2152, 12000}}, exp = 4000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Ferreiros",    storage = 45061, monster = "Cyclops Smith", amount = 50, reward = {{2152, 15000}}, exp = 5000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Diabos de Fogo", storage = 45066, monster = "Fire Devil",  amount = 50, reward = {{2152, 18000}}, exp = 6000, repeatable = true, maxRepeats = 3}
+      {name = "Caçador de Minotauros",   storage = 45036, monster = "Minotaur",      amount = 40, reward = {{2152, 8000}},  exp = 2500, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Elfos",        storage = 45041, monster = "Elf",           amount = 40, reward = {{2152, 8000}},  exp = 2500, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Ghouls",       storage = 45046, monster = "Ghoul",         amount = 40, reward = {{2152, 9000}},  exp = 3000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Berserkers",   storage = 45051, monster = "Orc Berserker", amount = 45, reward = {{2152, 10000}}, exp = 3500, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Terror Birds", storage = 45056, monster = "Terror Bird",   amount = 45, reward = {{2152, 12000}}, exp = 4000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Ferreiros",    storage = 45061, monster = "Cyclops Smith", amount = 50, reward = {{2152, 15000}}, exp = 5000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Diabos de Fogo", storage = 45066, monster = "Fire Devil",  amount = 50, reward = {{2152, 18000}}, exp = 6000, repeatable = true, maxRepeats = 3}
     }
   },
 
@@ -161,13 +161,13 @@ linkedTasksRooms = {
       {{2160, 25}}
     },
     tasks = {
-      {name = "Cacador de Esqueletos Demoniacos", storage = 45071, monster = "Demon Skeleton", amount = 60, reward = {{2152, 20000}}, exp = 8000,  repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Filhotes de Dragao",    storage = 45076, monster = "Dragon Hatchling", amount = 60, reward = {{2152, 25000}}, exp = 10000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Necromantes",           storage = 45081, monster = "Necromancer",     amount = 60, reward = {{2152, 25000}}, exp = 10000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Feiticeiros",           storage = 45086, monster = "Warlock",         amount = 70, reward = {{2152, 30000}}, exp = 12000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Hidras",                storage = 45091, monster = "Hydra",           amount = 70, reward = {{2152, 35000}}, exp = 15000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Behemoths",             storage = 45096, monster = "Behemoth",        amount = 60, reward = {{2152, 35000}}, exp = 15000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Dragoes",               storage = 45101, monster = "Dragon",          amount = 70, reward = {{2152, 40000}}, exp = 18000, repeatable = true, maxRepeats = 3}
+      {name = "Caçador de Esqueletos Demoniacos", storage = 45071, monster = "Demon Skeleton", amount = 60, reward = {{2152, 20000}}, exp = 8000,  repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Filhotes de Dragao",    storage = 45076, monster = "Dragon Hatchling", amount = 60, reward = {{2152, 25000}}, exp = 10000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Necromantes",           storage = 45081, monster = "Necromancer",     amount = 60, reward = {{2152, 25000}}, exp = 10000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Feiticeiros",           storage = 45086, monster = "Warlock",         amount = 70, reward = {{2152, 30000}}, exp = 12000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Hidras",                storage = 45091, monster = "Hydra",           amount = 70, reward = {{2152, 35000}}, exp = 15000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Behemoths",             storage = 45096, monster = "Behemoth",        amount = 60, reward = {{2152, 35000}}, exp = 15000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Dragoes",               storage = 45101, monster = "Dragon",          amount = 70, reward = {{2152, 40000}}, exp = 18000, repeatable = true, maxRepeats = 3}
     }
   },
 
@@ -191,13 +191,13 @@ linkedTasksRooms = {
       {{2160, 50}}
     },
     tasks = {
-      {name = "Cacador de Dragoes Mortos-Vivos", storage = 45106, monster = "Undead Dragon", amount = 70, reward = {{2152, 50000}}, exp = 25000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Dragoes de Gelo",      storage = 45111, monster = "Frost Dragon",  amount = 80, reward = {{2152, 55000}}, exp = 28000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Lordes Dragoes",       storage = 45116, monster = "Dragon Lord",   amount = 80, reward = {{2152, 60000}}, exp = 30000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Medusas",              storage = 45121, monster = "Medusa",        amount = 80, reward = {{2152, 65000}}, exp = 35000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Serpentes",            storage = 45126, monster = "Serpent Spawn", amount = 80, reward = {{2152, 65000}}, exp = 35000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Wyrms",                storage = 45131, monster = "Wyrm",          amount = 80, reward = {{2152, 70000}}, exp = 40000, repeatable = true, maxRepeats = 3},
-      {name = "Cacador de Feiticeiros Sombrios", storage = 45136, monster = "Dark Warlock",  amount = 70, reward = {{2152, 75000}}, exp = 45000, repeatable = true, maxRepeats = 3}
+      {name = "Caçador de Dragoes Mortos-Vivos", storage = 45106, monster = "Undead Dragon", amount = 70, reward = {{2152, 50000}}, exp = 25000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Dragoes de Gelo",      storage = 45111, monster = "Frost Dragon",  amount = 80, reward = {{2152, 55000}}, exp = 28000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Lordes Dragoes",       storage = 45116, monster = "Dragon Lord",   amount = 80, reward = {{2152, 60000}}, exp = 30000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Medusas",              storage = 45121, monster = "Medusa",        amount = 80, reward = {{2152, 65000}}, exp = 35000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Serpentes",            storage = 45126, monster = "Serpent Spawn", amount = 80, reward = {{2152, 65000}}, exp = 35000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Wyrms",                storage = 45131, monster = "Wyrm",          amount = 80, reward = {{2152, 70000}}, exp = 40000, repeatable = true, maxRepeats = 3},
+      {name = "Caçador de Feiticeiros Sombrios", storage = 45136, monster = "Dark Warlock",  amount = 70, reward = {{2152, 75000}}, exp = 45000, repeatable = true, maxRepeats = 3}
     }
   },
 
@@ -221,13 +221,13 @@ linkedTasksRooms = {
       {{2160, 100}}
     },
     tasks = {
-      {name = "Cacador de Demonios",          storage = 45141, monster = "Demon",          amount = 80, reward = {{2152, 100000}}, exp = 60000, repeatable = false},
-      {name = "Cacador de Destruidores",      storage = 45146, monster = "Destroyer",      amount = 60, reward = {{2152, 120000}}, exp = 70000, repeatable = false},
-      {name = "Cacador de Grim Reapers",      storage = 45151, monster = "Grim Reaper",    amount = 80, reward = {{2152, 120000}}, exp = 70000, repeatable = false},
-      {name = "Cacador de Nightfiends",       storage = 45156, monster = "Nightfiend",     amount = 80, reward = {{2152, 130000}}, exp = 80000, repeatable = false},
-      {name = "Cacador de Dragoes Sinistros", storage = 45161, monster = "Ghastly Dragon", amount = 50, reward = {{2152, 150000}}, exp = 90000, repeatable = false},
-      {name = "Cacador de Leviatas",          storage = 45166, monster = "Leviathan",      amount = 40, reward = {{2152, 180000}}, exp = 100000, repeatable = false},
-      {name = "Cacador de Elder Wyrms",       storage = 45171, monster = "Elder Wyrm",     amount = 50, reward = {{2152, 180000}}, exp = 100000, repeatable = false}
+      {name = "Caçador de Demonios",          storage = 45141, monster = "Demon",          amount = 80, reward = {{2152, 100000}}, exp = 60000, repeatable = false},
+      {name = "Caçador de Destruidores",      storage = 45146, monster = "Destroyer",      amount = 60, reward = {{2152, 120000}}, exp = 70000, repeatable = false},
+      {name = "Caçador de Grim Reapers",      storage = 45151, monster = "Grim Reaper",    amount = 80, reward = {{2152, 120000}}, exp = 70000, repeatable = false},
+      {name = "Caçador de Nightfiends",       storage = 45156, monster = "Nightfiend",     amount = 80, reward = {{2152, 130000}}, exp = 80000, repeatable = false},
+      {name = "Caçador de Dragoes Sinistros", storage = 45161, monster = "Ghastly Dragon", amount = 50, reward = {{2152, 150000}}, exp = 90000, repeatable = false},
+      {name = "Caçador de Leviatas",          storage = 45166, monster = "Leviathan",      amount = 40, reward = {{2152, 180000}}, exp = 100000, repeatable = false},
+      {name = "Caçador de Elder Wyrms",       storage = 45171, monster = "Elder Wyrm",     amount = 50, reward = {{2152, 180000}}, exp = 100000, repeatable = false}
     }
   }
 }
@@ -387,7 +387,7 @@ function linkedGiveTaskReward(cid, task)
   if task.exp and task.exp > 0 then
     local expGain = linkedExpWithRate(cid, task.exp)
     doPlayerAddExperience(cid, expGain)
-    table.insert(parts, expGain .. " de experiencia")
+    table.insert(parts, expGain .. " de experiência")
   end
   return table.concat(parts, ", ")
 end
@@ -429,7 +429,7 @@ function linkedCanStartTask(cid, room, taskIndex)
   if room.sequential then
     for j = 1, #room.tasks do
       if j ~= taskIndex and linkedTaskStatus(cid, room.tasks[j]) == 1 then
-        return false, "Voce ja tem a Task " .. j .. " ativa nesta sala. Clique no display dela para cancelar ou termine-a primeiro."
+        return false, "Você já tem a Task " .. j .. " ativa nesta sala. Clique no display dela para cancelar ou termine-a primeiro."
       end
     end
   end
@@ -469,13 +469,13 @@ function linkedTaskClaim(cid, roomId, task)
 
   local room = linkedTasksRooms[roomId]
   local pos = getCreaturePosition(cid)
-  doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Task ENTREGUE: " .. task.name .. "! Voce recebeu: " .. rewardList .. ".")
+  doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Task ENTREGUE: " .. task.name .. "! Você recebeu: " .. rewardList .. ".")
   doSendMagicEffect(pos, CONST_ME_GIFT_WRAPS)
   doSendAnimatedText(pos, "Entregue!", 215)
 
   -- libera o bau central se TODAS as tasks da sala forem entregues
   if room and linkedRoomIsDone(cid, roomId) then
-    doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Voce entregou todas as tasks da " .. room.name .. "! O bau central foi LIBERADO, va abri-lo!")
+    doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você entregou todas as tasks da " .. room.name .. "! O baú central foi LIBERADO, vá abri-lo!")
     doSendMagicEffect(pos, CONST_ME_MAGIC_GREEN)
     if room.chestPos and room.chestPos.x and room.chestPos.x > 0 then
       doSendMagicEffect(room.chestPos, CONST_ME_GIFT_WRAPS)
@@ -517,7 +517,7 @@ function linkedDisplayClick(cid, roomId, taskIndex)
     doSendMagicEffect(pos, CONST_ME_GIFT_WRAPS)
   elseif status == 3 then
     -- JA ENTREGUE e sem repeticoes disponiveis
-    doPlayerSendCancel(cid, "Esta task ja foi entregue" .. (task.repeatable and " (limite de repeticoes atingido)." or " e ela nao e repetivel."))
+    doPlayerSendCancel(cid, "Esta task já foi entregue" .. (task.repeatable and " (limite de repetições atingido)." or " e ela não e repetivel."))
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, info .. " Status: ENTREGUE.")
     return
   else
@@ -533,7 +533,7 @@ function linkedDisplayClick(cid, roomId, taskIndex)
     linkedTaskStart(cid, task)
     local repeatInfo = ""
     if completions > 0 and status == 0 then
-      repeatInfo = " (repeticao " .. (completions + 1) .. "/" .. maxRepeats .. ")"
+      repeatInfo = " (repetição " .. (completions + 1) .. "/" .. maxRepeats .. ")"
     end
     statusMsg = "Task INICIADA" .. repeatInfo .. ": mate " .. linkedTaskGoalText(task) .. ". Ao completar os kills, clique novamente no display para ENTREGAR. Clique agora para cancelar."
     doSendMagicEffect(pos, CONST_ME_MAGIC_BLUE)
@@ -548,15 +548,15 @@ function linkedDisplayClick(cid, roomId, taskIndex)
   local doneCount = linkedRoomDoneCount(cid, roomId)
   local roomLine = room.name .. ": " .. doneCount .. "/" .. total .. " tasks concluidas."
   if doneCount >= total then
-    roomLine = roomLine .. " Bau central LIBERADO!"
+    roomLine = roomLine .. " Baú central LIBERADO!"
   else
-    roomLine = roomLine .. " Faltam " .. (total - doneCount) .. " task(s) para liberar o bau central."
+    roomLine = roomLine .. " Faltam " .. (total - doneCount) .. " task(s) para liberar o baú central."
   end
   doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, roomLine)
 
   -- se cancelou uma task ativa, mostra quanto progresso foi perdido
   if status == 1 then
-    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, "Voce tinha " .. kills .. "/" .. linkedTaskGoalText(task) .. " nesta task (progresso zerado).")
+    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, "Você tinha " .. kills .. "/" .. linkedTaskGoalText(task) .. " nesta task (progresso zerado).")
   end
 end
 
@@ -567,7 +567,7 @@ end
 function linkedChestOpen(cid, roomId)
   local room = linkedTasksRooms[roomId]
   if not room then
-    doPlayerSendCancel(cid, "Bau invalido.")
+    doPlayerSendCancel(cid, "Baú invalido.")
     return
   end
 
@@ -577,18 +577,18 @@ function linkedChestOpen(cid, roomId)
 
   -- limites de abertura
   if not room.chestRepeatable and opened >= 1 then
-    doPlayerSendCancel(cid, "Voce ja abriu o bau central da " .. room.name .. ".")
+    doPlayerSendCancel(cid, "Você já abriu o baú central da " .. room.name .. ".")
     return
   end
   if room.chestRepeatable and opened >= maxOpens then
-    doPlayerSendCancel(cid, "Voce ja abriu o bau central da " .. room.name .. " " .. maxOpens .. " vezes.")
+    doPlayerSendCancel(cid, "Você já abriu o baú central da " .. room.name .. " " .. maxOpens .. " vezes.")
     return
   end
 
   -- todas as tasks precisam estar concluidas
   local doneCount = linkedRoomDoneCount(cid, roomId)
   if doneCount < #room.tasks then
-    doPlayerSendCancel(cid, "O bau central esta trancado! Complete todas as tasks da " .. room.name .. " (" .. doneCount .. "/" .. #room.tasks .. " concluidas).")
+    doPlayerSendCancel(cid, "O baú central está trancado! Complete todas as tasks da " .. room.name .. " (" .. doneCount .. "/" .. #room.tasks .. " concluidas).")
     return
   end
 
@@ -602,10 +602,10 @@ function linkedChestOpen(cid, roomId)
   if room.chestExp and room.chestExp > 0 then
     local expGain = linkedExpWithRate(cid, room.chestExp)
     doPlayerAddExperience(cid, expGain)
-    table.insert(parts, expGain .. " de experiencia")
+    table.insert(parts, expGain .. " de experiência")
   end
 
-  doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Voce abriu o bau central da " .. room.name .. " e recebeu: " .. table.concat(parts, ", ") .. ".")
+  doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você abriu o baú central da " .. room.name .. " e recebeu: " .. table.concat(parts, ", ") .. ".")
   doSendMagicEffect(pos, CONST_ME_GIFT_WRAPS)
   doSendAnimatedText(pos, "Premio!", 215)
 end
@@ -666,7 +666,7 @@ function spawnLinkedTaskItems()
 
     -- bau central
     local chestAid = 46100 + roomId
-    local chestText = room.name .. " - BAU CENTRAL (recompensa aleatoria)"
+    local chestText = room.name .. " - BAÚ CENTRAL (recompensa aleatoria)"
     linkedSpawnItem(room.chestPos, linkedTasksConfig.chestItemId, chestAid, chestText)
   end
   return true

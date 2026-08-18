@@ -31,21 +31,21 @@ function mountPlayer(cid, mountID)
     local currentMount = dataMounts[mountID..outfit.lookType]
 	
 	if getPlayerStorageValue(cid, mountID) == -1 and not haveAllMounts(cid) then
-        sendBlueMessage(cid, getLangString(cid, "Sorry, you don't have this mount.", "Desculpe, você não tem essa montaria."))
+        sendBlueMessage(cid, getLangString(cid, "Sorry, you don't have this mount.", "Desculpe, vocÃª nÃ£o tem essa montaria."))
         return false
     end
     if getPlayerStorageValue(cid, "playerOnAir") == 1 then
-        sendBlueMessage(cid, getLangString(cid, "You can't mount with fly or surf, sorry.", "Você não pode montar utilizando fly ou surf, desculpe."))
+        sendBlueMessage(cid, getLangString(cid, "You can't mount with fly or surf, sorry.", "VocÃª nÃ£o pode montar utilizando fly ou surf, desculpe."))
         return false
     end
 	
 	if getTileInfo(getCreaturePosition(cid)).protection then
-        sendBlueMessage(cid, getLangString(cid, "Sorry, you can't mount in a protection zone.", "Desculpe, você não pode montar dentro de uma zona protegida (PZ)."))
+        sendBlueMessage(cid, getLangString(cid, "Sorry, you can't mount in a protection zone.", "Desculpe, vocÃª nÃ£o pode montar dentro de uma zona protegida (PZ)."))
         return false
     end
 
     if getCreatureCondition(cid, CONDITION_OUTFIT) or currentMount == nil then
-        sendBlueMessage(cid, getLangString(cid, "You need to be wearing your normal outfit to get mounted. You can't also mount with fly or surf, sorry.", "Você precisa estar com sua roupa normal para montar. Você também não pode montar utilizando fly ou surf, desculpe."))
+        sendBlueMessage(cid, getLangString(cid, "You need to be wearing your normal outfit to get mounted. You can't also mount with fly or surf, sorry.", "VocÃª precisa estar com sua roupa normal para montar. VocÃª tambÃ©m nÃ£o pode montar utilizando fly ou surf, desculpe."))
         return false
     end
         local currentCondition = mounts[mountID..outfit.lookType]

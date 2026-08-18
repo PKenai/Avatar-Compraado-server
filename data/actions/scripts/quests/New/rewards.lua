@@ -16,15 +16,15 @@ end
  
 function onUse(cid, item, fromPosition, itemEx, toPosition)
         if getPlayerLevel(cid) < 45 then
-                return doPlayerSendCancel(cid, getLangString(cid, "Not enough level.", "Você não tem level suficiente."))
+                return doPlayerSendCancel(cid, getLangString(cid, "Not enough level.", "VocÃª nÃ£o tem level suficiente."))
         end
         local stor = getPlayerStorageValue(cid, item.actionid)
         if stor == -1 then
                 doPlayerAddRandomReward(cid, rewards)
                 setPlayerStorageValue(cid, item.actionid, 1)
-                return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You have found an item.", "Você encontrou um item."))
+                return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You have found an item.", "VocÃª encontrou um item."))
         else
-                return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The chest is empty.", "Esse chest está vazio."))
+                return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The chest is empty.", "Esse chest estÃ¡ vazio."))
         end
         return true
 end

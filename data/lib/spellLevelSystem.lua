@@ -36,7 +36,7 @@ spellsInfos =
                         [4] = {needLevel = 18, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [5] = {needLevel = 20, porcentageDamage = 0, effectSpell = false, needStorage = {
                                 ["levelFireWhip"] = {value = 3, storageName ="Fire Whip", isSpell = true},
-                				["fireWaveLvL5"] = {value = 1, storageName="completado missão do Mentor Iroh", isSpell = false}}
+                				["fireWaveLvL5"] = {value = 1, storageName="completado missÃ£o do Mentor Iroh", isSpell = false}}
             			},
                         [6] = {needLevel = 22, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [7] = {needLevel = 25, porcentageDamage = 0, effectSpell = false, needStorage = false},
@@ -86,12 +86,12 @@ spellsInfos =
                         [4] = {needLevel = 40, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [5] = {needLevel = 45, porcentageDamage = 0, effectSpell = false,  needStorage = {
                                 ["levelFireWave"] = {value = 6, storageName ="Fire Wave", isSpell = true},
-                                ["FireResLvL5"] = {value = 1, storageName ="utilizado pergaminho de invocação level 5", isSpell = false}}
+                                ["FireResLvL5"] = {value = 1, storageName ="utilizado pergaminho de invocaÃ§Ã£o level 5", isSpell = false}}
             			},
                         [6] = {needLevel = 52, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [7] = {needLevel = 63, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [8] = {needLevel = 70, porcentageDamage = 0, effectSpell = false, needStorage = {
-                                ["FireResLvL8"] = {value = 1, storageName ="utilizado pergaminho de invocação level 8", isSpell = false}}
+                                ["FireResLvL8"] = {value = 1, storageName ="utilizado pergaminho de invocaÃ§Ã£o level 8", isSpell = false}}
             			},
                         [9] = {needLevel = 80, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [10] = {needLevel = 90, porcentageDamage = 0, effectSpell = false, needStorage = false}
@@ -316,7 +316,7 @@ spellsInfos =
                         [4] = {needLevel = 18, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [5] = {needLevel = 20, porcentageDamage = 0, effectSpell = false, needStorage = {
                                 ["levelAirBall"] = {value = 3, storageName ="Air Ball", isSpell = true},
-                				["AirJumpLvL5"] = {value = 1, storageName="completado missão do Mentor Iroh", isSpell = false}}
+                				["AirJumpLvL5"] = {value = 1, storageName="completado missÃ£o do Mentor Iroh", isSpell = false}}
             			},
                         [6] = {needLevel = 22, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [7] = {needLevel = 25, porcentageDamage = 0, effectSpell = false, needStorage = false},
@@ -392,12 +392,12 @@ spellsInfos =
                         [4] = {needLevel = 40, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [5] = {needLevel = 45, porcentageDamage = 0, effectSpell = false,  needStorage = {
                                 ["levelAirJump"] = {value = 6, storageName ="Air Jump", isSpell = true},
-                                ["AirboostLvL5"] = {value = 1, storageName ="utilizado pergaminho de invocação level 5", isSpell = false}}
+                                ["AirboostLvL5"] = {value = 1, storageName ="utilizado pergaminho de invocaÃ§Ã£o level 5", isSpell = false}}
             			},
                         [6] = {needLevel = 52, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [7] = {needLevel = 63, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [8] = {needLevel = 70, porcentageDamage = 0, effectSpell = false, needStorage = {
-                                ["AirboostLvL8"] = {value = 1, storageName ="utilizado pergaminho de invocação level 8", isSpell = false}}
+                                ["AirboostLvL8"] = {value = 1, storageName ="utilizado pergaminho de invocaÃ§Ã£o level 8", isSpell = false}}
             			},
                         [9] = {needLevel = 80, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [10] = {needLevel = 90, porcentageDamage = 0, effectSpell = false, needStorage = false}
@@ -577,7 +577,7 @@ spellsInfos =
                         [4] = {needLevel = 18, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [5] = {needLevel = 20, porcentageDamage = 0, effectSpell = false, needStorage = {
                                 ["levelWaterwhip"] = {value = 3, storageName ="Water whip", isSpell = true},
-                                ["WaterhealLvL5"] = {value = 1, storageName="completado missão do Mentor Iroh", isSpell = false}}
+                                ["WaterhealLvL5"] = {value = 1, storageName="completado missÃ£o do Mentor Iroh", isSpell = false}}
                         },
                         [6] = {needLevel = 22, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [7] = {needLevel = 25, porcentageDamage = 0, effectSpell = false, needStorage = false},
@@ -653,12 +653,12 @@ spellsInfos =
                         [4] = {needLevel = 40, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [5] = {needLevel = 45, porcentageDamage = 0, effectSpell = false,  needStorage = {
                                 ["levelWaterheal"] = {value = 6, storageName ="Water heal", isSpell = true},
-                                ["WatericeBeamLvL5"] = {value = 1, storageName ="utilizado pergaminho de invocação level 5", isSpell = false}}
+                                ["WatericeBeamLvL5"] = {value = 1, storageName ="utilizado pergaminho de invocaÃ§Ã£o level 5", isSpell = false}}
                         },
                         [6] = {needLevel = 52, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [7] = {needLevel = 63, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [8] = {needLevel = 70, porcentageDamage = 0, effectSpell = false, needStorage = {
-                                ["WatericeBeamLvL8"] = {value = 1, storageName ="utilizado pergaminho de invocação level 8", isSpell = false}}
+                                ["WatericeBeamLvL8"] = {value = 1, storageName ="utilizado pergaminho de invocaÃ§Ã£o level 8", isSpell = false}}
                         },
                         [9] = {needLevel = 80, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [10] = {needLevel = 90, porcentageDamage = 0, effectSpell = false, needStorage = false}
@@ -838,7 +838,7 @@ spellsInfos =
                         [4] = {needLevel = 18, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [5] = {needLevel = 20, porcentageDamage = 0, effectSpell = false, needStorage = {
                                 ["levelEarthcrush"] = {value = 3, storageName ="Earth crush", isSpell = true},
-                                ["EarthrockLvL5"] = {value = 1, storageName="completado missão do Mentor Iroh", isSpell = false}}
+                                ["EarthrockLvL5"] = {value = 1, storageName="completado missÃ£o do Mentor Iroh", isSpell = false}}
                         },
                         [6] = {needLevel = 22, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [7] = {needLevel = 25, porcentageDamage = 0, effectSpell = false, needStorage = false},
@@ -914,12 +914,12 @@ spellsInfos =
                         [4] = {needLevel = 40, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [5] = {needLevel = 45, porcentageDamage = 0, effectSpell = false,  needStorage = {
                                 ["levelEarthrock"] = {value = 6, storageName ="Earth rock", isSpell = true},
-                                ["EarthwallLvL5"] = {value = 1, storageName ="utilizado pergaminho de invocação level 5", isSpell = false}}
+                                ["EarthwallLvL5"] = {value = 1, storageName ="utilizado pergaminho de invocaÃ§Ã£o level 5", isSpell = false}}
                         },
                         [6] = {needLevel = 52, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [7] = {needLevel = 63, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [8] = {needLevel = 70, porcentageDamage = 0, effectSpell = false, needStorage = {
-                                ["EarthwallLvL8"] = {value = 1, storageName ="utilizado pergaminho de invocação level 8", isSpell = false}}
+                                ["EarthwallLvL8"] = {value = 1, storageName ="utilizado pergaminho de invocaÃ§Ã£o level 8", isSpell = false}}
                         },
                         [9] = {needLevel = 80, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [10] = {needLevel = 90, porcentageDamage = 0, effectSpell = false, needStorage = false}
@@ -1069,7 +1069,7 @@ function canGainLevel(cid, element, spell, spellLevel, level)
         local needLevel, cantUp = spellsInfos[element][spell][spellLevel+1].needLevel, false
         if needLevel and needLevel > level then
                 if not exhaustion.check(cid, "msgcd"..element..spell.."") then
-                        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você precisa de level "..needLevel.." para avançar de nível na dobra "..element.." "..spell..".")
+                        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÃª precisa de level "..needLevel.." para avanÃ§ar de nÃ­vel na dobra "..element.." "..spell..".")
                         exhaustion.set(cid, "msgcd"..element..spell.."", 60*60)
                 end
                 return false
@@ -1081,9 +1081,9 @@ function canGainLevel(cid, element, spell, spellLevel, level)
 							cantUp = true
                                 if not exhaustion.check(cid, "msgcd"..element..spell.."") then
                                         if k.isSpell then
-                                                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você precisa ter a dobra "..k.storageName.." no nível "..k.value.." para avançar de nível na dobra "..element.." "..spell..".")
+                                                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÃª precisa ter a dobra "..k.storageName.." no nÃ­vel "..k.value.." para avanÃ§ar de nÃ­vel na dobra "..element.." "..spell..".")
                                         else
-                                                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você precisa ter "..k.storageName.." para avançar de nível na dobra "..element.." "..spell..".") 
+                                                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÃª precisa ter "..k.storageName.." para avanÃ§ar de nÃ­vel na dobra "..element.." "..spell..".") 
                                         end
                                         addEvent(function()
                                                 return isCreature(cid) and exhaustion.set(cid, "msgcd"..element..spell.."", 60*60)
@@ -1099,7 +1099,7 @@ function canGainLevel(cid, element, spell, spellLevel, level)
         return true
 end
  
--- Função para dar round na exp do cast ganha
+-- FunÃ§Ã£o para dar round na exp do cast ganha
 function round(n)
     return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
 end
@@ -1117,7 +1117,7 @@ function trySpellExp(cid, element, spell)
 		return false 
 	end
         if not table.contem(element, spellsInfos) or not table.contem(spell, spellsInfos[element]) then
-                --print("Dobra "..element..spell.." não configurada no spell level system.")
+                --print("Dobra "..element..spell.." nÃ£o configurada no spell level system.")
                 return false
         end
         local storageLevel, storageExp = spellsInfos[element][spell]["Info"].storageLevel, spellsInfos[element][spell]["Info"].storageExp
@@ -1128,10 +1128,10 @@ function trySpellExp(cid, element, spell)
         spellLevel = spellLevel > 0 and spellLevel or 1
  
         local spellExp = getPlayerStorageValue(cid, storageExp)
-        spellExp = tonumber(spellExp) > 0 and tonumber(spellExp) or 0 -- Fix: convertendo string para número, spellExp estava sendo visto como string, correndo erro no typecast
+        spellExp = tonumber(spellExp) > 0 and tonumber(spellExp) or 0 -- Fix: convertendo string para nÃºmero, spellExp estava sendo visto como string, correndo erro no typecast
         local learnLevel = getSpellLevel(element, spell)
         if learnLevel == 0 then
-                --print("não contém magia ou level da magia com nome "..element..spell.." no spells.xml")
+                --print("nÃ£o contÃ©m magia ou level da magia com nome "..element..spell.." no spells.xml")
                 return false
         end
         local fatorExp = ((50*spellLevel)/(level/(learnLevel*2)))
@@ -1144,12 +1144,12 @@ function trySpellExp(cid, element, spell)
                         newExp = newExp-100
                         spellLevel = spellLevel+1
                         setPlayerStorageValue(cid, storageLevel, spellLevel)
-                        doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você avançou para o nível "..spellLevel.." com a dobra "..element.." "..spell..".")
+                        doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª avanÃ§ou para o nÃ­vel "..spellLevel.." com a dobra "..element.." "..spell..".")
                 end
         end
-        doSendAnimatedText(getThingPos(cid), round(fatorExp) * 10, COLOR_RED) -- Enviando animação para player com a exp do cast adquirida.
+        doSendAnimatedText(getThingPos(cid), round(fatorExp) * 10, COLOR_RED) -- Enviando animaÃ§Ã£o para player com a exp do cast adquirida.
         setPlayerStorageValue(cid, storageExp, newExp) 
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, "Status da dobra "..element.." "..spell..": nível "..spellLevel.." ("..round(newExp).."%).")
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, "Status da dobra "..element.." "..spell..": nÃ­vel "..spellLevel.." ("..round(newExp).."%).")
         return true
 end
  
@@ -1179,7 +1179,7 @@ function getPlayerExaust(cid, element, spellName)
   end
  
     if getPlayerInWaterWithUnderwater(cid) == true and isForbiddenSpell(element, spellName, cid) then
-        local str = getLangString(cid, "You can't use this bend on water.", "Você não pode usar essa dobra na água.")
+        local str = getLangString(cid, "You can't use this bend on water.", "VocÃª nÃ£o pode usar essa dobra na Ã¡gua.")
         doPlayerSendCancelEf(cid, str)
         return false 
     end
@@ -1191,9 +1191,9 @@ function getPlayerExaust(cid, element, spellName)
     local tableTime = getTimeInString(delayTime)
  
     if tonumber(tableTime.second) >= 1 then
-      strError = getLangString(cid, "You need wait "..stringTime.." to use this fold again.", "Você precisa esperar "..stringTime.." para usar essa dobra novamente.")
+      strError = getLangString(cid, "You need wait "..stringTime.." to use this fold again.", "VocÃª precisa esperar "..stringTime.." para usar essa dobra novamente.")
     else
-      strError = getLangString(cid, "You need wait a few moments to use this fold again.", "Você precisa esperar alguns instantes para usar essa dobra novamente.")
+      strError = getLangString(cid, "You need wait a few moments to use this fold again.", "VocÃª precisa esperar alguns instantes para usar essa dobra novamente.")
     end
  
     doPlayerSendCancelEf(cid, strError)

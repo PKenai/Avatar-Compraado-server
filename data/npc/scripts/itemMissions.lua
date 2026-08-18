@@ -12,7 +12,7 @@ function onPlayerEndTrade(cid)				npcHandler:onPlayerEndTrade(cid)			end
 function onPlayerCloseChannel(cid)			npcHandler:onPlayerCloseChannel(cid)		end
 npcHandler:setMessage(MESSAGE_GREET, "")
 
-function getRequiredItems(tabela) -- retorna uma string com os necessários exemplo "5x dragon tail e 300 gold coins"
+function getRequiredItems(tabela) -- retorna uma string com os necessÃ¡rios exemplo "5x dragon tail e 300 gold coins"
 if not tabela or not tabela.itens then return "" end 
 	local string = ""
 	for i = 1, #tabela.itens do 
@@ -26,7 +26,7 @@ if not tabela or not tabela.itens then return "" end
 	return string
 end 
 
-function getMissionItemString(cid) -- retorna mensagem completa informando quais tem disponíveis, caso não tenha retorna falso
+function getMissionItemString(cid) -- retorna mensagem completa informando quais tem disponÃ­veis, caso nÃ£o tenha retorna falso
 	local tabela = itemTaskInfo
 	local missions = ""
 	local count = 0
@@ -34,7 +34,7 @@ function getMissionItemString(cid) -- retorna mensagem completa informando quais
 		local task = v
 		if canDoMission(cid, task) then 
 			if count == 0 then 
-				missions = getLangString(cid, "The following missions are available for you: ", "As seguintes missões estão disponíveis para você: ")
+				missions = getLangString(cid, "The following missions are available for you: ", "As seguintes missÃµes estÃ£o disponÃ­veis para vocÃª: ")
 				missions = missions .. "{" .. k .. "}"
 				count = 1
 			else 
@@ -82,7 +82,7 @@ function rewardPlayer(cid, tabela) -- finaliza a missao dando os itens exp stora
 		for i = 1, #tabela.itensReward do 
 			doPlayerAddItem(cid, tabela.itensReward[i][1], tabela.itensReward[i][2])
 			if i == 1 then 
-				premios = "Você recebeu: "
+				premios = "VocÃª recebeu: "
 				premios = premios .. tabela.itensReward[i][2] .. "x " .. getItemNameById(tabela.itensReward[i][1])
 			elseif i == #tabela.itensReward then
 				premios = premios .. ", " .. tabela.itensReward[i][2] .. "x " .. getItemNameById(tabela.itensReward[i][1])
@@ -98,9 +98,9 @@ function rewardPlayer(cid, tabela) -- finaliza a missao dando os itens exp stora
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
 		if tabela.itensReward then 
-			premios = premios .. ", " .. finalExp .. " pontos de experiência"
+			premios = premios .. ", " .. finalExp .. " pontos de experiÃªncia"
 		else 
-			premios = "Você recebeu: " .. finalExp .. " pontos de experiência"
+			premios = "VocÃª recebeu: " .. finalExp .. " pontos de experiÃªncia"
 		end
 	end 
 	if tabela.goldReward and tabela.goldReward ~= 0 then 
@@ -108,7 +108,7 @@ function rewardPlayer(cid, tabela) -- finaliza a missao dando os itens exp stora
 		if tabela.itensReward or (tabela.exp and tabela.exp[1] ~= 0) then 
 			premios = premios .. " e " .. tabela.goldReward .. " gold coins"
 		else 
-			premios = "Você recebeu: " .. tabela.goldReward .. " gold coins"
+			premios = "VocÃª recebeu: " .. tabela.goldReward .. " gold coins"
 		end
 	end 
 
@@ -122,9 +122,9 @@ function rewardPlayer(cid, tabela) -- finaliza a missao dando os itens exp stora
 	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, premios)
 end
 
-function getMsgByMission(tabela) -- Mensagem informando os itens necessários e perguntando se tem
+function getMsgByMission(tabela) -- Mensagem informando os itens necessÃ¡rios e perguntando se tem
 	local strbr = "On this mission you need to bring to me: " .. getRequiredItems(tabela) .. ". Do you have all of this?"
-	local stren = "Nesta missão você precisa me trazer: " .. getRequiredItems(tabela) .. ". Você possui todos estes itens?"
+	local stren = "Nesta missÃ£o vocÃª precisa me trazer: " .. getRequiredItems(tabela) .. ". VocÃª possui todos estes itens?"
 return getLangString(cid, stren, strbr)
 end 
 
@@ -155,14 +155,14 @@ function creatureSayCallback(cid, type, msg)
 	end
 
         if talkState[talkUser] == 1 then
-            if msgcontains(msg, "mission") or msgcontains(msg, "missão") or msgcontains(msg, "missões") or msgcontains(msg, "missoes") or msgcontains(msg, "missao") then
+            if msgcontains(msg, "mission") or msgcontains(msg, "missÃ£o") or msgcontains(msg, "missÃµes") or msgcontains(msg, "missÃµes") or msgcontains(msg, "missÃ£o") then
 				local missions = getMissionItemString(cid)
 				if missions then
 					local misStr = getMissionItemString(cid)
 					selfSay(getLangString(cid, misStr, misStr), cid)
 					talkState[talkUser] = 2
 				else 
-					selfSay(getLangString(cid, "I don't have missions for you right now or you're not strong enough to do then.", "Eu não tenho missões para você no momento ou você não é forte o suficiente para me ajudar com as mesmas."), cid)
+					selfSay(getLangString(cid, "I don't have missions for you right now or you're not strong enough to do then.", "Eu nÃ£o tenho missÃµes para vocÃª no momento ou vocÃª nÃ£o Ã© forte o suficiente para me ajudar com as mesmas."), cid)
 					talkState[talkUser] = 1
 					return false
 				end 
@@ -176,10 +176,10 @@ function creatureSayCallback(cid, type, msg)
 					talkState[talkUser] = 3
 					setPlayerStorageValue(cid, "itemMission", msg)
 				else 
-					selfSay(getLangString(cid, "You can't do this mission.", "Você somente pode fazer as missões que foram listadas."), cid)
+					selfSay(getLangString(cid, "You can't do this mission.", "VocÃª somente pode fazer as missÃµes que foram listadas."), cid)
 				end 	
             else
-                selfSay(getLangString(cid, "I don't get it. Tell me the exactly mission name.", "Não entendi. Fale o nome da missão corretamente."), cid)
+                selfSay(getLangString(cid, "I don't get it. Tell me the exactly mission name.", "NÃ£o entendi. Fale o nome da missÃ£o corretamente."), cid)
 				talkState[talkUser] = 2
             end
 		elseif talkState[talkUser] == 3 then 
@@ -191,20 +191,20 @@ function creatureSayCallback(cid, type, msg)
 				end 
 				if haveAllItems(cid, itemMission) then 
 					rewardPlayer(cid, itemMission)
-					selfSay(getLangString(cid, "Here you are. Thank you!", "Obrigado! Aqui está a sua recompensa."), cid)
+					selfSay(getLangString(cid, "Here you are. Thank you!", "Obrigado! Aqui estÃ¡ a sua recompensa."), cid)
 					talkState[talkUser] = 1
 					return false
 				else 					
 				--	local itemsString = getRequiredItems(itemMission)
-					selfSay(getLangString(cid, "You don't have all the items that i need. Come back when you have all!", "Você não me trouxe todos os itens que preciso. Volte quando terminar de coletar!"), cid)
+					selfSay(getLangString(cid, "You don't have all the items that i need. Come back when you have all!", "VocÃª nÃ£o me trouxe todos os itens que preciso. Volte quando terminar de coletar!"), cid)
 					talkState[talkUser] = 1
 					return false
 				end 
-			elseif msgcontains(msg, "no") or msgcontains(msg, "nao") or msgcontains(msg, "não") then
+			elseif msgcontains(msg, "no") or msgcontains(msg, "nÃ£o") or msgcontains(msg, "nÃ£o") then
 					talkState[talkUser] = 1
 					return false 
 			else 
-					selfSay(getLangString(cid, "What? Yes or no?", "Não entendi. Sim ou não?"), cid)
+					selfSay(getLangString(cid, "What? Yes or no?", "NÃ£o entendi. Sim ou nÃ£o?"), cid)
             end
            -- talkState[talkUser] = 1
 	   end
@@ -214,7 +214,7 @@ end
 
 function onGreet(cid) 
 	talkState[cid] = 1 	
-	selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", i have important {missions} for you.", "Olá "..getCreatureName(cid)..", eu tenho {missões} importantes para você."), cid)
+	selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", i have important {missions} for you.", "OlÃ¡ "..getCreatureName(cid)..", eu tenho {missÃµes} importantes para vocÃª."), cid)
 	return true
 end
 

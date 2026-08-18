@@ -111,7 +111,7 @@ function onCastSpell(cid, var)
     end
 	if isPlayer(cid) and getPlayerStorageValue(cid, "nuncaUsouTempest") ~= 1 then
 		setPlayerStorageValue(cid, "nuncaUsouTempest", 1)
-		sendBlueMessage(cid, "Dica: Existe duas versıes da dobra Air Tempest. Utilize sem um alvo para afastar inimigos prÛximos e com um alvo para usar de forma ofensiva.")
+		sendBlueMessage(cid, "Dica: Existe duas vers√µes da dobra Air Tempest. Utilize sem um alvo para afastar inimigos pr√≥ximos e com um alvo para usar de forma ofensiva.")
 	end
 	return true
 end

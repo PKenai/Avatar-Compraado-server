@@ -612,7 +612,7 @@ function onStatsChange(cid, attacker, type, combat, value)
 
         if isInArray(rarods, getCreatureName(attacker)) and not isInQuestRarods(attacker) then
           doTeleportCreature(cid, {x=505,y=342,z=7}, 10)
-          sendBlueMessage(cid, getLangString(cid, "You have been teleported back to temple. Be careful, Rarods are dangerous!", "Você foi teleportado para o templo! Tenha cuidado com os Rarods, eles são muito perigosos!"))
+          sendBlueMessage(cid, getLangString(cid, "You have been teleported back to temple. Be careful, Rarods are dangerous!", "VocÃª foi teleportado para o templo! Tenha cuidado com os Rarods, eles sÃ£o muito perigosos!"))
 			doCreatureAddHealth(cid, getCreatureMaxHealth(cid)-getCreatureHealth(cid))
           return false
         end

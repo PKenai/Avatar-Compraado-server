@@ -39,11 +39,11 @@ function onThink(interval, lastExecution)
                 if(add_item_type == 'montarias') then
                     if not canPlayerRideMount(cid, itemtogive_id) then
                         doPlayerAddMount(cid, itemtogive_id)
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'Você recebeu do Store Online a montaria: ('.. add_item_name ..').')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'VocÃª recebeu do Store Online a montaria: ('.. add_item_name ..').')
                         db.query("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
                         db.query("UPDATE `z_shop_history_item` SET `trans_state`='realized', `trans_real`=" .. os.time() .. " WHERE id = " .. id .. ";")
                     else
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online tentou enviar para você a montaria: ('.. add_item_name ..'). Entretanto, esse character já possui essa montaria.')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online tentou enviar para vocÃª a montaria: ('.. add_item_name ..'). Entretanto, esse character jÃ¡ possui essa montaria.')
                         local oldPrice = tonumber(result_plr:getDataInt("param7"))
                         doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, oldPrice .. ' Elemental Coins foram devolvidos para a sua conta.')
                         db.query("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
@@ -57,11 +57,11 @@ function onThink(interval, lastExecution)
                 if(add_item_type == 'outfits') then
                     if not canPlayerWearOutfitId(cid, itemtogive_id, 3) and (getPlayerVocation(cid) == 1) then
                         doPlayerAddOutfitId(cid, itemtogive_id, 3)
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'Você recebeu do Store Online o outfit: ('.. add_item_name ..').')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'VocÃª recebeu do Store Online o outfit: ('.. add_item_name ..').')
                         db.query("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
                         db.query("UPDATE `z_shop_history_item` SET `trans_state`='realized', `trans_real`=" .. os.time() .. " WHERE id = " .. id .. ";")
                     else
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online tentou enviar para você o outfit: ('.. add_item_name ..'). Entretanto, esse character já possui esse outfit, ou você está tentando comprar um outfit de outra vocação (o que não é permitido).')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online tentou enviar para vocÃª o outfit: ('.. add_item_name ..'). Entretanto, esse character jÃ¡ possui esse outfit, ou vocÃª estÃ¡ tentando comprar um outfit de outra vocaÃ§Ã£o (o que nÃ£o Ã© permitido).')
                         local oldPrice = tonumber(result_plr:getDataInt("param7"))
                         doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, oldPrice .. ' Elemental Coins foram devolvidos para a sua conta.')
                         db.query("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
@@ -74,11 +74,11 @@ function onThink(interval, lastExecution)
                 if(add_item_type == 'outfitsw') then
                     if not canPlayerWearOutfitId(cid, itemtogive_id, 3) and (getPlayerVocation(cid) == 2) then
                         doPlayerAddOutfitId(cid, itemtogive_id, 3)
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'Você recebeu do Store Online o outfit: ('.. add_item_name ..').')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'VocÃª recebeu do Store Online o outfit: ('.. add_item_name ..').')
                         db.query("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
                         db.query("UPDATE `z_shop_history_item` SET `trans_state`='realized', `trans_real`=" .. os.time() .. " WHERE id = " .. id .. ";")
                     else
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online tentou enviar para você o outfit: ('.. add_item_name ..'). Entretanto, esse character já possui esse outfit, ou você está tentando comprar um outfit de outra vocação (o que não é permitido).')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online tentou enviar para vocÃª o outfit: ('.. add_item_name ..'). Entretanto, esse character jÃ¡ possui esse outfit, ou vocÃª estÃ¡ tentando comprar um outfit de outra vocaÃ§Ã£o (o que nÃ£o Ã© permitido).')
                         local oldPrice = tonumber(result_plr:getDataInt("param7"))
                         doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, oldPrice .. ' Elemental Coins foram devolvidos para a sua conta.')
                         db.query("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
@@ -91,11 +91,11 @@ function onThink(interval, lastExecution)
                 if(add_item_type == 'outfitsa') then
                     if not canPlayerWearOutfitId(cid, itemtogive_id, 3) and (getPlayerVocation(cid) == 3) then
                         doPlayerAddOutfitId(cid, itemtogive_id, 3)
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'Você recebeu do Store Online o outfit: ('.. add_item_name ..').')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'VocÃª recebeu do Store Online o outfit: ('.. add_item_name ..').')
                         db.query("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
                         db.query("UPDATE `z_shop_history_item` SET `trans_state`='realized', `trans_real`=" .. os.time() .. " WHERE id = " .. id .. ";")
                     else
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online tentou enviar para você o outfit: ('.. add_item_name ..'). Entretanto, esse character já possui esse outfit, ou você está tentando comprar um outfit de outra vocação (o que não é permitido).')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online tentou enviar para vocÃª o outfit: ('.. add_item_name ..'). Entretanto, esse character jÃ¡ possui esse outfit, ou vocÃª estÃ¡ tentando comprar um outfit de outra vocaÃ§Ã£o (o que nÃ£o Ã© permitido).')
                         local oldPrice = tonumber(result_plr:getDataInt("param7"))
                         doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, oldPrice .. ' Elemental Coins foram devolvidos para a sua conta.')
                         db.query("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
@@ -108,11 +108,11 @@ function onThink(interval, lastExecution)
                 if(add_item_type == 'outfitse') then
                     if not canPlayerWearOutfitId(cid, itemtogive_id, 3) and (getPlayerVocation(cid) == 4) then
                         doPlayerAddOutfitId(cid, itemtogive_id, 3)
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'Você recebeu do Store Online o outfit: ('.. add_item_name ..').')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'VocÃª recebeu do Store Online o outfit: ('.. add_item_name ..').')
                         db.query("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
                         db.query("UPDATE `z_shop_history_item` SET `trans_state`='realized', `trans_real`=" .. os.time() .. " WHERE id = " .. id .. ";")
                     else
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online tentou enviar para você o outfit: ('.. add_item_name ..'). Entretanto, esse character já possui esse outfit, ou você está tentando comprar um outfit de outra vocação (o que não é permitido).')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online tentou enviar para vocÃª o outfit: ('.. add_item_name ..'). Entretanto, esse character jÃ¡ possui esse outfit, ou vocÃª estÃ¡ tentando comprar um outfit de outra vocaÃ§Ã£o (o que nÃ£o Ã© permitido).')
                         local oldPrice = tonumber(result_plr:getDataInt("param7"))
                         doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, oldPrice .. ' Elemental Coins foram devolvidos para a sua conta.')
                         db.query("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
@@ -157,14 +157,14 @@ function onThink(interval, lastExecution)
                         received_item = doPlayerAddItemEx(cid, new_item)
                     end
                     if received_item == RETURNVALUE_NOERROR then
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'Você recebeu do Store Online o item: ('.. add_item_name ..').')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'VocÃª recebeu do Store Online o item: ('.. add_item_name ..').')
                         db.executeQuery("DELETE FROM `z_ots_comunication` WHERE `id` = " .. id .. ";")
                         db.executeQuery("UPDATE `z_shop_history_item` SET `trans_state`='realized', `trans_real`=" .. os.time() .. " WHERE id = " .. id .. ";")
                     else
-                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online está tentando enviar para você o item: ('.. add_item_name ..'). Por favor, verifique se você possui espaço suficiente em sua mochila ou capacidade necessária para recebê-lo. Tentaremos enviar novamente o item em '.. SQL_interval ..' segundos.')
+                        doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online estÃ¡ tentando enviar para vocÃª o item: ('.. add_item_name ..'). Por favor, verifique se vocÃª possui espaÃ§o suficiente em sua mochila ou capacidade necessÃ¡ria para recebÃª-lo. Tentaremos enviar novamente o item em '.. SQL_interval ..' segundos.')
                     end
                 else
-                    doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online está tentando enviar para você o item: ('.. add_item_name ..'). Por favor, verifique se você possui espaço suficiente em sua mochila ou capacidade necessária para recebê-lo. Tentaremos enviar novamente o item em '.. SQL_interval ..' segundos.')
+                    doPlayerSendTextMessage(cid, SHOP_MSG_TYPE, 'O Store Online estÃ¡ tentando enviar para vocÃª o item: ('.. add_item_name ..'). Por favor, verifique se vocÃª possui espaÃ§o suficiente em sua mochila ou capacidade necessÃ¡ria para recebÃª-lo. Tentaremos enviar novamente o item em '.. SQL_interval ..' segundos.')
                 end
             end
             if not(result_plr:next()) then

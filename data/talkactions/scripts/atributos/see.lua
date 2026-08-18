@@ -11,7 +11,7 @@ function onSay(cid, words, param, channel)
 		local storageAtributo = atributosList[i] .. "value"
 		storageAtributo = getPlayerStorageValue(target, storageAtributo)
 		storageAtributo = storageAtributo > 1 and storageAtributo or 1
-		string = string.. "• "..atributosList[i]..": "..storageAtributo.."\n"
+		string = string.. "â€¢ "..atributosList[i]..": "..storageAtributo.."\n"
 	end 
 	doPlayerPopupFYI(cid, string)
 return true 

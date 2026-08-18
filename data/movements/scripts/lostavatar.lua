@@ -6,7 +6,7 @@ function onStepIn(cid, item, position, fromPosition)
 	end
 	if getPlayerLevel(cid) < 125 then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 125+  para entrar na Lost Avatar Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de Level 125+  para entrar na Lost Avatar Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else
 		doTeleportThing(cid, {x=757, y=368, z=10})	

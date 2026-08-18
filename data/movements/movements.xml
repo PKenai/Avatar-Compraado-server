@@ -887,9 +887,9 @@
 		<!-- Death Ring -->
 	<movevent type="Equip" itemid="6300" level="220" slot="ring" event="function" value="onEquipItem"/>
 	<movevent type="DeEquip" itemid="6300" level="220" slot="ring" event="function" value="onDeEquipItem"/>
-		<!-- Spark Ring -->
-	<movevent type="Equip" itemid="17986" level="125" slot="ring" event="function" value="onEquipItem"/>
-	<movevent type="DeEquip" itemid="17986" level="125" slot="ring" event="function" value="onDeEquipItem"/>
+		<!-- Anel de Tubarao (ex Spark Ring) -->
+	<movevent type="Equip" itemid="18880" level="50" slot="ring" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="18880" level="50" slot="ring" event="function" value="onDeEquipItem"/>
 
 	<!-- Helmets -->
 		<!-- Hat of the Mad -->

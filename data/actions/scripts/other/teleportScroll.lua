@@ -89,7 +89,7 @@ local function loadTeleport(cid, current)
 
       if canTeleport(cid, finalPos) then
         doTeleportCreature(cid, finalPos, 10)
-        sendBlueMessage(cid, getLangString(cid, "You have been teleported successfully.", "Você foi teleportado com sucesso."))
+        sendBlueMessage(cid, getLangString(cid, "You have been teleported successfully.", "VocÃª foi teleportado com sucesso."))
         doSendAnimatedText(finalPos, "Wooop!", TEXTCOLOR_WHITE)
       else
         doPlayerSendCancel(cid, getLangString(cid, "The teleport failed.", "O teleport falhou."))
@@ -105,16 +105,16 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
   if getPlayerStorageValue(cid, "statsTeleport") == -1 then
     --Salvar
     if not canSave(cid) then
-      doPlayerSendCancelEf(cid, getLangString(cid, "You can't save this here.", "Você não pode salvar essa posição."))
+      doPlayerSendCancelEf(cid, getLangString(cid, "You can't save this here.", "VocÃª nÃ£o pode salvar essa posiÃ§Ã£o."))
     else
-      sendBlueMessage(cid, getLangString(cid, "Position saved successfully.", "Posição salva com sucesso."))
+      sendBlueMessage(cid, getLangString(cid, "Position saved successfully.", "PosiÃ§Ã£o salva com sucesso."))
       doSendMagicEffect(getThingPos(cid), 12)
       setPlayerStorageValue(cid, "statsTeleport", 1)
       registerPosInStorage(cid, "teleportPos", getThingPos(cid))
     end
   else
     if not canStartTeleport(cid) then
-      doPlayerSendCancelEf(cid, getLangString(cid, "You can't teleport now.", "Você não pode teleportar agora."))
+      doPlayerSendCancelEf(cid, getLangString(cid, "You can't teleport now.", "VocÃª nÃ£o pode teleportar agora."))
     else
       for x = 1, maxLoads do
         doCreatureSetNoMove(cid, true)

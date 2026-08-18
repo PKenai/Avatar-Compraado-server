@@ -1,6 +1,6 @@
 -- pode adicionar quantos quiser na lista
--- chance È chance em porcentagem, no caso 1 = 1%
--- ele vai tentando a chance seguindo a ordem de cada presente, se nenhuma porcentagem passar no teste, ele entregar· um presente random da lista.
+-- chance √© chance em porcentagem, no caso 1 = 1%
+-- ele vai tentando a chance seguindo a ordem de cada presente, se nenhuma porcentagem passar no teste, ele entregar√° um presente random da lista.
 -- aconselho colocar os itens com menores chance primeiro, para que ele percorra mais a lista antes de conseguir passar no teste de chance em algum
 -- preenchi com alguns exemplos 
 local presentes = {
@@ -44,18 +44,18 @@ function creatureSayCallback(cid, type, msg)
     local msg = msg:lower()
 	if getPlayerLevel(cid) < 80 then
 		if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "presente") or msgcontains(msg, "present") or msgcontains(msg, "presents") or msgcontains(msg, "presentes") then
-			selfSay(getLangString(cid, 'You still do not deserve an Christmas gift! Come back when you reach level 80.', 'VocÍ ainda n„o merece um presente de natal! Volte quando atingir o nÌvel 80.'), cid)
+			selfSay(getLangString(cid, 'You still do not deserve an Christmas gift! Come back when you reach level 80.', 'Voc√™ ainda n√£o merece um presente de natal! Volte quando atingir o n√≠vel 80.'), cid)
 			return true
 		else 
-			selfSay(getLangString(cid, 'Do you want a {present}?', 'VocÍ quer um {presente}?'), cid) 
+			selfSay(getLangString(cid, 'Do you want a {present}?', 'Voc√™ quer um {presente}?'), cid) 
 			return true
 		end
 	elseif getPlayerStorageValue(cid, "natal2018") == 1 then 
 		if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "presente") or msgcontains(msg, "present") or msgcontains(msg, "presents") or msgcontains(msg, "presentes") then
-			selfSay(getLangString(cid, 'You have already received your Christmas gift this year. Come back next Christmas!', 'VocÍ j· recebeu seu presente de natal este ano. Volte no prÛximo natal!'), cid)
+			selfSay(getLangString(cid, 'You have already received your Christmas gift this year. Come back next Christmas!', 'Voc√™ j√° recebeu seu presente de natal este ano. Volte no pr√≥ximo natal!'), cid)
 			return true
 		else 
-			selfSay(getLangString(cid, 'Do you want a {present}?', 'VocÍ quer um {presente}?'), cid) 
+			selfSay(getLangString(cid, 'Do you want a {present}?', 'Voc√™ quer um {presente}?'), cid) 
 			return true
 		end
 	end
@@ -75,10 +75,10 @@ function creatureSayCallback(cid, type, msg)
 			end 
 			doPlayerAddItem(cid, sorteado, quantia)
 			setPlayerStorageValue(cid, "natal2018", 1)
-			selfSay(getLangString(cid, 'I have '..quantia..' '..getItemNameById(sorteado)..' for you. Merry Christmas!', 'Eu tenho '..quantia..' '..getItemNameById(sorteado)..' para vocÍ. Feliz natal!'), cid)
+			selfSay(getLangString(cid, 'I have '..quantia..' '..getItemNameById(sorteado)..' for you. Merry Christmas!', 'Eu tenho '..quantia..' '..getItemNameById(sorteado)..' para voc√™. Feliz natal!'), cid)
 		end
 	else 
-		selfSay(getLangString(cid, 'Do you want a {present}?', 'VocÍ quer um {presente}?'), cid) 
+		selfSay(getLangString(cid, 'Do you want a {present}?', 'Voc√™ quer um {presente}?'), cid) 
     end
 	return true
 end

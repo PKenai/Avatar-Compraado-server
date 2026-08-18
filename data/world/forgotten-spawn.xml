@@ -693,6 +693,9 @@
 	<spawn centerx="364" centery="220" centerz="7" radius="1">
 		<npc name="olgaz" x="-1" y="-1" z="7" spawntime="40" />
 	</spawn>
+	<spawn centerx="541" centery="291" centerz="7" radius="1">
+		<npc name="Rafinha" x="-1" y="1" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="441" centery="312" centerz="7" radius="1">
 		<monster name="Abelha de barro" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -810,8 +813,8 @@
 	<spawn centerx="623" centery="375" centerz="7" radius="1">
 		<monster name="Leao de ba sin se" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="558" centery="377" centerz="7" radius="5">
-		<npc name="clerical jorge" x="0" y="3" z="7" spawntime="40" />
+	<spawn centerx="558" centery="379" centerz="7" radius="1">
+		<npc name="clerical jorge" x="0" y="1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="444" centery="381" centerz="7" radius="1">
 		<monster name="Joaninha da terra" x="-1" y="-1" z="7" spawntime="60" direction="2" />
@@ -857,14 +860,14 @@
 	<spawn centerx="401" centery="392" centerz="7" radius="1">
 		<monster name="Joaninha da terra" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="616" centery="392" centerz="7" radius="1">
-		<monster name="Leao de ba sin se" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
 	<spawn centerx="448" centery="393" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="453" centery="393" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="615" centery="393" centerz="7" radius="1">
+		<monster name="Leao de ba sin se" x="1" y="-1" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="408" centery="394" centerz="7" radius="1">
 		<monster name="Joaninha da terra" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -923,17 +926,28 @@
 	<spawn centerx="545" centery="401" centerz="7" radius="1">
 		<monster name="Lobo selvagem" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="583" centery="402" centerz="7" radius="1">
+		<monster name="Coelho" x="-1" y="-1" z="7" spawntime="60" direction="2" />
+		<monster name="Coelho" x="1" y="-1" z="7" spawntime="60" direction="2" />
+		<monster name="Coelho" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="589" centery="402" centerz="7" radius="1">
+		<npc name="Dona Margarida" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="640" centery="402" centerz="7" radius="1">
 		<monster name="Leao de ba sin se" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="520" centery="404" centerz="7" radius="1">
 		<monster name="Coelho" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="587" centery="404" centerz="7" radius="1">
-		<monster name="Lobo selvagem" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="582" centery="404" centerz="7" radius="1">
+		<monster name="Coelho" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="486" centery="405" centerz="7" radius="2">
 		<npc name="Alcion" x="1" y="-1" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="571" centery="406" centerz="7" radius="1">
+		<monster name="Aranha cospe pedra" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="609" centery="406" centerz="7" radius="1">
 		<monster name="Leao de ba sin se" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -972,14 +986,23 @@
 	<spawn centerx="419" centery="417" centerz="7" radius="1">
 		<monster name="Joaninha da terra" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="585" centery="417" centerz="7" radius="1">
+		<monster name="Aranha cospe pedra" x="1" y="1" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="557" centery="418" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="604" centery="418" centerz="7" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="521" centery="419" centerz="7" radius="1">
 		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="415" centery="420" centerz="7" radius="1">
 		<monster name="Joaninha da terra" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="582" centery="420" centerz="7" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="630" centery="422" centerz="7" radius="1">
 		<monster name="Leao de ba sin se" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1032,6 +1055,9 @@
 	<spawn centerx="572" centery="433" centerz="7" radius="1">
 		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="442" centery="434" centerz="7" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="598" centery="434" centerz="7" radius="1">
 		<monster name="Pica-pau da terra" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -1073,6 +1099,9 @@
 	</spawn>
 	<spawn centerx="492" centery="443" centerz="7" radius="1">
 		<monster name="Coelho" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="434" centery="446" centerz="7" radius="1">
+		<npc name="Joana" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="209" centery="447" centerz="7" radius="1">
 		<npc name="Edward Colin" x="0" y="0" z="7" spawntime="40" />
@@ -1203,6 +1232,9 @@
 	<spawn centerx="612" centery="477" centerz="7" radius="1">
 		<monster name="Pica-pau da terra" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="626" centery="477" centerz="7" radius="1">
+		<monster name="Pica-pau da terra" x="-1" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="615" centery="478" centerz="7" radius="1">
 		<monster name="Pica-pau da terra" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -1220,6 +1252,9 @@
 	</spawn>
 	<spawn centerx="463" centery="483" centerz="7" radius="1">
 		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="621" centery="483" centerz="7" radius="1">
+		<monster name="Pica-pau da terra" x="0" y="-1" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="406" centery="485" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1260,11 +1295,26 @@
 	<spawn centerx="622" centery="501" centerz="7" radius="1">
 		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="585" centery="504" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="591" centery="505" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="427" centery="506" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="441" centery="507" centerz="7" radius="1">
 		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="583" centery="507" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="586" centery="507" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="589" centery="507" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="619" centery="508" centerz="7" radius="1">
 		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1883,11 +1933,17 @@
 		<monster name="Leao de ba sin se" x="-1" y="-1" z="8" spawntime="60" direction="2" />
 		<monster name="Leao de ba sin se" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="583" centery="393" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="519" centery="394" centerz="8" radius="1">
 		<monster name="Cockroach" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="553" centery="394" centerz="8" radius="1">
 		<monster name="Cockroach" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="587" centery="395" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="668" centery="395" centerz="8" radius="1">
 		<monster name="Leao de ba sin se" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -1918,6 +1974,9 @@
 	<spawn centerx="529" centery="400" centerz="8" radius="1">
 		<monster name="Cockroach" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="576" centery="401" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="644" centery="401" centerz="8" radius="1">
 		<monster name="Leao de ba sin se" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
@@ -1930,6 +1989,9 @@
 	</spawn>
 	<spawn centerx="490" centery="403" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="568" centery="403" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="444" centery="404" centerz="8" radius="1">
 		<monster name="Mordecasca da terra" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -1967,6 +2029,12 @@
 	<spawn centerx="544" centery="406" centerz="8" radius="1">
 		<monster name="Cockroach" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="572" centery="406" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="587" centery="406" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="644" centery="406" centerz="8" radius="1">
 		<monster name="Leao de ba sin se" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
@@ -1994,6 +2062,15 @@
 	<spawn centerx="481" centery="413" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="568" centery="413" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="575" centery="413" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="583" centery="414" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="457" centery="415" centerz="8" radius="1">
 		<monster name="Mordecasca da terra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
@@ -2015,11 +2092,30 @@
 	<spawn centerx="486" centery="419" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="430" centery="420" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Urso feroz" x="0" y="1" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="587" centery="420" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="432" centery="421" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="442" centery="421" centerz="8" radius="1">
 		<monster name="Mordecasca da terra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="420" centery="424" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="603" centery="424" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="455" centery="425" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="419" centery="426" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="453" centery="426" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -2027,18 +2123,43 @@
 	<spawn centerx="479" centery="426" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="606" centery="426" centerz="8" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="477" centery="428" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="405" centery="429" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Urso feroz" x="1" y="1" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="456" centery="429" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 		<monster name="Tarantula de pedra" x="-1" y="1" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="426" centery="432" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="474" centery="432" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="394" centery="433" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="396" centery="433" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="437" centery="433" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="482" centery="433" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="429" centery="434" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="395" centery="436" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="480" centery="436" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -2046,6 +2167,12 @@
 	<spawn centerx="456" centery="440" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 		<monster name="Tarantula de pedra" x="1" y="1" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="418" centery="442" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="420" centery="442" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="463" centery="442" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -2059,14 +2186,31 @@
 	<spawn centerx="486" centery="449" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="427" centery="451" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="454" centery="451" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="489" centery="451" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="391" centery="452" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Urso feroz" x="1" y="1" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="389" centery="453" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="429" centery="453" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="456" centery="453" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="412" centery="454" centerz="8" radius="1">
+		<monster name="Urso feroz" x="-1" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="467" centery="455" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -2074,9 +2218,21 @@
 	<spawn centerx="466" centery="457" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="404" centery="459" centerz="8" radius="1">
+		<monster name="Urso feroz" x="-1" y="-1" z="8" spawntime="60" direction="2" />
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="471" centery="460" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="-1" z="8" spawntime="60" direction="2" />
 		<monster name="Tarantula de pedra" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="437" centery="461" centerz="8" radius="1">
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Urso feroz" x="-1" y="1" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="421" centery="466" centerz="8" radius="1">
+		<monster name="Urso feroz" x="-1" y="-1" z="8" spawntime="60" direction="2" />
+		<monster name="Urso feroz" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="452" centery="470" centerz="8" radius="1">
 		<monster name="Tarantula de pedra" x="-1" y="0" z="8" spawntime="60" direction="2" />
@@ -2108,8 +2264,8 @@
 	<spawn centerx="589" centery="576" centerz="8" radius="1">
 		<monster name="Traidor" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="593" centery="576" centerz="8" radius="1">
-		<monster name="Traidor" x="0" y="0" z="8" spawntime="60" direction="2" />
+	<spawn centerx="592" centery="576" centerz="8" radius="1">
+		<monster name="Traidor" x="1" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="459" centery="300" centerz="9" radius="1">
 		<monster name="Abelha de barro" x="0" y="0" z="9" spawntime="60" direction="2" />
@@ -2177,8 +2333,26 @@
 	<spawn centerx="496" centery="371" centerz="9" radius="1">
 		<monster name="Cockroach" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="584" centery="383" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="594" centery="384" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="599" centery="385" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="577" centery="387" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="579" centery="389" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="515" centery="391" centerz="9" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="591" centery="393" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="506" centery="397" centerz="9" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
@@ -2195,8 +2369,53 @@
 	<spawn centerx="485" centery="410" centerz="9" radius="1">
 		<monster name="Tarantula de pedra" x="1" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="636" centery="412" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="642" centery="415" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="636" centery="417" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="636" centery="426" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="608" centery="428" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="640" centery="430" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="605" centery="431" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="478" centery="432" centerz="9" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="631" centery="434" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="633" centery="436" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="613" centery="437" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="617" centery="443" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="627" centery="443" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="623" centery="448" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="630" centery="454" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="634" centery="462" centerz="9" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="574" centery="563" centerz="9" radius="1">
 		<monster name="Traidor" x="0" y="0" z="9" spawntime="60" direction="2" />
@@ -2227,8 +2446,86 @@
 	<spawn centerx="589" centery="583" centerz="9" radius="1">
 		<monster name="Traidor" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="622" centery="373" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="606" centery="374" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="615" centery="380" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="597" centery="381" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="638" centery="385" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="592" centery="388" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="581" centery="389" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="630" centery="389" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="607" centery="390" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="620" centery="390" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="660" centery="391" centerz="10" radius="1">
+		<npc name="Coelho da Margarida" x="-1" y="-1" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="627" centery="395" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="661" centery="395" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="600" centery="396" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="585" centery="397" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="639" centery="400" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="-1" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="653" centery="401" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="607" centery="402" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="645" centery="402" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="625" centery="404" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="633" centery="404" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="616" centery="411" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="624" centery="411" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="650" centery="412" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="637" centery="415" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="486" centery="416" centerz="10" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="646" centery="417" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="483" centery="419" centerz="10" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
@@ -2239,8 +2536,14 @@
 	<spawn centerx="483" centery="423" centerz="10" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="640" centery="423" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="480" centery="426" centerz="10" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="640" centery="427" centerz="10" radius="1">
+		<monster name="Aranha cospe pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="484" centery="430" centerz="10" radius="1">
 		<monster name="Tarantula de pedra" x="0" y="0" z="10" spawntime="60" direction="2" />
@@ -2567,8 +2870,5 @@
 	</spawn>
 	<spawn centerx="668" centery="591" centerz="11" radius="1">
 		<monster name="Traidor" x="0" y="0" z="11" spawntime="60" direction="2" />
-	</spawn>
-	<spawn centerx="496" centery="175" centerz="12" radius="1">
-		<npc name="leviathan quest" x="0" y="-1" z="12" spawntime="40" />
 	</spawn>
 </spawns>

@@ -43,7 +43,7 @@ local function rewardByValor(cid, valor, adm)
 		doPlayerAddItem(cid, 12781, 1) -- crystal shield
 		doPlayerAddItem(cid, 12781, 1) -- crystal shield
 	else
-		doPlayerSendTextMessage(adm, MESSAGE_STATUS_CONSOLE_BLUE, "[Erro] Este pacote n„o possui itens na lista. Revisar cÛdigo.")
+		doPlayerSendTextMessage(adm, MESSAGE_STATUS_CONSOLE_BLUE, "[Erro] Este pacote n√£o possui itens na lista. Revisar c√≥digo.")
 	end
 end
 
@@ -51,22 +51,22 @@ function onSay(cid, words, param, channel)
   local param = string.explode(param, ",")
 
   if param[1] == nil or param[2] == nil then
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Par‚metro incorreto. Digite /pacote Nick, valor - Lembre-se que o valor È o BRL equivalente aos pacotes do pagseguro.")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Par√¢metro incorreto. Digite /pacote Nick, valor - Lembre-se que o valor √© o BRL equivalente aos pacotes do pagseguro.")
 		return true 
 	end 
 	local nick = param[1]
 	local valor = tonumber(param[2])
 	if not isInArray(valores, valor) then
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Valor n„o consta na lista. Os pacotes s„o: 10, 22, 46, 68, 84, 120 e 240 (equivalente em BRL).")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Valor n√£o consta na lista. Os pacotes s√£o: 10, 22, 46, 68, 84, 120 e 240 (equivalente em BRL).")
 		return true 
 	end 
 	local player = getPlayerByNameWildcard(nick)
 	if not player then 
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, ""..nick.." est· offline no momento.")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, ""..nick.." est√° offline no momento.")
 		return true 
 	end 
 		rewardByValor(player, valor, cid)
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_RED, "Os itens referentes ao pacote de "..valor.." R$ foram entregues ‡ "..nick..".")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_RED, "Os itens referentes ao pacote de "..valor.." R$ foram entregues √† "..nick..".")
 		doPlayerSendTextMessage(player, MESSAGE_STATUS_CONSOLE_RED, "[Donate] You received new items, check your backpack. New elemental coins was been received too, check your Webshop. Thank you for supporting Avatar!")
   return true
 end

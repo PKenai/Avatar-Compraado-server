@@ -1,8 +1,8 @@
 function onUse(cid, item, fromPosition, itemEx, toPosition)
    if isInArray({0, 65535}, toPosition.x) then
-       return doPlayerSendCancel(cid, "Desculpe, nao e possivel.")
+       return doPlayerSendCancel(cid, "Desculpe, não e possível.")
    elseif getTileItemById(toPosition, 2555).uid == 0 then
-       return doPlayerSendCancel(cid, "Voce deve adicionar os ingredientes sobre a bigorna!.")
+       return doPlayerSendCancel(cid, "Você deve adicionar os ingredientes sobre a bigorna!.")
    end
 
    local obj = RecipeFromPosition(toPosition)

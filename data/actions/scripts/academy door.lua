@@ -45,14 +45,14 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 			local freePoses = getFreePositions(toPosition, id)
 			if freePoses then 
 				if id == 25842 then 
-					sendBlueMessage(cid, getLangString(cid, "Welcome to the training room! You can always leave using the command !leaveacademy or by clicking in the 'Leave Academy' option (can be seen in the '+' button, right upper side of your client).", "Você entrou na sala de treinamento! Você pode sempre sair utilizando o comando !leaveacademy ou clicando na opção 'Sair da Academia' no botão '+', canto superior direito do client."))
+					sendBlueMessage(cid, getLangString(cid, "Welcome to the training room! You can always leave using the command !leaveacademy or by clicking in the 'Leave Academy' option (can be seen in the '+' button, right upper side of your client).", "VocÃª entrou na sala de treinamento! VocÃª pode sempre sair utilizando o comando !leaveacademy ou clicando na opÃ§Ã£o 'Sair da Academia' no botÃ£o '+', canto superior direito do client."))
 					doTeleportThing(cid, freePoses[#freePoses])
 				else 
-					sendBlueMessage(cid, getLangString(cid, "Welcome to the training room! You can always leave using the command !leaveacademy or by clicking in the 'Leave Academy' option (can be seen in the '+' button, right upper side of your client).", "Você entrou na sala de treinamento! Você pode sempre sair utilizando o comando !leaveacademy ou clicando na opção 'Sair da Academia' no botão '+', canto superior direito do client."))
+					sendBlueMessage(cid, getLangString(cid, "Welcome to the training room! You can always leave using the command !leaveacademy or by clicking in the 'Leave Academy' option (can be seen in the '+' button, right upper side of your client).", "VocÃª entrou na sala de treinamento! VocÃª pode sempre sair utilizando o comando !leaveacademy ou clicando na opÃ§Ã£o 'Sair da Academia' no botÃ£o '+', canto superior direito do client."))
 					doTeleportThing(cid, freePoses[1])
 				end
 			else 
-				doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Não há espaço vazio nesta sala para você.")
+				doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "NÃ£o hÃ¡ espaÃ§o vazio nesta sala para vocÃª.")
 				return true
 			end 
 		end 

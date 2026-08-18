@@ -64,9 +64,9 @@ function onLook(cid, thing, position, lookDistance)
     --fim--
     if isInArray(potsBlood, thing.itemid) then
       local bloodItem = getItemAttribute(thing.uid, "hitpoints") or (potions[thing.itemid] or potionsOld[thing.itemid])
-      local author = getItemAttribute(thing.uid, "author") or getLangString(cid, "unknown", "alguém desconhecido")
+      local author = getItemAttribute(thing.uid, "author") or getLangString(cid, "unknown", "alguÃ©m desconhecido")
  
-      local text = getLangString(cid, "This flask of blood contains "..bloodItem.." hitpoints, blood drawn from "..author..".\n It only heals "..(bloodItem/2).." hitpoints if you received damage from players on last 5 seconds.", "Esse sangue pertence á "..author..", tendo exatamente "..bloodItem.." hitpoints. \n Isto apenas regenera "..(bloodItem/2).." hitpoints caso você tenha recebido dano de algum jogador nos últimos 5 segundos.")
+      local text = getLangString(cid, "This flask of blood contains "..bloodItem.." hitpoints, blood drawn from "..author..".\n It only heals "..(bloodItem/2).." hitpoints if you received damage from players on last 5 seconds.", "Esse sangue pertence Ã¡ "..author..", tendo exatamente "..bloodItem.." hitpoints. \n Isto apenas regenera "..(bloodItem/2).." hitpoints caso vocÃª tenha recebido dano de algum jogador nos Ãºltimos 5 segundos.")
       doItemSetAttribute(thing.uid, "description", text)
       return true
  
@@ -94,16 +94,16 @@ function onLook(cid, thing, position, lookDistance)
       local text = ""
 	  if getPlayerLevel(thing.uid) < 50 then 
 		if thing.uid ~= cid then
-			text = getLangString(cid, "\nThis player doesnt have enough level to PvP.", "\nEste jogador não possui nível suficiente para participar de combates PvP.")
+			text = getLangString(cid, "\nThis player doesnt have enough level to PvP.", "\nEste jogador nÃ£o possui nÃ­vel suficiente para participar de combates PvP.")
 		else
-			text = getLangString(cid, "\nYou dont have enough level to PvP.", "\nVocê não possui nível suficiente para participar de combates PvP.")
+			text = getLangString(cid, "\nYou dont have enough level to PvP.", "\nVocÃª nÃ£o possui nÃ­vel suficiente para participar de combates PvP.")
 		end
 	  end 
 	    if getPlayerStorageValue(thing.uid, "isAvatar") == 1 then
 			if thing.uid ~= cid then
-				text = text .. getLangString(cid, "\nHe is the Avatar.", "\nEle é o Avatar.")
+				text = text .. getLangString(cid, "\nHe is the Avatar.", "\nEle Ã© o Avatar.")
 			else
-				text = text .. getLangString(cid, "\nYou are the Avatar.", "\nVocê é o Avatar.")
+				text = text .. getLangString(cid, "\nYou are the Avatar.", "\nVocÃª Ã© o Avatar.")
 			end
 		end
       doPlayerSetSpecialDescription(thing.uid, text)
@@ -111,9 +111,9 @@ function onLook(cid, thing, position, lookDistance)
   end
   if isPlayer(thing.uid) and getPlayerStorageValue(thing.uid, "isAvatar") == 1 then
 	if thing.uid ~= cid then
-		doPlayerSetSpecialDescription(thing.uid, getLangString(cid, "\nHe is the Avatar.", "\nEle é o Avatar."))
+		doPlayerSetSpecialDescription(thing.uid, getLangString(cid, "\nHe is the Avatar.", "\nEle Ã© o Avatar."))
 	 else
-		doPlayerSetSpecialDescription(thing.uid, getLangString(cid, "\nYou are the Avatar.", "\nVocê é o Avatar."))
+		doPlayerSetSpecialDescription(thing.uid, getLangString(cid, "\nYou are the Avatar.", "\nVocÃª Ã© o Avatar."))
 	 end
   end
  

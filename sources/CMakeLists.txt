@@ -123,7 +123,7 @@ if(MSVC)
     # is found normally.
     target_compile_options(theforgottenserver PRIVATE
         "/I${LIBXML2_INCLUDE_DIR}"
-        /permissive- /EHsc /bigobj /MP /Zi
+        /permissive- /EHsc /bigobj /MP /Zi /utf-8
         /wd4996 /wd4267 /wd4244 /wd4018 /wd4309 /wd4250 /wd4244
     )
     # /DEBUG produces the .pdb (kept out-of-band, exe stays optimized).

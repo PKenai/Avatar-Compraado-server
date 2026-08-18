@@ -83,11 +83,11 @@ end
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if not getTileInfo(getCreaturePosition(cid)).protection then 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "É necessário estar em uma zona protegida (PZ) para resetar seus atributos.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Ã‰ necessÃ¡rio estar em uma zona protegida (PZ) para resetar seus atributos.")
 		return false 
 	end 
 	if getPlayerStorageValue(cid, "ativoBot") == 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você precisa responder ao Anti-Bot primeiro.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª precisa responder ao Anti-Bot primeiro.")
 		return false 
 	end
     doRemoveItem(item.uid, 1)

@@ -13,7 +13,7 @@ end
 local stoneVoc = {12686, 12688, 12689, 12687} -- fire, water, air, earth
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if checkBossAlive() then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa derrotar o Gaz'Haragoth primeiro.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª precisa derrotar o Gaz'Haragoth primeiro.")
 		return true
 	end
 	local pedra = getTileItemById(toPosition, stoneVoc[getPlayerVocation(cid)]).uid
@@ -25,7 +25,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	doTeleportThing(cid,  {x = 1117, y = 640, z = 9})
 	doSendMagicEffect({x = 1117, y = 640, z = 9}, CONST_ME_TELEPORT)
 	if getPlayerStorageValue(cid, "isPromoted") ~= 1 and getPlayerStorageValue(cid, "canPromote") ~= 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "Report the mission to your Mentor.", "Reporte esta missão para o seu Mentor."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "Report the mission to your Mentor.", "Reporte esta missÃ£o para o seu Mentor."))
 		setPlayerStorageValue(cid, "canPromote", 1)
 		doPlayerAddItem(cid, 2160, 30)
 		doSendMagicEffect(getThingPos(cid), 29)

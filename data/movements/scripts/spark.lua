@@ -6,7 +6,7 @@ function onStepIn(cid, item, position, fromPosition)
 	end
 	if getPlayerLevel(cid) < 125 then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 125+  para entrar na Spark of Destruction Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de Level 125+  para entrar na Spark of Destruction Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else
 		doTeleportThing(cid, {x=808, y=751, z=9})	

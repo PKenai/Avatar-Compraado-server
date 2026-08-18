@@ -11,7 +11,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	end 
 	if reward.level and reward.level ~= 0 then 
 		if getPlayerLevel(cid) < reward.level then 
-			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Somente jogadores de nível "..reward.level.." ou superior podem receber esta recompensa.")
+			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Somente jogadores de nÃ­vel "..reward.level.." ou superior podem receber esta recompensa.")
 			return true
 		end 
 	end 
@@ -44,19 +44,19 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 				local quantia = reward.premios[i][2]
 				doPlayerAddItem(cid, itemId, quantia)
 				if finalExp ~= 0 and i == 1 then 
-					finalString = finalString .. "Você recebeu "..finalExp.." pontos de experiência, "..quantia.."x "..getItemNameById(itemId)..""
+					finalString = finalString .. "VocÃª recebeu "..finalExp.." pontos de experiÃªncia, "..quantia.."x "..getItemNameById(itemId)..""
 					if i == #reward.premios then 
-						finalString = "Você recebeu "..finalExp.." pontos de experiência e "..quantia.."x "..getItemNameById(itemId).."."
+						finalString = "VocÃª recebeu "..finalExp.." pontos de experiÃªncia e "..quantia.."x "..getItemNameById(itemId).."."
 					end 
 				elseif i == #reward.premios then 
 					finalString = finalString .. " e "..quantia.."x "..getItemNameById(itemId).."."
 					if i == 1 then
-						finalString = "Você recebeu "..quantia.."x "..getItemNameById(itemId).."."
+						finalString = "VocÃª recebeu "..quantia.."x "..getItemNameById(itemId).."."
 					end 
 				elseif i ~= 1 then 
 					finalString = finalString .. ", "..quantia.."x "..getItemNameById(itemId)..""
 				else
-					finalString = finalString .. "Você recebeu "..quantia.."x "..getItemNameById(itemId)..""
+					finalString = finalString .. "VocÃª recebeu "..quantia.."x "..getItemNameById(itemId)..""
 					if i == #reward.premios then 
 						finalString = finalString .. "."
 					end 
@@ -68,7 +68,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		end 
 		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, finalString)
 	else 
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já recebeu esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ recebeu esta recompensa.")
 	end
 	return true
 end

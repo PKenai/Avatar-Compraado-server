@@ -111,9 +111,9 @@ function onSay(cid, words, param, channel)
 
   if timeLimit > os.time() then
     string = getLangString(cid, isGmString.."Current Frags: "..fragsNumber..".\n\nYour(s) frag(s) will expire in: "..getSecsString(timeLimit-os.time())..".\n\nAttention: with "..config.fragsToRedSkull.." frags you will get a Red Skull.",
-    isGmString.."Frags Ativas: "..fragsNumber..".\n\nSua(s) frag(s) vão(ai) expirar em: "..getSecsString(timeLimit-os.time())..".\n\nAtenção: com "..config.fragsToRedSkull.." frags você ganhará Red Skull.")
+    isGmString.."Frags Ativas: "..fragsNumber..".\n\nSua(s) frag(s) vÃ£o(ai) expirar em: "..getSecsString(timeLimit-os.time())..".\n\nAtenÃ§Ã£o: com "..config.fragsToRedSkull.." frags vocÃª ganharÃ¡ Red Skull.")
   else
-    string = getLangString(cid, isGmString.."Congratulations! You don't have any active frag.", isGmString.."Parábens! Você não possui nenhuma frag ativa.")
+    string = getLangString(cid, isGmString.."Congratulations! You don't have any active frag.", isGmString.."ParabÃ©ns! VocÃª nÃ£o possui nenhuma frag ativa.")
   end
 
   doPlayerPopupFYI(cid, string)

@@ -6,7 +6,7 @@ function onStepIn(cid, item, position, fromPosition)
 	end
 	if getPlayerLevel(cid) < 220 then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 220+  para entrar na The Dark Four Elements Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de Level 220+  para entrar na The Dark Four Elements Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else
 		doTeleportThing(cid, {x=88, y=729, z=9})	

@@ -23,7 +23,7 @@ function onStepIn(cid, item, position, fromPosition)
 		doSendMagicEffect({x=185, y=1017, z=8}, CONST_ME_TELEPORT)
 	else
 		doTeleportThing(cid, {x=180, y=1065, z=6}, true)
-		doCreatureSay(cid, "Você não possui permissão para entrar.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª nÃ£o possui permissÃ£o para entrar.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	end
 	return true

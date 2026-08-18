@@ -2,23 +2,23 @@
 
 -- exemplo de bau que so da 1 item e exp: 
 -- [3198] = {level = 20, premios = {{3891, 2}}, exp = 2500, effect = 32}
--- nesse caso o bau com actionid 3198 so vai poder ser usado por player level 20+ e vai dar como premio 2(quantia) itens de id 3891 e tb 2500 de exp. vai lanÁar tb o efeito 32 na pos do player q abrir
+-- nesse caso o bau com actionid 3198 so vai poder ser usado por player level 20+ e vai dar como premio 2(quantia) itens de id 3891 e tb 2500 de exp. vai lan√ßar tb o efeito 32 na pos do player q abrir
 -- se quiser colocar sem exp poe exp = 0
 
 -- exemplo de bau que da mais de 1 item:
 -- [3123] = {level = 40, premios = {{3891, 1}, {4921, 4}, {2918, 6}}, exp = 4500, effect = 0}
--- nesse caso o bau com actionid 3123 vai poder ser usado por players lv 40+ e vai dar 1 item id 3891, 4 itens id 4921, 6 itens id 2918, e exp 4500. n„o vai lanÁar efeito na pos do player q abrir
+-- nesse caso o bau com actionid 3123 vai poder ser usado por players lv 40+ e vai dar 1 item id 3891, 4 itens id 4921, 6 itens id 2918, e exp 4500. n√£o vai lan√ßar efeito na pos do player q abrir
 
 
--- STORAGE … PARA IMPEDIR QUE POSSAM ABRIR O MESMO BA⁄ 2X! CASO QUEIRA CRIAR 2 BA⁄S DIFERENTES NO QUAL S” PODE ABRIR 1, UTILIZE O MESMO STORAGE ENTRE AMBOS.
+-- STORAGE √â PARA IMPEDIR QUE POSSAM ABRIR O MESMO BA√ö 2X! CASO QUEIRA CRIAR 2 BA√öS DIFERENTES NO QUAL S√ì PODE ABRIR 1, UTILIZE O MESMO STORAGE ENTRE AMBOS.
 -- SE VOCE DEIXAR STORAGE = 0 O SISTEMA VAI USAR COMO STORAGE "questChests" + numero do actionID, 
--- no caso n„o tem problema deixar 0, sÛ ser· util pra caso queria um storage especifico ou deixar 2 baus de 2 actionID diferente compartilhando storage pra n poder abrir ambos
+-- no caso n√£o tem problema deixar 0, s√≥ ser√° util pra caso queria um storage especifico ou deixar 2 baus de 2 actionID diferente compartilhando storage pra n poder abrir ambos
 
--- GIVESTORAGE PODE DEIXAR EM 0 D¡ NADA N√O. … PARA COLOCAR O STORAGE ESCOLHIDO EM 1 AO ABRIR CASO TENHA ALGUM ESPECIFICADO, 
--- EU POSSO USAR ISSO PARA ALGUM SISTEMA CASO PRECISE, COMO UM CHEST QUE TE D  BLESS(que È storage no avatar), SEI L¡.
+-- GIVESTORAGE PODE DEIXAR EM 0 D√Å NADA N√ÉO. √â PARA COLOCAR O STORAGE ESCOLHIDO EM 1 AO ABRIR CASO TENHA ALGUM ESPECIFICADO, 
+-- EU POSSO USAR ISSO PARA ALGUM SISTEMA CASO PRECISE, COMO UM CHEST QUE TE D√ä BLESS(que √© storage no avatar), SEI L√Å.
 
--- CUSTOMTEXT … PRA CASO QUEIRA POR UMA FRASE CUSTOM PRA QUANDO ABRIR O BA⁄ 
--- SE N√O TIVER FRASE, FOR "" ENT√O ELE MOSTRA MENSAGEM COM OS ITENS ADQUIRIDOS
+-- CUSTOMTEXT √â PRA CASO QUEIRA POR UMA FRASE CUSTOM PRA QUANDO ABRIR O BA√ö 
+-- SE N√ÉO TIVER FRASE, FOR "" ENT√ÉO ELE MOSTRA MENSAGEM COM OS ITENS ADQUIRIDOS
 
 chestsInfo =
 {

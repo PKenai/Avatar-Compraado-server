@@ -37,7 +37,9 @@ end
 table.getPos = table.find
 
 table.contains = function (txt, str)
+  txt = stripAccents(txt:lower())
   for i, v in pairs(str) do
+    v = stripAccents(v:lower())
     if(txt:find(v) and not txt:find('(%w+)' .. v) and not txt:find(v .. '(%w+)')) then
       return true
     end

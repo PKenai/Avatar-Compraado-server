@@ -24,38 +24,38 @@ function creatureSayCallback(cid, type, msg)
         talkState[talkUser] = 1 
     end
 	if getPlayerLevel(cid) < 170  then
-		selfSay(getLangString(cid, "You need Level 170+  to help me.", "VocÍ precisa de Level 170+  para me ajudar."), cid)
+		selfSay(getLangString(cid, "You need Level 170+  to help me.", "Voc√™ precisa de Level 170+  para me ajudar."), cid)
 		return true
 	end
 	if getPlayerStorageValue(cid, "outlawAccess") == 2 then
 		setPlayerStorageValue(cid, "outlawAccess", 3)
 		setPlayerStorageValue(cid, "90513", 1)
-		selfSay(getLangString(cid, "Oh, you made it! Speaking truly, i was thinking that you died. Thanks to you, i can continue my research in peace. Here, accept this reward as my thanks!", "Oh, vocÍ conseguiu! Sinceramente, n„o achava que voltaria vivo. GraÁas a vocÍ, poderei continuar minha pesquisa em paz. Receba esta recompensa como minha gratid„o!"), cid)
+		selfSay(getLangString(cid, "Oh, you made it! Speaking truly, i was thinking that you died. Thanks to you, i can continue my research in peace. Here, accept this reward as my thanks!", "Oh, voc√™ conseguiu! Sinceramente, n√£o achava que voltaria vivo. Gra√ßas a voc√™, poderei continuar minha pesquisa em paz. Receba esta recompensa como minha gratid√£o!"), cid)
 		doPlayerAddMoney(cid, 200000)
 		doPlayerAddItem(cid, 2123, 1)
 		local finalExp = getExperienceForLevel(181) - getExperienceForLevel(180)
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÈns! VocÍ completou a Outlaw's Secret Weapon Quest. Como recompensa, vocÍ recebeu "..finalExp.." pontos de experiÍncia, 1x Southern Ring e 200000 gold coins.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parab√©ns! Voc√™ completou a Outlaw's Secret Weapon Quest. Como recompensa, voc√™ recebeu "..finalExp.." pontos de experi√™ncia, 1x Southern Ring e 200000 gold coins.")
 		return true
 	elseif getPlayerStorageValue(cid, "outlawAccess") == 1 then
-		selfSay(getLangString(cid, "What are you waiting for? You need to defeat this beast quickly!", "O que vocÍ est· esperando?! VocÍ precisa derrotar esta besta imediatamente!"), cid)
+		selfSay(getLangString(cid, "What are you waiting for? You need to defeat this beast quickly!", "O que voc√™ est√° esperando?! Voc√™ precisa derrotar esta besta imediatamente!"), cid)
 		return true
 	end
         if talkState[talkUser] == 1 then
             if msgcontains(msg, "secret weapon") or msgcontains(msg, "arma secreta") or msgcontains(msg, "mission") or msgcontains(msg, "yes") or msgcontains(msg, "sim") then
                 if getPlayerStorageValue(cid, "90513") >= 1 then
-                    selfSay(getLangString(cid, "Sorry, you already did your job.", "Desculpe, vocÍ j· fez sua parte."), cid)
+                    selfSay(getLangString(cid, "Sorry, you already did your job.", "Desculpe, voc√™ j√° fez sua parte."), cid)
                     talkState[talkUser] = 1         
                 else
-                    selfSay(getLangString(cid, "The outlaws are making a MONSTER! We need to stop them quickly. Unfortunately, your access has been protected by a strong magic, and i need {40 midnight shards} to make a counter-magic on you. Can you get it for me?", "Os exilados est„o criando um MONSTRO! Precisamos urgentemente detÍ-los. Infelizmente, seu acesso est· restrito por uma forte magia, preciso que me traga {40 midnight shards} e eu poderei te fazer um encanto para quebr·-la. VocÍ pode pegar para mim?"), cid)
+                    selfSay(getLangString(cid, "The outlaws are making a MONSTER! We need to stop them quickly. Unfortunately, your access has been protected by a strong magic, and i need {40 midnight shards} to make a counter-magic on you. Can you get it for me?", "Os exilados est√£o criando um MONSTRO! Precisamos urgentemente det√™-los. Infelizmente, seu acesso est√° restrito por uma forte magia, preciso que me traga {40 midnight shards} e eu poderei te fazer um encanto para quebr√°-la. Voc√™ pode pegar para mim?"), cid)
                     talkState[talkUser] = 2
                 end
             end
         elseif talkState[talkUser] == 2 then
             if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "shards") then
                 if doPlayerRemoveItem(cid, 10531, 40) then
-                    selfSay(getLangString(cid, "Thank you, this should work! Now, go to the gate and defeat the beast. Be careful!", "Obrigado, isso deve funcionar! Agora, v· para o port„o e derrote a besta. Seja cuidadoso!"), cid)
+                    selfSay(getLangString(cid, "Thank you, this should work! Now, go to the gate and defeat the beast. Be careful!", "Obrigado, isso deve funcionar! Agora, v√° para o port√£o e derrote a besta. Seja cuidadoso!"), cid)
                     setPlayerStorageValue(cid, "outlawAccess", 1)
 					doSendMagicEffect(getCreaturePosition(cid), 14)
                     talkState[talkUser] = 2
@@ -70,7 +70,7 @@ end
 
 function onGreet(cid) 
     talkState[cid] = 1  
-	selfSay(getLangString(cid, "Hello, "..getCreatureName(cid)..". We don't have much time! Sooner or later they will release the {secret weapon}.", "Ol·, "..getCreatureName(cid)..". NÛs n„o temos muito tempo! Mais cedo ou mais tarde eles ir„o liberar a sua {arma secreta}."), cid)
+	selfSay(getLangString(cid, "Hello, "..getCreatureName(cid)..". We don't have much time! Sooner or later they will release the {secret weapon}.", "Ol√°, "..getCreatureName(cid)..". N√≥s n√£o temos muito tempo! Mais cedo ou mais tarde eles ir√£o liberar a sua {arma secreta}."), cid)
     return true
 end
 

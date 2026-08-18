@@ -2,8 +2,8 @@
  * File destinado aos Exausted, separado por tables.
 ]]--
 
--- Atk = porcentagem do dano. 100 = dano original da fórmula, 70 = 30% menor do que o dano original da fórmula. Se colocar 0, só irá tirar 1 de dano
--- "heal" funciona igual o atk, só muda nome pra informar que muda a cura 
+-- Atk = porcentagem do dano. 100 = dano original da fÃ³rmula, 70 = 30% menor do que o dano original da fÃ³rmula. Se colocar 0, sÃ³ irÃ¡ tirar 1 de dano
+-- "heal" funciona igual o atk, sÃ³ muda nome pra informar que muda a cura 
 spellsInfo =
 {
 ["air ball"] = {atk = 120},
@@ -260,9 +260,9 @@ end
     local tableTime = getTimeInString(delayTime)
 
     if tonumber(tableTime.second) >= 1 then
-      strError = getLangString(cid, "You need wait "..stringTime.." to use this fold again.", "Você precisa esperar "..stringTime.." para usar essa dobra novamente.")
+      strError = getLangString(cid, "You need wait "..stringTime.." to use this fold again.", "VocÃª precisa esperar "..stringTime.." para usar essa dobra novamente.")
     else
-      strError = getLangString(cid, "You need wait a few moments to use this fold again.", "Você precisa esperar alguns instantes para usar essa dobra novamente.")
+      strError = getLangString(cid, "You need wait a few moments to use this fold again.", "VocÃª precisa esperar alguns instantes para usar essa dobra novamente.")
     end
 
     doPlayerSendCancelEf(cid, strError)
@@ -325,12 +325,12 @@ function canUseWaterSpell(cid, countWater, distance, onlyAmbient)
   end
 
   if getPlayerCanUseAmbientWater(cid, distance) == true then
-    doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, getLangString(cid, "Using ambient water.", "Usando água ambiente."))
+    doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, getLangString(cid, "Using ambient water.", "Usando Ã¡gua ambiente."))
     return true
   end
 
   if onlyAmbient == true then
-    doPlayerSendCancelEf(cid, getLangString(cid, "This fold requires a lot of water, only ambient water.", "Essa dobra requer uma grande quantidade de água, apenas água ambiente."))
+    doPlayerSendCancelEf(cid, getLangString(cid, "This fold requires a lot of water, only ambient water.", "Essa dobra requer uma grande quantidade de Ã¡gua, apenas Ã¡gua ambiente."))
     return false
   end
 
@@ -345,35 +345,35 @@ function canUseWaterSpell(cid, countWater, distance, onlyAmbient)
     if waterPouch.uid > 0 and (waterPouch.itemid == fullPouchId or waterPouch.itemid == emptyPouchId) then
       doItemSetAttribute(waterPouch.uid, "water", 0)
     end
-    doPlayerSendCancelEf(cid, getLangString(cid, "To use this fold you need a water source.", "Para usar essa dobra, você precisa de uma fonte de água."))
+    doPlayerSendCancelEf(cid, getLangString(cid, "To use this fold you need a water source.", "Para usar essa dobra, vocÃª precisa de uma fonte de Ã¡gua."))
     return false
   end
   local waterPouchCount = getPlayerItemCount(cid, 4864)
   if waterPouch.itemid == fullPouchId then
     if pouchWater < countWater then
       setWaterOnPounchPlayer(cid, 0, waterPouch)
-      doPlayerSendCancel(cid, getLangString(cid, "The water we had was not enough to fold and was discarded.", "Essa água não serve para essa dobra, portanto, ela foi descartada."))
+      doPlayerSendCancel(cid, getLangString(cid, "The water we had was not enough to fold and was discarded.", "Essa Ã¡gua nÃ£o serve para essa dobra, portanto, ela foi descartada."))
       doDecayItem(doCreateItem(2017, getCreaturePosition(cid)))
       return false
     elseif pouchWater == countWater then
       setWaterOnPounchPlayer(cid, 0, waterPouch)
     if waterPouchCount <= 1 then 
-      doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "Using water pounch, your water pouch dried.", "Usando water pouch, acabou a água."))
+      doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "Using water pounch, your water pouch dried.", "Usando water pouch, acabou a Ã¡gua."))
     else
-      doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "One water pouch dried, you now have "..(waterPouchCount-1).." more.", "Um water pouch secou, você tem mais "..(waterPouchCount-1).."."))
+      doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "One water pouch dried, you now have "..(waterPouchCount-1).." more.", "Um water pouch secou, vocÃª tem mais "..(waterPouchCount-1).."."))
     end 
       return true
     else
       setWaterOnPounchPlayer(cid, pouchWater-countWater, waterPouch)
       if waterPouchCount <= 1 then 
-      doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "Using last water pounch ("..pouchWater.."%).", "Usando último water pouch ("..pouchWater.."%)."))
+      doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "Using last water pounch ("..pouchWater.."%).", "Usando Ãºltimo water pouch ("..pouchWater.."%)."))
     else 
       doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, getLangString(cid, "Using one ("..pouchWater.."%) of "..waterPouchCount.." water pounchs.", "Usando um ("..pouchWater.."%) de "..waterPouchCount.." water pouchs."))
     end 
       return true
     end
   else
-    doPlayerSendCancelEf(cid, getLangString(cid, "To use this fold you need a water source.", "Para usar essa dobra, você precisa de uma fonte de água."))
+    doPlayerSendCancelEf(cid, getLangString(cid, "To use this fold you need a water source.", "Para usar essa dobra, vocÃª precisa de uma fonte de Ã¡gua."))
     return false
   end
 end
@@ -384,11 +384,11 @@ function getSpellCancels(cid, spellName, isFury, isDash)
   end
  
   if getCreatureNoMove(cid) or exhaustion.check(cid, "airtrapped") then
-    doPlayerSendCancelEf(cid, getLangString(cid, "You are unable to bend now.", "Você não pode dobrar agora."))  
+    doPlayerSendCancelEf(cid, getLangString(cid, "You are unable to bend now.", "VocÃª nÃ£o pode dobrar agora."))  
     return true
   end
   if getPlayerStorageValue(cid, "playerCantDown") == 1 and not isFury then 
-    doPlayerSendCancelEf(cid, getLangString(cid, "You are unable to bend flying.", "Você não pode dobrar voando."))  
+    doPlayerSendCancelEf(cid, getLangString(cid, "You are unable to bend flying.", "VocÃª nÃ£o pode dobrar voando."))  
     return true
   end
 
@@ -402,7 +402,7 @@ function getSpellCancels(cid, spellName, isFury, isDash)
     local isSqmFlying = not groundItem or groundItem.itemid == 1 or groundItem.id == 460
 
     if getPlayerStorageValue(cid, "playerOnAir") == 1 or isSqmFlying then
-      doPlayerSendCancelEf(cid, getLangString(cid, "You can't use this bend on air.", "Você não pode usar essa dobra no ar."))
+      doPlayerSendCancelEf(cid, getLangString(cid, "You can't use this bend on air.", "VocÃª nÃ£o pode usar essa dobra no ar."))
       return true
     end
 

@@ -6,7 +6,7 @@ function onStepIn(cid, item, position, fromPosition)
 	 end
 	if getPlayerLevel(cid) < 200  then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 200+  para entrar na Tyrn Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de Level 200+  para entrar na Tyrn Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else
 		doTeleportThing(cid, {x = 544, y = 620, z = 12}, false)

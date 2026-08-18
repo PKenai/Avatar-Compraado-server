@@ -1,9 +1,9 @@
 function onSay(cid, words, param, channel)
 	local avatar = getStorage(73991)
 	if avatar > 0 then
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "O Avatar atual È o dobrador: " ..getPlayerNameByGUID(avatar).. ".")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "O Avatar atual √© o dobrador: " ..getPlayerNameByGUID(avatar).. ".")
 	else
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "O Avatar ainda n„o foi escolhido.")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "O Avatar ainda n√£o foi escolhido.")
 	end
 return TRUE
 end

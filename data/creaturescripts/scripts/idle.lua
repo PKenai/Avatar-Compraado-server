@@ -41,10 +41,13 @@ local onlineCount = #getPlayersOnline()
 	if getPlayerStorageValue(cid, "hasInPotionExp") > os.time() then -- Se tem pot exp 20% mais xp
 		expF = expF+0.2
 	end
+	if getPlayerStorageValue(cid, "hasExpScroll") > os.time() then -- Pergaminho da experiencia: +50% xp por 45 min
+		expF = expF+0.5
+	end
 	if getPlayerStamina(cid) >= 2400 then  -- Se tem stamina 40+ 20% mais xp
 		expF = expF + 0.2
 	end 
-	if getPlayerGuildName(cid) == getStorage(391893) then -- se é da guild dominante +15% xp
+	if getPlayerGuildName(cid) == getStorage(391893) then -- se Ã© da guild dominante +15% xp
 		expF = expF+0.15
 	end
 	if (getCreatureSkullType(cid) == SKULL_RED) then
@@ -75,7 +78,7 @@ local function marketCheck(cid)
         balance:free()
         return true
     end
-    doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você recebeu " .. string.format("%.0f", amount) .. " gold coins por ter vendido algum item no mercado!")
+    doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª recebeu " .. string.format("%.0f", amount) .. " gold coins por ter vendido algum item no mercado!")
     doPlayerAddMoney(cid, amount)
     db.executeQuery("UPDATE `players` SET `auction_balance` = '0' WHERE `id` = " .. getPlayerGUID(cid) .. ";")
     balance:free()
@@ -116,9 +119,9 @@ end
 		doPlayerResetIdleTime(cid)
 		return true
 	end
-    local message = getLangString(cid, "There was no variation in your behaviour for " .. math.ceil(config.idleWarning / 60000) .. " minutes", "Seu character não teve nenhuma variação de movimento nos últimos "..math.ceil(config.idleWarning / 60000).." minutos")
+    local message = getLangString(cid, "There was no variation in your behaviour for " .. math.ceil(config.idleWarning / 60000) .. " minutes", "Seu character nÃ£o teve nenhuma variaÃ§Ã£o de movimento nos Ãºltimos "..math.ceil(config.idleWarning / 60000).." minutos")
     if(config.idleKick > 0) then
-      message = message .. getLangString(cid, ". You will be disconnected in ", ". Você será desconectado em ")
+      message = message .. getLangString(cid, ". You will be disconnected in ", ". VocÃª serÃ¡ desconectado em ")
       local diff = math.ceil((config.idleWarning - config.idleKick) / 60000)
       if(diff > 1) then
         message = message .. diff .. getLangString(cid, " minutes", " minutos")
@@ -126,7 +129,7 @@ end
         message = message .. getLangString(cid, "one minute", "um minuto")
       end
 
-      message = message .. getLangString(cid, " if you don't move", " se você não se movimentar")
+      message = message .. getLangString(cid, " if you don't move", " se vocÃª nÃ£o se movimentar")
     end
 
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_WARNING, message..".")

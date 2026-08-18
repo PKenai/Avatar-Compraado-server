@@ -51,19 +51,19 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		return false
 	end
 	if not isArmor(itemEx) then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You can't desenchant this item. Only helmets, armors, legs and boots.", "Você não pode desencantar este item. Apenas helmets, armors, legs e boots."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You can't desenchant this item. Only helmets, armors, legs and boots.", "VocÃª nÃ£o pode desencantar este item. Apenas helmets, armors, legs e boots."))
 		return true
 	end
 	if not getItemAttribute(itemEx.uid, 'elementalrunetype') or getItemAttribute(itemEx.uid, 'elementalrunetype') <= 0 or not getItemAttribute(itemEx.uid, 'elementalrunelevel') or getItemAttribute(itemEx.uid, 'elementalrunelevel') <= 0 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This item is not enchanted.", "Este item não está encantado."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This item is not enchanted.", "Este item nÃ£o estÃ¡ encantado."))
 		return true
 	end
 	if toPosition.x ~= CONTAINER_POSITION then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The item need to be in a container to be disenchanted.", "O item precisa estar em um inventário para ser desencantado."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The item need to be in a container to be disenchanted.", "O item precisa estar em um inventÃ¡rio para ser desencantado."))
 		return true
 	end
 	if not isItemEventRegistered(itemEx.uid) then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This item is too weak to be disenchanted.", "Este item é fraco demais para ser desencantado."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This item is too weak to be disenchanted.", "Este item Ã© fraco demais para ser desencantado."))
 		return true
 	end
 	if isEquipped(cid, itemEx.uid) then

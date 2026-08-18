@@ -1,8 +1,8 @@
 local errorMsg = {
-    ["fire"] = {"Before you need learn this fold.", "Você ainda não aprendeu a usar essa dobra."},
-    ["air"] = {"Before you need learn this fold.", "Você ainda não aprendeu a usar essa dobra."},
-    ["earth"] = {"Before you need learn this fold.", "Você ainda não aprendeu a usar essa dobra."},
-    ["water"] = {"Before you need learn this fold.", "Você ainda não aprendeu a usar essa dobra."}
+    ["fire"] = {"Before you need learn this fold.", "VocÃª ainda nÃ£o aprendeu a usar essa dobra."},
+    ["air"] = {"Before you need learn this fold.", "VocÃª ainda nÃ£o aprendeu a usar essa dobra."},
+    ["earth"] = {"Before you need learn this fold.", "VocÃª ainda nÃ£o aprendeu a usar essa dobra."},
+    ["water"] = {"Before you need learn this fold.", "VocÃª ainda nÃ£o aprendeu a usar essa dobra."}
 }
 
 function onCastSpell(cid, words)
@@ -22,7 +22,7 @@ function onCastSpell(cid, words)
             
             if not (currentSpell == -1) then
                 if words == currentSpell then
-                    doPlayerSendCancel(cid, getLangString(cid, "You cannot use this fold here.", "Você não pode usar essa dobra aqui."))
+                    doPlayerSendCancel(cid, getLangString(cid, "You cannot use this fold here.", "VocÃª nÃ£o pode usar essa dobra aqui."))
                     return false
                 end
             else
@@ -34,7 +34,7 @@ function onCastSpell(cid, words)
     if spellInfo.level > 46 then
         if playerLevel >= spellInfo.level then
             if not hasFoldIsBuy(cid, words) then
-                doPlayerSendCancel(cid, getLangString(cid, "Before you need learn this fold.", "Você ainda não aprendeu a usar essa dobra."))
+                doPlayerSendCancel(cid, getLangString(cid, "Before you need learn this fold.", "VocÃª ainda nÃ£o aprendeu a usar essa dobra."))
                 local errorMsg = errorMsg[element]
 
                 sendBlueMessage(cid, getLangString(cid, errorMsg[1], errorMsg[2]))

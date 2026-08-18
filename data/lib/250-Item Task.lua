@@ -1,11 +1,11 @@
--- goldReq È qnt precisa pagar junto dos itens 
--- itensReward  se tiver false n„o d· recompensa caso contrario d· os itens listados 
--- givestorage È o storage q d· ao player qnd completar
--- storage È o que precisa pra comeÁar essa missao
+-- goldReq √© qnt precisa pagar junto dos itens 
+-- itensReward  se tiver false n√£o d√° recompensa caso contrario d√° os itens listados 
+-- givestorage √© o storage q d√° ao player qnd completar
+-- storage √© o que precisa pra come√ßar essa missao
 
--- AMBOS S√O S” DE EXEMPLO, PUS NUMEROS RANDOM
--- [] = nome da missao, precisa falar pro npc pra comeÁar, ele lista com esse nome tambem nas disponiveis
--- storage usado pra registrar que ja terminou a task È "storageIdItemTask", exemplo "1ItemTask", sÛ n„o repita nenhum que ta ok. Se quiser que exista 2 missıes na qual so dÍ pra fazer 1, use o mesmo storage id
+-- AMBOS S√ÉO S√ì DE EXEMPLO, PUS NUMEROS RANDOM
+-- [] = nome da missao, precisa falar pro npc pra come√ßar, ele lista com esse nome tambem nas disponiveis
+-- storage usado pra registrar que ja terminou a task √© "storageIdItemTask", exemplo "1ItemTask", s√≥ n√£o repita nenhum que ta ok. Se quiser que exista 2 miss√µes na qual so d√™ pra fazer 1, use o mesmo storage id
 
 itemTaskInfo =
 {

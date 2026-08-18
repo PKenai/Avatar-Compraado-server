@@ -159,6 +159,7 @@
     	<action itemid="4856" event="script" value="pick.lua"/>
     	<action itemid="2177" event="script" value="other/lifeCrystal.lua"/>
     	<action itemid="12754" event="script" value="other/potExp.lua"/>
+    	<action itemid="18865;18866;18867" event="script" value="scrolls/scrolls.lua"/>
         <action itemid="13041" event="script" value="other/premiumScroll.lua"/>
         <action itemid="18057" event="script" value="other/premiumScroll2.lua"/>
         <action itemid="17820" event="script" value="starterPackage.lua"/>

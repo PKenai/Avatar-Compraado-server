@@ -41,12 +41,12 @@ end
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if isInArray(ovosVivos, item.itemid) and isEggCooldown() then
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, getLangString(cid, "The eggs are still regenerating and cant be destroyed.", "Os ovos ainda estão se regenerando e não podem ser destruídos."))
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, getLangString(cid, "The eggs are still regenerating and cant be destroyed.", "Os ovos ainda estÃ£o se regenerando e nÃ£o podem ser destruÃ­dos."))
 		return true
 	end
 	if isInArray(ovosVivos, item.itemid) then
 		if isCreature(lastBossCid) then
-			doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT,  getLangString(cid, "The eggs are being protected by the Baron and cant be destroyed.", "Os ovos estão protegidos pelo Baron e não podem ser destruídos."))
+			doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT,  getLangString(cid, "The eggs are being protected by the Baron and cant be destroyed.", "Os ovos estÃ£o protegidos pelo Baron e nÃ£o podem ser destruÃ­dos."))
 			return true
 		end
 		doTransformItem(item.uid, vivoToQuebrado["" .. item.itemid])
@@ -54,11 +54,11 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		brokenEggsCount = brokenEggsCount+1
 		doSendMagicEffect(toPosition, CONST_ME_POFF)
 		if brokenEggsCount >= 80 then
-			doPlayerSendTextMessage(cid, 22,  getLangString(cid, "You did it, now he is mad. Run for your life.", "Você conseguiu irritar ele, parabéns. Agora fuja o quanto antes se deseja sobreviver."))
+			doPlayerSendTextMessage(cid, 22,  getLangString(cid, "You did it, now he is mad. Run for your life.", "VocÃª conseguiu irritar ele, parabÃ©ns. Agora fuja o quanto antes se deseja sobreviver."))
 			lastBossCid = doCreateMonster(bossConfig.name, bossConfig.pos)
 			eggCooldownEnd = os.time()+bossConfig.respawnCooldown
 		else
-			 doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT,  getLangString(cid, "Stop breaking the eggs! He will get angry.", "Pare de quebrar os ovos! Ele ficará enfurecido."))
+			 doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT,  getLangString(cid, "Stop breaking the eggs! He will get angry.", "Pare de quebrar os ovos! Ele ficarÃ¡ enfurecido."))
 		end
 		return true
 	end 

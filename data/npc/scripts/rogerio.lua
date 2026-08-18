@@ -75,7 +75,7 @@ local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
     print("[Rogerio] startQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "Nova missão: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -88,7 +88,7 @@ local function deliverQuest(cid)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, PHOTOS_NEEDED)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
     print("[Rogerio] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Missão concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. MISSION_NAME)
     end)
@@ -103,20 +103,20 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     if getPlayerLevel(cid) < LEVEL_REQUIRED then
-        selfSay("Ainda nao e a sua hora, aventureiro. Essas paisagens so podem ser registradas por quem tem coragem de level 115 ou mais. Volte quando for mais forte!", cid)
+        selfSay("Ainda não e a sua hora, aventureiro. Essas paisagens só podem ser registradas por quem tem coragem de level 115 ou mais. Volte quando for mais forte!", cid)
         return true
     end
     talkState[cid] = 1
     syncProgress(cid)
 
     if questCompleted(cid) then
-        selfSay("Ola, " .. getCreatureName(cid) .. "! Obrigado por ter recuperado minhas fotos. Agora consigo registrar as paisagens novamente em paz!", cid)
+        selfSay("Olá, " .. getCreatureName(cid) .. "! Obrigado por ter recuperado minhas fotos. Agora consigo registrar as paisagens novamente em paz!", cid)
     elseif hasEnoughPhotos(cid) then
-        selfSay("Ola, " .. getCreatureName(cid) .. "! Vejo que voce recuperou minhas fotos! Diga que quer me devolver para receber sua recompensa.", cid)
+        selfSay("Olá, " .. getCreatureName(cid) .. "! Vejo que você recuperou minhas fotos! Diga que quer me devolver para receber sua recompensa.", cid)
     elseif questStarted(cid) then
-        selfSay("Ola, " .. getCreatureName(cid) .. "! Ainda estou sem minhas fotos... As Mordecascas da terra levaram tudo o que eu tinha registrado. Recupere-as pra mim!", cid)
+        selfSay("Olá, " .. getCreatureName(cid) .. "! Ainda estou sem minhas fotos... As Mordecascas da terra levaram tudo o que eu tinha registrado. Recupere-as pra mim!", cid)
     else
-        selfSay("Ola, " .. getCreatureName(cid) .. "! Eu sou Rogerio, fotografo de paisagens. Eu estava tirando fotos da regiao quando um Mordecasca da terra surgiu e roubou todas as minhas fotos! Voce pode me ajudar a recupera-las?", cid)
+        selfSay("Olá, " .. getCreatureName(cid) .. "! Eu sou Rogerio, fotografo de paisagens. Eu estava tirando fotos da região quando um Mordecasca da terra surgiu e roubou todas as minhas fotos! Você pode me ajudar a recupera-las?", cid)
     end
     return true
 end
@@ -126,7 +126,7 @@ function creatureSayCallback(cid, type, msg)
         return false
     end
     if getPlayerLevel(cid) < LEVEL_REQUIRED then
-        selfSay("Ainda nao e a sua hora, aventureiro. Volte quando tiver level 115 ou mais!", cid)
+        selfSay("Ainda não e a sua hora, aventureiro. Volte quando tiver level 115 ou mais!", cid)
         return false
     end
     local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
@@ -141,26 +141,26 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja me devolveu as fotos, " .. getCreatureName(cid) .. "! Obrigado de novo, agora posso voltar a fotografar as paisagens!", cid)
+                selfSay("Você já me devolveu as fotos, " .. getCreatureName(cid) .. "! Obrigado de novo, agora posso voltar a fotografar as paisagens!", cid)
             elseif hasEnoughPhotos(cid) then
                 deliverQuest(cid)
-                selfSay("Minhas fotos! Que alegria ve-las de volta! Aqui esta sua recompensa: " .. REWARD_COUNT .. " platinum coins e " .. REWARD_EXP .. " de experiencia. Obrigado, " .. getCreatureName(cid) .. "!", cid)
+                selfSay("Minhas fotos! Que alegria ve-las de volta! Aqui está sua recompensa: " .. REWARD_COUNT .. " platinum coins e " .. REWARD_EXP .. " de experiência. Obrigado, " .. getCreatureName(cid) .. "!", cid)
             elseif started then
-                selfSay("Ainda estou sem minhas fotos! Faltam " .. (PHOTOS_NEEDED - photosCount(cid)) .. " para completar o album. Vai atras das Mordecascas da terra e recupere-as!", cid)
+                selfSay("Ainda estou sem minhas fotos! Faltam " .. (PHOTOS_NEEDED - photosCount(cid)) .. " para completar o album. Vai atrás das Mordecascas da terra e recupere-as!", cid)
             else
-                selfSay("Otimo! As Mordecascas da terra roubaram minhas fotos quando eu fotografava as paisagens. Cace-as e recupere as " .. PHOTOS_NEEDED .. " fotos que elas levaram!", cid)
+                selfSay("Ótimo! As Mordecascas da terra roubaram minhas fotos quando eu fotografava as paisagens. Cace-as e recupere as " .. PHOTOS_NEEDED .. " fotos que elas levaram!", cid)
                 startQuest(cid)
             end
         elseif msgcontains(msg, "foto") or msgcontains(msg, "fotos") or msgcontains(msg, "mordecasca") or msgcontains(msg, "paisagem") or msgcontains(msg, "roub") or msgcontains(msg, "recuperar") or msgcontains(msg, "ajuda") or msgcontains(msg, "album") then
             if hasEnoughPhotos(cid) then
-                selfSay("Voce recuperou minhas fotos! Diga que quer me devolver para receber sua recompensa.", cid)
+                selfSay("Você recuperou minhas fotos! Diga que quer me devolver para receber sua recompensa.", cid)
             elseif started then
                 selfSay("Eu estava tirando fotos das paisagens quando um Mordecasca da terra apareceu e roubou tudo! Ainda faltam " .. (PHOTOS_NEEDED - photosCount(cid)) .. " fotos pra mim. Cace as Mordecascas da terra!", cid)
             else
                 selfSay("Eu estava tirando fotos das paisagens quando um Mordecasca da terra surgiu e roubou todas as minhas fotos! Quer me ajudar a recupera-las?", cid)
             end
         else
-            selfSay("Nao entendi. Esta falando das minhas {fotos} que as Mordecascas da terra roubaram?", cid)
+            selfSay("Não entendi. Está falando das minhas {fotos} que as Mordecascas da terra roubaram?", cid)
         end
     end
     return true

@@ -21,7 +21,6 @@
 -- A lib e idempotente: pode ser dofilada aqui e no startup sem perder as quests.
 dofile(getDataDir() .. "lib/questSystemLib.lua")
 qsLoadQuestsFromXML()
-print("[QuestSystem] creaturescript state: " .. #QuestSystem.quests .. " quests carregadas")
 
 -- ============================================================
 -- CONTAGEM DE KILLS (type="kill")

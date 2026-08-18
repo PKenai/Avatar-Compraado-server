@@ -40,11 +40,11 @@ function creatureSayCallback(cid, type, msg)
 		talkState[talkUser] = 1 
 	end
 	if getPlayerLevel(cid) < 80 then
-		selfSay(getLangString(cid, "Sorry, you need at least level 80 to start this mission.", "Desculpe, mas você precisa de pelo menos nível 80 para iniciar as minhas missões."), cid)
+		selfSay(getLangString(cid, "Sorry, you need at least level 80 to start this mission.", "Desculpe, mas vocÃª precisa de pelo menos nÃ­vel 80 para iniciar as minhas missÃµes."), cid)
 		return true
 	end
 	if getPlayerStorageValue(cid, "pascoa2018") == 1 then
-		selfSay(getLangString(cid, "Sorry, but you already received your present!", "Desculpe, mas você já recebeu o seu presente!"), cid)
+		selfSay(getLangString(cid, "Sorry, but you already received your present!", "Desculpe, mas vocÃª jÃ¡ recebeu o seu presente!"), cid)
 		return true
 	end
 	local atual = getPlayerStorageValue(cid, "easter2018State")
@@ -69,37 +69,37 @@ function creatureSayCallback(cid, type, msg)
 				doPlayerAddItem(cid, 18057, 1)
 				local finalExp = 2000000
 				doPlayerAddExperience(cid, finalExp)
-				selfSay(getLangString(cid, "Awesome, you finished all the missions! Here is my present for you: 2x "..stonesNameByVoc[vocId]..", 1x Gift Scroll, "..finalExp.." XP and 20% extra experience for 7 days. Merry Christmas, HOW HOW HOW!", "Incrível, você completou todas as missões! Aqui está meu presente para você: 2x "..stonesNameByVoc[vocId]..", 1x Gift Scroll, "..finalExp.." de XP e 20% de experiência extra durante 7 dias. Feliz Natal, HOW HOW HOW!"), cid)
+				selfSay(getLangString(cid, "Awesome, you finished all the missions! Here is my present for you: 2x "..stonesNameByVoc[vocId]..", 1x Gift Scroll, "..finalExp.." XP and 20% extra experience for 7 days. Merry Christmas, HOW HOW HOW!", "IncrÃ­vel, vocÃª completou todas as missÃµes! Aqui estÃ¡ meu presente para vocÃª: 2x "..stonesNameByVoc[vocId]..", 1x Gift Scroll, "..finalExp.." de XP e 20% de experiÃªncia extra durante 7 dias. Feliz Natal, HOW HOW HOW!"), cid)
 			else			
 				setPlayerStorageValue(cid, "inPascoaTask", 0)
-				selfSay(getLangString(cid, "Great! Are you ready for your "..(atual+1).."º mission?", "Ótimo! Pronto para a sua "..(atual+1).."ª missão?"), cid)
+				selfSay(getLangString(cid, "Great! Are you ready for your "..(atual+1).."Âº mission?", "Ã“timo! Pronto para a sua "..(atual+1).."Âª missÃ£o?"), cid)
 			end
 		else
-			selfSay(getLangString(cid, "You did not kill all the {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."} yet! Come back only when you finish it.", "Você não matou {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."} ainda! Volte aqui somente quando acabar."), cid)		
+			selfSay(getLangString(cid, "You did not kill all the {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."} yet! Come back only when you finish it.", "VocÃª nÃ£o matou {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."} ainda! Volte aqui somente quando acabar."), cid)		
 		end
 		return true
 	end
     if not msgcontains(msg, "yes") and not msgcontains(msg, "sim") and not msgcontains(msg, "present") and not msgcontains(msg, "presents") and not msgcontains(msg, "presente") and not msgcontains(msg, "presentes") then
-		selfSay(getLangString(cid, "I dont get it. Do you want or not a {present}?", "Não entendi. Você quer ou não um {presente}?"), cid)		
+		selfSay(getLangString(cid, "I dont get it. Do you want or not a {present}?", "NÃ£o entendi. VocÃª quer ou nÃ£o um {presente}?"), cid)		
 		return true
 	end
 	if not pascoaMissions[atual+1] then -- nao deveria chegar aqui
-		print("Alguem chegou em parte que nao devia no npc easter")
+		print("AlguÃ©m chegou em parte que nÃ£o devia no npc easter")
 		return true
 	end
 	atual = atual+1
 	if atual >= 7 and getPlayerLevel(cid) < 125 then
-		selfSay(getLangString(cid, "Sorry, you need at least level 125 to start the last mission.", "Desculpe, mas você precisa de pelo menos nível 125 para iniciar a última missão."), cid)
+		selfSay(getLangString(cid, "Sorry, you need at least level 125 to start the last mission.", "Desculpe, mas vocÃª precisa de pelo menos nÃ­vel 125 para iniciar a Ãºltima missÃ£o."), cid)
 		return true
 	end
 	setPlayerStorageValue(cid, "inPascoaTask", 1)
 	setPlayerStorageValue(cid, "easter2018State", atual)
 	setPlayerStorageValue(cid, "easter2018Kills", 0)
 	if atual == 1 then
-		selfSay(getLangString(cid, "You thought that this would be easy? HOW HOW HOW! To receive the present, you need to complete some missions for me first.", "Achou que seria fácil? HOW HOW HOW! Para conseguir seus presentes, você deve completar algumas missões primeiro."), cid)		
-		selfSay(getLangString(cid, "In your first mission, you have to kill {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."}. Come back when you finish it.", "Sua primeira missão é matar {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."}, volte aqui quando acabar."), cid)		
+		selfSay(getLangString(cid, "You thought that this would be easy? HOW HOW HOW! To receive the present, you need to complete some missions for me first.", "Achou que seria fÃ¡cil? HOW HOW HOW! Para conseguir seus presentes, vocÃª deve completar algumas missÃµes primeiro."), cid)		
+		selfSay(getLangString(cid, "In your first mission, you have to kill {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."}. Come back when you finish it.", "Sua primeira missÃ£o Ã© matar {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."}, volte aqui quando acabar."), cid)		
 	else		
-		selfSay(getLangString(cid, "In your "..atual.."º mission, you have to kill {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."}. Come back when you finish it.", "Na sua "..atual.."ª missão, você precisa matar {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."}. Volte aqui quando acabar."), cid)		
+		selfSay(getLangString(cid, "In your "..atual.."Âº mission, you have to kill {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."}. Come back when you finish it.", "Na sua "..atual.."Âª missÃ£o, vocÃª precisa matar {"..pascoaMissions[atual].count.." "..pascoaMissions[atual].monsterName.."}. Volte aqui quando acabar."), cid)		
 	end
 	
 
@@ -109,17 +109,17 @@ end
 function onGreet(cid) 
 	talkState[cid] = 1 	
 	if getPlayerLevel(cid) < 80 then
-		selfSay(getLangString(cid, "Sorry, you need at least level 80 to start this mission.", "Desculpe, mas você precisa de pelo menos nível 80 para iniciar as minhas missões."), cid)
+		selfSay(getLangString(cid, "Sorry, you need at least level 80 to start this mission.", "Desculpe, mas vocÃª precisa de pelo menos nÃ­vel 80 para iniciar as minhas missÃµes."), cid)
 		return true
 	end
 	if getPlayerStorageValue(cid, "pascoa2018") ~= 1 then
 		if getPlayerStorageValue(cid, "inPascoaTask") == 1 or getPlayerStorageValue(cid, "easter2018State") >= 1 then
-			selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", did you finish your mission?", "Olá "..getCreatureName(cid)..", você já terminou a sua missão?"), cid)
+			selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", did you finish your mission?", "OlÃ¡ "..getCreatureName(cid)..", vocÃª jÃ¡ terminou a sua missÃ£o?"), cid)
 		else
-			selfSay(getLangString(cid, "HOW HOW HOW! Merry Christmas, "..getCreatureName(cid).."! I brought a {present} for you!", "HOW HOW HOW! Feliz Natal, "..getCreatureName(cid).."! Eu trouxe alguns {presentes} para você!"), cid)
+			selfSay(getLangString(cid, "HOW HOW HOW! Merry Christmas, "..getCreatureName(cid).."! I brought a {present} for you!", "HOW HOW HOW! Feliz Natal, "..getCreatureName(cid).."! Eu trouxe alguns {presentes} para vocÃª!"), cid)
 		end
 	else
-		selfSay(getLangString(cid, "Sorry, but you already received your present!", "Desculpe, mas você já recebeu o seu presente!"), cid)
+		selfSay(getLangString(cid, "Sorry, but you already received your present!", "Desculpe, mas vocÃª jÃ¡ recebeu o seu presente!"), cid)
 	end
 	return true
 end

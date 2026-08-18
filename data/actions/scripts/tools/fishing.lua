@@ -67,6 +67,29 @@ local config = {
 config.checkCorpseOwner = getBooleanFromString(config.checkCorpseOwner)
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
+  -- Quest: O Anel do Rafinha (quest id 25) - checado ANTES do check de aguas,
+  -- entao o actionid 49252 funciona em qualquer tile de agua do lago.
+  if(itemEx.actionid == 49252) then
+    local rafinhaStatus = getPlayerStorageValue(cid, 49250)
+    if(rafinhaStatus == 1 and getPlayerStorageValue(cid, 49251) < 1) then
+      if(math.random(1, 100) <= 2) then
+        doPlayerAddItem(cid, 18880, 1)
+        setPlayerStorageValue(cid, 49251, 1)
+        setPlayerStorageValue(cid, 49250, 2)
+        doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você sentiu algo pesado na linha... e um anel de tubarão!")
+        doSendMagicEffect(toPosition, CONST_ME_MAGIC_BLUE)
+        return true
+      end
+    elseif(rafinhaStatus == 2) then
+      doPlayerSendTextMessage(cid, MESSAGE_STATUS_WARNING, "Você já pescou o anel! Leve ele pro Rafinha.")
+      return true
+    else
+      -- aid detectado, mas a quest nao esta ativa (mensagem ajuda no teste)
+      doPlayerSendTextMessage(cid, MESSAGE_STATUS_WARNING, "Você sente algo estranho na água... mas precisa falar com o Rafinha primeiro.")
+      return true
+    end
+  end
+
   if(isInArray(config.waters, itemEx.itemid)) then
     if(isInArray(config.spawning, itemEx.itemid)) then
       doPlayerSendDefaultCancel(cid, RETURNVALUE_NOTPOSSIBLE)

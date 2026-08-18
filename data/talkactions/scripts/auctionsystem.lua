@@ -5,8 +5,8 @@
 
 local config = {
     maxOffersPerPlayer = 5,
-    -- Preço máximo aceito: 2^53 - 1 (maior inteiro exato em Lua 5.1 /
-    -- double). Na prática é "ilimitado" para qualquer economia do jogo.
+    -- PreÃ§o mÃ¡ximo aceito: 2^53 - 1 (maior inteiro exato em Lua 5.1 /
+    -- double). Na prÃ¡tica Ã© "ilimitado" para qualquer economia do jogo.
     maxPrice = 9007199254740991,
     storageExhaustion  = 9999,
     sendOffersOnlyInPZ = true,
@@ -53,7 +53,7 @@ local function isItemToOffer(itemId)
         return true
     elseif isItemStackable(itemId) then
         return false
-    elseif item.wieldPosition == 1 or item.wieldPosition == 2 or item.wieldPosition == 4 or item.wieldPosition == 7 or item.wieldPosition == 8 or item.wieldPosition == 9 then -- capacete, armadura, bota, calça, anel, amuleto
+    elseif item.wieldPosition == 1 or item.wieldPosition == 2 or item.wieldPosition == 4 or item.wieldPosition == 7 or item.wieldPosition == 8 or item.wieldPosition == 9 then -- capacete, armadura, bota, calÃ§a, anel, amuleto
         return true
     elseif item.weaponType > 0 then -- sword, axe, club, distance, shield, wands, rods, ammunition
         return true
@@ -63,15 +63,15 @@ end
 
 function onSay(cid, words, param, channel)
     if (param == '') then
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Comando inválido.")
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Comando invÃ¡lido.")
         doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
         return true
     elseif config.sendOffersOnlyInPZ and not getTilePzInfo(getPlayerPosition(cid)) then
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você necessita estar em área PZ para utilizar o market.")
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª necessita estar em Ã¡rea PZ para utilizar o market.")
         doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
         return true
     elseif getExhaustion(cid) > 0 then
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você está exhausted.")
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª estÃ¡ exhausted.")
         doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
         return true
     end
@@ -79,7 +79,7 @@ function onSay(cid, words, param, channel)
     local word = string.explode(param, ",")
     if word[1] == "add" then
         if not word[2] or not word[3] or not word[4] then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] É necessário informar todos os dados.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Ã‰ necessÃ¡rio informar todos os dados.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         end
@@ -87,23 +87,23 @@ function onSay(cid, words, param, channel)
         local itemCount = tonumber(word[3])
         local itemValue = tonumber(word[4])
         if (not itemCount or not itemValue) or (itemCount < 1 or itemValue < 1) then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Insira valores válidos.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Insira valores vÃ¡lidos.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif #tostring(itemCount) > 3 then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Esta quantidade está acima do limite.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Esta quantidade estÃ¡ acima do limite.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif itemCount > 100 then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você não pode vender mais do que 100 itens.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª nÃ£o pode vender mais do que 100 itens.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif itemValue > config.maxPrice then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este preço está acima do limite.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este preÃ§o estÃ¡ acima do limite.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif itemValue < 1000 then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este preço está abaixo do limite.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este preÃ§o estÃ¡ abaixo do limite.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         end
@@ -113,7 +113,7 @@ function onSay(cid, words, param, channel)
         local resultId = db.getResult("SELECT `id` FROM `auction_system` WHERE `player` = " .. getPlayerGUID(cid) .. " AND `world_id` = " .. getConfigValue('worldId') .. ";")
         if (resultId:getID() ~= -1) then
             if resultId:getRows(true) >= config.maxOffersPerPlayer then
-                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, você não pode adicionar mais ofertas (máximo de " .. config.maxOffersPerPlayer .. " ofertas por personagem).")
+                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, vocÃª nÃ£o pode adicionar mais ofertas (mÃ¡ximo de " .. config.maxOffersPerPlayer .. " ofertas por personagem).")
                 doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
                 return true
             end
@@ -122,23 +122,23 @@ function onSay(cid, words, param, channel)
         local itemId = getItemIdByName(word[2])
         itemCount = math.floor(itemCount)
         if not itemId then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Não existe item com este nome.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] NÃ£o existe item com este nome.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif isInArray(config.blocked_items, itemId) then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este item não pode ser vendido no market.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este item nÃ£o pode ser vendido no market.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif not isItemToOffer(itemId) then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este item não pode ser vendido no market.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este item nÃ£o pode ser vendido no market.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif itemCount > 1 and not isItemStackable(itemId) then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este tipo de item só pode ser anunciado com a quantidade limitada a 1.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este tipo de item sÃ³ pode ser anunciado com a quantidade limitada a 1.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif getPlayerItemCount(cid, itemId) < itemCount then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, você não tem este item ou a quantia deste item.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, vocÃª nÃ£o tem este item ou a quantia deste item.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         end
@@ -149,7 +149,7 @@ function onSay(cid, words, param, channel)
         else
             local theItem = getPlayerItemById(cid, true, itemId)
             if not theItem or not theItem.uid then
-                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, você não tem este item.")
+                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, vocÃª nÃ£o tem este item.")
                 doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
                 return true
             end
@@ -158,7 +158,7 @@ function onSay(cid, words, param, channel)
             local elementalRuneCharges = getItemAttribute(theItem.uid, 'elementalrunecharges')
             if elementalRuneType then
                 if elementalRuneType >= 1 and (isArmor(theItem.itemid) or (elementalRuneCharges and elementalRuneCharges > 0)) then
-                    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você não pode colocar um item encantado no market.")
+                    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª nÃ£o pode colocar um item encantado no market.")
                     doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
                     return true
                 end
@@ -171,7 +171,7 @@ function onSay(cid, words, param, channel)
         end
 
         if not doPlayerRemoveItem(cid, itemId, itemCount) then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, você não tem este item ou a quantidade deste item.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, vocÃª nÃ£o tem este item ou a quantidade deste item.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         else
@@ -184,7 +184,7 @@ function onSay(cid, words, param, channel)
                 "INSERT INTO `auction_system` (`player`, `item_name`, `item_id`, `count`, `desc`, `cost`, `date`, `expired`, `world_id`) VALUES (" ..
                 getPlayerGUID(cid) .. ", " .. q(itemName) .. ", " .. itemId .. ", " .. itemCount .. ", " .. q(theDesc) .. ", " .. string.format("%.0f", itemValue) .. ", " .. os.time() .. ", 0, " .. getConfigValue('worldId') .. ");"
             )
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você adicionou " .. itemCount .. " " .. itemName .. " por " .. string.format("%.0f", itemValue) .. " gold coins nas ofertas de venda do market.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª adicionou " .. itemCount .. " " .. itemName .. " por " .. string.format("%.0f", itemValue) .. " gold coins nas ofertas de venda do market.")
         end
 
         return true
@@ -198,7 +198,7 @@ function onSay(cid, words, param, channel)
 
         local id = tonumber(word[2])
         if not id then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você não digitou um número válido para o ID da oferta.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª nÃ£o digitou um nÃºmero vÃ¡lido para o ID da oferta.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         end
@@ -222,23 +222,23 @@ function onSay(cid, words, param, channel)
         resultId:free()
 
         if expired == 1 then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Esta oferta já expirou.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Esta oferta jÃ¡ expirou.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif getPlayerName(cid) == playerName then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você não pode comprar seus próprios itens.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª nÃ£o pode comprar seus prÃ³prios itens.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif getPlayerMoney(cid) < itemValue then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você não possui dinheiro suficiente.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª nÃ£o possui dinheiro suficiente.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif getPlayerFreeCap(cid) < getItemWeightById(itemId, itemCount) then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você está tentando comprar o item " .. itemName .. " de " .. getItemWeightById(itemId, itemCount) .. " de cap, você possui apenas " .. getPlayerFreeCap(cid) .. " de cap. disponível. Coloque alguns itens em seu depot ou em sua house, e tente refazer a compra.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª estÃ¡ tentando comprar o item " .. itemName .. " de " .. getItemWeightById(itemId, itemCount) .. " de cap, vocÃª possui apenas " .. getPlayerFreeCap(cid) .. " de cap. disponÃ­vel. Coloque alguns itens em seu depot ou em sua house, e tente refazer a compra.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         elseif not doPlayerRemoveMoney(cid, itemValue) then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você não possui dinheiro suficiente.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª nÃ£o possui dinheiro suficiente.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         else
@@ -250,7 +250,7 @@ function onSay(cid, words, param, channel)
                 end
             end
             db.executeQuery("DELETE FROM `auction_system` WHERE `id` = " .. id .. " AND `world_id` = " .. getConfigValue('worldId') .. ";")
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você comprou " .. itemCount .. " " .. itemName .. " por " .. string.format("%.0f", itemValue) .. " gps!")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª comprou " .. itemCount .. " " .. itemName .. " por " .. string.format("%.0f", itemValue) .. " gps!")
             db.executeQuery("UPDATE `players` SET `auction_balance` = `auction_balance` + " .. string.format("%.0f", itemValue) .. " WHERE `id` = " .. playerId .. ";")
         end
 
@@ -265,7 +265,7 @@ function onSay(cid, words, param, channel)
 
         local id = tonumber(word[2])
         if not id then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você não digitou um número válido para o ID da oferta.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª nÃ£o digitou um nÃºmero vÃ¡lido para o ID da oferta.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         end
@@ -286,7 +286,7 @@ function onSay(cid, words, param, channel)
 
         if getPlayerGUID(cid) == playerId then
             if getPlayerFreeCap(cid) < getItemWeightById(itemId, itemCount) then
-                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você está tentando retirar o item " .. itemName .. " de " .. getItemWeightById(itemId, itemCount) .. " de capacidade e você tem " .. getPlayerFreeCap(cid) .. " de capacidade disponível. Coloque alguns itens em seu depot ou em sua house, e tente remover a oferta.")
+                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] VocÃª estÃ¡ tentando retirar o item " .. itemName .. " de " .. getItemWeightById(itemId, itemCount) .. " de capacidade e vocÃª tem " .. getPlayerFreeCap(cid) .. " de capacidade disponÃ­vel. Coloque alguns itens em seu depot ou em sua house, e tente remover a oferta.")
                 doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             else
                 db.executeQuery("DELETE FROM `auction_system` WHERE `id` = " .. id .. " AND `world_id` = " .. getConfigValue('worldId') .. ";")
@@ -300,7 +300,7 @@ function onSay(cid, words, param, channel)
                 doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Sua oferta foi removida do market.")
             end
         else
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Esta oferta não pertence a você.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Esta oferta nÃ£o pertence a vocÃª.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
         end
     end

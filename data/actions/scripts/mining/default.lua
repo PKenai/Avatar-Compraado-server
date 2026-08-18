@@ -9,8 +9,8 @@ MyLocal.picks = {
 MyLocal.useablesTiles = {351, 352, 353, 355, 9021, 9022, 9023, 9024, 9025}
 MyLocal.trashTiles = {6299}
 
-MyLocal.normalNuggets = {{itemid = 13005, chance = 30, msg = {"You have found a bronze nugget.", "Você achou um bronze nugget."}, pointsUp = 15}, {itemid = 13006, chance = 70, msg = {"You have found an iron nugget.", "Você achou um iron nugget."}, pointsUp = 7}}
-MyLocal.specialNuggets = {{itemid = 13003, chance = 15, msg = {"You have found a golden nugget.", "Você achou um golden nugget."}, pointsUp = 35}, {itemid = 13004, chance = 85, msg = {"You have found a silver nugget.", "Você achou um silver nugget."}, pointsUp = 20}}
+MyLocal.normalNuggets = {{itemid = 13005, chance = 30, msg = {"You have found a bronze nugget.", "VocÃª achou um bronze nugget."}, pointsUp = 15}, {itemid = 13006, chance = 70, msg = {"You have found an iron nugget.", "VocÃª achou um iron nugget."}, pointsUp = 7}}
+MyLocal.specialNuggets = {{itemid = 13003, chance = 15, msg = {"You have found a golden nugget.", "VocÃª achou um golden nugget."}, pointsUp = 35}, {itemid = 13004, chance = 85, msg = {"You have found a silver nugget.", "VocÃª achou um silver nugget."}, pointsUp = 20}}
 
 MyLocal.delayToNewTile = 90
 MyLocal.players, MyLocal.delay = {}, 0.5
@@ -101,9 +101,9 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
     addEvent(removeTable, 1000*MyLocal.delay, cid)
   else
     if isInArray(MyLocal.trashTiles, itemEx.itemid) then
-      doPlayerSendCancel(cid, getLangString(cid, "This tile has been completely explored.", "Esse tile já está completamente explorado."))
+      doPlayerSendCancel(cid, getLangString(cid, "This tile has been completely explored.", "Esse tile jÃ¡ estÃ¡ completamente explorado."))
     else
-      doPlayerSendCancel(cid, getLangString(cid, "Sorry, you cannot mine this tile, search a cave tile.", "Desculpe, você não pode minerar esse tile, procure outro."))
+      doPlayerSendCancel(cid, getLangString(cid, "Sorry, you cannot mine this tile, search a cave tile.", "Desculpe, vocÃª nÃ£o pode minerar esse tile, procure outro."))
     end
   end
   return true

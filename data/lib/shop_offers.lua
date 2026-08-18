@@ -23,6 +23,11 @@ ShopOffers = ShopOffers or {}
 
 -- Categoria: Items
 
+-- Categoria: Use
+table.insert(ShopOffers, { category = "Use", type = "item", title = "Pergaminho da experiência", itemId = 18867, count = 1, cost = 10, class = "all", description = "Aumenta seu ganho de experiência por 45 minutos!" })
+table.insert(ShopOffers, { category = "Use", type = "item", title = "Pergaminho da benção", itemId = 18866, count = 1, cost = 5, class = "all", description = "Concede a benção: perca 50% menos experiência na próxima morte." })
+table.insert(ShopOffers, { category = "Use", type = "item", title = "Pergaminho do despertar", itemId = 18865, count = 1, cost = 15, class = "all", description = "Desperta o estado Avatar por 5 minutos." })
+
 -- Categoria: Outfits
 table.insert(ShopOffers, { category = "Others", type = "item", title = "Camera", itemId = 18432, count = 1, cost = 25, class = "all", description = "Use it to turn on or off your channel." })
 table.insert(ShopOffers, { category = "Others", type = "item", title = "Momo Pouch", itemId = 18435, count = 1, cost = 25, class = "all", hideIfOwned = true, description = "A special pouch that can only be equipped in its own slot." })

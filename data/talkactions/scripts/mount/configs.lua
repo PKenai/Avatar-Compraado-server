@@ -1,18 +1,18 @@
 --[[
-    PrÈ-Requisitos
+    Pr√©-Requisitos
      1. Ser premium account;
      2. Ter a montaria adquirida;
-     3. N„o estar voando;
-     4. N„o estar nadando;
+     3. N√£o estar voando;
+     4. N√£o estar nadando;
 
     Fluxo Normal
      1. Servidor recebe a mensagem (talkaction !mount ID..Sexo (servidor que coloca o sexo;))
-     2. Checagem se o player j· est· utilizando uma montaria;
+     2. Checagem se o player j√° est√° utilizando uma montaria;
      3. Adiciona storage value ("inMount", 1);
      4. Adiciona mount pelo comandinho de outfit (msm do fly e nadar.).
 
     Fluxo Alternativo
-     2.1 Player recebe mensagem de erro (You already using mount., "VoocÍ j· est· utilizando uma montaria.");
+     2.1 Player recebe mensagem de erro (You already using mount., "Vooc√™ j√° est√° utilizando uma montaria.");
      2.2 Fim.
 
     dataTable

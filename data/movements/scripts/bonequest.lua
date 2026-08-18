@@ -31,15 +31,15 @@ function onStepIn(cid, item, position, fromPosition)
 	end
 	if getPlayerLevel(cid) < 150  then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 150+  para entrar na Evil Zuko Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de Level 150+  para entrar na Evil Zuko Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	elseif getPlayerStorageValue(cid, "90509") == 1 then 
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você já completou esta quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª jÃ¡ completou esta quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	elseif checkPlayer() then 
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Alguém já está dentro da sala no momento.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "AlguÃ©m jÃ¡ estÃ¡ dentro da sala no momento.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else 
 		checkZuko()

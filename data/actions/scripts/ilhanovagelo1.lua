@@ -31,7 +31,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if item.itemid == 1945 then 
 		removerPedrass()
 		addEvent(colocarPedrass, 1*60*1000)
-        sendBlueMessage(cid, getLangString(cid, "You just pulled a lever! Run, you only have 1 minute!", "Você acabou de puxar uma alavanca! Corra, você só tem 1 minuto!"))
+        sendBlueMessage(cid, getLangString(cid, "You just pulled a lever! Run, you only have 1 minute!", "VocÃª acabou de puxar uma alavanca! Corra, vocÃª sÃ³ tem 1 minuto!"))
 		return true
 	end 
   return false 

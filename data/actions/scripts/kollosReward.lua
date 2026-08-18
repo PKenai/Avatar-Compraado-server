@@ -13,16 +13,16 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	--doTeleportThing(cid, {x=311, y=835, z=12})
 	--doSendMagicEffect(getThingPos(cid), CONST_ME_TELEPORT)
 	if getPlayerStorageValue(cid, "90511") == 1 then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ pegou esta recompensa.")
 		return true
 	elseif checkBossAlive() then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa derrotar o Kollos.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª precisa derrotar o Kollos.")
 		return true
 	end 
     setPlayerStorageValue(cid, "90511", 1)
    doPlayerAddItem(cid, 12889, 1)
    doSendMagicEffect(getThingPos(cid), 29)
    
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você conquistou a hive plate.")
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! VocÃª conquistou a hive plate.")
     return true
 end

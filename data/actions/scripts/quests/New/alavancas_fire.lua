@@ -19,7 +19,7 @@ end
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	local restante = getStorage(cf.storage) - os.time()
 		if restante > 0 then 
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você precisa esperar "..restante.." segundo(s) para que as pedras possam ser removidas novamente.")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÃª precisa esperar "..restante.." segundo(s) para que as pedras possam ser removidas novamente.")
 		return true 
 		end
 	for i,v in pairs (stones) do
@@ -29,7 +29,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		end
 	end
 	doSetStorage(cf.storage, os.time()+60)
-	doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Corra! As pedras foram removidas por um período de 1 minuto.")
+	doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Corra! As pedras foram removidas por um perÃ­odo de 1 minuto.")
 	doSendMagicEffect(getCreaturePosition(cid), cf.effect)
 	addEvent(createStones, 60 * 1000)
 	return true

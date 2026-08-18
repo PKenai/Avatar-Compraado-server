@@ -38,19 +38,19 @@ local forbiddenNames = {"Draptor", "Tyrn", "Devil Skeleton", "Kraken", "Death Wi
 
 function onSay(cid, words, param, channel)
   if param == nil or param == "" or param == " " then
-    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, getLangString(cid, "Incorrect  parameter. Type !loot MonsterName", "Par‚metro incorreto. Digite !loot NomeDoMonstro"))
+    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, getLangString(cid, "Incorrect  parameter. Type !loot MonsterName", "Par√¢metro incorreto. Digite !loot NomeDoMonstro"))
 	return true 
   end 
   
   local monster = getMonsterInfo(param)
   
   if ( not monster ) then
-    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, param .. getLangString(cid, " does not exist.", " n„o existe."))
+    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, param .. getLangString(cid, " does not exist.", " n√£o existe."))
 	return true
   end
   
   if isInArray(forbiddenNames, param) then
-	doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, monster.name .. getLangString(cid, " information is locked.", " n„o pode ser listado."))
+	doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, monster.name .. getLangString(cid, " information is locked.", " n√£o pode ser listado."))
 	return true
   end
   

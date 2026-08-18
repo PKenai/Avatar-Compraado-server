@@ -25,7 +25,7 @@ local function doorEnter(cid, item, toPosition)
 
   if item.uid == 3782 then -- Caso da anihi para so poder passar 1x, direto
     if getPlayerStorageValue(cid, "canUseDoorAnihi2") == 1 then
-      doPlayerSendCancel(cid, getLangString(cid, "You can't use this door again.", "Você não pode usar essa porta novamente."))
+      doPlayerSendCancel(cid, getLangString(cid, "You can't use this door again.", "VocÃª nÃ£o pode usar essa porta novamente."))
       return true
     else
       setPlayerStorageValue(cid, "canUseDoorAnihi2", 1)

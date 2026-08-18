@@ -70,10 +70,12 @@ local CONFIG = {
 -- value: usado APENAS por skills FISICAS (tries por acerto). Magic usa a
 -- tabela CONFIG.timePerLevel (o ganho e calculado p/ bater os tempos do dono)
 local WANDS = {
-    [18336] = { name = "Water Training Wand", skill = "magic", value = 600, effect = CONST_ME_MAGIC_BLUE },
+    -- Efeitos custom do client (os padroes 12/14/15 nao renderizam em algumas):
+    -- Ar = 77 (NEWVIII) | Agua = 87 (NEWXVIII) | Terra = 94 (NEWXXV) | Fogo = 15 (padrao, funciona)
+    [18336] = { name = "Water Training Wand", skill = "magic", value = 600, effect = CONST_ME_NEWXVIII },
     [18337] = { name = "Fire Training Wand",  skill = "magic", value = 600, effect = CONST_ME_HITBYFIRE },
-    [18338] = { name = "Air Training Wand",   skill = "magic", value = 600, effect = CONST_ME_MAGIC_ENERGY },
-    [18339] = { name = "Earth Training Wand", skill = "magic", value = 600, effect = CONST_ME_MAGIC_GREEN },
+    [18338] = { name = "Air Training Wand",   skill = "magic", value = 600, effect = CONST_ME_NEWVIII },
+    [18339] = { name = "Earth Training Wand", skill = "magic", value = 600, effect = CONST_ME_NEWXXV },
 }
 
 local SKILL_TYPES = {

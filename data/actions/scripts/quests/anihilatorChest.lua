@@ -25,6 +25,6 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	finalExp = finalExp/2
 	doPlayerAddExperience(cid, finalExp)
 	doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você recebeu "..finalExp.." pontos de experiência e "..config.winActionId[item.actionid].amount.."x "..getItemNameById(config.winActionId[item.actionid].itemid)..".")
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª recebeu "..finalExp.." pontos de experiÃªncia e "..config.winActionId[item.actionid].amount.."x "..getItemNameById(config.winActionId[item.actionid].itemid)..".")
     return true
 end

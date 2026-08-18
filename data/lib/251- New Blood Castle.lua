@@ -1,13 +1,13 @@
 bloodconfig = {
      templo = {x = 505, y = 342, z = 7}, -- templo
 
-     posGuarda = {x = 127, y = 156, z = 13}, -- Onde o guarda do port„o vai nascer
+     posGuarda = {x = 127, y = 156, z = 13}, -- Onde o guarda do port√£o vai nascer
 
-     positionTP = {x = 501, y = 357, z = 7}, -- Onde o tp ser· criado
+     positionTP = {x = 501, y = 357, z = 7}, -- Onde o tp ser√° criado
 
      positionEvento = {x = 128, y = 221, z = 13}, -- Para onde o tp vai levar
 
-     posPedras = {{x = 126, y = 220, z = 13, stackpos=1}, {x = 127, y = 220, z = 13, stackpos=1}, {x = 128, y = 220, z = 13, stackpos=1}, {x = 129, y = 220, z = 13, stackpos=1}}, -- PosiÁıes das pedras que bloqueiam a entrada do evento
+     posPedras = {{x = 126, y = 220, z = 13, stackpos=1}, {x = 127, y = 220, z = 13, stackpos=1}, {x = 128, y = 220, z = 13, stackpos=1}, {x = 129, y = 220, z = 13, stackpos=1}}, -- Posi√ß√µes das pedras que bloqueiam a entrada do evento
 
      idDasParedes = 1547, -- ID das paredes que vao ser removidas quando o Guarda morrer (todas devem ter o mesmo id)
 
@@ -15,14 +15,14 @@ bloodconfig = {
 
      posParedes = {
 		{x = 125, y = 154, z = 13},
-		{x = 126, y = 154, z = 13}, -- PosiÁıes das paredes que ficam atr·s do guarda
-		{x = 127, y = 154, z = 13}, -- PosiÁıes das paredes que ficam atr·s do guarda
-		{x = 128, y = 154, z = 13}, -- PosiÁıes das paredes que ficam atr·s do guarda
-		{x = 129, y = 154, z = 13}, -- PosiÁıes das paredes que ficam atr·s do guarda
-		}, -- PosiÁıes das paredes que ficam atr·s do guarda
+		{x = 126, y = 154, z = 13}, -- Posi√ß√µes das paredes que ficam atr√°s do guarda
+		{x = 127, y = 154, z = 13}, -- Posi√ß√µes das paredes que ficam atr√°s do guarda
+		{x = 128, y = 154, z = 13}, -- Posi√ß√µes das paredes que ficam atr√°s do guarda
+		{x = 129, y = 154, z = 13}, -- Posi√ß√µes das paredes que ficam atr√°s do guarda
+		}, -- Posi√ß√µes das paredes que ficam atr√°s do guarda
 
-     fromPos = {x = 114, y = 128, z = 13}, -- Canto superior esquerdo da ·rea do seu evento ---- Deve ser uma ·rea quadrada ou retangular, de forma que todo o evento fique dentro dela.
-     toPos = {x = 146, y = 245, z = 13}, -- Canto inferior direito da ·rea do seu evento
+     fromPos = {x = 114, y = 128, z = 13}, -- Canto superior esquerdo da √°rea do seu evento ---- Deve ser uma √°rea quadrada ou retangular, de forma que todo o evento fique dentro dela.
+     toPos = {x = 146, y = 245, z = 13}, -- Canto inferior direito da √°rea do seu evento
 	 bloodParticipantes = {}
 }
 
@@ -49,7 +49,7 @@ function bloodCreateEvent()
 	doContagemRegressiva({x=127, y=220, z=13}, 180)
 	doSetItemActionId(tp, 58914)
 	addEvent(bloodStart, 180000) 
-	doBroadcastMessage("[Evento - Blood Castle] O Blood Castle foi aberto por 3 minutos! Para todos que desejam participar, o portal se localiza no depot de Ba Sing Se. Somente dobradores com nÌvel maior ou igual ‡ 50 podem entrar!")
+	doBroadcastMessage("[Evento - Blood Castle] O Blood Castle foi aberto por 3 minutos! Para todos que desejam participar, o portal se localiza no depot de Ba Sing Se. Somente dobradores com n√≠vel maior ou igual √† 50 podem entrar!")
 end
 
 function bloodOnEnter(cid)
@@ -128,14 +128,14 @@ function bloodRemovePlayers()
 				doTeleportThing(pid, bloodconfig.templo, false)
 				local bloodKills = bloodGetKills(pid)
 				if bloodKills <= 0 then 
-					doPlayerSendTextMessage(pid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÍ n„o matou monstros no Blood Castle, portanto n„o receber· recompensa. Boa sorte na prÛxima vez!")
+					doPlayerSendTextMessage(pid, MESSAGE_STATUS_CONSOLE_BLUE, "Voc√™ n√£o matou monstros no Blood Castle, portanto n√£o receber√° recompensa. Boa sorte na pr√≥xima vez!")
 				else 
 					local myLevel = getPlayerLevel(pid)
 					local finalExp = myLevel * 30
 					finalExp = finalExp * (bloodKills+5)
 					doPlayerAddExperience(pid, finalExp)
 					doSendAnimatedText(getCreaturePosition(pid), finalExp, 215)
-					doPlayerSendTextMessage(pid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÍ derrotou "..bloodKills.." monstros no Blood Castle e recebeu um bÙnus de "..finalExp.." pontos de EXP!")
+					doPlayerSendTextMessage(pid, MESSAGE_STATUS_CONSOLE_BLUE, "Voc√™ derrotou "..bloodKills.." monstros no Blood Castle e recebeu um b√¥nus de "..finalExp.." pontos de EXP!")
 				end 
 			end
 		end
@@ -147,7 +147,7 @@ end
 function bloodStart()
 	bloodRemoveTpa()
     bloodRemoveStones()
-	doBroadcastMessage("[Evento - Blood Castle] O Evento comeÁou. Boa sorte ‡ todos os participantes!")
+	doBroadcastMessage("[Evento - Blood Castle] O Evento come√ßou. Boa sorte √† todos os participantes!")
     if not isMonster(getTopCreature(bloodconfig.posGuarda).uid) then
        doCreateMonster("Blood Guard", bloodconfig.posGuarda)
     end

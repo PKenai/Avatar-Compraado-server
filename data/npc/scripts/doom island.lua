@@ -25,13 +25,13 @@ function creatureSayCallback(cid, type, msg)
     local msg = msg:lower()
     if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "viagem") or msgcontains(msg, "interested") then
 		if getPlayerLevel(cid) < 175  then
-			selfSay(getLangString(cid, "You need Level 175+  to start this quest.", "Você precisa de Level 175+  para iniciar esta missão."), cid)
+			selfSay(getLangString(cid, "You need Level 175+  to start this quest.", "VocÃª precisa de Level 175+  para iniciar esta missÃ£o."), cid)
 		elseif doPlayerRemoveMoney(cid, 50000) then
-			selfSay(getLangString(cid, "Thank you. Get ready, this will be a dangerous trip!", "Obrigado. Se segure, será uma viagem perigosa!"), cid)
+			selfSay(getLangString(cid, "Thank you. Get ready, this will be a dangerous trip!", "Obrigado. Se segure, serÃ¡ uma viagem perigosa!"), cid)
 			doTeleportThing(cid, {x = 1120, y = 691, z = 7})
 			doSendMagicEffect(getCreaturePosition(cid), CONST_ME_TELEPORT)
 		else
-			selfSay(getLangString(cid, "Sorry, i can't make it for free. You don't have enough gold.", "Desculpe, eu não posso fazer isso de graça. Você não tem ouro suficiente."), cid)
+			selfSay(getLangString(cid, "Sorry, i can't make it for free. You don't have enough gold.", "Desculpe, eu nÃ£o posso fazer isso de graÃ§a. VocÃª nÃ£o tem ouro suficiente."), cid)
 		end
 	end
     return true
@@ -39,7 +39,7 @@ end
 
 function onGreet(cid) 
 	talkState[cid] = 1
-	selfSay(getLangString(cid, "You should not be here. This place is dangerous.. Unless you're the chosen one, of course! In this case, i can help you to get into the Doom Island and finish your mission. But, i can't risk my life for free.. I can make it for 50.000 gold coins, are you {interested}?", "Você não deveria estar aqui, este lugar é muito perigoso. A menos que você seja o dobrador escolhido, é claro! Neste caso eu posso te ajudar a chegar na Doom Island e continuar sua missão. Mas claro, eu não irei arriscar minha vida de graça. Posso fazer esta {viagem} por 50.000 gold coins, você aceita?"), cid)
+	selfSay(getLangString(cid, "You should not be here. This place is dangerous.. Unless you're the chosen one, of course! In this case, i can help you to get into the Doom Island and finish your mission. But, i can't risk my life for free.. I can make it for 50.000 gold coins, are you {interested}?", "VocÃª nÃ£o deveria estar aqui, este lugar Ã© muito perigoso. A menos que vocÃª seja o dobrador escolhido, Ã© claro! Neste caso eu posso te ajudar a chegar na Doom Island e continuar sua missÃ£o. Mas claro, eu nÃ£o irei arriscar minha vida de graÃ§a. Posso fazer esta {viagem} por 50.000 gold coins, vocÃª aceita?"), cid)
 	return true
 end
 

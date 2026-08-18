@@ -58,7 +58,7 @@ function onSay(cid, words, param, channel)
 	setPlayerStorageValue(cid, "tutorialback", 1)
 	doCalculateEffect(cid, getCreatureLookDirection(cid))
 	if isNpc(getTopCreature(posNpc).uid) then
-		local mensagem = getLangString(cid, "I see that you already know how to bend the water. We'll prepare you and teach how to control it with the best benders, be welcome to the tribe! Go back and talk with Hilde, she'll travel with you to the North Water Tribe. Good luck, "..getCreatureName(cid).."!", "Vejo que j· domina bem o elemento ·gua. Iremos te treinar para aprimorar a sua habilidade de dobra com os melhores, seja bem vindo! Volte e fale com a Hilde, ele ir· te levar para North Water Tribe. Boa sorte, "..getCreatureName(cid).."!")
+		local mensagem = getLangString(cid, "I see that you already know how to bend the water. We'll prepare you and teach how to control it with the best benders, be welcome to the tribe! Go back and talk with Hilde, she'll travel with you to the North Water Tribe. Good luck, "..getCreatureName(cid).."!", "Vejo que j√° domina bem o elemento √°gua. Iremos te treinar para aprimorar a sua habilidade de dobra com os melhores, seja bem vindo! Volte e fale com a Hilde, ele ir√° te levar para North Water Tribe. Boa sorte, "..getCreatureName(cid).."!")
 		doCreatureSay(getTopCreature(posNpc).uid, mensagem, 5, false, cid)
 	end
   return true

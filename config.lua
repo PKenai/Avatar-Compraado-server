@@ -7,8 +7,8 @@ noDamageToPartyMembers = 1
 accountManager = true
 namelockManager = true
 newPlayerChooseVoc = true
-newPlayerSpawnPosX = 500
-newPlayerSpawnPosY = 500
+newPlayerSpawnPosX = 505
+newPlayerSpawnPosY = 342
 newPlayerSpawnPosZ = 7
 newPlayerTownId = 1
 newPlayerLevel = 8
@@ -39,11 +39,11 @@ ipBanLength = 1 * 24 * 60 * 60
 allowedMaxSizePackets = 20
 
 worldType = "open"
-protectionLevel = 30
+protectionLevel = 15
 pvpTileIgnoreLevelAndVocationProtection = true
 pzLocked = 1 * 60 * 1000
 huntingDuration = 1 * 1000
-criticalHitChance = 0
+criticalHitChance = 1
 criticalHitMultiplier = 1.15
 displayCriticalHitNotify = true
 removeWeaponAmmunition = true
@@ -86,11 +86,11 @@ loginTries = 10
 retryTimeout = 5 * 1000
 loginTimeout = 60 * 1000
 maxPlayers = 1000
-motd = "Welcome to fantastic world of Avatar!"
-displayOnOrOffAtCharlist = false
-onePlayerOnlinePerAccount = false
+motd = "Welcome to Avatar Eclipse!"
+displayOnOrOffAtCharlist = true
+onePlayerOnlinePerAccount = true
 allowClones = 0
-serverName = "Raava"
+serverName = "Eclipse"
 loginMessageEN = "Welcome to the amazing world of Avatar, enjoy!"
 loginMessagePT = "Seja bem-vindo ao fantastico mundo de Avatar!"
 statusTimeout = 1 * 5 * 1000
@@ -152,10 +152,10 @@ timeBetweenExActions = 500
 timeBetweenCustomActions = 100
 hotkeyAimbotEnabled = true
 tibiaClassicSlots = true
-canOnlyRopePlayers = true
+canOnlyRopePlayers = false
 
 mapName = "forgotten.otbm"
-mapAuthor = "Naldo"
+mapAuthor = "Sirius"
 randomizeTiles = false
 storeTrash = true
 cleanProtectedZones = true
@@ -220,7 +220,7 @@ checkCorpseOwner = false
 monsterLootMessage = 0
 monsterLootMessageType = 29
 
-ghostModeInvisibleEffect = false
+ghostModeInvisibleEffect = true
 ghostModeSpellEffects = true
 
 idleWarningTime = 13 * 60 * 1000
@@ -242,10 +242,10 @@ eachBlessReduction = 8
 pvpBlessingThreshold = 40
 fairFightTimeRange = 60
 
-experienceStages = true
+experienceStages = false
 rateExperience = 1.5
-rateExperienceFromPlayers = 0
-rateSkill = 2
+rateExperienceFromPlayers = 1.0
+rateSkill = 1
 rateMagic = 0.0
 rateLoot = 1.0
 
@@ -282,24 +282,24 @@ extraPartyExperiencePercent = 50
 experienceShareActivity = 2 * 60 * 1000
 
 
-globalSaveEnabled = false
+globalSaveEnabled = true
 globalSaveHour = 7
 globalSaveMinute = 0
-shutdownAtGlobalSave = true
+shutdownAtGlobalSave = false
 cleanMapAtGlobalSave = false
-closeInstanceOnShutdown = true
+closeInstanceOnShutdown = false
 
 deSpawnRange = 2
 deSpawnRadius = 50
 monsterSpawnWalkback = true
-allowBlockSpawn = true
+allowBlockSpawn = false
 
 maxPlayerSummons = 1
 teleportAllSummons = true
 teleportPlayerSummons = true
 
 statusPort = 9194
-ownerName = "Tibia Avatar"
+ownerName = "Sirius"
 ownerEmail = "otavatartibia@gmail.com"
 url = "tibiaavatar.com"
 location = "Brazil"

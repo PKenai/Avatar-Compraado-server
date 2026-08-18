@@ -31,7 +31,7 @@ function creatureSayCallback(cid, type, msg)
 	end
         if talkState[talkUser] == 1 then
             if msgcontains(msg, "routes") or msgcontains(msg, "rotas") or msgcontains(msg, "travel") then
-                selfSay(getLangString(cid, "I can take you to: {Ba Sing Se}, {Fire Nation Capital} or {North Water Tribe} for 50 gold coins.", "Eu posso levar você para: {Ba Sing Se}, {Fire Nation Capital} ou {North Water Tribe} por 50 gold coins."), cid)
+                selfSay(getLangString(cid, "I can take you to: {Ba Sing Se}, {Fire Nation Capital} or {North Water Tribe} for 50 gold coins.", "Eu posso levar vocÃª para: {Ba Sing Se}, {Fire Nation Capital} ou {North Water Tribe} por 50 gold coins."), cid)
 			elseif msgcontains(msg, "sing") then
 				if doPlayerRemoveMoney(cid, 50) then
 					selfSay(getLangString(cid, "We are leaving!", "Estamos saindo!"), cid)
@@ -39,7 +39,7 @@ function creatureSayCallback(cid, type, msg)
 					doTeleportThing(cid, {x=573,y=352,z=6})
 					doSendMagicEffect(getThingPos(cid), CONST_ME_TELEPORT)
 				else
-					selfSay(getLangString(cid, "You dont have 50 gold coins.", "Você não tem 50 gold coins."), cid)
+					selfSay(getLangString(cid, "You dont have 50 gold coins.", "VocÃª nÃ£o tem 50 gold coins."), cid)
 				end
 			elseif msgcontains(msg, "north") then
 				if doPlayerRemoveMoney(cid, 50) then
@@ -48,7 +48,7 @@ function creatureSayCallback(cid, type, msg)
 					doTeleportThing(cid, {x=348,y=253,z=6})
 					doSendMagicEffect(getThingPos(cid), CONST_ME_TELEPORT)
 				else
-					selfSay(getLangString(cid, "You dont have 50 gold coins.", "Você não tem 50 gold coins."), cid)
+					selfSay(getLangString(cid, "You dont have 50 gold coins.", "VocÃª nÃ£o tem 50 gold coins."), cid)
 				end
 			elseif msgcontains(msg, "fire") then
 				if doPlayerRemoveMoney(cid, 50) then
@@ -57,7 +57,7 @@ function creatureSayCallback(cid, type, msg)
 					doTeleportThing(cid, {x=286,y=455,z=6})
 					doSendMagicEffect(getThingPos(cid), CONST_ME_TELEPORT)
 				else
-					selfSay(getLangString(cid, "You dont have 50 gold coins.", "Você não tem 50 gold coins."), cid)
+					selfSay(getLangString(cid, "You dont have 50 gold coins.", "VocÃª nÃ£o tem 50 gold coins."), cid)
 				end
             end
         end
@@ -66,7 +66,7 @@ end
 
 function onGreet(cid) 
 	talkState[cid] = 1 	
-    selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", do you want to {travel}?", "Olá "..getCreatureName(cid).."! Eu posso lhe transportar para vários lugares, deseja ver minhas {rotas}?"), cid)
+    selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", do you want to {travel}?", "OlÃ¡ "..getCreatureName(cid).."! Eu posso lhe transportar para vÃ¡rios lugares, deseja ver minhas {rotas}?"), cid)
 	return true
 end
 

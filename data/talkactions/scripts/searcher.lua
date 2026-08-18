@@ -46,17 +46,17 @@ function searcherAlvo(cid, targetPlayer)
 				end
 			end
 		end
-        local andaresStr = "no mesmo andar que você"
+        local andaresStr = "no mesmo andar que vocÃª"
 		if hispos.z < mypos.z then 
 			local dif = mypos.z - hispos.z
 			local difStr = dif == 1 and "andar" or "andares"
-			andaresStr = dif .. " "..difStr.." acima de você"
+			andaresStr = dif .. " "..difStr.." acima de vocÃª"
 		elseif hispos.z > mypos.z then 
 			local dif = hispos.z - mypos.z
 			local difStr = dif == 1 and "andar" or "andares"
-			andaresStr = dif .. " "..difStr.." abaixo de você"
+			andaresStr = dif .. " "..difStr.." abaixo de vocÃª"
 		end 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, ""..getCreatureName(targetPlayer).." está à "..getDistanceBetween(hispos, mypos).."sqm de distância e "..andaresStr..".")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, ""..getCreatureName(targetPlayer).." estÃ¡ Ã  "..getDistanceBetween(hispos, mypos).."sqm de distÃ¢ncia e "..andaresStr..".")
     else
       sendBlueMessage(cid, "Error 1872 please send it to gamemaster.")
     end

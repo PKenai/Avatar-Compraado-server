@@ -54,7 +54,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     print("[Katata] startQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Nova missão: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "Nova missÃ£o: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -66,7 +66,7 @@ local function deliverQuest(cid)
     doPlayerAddExperience(cid, REWARD_EXP)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
     print("[Katata] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missão concluída: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "MissÃ£o concluÃ­da: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. MISSION_NAME)
     end)
@@ -81,7 +81,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Zzz... Ah! Você aí! Eu estava dormindo e tive meu mel roubado... Tenho certeza que foram as abelhas de barro! Sem minha colmeia, vou passar fome!", cid)
+    selfSay("Zzz... Ah! VocÃª aÃ­! Eu estava dormindo e tive meu mel roubado... Tenho certeza que foram as abelhas de barro! Sem minha colmeia, vou passar fome!", cid)
     return true
 end
 
@@ -101,26 +101,26 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Você já me devolveu a colmeia. Obrigado, agora posso voltar a comer mel!", cid)
+                selfSay("VocÃª jÃ¡ me devolveu a colmeia. Obrigado, agora posso voltar a comer mel!", cid)
             elseif hasColmeia(cid) then
                 deliverQuest(cid)
-                selfSay("Você trouxe minha colmeia de volta! Aqui está sua recompensa: 20 platinum coins e 40.000 de experiência!", cid)
+                selfSay("VocÃª trouxe minha colmeia de volta! Aqui estÃ¡ sua recompensa: 20 platinum coins e 40.000 de experiÃªncia!", cid)
             elseif started then
-                selfSay("Ainda estou sem minha colmeia! Vá atrás das abelhas de barro e recupere-a, senão vou passar fome!", cid)
+                selfSay("Ainda estou sem minha colmeia! VÃ¡ atrÃ¡s das abelhas de barro e recupere-a, senÃ£o vou passar fome!", cid)
             else
-                selfSay("Ótimo! Vá até a toca das abelhas de barro e recupere minha colmeia!", cid)
+                selfSay("Ã“timo! VÃ¡ atÃ© a toca das abelhas de barro e recupere minha colmeia!", cid)
                 startQuest(cid)
             end
         elseif msgcontains(msg, "colmeia") or msgcontains(msg, "mel") or msgcontains(msg, "abelha") or msgcontains(msg, "fome") or msgcontains(msg, "ajuda") then
             if hasColmeia(cid) then
-                selfSay("Você recuperou minha colmeia! Diga que quer me devolver para receber sua recompensa.", cid)
+                selfSay("VocÃª recuperou minha colmeia! Diga que quer me devolver para receber sua recompensa.", cid)
             elseif started then
-                selfSay("Minha colmeia ainda está com as abelhas de barro... Recupere-a, senão vou passar fome!", cid)
+                selfSay("Minha colmeia ainda estÃ¡ com as abelhas de barro... Recupere-a, senÃ£o vou passar fome!", cid)
             else
-                selfSay("As abelhas de barro roubaram meu mel enquanto eu dormia! Recupere minha colmeia pra mim, senão vou passar fome!", cid)
+                selfSay("As abelhas de barro roubaram meu mel enquanto eu dormia! Recupere minha colmeia pra mim, senÃ£o vou passar fome!", cid)
             end
         else
-            selfSay("Não entendi. Está falando da minha {colmeia}?", cid)
+            selfSay("NÃ£o entendi. EstÃ¡ falando da minha {colmeia}?", cid)
         end
     end
     return true

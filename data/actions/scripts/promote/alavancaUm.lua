@@ -25,7 +25,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if item.itemid == 1945 then 
 		removerPedras()
 		addEvent(colocarPedras, 5*60*1000)
-        sendBlueMessage(cid, getLangString(cid, "You now have only 5 minutes. Run!", "Você agora tem somente 5 minutos. Corra!"))
+        sendBlueMessage(cid, getLangString(cid, "You now have only 5 minutes. Run!", "VocÃª agora tem somente 5 minutos. Corra!"))
 		return true
 	end 
   return false 

@@ -31,13 +31,13 @@ end
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if item.actionid >= 0 and item.actionid > os.time() then 
 		local restante = getSecsString(item.actionid-os.time()) 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Esta fire boots ainda está recarregando por "..restante..".")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Esta fire boots ainda estÃ¡ recarregando por "..restante..".")
 		return true
 	elseif getPlayerSlotItem(cid, 8).uid ~= item.uid then 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você precisa estar com a fire boots equipada para ativar sua habilidade.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª precisa estar com a fire boots equipada para ativar sua habilidade.")
 		return true
 	elseif getTileInfo(getCreaturePosition(cid)).protection then 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você precisa sair da zona de proteção para ativar a habilidade da fire boots.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª precisa sair da zona de proteÃ§Ã£o para ativar a habilidade da fire boots.")
 		return true
 	end 
 	doSendMagicEffect(getCreaturePosition(cid), 36)

@@ -15,12 +15,12 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 
         if possiblePlayer > 0 and isPlayer(possiblePlayer) then
 			if getPlayerStorageValue(possiblePlayer, "90520") == 1 then
-				doCreatureSay(cid, getLangString(cid, "Someone has completed this quest.", "Alguém já completou esta quest."), TALKTYPE_ORANGE_1)
+				doCreatureSay(cid, getLangString(cid, "Someone has completed this quest.", "AlguÃ©m jÃ¡ completou esta quest."), TALKTYPE_ORANGE_1)
 				return true
 			end
             players[x] = possiblePlayer
         else
-           doPlayerSendCancel(cid, getLangString(cid, "You need three players to get started.", "É necessário três dobradores para começar."))
+           doPlayerSendCancel(cid, getLangString(cid, "You need three players to get started.", "Ã‰ necessÃ¡rio trÃªs dobradores para comeÃ§ar."))
             return true
         end
     end

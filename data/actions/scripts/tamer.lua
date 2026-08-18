@@ -87,15 +87,15 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if item.itemid == 17965 and isCreature(itemEx.uid) and isMonster(itemEx.uid) and toMountId[string.lower(getCreatureName(itemEx.uid))] then -- Music box system
 		local mount = toMountId[string.lower(getCreatureName(itemEx.uid))]
 		if isInArray(forbiddenMusicBox, mount) then
-			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você não pode domar este animal com a music box.")
+			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª nÃ£o pode domar este animal com a music box.")
 			return true
 		end 
 		if canPlayerRideMount(cid, mount) then
-			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já possui esta montaria.")
+			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ possui esta montaria.")
 			return true
 		end
 		doRemoveItem(item.uid, 1)
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você conseguiu domar a "..getCreatureName(itemEx.uid)..".")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! VocÃª conseguiu domar a "..getCreatureName(itemEx.uid)..".")
 		doPlayerAddMount(cid, mount)
 		doRemoveCreature(itemEx.uid)
 		return true
@@ -104,19 +104,19 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 
   if monsterTamer and isCreature(itemEx.uid) and isMonster(itemEx.uid) and string.lower(getCreatureName(itemEx.uid)) == monsterTamer then
 		if canPlayerRideMount(cid, toMountId[string.lower(getCreatureName(itemEx.uid))]) then
-			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já possui esta montaria.")
+			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ possui esta montaria.")
 			return true
 		end
 		local random = math.random(1, 100)
 		if random >= 71 then 
 			-- ele fugiu
-			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você não obteve sucesso em domar, a "..getCreatureName(itemEx.uid).." fugiu.")
+			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª nÃ£o obteve sucesso em domar, a "..getCreatureName(itemEx.uid).." fugiu.")
 			doSendMagicEffect(toPosition, CONST_ME_POFF)
 			doRemoveCreature(itemEx.uid)
 		elseif random >= 71-(toDomarChance[string.lower(getCreatureName(itemEx.uid))]) then
 			-- yes
 			doRemoveItem(item.uid, 1)
-			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você conseguiu domar a "..getCreatureName(itemEx.uid)..".")
+			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! VocÃª conseguiu domar a "..getCreatureName(itemEx.uid)..".")
 			doSendMagicEffect(fromPosition, 30)
 			local mount = toMountId[string.lower(getCreatureName(itemEx.uid))]
 			doPlayerAddMount(cid, mount)
@@ -124,12 +124,12 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		else 
 			--broken 
 			doRemoveItem(item.uid, 1)
-			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você não obteve sucesso em domar, o seu item quebrou.")
+			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª nÃ£o obteve sucesso em domar, o seu item quebrou.")
 			doSendMagicEffect(fromPosition, CONST_ME_POFF)
 		end 
     return true
 	elseif isCreature(itemEx.uid) and toMountId[string.lower(getCreatureName(itemEx.uid))] then
-			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você não pode domar com este item.")
+			doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª nÃ£o pode domar com este item.")
 			return true
   end
   return false

@@ -19,7 +19,7 @@ local PROGRESS_STORAGE = 49161
 local BEETLES_NEEDED = 150
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 10
-local QUEST_NAME = "Infestação no Bueiro"
+local QUEST_NAME = "InfestaÃ§Ã£o no Bueiro"
 local MISSION_NAME = "Exterminar Terra beetles"
 
 local function questStarted(cid)
@@ -54,7 +54,7 @@ local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     print("[Astro] startQuest cid=" .. cid)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova missão: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "Nova missÃ£o: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -63,7 +63,7 @@ end
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
     print("[Astro] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missão concluída: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "MissÃ£o concluÃ­da: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. MISSION_NAME)
     end)
@@ -78,7 +78,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Olá! Tem uma infestação de terra beetles no bueiro na frente da minha casa... Você pode me ajudar a exterminar esses insetos?", cid)
+    selfSay("OlÃ¡! Tem uma infestaÃ§Ã£o de terra beetles no bueiro na frente da minha casa... VocÃª pode me ajudar a exterminar esses insetos?", cid)
     return true
 end
 
@@ -99,32 +99,32 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Você já acabou com a infestação. Obrigado pela ajuda!", cid)
+                selfSay("VocÃª jÃ¡ acabou com a infestaÃ§Ã£o. Obrigado pela ajuda!", cid)
             elseif started then
                 if progress >= BEETLES_NEEDED then
-                    selfSay("Você exterminou os 150 terra beetles! Quer receber sua recompensa?", cid)
+                    selfSay("VocÃª exterminou os 150 terra beetles! Quer receber sua recompensa?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda não acabou! Faltam " .. (BEETLES_NEEDED - progress) .. " terra beetles para acabar com a infestação.", cid)
+                    selfSay("Ainda nÃ£o acabou! Faltam " .. (BEETLES_NEEDED - progress) .. " terra beetles para acabar com a infestaÃ§Ã£o.", cid)
                 end
             else
-                selfSay("Ótimo! Vá até o bueiro, mate 150 terra beetles e me prove sua coragem!", cid)
+                selfSay("Ã“timo! VÃ¡ atÃ© o bueiro, mate 150 terra beetles e me prove sua coragem!", cid)
                 startQuest(cid)
             end
         elseif msgcontains(msg, "infesta") or msgcontains(msg, "bueiro") or msgcontains(msg, "terra") or msgcontains(msg, "beetle") or msgcontains(msg, "ajuda") then
             if started and not completed then
-                selfSay("Ainda não acabou! Faltam " .. (BEETLES_NEEDED - progress) .. " terra beetles para acabar com a infestação.", cid)
+                selfSay("Ainda nÃ£o acabou! Faltam " .. (BEETLES_NEEDED - progress) .. " terra beetles para acabar com a infestaÃ§Ã£o.", cid)
             else
-                selfSay("Sim, uma {infestação}! Preciso que você mate os 150 terra beetles do bueiro na frente da minha casa.", cid)
+                selfSay("Sim, uma {infestaÃ§Ã£o}! Preciso que vocÃª mate os 150 terra beetles do bueiro na frente da minha casa.", cid)
             end
         else
-            selfSay("Não entendi. Está falando da {infestação} de terra beetles?", cid)
+            selfSay("NÃ£o entendi. EstÃ¡ falando da {infestaÃ§Ã£o} de terra beetles?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             completeQuest(cid)
-            selfSay("Aqui está sua recompensa: 10 platinum coins. Você salvou minha casa!", cid)
+            selfSay("Aqui estÃ¡ sua recompensa: 10 platinum coins. VocÃª salvou minha casa!", cid)
             talkState[talkUser] = 1
         else
             selfSay("Tudo bem, volte quando quiser receber sua recompensa.", cid)

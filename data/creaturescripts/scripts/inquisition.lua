@@ -1,6 +1,6 @@
 local config = {
 	timeToRemove = 179 , -- seconds
-	message = "Agora você tem 3 minutos para sair desta sala. O teletransporte irá te levar para outra sala durante esse tempo, após esse tempo ele desaparecerá.",
+	message = "Agora vocÃª tem 3 minutos para sair desta sala. O teletransporte irÃ¡ te levar para outra sala durante esse tempo, apÃ³s esse tempo ele desaparecerÃ¡.",
 	teleportId = 1387,
 	bosses = { -- Monster Name,  Teleport Position
 		["Ushuriel"] = {  pos={ x=754, y=1283, z=9 }, aid=2006, stor=100079, value=3},

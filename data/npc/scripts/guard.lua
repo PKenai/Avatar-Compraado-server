@@ -10,9 +10,9 @@ function onCreatureSay(cid, type, msg)
         local msg = string.lower(msg)
 
         if (msgcontains(msg, "hi") or msgcontains(msg, "oi")) and getDistanceToCreature(cid) < 3 then
-            selfSay(getLangString(cid, "The city gates are very strong, but if someone or something open them, we will be here to protect you.", "Os portões da cidade são bem fortes, porém se alguem ou alguma coisa os abrir, nós estaremos aqui para proteger você!"))
+            selfSay(getLangString(cid, "The city gates are very strong, but if someone or something open them, we will be here to protect you.", "Os portÃµes da cidade sÃ£o bem fortes, porÃ©m se alguÃ©m ou alguma coisa os abrir, nÃ³s estaremos aqui para proteger vocÃª!"))
         elseif msgcontains(msg, "help") and getDistanceToCreature(cid) < 3 then
-            selfSay(getLangString(cid, "I don't need help, I have help of the all city army.", "Eu não preciso de ajuda, eu já tenho ajuda de todo exercito dessa cidade."))
+            selfSay(getLangString(cid, "I don't need help, I have help of the all city army.", "Eu nÃ£o preciso de ajuda, eu jÃ¡ tenho ajuda de todo exercito dessa cidade."))
         end
         
         return false

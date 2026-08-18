@@ -134,7 +134,6 @@ function HuntWaypoint.loadConfigs()
     end
     return a.name < b.name
   end)
-  print("[HuntWaypoint] " .. #HuntWaypoint.configs .. " hunt(s) carregada(s)")
 end
 
 -- Primeiro numero da faixa de level ("25-35" -> 25); sem level vai pro fim.

@@ -25,7 +25,7 @@ function onSay(cid, words, param, channel)
 			dismountPlayer(cid)
 			doCreatureExecuteTalkAction(cid, "!mount")
 		else
-			sendBlueMessage(cid, getLangString(cid, "Sorry, you don't have this mount.", "Desculpe, você não tem essa montaria."))
+			sendBlueMessage(cid, getLangString(cid, "Sorry, you don't have this mount.", "Desculpe, vocÃª nÃ£o tem essa montaria."))
 		end 
 	end
   return true

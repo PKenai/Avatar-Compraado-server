@@ -24,7 +24,7 @@ end
 
 
 function onGreet(cid) 
-	selfSay(getLangString(cid, "Hello, "..getCreatureName(cid).."! Do you want to see my {offers}?", "Olá, "..getCreatureName(cid).."! Você deseja ver minhas {ofertas}? Lembre-se: na hora de escrever o label da parcel, a escrita correta das cidades disponíveis é: {Ba Sing Se}, {South Air Temple}, {North Water Tribe}, {Fire Nation Capital} e {South Water Tribe}."), cid)
+	selfSay(getLangString(cid, "Hello, "..getCreatureName(cid).."! Do you want to see my {offers}?", "OlÃ¡, "..getCreatureName(cid).."! VocÃª deseja ver minhas {ofertas}? Lembre-se: na hora de escrever o label da parcel, a escrita correta das cidades disponÃ­veis Ã©: {Ba Sing Se}, {South Air Temple}, {North Water Tribe}, {Fire Nation Capital} e {South Water Tribe}."), cid)
 	return true
 end
 

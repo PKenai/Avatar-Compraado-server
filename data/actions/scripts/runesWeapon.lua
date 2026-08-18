@@ -47,15 +47,15 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		return false
 	end
 	if newRuneLevel == 1 and getPlayerLevel(cid) < 90 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "… necess·rio Level 90+ para utilizar esta runa em alguma arma.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "√â necess√°rio Level 90+ para utilizar esta runa em alguma arma.")
 		return true
 	end
 	if newRuneLevel == 2 and getPlayerLevel(cid) < 180 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "… necess·rio Level 180+ para utilizar esta runa em alguma arma.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "√â necess√°rio Level 180+ para utilizar esta runa em alguma arma.")
 		return true
 	end
 	if toPosition.x ~= CONTAINER_POSITION then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The item need to be in a container to be enchanted.", "O item precisa estar em um invent·rio para ser encantado."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The item need to be in a container to be enchanted.", "O item precisa estar em um invent√°rio para ser encantado."))
 		return true
 	end
 	if isEquipped(cid, itemEx.uid) then
@@ -73,15 +73,15 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	end
 	local legendarys = {17860, 17861, 17862, 17863}
 	if isInArray(legendarys, itemEx.itemid) then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This legendary weapon already have its own enchantment.", "Esta arma lend·ria j· possui seu prÛprio encantamento."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This legendary weapon already have its own enchantment.", "Esta arma lend√°ria j√° possui seu pr√≥prio encantamento."))
 		return true
 	end
 	if itemInfo.stackable then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You cant enchant ammo.", "VocÍ n„o pode encantar muniÁıes."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You cant enchant ammo.", "Voc√™ n√£o pode encantar muni√ß√µes."))
 		return true
 	end
 	if getItemAttribute(itemEx.uid, 'elementalrunecharges') and getItemAttribute(itemEx.uid, 'elementalrunecharges') >= 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This weapon is already enchanted.", "Esta arma j· est· encantada."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This weapon is already enchanted.", "Esta arma j√° est√° encantada."))
 		return true
 	end
 	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The weapon has successfully enchanted!", "A arma foi encantada com sucesso!"))

@@ -1,12 +1,12 @@
 function onUse(cid, item, fromPosition, itemEx, toPosition)
   if getPlayerStorageValue(cid, "questnova3") == 1 then  
-    doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+    doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ pegou esta recompensa.")
     return true
   end 
     setPlayerStorageValue(cid, "questnova3", 1)
    doPlayerAddItem(cid, 2007, 1)
    doSendMagicEffect(getThingPos(cid), 29)
    
-  doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Utilize essa água sagrada com sabedoria.")
+  doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! Utilize essa Ã¡gua sagrada com sabedoria.")
     return true
 end

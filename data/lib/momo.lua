@@ -383,7 +383,7 @@ function momoAutoLootAtPos(cid, pos)
 
 	local looted, failed = momoAutoLootContainer(cid, corpse)
 	if looted then
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_SMALL, getLangString(cid, "You looted some items.", "Voce coletou alguns itens."))
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_SMALL, getLangString(cid, "You looted some items.", "Você coletou alguns itens."))
 	end
 	if failed then
 		-- aviso VERMELHO no centro da tela (client: MESSAGE_STATUS_WARNING -> MessageWarning -> centerRed)

@@ -19,7 +19,7 @@ function onSay(cid, words, param, channel)
 --		return true 
 --	end 
 	if getPlayerItemCount(cid, cf.itemid) == 0 then 
-		sendBlueMessage(cid, getLangString(cid, "You don't have the required item to buy a mount.", "Você não possui o item necessário para comprar uma montaria."))
+		sendBlueMessage(cid, getLangString(cid, "You don't have the required item to buy a mount.", "VocÃª nÃ£o possui o item necessÃ¡rio para comprar uma montaria."))
 		return true 
 	end 
 	if id > 0 and id < 9 then 
@@ -32,7 +32,7 @@ function onSay(cid, words, param, channel)
 				doCreatureExecuteTalkAction(cid, "!mount")
 			end
 		else
-			sendBlueMessage(cid, getLangString(cid, "You already have this mount.", "Você já tem essa montaria."))
+			sendBlueMessage(cid, getLangString(cid, "You already have this mount.", "VocÃª jÃ¡ tem essa montaria."))
 		end 
 	end
   return true

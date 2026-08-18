@@ -10,7 +10,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
     end
 
     if getPlayerLevel(cid) < 250  then
-      doCreatureSay(cid, "Você precisa de Level 250+  para entrar na Draptor Quest.", TALKTYPE_ORANGE_1, false, cid)
+      doCreatureSay(cid, "VocÃª precisa de Level 250+  para entrar na Draptor Quest.", TALKTYPE_ORANGE_1, false, cid)
       return false
     end
 
@@ -19,7 +19,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
     doSendMagicEffect(fromPosition, CONST_ME_TELEPORT)
     doTeleportThing(cid, {x = 430, y = 1494, z = 7})
     doSendMagicEffect({x = 430, y = 1494, z = 7}, CONST_ME_TELEPORT)
-    doCreatureSay(cid, "Incrível, você entrou na Draptor Quest!", TALKTYPE_ORANGE_1, false, cid)
+    doCreatureSay(cid, "IncrÃ­vel, vocÃª entrou na Draptor Quest!", TALKTYPE_ORANGE_1, false, cid)
   end
   return false
 end

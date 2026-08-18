@@ -2,11 +2,11 @@ local newRunesIds = {18122, 18125, 18128}
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if getPlayerStorageValue(cid, "90510") == 1 then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ pegou esta recompensa.")
 		return true
 	end 
 	if getPlayerLevel(cid) < 150  then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa de Level 150+ e Reset 70+ para adquirir esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª precisa de Level 150+ e Reset 70+ para adquirir esta recompensa.")
 		return true
 	end 
 	if not isCreature(lastBossCid) then 
@@ -19,9 +19,9 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		finalExp = finalExp/2
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "Congratulations! You received "..finalExp.." experience points, 1x "..getItemNameById(runaId).." and 60000 gold coins.", "Parabéns! Você recebeu "..finalExp.." pontos de experiência, 1x "..getItemNameById(runaId).." e 100000 gold coins."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "Congratulations! You received "..finalExp.." experience points, 1x "..getItemNameById(runaId).." and 60000 gold coins.", "ParabÃ©ns! VocÃª recebeu "..finalExp.." pontos de experiÃªncia, 1x "..getItemNameById(runaId).." e 100000 gold coins."))
 	else
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_ADVANCE, getLangString(cid, "You need to kill the The Baron from Below first.", "Você precisa matar o The Baron from Below primeiro."))
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_ADVANCE, getLangString(cid, "You need to kill the The Baron from Below first.", "VocÃª precisa matar o The Baron from Below primeiro."))
 	end 
   return true
 end

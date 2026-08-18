@@ -38,7 +38,7 @@ end
 function randomizeNewAvatar()
 	local avatar = searchAvatar()
 	if avatar ~= 0 then
-		doBroadcastMessage("O dobrador "..getCreatureName(avatar).." È o novo Avatar escolhido.", MESSAGE_STATUS_CONSOLE_BLUE)
+		doBroadcastMessage("O dobrador "..getCreatureName(avatar).." √© o novo Avatar escolhido.", MESSAGE_STATUS_CONSOLE_BLUE)
 		setPlayerStorageValue(avatar, "isAvatar", 1)
 		local oldAvatar = 0
 		if getStorage(73991) > 0 then
@@ -58,7 +58,7 @@ end
 
 function makeNewAvatar(avatar)
 	if avatar ~= 0 then
-		doBroadcastMessage("O dobrador "..getCreatureName(avatar).." È o novo Avatar escolhido.", MESSAGE_STATUS_CONSOLE_BLUE)
+		doBroadcastMessage("O dobrador "..getCreatureName(avatar).." √© o novo Avatar escolhido.", MESSAGE_STATUS_CONSOLE_BLUE)
 		setPlayerStorageValue(avatar, "isAvatar", 1)
 		local oldAvatar = 0
 		if getStorage(73991) > 0 then
@@ -107,11 +107,11 @@ function tryEclipse()
 		local ultimo = getStorage(57302)
 		doSetStorage(57302, 0)
 		if ultimo == 1 then
-			doBroadcastMessage("O Cometa de Sozin n„o est· mais afetando o mundo Avatar, os dobradores de Fogo n„o est„o mais fortificados.", 22)
+			doBroadcastMessage("O Cometa de Sozin n√£o est√° mais afetando o mundo Avatar, os dobradores de Fogo n√£o est√£o mais fortificados.", 22)
 		elseif ultimo == 2 then
-			doBroadcastMessage("A Lua Cheia se despede do mundo Avatar, os dobradores de ¡gua n„o est„o mais fortificados.", 22)
+			doBroadcastMessage("A Lua Cheia se despede do mundo Avatar, os dobradores de √Ågua n√£o est√£o mais fortificados.", 22)
 		else
-			doBroadcastMessage("O Eclipse Lunar terminou, os dobradores de ¡gua e Fogo n„o est„o mais enfraquecidos.", 22)
+			doBroadcastMessage("O Eclipse Lunar terminou, os dobradores de √Ågua e Fogo n√£o est√£o mais enfraquecidos.", 22)
 		end
 		return false
 	end
@@ -130,15 +130,15 @@ function tryEclipse()
 	doSetStorage(57301, proximo)
 	if proximo % 3 == 2 then
 		-- eclipse
-		doBroadcastMessage("O mundo Avatar est· sob Eclipse Lunar, todos os dobradores de ¡gua e Fogo est„o enfraquecidos com 20% menos de dano em suas dobras nas prÛximas 4 horas.", 22)
+		doBroadcastMessage("O mundo Avatar est√° sob Eclipse Lunar, todos os dobradores de √Ågua e Fogo est√£o enfraquecidos com 20% menos de dano em suas dobras nas pr√≥ximas 4 horas.", 22)
 		doSetStorage(57302, 3)
 	elseif proximo % 3 == 1 then
 		-- lua
-		doBroadcastMessage("A Lua Cheia chegou no mundo Avatar, todos os dobradores de ¡gua est„o fortificados com 20% de dano extra em suas dobras nas prÛximas 4 horas.", 22)
+		doBroadcastMessage("A Lua Cheia chegou no mundo Avatar, todos os dobradores de √Ågua est√£o fortificados com 20% de dano extra em suas dobras nas pr√≥ximas 4 horas.", 22)
 		doSetStorage(57302, 2)
 	else
 		-- cometa
-		doBroadcastMessage("O Cometa de Sozin est· passando prÛximo ao mundo Avatar, todos os dobradores de Fogo est„o fortificados com 20% de dano extra em suas dobras nas prÛximas 4 horas.", 22)
+		doBroadcastMessage("O Cometa de Sozin est√° passando pr√≥ximo ao mundo Avatar, todos os dobradores de Fogo est√£o fortificados com 20% de dano extra em suas dobras nas pr√≥ximas 4 horas.", 22)
 		doSetStorage(57302, 1)
 	end
 end

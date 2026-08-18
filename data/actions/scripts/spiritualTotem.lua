@@ -7,7 +7,7 @@ local TOTEMS = {
 	[18193] = {voc = 4, name = "Spiritual Earth Totem", element = "terra"},
 	[18194] = {voc = 1, name = "Spiritual Fire Totem", element = "fogo"},
 	[18195] = {voc = 3, name = "Spiritual Air Totem", element = "ar"},
-	[18196] = {voc = 2, name = "Spiritual Water Totem", element = "agua"}
+	[18196] = {voc = 2, name = "Spiritual Water Totem", element = "água"}
 }
 
 local function getBaseVocation(cid)
@@ -37,7 +37,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 
 	local storageKey = getTotemStorageKey(item, fromPosition)
 	if getPlayerStorageValue(cid, storageKey) == 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Voce ja usou este totem neste personagem.")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você já usou este totem neste personagem.")
 		return true
 	end
 
@@ -60,6 +60,6 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	end
 
 	doSendMagicEffect(getCreaturePosition(cid), 28)
-	doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Seu espirito ficou mais forte, voce acaba de ganhar 1 attribute point.")
+	doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Seu espirito ficou mais forte, você acaba de ganhar 1 attribute point.")
 	return true
 end

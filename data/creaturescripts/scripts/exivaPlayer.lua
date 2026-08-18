@@ -15,12 +15,12 @@ function onTextEdit(cid, item, newText)
 
   if isPlayer(targetPlayer) then
     if cid == targetPlayer then
-      doPlayerSendCancel(cid, getLangString(cid, "You cannot search yourself.", "Você não pode procurar por você mesmo."))
+      doPlayerSendCancel(cid, getLangString(cid, "You cannot search yourself.", "VocÃª nÃ£o pode procurar por vocÃª mesmo."))
       return true
     end
 
     if getPlayerAccess(targetPlayer) > 3 then
-      doPlayerSendCancel(cid, getLangString(cid, "You cannot search the staff.", "Você não pode procurar por membros da equipe."))
+      doPlayerSendCancel(cid, getLangString(cid, "You cannot search the staff.", "VocÃª nÃ£o pode procurar por membros da equipe."))
       return true
     end
     
@@ -43,22 +43,22 @@ function onTextEdit(cid, item, newText)
         end
       end
       doRemoveItem(item.uid, 1)
-        local andaresStr = "no mesmo andar que você"
+        local andaresStr = "no mesmo andar que vocÃª"
     if hispos.z < mypos.z then 
       local dif = mypos.z - hispos.z
       local difStr = dif == 1 and "andar" or "andares"
-      andaresStr = dif .. " "..difStr.." acima de você"
+      andaresStr = dif .. " "..difStr.." acima de vocÃª"
     elseif hispos.z > mypos.z then 
       local dif = hispos.z - mypos.z
       local difStr = dif == 1 and "andar" or "andares"
-      andaresStr = dif .. " "..difStr.." abaixo de você"
+      andaresStr = dif .. " "..difStr.." abaixo de vocÃª"
     end 
-    doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, ""..getCreatureName(targetPlayer).." está à "..getDistanceBetween(hispos, mypos).."sqm de distância e "..andaresStr..".")
+    doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, ""..getCreatureName(targetPlayer).." estÃ¡ Ã  "..getDistanceBetween(hispos, mypos).."sqm de distÃ¢ncia e "..andaresStr..".")
     else
       sendBlueMessage(cid, "Error 1872 (creature/script/exivaPlayer.lua) -> Please send it to gamemaster.")
     end
   else
-    doPlayerSendCancel(cid, getLangString(cid, "A player with this name is not online.", "O player requisitado não está online ou não existe."))
+    doPlayerSendCancel(cid, getLangString(cid, "A player with this name is not online.", "O player requisitado nÃ£o estÃ¡ online ou nÃ£o existe."))
   end
   return true
 end

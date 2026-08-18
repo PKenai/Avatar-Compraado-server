@@ -5,7 +5,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
   local delay = getPlayerStorageValue(cid, "delayPotionStamina")
     if delay < os.time() then
 		if getPlayerStamina(cid) >= 2520 then 
-			doPlayerSendTextMessage(cid, 22, getLangString(cid, "You already have full stamina.", "Sua stamina já está completa."))
+			doPlayerSendTextMessage(cid, 22, getLangString(cid, "You already have full stamina.", "Sua stamina jÃ¡ estÃ¡ completa."))
 			return true
 		end 
 		doPlayerAddStamina(cid, 2520 - getPlayerStamina(cid))
@@ -15,7 +15,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		setPlayerStorageValue(cid, "delayPotionStamina", os.time()+config.delayToUseAgain)
 		return true
 	else
-		doPlayerSendCancel(cid, getLangString(cid, "You need wait "..getSecsString(delay-os.time()).." to use it again.", "Você precisa esperar "..getSecsString(delay-os.time()).." para usar isso novamente."))
+		doPlayerSendCancel(cid, getLangString(cid, "You need wait "..getSecsString(delay-os.time()).." to use it again.", "VocÃª precisa esperar "..getSecsString(delay-os.time()).." para usar isso novamente."))
 	end
 	return true
 end

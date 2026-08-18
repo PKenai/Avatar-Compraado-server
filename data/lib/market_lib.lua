@@ -80,7 +80,7 @@ end
 local categoryCache = {}
 
 -- Item category used by the client filter dropdown.
--- Slots (creature.h): 1=capacete 2=amuleto 4=armadura 7=calÁa 8=bota 9=anel.
+-- Slots (creature.h): 1=capacete 2=amuleto 4=armadura 7=cal√ßa 8=bota 9=anel.
 -- Weapons: WEAPON_SHIELD=5 -> escudo, any other weaponType>0 -> arma.
 local function getItemCategory(serverItemId)
   local cached = categoryCache[serverItemId]
@@ -119,12 +119,12 @@ end
 -- "look real" text sent to the client hover tooltip
 local slotNames = {
   [1] = "Capacete", [2] = "Amuleto", [4] = "Armadura",
-  [7] = "CalÁa", [8] = "Bota", [9] = "Anel"
+  [7] = "Cal√ßa", [8] = "Bota", [9] = "Anel"
 }
 
 local weaponTypeNames = {
-  [1] = "Espada", [2] = "MaÁa", [3] = "Machado", [4] = "Dist‚ncia",
-  [5] = "Escudo", [6] = "Punho", [7] = "Varinha", [8] = "MuniÁ„o"
+  [1] = "Espada", [2] = "Ma√ßa", [3] = "Machado", [4] = "Dist√¢ncia",
+  [5] = "Escudo", [6] = "Punho", [7] = "Varinha", [8] = "Muni√ß√£o"
 }
 
 -- Lua 5.1 string.format("%.2f") is locale-dependent (pt-BR prints "42,00").

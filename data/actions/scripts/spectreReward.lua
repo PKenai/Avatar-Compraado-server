@@ -11,13 +11,13 @@ local specs = getSpectators({x = 923, y = 452, z = 7}, 10, 10)
 end 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if getPlayerStorageValue(cid, "90507") == 1 then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ pegou esta recompensa.")
 		return true
 	elseif getPlayerLevel(cid) < 140  then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa de Level 140+  para adquirir esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª precisa de Level 140+  para adquirir esta recompensa.")
 		return true
 	elseif checkBossAlive() then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa derrotar o Spectre.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª precisa derrotar o Spectre.")
 		return true
 	end 
     setPlayerStorageValue(cid, "90507", 1)
@@ -26,6 +26,6 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
    local finalExp = 400000
 	doPlayerAddExperience(cid, finalExp)
 	doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você conquistou o Icy Shield.")
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! VocÃª conquistou o Icy Shield.")
     return true
 end

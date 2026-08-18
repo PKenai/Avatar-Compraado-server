@@ -580,12 +580,12 @@
 		<attribute key="showduration" value="1"/>
 		<attribute key="showattributes" value="1"/>
 	</item>
-	<item id="17986" article="a" name="spark ring">
+	<item id="18880" article="o" name="Anel de tubarão">
 		<attribute key="weight" value="40" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="armor" value="1" />
-		<attribute key="manaGain" value="6"/>
-		<attribute key="manaTicks" value="3000"/>
+		<attribute key="manaGain" value="5"/>
+		<attribute key="manaTicks" value="5000"/>
 		<attribute key="speed" value="20"/>
 		<attribute key="showattributes" value="1"/>
 	</item>
@@ -8558,7 +8558,7 @@
 	</item>
 	<item id="2594" article="a" name="depot chest">
 		<!-- containerSize = tamanho da pagina no client (30 slots/pagina).
-		     A capacidade total (numero de paginas) e definida no servidor:
+		     A capacidade total (número de páginas) é definida no servidor:
 		     Player::internalAddDepot aplica o depotLimit do grupo no bau. -->
 		<attribute key="containerSize" value="30" />
 	</item>
@@ -15669,6 +15669,41 @@
 	</item>
 	<item id="18877" article="a" name="Foto">
 		<attribute key="weight" value="5" />
+	</item>
+	<item id="18879" article="a" name="Filhote de coelho">
+		<attribute key="weight" value="1" />
+	</item>
+	<item id="18867" article="um" name="Pergaminho da experiência">
+		<attribute key="weight" value="5" />
+		<attribute key="description" value="Aumenta seu ganho de experiência por 45 minutos!" />
+	</item>
+	<item id="18866" article="um" name="Pergaminho da benção">
+		<attribute key="weight" value="5" />
+		<attribute key="description" value="Concede a benção: na próxima morte você perde 50% menos experiência e não perde itens." />
+	</item>
+	<item id="18865" article="um" name="Pergaminho do despertar">
+		<attribute key="weight" value="5" />
+		<attribute key="description" value="Desperta o estado Avatar por 5 minutos!" />
+	</item>
+
+
+	<item id="18923" article="a" name="closed door">
+		<attribute key="type" value="door"/>
+		<attribute key="blockprojectile" value="1"/>
+		<attribute key="transformUseTo" value="18925"/>
+	</item>
+	<item id="18924" article="a" name="closed door">
+		<attribute key="type" value="door"/>
+		<attribute key="blockprojectile" value="1"/>
+		<attribute key="transformUseTo" value="18926"/>
+	</item>
+	<item id="18925" article="an" name="open door">
+		<attribute key="type" value="door"/>
+		<attribute key="transformUseTo" value="18923"/>
+	</item>
+	<item id="18926" article="an" name="open door">
+		<attribute key="type" value="door"/>
+		<attribute key="transformUseTo" value="18924"/>
 	</item>
 
 </items>

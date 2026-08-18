@@ -54,31 +54,31 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		return false
 	end
 	if newRuneLevel == 1 and getPlayerLevel(cid) < 40 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "… necess·rio Level 40+ para utilizar esta runa em algum equipamento.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "√â necess√°rio Level 40+ para utilizar esta runa em algum equipamento.")
 		return true
 	end
 	if newRuneLevel == 2 and getPlayerLevel(cid) < 100 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "… necess·rio Level 100+ para utilizar esta runa em algum equipamento.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "√â necess√°rio Level 100+ para utilizar esta runa em algum equipamento.")
 		return true
 	end
 	if newRuneLevel == 3 and getPlayerLevel(cid) < 160 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "… necess·rio Level 160+ para utilizar esta runa em algum equipamento.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "√â necess√°rio Level 160+ para utilizar esta runa em algum equipamento.")
 		return true
 	end
 	if newRuneLevel == 4 and getPlayerLevel(cid) < 220 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "… necess·rio Level 220+ para utilizar esta runa em algum equipamento.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "√â necess√°rio Level 220+ para utilizar esta runa em algum equipamento.")
 		return true
 	end
 	if not isArmor(itemEx) or itemEx.itemid == 0 or itemEx.type > 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You can't enchant this item. Only helmets, armors, legs and boots.", "VocÍ n„o pode encantar este item. Apenas helmets, armors, legs e boots."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You can't enchant this item. Only helmets, armors, legs and boots.", "Voc√™ n√£o pode encantar este item. Apenas helmets, armors, legs e boots."))
 		return true
 	end
 	if toPosition.x ~= CONTAINER_POSITION then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The item need to be in a container to be enchanted.", "O item precisa estar em um invent·rio para ser encantado."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The item need to be in a container to be enchanted.", "O item precisa estar em um invent√°rio para ser encantado."))
 		return true
 	end
 	if not isItemEventRegistered(itemEx.uid) then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This item is too weak to be enchanted.", "Este item È fraco demais para ser encantado."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This item is too weak to be enchanted.", "Este item √© fraco demais para ser encantado."))
 		return true
 	end
 	if isEquipped(cid, itemEx.uid) then
@@ -86,7 +86,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		return true
 	end
 	if getItemAttribute(itemEx.uid, 'elementalrunetype') and getItemAttribute(itemEx.uid, 'elementalrunetype') >= 1 and getItemAttribute(itemEx.uid, 'elementalrunelevel') and getItemAttribute(itemEx.uid, 'elementalrunelevel') >= 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This item is already enchanted. Use the Rune Remover first.", "Este item j· est· encantado. Utilize a Rune Remover primeiro."))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "This item is already enchanted. Use the Rune Remover first.", "Este item j√° est√° encantado. Utilize a Rune Remover primeiro."))
 		return true
 	end
 	if math.random(1, 100) <= failRates[newRuneLevel] then

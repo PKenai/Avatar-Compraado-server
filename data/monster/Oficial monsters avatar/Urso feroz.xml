@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Urso feroz" nameDescription="um urso feroz" race="undead" experience="1600" speed="320" manacost="0">
+	<health now="600" max="600"/>
+	<look type="1287" corpse="18160"/>
+	<targetchange interval="5000" chance="10"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="70" attack="70"/>
+		<attack name="physical" interval="2500" chance="30" range="1" min="-60" max="-120"/>
+	</attacks>
+	<defenses armor="5" defense="5"/>
+	<loot>
+		<item id="2671" countmax="3" chance="75000"/><!-- HAM: 0 a 3 -->
+		<item id="2666" countmax="3" chance="75000"/><!-- MEAT: 0 a 3 -->
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="Grrrrrr"/>
+		<voice sentence="GROARRR!" yell="1"/>
+	</voices>
+</monster>

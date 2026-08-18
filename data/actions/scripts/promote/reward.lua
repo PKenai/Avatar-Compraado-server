@@ -12,14 +12,14 @@ end
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if getPlayerLevel(cid) < 150  then
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa de Level 150+ e Reset 70+ para adquirir esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª precisa de Level 150+ e Reset 70+ para adquirir esta recompensa.")
 		return true
 	end
 	if getPlayerStorageValue(cid, "90508") == 1 then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ pegou esta recompensa.")
 		return true
 	elseif checkBossAlive() then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa derrotar o Zorvorax primeiro.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª precisa derrotar o Zorvorax primeiro.")
 		return true
 	end 
     setPlayerStorageValue(cid, "90508", 1)
@@ -30,6 +30,6 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	finalExp = finalExp/2
 	doPlayerAddExperience(cid, finalExp)
 	doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você conquistou a Alloy Legs.")
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! VocÃª conquistou a Alloy Legs.")
     return true
 end

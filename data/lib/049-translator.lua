@@ -21,13 +21,13 @@ function getLangString(cid, en, pt)
 end
 
 local strings = {
-  ["Your target cant be disabled right now."] = "Seu alvo não pode sofrer prisões neste momento.",
-  ["Your target cant be disabled for the next %ds."] = "Seu alvo não pode sofrer prisões pelos próximos %ds.",
-  ["You can not use this ability in this creature now."] = "Você não pode usar essa habilidade nesta criatura, agora.",
-  ["You're already using this fold."] = "Você já está sobre o efeito dessa dobra.",
-  ["You can't use this fold in closed places."] = "Você não pode usar essa dobra em lugares fechados.",
-  ["You can not use this ability now."] = "Você não pode usar essa habilidade agora.",
-  ["It isn't possible use this fold here."] = "É impossível usar essa dobra aqui."
+  ["Your target cant be disabled right now."] = "Seu alvo nÃ£o pode sofrer prisÃµes neste momento.",
+  ["Your target cant be disabled for the next %ds."] = "Seu alvo nÃ£o pode sofrer prisÃµes pelos prÃ³ximos %ds.",
+  ["You can not use this ability in this creature now."] = "VocÃª nÃ£o pode usar essa habilidade nesta criatura, agora.",
+  ["You're already using this fold."] = "VocÃª jÃ¡ estÃ¡ sobre o efeito dessa dobra.",
+  ["You can't use this fold in closed places."] = "VocÃª nÃ£o pode usar essa dobra em lugares fechados.",
+  ["You can not use this ability now."] = "VocÃª nÃ£o pode usar essa habilidade agora.",
+  ["It isn't possible use this fold here."] = "Ã‰ impossÃ­vel usar essa dobra aqui."
 }
 
 function tr(cid, string)

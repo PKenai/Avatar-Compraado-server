@@ -1,6 +1,6 @@
--- posCentral é pos centro da sala pra checar range 10 dali se tem algum monstro neutro vivo, se range 10 for muito e acabar checando de outra sala diminua na linha que tem "getSpectators" o numero 10
--- destino é pra onde o tp leva
--- todo tp precisa ter terminado a missao do NPC pra entrar, o 46131 é o que começa a quest (sem check de monstro somente missao)
+-- posCentral Ã© pos centro da sala pra checar range 10 dali se tem algum monstro neutro vivo, se range 10 for muito e acabar checando de outra sala diminua na linha que tem "getSpectators" o numero 10
+-- destino Ã© pra onde o tp leva
+-- todo tp precisa ter terminado a missao do NPC pra entrar, o 46131 Ã© o que comeÃ§a a quest (sem check de monstro somente missao)
 -- coloquei mais do que necessario so caso vc precise
 -- sala do bau so usar o teleport azul comum mesmo pra sair, lembrando tb que na sala do bau n tem boss pra checar se ta vivo, vc so chega la passando pelo teleport do ultimo boss
 
@@ -39,12 +39,12 @@ function onStepIn(cid, item, position, fromPosition)
 	end 
 	if getPlayerStorageValue(cid, "evilAvatarQuest") < 1 then
 		doTeleportThing(cid, fromPosition, true)
-		doCreatureSay(cid, "Você precisa de permissão para entrar.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de permissÃ£o para entrar.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	elseif item.actionid > 46131 then 
 		if teleportsQuest[item.actionid].posCentral and checkBossAlive(teleportsQuest[item.actionid].posCentral) then
 			doTeleportThing(cid, fromPosition, true)
-			doCreatureSay(cid, "Você precisa matar os monstros próximos para entrar.", TALKTYPE_ORANGE_1, false, cid)
+			doCreatureSay(cid, "VocÃª precisa matar os monstros prÃ³ximos para entrar.", TALKTYPE_ORANGE_1, false, cid)
 			return false
 		else 
 			doTeleportThing(cid, teleportsQuest[item.actionid].destino, false)

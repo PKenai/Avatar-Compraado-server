@@ -17,7 +17,7 @@ end
 function onStepIn(cid, item, position, fromPosition)
 	if not canEnter() then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "N„o foi possÌvel fazer a conex„o. Verifique se todas as fogueiras est„o acesas!", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "N√£o foi poss√≠vel fazer a conex√£o. Verifique se todas as fogueiras est√£o acesas!", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else
 		doSendMagicEffect(position, CONST_ME_TELEPORT)

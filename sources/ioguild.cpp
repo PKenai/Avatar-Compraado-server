@@ -723,7 +723,7 @@ void IOGuild::frag(Player* player, uint64_t deathId, const DeathList& list, bool
 	if((channel = g_chat.getChannel(player, CHANNEL_GUILD)))
 	{
 		s << "O membro da sua guild " << player->getName() << " foi morto pelo jogador " << killers << " da guild inimiga.";
-		s << " Agora o placar da guerra está " << war.frags[war.type == WAR_GUILD] << " para a sua guild e "
+		s << " Agora o placar da guerra estÃ¡ " << war.frags[war.type == WAR_GUILD] << " para a sua guild e "
 			<< war.frags[war.type] << " para a guild inimiga.";
 
 		channel->talk("[GUILDWAR]", MSG_GAMEMASTER_CHANNEL, s.str());
@@ -733,7 +733,7 @@ void IOGuild::frag(Player* player, uint64_t deathId, const DeathList& list, bool
 	if((channel = g_chat.getChannel(list[0].getKillerCreature()->getPlayer(), CHANNEL_GUILD)))
 	{
 		s << "O membro " << player->getName() << " da guild inimiga foi morto pelo jogador " << killers << " da sua guild.";
-		s << " Agora o placar da guerra está " << war.frags[war.type] << " para a sua guild e "
+		s << " Agora o placar da guerra estÃ¡ " << war.frags[war.type] << " para a sua guild e "
 			<< war.frags[war.type == WAR_GUILD] << " para a guild inimiga.";
 
 		channel->talk("[GUILDWAR]", MSG_GAMEMASTER_CHANNEL, s.str());

@@ -9,8 +9,8 @@ function doMessageCheck(message, keyword)
         return table.isStrIn(keyword, message)
     end
     
-    local keyword = keyword:lower()
-    local message = message:lower() 
+    local keyword = stripAccents(keyword:lower())
+    local message = stripAccents(message:lower())
 
     local a, b = message:find(keyword)
     if keyword == "hi" or keyword == "oi" then
@@ -55,7 +55,7 @@ function setItemToRealPrice(cid, item)
     
     if priceInList then
         doItemSetAttribute(item.uid, "price", priceInList)
-        doItemSetAttribute(item.uid, "description", getItemDescriptionsById(item.itemid).description..""..getLangString(cid, "Price", "Preço")..": "..getPriceByItem(item).." gold.")  
+        doItemSetAttribute(item.uid, "description", getItemDescriptionsById(item.itemid).description..""..getLangString(cid, "Price", "PreÃ§o")..": "..getPriceByItem(item).." gold.")  
     else
         doItemSetAttribute(item.uid, "price", "Unsellable")
         doItemSetAttribute(item.uid, "description", getItemDescriptionsById(item.itemid).description.."")

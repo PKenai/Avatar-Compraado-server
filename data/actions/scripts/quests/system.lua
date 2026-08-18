@@ -22,7 +22,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 
   if(getCreatureStorage(cid, storage) > 0) then
   local ret = getItemDescriptions(item.uid)
-    doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The "..ret.name.." is empty.", "Esse "..ret.name.." est· vazio."))
+    doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The "..ret.name.." is empty.", "Esse "..ret.name.." est√° vazio."))
     return true
   end
 

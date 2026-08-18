@@ -1,4 +1,4 @@
-local strError = 'Você está usando o comando de maneira errada. Exemplo correto: "/add bend, 5", que iria gastar 5 de seus pontos em bend, ou "/add health, 5."'
+local strError = 'VocÃª estÃ¡ usando o comando de maneira errada. Exemplo correto: "/add bend, 5", que iria gastar 5 de seus pontos em bend, ou "/add health, 5."'
 local atributosList = {"health", "bend", "dodge", "mana"}
 
 local function onAddAtributo(cid, atributo, quantia)
@@ -92,7 +92,7 @@ local storageAtributo = atributo .. "value"
 local valor = getPlayerStorageValue(cid, storageAtributo)
 valor = valor > 0 and valor or 0
 	if atributo == "dodge" and valor >= 15 then 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Este atributo já atingiu seu nível máximo.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Este atributo jÃ¡ atingiu seu nÃ­vel mÃ¡ximo.")
 		return true
 	end 
 local custo = getCostByValue(valor, atributo)
@@ -101,10 +101,10 @@ local pendentes = getPlayerStorageValue(cid, "pendentes")
 pendentes = pendentes > 0 and pendentes or 0
 
 	if quantia > pendentes then 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você não possui pontos suficientes.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª nÃ£o possui pontos suficientes.")
 		return true
 	elseif quantia < custo then 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você não possui pontos suficientes para evoluir este atributo.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª nÃ£o possui pontos suficientes para evoluir este atributo.")
 		return true
 	end
 	local oldValorAtt = valor
@@ -117,7 +117,7 @@ pendentes = pendentes > 0 and pendentes or 0
 		valor = valor+1
 		custo = getCostByValue(valor, atributo)
 		if atributo == "dodge" and valor >= 15 then 
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Este atributo já atingiu seu nível máximo.")
+			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Este atributo jÃ¡ atingiu seu nÃ­vel mÃ¡ximo.")
 			break;
 		end 
 		if dbugCount > 1000 then 

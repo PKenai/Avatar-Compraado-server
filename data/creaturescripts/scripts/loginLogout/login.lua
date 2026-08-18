@@ -388,7 +388,7 @@ function onLogin(cid)
  
     if(getPlayerAccountManager(cid) == MANAGER_NONE) then
         if(lastLogin > 0) then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, getLangString(cid, "Your last visit was on "..os.date("%a %b %d %X %Y", lastLogin) ..".", "Sua ultima visita foi em "..os.date("%a %b %d %X %Y", lastLogin).."."))
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, getLangString(cid, "Your last visit was on "..os.date("%a %b %d %X %Y", lastLogin) ..".", "Sua última visita foi em "..os.date("%a %b %d %X %Y", lastLogin).."."))
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, getLangString(cid, config.loginMessageEN, config.loginMessagePT))
         end
 

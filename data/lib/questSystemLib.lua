@@ -22,8 +22,8 @@
  *  - monster.storageid             -> kills por monstro (se especificado no XML)
  *  - fallback: MISSION_PROGRESS_TRACKING_BASE + questId*100 + missionId
  *
- * OBS: use apenas caracteres ASCII nos textos (sem acentos) para nao
- * quebrar a exibicao no client.
+ * OBS: os textos podem usar acentuacao normal (UTF-8) — o client renderiza
+ * corretamente. Evite apenas bytes invalidos de UTF-8.
  *]]
 
 -- ============================================================
@@ -194,7 +194,6 @@ function qsLoadQuestsFromXML()
         end
     end
 
-    print("[QuestSystem] Loaded " .. #QuestSystem.quests .. " quests")
     return true
 end
 
@@ -280,6 +279,10 @@ end
 -- ============================================================
 
 function qsGetMissionProgress(cid, questId, missionId)
+    -- Blindagem: ids invalidos nunca podem derrubar o envio do quest log
+    questId = tonumber(questId) or 0
+    missionId = tonumber(missionId) or 0
+
     local quest = QuestSystem.getQuest(questId)
     if not quest then return 0 end
 
@@ -306,6 +309,9 @@ function qsGetMissionProgress(cid, questId, missionId)
 end
 
 function qsSetMissionProgress(cid, questId, missionId, progress)
+    questId = tonumber(questId) or 0
+    missionId = tonumber(missionId) or 0
+
     local quest = QuestSystem.getQuest(questId)
     if not quest then return end
 
@@ -321,44 +327,49 @@ function qsOnKillMonster(cid, monsterName)
     monsterName = monsterName:lower()
 
     for _, quest in ipairs(QuestSystem.quests) do
-        if qsIsQuestStarted(cid, quest.id) then
-            for _, mission in ipairs(quest.missions) do
-                if not qsIsMissionCompleted(cid, quest.id, mission.id) then
-                    for _, monster in ipairs(mission.monsters) do
-                        if monster.name:lower() == monsterName then
-                            -- Rastreamento por monstro (storageId no XML)
-                            if monster.storageId then
-                                local mProgress = math.max(0, getPlayerStorageValue(cid, monster.storageId))
-                                if mProgress < monster.count then
-                                    setPlayerStorageValue(cid, monster.storageId, mProgress + 1)
+        local killOk, killErr = pcall(function()
+            if qsIsQuestStarted(cid, quest.id) then
+                for _, mission in ipairs(quest.missions) do
+                    if not qsIsMissionCompleted(cid, quest.id, mission.id or 0) then
+                        for _, monster in ipairs(mission.monsters) do
+                            if monster.name:lower() == monsterName then
+                                -- Rastreamento por monstro (storageId no XML)
+                                if monster.storageId then
+                                    local mProgress = math.max(0, getPlayerStorageValue(cid, monster.storageId))
+                                    if mProgress < monster.count then
+                                        setPlayerStorageValue(cid, monster.storageId, mProgress + 1)
+                                    end
+                                else
+                                    -- Rastreamento padrao da missao
+                                    local progress = qsGetMissionProgress(cid, quest.id, mission.id or 0)
+                                    progress = progress + 1
+                                    qsSetMissionProgress(cid, quest.id, mission.id or 0, progress)
                                 end
-                            else
-                                -- Rastreamento padrao da missao
-                                local progress = qsGetMissionProgress(cid, quest.id, mission.id or 0)
-                                progress = progress + 1
-                                qsSetMissionProgress(cid, quest.id, mission.id, progress)
+
+                                -- Checa se a missao completou
+                                local totalRequired = 0
+                                for _, m in ipairs(mission.monsters) do
+                                    totalRequired = totalRequired + m.count
+                                end
+
+                                local totalProgress = qsGetMissionProgress(cid, quest.id, mission.id or 0)
+
+                                if totalProgress >= totalRequired then
+                                    doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Task finished! Talk to the NPC to receive your reward.")
+                                else
+                                    doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest progress: " .. totalProgress .. "/" .. totalRequired .. " " .. monster.name)
+                                end
+
+                                qsSendQuestList(cid)
+                                qsSendQuestDetails(cid, quest.id)
                             end
-
-                            -- Checa se a missao completou
-                            local totalRequired = 0
-                            for _, m in ipairs(mission.monsters) do
-                                totalRequired = totalRequired + m.count
-                            end
-
-                            local totalProgress = qsGetMissionProgress(cid, quest.id, mission.id)
-
-                            if totalProgress >= totalRequired then
-                                doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Task finished! Talk to the NPC to receive your reward.")
-                            else
-                                doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest progress: " .. totalProgress .. "/" .. totalRequired .. " " .. monster.name)
-                            end
-
-                            qsSendQuestList(cid)
-                            qsSendQuestDetails(cid, quest.id)
                         end
                     end
                 end
             end
+        end)
+        if not killOk then
+            print("[QuestSystem] Erro no kill handler da quest '" .. tostring(quest.name) .. "' (id " .. tostring(quest.id) .. "): " .. tostring(killErr))
         end
     end
 end
@@ -388,7 +399,7 @@ function qsStartQuest(cid, questId, npcName, skipSound)
     if npcName then
         local notificationData = {
             title = quest.name,
-            message = "Nova missao: " .. firstMission.name .. "!",
+            message = "Nova missão: " .. firstMission.name .. "!",
             color = "#FFA500",
             duration = 5000
         }
@@ -430,7 +441,7 @@ function qsCompleteMission(cid, questId, missionId, npcName, skipSound)
     if npcName then
         local notificationData = {
             title = quest.name,
-            message = "Missao concluida: " .. mission.name .. "!",
+            message = "Missão concluida: " .. mission.name .. "!",
             color = "#00FF00",
             duration = 5000
         }
@@ -462,78 +473,83 @@ function qsSendQuestDetails(cid, questId)
     }
 
     local showNext = true
-    for _, mission in ipairs(quest.missions) do
-        local missionStatus = qsGetMissionStatus(cid, quest.id, mission.id)
-        local isStartedOrDone = (missionStatus ~= MISSION_STATUS.NOT_STARTED)
+    local detailsOk, detailsErr = pcall(function()
+        for _, mission in ipairs(quest.missions) do
+            local missionStatus = qsGetMissionStatus(cid, quest.id, mission.id or 0)
+            local isStartedOrDone = (missionStatus ~= MISSION_STATUS.NOT_STARTED)
 
-        -- Mostra apenas missoes ja iniciadas/concluidas ou a proxima disponivel
-        if isStartedOrDone or showNext then
-            local maxProgress = 0
-            for _, monster in ipairs(mission.monsters) do
-                maxProgress = maxProgress + monster.count
-            end
-            if maxProgress == 0 then
-                maxProgress = mission.maxProgressOverride or 1
-            end
-
-            local rewardsData = {}
-            if questData.status == QUEST_STATUS.COMPLETED then
-                for _, reward in ipairs(mission.rewards) do
-                    local clientId = itemClientId(reward.id)
-                    local name = "Unknown Item"
-                    local it = safeItemType(reward.id)
-                    if it then
-                        local okName, itemName = pcall(function() return it:getName() end)
-                        if okName and itemName and itemName ~= "" then
-                            name = itemName
-                        end
-                    end
-
-                    -- Tooltip detalhado com atributos
-                    local tooltip = name
-                    if it then
-                        local armor = itemField(it, "getArmor")
-                        local attack = itemField(it, "getAttack")
-                        local defense = itemField(it, "getDefense")
-                        local weight = itemField(it, "getWeight")
-
-                        if armor > 0 then tooltip = tooltip .. "\nArmor: " .. armor end
-                        if attack > 0 then tooltip = tooltip .. "\nAttack: " .. attack end
-                        if defense > 0 then tooltip = tooltip .. "\nDefense: " .. defense end
-                        if weight > 0 then tooltip = tooltip .. "\nWeight: " .. (weight / 100) .. " oz" end
-                    end
-
-                    table.insert(rewardsData, {id = clientId, count = reward.count, name = tooltip})
+            -- Mostra apenas missoes ja iniciadas/concluidas ou a proxima disponivel
+            if isStartedOrDone or showNext then
+                local maxProgress = 0
+                for _, monster in ipairs(mission.monsters) do
+                    maxProgress = maxProgress + monster.count
                 end
-            end
+                if maxProgress == 0 then
+                    maxProgress = mission.maxProgressOverride or 1
+                end
 
-            local monstersData = {}
-            for _, monster in ipairs(mission.monsters) do
-                table.insert(monstersData, {
-                    name = monster.name,
-                    count = monster.count,
-                    outfit = monster.outfit or 0,
-                    progress = monster.storageId and math.max(0, getPlayerStorageValue(cid, monster.storageId)) or 0
+                local rewardsData = {}
+                if questData.status == QUEST_STATUS.COMPLETED then
+                    for _, reward in ipairs(mission.rewards) do
+                        local clientId = itemClientId(reward.id)
+                        local name = "Unknown Item"
+                        local it = safeItemType(reward.id)
+                        if it then
+                            local okName, itemName = pcall(function() return it:getName() end)
+                            if okName and itemName and itemName ~= "" then
+                                name = itemName
+                            end
+                        end
+
+                        -- Tooltip detalhado com atributos
+                        local tooltip = name
+                        if it then
+                            local armor = itemField(it, "getArmor")
+                            local attack = itemField(it, "getAttack")
+                            local defense = itemField(it, "getDefense")
+                            local weight = itemField(it, "getWeight")
+
+                            if armor > 0 then tooltip = tooltip .. "\nArmor: " .. armor end
+                            if attack > 0 then tooltip = tooltip .. "\nAttack: " .. attack end
+                            if defense > 0 then tooltip = tooltip .. "\nDefense: " .. defense end
+                            if weight > 0 then tooltip = tooltip .. "\nWeight: " .. (weight / 100) .. " oz" end
+                        end
+
+                        table.insert(rewardsData, {id = clientId, count = reward.count, name = tooltip})
+                    end
+                end
+
+                local monstersData = {}
+                for _, monster in ipairs(mission.monsters) do
+                    table.insert(monstersData, {
+                        name = monster.name,
+                        count = monster.count,
+                        outfit = monster.outfit or 0,
+                        progress = monster.storageId and math.max(0, getPlayerStorageValue(cid, monster.storageId)) or 0
+                    })
+                end
+
+                table.insert(questData.missions, {
+                    id = mission.id,
+                    name = mission.name,
+                    description = mission.description,
+                    status = missionStatus,
+                    completed = qsIsMissionCompleted(cid, quest.id, mission.id or 0),
+                    progress = math.min(qsGetMissionProgress(cid, quest.id, mission.id or 0), maxProgress),
+                    maxProgress = maxProgress,
+                    rewards = rewardsData,
+                    monsters = monstersData
                 })
             end
 
-            table.insert(questData.missions, {
-                id = mission.id,
-                name = mission.name,
-                description = mission.description,
-                status = missionStatus,
-                completed = qsIsMissionCompleted(cid, quest.id, mission.id),
-                progress = math.min(qsGetMissionProgress(cid, quest.id, mission.id), maxProgress),
-                maxProgress = maxProgress,
-                rewards = rewardsData,
-                monsters = monstersData
-            })
+            -- Se a missao atual nao esta completa, para de mostrar as proximas
+            if missionStatus ~= MISSION_STATUS.COMPLETED then
+                showNext = false
+            end
         end
-
-        -- Se a missao atual nao esta completa, para de mostrar as proximas
-        if missionStatus ~= MISSION_STATUS.COMPLETED then
-            showNext = false
-        end
+    end)
+    if not detailsOk then
+        print("[QuestSystem] Erro ao enviar detalhes da quest '" .. tostring(quest.name) .. "' (id " .. tostring(quest.id) .. "): " .. tostring(detailsErr))
     end
 
     local payload = {
@@ -547,61 +563,68 @@ end
 function qsSendQuestList(cid)
     local questsData = {}
     for _, quest in ipairs(QuestSystem.quests) do
-        local status = qsGetQuestStatus(cid, quest.id)
-        if status ~= QUEST_STATUS.NOT_STARTED then
-            local visibleMissionCount = 0
-            local completedMissions = 0
-            local totalProgress = 0
-            local totalMax = 0
-            local showNext = true
+        -- Uma quest com dados quebrados NAO pode apagar o quest log inteiro:
+        -- isola a montagem de cada quest; as saudaveis continuam aparecendo.
+        local listOk, listErr = pcall(function()
+            local status = qsGetQuestStatus(cid, quest.id or 0)
+            if status ~= QUEST_STATUS.NOT_STARTED then
+                local visibleMissionCount = 0
+                local completedMissions = 0
+                local totalProgress = 0
+                local totalMax = 0
+                local showNext = true
 
-            for _, mission in ipairs(quest.missions) do
-                local mStatus = qsGetMissionStatus(cid, quest.id, mission.id)
-                local isStartedOrDone = (mStatus ~= MISSION_STATUS.NOT_STARTED)
+                for _, mission in ipairs(quest.missions) do
+                    local mStatus = qsGetMissionStatus(cid, quest.id or 0, mission.id or 0)
+                    local isStartedOrDone = (mStatus ~= MISSION_STATUS.NOT_STARTED)
 
-                if isStartedOrDone or showNext then
-                    visibleMissionCount = visibleMissionCount + 1
-                    if mStatus == MISSION_STATUS.COMPLETED then
-                        completedMissions = completedMissions + 1
+                    if isStartedOrDone or showNext then
+                        visibleMissionCount = visibleMissionCount + 1
+                        if mStatus == MISSION_STATUS.COMPLETED then
+                            completedMissions = completedMissions + 1
+                        end
+
+                        -- Progresso de kills: soma missao a missao
+                        local maxProgress = 0
+                        for _, monster in ipairs(mission.monsters) do
+                            maxProgress = maxProgress + monster.count
+                        end
+                        if maxProgress == 0 then
+                            maxProgress = mission.maxProgressOverride or 1
+                        end
+
+                        local missionProgress = 0
+                        if mStatus == MISSION_STATUS.COMPLETED then
+                            missionProgress = maxProgress
+                        else
+                            missionProgress = math.min(qsGetMissionProgress(cid, quest.id or 0, mission.id or 0), maxProgress)
+                        end
+
+                        totalMax = totalMax + maxProgress
+                        totalProgress = totalProgress + missionProgress
                     end
 
-                    -- Progresso de kills: soma missao a missao
-                    local maxProgress = 0
-                    for _, monster in ipairs(mission.monsters) do
-                        maxProgress = maxProgress + monster.count
+                    if mStatus ~= MISSION_STATUS.COMPLETED then
+                        showNext = false
                     end
-                    if maxProgress == 0 then
-                        maxProgress = mission.maxProgressOverride or 1
-                    end
-
-                    local missionProgress = 0
-                    if mStatus == MISSION_STATUS.COMPLETED then
-                        missionProgress = maxProgress
-                    else
-                        missionProgress = math.min(qsGetMissionProgress(cid, quest.id, mission.id or 0), maxProgress)
-                    end
-
-                    totalMax = totalMax + maxProgress
-                    totalProgress = totalProgress + missionProgress
                 end
 
-                if mStatus ~= MISSION_STATUS.COMPLETED then
-                    showNext = false
-                end
+                table.insert(questsData, {
+                    id = quest.id,
+                    name = quest.name,
+                    lookType = quest.lookType or 0,
+                    lookTypeEx = quest.lookTypeEx > 0 and itemClientId(quest.lookTypeEx) or 0,
+                    description = quest.description or "",
+                    status = status,
+                    missionCount = visibleMissionCount,
+                    completedMissions = completedMissions,
+                    progress = totalProgress,
+                    maxProgress = totalMax
+                })
             end
-
-            table.insert(questsData, {
-                id = quest.id,
-                name = quest.name,
-                lookType = quest.lookType or 0,
-                lookTypeEx = quest.lookTypeEx > 0 and itemClientId(quest.lookTypeEx) or 0,
-                description = quest.description or "",
-                status = status,
-                missionCount = visibleMissionCount,
-                completedMissions = completedMissions,
-                progress = totalProgress,
-                maxProgress = totalMax
-            })
+        end)
+        if not listOk then
+            print("[QuestSystem] Erro ao montar quest '" .. tostring(quest.name) .. "' (id " .. tostring(quest.id) .. "): " .. tostring(listErr))
         end
     end
 

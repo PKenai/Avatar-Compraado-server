@@ -8,7 +8,7 @@ local sto = Ahu -- storage vip aqui.
        else
          doTeleportThing(cid, fromPosition, true)
        doSendMagicEffect(getThingPos(cid), 11)
-      doPlayerSendTextMessage(cid, 25, "Você não tem permissão para entrar aqui! Fale com o protetor Tunico.")
+      doPlayerSendTextMessage(cid, 25, "VocÃª nÃ£o tem permissÃ£o para entrar aqui! Fale com o protetor Tunico.")
    end
  end
  

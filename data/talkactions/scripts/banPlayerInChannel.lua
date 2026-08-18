@@ -46,7 +46,7 @@ function onSay(cid, words, param, channel)
         local time, minutes = filterNumber(param[2])*60, filterNumber(param[2])
         setPlayerStorageValue(pid, "getPlayerHasBanned", os.time()+time)
         sendBlueMessage(cid, param[1].." has to banned to talk in public channels successfully for "..minutes.." minutes.")
-        doPlayerSendTextMessage(pid, MESSAGE_STATUS_WARNING, getLangString(pid, "You have been banned from speaking in public chats for "..minutes.." minute(s).", "Você foi banido de falar em chats publicos por "..minutes.." minuto(s)."))
+        doPlayerSendTextMessage(pid, MESSAGE_STATUS_WARNING, getLangString(pid, "You have been banned from speaking in public chats for "..minutes.." minute(s).", "VocÃª foi banido de falar em chats publicos por "..minutes.." minuto(s)."))
       end
     end
   else

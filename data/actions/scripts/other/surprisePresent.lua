@@ -47,6 +47,6 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
   doPlayerAddItem(cid, items[itemIndex].itemId, count)
   doRemoveItem(item.uid, 1)
 
-  sendBlueMessage(cid, string.format(getLangString(cid, "You have found %s %s(s) in surprise present, enjoy it!", "Parábens, Você encontrou %s %s(s) no presente surpresa, aproveite!"), count, itemName))
+  sendBlueMessage(cid, string.format(getLangString(cid, "You have found %s %s(s) in surprise present, enjoy it!", "ParabÃ©ns, VocÃª encontrou %s %s(s) no presente surpresa, aproveite!"), count, itemName))
   return true
 end

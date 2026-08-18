@@ -17,7 +17,7 @@ npcHandler:setMessage(MESSAGE_GREET, "")
 
 local function tryTravel(cid, destination)
 	if isAppaFlying and isAppaFlying(cid) then
-		selfSay(getLangString(cid, "You are already flying!", "Voce ja esta voando!"), cid)
+		selfSay(getLangString(cid, "You are already flying!", "Você já está voando!"), cid)
 		if appaFlightUnlock then appaFlightUnlock(cid) end
 		return
 	end
@@ -30,7 +30,7 @@ local function tryTravel(cid, destination)
 		end
 	else
 		if appaFlightUnlock then appaFlightUnlock(cid) end
-		selfSay(getLangString(cid, "You dont have 50 gold coins.", "Voce nao tem 50 gold coins."), cid)
+		selfSay(getLangString(cid, "You dont have 50 gold coins.", "Você não tem 50 gold coins."), cid)
 	end
 end
 
@@ -59,14 +59,14 @@ function creatureSayCallback(cid, type, msg)
 		elseif msgcontains(msg, "no") then
 			pendingDest[cid] = nil
 			talkState[talkUser] = 1
-			selfSay(getLangString(cid, "Maybe next time.", "Talvez na proxima."), cid)
+			selfSay(getLangString(cid, "Maybe next time.", "Talvez na próxima."), cid)
 		end
 		return true
 	end
 
 	if talkState[talkUser] == 1 then
 		if msgcontains(msg, "routes") or msgcontains(msg, "rotas") or msgcontains(msg, "travel") then
-			selfSay(getLangString(cid, "I can take you to: {South Air Temple} or {West Field} for 50 gold coins.", "Eu posso levar voce para: {South Air Temple} ou {West Field} por 50 gold coins."), cid)
+			selfSay(getLangString(cid, "I can take you to: {South Air Temple} or {West Field} for 50 gold coins.", "Eu posso levar você para: {South Air Temple} ou {West Field} por 50 gold coins."), cid)
 		elseif msgcontains(msg, "temple") then
 			pendingDest[cid] = {x = 510, y = 688, z = 4}
 			talkState[talkUser] = 2
@@ -83,7 +83,7 @@ end
 function onGreet(cid)
 	talkState[cid] = 1
 	pendingDest[cid] = nil
-	selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", do you want to {travel}?", "Ola "..getCreatureName(cid).."! Eu posso lhe transportar para varios lugares, deseja ver minhas {rotas}?"), cid)
+	selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", do you want to {travel}?", "Olá "..getCreatureName(cid).."! Eu posso lhe transportar para varios lugares, deseja ver minhas {rotas}?"), cid)
 	return true
 end
 

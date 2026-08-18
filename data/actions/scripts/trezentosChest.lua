@@ -28,16 +28,16 @@ end
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if checkBossAlive() then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa derrotar os 4 bosses presentes na sala.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª precisa derrotar os 4 bosses presentes na sala.")
 		return true
 	elseif getPlayerStorageValue(cid, "90520") == 1 then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ pegou esta recompensa.")
 	else	
 		local theItem = getItemBySkill(cid)
 		setPlayerStorageValue(cid, "90520", 1)
 		doPlayerAddItem(cid, theItem, 1)
 		doSendMagicEffect(getThingPos(cid), 29)
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você conquistou o "..getItemNameById(theItem)..".")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! VocÃª conquistou o "..getItemNameById(theItem)..".")
 	end 
 		doTeleportThing(cid, {x=1138, y=1047, z=7})
 		doSendMagicEffect({x=1138, y=1047, z=7}, CONST_ME_TELEPORT)

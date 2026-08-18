@@ -2,7 +2,7 @@
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if getPlayerStorageValue(cid, "90509") == 1 then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ pegou esta recompensa.")
 		return true
 	end 
     setPlayerStorageValue(cid, "90509", 1)
@@ -15,6 +15,6 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	finalExp = finalExp/2
 	doPlayerAddExperience(cid, finalExp)
 	doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você completou a Evil Zuko Quest. Como recompensa, você recebeu 1x Fire Boots.")
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! VocÃª completou a Evil Zuko Quest. Como recompensa, vocÃª recebeu 1x Fire Boots.")
     return true
 end

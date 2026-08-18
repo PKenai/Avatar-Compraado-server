@@ -3,21 +3,21 @@
 -- castleWar.init() - inicia o evento
 -- castleWar.close() - termina o evento, usado quando acaba o tempo
 -- castleWar.makeOwner(cid) - torna a guild do cid a nova dona do castelo 
--- castleWar.isOnCastle(cid) - verifica se o usuário está dentro da ilha(andar 7 ou voando)
--- castleWar.removeEnemies() - remove jogadores que estão na ilha e não são da guild dominante 
--- castleWar.isInDominantGuild(cid) - checa se o cid é membro da guild dominante
--- castleWar.isRunning() - checa se o evento está rolando
+-- castleWar.isOnCastle(cid) - verifica se o usuÃ¡rio estÃ¡ dentro da ilha(andar 7 ou voando)
+-- castleWar.removeEnemies() - remove jogadores que estÃ£o na ilha e nÃ£o sÃ£o da guild dominante 
+-- castleWar.isInDominantGuild(cid) - checa se o cid Ã© membro da guild dominante
+-- castleWar.isRunning() - checa se o evento estÃ¡ rolando
 
 
 local winnerStorage = 391893 -- storage com a guild name dominante 
-local nameLever = 391894 -- storage com o nome do último jogador que usou a lever
-local runningStorage = 391895 -- storage caso 1 está rolando o event
-local teleportEnterFrom = {x=500,y=325,z=8} -- onde é criado o tp pro evento
+local nameLever = 391894 -- storage com o nome do Ãºltimo jogador que usou a lever
+local runningStorage = 391895 -- storage caso 1 estÃ¡ rolando o event
+local teleportEnterFrom = {x=500,y=325,z=8} -- onde Ã© criado o tp pro evento
 local teleportEnterTo = {x=1150,y=978,z=7} -- para onde o tp do evento leva
-local teleportExit = {x=1159, y=924, z=4} -- local que abre um tp de saída para quem ficou dentro do castle(saiu da guild dominante lá dentro)
+local teleportExit = {x=1159, y=924, z=4} -- local que abre um tp de saÃ­da para quem ficou dentro do castle(saiu da guild dominante lÃ¡ dentro)
 local townPos = {x=1152, y=941, z=7} -- pos do templo ba-sing-se, usado pra ser o destino do tp acima /\
-local posPortao = {x=1152, y=930, z=7} -- pos do portão a ser transformado em mob
-local warMinutos = 30 -- duração do evento em minutos
+local posPortao = {x=1152, y=930, z=7} -- pos do portÃ£o a ser transformado em mob
+local warMinutos = 30 -- duraÃ§Ã£o do evento em minutos
 
 local function removeItemPos(pos, id)
 	local v = getTileItemById(pos, id).uid
@@ -38,7 +38,7 @@ castleWar =
 		doSetStorage(runningStorage, 1)
 	--	doCreateTeleport(1387, teleportEnterTo, teleportEnterFrom)
 		addEvent(castleWar.close, warMinutos*60*1000)
-		addEvent(function() doBroadcastMessage("[Evento - Castle War] O evento acabará em 1 minuto!", MESSAGE_STATUS_CONSOLE_BLUE) end, (warMinutos-1)*60*1000)
+		addEvent(function() doBroadcastMessage("[Evento - Castle War] O evento acabarÃ¡ em 1 minuto!", MESSAGE_STATUS_CONSOLE_BLUE) end, (warMinutos-1)*60*1000)
 		castleWar.animatedTexts()
 		local specs = getSpectators(bloodconfig.positionTP, 1, 0)
 		if specs and #specs >= 1 then 
@@ -52,7 +52,7 @@ castleWar =
 		local tp = doCreateItem(1387, 1, bloodconfig.positionTP)
 		doSendMagicEffect(bloodconfig.positionTP, 10)
 		doSetItemActionId(tp, 58977)
-		doBroadcastMessage("[Evento - Castle War] O Castle War foi aberto! Para todos que desejam participar, o portal se localiza no depot de Ba Sing Se. Somente dobradores com nível maior ou igual à 50 podem entrar! ")
+		doBroadcastMessage("[Evento - Castle War] O Castle War foi aberto! Para todos que desejam participar, o portal se localiza no depot de Ba Sing Se. Somente dobradores com nÃ­vel maior ou igual Ã  50 podem entrar! ")
 	end,
 	
 	close = function ()

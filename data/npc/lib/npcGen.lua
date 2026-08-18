@@ -1,6 +1,6 @@
 --incompleto (getNpcId())
 
-local timeToBye = 15 --tempo (seg) que npc encerrar· msg
+local timeToBye = 15 --tempo (seg) que npc encerrar√° msg
 
 dofile(getDataDir().."lib/isoled/150-npcSystem.lua")
 
@@ -144,19 +144,19 @@ function Npc:onThink(func)
       doNpcSetCreatureFocus(self.client)
 
       if getDistanceToCreature(self.client) > 5 then
-        self:say("How rude!", "Quanta educaÁ„o...")
+        self:say("How rude!", "Quanta educa√ß√£o...")
         setPlayerStorageValue(self.client, "canTalkWithNpc", os.time()+2)
         self.client = nil
         return
       end
 		local specs = getSpectatorsPlayers(getCreaturePosition(self.client), 1, 1)
       if (os.clock() - self.talkStart) > 120 or ((os.clock() - self.talkStart) > 45 and #specs > 1) then
-        self:say("Next please!", "PrÛximo por favor!")
+        self:say("Next please!", "Pr√≥ximo por favor!")
         setPlayerStorageValue(self.client, "canTalkWithNpc", os.time()+2)
         self.client = nil
       end
     else
-      self:say("Next please!", "PrÛximo por favor!")
+      self:say("Next please!", "Pr√≥ximo por favor!")
       self.client = nil
     end
   end
@@ -169,7 +169,7 @@ end
 function Npc:onDisappear(cid, pos)
   if self.client then
     if cid == self.client then
-      selfSay(getLangNpcString(self.lang, "Good bye then.", "Ent„o t·... tchau."))
+      selfSay(getLangNpcString(self.lang, "Good bye then.", "Ent√£o t√°... tchau."))
       setPlayerStorageValue(cid, "canTalkWithNpc", os.time()+2)
       self.client = nil
     end
@@ -219,27 +219,27 @@ function Npc:loadSellableItens(msg)
         if msgcontains(msg, itens[x].name) then
           itens[x].number = setValidateNumber(getNumbersInString(msg)[1], 2000)
           self:say('Do you want to buy '..itens[x].number..'x '..getNameItemPluralOrNot(itens[x].itemId, itens[x].name, itens[x].number)..' for '..itens[x].price*itens[x].number..' gold coins?',
-          'VocÍ deseja comprar '..itens[x].number..'x '..getNameItemPluralOrNot(itens[x].itemId, itens[x].name, itens[x].number)..' por '..itens[x].price*itens[x].number..' gold coins?')
+          'Voc√™ deseja comprar '..itens[x].number..'x '..getNameItemPluralOrNot(itens[x].itemId, itens[x].name, itens[x].number)..' por '..itens[x].price*itens[x].number..' gold coins?')
           self.sellable = 1 
           self.currentItemSell = itens[x]
           return true
         end
       end
-      self:say("Sorry, I don't sell this item.", "Desculpe, eu n„o vendo nenhum item com esse nome.")
+      self:say("Sorry, I don't sell this item.", "Desculpe, eu n√£o vendo nenhum item com esse nome.")
     end
 
   elseif self.sellable == 1 then
     if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
       if doPlayerRemoveMoney(self.client, self.currentItemSell.price*self.currentItemSell.number) then
         self:say("Here is "..self.currentItemSell.number.."x "..getNameItemPluralOrNot(self.currentItemSell.itemId, self.currentItemSell.name, self.currentItemSell.number)..", it was a pleasure doing business with you.",
-        "Aqui est· "..self.currentItemSell.number.."x "..getNameItemPluralOrNot(self.currentItemSell.itemId, self.currentItemSell.name, self.currentItemSell.number)..", È sempre um prazer negociar com vocÍ.")
+        "Aqui est√° "..self.currentItemSell.number.."x "..getNameItemPluralOrNot(self.currentItemSell.itemId, self.currentItemSell.name, self.currentItemSell.number)..", √© sempre um prazer negociar com voc√™.")
         --doPlayerAddItem(self.client, self.currentItemSell.itemId, self.currentItemSell.number)
         doPlayerAddItemNPC(self.client, self.currentItemSell.itemId, self.currentItemSell.number)
       else
-        self:say("Sorry, you don't have enough money for do this.", "Desculpe, vocÍ n„o tem dinheiro suficiente para comprar isso.")
+        self:say("Sorry, you don't have enough money for do this.", "Desculpe, voc√™ n√£o tem dinheiro suficiente para comprar isso.")
       end
     else
-      self:say("Ok, I think...", "OK ent„o...")
+      self:say("Ok, I think...", "OK ent√£o...")
     end
     self.sellable = 0
     return true
@@ -255,13 +255,13 @@ function Npc:loadBuyableItens(msg)
         if msgcontains(msg, itens[x].name) then
           itens[x].number = setValidateNumber(getNumbersInString(msg)[1])
           self:say('Do you want to sell '..itens[x].number..'x '..getNameItemPluralOrNot(itens[x].itemId, itens[x].name, itens[x].number)..' for '..itens[x].price*itens[x].number..' gold coins?',
-          'VocÍ deseja vender '..itens[x].number..'x '..getNameItemPluralOrNot(itens[x].itemId, itens[x].name, itens[x].number)..' por '..itens[x].price*itens[x].number..' gold coins?')
+          'Voc√™ deseja vender '..itens[x].number..'x '..getNameItemPluralOrNot(itens[x].itemId, itens[x].name, itens[x].number)..' por '..itens[x].price*itens[x].number..' gold coins?')
           self.buyable = 1 
           self.currentItemBuy = itens[x]
           return true
         end
       end
-      self:say("Sorry, I don't buy this item.", "Desculpe, eu n„o compro nenhum item com esse nome.")
+      self:say("Sorry, I don't buy this item.", "Desculpe, eu n√£o compro nenhum item com esse nome.")
 
     elseif msgcontains(msg, "all loot") then
       local lootSlot = getItensInContainer(getPlayerSlotItem(self.client, CONST_SLOT_RING).uid)
@@ -290,9 +290,9 @@ function Npc:loadBuyableItens(msg)
           error('[doPlayerAddMoney] Could not add money to: ' .. getPlayerName(self.client) .. ' (' .. totalPrice .. 'gp).')
         end
 
-        self:say("Here is "..totalPrice.." gold coins, it was a pleasure doing business with you.", "Aqui est· "..totalPrice.." gold coins, È sempre um prazer negociar com vocÍ.")
+        self:say("Here is "..totalPrice.." gold coins, it was a pleasure doing business with you.", "Aqui est√° "..totalPrice.." gold coins, √© sempre um prazer negociar com voc√™.")
       else
-        self:say("Sorry, I don't buy any item for your Loot Slot.", "Desculpe, eu n„o estou comprando nenhum desses items.")
+        self:say("Sorry, I don't buy any item for your Loot Slot.", "Desculpe, eu n√£o estou comprando nenhum desses items.")
       end
     end
 
@@ -300,12 +300,12 @@ function Npc:loadBuyableItens(msg)
     if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
       if doPlayerSellItem(self.client, self.currentItemBuy.itemId, self.currentItemBuy.number, self.currentItemBuy.price*self.currentItemBuy.number) then
         self:say("Here is "..self.currentItemBuy.price*self.currentItemBuy.number.." gold coins, it was a pleasure doing business with you.",
-        "Aqui est· "..self.currentItemBuy.price*self.currentItemBuy.number.." gold coins, È sempre um prazer negociar com vocÍ.")
+        "Aqui est√° "..self.currentItemBuy.price*self.currentItemBuy.number.." gold coins, √© sempre um prazer negociar com voc√™.")
       else
-        self:say("Sorry, you dont have this item to sell.", "Desculpe, vocÍ nao tem esses itens para vender.")
+        self:say("Sorry, you dont have this item to sell.", "Desculpe, voc√™ n√£o tem esses itens para vender.")
       end
     else
-      self:say("Ok, I think...", "OK ent„o...")
+      self:say("Ok, I think...", "OK ent√£o...")
     end
     self.buyable = 0
     return true
@@ -316,7 +316,7 @@ function Npc:loadShipRoutes(msg)
   if self.boatStage == nil then
     for x = 1, #self.boatRoutes do
       if msgcontains(msg, self.boatRoutes[x].name) then
-        self:say("Are you sure you want to go to "..self.boatRoutes[x].name.." for "..self.boatRoutes[x].price.." gold coins?", "VocÍ tem certeza que deseja ir para "..self.boatRoutes[x].name.." por "..self.boatRoutes[x].price.." gold coins?")
+        self:say("Are you sure you want to go to "..self.boatRoutes[x].name.." for "..self.boatRoutes[x].price.." gold coins?", "Voc√™ tem certeza que deseja ir para "..self.boatRoutes[x].name.." por "..self.boatRoutes[x].price.." gold coins?")
         self.boatStage = 1
         self.boatIndex = x
         return true
@@ -327,16 +327,16 @@ function Npc:loadShipRoutes(msg)
     if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
       if not isPlayerPzLocked(self.client) then
         if doPlayerRemoveMoney(self.client, self.boatRoutes[self.boatIndex].price) then
-          self:say("Thank you for choosing my services.", "Obrigado por escolher meus serviÁos!")
+          self:say("Thank you for choosing my services.", "Obrigado por escolher meus servi√ßos!")
           doTeleportCreature(self.client, self.boatRoutes[self.boatIndex].pos, 10)
         else
-          self:say("Sorry, you don't have money to do this.", "Desculpe vocÍ n„o tem dinheiro para fazer isso.")
+          self:say("Sorry, you don't have money to do this.", "Desculpe voc√™ n√£o tem dinheiro para fazer isso.")
         end
       else
-        self:say("Sorry, you cannot travel with battle active.", "Desculpe, vocÍ n„o pode viajar com battle ativo.")
+        self:say("Sorry, you cannot travel with battle active.", "Desculpe, voc√™ n√£o pode viajar com battle ativo.")
       end
     else
-      self:say("Ok, I think...", "OK ent„o...")
+      self:say("Ok, I think...", "OK ent√£o...")
     end
     self.boatStage = nil
   end
@@ -381,27 +381,27 @@ function Npc:loadFoldNPC(cid, msg)
 		if msgcontains(msg, "promote") or msgcontains(msg, "promotion") or msgcontains(msg, "promover") then
 			if getPlayerStorageValue(cid, "canPromote") == 1 then
 				local nomeByVoc = {"Fire Lord", "Tribal Chief", "Air Monk", "Dai Li"}
-				self:say("I now promote you to "..nomeByVoc[getPlayerVocation(cid)]..". Congratulations and honor your name!", "Eu agora te promovo a "..nomeByVoc[getPlayerVocation(cid)]..". ParabÈns e honre seu nome!")
+				self:say("I now promote you to "..nomeByVoc[getPlayerVocation(cid)]..". Congratulations and honor your name!", "Eu agora te promovo a "..nomeByVoc[getPlayerVocation(cid)]..". Parab√©ns e honre seu nome!")
 				doSendMagicEffect(getCreaturePosition(cid), 49)
 				self:setStage(1)
 				setPlayerStorageValue(cid, "canPromote", 2)
 				setPlayerStorageValue(cid, "isPromoted", 1)
 			elseif getPlayerStorageValue(cid, "canPromote") == 2 then
 				local nomeByVoc = {"Fire Lord", "Tribal Chief", "Air Monk", "Dai Li"}
-				self:say("You already are a "..nomeByVoc[getPlayerVocation(cid)]..".", "VocÍ j· È um "..nomeByVoc[getPlayerVocation(cid)]..".")
+				self:say("You already are a "..nomeByVoc[getPlayerVocation(cid)]..".", "Voc√™ j√° √© um "..nomeByVoc[getPlayerVocation(cid)]..".")
 				self:setStage(1)
 			else
-				self:say("You need to complete your secret mission first.", "VocÍ precisa completar a sua miss„o secreta primeiro.")
+				self:say("You need to complete your secret mission first.", "Voc√™ precisa completar a sua miss√£o secreta primeiro.")
 				self:setStage(1)
 			end
         elseif msgcontains(msg, "learn") or msgcontains(msg, "aprender") then
             local list = getListLearnFold(cid, true)
 
             if list ~= "" then
-                self:say("Huuumm, let me see... in this level you can learn: "..list..". Are you interested?", "Huuumm, deixe-me ver... nesse level vocÍ pode aprender: "..list..". Est· interessado?")
+                self:say("Huuumm, let me see... in this level you can learn: "..list..". Are you interested?", "Huuumm, deixe-me ver... nesse level voc√™ pode aprender: "..list..". Est√° interessado?")
                 self:setStage(2)
             else
-                self:say("Right now you don't have any fold avaiable to learn.", "Nesse momento vocÍ n„o tem nenhuma dobra dÌsponivel para aprender.")
+                self:say("Right now you don't have any fold avaiable to learn.", "Nesse momento voc√™ n√£o tem nenhuma dobra d√≠sponivel para aprender.")
             end
         end
 
@@ -426,11 +426,11 @@ function Npc:loadFoldNPC(cid, msg)
             self:say("Hum, the fold "..element.." "..list[x].." costs "..price.." gold coins or 1 bender scroll to learn, do you wanna pay with GOLD or BENDER SCROLL?", "Hum, a dobra "..element.." "..list[x].." custa "..price.." gold coins ou 1 bender scroll para aprender, quer pagar com GOLD ou BENDER SCROLL?")
             nextStage = 3
       --    elseif sequencia == #spells then      
-      --      self:say("Unfortunately, folds as the "..element.." "..list[x].." is not so simple to master. I'll need bender scrolls, which are scrolls that have the secrets of these folds. Rumor has it that the Belzeboss is the guardian of these scrolls, which protects them to prevent them from falling into the hands of benders.", "Infelizmente, dobra como a "..element.." "..list[x].." n„o È t„o simples de se dominar. Precisarei de bender scrolls, que s„o pergaminhos que possuem os segredos destas dobras. H· rumores de que o Belzeboss È o guardi„o destes pergaminhos, que os protege para evitar que caiam em m„os de dobradores.")      
-      --      self:say("The fold "..element.." "..list[x].." costs 3 bender scrolls to learn, do you accept?", "A dobra "..element.." "..list[x].." custa 3 bender scrolls para aprender, est· interessado?")
+      --      self:say("Unfortunately, folds as the "..element.." "..list[x].." is not so simple to master. I'll need bender scrolls, which are scrolls that have the secrets of these folds. Rumor has it that the Belzeboss is the guardian of these scrolls, which protects them to prevent them from falling into the hands of benders.", "Infelizmente, dobra como a "..element.." "..list[x].." n√£o √© t√£o simples de se dominar. Precisarei de bender scrolls, que s√£o pergaminhos que possuem os segredos destas dobras. H√° rumores de que o Belzeboss √© o guardi√£o destes pergaminhos, que os protege para evitar que caiam em m√£os de dobradores.")      
+      --      self:say("The fold "..element.." "..list[x].." costs 3 bender scrolls to learn, do you accept?", "A dobra "..element.." "..list[x].." custa 3 bender scrolls para aprender, est√° interessado?")
       --    elseif sequencia+1 == #spells then                    
-      --      self:say("Unfortunately, folds as the "..element.." "..list[x].." is not so simple to master. I'll need bender scrolls, which are scrolls that have the secrets of these folds. Rumor has it that the Belzeboss is the guardian of these scrolls, which protects them to prevent them from falling into the hands of benders.", "Infelizmente, dobra como a "..element.." "..list[x].." n„o È t„o simples de se dominar. Precisarei de bender scrolls, que s„o pergaminhos que possuem os segredos destas dobras. H· rumores de que o Belzeboss È o guardi„o destes pergaminhos, que os protege para evitar que caiam em m„os de dobradores.")        
-      --      self:say("The fold "..element.." "..list[x].." costs 2 bender scrolls to learn, do you accept?", "A dobra "..element.." "..list[x].." custa 2 bender scrolls para aprender, est· interessado?")
+      --      self:say("Unfortunately, folds as the "..element.." "..list[x].." is not so simple to master. I'll need bender scrolls, which are scrolls that have the secrets of these folds. Rumor has it that the Belzeboss is the guardian of these scrolls, which protects them to prevent them from falling into the hands of benders.", "Infelizmente, dobra como a "..element.." "..list[x].." n√£o √© t√£o simples de se dominar. Precisarei de bender scrolls, que s√£o pergaminhos que possuem os segredos destas dobras. H√° rumores de que o Belzeboss √© o guardi√£o destes pergaminhos, que os protege para evitar que caiam em m√£os de dobradores.")        
+      --      self:say("The fold "..element.." "..list[x].." costs 2 bender scrolls to learn, do you accept?", "A dobra "..element.." "..list[x].." custa 2 bender scrolls para aprender, est√° interessado?")
       --      end 
           self:setStorage("foldName", list[x])
           self:setStage(nextStage)
@@ -438,7 +438,7 @@ function Npc:loadFoldNPC(cid, msg)
             end
         end
 
-        self:say("Only the folds I said earlier are available for learning.", "Apenas as dobras que eu disse anteriormente est„o disponiveis para aprendizagem.")
+        self:say("Only the folds I said earlier are available for learning.", "Apenas as dobras que eu disse anteriormente est√£o disponiveis para aprendizagem.")
         self:setStage(2)
         return true
 
@@ -453,12 +453,12 @@ function Npc:loadFoldNPC(cid, msg)
             local canLearn = canBuyFold(cid, current, msgcontains(msg, "gold") and 1 or 2)
 
             if canLearn == true then
-                self:say("Congratulations! Use this fold with extreme caution and wisdom.", "Par·bens! Use essa dobra com extremo cuidado e sabedoria.")
+                self:say("Congratulations! Use this fold with extreme caution and wisdom.", "Parab√©ns! Use essa dobra com extremo cuidado e sabedoria.")
             else
                 self:say(canLearn[1], canLearn[2])
             end
         else
-            self:say("Ok, I think...", "Ok ent„o...")
+            self:say("Ok, I think...", "Ok ent√£o...")
         end
 
         self:setStage(2)
@@ -471,12 +471,12 @@ function Npc:loadFoldNPC(cid, msg)
             local canLearn = canBuyFold(cid, current, 2)
 
             if canLearn == true then
-                self:say("Congratulations! Use this fold with extreme caution and wisdom.", "Par·bens! Use essa dobra com extremo cuidado e sabedoria.")
+                self:say("Congratulations! Use this fold with extreme caution and wisdom.", "Parab√©ns! Use essa dobra com extremo cuidado e sabedoria.")
             else
                 self:say(canLearn[1], canLearn[2])
             end
         else
-            self:say("Ok, I think...", "Ok ent„o...")
+            self:say("Ok, I think...", "Ok ent√£o...")
         end
 
         self:setStage(1)
@@ -493,7 +493,7 @@ function Npc:onSay(cid, type, msg, func)
 		doCreatureSay(getNpcId(), getLangNpcString(getLang(cid), getCreatureName(cid).." please wait for your turn.", getCreatureName(cid)..", por favor espere por sua vez."), TALKTYPE_SAY, false, cid)
       else
         self.talkStart = os.clock()
-        selfSay(getLangNpcString(self.lang, "I'm already talking with you.", "Eu j· estou falando com vocÍ."))
+        selfSay(getLangNpcString(self.lang, "I'm already talking with you.", "Eu j√° estou falando com voc√™."))
       end
     else
 
@@ -528,7 +528,7 @@ function Npc:onSay(cid, type, msg, func)
           if self.msgHi then
             selfSay(getLangNpcString(self.lang, string.format(self.msgHi[1], getCreatureName(cid)), string.format(self.msgHi[2], getCreatureName(cid))))
           else
-            selfSay("Ol·, oque vocÍ deseja com minha pessoa?")
+            selfSay("Ol√°, oque voc√™ deseja com minha pessoa?")
           end
         end
 
@@ -549,7 +549,7 @@ function Npc:onSay(cid, type, msg, func)
   else
     if self.client == cid then
       if msgcontains(msg, "bye") or msgcontains(msg, "tchau") then
-        self:say('Good bye, ' .. creatureGetName(cid) .. '!', 'AtÈ logo '..creatureGetName(cid)..'!')
+        self:say('Good bye, ' .. creatureGetName(cid) .. '!', 'At√© logo '..creatureGetName(cid)..'!')
         setPlayerStorageValue(cid, "canTalkWithNpc", os.time()+2)
         self.client = nil
         return

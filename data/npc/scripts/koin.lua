@@ -37,7 +37,7 @@ function onBuy(cid, itemid, subType, amount, ignoreCap, inBackpacks)
   if getPlayerItemCount(cid, COIN_AVATAR) < totalCost then
     doPlayerSendCancel(cid, getLangString(cid,
       "You need "..totalCost.." Moedas Avatar to buy that.",
-      "Você precisa de "..totalCost.." Moedas Avatar para comprar isso."))
+      "VocÃª precisa de "..totalCost.." Moedas Avatar para comprar isso."))
     return false
   end
 
@@ -46,23 +46,23 @@ function onBuy(cid, itemid, subType, amount, ignoreCap, inBackpacks)
   if a < amount then
     doPlayerSendCancel(cid, getLangString(cid,
       "You do not have enough space.",
-      "Você não tem espaço suficiente."))
+      "VocÃª nÃ£o tem espaÃ§o suficiente."))
     return false
   end
 
   doPlayerRemoveItem(cid, COIN_AVATAR, totalCost)
   doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid,
     "You bought "..amount.." "..getItemNameById(itemid).." for "..totalCost.." Moedas Avatar.",
-    "Você comprou "..amount.." "..getItemNameById(itemid).." por "..totalCost.." Moedas Avatar."))
+    "VocÃª comprou "..amount.." "..getItemNameById(itemid).." por "..totalCost.." Moedas Avatar."))
   return false
 end
 npcHandler:setCallback(CALLBACK_ONBUY, onBuy)
 
--- Koin não compra itens de volta.
+-- Koin nÃ£o compra itens de volta.
 function onSell(cid, itemid, subType, amount, ignoreCap, inBackpacks)
   doPlayerSendCancel(cid, getLangString(cid,
     "I do not buy items.",
-    "Eu não compro itens."))
+    "Eu nÃ£o compro itens."))
   return false
 end
 npcHandler:setCallback(CALLBACK_ONSELL, onSell)
@@ -86,7 +86,7 @@ end
 function onGreet(cid)
   selfSay(getLangString(cid,
     "Hello "..getCreatureName(cid).."! I sell {training wands} for 5 {Moeda Avatar} each. Say {trade} to see my offers!",
-    "Olá "..getCreatureName(cid).."! Eu vendo {varinhas de treino} por 5 {Moedas Avatar} cada. Diga {trade} para ver minhas ofertas!"), cid)
+    "OlÃ¡ "..getCreatureName(cid).."! Eu vendo {varinhas de treino} por 5 {Moedas Avatar} cada. Diga {trade} para ver minhas ofertas!"), cid)
   return true
 end
 

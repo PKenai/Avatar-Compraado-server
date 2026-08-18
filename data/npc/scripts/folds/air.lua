@@ -41,7 +41,7 @@ function onThink() 							npcHandler:onThink() 						end
 function onPlayerEndTrade(cid)				npcHandler:onPlayerEndTrade(cid)			end
 function onPlayerCloseChannel(cid)			npcHandler:onPlayerCloseChannel(cid)		end
 
-npcHandler:setMessage(MESSAGE_GREET, "Ol· |PLAYERNAME|, vocÍ quer {aprender} alguma dobra comigo hoje, ou deseja ser {promovido}?")
+npcHandler:setMessage(MESSAGE_GREET, "Ol√° |PLAYERNAME|, voc√™ quer {aprender} alguma dobra comigo hoje, ou deseja ser {promovido}?")
 
 local dobraAtual = {}
 local sequenciaAtual = {}
@@ -53,7 +53,7 @@ function creatureSayCallback(cid, type, msg)
 	local lang, element = getLang(cid), getPlayerElement(cid)
 
     if element ~= "air" then
-        selfSay(getLangString(cid, "Sorry, i only teaching air benders, the winds will lead you to your mentor.", "Eu sÛ treino dobradores do ar, os ventos v„o leva-lo atÈ o seu mentor."), cid)
+        selfSay(getLangString(cid, "Sorry, i only teaching air benders, the winds will lead you to your mentor.", "Eu s√≥ treino dobradores do ar, os ventos v√£o leva-lo at√© o seu mentor."), cid)
         return false
     end
 	 
@@ -65,7 +65,7 @@ function creatureSayCallback(cid, type, msg)
         if msgcontains(msg, "promote") or msgcontains(msg, "promotion") or msgcontains(msg, "promovido") or msgcontains(msg, "promover") then
 			if getPlayerStorageValue(cid, "canPromote") == 1 then
 				local nomeByVoc = {"Fire Lord", "Tribal Chief", "Air Monk", "Dai Li"}
-				selfSay(getLangString(cid, "I now promote you to "..nomeByVoc[getPlayerVocation(cid)]..". Congratulations and honor your name!", "Eu agora te promovo a "..nomeByVoc[getPlayerVocation(cid)]..". ParabÈns e honre seu nome!"), cid)
+				selfSay(getLangString(cid, "I now promote you to "..nomeByVoc[getPlayerVocation(cid)]..". Congratulations and honor your name!", "Eu agora te promovo a "..nomeByVoc[getPlayerVocation(cid)]..". Parab√©ns e honre seu nome!"), cid)
 				doSendMagicEffect(getCreaturePosition(cid), 49)
 				talkState[talkUser] = 1 
 				setPlayerStorageValue(cid, "canPromote", 2)
@@ -73,20 +73,20 @@ function creatureSayCallback(cid, type, msg)
                 setPlayerStorageValue(cid, "90514", 1)
 			elseif getPlayerStorageValue(cid, "canPromote") == 2 then
 				local nomeByVoc = {"Fire Lord", "Tribal Chief", "Air Monk", "Dai Li"}
-				selfSay(getLangString(cid, "You already are a "..nomeByVoc[getPlayerVocation(cid)]..".", "VocÍ j· È um "..nomeByVoc[getPlayerVocation(cid)].."."), cid)
+				selfSay(getLangString(cid, "You already are a "..nomeByVoc[getPlayerVocation(cid)]..".", "Voc√™ j√° √© um "..nomeByVoc[getPlayerVocation(cid)].."."), cid)
 				talkState[talkUser] = 1 
 			else
-				selfSay(getLangString(cid, "You need to complete your secret mission first.", "VocÍ precisa completar a sua miss„o secreta primeiro."), cid)
+				selfSay(getLangString(cid, "You need to complete your secret mission first.", "Voc√™ precisa completar a sua miss√£o secreta primeiro."), cid)
 				talkState[talkUser] = 1 
 			end
         elseif msgcontains(msg, "learn") or msgcontains(msg, "aprender") then
             local list = getListLearnFold(cid, true)
 
             if list ~= "" then
-                selfSay(getLangString(cid, "Huuumm, let me see... in this level you can learn: {"..list.."}. Are you interested?", "Huuumm, deixe-me ver... nesse level vocÍ pode aprender: {"..list.."}. Est· interessado?"), cid)
+                selfSay(getLangString(cid, "Huuumm, let me see... in this level you can learn: {"..list.."}. Are you interested?", "Huuumm, deixe-me ver... nesse level voc√™ pode aprender: {"..list.."}. Est√° interessado?"), cid)
                 talkState[talkUser] = 2 
             else
-                selfSay(getLangString(cid, "Right now you don't have any fold avaiable to learn.", "Nesse momento vocÍ n„o tem nenhuma dobra dÌsponivel para aprender."), cid)
+                selfSay(getLangString(cid, "Right now you don't have any fold avaiable to learn.", "Nesse momento voc√™ n√£o tem nenhuma dobra d√≠sponivel para aprender."), cid)
             end
         end
 
@@ -102,7 +102,7 @@ function creatureSayCallback(cid, type, msg)
         break;
       end 
     end 
-	-- sequencia 12 È a penultima, 13 È a ultima
+	-- sequencia 12 √© a penultima, 13 √© a ultima
         for x = 1, #list do
             if msgcontains(msg, list[x]:lower()) then
 				if list[x]:lower() == "vortex" or list[x]:lower() == "deflection" then							
@@ -113,7 +113,7 @@ function creatureSayCallback(cid, type, msg)
                         totaltasks = 150
 						sequenciaAtual[cid] = 13
 					end
-					selfSay(getLangString(cid, "Hmm, the Air "..list[x].." bend costs {"..stones.." Air Stones} and require {Reset "..totaltasks.."} or higher to learn, do you have the stones and the required Reset level?", "Hum, a dobra Air "..list[x].." custa {"..stones.." Air Stones} e requer {Reset "..totaltasks.."} ou superior para ser aprendida, vocÍ tem as stones e possui o level de Reset necess·rio?"), cid)			
+					selfSay(getLangString(cid, "Hmm, the Air "..list[x].." bend costs {"..stones.." Air Stones} and require {Reset "..totaltasks.."} or higher to learn, do you have the stones and the required Reset level?", "Hum, a dobra Air "..list[x].." custa {"..stones.." Air Stones} e requer {Reset "..totaltasks.."} ou superior para ser aprendida, voc√™ tem as stones e possui o level de Reset necess√°rio?"), cid)			
 					dobraAtual[cid] = list[x]
 					talkState[talkUser] = 5
 					return true
@@ -130,7 +130,7 @@ function creatureSayCallback(cid, type, msg)
             end
         end
             local list = getListLearnFold(cid, true)
-			selfSay(getLangString(cid, "Only the folds i said earlier are available for learning. List: {"..list.."}.", "Apenas as dobras que eu disse anteriormente est„o disponiveis para aprendizagem. S„o elas: {"..list.."}."), cid)
+			selfSay(getLangString(cid, "Only the folds i said earlier are available for learning. List: {"..list.."}.", "Apenas as dobras que eu disse anteriormente est√£o disponiveis para aprendizagem. S√£o elas: {"..list.."}."), cid)
 			talkState[talkUser] = 2 
         return true
 
@@ -145,12 +145,12 @@ function creatureSayCallback(cid, type, msg)
             local canLearn = canBuyFold(cid, current, msgcontains(msg, "gold") and 1 or 2)
 
             if canLearn == true then
-                selfSay(getLangString(cid, "Congratulations! Use this fold with extreme caution and wisdom.", "Par·bens! Use essa dobra com extremo cuidado e sabedoria."), cid)
+                selfSay(getLangString(cid, "Congratulations! Use this fold with extreme caution and wisdom.", "Parab√©ns! Use essa dobra com extremo cuidado e sabedoria."), cid)
             else
                 selfSay(getLangString(cid, canLearn[1], canLearn[2]), cid)
             end
         else
-            selfSay(getLangString(cid, "Ok, I think.", "Ok ent„o."), cid)
+            selfSay(getLangString(cid, "Ok, I think.", "Ok ent√£o."), cid)
         end
 
         talkState[talkUser] = 2 
@@ -163,12 +163,12 @@ function creatureSayCallback(cid, type, msg)
             local canLearn = canBuyFold(cid, current, 2)
 
             if canLearn == true then
-                selfSay(getLangString(cid, "Congratulations! Use this fold with extreme caution and wisdom.", "Par·bens! Use essa dobra com extremo cuidado e sabedoria."), cid)
+                selfSay(getLangString(cid, "Congratulations! Use this fold with extreme caution and wisdom.", "Parab√©ns! Use essa dobra com extremo cuidado e sabedoria."), cid)
             else
                 selfSay(getLangString(cid, canLearn[1], canLearn[2]), cid)
             end
         else
-            selfSay(getLangString(cid, "Ok, I think.", "Ok ent„o."), cid)
+            selfSay(getLangString(cid, "Ok, I think.", "Ok ent√£o."), cid)
         end
 
        talkState[talkUser] = 1 
@@ -181,12 +181,12 @@ function creatureSayCallback(cid, type, msg)
             local canLearn = canBuyUltimateFold(cid, current, sequencia)
 
             if canLearn == true then
-                selfSay(getLangString(cid, "Congratulations! Use this fold with extreme caution and wisdom.", "Par·bens! Use essa dobra com extremo cuidado e sabedoria."), cid)
+                selfSay(getLangString(cid, "Congratulations! Use this fold with extreme caution and wisdom.", "Parab√©ns! Use essa dobra com extremo cuidado e sabedoria."), cid)
             else
                 selfSay(getLangString(cid, canLearn[1], canLearn[2]), cid)
             end
         else
-            selfSay(getLangString(cid, "Ok, I think.", "Ok ent„o."), cid)
+            selfSay(getLangString(cid, "Ok, I think.", "Ok ent√£o."), cid)
         end
 
        talkState[talkUser] = 1 

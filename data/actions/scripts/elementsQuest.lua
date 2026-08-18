@@ -27,7 +27,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		if possiblePlayer > 0 and isPlayer(possiblePlayer) and getPlayerLevel(possiblePlayer) >= 125 and isTheElement(possiblePlayer, x) then
             players[x] = possiblePlayer
         else
-            doPlayerSendCancel(cid, getLangString(cid, "Your team needs an bender of each element in the correct position to start.", "Seu time precisa de um dobrador de cada elemento na posição correta para iniciar."))
+            doPlayerSendCancel(cid, getLangString(cid, "Your team needs an bender of each element in the correct position to start.", "Seu time precisa de um dobrador de cada elemento na posiÃ§Ã£o correta para iniciar."))
             return true
         end
     end

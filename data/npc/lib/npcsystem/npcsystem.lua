@@ -14,7 +14,7 @@ if(NpcSystem == nil) then
   KEYWORD_BEHAVIOR = BEHAVIOR_NORMAL_EXTENDED
 
   -- Greeting and unGreeting keywords. For more information look at the top of modules.lua
-  FOCUS_GREETWORDS = {'hi', 'hello', 'hey', 'oi', 'ola'}
+  FOCUS_GREETWORDS = {'hi', 'hello', 'hey', 'oi', 'olá'}
   FOCUS_FAREWELLWORDS = {'bye', 'farewell', 'cya', 'xau', 'tchau', 'adeus'}
 
   -- The word for requesting trade window. For more information look at the top of modules.lua

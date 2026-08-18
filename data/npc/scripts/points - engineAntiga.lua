@@ -9,7 +9,7 @@ function onCreatureDisappear(cid, pos)
         if lang == EN then
             selfSay('Good bye then.')
         else
-            selfSay("Então tá... tchau.")
+            selfSay("EntÃ£o tÃ¡... tchau.")
         end
         focus = 0
         talk_start = 0
@@ -161,7 +161,7 @@ function onCreatureSay(cid, type, msg)
                 if getLang(cid) == EN then
                     selfSay("Sorry "..getCreatureName(cid)..", I can't talk to you while you are an Avatar.")
                 else
-                    selfSay("Desculpe "..getCreatureName(cid)..", eu não posso falar com você enquanto for um Avatar!")
+                    selfSay("Desculpe "..getCreatureName(cid)..", eu nÃ£o posso falar com vocÃª enquanto for um Avatar!")
                 end
                 return true
             end
@@ -175,7 +175,7 @@ function onCreatureSay(cid, type, msg)
                 if getLang(cid) == EN then
                     selfSay("Hello "..getCreatureName(cid).."! Do you want to change your points for STATS, want to change STONES for points or you want to see your BALANCE?")
                 else
-                    selfSay("Olá "..getCreatureName(cid).."! Você deseja trocar seus pontos elementais por STATS? Você também pode trocar STONES por pontos, ou ver o seu SALDO.")
+                    selfSay("OlÃ¡ "..getCreatureName(cid).."! VocÃª deseja trocar seus pontos elementais por STATS? VocÃª tambÃ©m pode trocar STONES por pontos, ou ver o seu SALDO.")
                 end
                 focus = cid
                 talk_start = os.clock()
@@ -206,7 +206,7 @@ function onCreatureSay(cid, type, msg)
             if lang == EN then
                 selfSay('Good bye, ' .. creatureGetName(cid) .. '!')
             else
-                selfSay("Até logo, "..creatureGetName(cid).."!")
+                selfSay("AtÃ© logo, "..creatureGetName(cid).."!")
             end
             focus = 0
             talk_start = 0
@@ -215,7 +215,7 @@ function onCreatureSay(cid, type, msg)
             if lang == EN then
                 selfSay("I'm already talking with you.")
             else
-                selfSay("Eu já estou falando com você.")
+                selfSay("Eu jÃ¡ estou falando com vocÃª.")
             end
         end
 
@@ -225,20 +225,20 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("You can change your points for MANA, HEALTH, BEND LEVEL or DODGE.")
                 else
-                    selfSay("Você pode trocar seus pontos por MANA, HEALTH, BEND LEVEL ou DODGE.")
+                    selfSay("VocÃª pode trocar seus pontos por MANA, HEALTH, BEND LEVEL ou DODGE.")
                 end
             elseif msgcontains(msg, "balance") or msgcontains(msg, "saldo") then
                 if lang == EN then
                     selfSay("Now you balance are "..getPlayerElementPoints(cid, elementPlayer).." point(s).")
                 else
-                    selfSay("Seu saldo é de "..getPlayerElementPoints(cid, elementPlayer).." pontos.")
+                    selfSay("Seu saldo Ã© de "..getPlayerElementPoints(cid, elementPlayer).." pontos.")
                 end
             elseif msgcontains(msg, "stone") or msgcontains(msg, "stones") then
                 local number = setValidateNumber(getNumbersInString(msg)[1])
                 if lang == EN then
                     selfSay("You want to change "..number.." "..elementPlayer.." stones for "..number.." point(s)?")
                 else
-                    selfSay("Você deseja trocar "..number.." "..elementPlayer.." stones por "..number.." ponto(s)?")
+                    selfSay("VocÃª deseja trocar "..number.." "..elementPlayer.." stones por "..number.." ponto(s)?")
                 end
                 amountOfItem = number
                 talk_state = 2
@@ -249,7 +249,7 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("I add +"..5*number.." of your total mana (+"..number.." attribute(s) in mana) for "..cost.." point(s), are you interested?")
                 else
-                    selfSay("Eu vou adicionar +"..5*number.." na sua mana total (+"..number.." atributo(s) em mana) por "..cost.." ponto(s), você está interresado?")
+                    selfSay("Eu vou adicionar +"..5*number.." na sua mana total (+"..number.." atributo(s) em mana) por "..cost.." ponto(s), vocÃª estÃ¡ interresado?")
                 end
                 talk_state = 3
 
@@ -259,7 +259,7 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("I add +"..20*number.." of your total health (+"..number.." attributes in health) for "..cost.." point(s), are you interested?")
                 else
-                    selfSay("Eu vou adicionar +"..20*number.." na sua vida total (+"..number.." atributo(s) em health) por "..cost.." ponto(s), você está interresado?")
+                    selfSay("Eu vou adicionar +"..20*number.." na sua vida total (+"..number.." atributo(s) em health) por "..cost.." ponto(s), vocÃª estÃ¡ interresado?")
                 end
                 talk_state = 4
 
@@ -270,7 +270,7 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("I add +"..1*number.." to your bend level (+"..number.." attributes in bend level) for "..cost.." point(s), are you interested?")
                 else
-                    selfSay("Eu vou adicionar +"..1*number.." no seu bend level (+"..number.." atributo(s) em bend level) por "..cost.." ponto(s), você está interresado?")
+                    selfSay("Eu vou adicionar +"..1*number.." no seu bend level (+"..number.." atributo(s) em bend level) por "..cost.." ponto(s), vocÃª estÃ¡ interresado?")
                 end
                 talk_state = 5
 
@@ -282,7 +282,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("You can't add +"..number.." point(s) in dodge, because the max allowed are 15%, you already have "..getPointsUsedInSkill(cid, "dodge").."%.")
                     else
-                        selfSay("Você não pode adicionar +"..number.." ponto(s) em dodge, porque o máximo permitido é 15%, e você já tem "..getPointsUsedInSkill(cid, "dodge").."%.")
+                        selfSay("VocÃª nÃ£o pode adicionar +"..number.." ponto(s) em dodge, porque o mÃ¡ximo permitido Ã© 15%, e vocÃª jÃ¡ tem "..getPointsUsedInSkill(cid, "dodge").."%.")
                     end
                     return true
                 end
@@ -290,7 +290,7 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("I add +"..1*number.."% to your dodge ability (+"..number.." attributes in dodge ability) for "..cost.." point(s), are you interested?")
                 else
-                    selfSay("Eu vou adicionar +"..1*number.."% na sua capacidade de esquiva (+"..number.." atributo(s) em dodge) por "..cost.." pontos(s), você está interresado?")
+                    selfSay("Eu vou adicionar +"..1*number.."% na sua capacidade de esquiva (+"..number.." atributo(s) em dodge) por "..cost.." pontos(s), vocÃª estÃ¡ interresado?")
                 end
                 talk_state = 6
             end
@@ -301,7 +301,7 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("You want to change "..number.." "..elementPlayer.." stone(s) for "..number.." point(s)?")
                 else
-                    selfSay("Você deseja trocar "..number.." "..elementPlayer.." stone(s) por "..number.." ponto(s)?")
+                    selfSay("VocÃª deseja trocar "..number.." "..elementPlayer.." stone(s) por "..number.." ponto(s)?")
                 end
                 talk_state = 2
                 amountOfItem = number
@@ -316,7 +316,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("Ok, thanks for change with me, now you have "..getPlayerElementPoints(cid, elementPlayer).." "..elementPlayer.." point(s).")
                     else
-                        selfSay("Ok, obrigado por negociar comigo, agora você tem "..getPlayerElementPoints(cid, elementPlayer).." ponto(s).")
+                        selfSay("Ok, obrigado por negociar comigo, agora vocÃª tem "..getPlayerElementPoints(cid, elementPlayer).." ponto(s).")
                     end
                     talk_state = 0
                     return true
@@ -324,7 +324,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("You don't have "..amountOfItem.." "..elementPlayer.." stone(s) to change with me.")
                     else
-                        selfSay("você não tem "..amountOfItem.." "..elementPlayer.." stone(s) para trocar comigo.")
+                        selfSay("vocÃª nÃ£o tem "..amountOfItem.." "..elementPlayer.." stone(s) para trocar comigo.")
                     end
                     talk_state = 0
                 end
@@ -332,7 +332,7 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("Ok, I think...")
                 else
-                    selfSay("Ok então...")
+                    selfSay("Ok entÃ£o...")
                 end
                 talk_state = 0    
             end
@@ -344,7 +344,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("Excellent choice! Here is +"..5*amount.." added to your total mana.")
                     else
-                        selfSay("Exelente escolha! Aqui está +"..5*amount.." pontos adicionados em sua mana total.")
+                        selfSay("Exelente escolha! Aqui estÃ¡ +"..5*amount.." pontos adicionados em sua mana total.")
                     end
                     addPointsInSkill(cid, "mana", 5*amount)
                     setCreatureMaxMana(cid, getCreatureMaxMana(cid)+(5*amount))
@@ -355,7 +355,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("You don't have "..price.." point(s) for buy this mana.")
                     else
-                        selfSay("Você não tem "..price.." ponto(s) para comprar isso.")
+                        selfSay("VocÃª nÃ£o tem "..price.." ponto(s) para comprar isso.")
                     end
                     talk_state = 0
                 end
@@ -363,7 +363,7 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("Ok, I think...")
                 else
-                    selfSay("Ok então...")
+                    selfSay("Ok entÃ£o...")
                 end
                 talk_state = 0   
             end
@@ -375,7 +375,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("Excellent choice! Here is +"..20*amount.." added to your total health.")
                     else
-                        selfSay("Exelente escolha! Aqui está +"..20*amount.." pontos adicionados em sua vida total.")
+                        selfSay("Exelente escolha! Aqui estÃ¡ +"..20*amount.." pontos adicionados em sua vida total.")
                     end
                     addPointsInSkill(cid, "health", 20*amount)
                     setCreatureMaxHealth(cid, getCreatureMaxHealth(cid)+(20*amount))
@@ -386,7 +386,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("You don't have "..price.." point(s) for buy this health.")
                     else
-                        selfSay("Você não tem "..price.." ponto(s) para comprar isso.")
+                        selfSay("VocÃª nÃ£o tem "..price.." ponto(s) para comprar isso.")
                     end
                     talk_state = 0
                 end
@@ -394,7 +394,7 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("Ok, I think...")
                 else
-                    selfSay("Ok então...")
+                    selfSay("Ok entÃ£o...")
                 end
                 talk_state = 0   
             end
@@ -406,7 +406,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("Excellent choice! Here is +"..1*amount.." added to your bend level.")
                     else
-                        selfSay("Exelente escolha! Aqui está +"..1*amount.." ponto(s) adicionado em seu bend level.")
+                        selfSay("Exelente escolha! Aqui estÃ¡ +"..1*amount.." ponto(s) adicionado em seu bend level.")
                     end
                     addPointsInSkill(cid, "bend", 1*amount)
                     doPlayerAddMagicLevel(cid, amount)
@@ -416,7 +416,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("You don't have "..price.." point(s) for buy this bend level.")
                     else
-                        selfSay("Você não tem "..price.." ponto(s) para comprar isso.")
+                        selfSay("VocÃª nÃ£o tem "..price.." ponto(s) para comprar isso.")
                     end
                     talk_state = 0
                 end
@@ -424,7 +424,7 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("Ok, I think...")
                 else
-                    selfSay("Ok então...")
+                    selfSay("Ok entÃ£o...")
                 end
                 talk_state = 0   
             end
@@ -437,7 +437,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("You can't add +"..amount.." point(s) in dodge, because the max allowed are 15%, you already have "..getPointsUsedInSkill(cid, "dodge").."%.")
                     else
-                        selfSay("Você não pode adicionar +"..amount.." ponto(s) em dodge, porque o máximo permitido é 15%, e você já tem "..getPointsUsedInSkill(cid, "dodge").."%.")
+                        selfSay("VocÃª nÃ£o pode adicionar +"..amount.." ponto(s) em dodge, porque o mÃ¡ximo permitido Ã© 15%, e vocÃª jÃ¡ tem "..getPointsUsedInSkill(cid, "dodge").."%.")
                     end
                     talk_state = 0
                     return true
@@ -446,7 +446,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("Excellent choice! Here is +"..1*amount.." added to your dodge ability.")
                     else
-                        selfSay("Exelente escolha! Aqui está +"..1*amount.." ponto(s) adicionados em sua capacidade de esquiva.")
+                        selfSay("Exelente escolha! Aqui estÃ¡ +"..1*amount.." ponto(s) adicionados em sua capacidade de esquiva.")
                     end
                     addPointsInSkill(cid, "dodge", 1*amount)
                     doPlayerSetElementPoints(cid, elementPlayer, getPlayerElementPoints(cid, elementPlayer)-price)
@@ -455,7 +455,7 @@ function onCreatureSay(cid, type, msg)
                     if lang == EN then
                         selfSay("You don't have "..price.." point(s) for buy this dodge ability.")
                     else
-                        selfSay("Você não tem "..price.." ponto(s) para comprar isso.")
+                        selfSay("VocÃª nÃ£o tem "..price.." ponto(s) para comprar isso.")
                     end
                     talk_state = 0
                 end
@@ -463,7 +463,7 @@ function onCreatureSay(cid, type, msg)
                 if lang == EN then
                     selfSay("Ok, I think...")
                 else
-                    selfSay("Ok então...")
+                    selfSay("Ok entÃ£o...")
                 end
                 talk_state = 0   
             end
@@ -482,7 +482,7 @@ function onThink()
             if lang == EN then
                 selfSay('Next please!')
             else
-                selfSay('Proxímo porfavor!')
+                selfSay('ProxÃ­mo porfavor!')
             end
         end
         focus = 0
@@ -492,7 +492,7 @@ function onThink()
             if lang == EN then
                 selfSay('How rude!')
             else
-                selfSay('Quanta educação...')
+                selfSay('Quanta educaÃ§Ã£o...')
             end
             focus = 0
         end

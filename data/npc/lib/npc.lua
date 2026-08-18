@@ -53,8 +53,8 @@ function doMessageCheck(message, keyword)
   if(type(keyword) == "table") then
     return table.isStrIn(keyword, message)
   end
-  local keyword = keyword:lower()
-  local message = message:lower() 
+  local keyword = stripAccents(keyword:lower())
+  local message = stripAccents(message:lower())
 
   local a, b = message:find(keyword)
   if keyword == "hi" or keyword == "oi" then

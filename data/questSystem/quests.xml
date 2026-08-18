@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Quest Log - definicao das quests (client: modules/game_quests)
-  Arquivo proprio do quest system (NAO e o data/XML/quests.xml do quest log nativo do TFS).
+  Quest Log - definição das quests (client: modules/game_quests)
+  Arquivo próprio do quest system (NÃO é o data/XML/quests.xml do quest log nativo do TFS).
   Carregado no startup por data/globalevents/scripts/questSystemInit.lua.
   ======================================================================
   FORMATO:
     Cada quest usa uma tag de quest com os atributos: name, id,
     looktype (outfit do icone) ou looktypeex (id de item),
-    startstorageid + startstoragevalue (a quest so aparece no log
+    startstorageid + startstoragevalue (a quest só aparece no log
     quando o storage do player atinge o valor). Dentro da quest:
     description, mission (name, storageid, startvalue, endvalue,
     progressstorageid), monster (name, count, storageid opcional,
@@ -19,26 +19,26 @@
       dos NPCs e separado do global; a questSystemLib so roda no global):
         setPlayerStorageValue(cid, startstorageid, startstoragevalue)
         setPlayerStorageValue(cid, progressstorageid, 0)  (zera o progresso)
-    - Para CONCLUIR a missao: setPlayerStorageValue(cid, storageid, endvalue)
-    - STORAGES: usa a faixa 49000-49999 (livre neste servidor). NAO use
-      storages desta faixa em outros sistemas, senao as quests conflitam.
-    - O loader usa padroes de texto (gmatch) sobre o arquivo CRU: NAO
-      escreva tags literais de quest neste comentario, senao o padrao
-      casa com o comentario e engole as quests reais.
+    - Para CONCLUIR a missão: setPlayerStorageValue(cid, storageid, endvalue)
+    - STORAGES: usa a faixa 49000-49999 (livre neste servidor). NÃO use
+      storages desta faixa em outros sistemas, senão as quests conflitam.
+    - O loader usa padrões de texto (gmatch) sobre o arquivo CRU: NÃO
+      escreva tags literais de quest neste comentário, senão o padrão
+      casa com o comentário e engole as quests reais.
 -->
 <quests>
 
-    <quest name="Ca�ada de Alcion" id="15" looktype="1169" startstorageid="49150" startstoragevalue="1">
-        <description>Alcion precisa de ajuda para conter a invas�o das Tar�ntulas de pedra na regi�o.</description>
-        <mission name="Eliminar Tar�ntulas" storageid="49150" startvalue="1" endvalue="2" progressstorageid="49151">
-            <description>Mate 250 Tar�ntulas de pedra e volte ao Alcion para receber sua recompensa.</description>
+    <quest name="Caçada de Alcion" id="15" looktype="1169" startstorageid="49150" startstoragevalue="1">
+        <description>Alcion precisa de ajuda para conter a invasão das Tarântulas de pedra na região.</description>
+        <mission name="Eliminar Tarântulas" storageid="49150" startvalue="1" endvalue="2" progressstorageid="49151">
+            <description>Mate 250 Tarântulas de pedra e volte ao Alcion para receber sua recompensa.</description>
             <monster name="Tarantula de pedra" count="250" />
             <reward id="2152" count="30" />
         </mission>
     </quest>
 
-    <quest name="Infesta��o no Bueiro" id="16" looktype="1172" startstorageid="49160" startstoragevalue="1">
-        <description>Astro est� sofrendo com uma infesta��o de Terra beetles no bueiro na frente da casa dele.</description>
+    <quest name="Infestação no Bueiro" id="16" looktype="1172" startstorageid="49160" startstoragevalue="1">
+        <description>Astro está sofrendo com uma infestação de Terra beetles no bueiro na frente da casa dele.</description>
         <mission name="Exterminar Terra beetles" storageid="49160" startvalue="1" endvalue="2" progressstorageid="49161">
             <description>Mate 150 Terra beetles no bueiro e volte ao Astro para receber sua recompensa.</description>
             <monster name="Terra beetle" count="150" />
@@ -47,17 +47,17 @@
     </quest>
 
     <quest name="O Mel de Katata" id="17" looktype="1179" startstorageid="49170" startstoragevalue="1">
-        <description>Katata teve sua colmeia de mel roubada pelas abelhas de barro e precisa dela de volta para n�o passar fome.</description>
+        <description>Katata teve sua colmeia de mel roubada pelas abelhas de barro e precisa dela de volta para não passar fome.</description>
         <mission name="Recuperar a Colmeia de barro" storageid="49170" startvalue="1" endvalue="2" progressstorageid="49171" maxprogress="1">
             <description>Encontre a Colmeia de barro na toca das abelhas de barro e devolva ao Katata.</description>
             <reward id="2152" count="20" />
         </mission>
     </quest>
 
-    <quest name="Exterminio dos Leoes" id="18" looktype="1184" startstorageid="49180" startstoragevalue="1">
-        <description>Tong Lee encontrou o santuario dos leoes, mas nao liga para o santuario: ele so quer exterminar todos os leoes.</description>
-        <mission name="Exterminar os Leoes" storageid="49180" startvalue="1" endvalue="2" progressstorageid="49181">
-            <description>Mate 300 Leao de ba sin se no santuario e volte ao Tong Lee para receber sua recompensa.</description>
+    <quest name="Extermínio dos Leões" id="18" looktype="1184" startstorageid="49180" startstoragevalue="1">
+        <description>Tong Lee encontrou o santuário dos leões, mas não liga para o santuário: ele só quer exterminar todos os leões.</description>
+        <mission name="Exterminar os Leões" storageid="49180" startvalue="1" endvalue="2" progressstorageid="49181">
+            <description>Mate 300 Leao de ba sin se no santuário e volte ao Tong Lee para receber sua recompensa.</description>
             <monster name="Leao de ba sin se" count="300" />
             <reward id="2152" count="50" />
             <reward id="12810" count="1" />
@@ -66,7 +66,7 @@
 
 
     <quest name="A Pena de John" id="19" looktype="1268" startstorageid="49190" startstoragevalue="1">
-        <description>John faz vestimentas com itens de animais e precisa de uma pena de pica-pau da terra para sua proxima criacao.</description>
+        <description>John faz vestimentas com itens de animais e precisa de uma pena de pica-pau da terra para sua próxima criação.</description>
         <mission name="Entregar a pena" storageid="49190" startvalue="1" endvalue="2" maxprogress="1">
             <description>Consiga uma pena de pica-pau da terra e entregue ao John.</description>
             <reward id="18872" count="1" />
@@ -86,15 +86,41 @@
     <quest name="Massacre dos Traidores" id="21" looktype="1286" startstorageid="49210" startstoragevalue="1">
         <description>Um homem estranho roubou o dinheirinho do pirulito do Felipinho e ainda deu um soco na cara dele. Massacre a familia desse homem, os Traidores, e recupere os 100k de gold.</description>
         <mission name="Massacre a familia do Traidor" storageid="49210" startvalue="1" endvalue="2" progressstorageid="49211">
-            <description>Mate 800 Traidores e volte ao Felipinho com 100k de gold para receber uma peca do Set de um traidor (a sua escolha).</description>
+            <description>Mate 800 Traidores e volte ao Felipinho com 100k de gold para receber uma peça do Set de um traidor (a sua escolha).</description>
             <monster name="Traidor" count="800" />
         </mission>
     </quest>
 
     <quest name="O Tesouro do Defensor da Montanha" id="22" looktype="1285" startstorageid="49220" startstoragevalue="1">
-        <description>Aiano estava subindo a montanha quando encontrou um monstro enorme e branco, o Defensor da montanha, que guarda um tesouro. Derrote-o e roube uma peca do tesouro.</description>
-        <mission name="Roubar o tesouro do guardiao" storageid="49220" startvalue="1" endvalue="2" progressstorageid="49221" maxprogress="1">
-            <description>Derrote o Defensor da montanha, pegue o bau do tesouro e volte ao Aiano para escolher uma peca do Set da montanha.</description>
+        <description>Aiano estava subindo a montanha quando encontrou um monstro enorme e branco, o Defensor da montanha, que guarda um tesouro. Derrote-o e roube uma peça do tesouro.</description>
+        <mission name="Roubar o tesouro do guardião" storageid="49220" startvalue="1" endvalue="2" progressstorageid="49221" maxprogress="1">
+            <description>Derrote o Defensor da montanha, pegue o baú do tesouro e volte ao Aiano para escolher uma peça do Set da montanha.</description>
+        </mission>
+    </quest>
+
+    <quest name="O Coelho da Margarida" id="23" looktype="1254" startstorageid="49230" startstoragevalue="1">
+        <description>O coelho da Dona Margarida fugiu de medo e entrou na toca das aranhas cospe pedra. Resgate-o e devolva-o a ela.</description>
+        <mission name="Resgatar o coelho" storageid="49230" startvalue="1" endvalue="3" progressstorageid="49231" maxprogress="1">
+            <description>Encontre o Coelho da Margarida na toca das aranhas cospe pedra, diga resgatar e volte para a Dona Margarida.</description>
+            <reward id="18879" count="1" />
+            <reward id="2152" count="20" />
+        </mission>
+    </quest>
+
+    <quest name="Invasão dos Ursos" id="24" looktype="1175" startstorageid="49240" startstoragevalue="1">
+        <description>Joana está sendo incomodada por ursos ferozes tentando invadir a casa dela. Cace 150 deles e ganhe um presente.</description>
+        <mission name="Eliminar ursos ferozes" storageid="49240" startvalue="1" endvalue="2" progressstorageid="49241">
+            <description>Mate 150 ursos ferozes e volte a Joana para receber sua recompensa.</description>
+            <monster name="Urso feroz" count="150" />
+            <reward id="12901" count="1" />
+        </mission>
+    </quest>
+
+    <quest name="O Anel do Rafinha" id="25" looktype="1178" startstorageid="49250" startstoragevalue="1">
+        <description>Rafinha perdeu o anel do pai dentro do lago onde eles costumam pescar e pede ajuda para recupera-lo antes do pai voltar.</description>
+        <mission name="Pegar o anel no lago" storageid="49250" startvalue="1" endvalue="3" progressstorageid="49251" maxprogress="1">
+            <description>Pesque no ponto do lago marcado para encontrar o anel de tubarão e volte até o Rafinha.</description>
+            <reward id="18880" count="1" />
         </mission>
     </quest>
 

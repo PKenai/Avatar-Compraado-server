@@ -4,7 +4,7 @@ function onSay(cid, words, param, channel)
   local param = string.explode(param, ",")
 
   if param[1] == nil or param[2] == nil then
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Par‚metro incorreto. Digite /msg Nick, mensagem")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Par√¢metro incorreto. Digite /msg Nick, mensagem")
 		return true 
 	end 
 	local nick = param[1]

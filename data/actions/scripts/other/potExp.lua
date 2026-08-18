@@ -5,7 +5,7 @@ local config = {
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
  -- if getPlayerLevel(cid) < 20 then 
---	doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você precisa atingir o level 20 para utilizar esta poção.")
+--	doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª precisa atingir o level 20 para utilizar esta poÃ§Ã£o.")
 --	return false
  -- end 
   local delay = getPlayerStorageValue(cid, "delayPotionExp")
@@ -26,9 +26,9 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
     setPlayerStorageValue(cid, "delayPotionExp", os.time()+config.delayToUseAgain)
     doSendMagicEffect(getThingPos(cid), 13)
     doRemoveItem(item.uid, 1)
-    sendBlueMessage(cid, getLangString(cid, "You have enabled exp potion, it will end in 7 days.", "Você ativou sua poção de expêriencia, o efeito acabará em 7 dias."))
+    sendBlueMessage(cid, getLangString(cid, "You have enabled exp potion, it will end in 7 days.", "VocÃª ativou sua poÃ§Ã£o de expÃªriencia, o efeito acabarÃ¡ em 7 dias."))
   else
-    doPlayerSendCancel(cid, getLangString(cid, "You need wait "..getSecsString(delay-os.time()).." to use it again.", "Você precisa esperar "..getSecsString(delay-os.time()).." para usar isso novamente."))
+    doPlayerSendCancel(cid, getLangString(cid, "You need wait "..getSecsString(delay-os.time()).." to use it again.", "VocÃª precisa esperar "..getSecsString(delay-os.time()).." para usar isso novamente."))
   end
 
   return true

@@ -27,7 +27,7 @@ end
 local playerHasDo = {}
 
 function onSay(cid, words, param, channel)
-  --sendBlueMessage(cid, getLangString(cid, "Are you lost? See our world map: http://vaatu.avatarworld.com.br/?subtopic=worldmap", "Est· perdido? Veja nosso world map: www.avatarlegendsonline.com.br/?subtopic=worldmap"))
+  --sendBlueMessage(cid, getLangString(cid, "Are you lost? See our world map: http://vaatu.avatarworld.com.br/?subtopic=worldmap", "Est√° perdido? Veja nosso world map: www.avatarlegendsonline.com.br/?subtopic=worldmap"))
   return true
 end
 

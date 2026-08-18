@@ -38,7 +38,7 @@ end
 function onSay(cid, words, param, channel)
 	local avatar = searchAvatar()
 	if avatar ~= 0 then
-		doBroadcastMessage("O dobrador "..getCreatureName(avatar).." é o novo Avatar escolhido.", MESSAGE_STATUS_CONSOLE_BLUE)
+		doBroadcastMessage("O dobrador "..getCreatureName(avatar).." Ã© o novo Avatar escolhido.", MESSAGE_STATUS_CONSOLE_BLUE)
 		setPlayerStorageValue(avatar, "isAvatar", 1)
 		local oldAvatar = 0
 		if getStorage(73991) > 0 then

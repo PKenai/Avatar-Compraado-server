@@ -253,7 +253,7 @@ local tornados = getTornados(getThingPos(cid))
 for i = 1, #tornados do 
 if isProjectable({x=tornados[i].x, y=tornados[i].y, z=tornados[i].z}) then return false end 
 end 
-doPlayerSendCancel(cid, "Você precisa de espaço para executar esta dobra.")
+doPlayerSendCancel(cid, "VocÃª precisa de espaÃ§o para executar esta dobra.")
 --doSendMagicEffect(getThingPos(cid), CONST_ME_POFF)
 return true
 end 

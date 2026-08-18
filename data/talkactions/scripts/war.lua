@@ -44,7 +44,7 @@ function onSay(cid, words, param, channel)
     if database:getID() == -1 then
       local database2 = db.getResult("SELECT `guild_id`, `guild_kills`, `enemy_kills` FROM `guild_wars` WHERE `enemy_id` = " .. guild .." AND `status` = 1")
       if database2:getID() == -1 then
-        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Sua guild n„o est· em guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Sua guild n√£o est√° em guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
         return true
       end
       
@@ -80,26 +80,26 @@ function onSay(cid, words, param, channel)
   end
 
   if not guild or guild == 0 or getPlayerGuildLevel(cid) < GUILDLEVEL_LEADER then 
-    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ n„o pode executar esta aÁ„o.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ n√£o pode executar esta a√ß√£o.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
     return true
   elseif getExhaustion(cid) > 0 then
-    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ est· exhausted.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ est√° exhausted.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
     return true
   end
 
   if not parametro[2] then
-    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Par‚metro incorreto.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Par√¢metro incorreto.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
     return true
   end
   
   local enemy = getGuildId(parametro[2])
   if not enemy then
-    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Esta guild n„o existe.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Esta guild n√£o existe.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
     return true
   end
 
   if enemy == guild then
-    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ n„o pode invitar sua prÛpria guild para uma guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ n√£o pode invitar sua pr√≥pria guild para uma guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
     return true
   end
 
@@ -118,7 +118,7 @@ function onSay(cid, words, param, channel)
 
     database = db.getResult("SELECT `id`, `begin`, `end`, `payment` FROM `guild_wars` WHERE " .. query .. " AND `status` = 0")
     if database:getID() == -1 then
-      doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ n„o tem nenhum convite para uma guerra com a guild " .. enemyName .. ".", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+      doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ n√£o tem nenhum convite para uma guerra com a guild " .. enemyName .. ".", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
       return true
     end
 
@@ -131,25 +131,25 @@ function onSay(cid, words, param, channel)
     if parametro[1] == "accept" then
       local databaseGuild = db.getResult("SELECT `id` FROM `guild_wars` WHERE `guild_id` = " .. guild .." AND `status` = 1")
       if databaseGuild:getID() ~= -1 then
-        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ n„o pode aceitar o convite de uma guerra porque j· est· participando de uma.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ n√£o pode aceitar o convite de uma guerra porque j√° est√° participando de uma.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
         return true
       end
 
       databaseGuild = db.getResult("SELECT `id` FROM `guild_wars` WHERE `enemy_id` = " .. guild .." AND `status` = 1")
       if databaseGuild:getID() ~= -1 then
-        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ n„o pode aceitar o convite de uma guerra porque j· est· participando de uma.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ n√£o pode aceitar o convite de uma guerra porque j√° est√° participando de uma.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
         return true
       end
       
       databaseGuild = db.getResult("SELECT `id` FROM `guild_wars` WHERE `guild_id` = " .. enemy .." AND `status` = 1")
       if databaseGuild:getID() ~= -1 then
-        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ n„o pode aceitar o convite dessa guerra porque o seu oponente j· est· participando de uma.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ n√£o pode aceitar o convite dessa guerra porque o seu oponente j√° est√° participando de uma.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
         return true
       end
 
       databaseGuild = db.getResult("SELECT `id` FROM `guild_wars` WHERE `enemy_id` = " .. enemy .." AND `status` = 1")
       if databaseGuild:getID() ~= -1 then
-        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ n„o pode aceitar o convite dessa guerra porque o seu oponente j· est· participando de uma.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ n√£o pode aceitar o convite dessa guerra porque o seu oponente j√° est√° participando de uma.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
         return true
       end
       
@@ -158,7 +158,7 @@ function onSay(cid, words, param, channel)
       balanceQuery:free()
       
       if state then
-        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ n„o tem saldo suficiente no banco da sua guild para aceitar o convite dessa guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+        doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ n√£o tem saldo suficiente no banco da sua guild para aceitar o convite dessa guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
         return true
       end
 
@@ -173,7 +173,7 @@ function onSay(cid, words, param, channel)
       db.executeQuery("UPDATE `guilds` SET `balance` = `balance` + " .. paymentWar .. " WHERE `id` = " .. enemy)
     elseif parametro[1] == "cancel" then
       query = query .. "`end` = " .. os.time() .. ", `status` = 3"
-      msg = "cancelou o convite para uma guerra que havia feito ‡ guild " .. enemyName .. "."
+      msg = "cancelou o convite para uma guerra que havia feito √† guild " .. enemyName .. "."
       db.executeQuery("UPDATE `guilds` SET `balance` = `balance` + " .. paymentWar .. " WHERE `id` = " .. guild)
     else
       query = query .. "`begin` = " .. os.time() .. ", `end` = " .. (endWar > 0 and (os.time() + ((beginWar - endWar) / 86400)) or 0) .. ", `status` = 1"
@@ -206,12 +206,12 @@ function onSay(cid, words, param, channel)
     if database:getID() ~= -1 then
       if database:getDataInt("status") == 0 then
         if database:getDataInt("guild_id") == guild then
-          str = "VocÍ j· enviou um convite de guerra para a guild " .. enemyName .. "."
+          str = "Voc√™ j√° enviou um convite de guerra para a guild " .. enemyName .. "."
         else
-          str = "A guild ".. enemyName .. " j· enviou um convite de guerra para a sua guild."
+          str = "A guild ".. enemyName .. " j√° enviou um convite de guerra para a sua guild."
         end
       else
-        str = "VocÍ j· est· em guerra com a guild " .. enemyName .. "."
+        str = "Voc√™ j√° est√° em guerra com a guild " .. enemyName .. "."
       end
       database:free()
     end
@@ -228,7 +228,7 @@ function onSay(cid, words, param, channel)
       doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Digite a quantidade de frags para invitar a guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
       return true
     elseif frags < 10 or frags > 100 then
-      doPlayerSendChannelMessage(cid, "[GUILDWAR]", "A quantidade mÌnima de frags È 10 e a m·xima 100.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+      doPlayerSendChannelMessage(cid, "[GUILDWAR]", "A quantidade m√≠nima de frags √© 10 e a m√°xima 100.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
       return true
     end
 
@@ -237,7 +237,7 @@ function onSay(cid, words, param, channel)
       doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Digite a quantidade da aposta para invitar a guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
       return true
     elseif payment < 100000 or payment > 10000000 then
-      doPlayerSendChannelMessage(cid, "[GUILDWAR]", "A quantidade mÌnima da aposta da guerra È de 100k e a m·xima 10kk.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+      doPlayerSendChannelMessage(cid, "[GUILDWAR]", "A quantidade m√≠nima da aposta da guerra √© de 100k e a m√°xima 10kk.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
       return true
     end
 
@@ -246,7 +246,7 @@ function onSay(cid, words, param, channel)
     database:free()
 
     if state then
-      doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ n„o tem dinheiro suficiente no banco da sua guild para a aposta.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+      doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ n√£o tem dinheiro suficiente no banco da sua guild para a aposta.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
       return true
     end
 
@@ -254,14 +254,14 @@ function onSay(cid, words, param, channel)
 
     local begining, ending = os.time(), 0
     db.executeQuery("INSERT INTO `guild_wars` (`guild_id`, `enemy_id`, `begin`, `end`, `frags`, `payment`, `world_id`) VALUES (" .. guild .. ", " .. enemy .. ", " .. begining .. ", " .. ending .. ", " .. frags .. ", " .. payment .. ", " .. getConfigValue('worldId') .. ");")
-    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "A guild ".. getPlayerGuildName(cid) .. " invitou a guild " .. enemyName .. " para uma guerra de " .. frags .. " frags com o valor da premiaÁ„o em ".. payment .." gold coins.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
-    msgAllWarMembers(guild, enemy, "A guild ".. getPlayerGuildName(cid) .. " invitou a guild " .. enemyName .. " para uma guerra de " .. frags .. " frags com o valor da premiaÁ„o em ".. payment .." gold coins.")
+    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "A guild ".. getPlayerGuildName(cid) .. " invitou a guild " .. enemyName .. " para uma guerra de " .. frags .. " frags com o valor da premia√ß√£o em ".. payment .." gold coins.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+    msgAllWarMembers(guild, enemy, "A guild ".. getPlayerGuildName(cid) .. " invitou a guild " .. enemyName .. " para uma guerra de " .. frags .. " frags com o valor da premia√ß√£o em ".. payment .." gold coins.")
     return true
   end
 
   if parametro[1] == "end" then
     if getExhaustionEnd(cid) > 0 then
-      doPlayerSendChannelMessage(cid, "[GUILDWAR]", "VocÍ est· exhausted para finalizar esta guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+      doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Voc√™ est√° exhausted para finalizar esta guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
       return true
     end
     
@@ -277,7 +277,7 @@ function onSay(cid, words, param, channel)
 
       db.executeQuery("UPDATE `guilds` SET `balance` = `balance` + " .. paymentWar .. " WHERE `id` = " .. enemy)
       db.executeQuery("UPDATE `guild_wars` SET `end` = " .. os.time() .. ", `status` = 5 WHERE `id` = " .. idWar)
-      doBroadcastMessage("[GUILDWAR]: A guild ".. getPlayerGuildName(cid) .. " terminou antecipadamente a guerra dando a vitÛria a guild " .. enemyName .. ".", MESSAGE_EVENT_ADVANCE)
+      doBroadcastMessage("[GUILDWAR]: A guild ".. getPlayerGuildName(cid) .. " terminou antecipadamente a guerra dando a vit√≥ria a guild " .. enemyName .. ".", MESSAGE_EVENT_ADVANCE)
       setExhaustionEnd(cid, 900)
       return true
     end
@@ -294,12 +294,12 @@ function onSay(cid, words, param, channel)
 
       db.executeQuery("UPDATE `guilds` SET `balance` = `balance` + " .. paymentWar .. " WHERE `id` = " .. enemy)
       db.executeQuery("UPDATE `guild_wars` SET `end` = " .. os.time() .. ", `status` = 5 WHERE `id` = " .. idWar)
-      doBroadcastMessage("[GUILDWAR]: A guild ".. getPlayerGuildName(cid) .. " terminou antecipadamente a guerra dando a vitÛria a guild " .. enemyName .. ".", MESSAGE_EVENT_ADVANCE)
+      doBroadcastMessage("[GUILDWAR]: A guild ".. getPlayerGuildName(cid) .. " terminou antecipadamente a guerra dando a vit√≥ria a guild " .. enemyName .. ".", MESSAGE_EVENT_ADVANCE)
       setExhaustionEnd(cid, 900)
       return true
     end
 
-    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Sua guild n„o est· em guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+    doPlayerSendChannelMessage(cid, "[GUILDWAR]", "Sua guild n√£o est√° em guerra.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
     return true
   end
 

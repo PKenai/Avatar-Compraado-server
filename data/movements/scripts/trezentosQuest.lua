@@ -10,7 +10,7 @@ function onStepIn(cid, item, position, fromPosition)
 	end
 	if getPlayerLevel(cid) < 300  then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 300+  para entrar na The Bosses Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de Level 300+  para entrar na The Bosses Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else 
 		doTeleportThing(cid, {x = 1125, y = 1045, z = 7} , false)

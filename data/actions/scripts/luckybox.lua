@@ -12,22 +12,22 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	end
 	if random <= 15 then  
 		doPlayerAddItem(cid, 13852, 1)
-		sendBlueMessage(cid, getLangString(cid, "You won 1x Crystal Helmet. Check your backpack!", "Você ganhou 1x Crystal Helmet. Cheque sua backpack!"))
+		sendBlueMessage(cid, getLangString(cid, "You won 1x Crystal Helmet. Check your backpack!", "VocÃª ganhou 1x Crystal Helmet. Cheque sua backpack!"))
 	elseif random <= 30 then 
 		doPlayerAddItem(cid, 12886, 1)
-		sendBlueMessage(cid, getLangString(cid, "You won 1x Crystal Chest. Check your backpack!", "Você ganhou 1x Crystal Chest. Cheque sua backpack!"))
+		sendBlueMessage(cid, getLangString(cid, "You won 1x Crystal Chest. Check your backpack!", "VocÃª ganhou 1x Crystal Chest. Cheque sua backpack!"))
 	elseif random <= 45 then  
 		doPlayerAddItem(cid, 11117, 1)
-		sendBlueMessage(cid, getLangString(cid, "You won 1x Crystal Boots. Check your backpack!", "Você ganhou 1x Crystal Boots. Cheque sua backpack!"))
+		sendBlueMessage(cid, getLangString(cid, "You won 1x Crystal Boots. Check your backpack!", "VocÃª ganhou 1x Crystal Boots. Cheque sua backpack!"))
 	elseif random <= 65 then  
 		doPlayerAddItem(cid, 13914, 1)
-		sendBlueMessage(cid, getLangString(cid, "Congratulations! You won 1x Crystal Legs. Check your backpack!", "Parabéns! Você ganhou 1x Crystal Legs. Cheque sua backpack!"))
+		sendBlueMessage(cid, getLangString(cid, "Congratulations! You won 1x Crystal Legs. Check your backpack!", "ParabÃ©ns! VocÃª ganhou 1x Crystal Legs. Cheque sua backpack!"))
 	elseif random <= 85 then  
 		doPlayerAddItem(cid, 12781, 1)
-		sendBlueMessage(cid, getLangString(cid, "Congratulations! You won 1x Crystal Shield. Check your backpack!", "Parabéns! Você ganhou 1x Crystal Shield. Cheque sua backpack!"))
+		sendBlueMessage(cid, getLangString(cid, "Congratulations! You won 1x Crystal Shield. Check your backpack!", "ParabÃ©ns! VocÃª ganhou 1x Crystal Shield. Cheque sua backpack!"))
 	else 
 		doPlayerAddItem(cid, 11259, 25)
-		sendBlueMessage(cid, getLangString(cid, "Congratulations! You won 25 Elemental Coins. Check your backpack!", "Parabéns! Você ganhou 25 Elemental Coins. Cheque sua backpack!"))
+		sendBlueMessage(cid, getLangString(cid, "Congratulations! You won 25 Elemental Coins. Check your backpack!", "ParabÃ©ns! VocÃª ganhou 25 Elemental Coins. Cheque sua backpack!"))
 		setPlayerStorageValue(cid, "winCoins", totalWinCoins+1)
 	end
 	if totalWinCoins > 0 and random <= 85 then

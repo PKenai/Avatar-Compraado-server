@@ -12,16 +12,16 @@ end
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if getPlayerStorageValue(cid, "90503") == 1 then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Vocï¿½ jï¿½ pegou esta recompensa.")
 		return true
 	elseif checkBossAlive() then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa derrotar o Spark of Destruction.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Vocï¿½ precisa derrotar o Spark of Destruction.")
 		return true
 	end 
     setPlayerStorageValue(cid, "90503", 1)
-   doPlayerAddItem(cid, 17986, 1)
+   doPlayerAddItem(cid, 18880, 1)
    doSendMagicEffect(getThingPos(cid), 29)
    
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você conquistou a Spark Ring.")
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabï¿½ns! Vocï¿½ conquistou o Anel de TubarÃ£o.")
     return true
 end

@@ -6,11 +6,11 @@ CodeRedeem.cfg = CodeRedeem.cfg or {
 
   text = {
     invalid = "Codigo invalido.",
-    already = "Voce ja resgatou esse codigo.",
+    already = "Você já resgatou esse codigo.",
     expired = "Codigo expirado.",
     limit = "Codigo esgotado (limite de %d usos).",
     ok = "Codigo resgatado com sucesso.",
-    receivedPrefix = "Voce recebeu:"
+    receivedPrefix = "Você recebeu:"
   },
 
   -- Os codigos ficam em data/lib/codes_data.lua (gerados pelo

@@ -8,7 +8,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 			doSendMagicEffect(getThingPos(cid), CONST_ME_TELEPORT)
 		end
 	else
-		doCreatureSay(cid, "Seu sangue é impuro! Você precisa de Level 260+  para entrar na The Duke Of The Depths.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "Seu sangue Ã© impuro! VocÃª precisa de Level 260+  para entrar na The Duke Of The Depths.", TALKTYPE_ORANGE_1, false, cid)
 		doCreatureAddHealth(cid, hpp)
 		doSendMagicEffect(getThingPos(cid), 0)
 	end 

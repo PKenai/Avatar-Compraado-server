@@ -10,7 +10,7 @@ function onStepIn(cid, item, position, fromPosition)
 	end
 	if getPlayerLevel(cid) < 250  then
 		doTeleportThing(cid, fromPosition, false)
-		doCreatureSay(cid, "Você precisa de Level 250+  para entrar na Evil Avatar Quest.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de Level 250+  para entrar na Evil Avatar Quest.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else 
 		doTeleportThing(cid, {x = 506, y = 156, z = 12}, false)

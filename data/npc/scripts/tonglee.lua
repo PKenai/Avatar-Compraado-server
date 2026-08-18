@@ -25,7 +25,7 @@ local REWARD_EXP = 100000
 local REWARD_COIN = 2152
 local REWARD_COIN_COUNT = 50
 local REWARD_ARMOR = 12810
-local QUEST_NAME = "Exterminio dos Leoes"
+local QUEST_NAME = "Extermínio dos Leoes"
 local MISSION_NAME = "Exterminar os Leoes"
 
 local function questStarted(cid)
@@ -60,7 +60,7 @@ local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     print("[Tong Lee] startQuest cid=" .. cid)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "Nova missão: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -69,7 +69,7 @@ end
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
     print("[Tong Lee] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Missão concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. MISSION_NAME)
     end)
@@ -84,7 +84,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Ah, voce por aqui! Eu sou Tong Lee. Eu encontrei esse santuario dos leoes, mas quer saber? Eu nao estou nem ai para o santuario! Aqueles leoes me aterrorizam... Eu quero e {exterminar} todos eles!", cid)
+    selfSay("Ah, você por aqui! Eu sou Tong Lee. Eu encontrei esse santuário dos leoes, mas quer saber? Eu não estou nem aí para o santuário! Aqueles leoes me aterrorizam... Eu quero e {exterminar} todos eles!", cid)
     return true
 end
 
@@ -104,21 +104,21 @@ function creatureSayCallback(cid, type, msg)
 
     if talkState[talkUser] == 1 then
         if completed then
-            selfSay("Voce ja exterminou os leoes. Obrigado pela ajuda!", cid)
+            selfSay("Você já exterminou os leoes. Obrigado pela ajuda!", cid)
         elseif started then
             if progress >= LIONS_NEEDED then
-                selfSay("Voce exterminou os 300 leoes! Quer receber sua recompensa?", cid)
+                selfSay("Você exterminou os 300 leoes! Quer receber sua recompensa?", cid)
                 talkState[talkUser] = 2
             else
-                selfSay("Ainda nao acabou! Faltam " .. (LIONS_NEEDED - progress) .. " leoes para eu poder dormir em paz.", cid)
+                selfSay("Ainda não acabou! Faltam " .. (LIONS_NEEDED - progress) .. " leoes para eu poder dormir em paz.", cid)
             end
         elseif msgcontains(msg, "extermin") or msgcontains(msg, "sim") or msgcontains(msg, "yes") then
-            selfSay("Entao voce vai me ajudar?", cid)
+            selfSay("Entao você vai me ajudar?", cid)
             talkState[talkUser] = 3
-        elseif msgcontains(msg, "santuario") or msgcontains(msg, "leao") or msgcontains(msg, "leoe") or msgcontains(msg, "medo") or msgcontains(msg, "ajuda") then
-            selfSay("Eu achei esse {santuario} cheio de leoes, mas nao ligo para ele! O que eu quero e {exterminar} todos aqueles leoes. Quer me ajudar?", cid)
+        elseif msgcontains(msg, "santuário") or msgcontains(msg, "leao") or msgcontains(msg, "leoe") or msgcontains(msg, "medo") or msgcontains(msg, "ajuda") then
+            selfSay("Eu achei esse {santuário} cheio de leoes, mas não ligo para ele! O que eu quero e {exterminar} todos aqueles leoes. Quer me ajudar?", cid)
         else
-            selfSay("Nao entendi. Esta falando do {santuario} dos leoes?", cid)
+            selfSay("Não entendi. Está falando do {santuário} dos leoes?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
@@ -126,7 +126,7 @@ function creatureSayCallback(cid, type, msg)
             doPlayerAddItem(cid, REWARD_ARMOR, 1)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Aqui esta sua recompensa: 100.000 de experiencia, 50 platinum coins e a Armadura do Rugido. Agora posso viver em paz!", cid)
+            selfSay("Aqui está sua recompensa: 100.000 de experiência, 50 platinum coins e a Armadura do Rugido. Agora posso viver em paz!", cid)
             talkState[talkUser] = 1
         else
             selfSay("Tudo bem, volte quando quiser receber sua recompensa.", cid)
@@ -134,11 +134,11 @@ function creatureSayCallback(cid, type, msg)
         end
     elseif talkState[talkUser] == 3 then
         if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
-            selfSay("Boa sorte! Va ate o santuario, mate 300 leoes de ba sin se e depois volte para mim!", cid)
+            selfSay("Boa sorte! Vá até o santuário, mate 300 leoes de ba sin se e depois volte para mim!", cid)
             startQuest(cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, se mudar de ideia e so me chamar.", cid)
+            selfSay("Tudo bem, se mudar de ideia e só me chamar.", cid)
             talkState[talkUser] = 1
         end
     end

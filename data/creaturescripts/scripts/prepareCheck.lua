@@ -33,14 +33,14 @@ function onPrepareDeath(cid, deathList)
     if isInArea(getThingPos(cid), bloodconfig.fromPos, bloodconfig.toPos) then
 		  local bloodKills = bloodGetKills(cid)
 		  if bloodKills <= 0 then 
-				doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você não matou monstros no Blood Castle, portanto não receberá recompensa. Boa sorte na próxima vez!")
+				doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÃª nÃ£o matou monstros no Blood Castle, portanto nÃ£o receberÃ¡ recompensa. Boa sorte na prÃ³xima vez!")
 			else 
 				local myLevel = getPlayerLevel(cid)
 				local finalExp = myLevel * 30
 				finalExp = finalExp * (bloodKills+5)
 				doPlayerAddExperience(cid, finalExp)
 				doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-				doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você derrotou "..bloodKills.." monstros no Blood Castle e recebeu um bônus de "..finalExp.." pontos de EXP!")
+				doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÃª derrotou "..bloodKills.." monstros no Blood Castle e recebeu um bÃ´nus de "..finalExp.." pontos de EXP!")
 		  end 
 	end
   doCreatureAddHealth(cid, getCreatureMaxHealth(cid)-getCreatureHealth(cid), true)
@@ -57,20 +57,20 @@ function onPrepareDeath(cid, deathList)
 	setPlayerStorageValue(cid, "timeWar", 0)
 	local warKills = getPlayerStorageValue(cid, "warKills")
 	if warKills <= 50000 then 
-		--doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você não matou ninguém no War Ground, portanto não receberá recompensa. Boa sorte na próxima vez!")
+		--doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÃª nÃ£o matou ninguÃ©m no War Ground, portanto nÃ£o receberÃ¡ recompensa. Boa sorte na prÃ³xima vez!")
 		local myLevel = getPlayerLevel(cid)
 		local finalExp = myLevel * 35
 		finalExp = finalExp * 57
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Pela sua participação no War Ground, você recebeu "..finalExp.." pontos de EXP!")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Pela sua participaÃ§Ã£o no War Ground, vocÃª recebeu "..finalExp.." pontos de EXP!")
 	else 
 		local myLevel = getPlayerLevel(cid)
 		local finalExp = myLevel * 35
 		finalExp = finalExp * (warKills+5)
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você derrotou "..warKills.." jogadores no War Ground e recebeu "..finalExp.." pontos de EXP!")
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "VocÃª derrotou "..warKills.." jogadores no War Ground e recebeu "..finalExp.." pontos de EXP!")
 	 end 
 	if getPlayerStorageValue(cid, "estavaNon") == 1 then 
 		setPlayerStorageValue(cid, "estavaNon", 0)

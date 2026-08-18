@@ -8,10 +8,10 @@ local function getColdownPassive(cid)
   local time = getPlayerStorageValue(cid, "hasPassiveDeathActive")
   if time > os.time() then
     local stringTime = getSecsString(time-os.time())
-    return getLangString(cid, "\nPassive Resurrection: "..stringTime..".", "\nPassiva de Ressurreição: "..stringTime..".")
+    return getLangString(cid, "\nPassive Resurrection: "..stringTime..".", "\nPassiva de RessurreiÃ§Ã£o: "..stringTime..".")
   end
   
-  return getLangString(cid, "\nPassive Resurrection: Ready.", "\nPassiva de Ressurreição: Ativa.")
+  return getLangString(cid, "\nPassive Resurrection: Ready.", "\nPassiva de RessurreiÃ§Ã£o: Ativa.")
 end
 
 local function getPotionExpString(cid)
@@ -47,13 +47,13 @@ local function stringToPlural(stringNormal, stringPlural, number)
 end
 
 local function getArchangelString(cid)
-return exhaustion.check(cid, "Archangel") and "\nBenção do Arcanjo: "..getSecsString(exhaustion.get(cid, "Archangel")).."" or ""
+return exhaustion.check(cid, "Archangel") and "\nBenÃ§Ã£o do Arcanjo: "..getSecsString(exhaustion.get(cid, "Archangel")).."" or ""
 end
 local function getBlessString(cid)
 if getPlayerStorageValue(cid, "playerWithSupremeBless") == 1 then 
     return "Ativa (Bless Suprema)"
 end
-return getPlayerStorageValue(cid, "playerWithBless") == 1 and "Ativa" or "Sem proteção"
+return getPlayerStorageValue(cid, "playerWithBless") == 1 and "Ativa" or "Sem proteÃ§Ã£o"
 end
 
 
@@ -71,7 +71,7 @@ function onSay(cid, words, param, channel)
     local playerLevel = getPlayerVocation(cid)
 
     if (upgradeStones == 0) then
-        lastDobra = "Você ainda não aprimorou nenhuma dobra"
+        lastDobra = "VocÃª ainda nÃ£o aprimorou nenhuma dobra"
     elseif ((upgradeStones == 1) and playerLevel == 1) then
         lastDobra = "Fire Whip"
     elseif ((upgradeStones == 2) and playerLevel == 1) then
@@ -257,10 +257,10 @@ function onSay(cid, words, param, channel)
     elseif ((upgradeStones == 23) and playerLevel == 4) then
         lastDobra = "Earth Metalwall"
     else
-        lastDobra = "Error - Reportar à administração do jogo."
+        lastDobra = "Error - Reportar Ã  administraÃ§Ã£o do jogo."
     end
     
-    local stringEN = "Elemental Coins: "..coins..".\nBlessing: "..getBlessString(cid)..""..getArchangelString(cid)..".\nÚltima dobra aprimorada: "..lastDobra.."."
+    local stringEN = "Elemental Coins: "..coins..".\nBlessing: "..getBlessString(cid)..""..getArchangelString(cid)..".\nÃšltima dobra aprimorada: "..lastDobra.."."
     local CDPassive, potExp, potRed = getColdownPassive(cid), getPotionExpString(cid), getPotionRedString(cid)
     local info = stringEN..CDPassive..potExp..potRed, stringEN..CDPassive..potExp..potRed
     
@@ -269,7 +269,7 @@ function onSay(cid, words, param, channel)
     players[cid] = true
     addEvent(function(cid) players[cid] = nil end, 5000, cid)
   else
-    doPlayerSendCancel(cid, getLangString(cid, "You need wait a few moments to use it again.", "Você precisa esperar alguns instantes para usar isso novamente."))
+    doPlayerSendCancel(cid, getLangString(cid, "You need wait a few moments to use it again.", "VocÃª precisa esperar alguns instantes para usar isso novamente."))
   end
   return true
 end

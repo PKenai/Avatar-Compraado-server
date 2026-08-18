@@ -786,4 +786,6 @@
 
 	<monster name="Defensor da montanha" file="Oficial monsters avatar/Defensor da montanha.xml"/>
 	<monster name="Traidor" file="Oficial monsters avatar/Traidor.xml"/>
+	<monster name="Urso feroz" file="Oficial monsters avatar/Urso feroz.xml"/>
+	<monster name="Aranha cospe pedra" file="Oficial monsters avatar/Aranha cospe pedra.xml"/>
 </monsters>

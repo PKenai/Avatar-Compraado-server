@@ -1,4 +1,4 @@
--- Alcion - Quest: matar 250 Tar‚ntulas de pedra (quest id 15)
+-- Alcion - Quest: matar 250 Tar√¢ntulas de pedra (quest id 15)
 -- Storages (data/questSystem/quests.xml):
 --   49150 = status da quest (1 = em andamento, 2 = completa)
 --   49151 = kills acumulados (progresso)
@@ -19,8 +19,8 @@ local PROGRESS_STORAGE = 49151
 local TARANTULAS_NEEDED = 250
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 30
-local QUEST_NAME = "CaÁada de Alcion"
-local MISSION_NAME = "Eliminar Tar‚ntulas"
+local QUEST_NAME = "Ca√ßada de Alcion"
+local MISSION_NAME = "Eliminar Tar√¢ntulas"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -54,7 +54,7 @@ local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     print("[Alcion] startQuest cid=" .. cid)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova miss„o: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "Nova miss√£o: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -63,7 +63,7 @@ end
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
     print("[Alcion] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Miss„o concluÌda: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Miss√£o conclu√≠da: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. MISSION_NAME)
     end)
@@ -78,7 +78,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Ol·, vejo que vocÍ parece um dobrador procurando um {desafio}, gostaria de me mostrar sua forÁa tentando exterminar aquelas tar‚ntulas de pedra?", cid)
+    selfSay("Ol√°, vejo que voc√™ parece um dobrador procurando um {desafio}, gostaria de me mostrar sua for√ßa tentando exterminar aquelas tar√¢ntulas de pedra?", cid)
     return true
 end
 
@@ -99,32 +99,32 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("VocÍ j· completou essa miss„o. Obrigado pela ajuda!", cid)
+                selfSay("Voc√™ j√° completou essa miss√£o. Obrigado pela ajuda!", cid)
             elseif started then
                 if progress >= TARANTULAS_NEEDED then
-                    selfSay("VocÍ exterminou as 250 tar‚ntulas de pedra! Quer receber sua recompensa?", cid)
+                    selfSay("Voc√™ exterminou as 250 tar√¢ntulas de pedra! Quer receber sua recompensa?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda n„o acabou! Me prove o qu„o forte vocÍ È, faltam " .. (TARANTULAS_NEEDED - progress) .. " tar‚ntulas de pedra.", cid)
+                    selfSay("Ainda n√£o acabou! Me prove o qu√£o forte voc√™ √©, faltam " .. (TARANTULAS_NEEDED - progress) .. " tar√¢ntulas de pedra.", cid)
                 end
             else
-                selfSay("”timo, v· l· e elimine 250 e me prove o qu„o forte vocÍ È!", cid)
+                selfSay("√ìtimo, v√° l√° e elimine 250 e me prove o qu√£o forte voc√™ √©!", cid)
                 startQuest(cid)
             end
         elseif msgcontains(msg, "desafio") or msgcontains(msg, "quest") or msgcontains(msg, "tarantula") then
             if started and not completed then
-                selfSay("Ainda n„o acabou! Me prove o qu„o forte vocÍ È, faltam " .. (TARANTULAS_NEEDED - progress) .. " tar‚ntulas de pedra.", cid)
+                selfSay("Ainda n√£o acabou! Me prove o qu√£o forte voc√™ √©, faltam " .. (TARANTULAS_NEEDED - progress) .. " tar√¢ntulas de pedra.", cid)
             else
-                selfSay("Sim, um {desafio}! Gostaria de me mostrar sua forÁa exterminando aquelas tar‚ntulas de pedra?", cid)
+                selfSay("Sim, um {desafio}! Gostaria de me mostrar sua for√ßa exterminando aquelas tar√¢ntulas de pedra?", cid)
             end
         else
-            selfSay("N„o entendi. Est· procurando um {desafio}?", cid)
+            selfSay("N√£o entendi. Est√° procurando um {desafio}?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             completeQuest(cid)
-            selfSay("Aqui est· sua recompensa: 30 platinum coins. VocÍ provou sua forÁa!", cid)
+            selfSay("Aqui est√° sua recompensa: 30 platinum coins. Voc√™ provou sua for√ßa!", cid)
             talkState[talkUser] = 1
         else
             selfSay("Tudo bem, volte quando quiser receber sua recompensa.", cid)

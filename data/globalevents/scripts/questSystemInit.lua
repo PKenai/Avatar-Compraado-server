@@ -5,6 +5,5 @@ dofile(getDataDir() .. "lib/questSystemLib.lua")
 
 function onStartup()
     qsLoadQuestsFromXML()
-    print("[QuestSystem] Loaded " .. #QuestSystem.quests .. " quests")
     return true
 end

@@ -3,21 +3,21 @@ local effByVoc = {28, 28, 28, 28}
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	local vocId = getPlayerVocation(cid)
 	if stoneIds[vocId] ~= item.itemid then 
-		sendBlueMessage(cid, "Você não pode utilizar stone de outro elemento.")
+		sendBlueMessage(cid, "VocÃª nÃ£o pode utilizar stone de outro elemento.")
 		return true
 	end 
 	if getDobrasLevel(cid) >= 23 then 
-		sendBlueMessage(cid, "Você já aprimorou sua última dobra.")
+		sendBlueMessage(cid, "VocÃª jÃ¡ aprimorou sua Ãºltima dobra.")
 		return true
 	end 
 	local needLevel = getLevelForNextUpgrade(getDobrasLevel(cid)+1)
 	if getPlayerLevel(cid) < needLevel then 
-		sendBlueMessage(cid, "Você precisa alcançar o nível "..needLevel.." para aprimorar sua próxima dobra.")
+		sendBlueMessage(cid, "VocÃª precisa alcanÃ§ar o nÃ­vel "..needLevel.." para aprimorar sua prÃ³xima dobra.")
 		return true
 	end 
 	local needStones = getStonesForNextUpgrade(cid)
 	if item.type < needStones then 
-		sendBlueMessage(cid, "Você precisa juntar "..needStones.." stones para aprimorar sua próxima dobra.")
+		sendBlueMessage(cid, "VocÃª precisa juntar "..needStones.." stones para aprimorar sua prÃ³xima dobra.")
 		return true
 	end 
 	local oldStage = getDobrasLevel(cid)

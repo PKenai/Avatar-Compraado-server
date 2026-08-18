@@ -400,11 +400,11 @@ function Bomberman.joinQueue(cid)
 		return false
 	end
 	if pget(cid, st("inMatch")) == 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce ja esta em uma partida de Bomberman!")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você já está em uma partida de Bomberman!")
 		return false
 	end
 	if pget(cid, st("inQueue")) == 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce ja esta na fila do Bomberman, aguardando um adversario...")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você já está na fila do Bomberman, aguardando um adversario...")
 		return false
 	end
 
@@ -412,7 +412,7 @@ function Bomberman.joinQueue(cid)
 	local list = Bomberman.readQueue()
 	for _, g in ipairs(list) do
 		if g == guid then
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce ja esta na fila do Bomberman, aguardando um adversario...")
+			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você já está na fila do Bomberman, aguardando um adversario...")
 			return false
 		end
 	end
@@ -420,7 +420,7 @@ function Bomberman.joinQueue(cid)
 	table.insert(list, guid)
 	Bomberman.writeQueue(list)
 	pset(cid, st("inQueue"), 1)
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Voce entrou na fila do Bomberman! Aguardando um adversario... (fila: " .. #list .. "/2)")
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você entrou na fila do Bomberman! Aguardando um adversario... (fila: " .. #list .. "/2)")
 
 	Bomberman.tryStartNextMatch()
 	return true
@@ -428,11 +428,11 @@ end
 
 function Bomberman.leaveQueue(cid)
 	if pget(cid, st("inQueue")) ~= 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce nao esta na fila do Bomberman.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você não está na fila do Bomberman.")
 		return false
 	end
 	Bomberman.removeFromQueue(cid)
-	doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce saiu da fila do Bomberman.")
+	doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você saiu da fila do Bomberman.")
 	return true
 end
 
@@ -621,7 +621,7 @@ function Bomberman.endMatch(arenaIdx, winnerGuid)
 		local cid = getPlayerByGUID(guid)
 		if cid and cid ~= 0 and isCreature(cid) then
 			if winnerGuid and guid == winnerGuid then
-				doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VOCE VENCEU a partida de Bomberman! Parabens!")
+				doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VOCÊ VENCEU a partida de Bomberman! Parabens!")
 			else
 				doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, msg)
 			end
@@ -856,7 +856,7 @@ function Bomberman.dropBomb(cid)
 		return
 	end
 	if pget(cid, st("inMatch")) ~= 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce so pode soltar bombas dentro de uma partida de Bomberman!")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você só pode soltar bombas dentro de uma partida de Bomberman!")
 		return
 	end
 
@@ -874,31 +874,31 @@ function Bomberman.dropBomb(cid)
 		active = 0
 	end
 	if active >= maxBombs then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce ja soltou o numero maximo de bombas!")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você já soltou o número máximo de bombas!")
 		return
 	end
 
 	local pos = getThingPosition(cid)
 	if not Bomberman.insideArena(arenaIdx, pos) then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce so pode soltar bombas dentro da arena!")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você só pode soltar bombas dentro da arena!")
 		return
 	end
 	if getTileItemById(pos, cfg("BOMB_ID")).uid > 0
 		or getTileItemById(pos, cfg("WALL_ID")).uid > 0
 		or getTileItemById(pos, cfg("BLOCK_ID")).uid > 0 then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Nao da para soltar a bomba neste tile!")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Não da para soltar a bomba neste tile!")
 		return
 	end
 	local top = getTopCreature(pos).uid
 	if top > 0 and top ~= cid then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Nao da para soltar a bomba neste tile!")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Não da para soltar a bomba neste tile!")
 		return
 	end
 
 	doCreateItem(cfg("BOMB_ID"), 1, pos)
 	if getTileItemById(pos, cfg("BOMB_ID")).uid == 0 then
 		-- nao conseguiu criar a bomba (item nao configurado?) -> nao gasta o slot
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Nao foi possivel criar a bomba!")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Não foi possível criar a bomba!")
 		return
 	end
 
@@ -1049,7 +1049,7 @@ function Bomberman.hitPlayer(arenaIdx, victim)
 	if hasPowers then
 		Bomberman.resetPowerUps(victim)
 		doSendMagicEffect(getThingPosition(victim), cfg("EXPLOSION_EFFECT"))
-		doPlayerSendTextMessage(victim, MESSAGE_INFO_DESCR, "Voce foi atingido pela explosao e perdeu suas habilidades!")
+		doPlayerSendTextMessage(victim, MESSAGE_INFO_DESCR, "Você foi atingido pela explosao e perdeu suas habilidades!")
 	else
 		local winner = pget(victim, st("partner"))
 		Bomberman.endMatch(arenaIdx, winner)
@@ -1122,23 +1122,23 @@ function Bomberman.onStepOnPowerUp(cid, item)
 	if id == cfg("FIRE_PU") then
 		local cur = pget(cid, st("bombSize")) or 1
 		if cur >= cfg("MAX_BOMB_SIZE") then
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Sua bomba ja atinge o maximo de " .. cfg("MAX_BOMB_SIZE") .. " sqm.")
+			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Sua bomba já atinge o máximo de " .. cfg("MAX_BOMB_SIZE") .. " sqm.")
 		else
 			pset(cid, st("bombSize"), cur + 1)
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Agora sua bomba atinge ate " .. (cur + 1) .. " sqm!")
+			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Agora sua bomba atinge até " .. (cur + 1) .. " sqm!")
 		end
 	elseif id == cfg("BOMBS_PU") then
 		local cur = pget(cid, st("maxBombs")) or 1
 		if cur >= cfg("MAX_BOMBS") then
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce ja pode soltar o maximo de " .. cfg("MAX_BOMBS") .. " bombas.")
+			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você já pode soltar o máximo de " .. cfg("MAX_BOMBS") .. " bombas.")
 		else
 			pset(cid, st("maxBombs"), cur + 1)
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Agora voce pode soltar ate " .. (cur + 1) .. " bombas!")
+			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Agora você pode soltar até " .. (cur + 1) .. " bombas!")
 		end
 	elseif id == cfg("SPEED_PU") then
 		local cur = pget(cid, st("speed")) or 1
 		if cur >= cfg("MAX_SPEED") then
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce ja esta com a velocidade maxima (" .. cfg("MAX_SPEED") .. ").")
+			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você já está com a velocidade máxima (" .. cfg("MAX_SPEED") .. ").")
 		else
 			pset(cid, st("speed"), cur + 1)
 			Bomberman.applySpeed(cid)
@@ -1146,15 +1146,15 @@ function Bomberman.onStepOnPowerUp(cid, item)
 		end
 	elseif id == cfg("KICK_PU") then
 		pset(cid, st("kick"), 1)
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Agora voce pode chutar as bombas! Ande em cima delas para move-las.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Agora você pode chutar as bombas! Ande em cima delas para move-las.")
 	elseif id == cfg("SLOW_PU") then
 		local cur = pget(cid, st("speed")) or 1
 		if cur <= -cfg("MAX_SPEED") then
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce ja esta bem lento...")
+			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você já está bem lento...")
 		else
 			pset(cid, st("speed"), cur - 1)
 			Bomberman.applySpeed(cid)
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Voce ficou lento!")
+			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você ficou lento!")
 		end
 	end
 

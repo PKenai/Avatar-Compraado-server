@@ -1,14 +1,14 @@
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if not isInPz(cid) then 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você precisa estar em uma zona de proteção (pz) para remover o skull.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª precisa estar em uma zona de proteÃ§Ã£o (pz) para remover o skull.")
 		return true 
 	end 
 	if getCreatureSkullType(cid) ~= 4 then 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você não possui red skull para ser removida.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª nÃ£o possui red skull para ser removida.")
 		return true 
 	end 
 	if getPlayerStorageValue(cid, "ativoBot") == 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você precisa responder ao Anti-Bot primeiro.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª precisa responder ao Anti-Bot primeiro.")
 		return true 
 	end
     doRemoveItem(item.uid, 1)

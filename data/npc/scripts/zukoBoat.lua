@@ -1,15 +1,15 @@
 local npcGen = newNpc("zukoBoatNpc")
 
---npcGen:setHiMsg("Hello %s. My service is expensive, but they are unbelievable routes to amazing places, you want see the ROUTES?", "Ol· %s. Meu serviÁo È caro, porÈm eu posso lhe levar para lugares inacreditaveis, deseja ver minhas ROUTES?")
+--npcGen:setHiMsg("Hello %s. My service is expensive, but they are unbelievable routes to amazing places, you want see the ROUTES?", "Ol√° %s. Meu servi√ßo √© caro, por√©m eu posso lhe levar para lugares inacreditaveis, deseja ver minhas ROUTES?")
 npcGen:needPremium(true)
 npcGen:setRoutes("zukoBoat")
 
-npcGen:addOptionInNpc("help", {"I don't need your help, thank you.", "Eu n„o preciso de sua ajuda, obrigado."})
+npcGen:addOptionInNpc("help", {"I don't need your help, thank you.", "Eu n√£o preciso de sua ajuda, obrigado."})
 
 
 npcGen:setFuncStart(function(cid)
     local name = getCreatureName(cid)
-        npcGen:say("Hello "..name..". My service is expensive, but they are unbelievable routes to amazing places, you want see the ROUTES?", "Ol· "..name..". Meu serviÁo È caro, porÈm eu posso lhe levar para lugares inacreditaveis, deseja ver minhas ROUTES?", getLang(cid))
+        npcGen:say("Hello "..name..". My service is expensive, but they are unbelievable routes to amazing places, you want see the ROUTES?", "Ol√° "..name..". Meu servi√ßo √© caro, por√©m eu posso lhe levar para lugares inacreditaveis, deseja ver minhas ROUTES?", getLang(cid))
         return true
     end)
 
@@ -20,7 +20,7 @@ function onCreatureSay(cid, type, msg)
         if stage == 1 then
             if msgcontains(msg, "routes") or msgcontains(msg, "offer") then
                 if npcGen:isPlayerStageFree() then
-                    npcGen:say("I can take you to: "..npcGen:getRoutesString()..".", "Eu posso levar vocÍ para: "..npcGen:getRoutesString()..".")
+                    npcGen:say("I can take you to: "..npcGen:getRoutesString()..".", "Eu posso levar voc√™ para: "..npcGen:getRoutesString()..".")
                     return true
                 end
             end

@@ -1,6 +1,6 @@
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if getPlayerStorageValue(cid, "90519") == 1 then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ pegou esta recompensa.")
 		return true
 	end 
     setPlayerStorageValue(cid, "90519", 1)
@@ -18,6 +18,6 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	doSendMagicEffect({x=pos.x-1, y=pos.y, z=pos.z}, 96)
 	doSendMagicEffect({x=pos.x, y=pos.y+1, z=pos.z}, 96)
 
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você conquistou o espírito do Avatar. Agora, os 4 elementos irão te ajudar no momento em que você mais precisar.")
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! VocÃª conquistou o espÃ­rito do Avatar. Agora, os 4 elementos irÃ£o te ajudar no momento em que vocÃª mais precisar.")
     return true
 end

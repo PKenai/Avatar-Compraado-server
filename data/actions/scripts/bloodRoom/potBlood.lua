@@ -31,7 +31,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
       else
         if getPlayerStorageValue(cid, "playerDelayInBloodRoom") > os.time() then
           local timeToDo = (getPlayerStorageValue(cid, "playerDelayInBloodRoom")-os.time())
-          doPlayerSendCancel(cid, getLangString(cid, "Sorry, you need wait "..timeToDo.." seconds to do it again.", "Desculpe, você precisa esperar "..timeToDo.." segundos para fazer isso novamente."))
+          doPlayerSendCancel(cid, getLangString(cid, "Sorry, you need wait "..timeToDo.." seconds to do it again.", "Desculpe, vocÃª precisa esperar "..timeToDo.." segundos para fazer isso novamente."))
           return true
         end
         local maxHealth = getCreatureMaxHealth(cid)
@@ -44,7 +44,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
           doCreatureAddHealth(cid, -maxHealth*0.20)
           doSendMagicEffect(getThingPos(cid), 0)
         else
-          doPlayerSendCancel(cid, getLangString(cid, "Sorry, you need have a full life to do this action.", "Desculpe, você precisa estar com vida cheia para fazer isso."))
+          doPlayerSendCancel(cid, getLangString(cid, "Sorry, you need have a full life to do this action.", "Desculpe, vocÃª precisa estar com vida cheia para fazer isso."))
         end
       end
       return true

@@ -24,7 +24,7 @@ function creatureSayCallback(cid, type, msg)
 end
 
 function onGreet(cid) 
-	selfSay(getLangString(cid, "Hello "..getCreatureName(cid).."! How can i help you? Do you want to see my {offers}?", "Olá "..getCreatureName(cid).."! Eu faço variadas poções que podem te ajudar, deseja ver minhas {ofertas}?"), cid)
+	selfSay(getLangString(cid, "Hello "..getCreatureName(cid).."! How can i help you? Do you want to see my {offers}?", "OlÃ¡ "..getCreatureName(cid).."! Eu faÃ§o variadas poÃ§Ãµes que podem te ajudar, deseja ver minhas {ofertas}?"), cid)
 	return true
 end
 

@@ -24,7 +24,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
     doRemoveItem(item.uid, 1)
     doSendMagicEffect(toPosition, 1)
     setPlayerStorageValue(cid, "90525", 1)
-    doCreatureSay(cid, "VocÍ conseguiu apagar o fogo com a ·gua sagrada! Sua miss„o aqui est· quase completa, agora v· e enfrente-o!", TALKTYPE_ORANGE_1, false, cid)
+    doCreatureSay(cid, "Voc√™ conseguiu apagar o fogo com a √°gua sagrada! Sua miss√£o aqui est√° quase completa, agora v√° e enfrente-o!", TALKTYPE_ORANGE_1, false, cid)
   end
 
   return false

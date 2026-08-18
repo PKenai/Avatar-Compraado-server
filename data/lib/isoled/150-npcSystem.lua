@@ -1,9 +1,9 @@
 --[[
- * File destinado ao NpcSystem, preÁo dos equipamentos e etc.
+ * File destinado ao NpcSystem, pre√ßo dos equipamentos e etc.
 ]]--
 
 --[[
- * InNpcs types: "all", "loot", etc (Serve para setar quais NPCs v„o vender ou comprar taÌs itens.)
+ * InNpcs types: "all", "loot", etc (Serve para setar quais NPCs v√£o vender ou comprar ta√≠s itens.)
  * types: "helmet", "boot", "armor", "legs", "shield", "sword", "axe", "club", "distance", "ammunition", "conteiner", "food", "other"
 ]]--
 
@@ -17,7 +17,7 @@ routesShip = {
   {name = "South Air Temple", pos = {x=513,y=688,z=4}, inNpcs = "appaShip", price = 50}
 }
 
-itemInfosSell = { --[[Itens que o NPC ir· COMPRAR do player, name precisa est· em minusculo]]--
+itemInfosSell = { --[[Itens que o NPC ir√° COMPRAR do player, name precisa est√° em minusculo]]--
 
   --[[TN]]--
   
@@ -368,7 +368,7 @@ itemInfosSell = { --[[Itens que o NPC ir· COMPRAR do player, name precisa est· e
 
 }
 
-itemInfosBuy = { --[[Itens que o NPC ir· VENDER para o player, name precisa est· em minusculo]]--  
+itemInfosBuy = { --[[Itens que o NPC ir√° VENDER para o player, name precisa est√° em minusculo]]--  
 
   {name = "rope", price=25, itemId=2120, type="other", inNpcs="lootSuport"},
   {name = "shovel", price=10, itemId=2554, type="other", inNpcs="lootSuport"},
@@ -440,16 +440,16 @@ itemInfosBuy = { --[[Itens que o NPC ir· VENDER para o player, name precisa est·
 }
 
 
-npcLootOfferMensage = {"I'm buying a lot of things, to know if I buy or not, say SELL + your item name or SELL ALL LOOT.", "Eu compro v·rias coisas, para saber o que eu compro diga SELL + nome do item ou SELL ALL LOOT."}
-npclootOfferMensage = {"I'm buying a lot of things, to know if I buy or not, say SELL + your item name or SELL ALL LOOT.", "Eu compro v·rias coisas, para saber o que eu compro diga SELL + nome do item ou SELL ALL LOOT."}
-npcLootSpecialOfferMensage = {"I'm buying a lot of things, to know if I buy or not, say SELL + your item name or SELL ALL LOOT.", "Eu compro v·rias coisas, para saber o que eu compro diga SELL + nome do item ou SELL ALL LOOT."}
-npcLootSuportMensage = {"I'm selling rope, shovel, pick, backpack, fishing rod, bag and water pouch. You want to buy anything?", "Eu vendo rope, shovel, pick, backpack, fishing rod, bag e water pouch. VocÍ deseja comprar algo?"}
+npcLootOfferMensage = {"I'm buying a lot of things, to know if I buy or not, say SELL + your item name or SELL ALL LOOT.", "Eu compro v√°rias coisas, para saber o que eu compro diga SELL + nome do item ou SELL ALL LOOT."}
+npclootOfferMensage = {"I'm buying a lot of things, to know if I buy or not, say SELL + your item name or SELL ALL LOOT.", "Eu compro v√°rias coisas, para saber o que eu compro diga SELL + nome do item ou SELL ALL LOOT."}
+npcLootSpecialOfferMensage = {"I'm buying a lot of things, to know if I buy or not, say SELL + your item name or SELL ALL LOOT.", "Eu compro v√°rias coisas, para saber o que eu compro diga SELL + nome do item ou SELL ALL LOOT."}
+npcLootSuportMensage = {"I'm selling rope, shovel, pick, backpack, fishing rod, bag and water pouch. You want to buy anything?", "Eu vendo rope, shovel, pick, backpack, fishing rod, bag e water pouch. Voc√™ deseja comprar algo?"}
 npcLootSimpleDistanceMensage = {"I'm selling bow, crossbow, arrow, sniper arrow, poison arrow, burst arrow, onyx arrow, bolt, power bolt, piercing bolt, spear, royal spear, enchanted spear, throwing star, viper star and throwing knife.", "Eu vendo bow, crossbow, arrow, sniper arrow, poison arrow, burst arrow, onyx arrow, bolt, power bolt, piercing bolt spear, royal spear, enchanted spear, throwing star, viper star e throwing knife."}
 npcPostMan = {"I'm selling letter, parcel and label, you want to buy?", "Eu vendo letter, parcel e label, deseja comprar algo?"}
 npcMeetFood = {"I'm selling fish, ham and meat.", "Eu vendo fish, ham e meat, deseja comprar algo?"}
 npcLootMagicMensage = {"I sell a 3 types of mana potion: normal mana potion, strong mana potion and great mana potion.", "Eu vendo 3 tipos de mana potion: normal mana potion, strong mana potion e great mana potion."}
 npcLootHealthMensage = {"I have full potions: health potion (150 HP), strong health potion (300 HP), great health potion (450 HP) and ultimate health potion (600 HP).", "Eu tenho potions cheios: health potion (50 HP), strong health potion (300 HP), great health potion (450 HP) and ultimate health potion (600 HP)."}
-npcDrinkStore = {"I have a looot beer.", "Eu tenho muita beer, alias, isso È o que n„o falta."}
+npcDrinkStore = {"I have a looot beer.", "Eu tenho muita beer, alias, isso √© o que n√£o falta."}
 
 function getAdvancedList(inNpcs, npcBuys, npcSells)
   local string = "- Advanced List -\n\n"

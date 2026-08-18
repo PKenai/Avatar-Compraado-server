@@ -4,9 +4,9 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if getPlayerStorageValue(cid, item.uniqueid) == -1 then
 		doPlayerAddItem(cid, rewards[math.random(#rewards)])
 		setPlayerStorageValue(cid, item.uniqueid, 1)
-		return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You have found an item.", "Você encontrou um item."))
+		return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You have found an item.", "VocÃª encontrou um item."))
 	else
-		return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The chest is empty.", "Esse chest está vazio."))
+		return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The chest is empty.", "Esse chest estÃ¡ vazio."))
 	end
 	return true
 end

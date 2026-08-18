@@ -13,16 +13,16 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	--doTeleportThing(cid, {x=311, y=835, z=12})
 	--doSendMagicEffect(getThingPos(cid), CONST_ME_TELEPORT)
 	if getPlayerStorageValue(cid, "90522") == 1 then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª jÃ¡ pegou esta recompensa.")
 		return true
 	elseif checkBossAlive() then 	
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você precisa derrotar o Arachnophobica.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "VocÃª precisa derrotar o Arachnophobica.")
 		return true
 	end 
     setPlayerStorageValue(cid, "90522", 1)
    doPlayerAddItem(cid, 13682, 1)
    doSendMagicEffect(getThingPos(cid), 29)
    
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você conquistou a alloy chest.")
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "ParabÃ©ns! VocÃª conquistou a alloy chest.")
     return true
 end

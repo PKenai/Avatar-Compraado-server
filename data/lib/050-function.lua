@@ -98,12 +98,49 @@ function doPlayerAddItemNPC(cid, itemid, amount)
   end
 end
 
+-- Remove acentos de uma string UTF-8 (mantem o resto intacto).
+-- Permite que keywords com ou sem acento casem com o input do player.
+function stripAccents(s)
+  if(type(s) ~= "string") then
+    return s
+  end
+  local map = {
+    ["\195\160"] = "a", ["\195\161"] = "a", ["\195\162"] = "a",
+    ["\195\163"] = "a", ["\195\164"] = "a", ["\195\165"] = "a",
+    ["\195\167"] = "c",
+    ["\195\168"] = "e", ["\195\169"] = "e", ["\195\170"] = "e",
+    ["\195\171"] = "e",
+    ["\195\172"] = "i", ["\195\173"] = "i", ["\195\174"] = "i",
+    ["\195\175"] = "i",
+    ["\195\177"] = "n",
+    ["\195\178"] = "o", ["\195\179"] = "o", ["\195\180"] = "o",
+    ["\195\181"] = "o", ["\195\182"] = "o",
+    ["\195\185"] = "u", ["\195\186"] = "u", ["\195\187"] = "u",
+    ["\195\188"] = "u",
+    ["\195\189"] = "y", ["\195\191"] = "y",
+    ["\195\128"] = "A", ["\195\129"] = "A", ["\195\130"] = "A",
+    ["\195\131"] = "A", ["\195\132"] = "A", ["\195\133"] = "A",
+    ["\195\135"] = "C",
+    ["\195\136"] = "E", ["\195\137"] = "E", ["\195\138"] = "E",
+    ["\195\139"] = "E",
+    ["\195\140"] = "I", ["\195\141"] = "I", ["\195\142"] = "I",
+    ["\195\143"] = "I",
+    ["\195\145"] = "N",
+    ["\195\146"] = "O", ["\195\147"] = "O", ["\195\148"] = "O",
+    ["\195\149"] = "O", ["\195\150"] = "O",
+    ["\195\153"] = "U", ["\195\154"] = "U", ["\195\155"] = "U",
+    ["\195\156"] = "U",
+    ["\195\157"] = "Y",
+  }
+  return (s:gsub("[\195][\128-\191]", map))
+end
+
 function checkMsg(message, keyword)
   if(type(keyword) == "table") then
     return table.isStrIn(keyword, message)
   end
-  local keyword = keyword:lower()
-  local message = message:lower() 
+  local keyword = stripAccents(keyword:lower())
+  local message = stripAccents(message:lower())
 
   local a, b = message:find(keyword)
   if keyword == "hi" or keyword == "oi" then
@@ -913,7 +950,7 @@ function isAvaliableItemWaterById(itemId)
 end
 
 
---[Checa se o tile é "andavel por monstros", ex. embaixo da água]
+--[Checa se o tile Ã© "andavel por monstros", ex. embaixo da Ã¡gua]
 function isMonsteableWater(itemId)
   local items = {5405, 5406, 5407, 5408, 5409, 5410, 15217, 15218, 15219, 15220, 15221, 15222, 15235, 15236, 15237, 15238, 15239, 15240}
 
@@ -1270,7 +1307,7 @@ function cantReceiveDisable(caster, cid)
 		if restante > 0 then
 			if isPlayer(caster) then
 				if getLang(caster) == PT then
-					doPlayerSendCancelEf(caster, "Seu alvo não pode sofrer prisões pelos próximos "..((math.round(restante/100))/10).."s.")
+					doPlayerSendCancelEf(caster, "Seu alvo nÃ£o pode sofrer prisÃµes pelos prÃ³ximos "..((math.round(restante/100))/10).."s.")
 				else
 					doPlayerSendCancelEf(caster, "Your target cant be disabled for the next "..((math.round(restante/100))/10).."s.")
 				end
@@ -1512,7 +1549,7 @@ function doFrozzenCreature(cid, time)
   end, 300, cid, "Frozzen!", COLOR_LIGHTBLUE)   
 end
 
-function filterString(cid, string) -- caso de tradução nas magias (temporario)
+function filterString(cid, string) -- caso de traduÃ§Ã£o nas magias (temporario)
   return tr(cid, string)
 end
 
@@ -1724,10 +1761,10 @@ function sendBackupToPlayer(cid)
          current = current+1
          doPlayerAddExperience(cid, result:getDataInt("expLost"))
 		setPlayerStorageValue(cid, "hasPassiveDeathActive", os.time())
-         doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "You received your experience lost in your last death. We apologize for the inconvenience.", "Devido a queda de conexão, você recebeu a experiência da sua última morte, pedimos deculpas pelo transtorno."))
+         doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "You received your experience lost in your last death. We apologize for the inconvenience.", "Devido a queda de conexÃ£o, vocÃª recebeu a experiÃªncia da sua Ãºltima morte, pedimos deculpas pelo transtorno."))
          if result:getDataInt("bless") == 1 and getPlayerStorageValue(cid, "playerWithBless") ~= 1 then
            setPlayerStorageValue(cid, "playerWithBless", 1)
-           doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "You has received the blessing of Sony.", "Você recebeu a benção de Sony."))
+           doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "You has received the blessing of Sony.", "VocÃª recebeu a benÃ§Ã£o de Sony."))
          end
          db.executeQuery("DELETE FROM deaths_record_touse WHERE id = "..playerGuid.." AND expLost = "..result:getDataInt("expLost"))
          hasWorked = true
@@ -1929,7 +1966,7 @@ end
 
 function removePotionExp(cid)
   if isPlayer(cid) then
-    doPlayerSendCancel(cid, getLangString(cid, "Your pot of experience has ended.", "Seu potion de expêriencia terminou."))
+    doPlayerSendCancel(cid, getLangString(cid, "Your pot of experience has ended.", "Seu potion de expÃªriencia terminou."))
     if isPremium(cid) then
       doPlayerSetExperienceRate(cid, 1.1)
     else
@@ -2045,12 +2082,12 @@ end
 function banimentoBot(cid)
 	if getPlayerStorageValue(cid, "antibotSecond") ~= 1 then
 		setPlayerStorageValue(cid, "antibotSecond", 1)
-		addPlayerBan(getPlayerName(cid), 4*60*60, "[Anti-Bot System] Primeiro banimento com duração de 4h, aguarde o fim de sua punição.")
+		addPlayerBan(getPlayerName(cid), 4*60*60, "[Anti-Bot System] Primeiro banimento com duraÃ§Ã£o de 4h, aguarde o fim de sua puniÃ§Ã£o.")
 	elseif getPlayerStorageValue(cid, "antibotThird") ~= 1 then
 		setPlayerStorageValue(cid, "antibotThird", 1)
-		addPlayerBan(getPlayerName(cid), 24*60*60, "[Anti-Bot System] Segundo banimento com duração de 24h, aguarde o fim de sua punição.")
+		addPlayerBan(getPlayerName(cid), 24*60*60, "[Anti-Bot System] Segundo banimento com duraÃ§Ã£o de 24h, aguarde o fim de sua puniÃ§Ã£o.")
 	else
-		addPlayerBan(getPlayerName(cid), 7*24*60*60, "[Anti-Bot System] Terceiro banimento com duração de 7 dias, aguarde o fim de sua punição.")
+		addPlayerBan(getPlayerName(cid), 7*24*60*60, "[Anti-Bot System] Terceiro banimento com duraÃ§Ã£o de 7 dias, aguarde o fim de sua puniÃ§Ã£o.")
 	end
 	-- todo: primeira vez 4h, depois 24h e entao 7 dias
 	return true
@@ -2091,7 +2128,7 @@ function verifyBot(cid)
 	end
 	local curta = getLangString(cid, "Look on screen.", "Veja na tela.")
 	local textoENG = "[Anti-Bot Question] Question shown by floating animation on top of your character, look at the screen. To respond, type in the transparent window that appeared the result of the question."
-	local textoBR = "[Anti-Bot Question] Questão mostrada por animação flutuante em cima de seu personagem, observe na tela. Para responder, digite na janela transparente que apareceu o resultado da questão."
+	local textoBR = "[Anti-Bot Question] QuestÃ£o mostrada por animaÃ§Ã£o flutuante em cima de seu personagem, observe na tela. Para responder, digite na janela transparente que apareceu o resultado da questÃ£o."
 	setPlayerStorageValue(cid, "respostaBot", resposta)
 	setPlayerStorageValue(cid, "horarioBot", os.time() + 120) -- usar como base pro cooldown
 	setPlayerStorageValue(cid, "ativoBot", 1)

@@ -52,13 +52,13 @@ function onThink(interval, lastExecution)
                         received_item = doPlayerAddItemEx(cid, new_item)
                     end
                     if received_item == RETURNVALUE_NOERROR then
-                        doPlayerSendTextMessage(cid, DONATE_MSG_TYPE, 'Obrigado por ter realizado a sua doação! Você recebeu o item: ('.. itemtogive_count ..' '.. add_item_name ..').')
+                        doPlayerSendTextMessage(cid, DONATE_MSG_TYPE, 'Obrigado por ter realizado a sua doaÃ§Ã£o! VocÃª recebeu o item: ('.. itemtogive_count ..' '.. add_item_name ..').')
                         db.executeQuery("DELETE FROM `z_ots_comunication_donate` WHERE `id` = " .. id .. ";")
                     else
-                        doPlayerSendTextMessage(cid, DONATE_MSG_TYPE, 'Obrigado por ter realizado a sua doação! Estamos tentando enviar para você o item: ('.. itemtogive_count ..' '.. add_item_name ..'). Por favor, verifique se você possui espaço suficiente em sua mochila ou capacidade necessária para recebê-lo. Tentaremos enviar novamente o item em '.. SQL_interval ..' segundos.')
+                        doPlayerSendTextMessage(cid, DONATE_MSG_TYPE, 'Obrigado por ter realizado a sua doaÃ§Ã£o! Estamos tentando enviar para vocÃª o item: ('.. itemtogive_count ..' '.. add_item_name ..'). Por favor, verifique se vocÃª possui espaÃ§o suficiente em sua mochila ou capacidade necessÃ¡ria para recebÃª-lo. Tentaremos enviar novamente o item em '.. SQL_interval ..' segundos.')
                     end
                 else
-                    doPlayerSendTextMessage(cid, DONATE_MSG_TYPE, 'Obrigado por ter realizado a sua doação! Estamos tentando enviar para você o item: ('.. itemtogive_count ..' '.. add_item_name ..'). Por favor, verifique se você possui espaço suficiente em sua mochila ou capacidade necessária para recebê-lo. Tentaremos enviar novamente o item em '.. SQL_interval ..' segundos.')
+                    doPlayerSendTextMessage(cid, DONATE_MSG_TYPE, 'Obrigado por ter realizado a sua doaÃ§Ã£o! Estamos tentando enviar para vocÃª o item: ('.. itemtogive_count ..' '.. add_item_name ..'). Por favor, verifique se vocÃª possui espaÃ§o suficiente em sua mochila ou capacidade necessÃ¡ria para recebÃª-lo. Tentaremos enviar novamente o item em '.. SQL_interval ..' segundos.')
                 end
             end
             if not(result_plr:next()) then

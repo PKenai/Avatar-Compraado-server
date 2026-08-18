@@ -12,7 +12,7 @@ function onStepIn(cid, item, position, fromPosition)
 	 end
 	if getPlayerLevel(cid) < 160 then
 		doTeleportThing(cid, {x=886, y=312, z=7}, true)
-		doCreatureSay(cid, "Você precisa de pelo menos nível 160 para entrar.", TALKTYPE_ORANGE_1, false, cid)
+		doCreatureSay(cid, "VocÃª precisa de pelo menos nÃ­vel 160 para entrar.", TALKTYPE_ORANGE_1, false, cid)
 		return false
 	else 
 		doTeleportThing(cid, {x=881, y=296, z=8}, false)

@@ -33,7 +33,7 @@ local QUEST_SYSTEM_STORAGE = 49220
 local SET_PIECES = {
     { id = 13401, article = "o",     name = "capacete", palavras = {"capacete", "elmo", "cap"} },
     { id = 13402, article = "a",     name = "armadura", palavras = {"armadura"} },
-    { id = 13403, article = "a",     name = "calca",    palavras = {"calca", "calcas"} },
+    { id = 13403, article = "a",     name = "calça",    palavras = {"calça", "calcas"} },
     { id = 13404, article = "a",     name = "bota",     palavras = {"bota", "botas"} },
     { id = 13405, article = "o",     name = "escudo",   palavras = {"escudo"} },
 }
@@ -71,21 +71,21 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     if getPlayerLevel(cid) < LEVEL_REQUIRED then
-        selfSay("Ainda nao e a sua hora, aventureiro. A montanha so aceita guerreiros de level 120 ou mais. Volte quando for mais forte!", cid)
+        selfSay("Ainda não e a sua hora, aventureiro. A montanha só aceita guerreiros de level 120 ou mais. Volte quando for mais forte!", cid)
         return true
     end
     talkState[cid] = 1
     local name = playerName(cid)
 
     if questCompleted(cid) then
-        selfSay("Ola, " .. name .. "! Ja te entreguei uma peca do tesouro do guardiao. Nao tenho mais nada para oferecer.", cid)
+        selfSay("Olá, " .. name .. "! Já te entreguei uma peça do tesouro do guardião. Não tenho mais nada para oferecer.", cid)
     elseif rewardReady(cid) then
-        selfSay("Ola, " .. name .. "! Enquanto eu corria daquele guardiao, consegui pegar algumas pecas de roupa de guerreiros que foram derrotados por ele. Voce teve coragem de ir la, entao merece algo. Qual peca do set da montanha voce quer? {capacete}, {armadura}, {calca}, {bota} ou {escudo}?", cid)
+        selfSay("Olá, " .. name .. "! Enquanto eu corria daquele guardião, consegui pegar algumas peças de roupa de guerreiros que foram derrotados por ele. Você teve coragem de ir lá, entao merece algo. Qual peça do set da montanha você quer? {capacete}, {armadura}, {calça}, {bota} ou {escudo}?", cid)
         talkState[cid] = 2
     elseif questStarted(cid) then
-        selfSay("Ola, " .. name .. "! O guardiao e um monstro enorme e branco, o Defensor da montanha. Derrote-o e pegue o bau do tesouro dele!", cid)
+        selfSay("Olá, " .. name .. "! O guardião é um monstro enorme e branco, o Defensor da montanha. Derrote-o e pegue o baú do tesouro dele!", cid)
     else
-        selfSay("Ola, " .. name .. "! Eu estava subindo a montanha quando encontrei um monstro enorme e branco. Ele se apresentou como Defensor da montanha e disse que nao permitiria que eu tomasse o tesouro dele. Voce gostaria de tentar ir la roubar uma das pecas do tesouro?", cid)
+        selfSay("Olá, " .. name .. "! Eu estava subindo a montanha quando encontrei um monstro enorme e branco. Ele se apresentou como Defensor da montanha e disse que não permitiria que eu tomasse o tesouro dele. Você gostaria de tentar ir lá roubar uma das peças do tesouro?", cid)
     end
     return true
 end
@@ -95,7 +95,7 @@ function creatureSayCallback(cid, type, msg)
         return false
     end
     if getPlayerLevel(cid) < LEVEL_REQUIRED then
-        selfSay("Ainda nao e a sua hora, aventureiro. Volte quando tiver level 120 ou mais!", cid)
+        selfSay("Ainda não e a sua hora, aventureiro. Volte quando tiver level 120 ou mais!", cid)
         return false
     end
     local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
@@ -110,38 +110,38 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja recebeu sua peca do set da montanha, " .. name .. "! O guardiao nao me deixaria roubar outra.", cid)
+                selfSay("Você já recebeu sua peça do set da montanha, " .. name .. "! O guardião não me deixaria roubar outra.", cid)
             elseif ready then
-                selfSay("Qual peca do set da montanha voce quer? {capacete}, {armadura}, {calca}, {bota} ou {escudo}?", cid)
+                selfSay("Qual peça do set da montanha você quer? {capacete}, {armadura}, {calça}, {bota} ou {escudo}?", cid)
                 talkState[talkUser] = 2
             elseif questStarted(cid) then
-                selfSay("Voce ja aceitou o desafio! Derrote o Defensor da montanha e pegue o bau do tesouro dele. Boa sorte!", cid)
+                selfSay("Você já aceitou o desafio! Derrote o Defensor da montanha e pegue o baú do tesouro dele. Boa sorte!", cid)
             else
-                selfSay("Otimo! O guardiao e um monstro enorme e branco chamado Defensor da montanha, e ele guarda o tesouro no topo da montanha. Derrote-o e pegue o bau do tesouro dele!", cid)
+                selfSay("Ótimo! O guardião é um monstro enorme e branco chamado Defensor da montanha, e ele guarda o tesouro no topo da montanha. Derrote-o e pegue o baú do tesouro dele!", cid)
                 setPlayerStorageValue(cid, QUEST_STORAGE, 1)
                 setPlayerStorageValue(cid, QUEST_SYSTEM_STORAGE, 1)
-                doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest: Roube uma peca do tesouro do Defensor da montanha!")
+                doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest: Roube uma peça do tesouro do Defensor da montanha!")
             end
-        elseif msgcontains(msg, "nao") or msgcontains(msg, "no") then
+        elseif msgcontains(msg, "não") or msgcontains(msg, "no") then
             if completed then
                 selfSay("Tudo bem, " .. name .. ". Obrigado por tudo!", cid)
             else
                 selfSay("Entendido, " .. name .. ". Se mudar de ideia, volte a falar comigo.", cid)
             end
         elseif msgcontains(msg, "defensor") or msgcontains(msg, "montanha") or msgcontains(msg, "tesouro")
-            or msgcontains(msg, "guardiao") or msgcontains(msg, "bau") or msgcontains(msg, "peca") then
+            or msgcontains(msg, "guardião") or msgcontains(msg, "baú") or msgcontains(msg, "peça") then
             if completed then
-                selfSay("Voce ja tem sua peca do set da montanha, " .. name .. ". Nao posso ajudar de novo.", cid)
+                selfSay("Você já tem sua peça do set da montanha, " .. name .. ". Não posso ajudar de novo.", cid)
             elseif ready then
-                selfSay("Voce conseguiu! Enquanto eu corria, peguei pecas de roupa de guerreiros derrotados pelo guardiao. Qual peca do set da montanha voce quer?", cid)
+                selfSay("Você conseguiu! Enquanto eu corria, peguei peças de roupa de guerreiros derrotados pelo guardião. Qual peça do set da montanha você quer?", cid)
                 talkState[talkUser] = 2
             elseif questStarted(cid) then
-                selfSay("O guardiao e um monstro enorme e branco, o Defensor da montanha. Derrote-o e pegue o bau do tesouro dele, " .. name .. "!", cid)
+                selfSay("O guardião é um monstro enorme e branco, o Defensor da montanha. Derrote-o e pegue o baú do tesouro dele, " .. name .. "!", cid)
             else
-                selfSay("Eu estava subindo a montanha quando encontrei um monstro enorme e branco. Ele se apresentou como Defensor da montanha e disse que nao permitiria que eu tomasse o tesouro dele. Voce gostaria de tentar ir la roubar uma das pecas do tesouro?", cid)
+                selfSay("Eu estava subindo a montanha quando encontrei um monstro enorme e branco. Ele se apresentou como Defensor da montanha e disse que não permitiria que eu tomasse o tesouro dele. Você gostaria de tentar ir lá roubar uma das peças do tesouro?", cid)
             end
         else
-            selfSay("Nao entendi. Voce quer tentar roubar uma das pecas do tesouro do Defensor da montanha?", cid)
+            selfSay("Não entendi. Você quer tentar roubar uma das peças do tesouro do Defensor da montanha?", cid)
         end
     elseif talkState[talkUser] == 2 then
         local chosen = nil
@@ -164,14 +164,14 @@ function creatureSayCallback(cid, type, msg)
                 doPlayerAddItem(cid, chosen.id, 1)
                 setPlayerStorageValue(cid, QUEST_STORAGE, 2)
                 setPlayerStorageValue(cid, QUEST_SYSTEM_STORAGE, 2)
-                selfSay("Aqui esta, " .. name .. "! " .. chosen.article .. " " .. chosen.name .. " da montanha. Que ele te proteja como protegeu o guardiao!", cid)
+                selfSay("Aqui está, " .. name .. "! " .. chosen.article .. " " .. chosen.name .. " da montanha. Que ele te proteja como protegeu o guardião!", cid)
                 talkState[talkUser] = 1
             else
-                selfSay("Calma, " .. name .. "! Voce ainda nao trouxe o tesouro do Defensor da montanha. Derrote-o e pegue o bau primeiro!", cid)
+                selfSay("Calma, " .. name .. "! Você ainda não trouxe o tesouro do Defensor da montanha. Derrote-o e pegue o baú primeiro!", cid)
                 talkState[talkUser] = 1
             end
         else
-            selfSay("Qual peca? {capacete}, {armadura}, {calca}, {bota} ou {escudo}?", cid)
+            selfSay("Qual peça? {capacete}, {armadura}, {calça}, {bota} ou {escudo}?", cid)
         end
     end
     return true

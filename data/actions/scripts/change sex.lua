@@ -1,6 +1,6 @@
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if not getTileInfo(getCreaturePosition(cid)).protection then 
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "É necessário estar em uma zona protegida (PZ) para trocar de sexo.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Ã‰ necessÃ¡rio estar em uma zona protegida (PZ) para trocar de sexo.")
 		return false 
 	end 
 	local sexId = getPlayerSex(cid)
@@ -11,7 +11,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	doRemoveItem(item.uid, 1)
 	doPlayerSetSex(cid, newSex)
 	doSendMagicEffect(getCreaturePosition(cid), 28)
-	doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você trocou o sexo de seu personagem!")
+	doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "VocÃª trocou o sexo de seu personagem!")
 	addEvent(doRemoveCreature, 1*1000, cid, true)
   return true
 end
