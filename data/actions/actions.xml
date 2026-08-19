@@ -304,4 +304,7 @@
 
 	<!-- Recompensa 100k (level 120+, uso unico) -->
 	<action actionid="50001" event="script" value="recompensa100k.lua"/>
+
+	<!-- Repolhos da quest do Senhor dos repolhos (item 18929) -->
+	<action itemid="18929" event="script" value="senhorRepolhos.lua"/>
 </actions>

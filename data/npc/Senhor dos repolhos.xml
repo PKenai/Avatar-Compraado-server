@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<npc name="Senhor dos repolhos" script="data/npc/scripts/senhor dos repolhos.lua" walkinterval="0" floorchange="0" lookdir="1">
+	<health now="100" max="100"/>
+	<look addons="0" type="1300" head="0" legs="0" body="0" feet="0"/>
+</npc>

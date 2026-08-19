@@ -74,6 +74,8 @@ local defs = {
     { id = 21, type = "creature", creature = "urso feroz", target = 150, name = "Derrotou 150 ursos ferozes", title = "Abraça urso", description = "Derrote 150 ursos ferozes." },
     -- Quest: desbloqueada manualmente pelo NPC (criatura sentinela, nunca matavel)
     { id = 22, type = "creature", creature = "rafinha", target = 1, name = "Pescou o anel do Rafinha", title = "Pescador nato", description = "Complete a quest O Anel do Rafinha." },
+    -- Quest: desbloqueada manualmente pelo NPC (repolhos sao itens, nao criaturas)
+    { id = 23, type = "creature", creature = "senhor dos repolhos", target = 1, name = "Recuperou os 50 repolhos", title = "Repolhudo", description = "Complete a quest Os Repolhos Roubados e recupere todos os 50 repolhos." },
 }
 
 for _, def in ipairs(defs) do

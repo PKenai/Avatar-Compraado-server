@@ -753,14 +753,14 @@
 	<spawn centerx="438" centery="346" centerz="7" radius="1">
 		<monster name="Sapo" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="496" centery="346" centerz="7" radius="1">
-		<npc name="Koin" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
 	<spawn centerx="539" centery="346" centerz="7" radius="5">
 		<npc name="Borkas" x="1" y="1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="567" centery="346" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="497" centery="348" centerz="7" radius="1">
+		<npc name="Koin" x="-1" y="-1" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="446" centery="351" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -865,6 +865,9 @@
 	</spawn>
 	<spawn centerx="453" centery="393" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="540" centery="393" centerz="7" radius="1">
+		<npc name="Senhor dos repolhos" x="1" y="1" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="615" centery="393" centerz="7" radius="1">
 		<monster name="Leao de ba sin se" x="1" y="-1" z="7" spawntime="60" direction="2" />

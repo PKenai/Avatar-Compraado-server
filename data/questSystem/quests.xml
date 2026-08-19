@@ -124,4 +124,14 @@
         </mission>
     </quest>
 
+
+    <quest name="Os Repolhos Roubados" id="26" looktype="1300" startstorageid="49260" startstoragevalue="1">
+        <description>Um arruaceiro roubou os repolhos do Senhor dos Repolhos e espalhou pela cidade. Clique nos repolhos no chao para recupera-los (level 1+).</description>
+        <mission name="Recuperar os repolhos roubados" storageid="49260" startvalue="1" endvalue="2" progressstorageid="49261" maxprogress="50">
+            <description>Encontre e clique nos 50 repolhos espalhados pela cidade. Volte ao Senhor dos Repolhos para receber recompensas a cada nivel atingido (1, 10, 20, 35 e 50 repolhos).</description>
+            <reward id="2152" count="85" />
+            <reward id="2148" count="1030000" />
+        </mission>
+    </quest>
+
 </quests>
