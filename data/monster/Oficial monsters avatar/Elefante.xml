@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Elefante" nameDescription="um elefante" race="undead" experience="3200" speed="430" manacost="0">
+	<health now="2600" max="2600"/>
+	<look type="1295" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="5000" chance="10"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="85" attack="90"/>
+		<attack name="physical" interval="2500" chance="30" range="1" min="-100" max="-180"/>
+	</attacks>
+	<defenses armor="15" defense="12"/>
+	<elements>
+		<element earthPercent="20"/>
+		<element firePercent="-10"/>
+	</elements>
+	<loot>
+		<item id="2148" countmax="120" chance="100000"/><!-- gold coins -->
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="PWWWRRRRR!" yell="1"/>
+		<voice sentence="TRRRRRUMMMM!" yell="1"/>
+	</voices>
+</monster>

@@ -14,5 +14,5 @@
 -- ==========================================================
 HuntWaypoint.register({
   ["Location"] = {x = 567, y = 329, z = 7},
-  ["Recomended level"] = "20-30",   -- ajuste a faixa do seu servidor
+  ["Recomended level"] = "0-30",   -- ajuste a faixa do seu servidor
 })

@@ -134,4 +134,111 @@
         </mission>
     </quest>
 
+    <quest name="A Carapaca de Carlos" id="27" looktype="1296" startstorageid="49270" startstoragevalue="1">
+        <description>Carlos e um ferreiro que precisa de carapacas de aco das centopeias pra forjar armaduras da guarda.</description>
+        <mission name="Recolher Carapacas de Aco" storageid="49270" startvalue="1" endvalue="2" progressstorageid="49271">
+            <description>Mate 200 Centopeias Carapaca de Aco e volte ao Carlos para receber sua recompensa.</description>
+            <monster name="Centopeia carapaca de aco" count="200" />
+            <reward id="2152" count="50" />
+        </mission>
+    </quest>
+
+    <quest name="O Erro de Haroldo" id="28" looktype="1267" startstorageid="49280" startstoragevalue="1">
+        <description>Haroldo era um professor que estudou textos proibidos e sem querer libertou conhecimentos que ganharam vida.</description>
+        <mission name="Destruir Livros Proibidos" storageid="49280" startvalue="1" endvalue="2" progressstorageid="49281">
+            <description>Mate 2500 Livros de Dobras Proibidas e volte ao Haroldo para receber sua recompensa.</description>
+            <monster name="Livro de dobras proibidas" count="2500" />
+            <reward id="2152" count="25" />
+        </mission>
+    </quest>
+
+    <quest name="A Vinganca do Coronel" id="29" looktype="1265" startstorageid="49290" startstoragevalue="1">
+        <description>Um coronel aposentado perdeu seu batalhao pra uma horda de abelhas urubu no deserto e agora quer vinganca.</description>
+        <mission name="Cacar Abelhas Urubu" storageid="49290" startvalue="1" endvalue="2" progressstorageid="49291">
+            <description>Mate 300 Abelhas Urubu e volte ao Coronel Fuligem para receber sua recompensa.</description>
+            <monster name="Abelha urubu" count="300" />
+            <reward id="2152" count="80" />
+        </mission>
+    </quest>
+
+    <quest name="A Caverna de Lumina" id="30" looktype="1257" startstorageid="49300" startstoragevalue="1">
+        <description>Lumina encontrou uma caverna cheia de besouros brilhantes, mas eles estao bloqueando a entrada.</description>
+        <mission name="Limpar a Caverna" storageid="49300" startvalue="1" endvalue="2" progressstorageid="49301">
+            <description>Mate 100 Besouros Luminosos na caverna e volte a Lumina para receber sua recompensa.</description>
+            <monster name="Besouro luminoso" count="100" />
+            <reward id="2152" count="25" />
+        </mission>
+    </quest>
+
+    <quest name="A Hortela da Dona Fofinha" id="31" looktype="1258" startstorageid="49310" startstoragevalue="1">
+        <description>Dona Fofinha plantou uma horta enorme e os elefantes estao destruindo tudo.</description>
+        <mission name="Proteger a Hortela" storageid="49310" startvalue="1" endvalue="2" progressstorageid="49311">
+            <description>Mate 150 Elefantes e volte a Dona Fofinha para receber sua recompensa.</description>
+            <monster name="Elefante" count="150" />
+            <reward id="2152" count="70" />
+        </mission>
+    </quest>
+
+    <quest name="O Cemiterio da Rosalinda" id="32" looktype="1253" startstorageid="49320" startstoragevalue="1">
+        <description>Rosalinda perdeu o brinquedo favorito da avo no cemiterio e os vermes estao comendo tudo.</description>
+        <mission name="Limpar o Cemiterio" storageid="49320" startvalue="1" endvalue="2" progressstorageid="49321">
+            <description>Mate 100 Vermes de Cemiterio e volte a Rosalinda para receber sua recompensa.</description>
+            <monster name="Verme de cemiterio" count="100" />
+        </mission>
+    </quest>
+
+    <quest name="A Praia da Coral" id="33" looktype="1266" startstorageid="49330" startstoragevalue="1">
+        <description>Coral encontrou um carangueijo ermitao de casca dourada na praia e quer proteger os ermitaos mansos.</description>
+        <mission name="Proteger os Carangueijos" storageid="49330" startvalue="1" endvalue="2" progressstorageid="49331">
+            <description>Mate 200 Carangueijos Ermitaos e volte a Coral para receber sua recompensa.</description>
+            <monster name="Carangueijo Hermitao" count="200" />
+            <reward id="2152" count="60" />
+        </mission>
+    </quest>
+
+    <quest name="A Experiencia do Dr. Ferreira" id="34" looktype="1265" startstorageid="49340" startstoragevalue="1">
+        <description>O Dr. Ferreira e um cientista que precisa de argila dos homens de barro pra uma experiencia no laboratorio.</description>
+        <mission name="Coletar Argila" storageid="49340" startvalue="1" endvalue="2" progressstorageid="49341">
+            <description>Mate 100 Homens de Barro e volte ao Dr. Ferreira para receber sua recompensa.</description>
+            <monster name="Homem de barro" count="100" />
+            <reward id="2152" count="20" />
+        </mission>
+    </quest>
+
+    <quest name="O Rio dos Hipos" id="35" looktype="1168" startstorageid="49350" startstoragevalue="1">
+        <description>Marcos cuida do rio da vila, mas uns hipos invadiram e estao atacando quem tenta passar.</description>
+        <mission name="Conter os Hipos" storageid="49350" startvalue="1" endvalue="2" progressstorageid="49351">
+            <description>Mate 150 Hippos e volte ao Marcos para receber sua recompensa.</description>
+            <monster name="Hippo" count="150" />
+            <reward id="2152" count="50" />
+        </mission>
+    </quest>
+
+    <quest name="A Selva das Oncas" id="36" looktype="1169" startstorageid="49360" startstoragevalue="1">
+        <description>As oncas da selva estao ficando agressivas e atacando viajantes.</description>
+        <mission name="Cacar as Oncas" storageid="49360" startvalue="1" endvalue="2" progressstorageid="49361">
+            <description>Mate 1000 Oncas e volte ao Victor para receber sua recompensa.</description>
+            <monster name="Onca" count="1000" />
+            <reward id="2152" count="100" />
+        </mission>
+    </quest>
+
+    <quest name="O Conhecimento Proibido" id="37" looktype="1170" startstorageid="49370" startstoragevalue="1">
+        <description>Um conhecimento proibido escapou e esta criando seres descontrolados por toda parte.</description>
+        <mission name="Conter o Caos" storageid="49370" startvalue="1" endvalue="2" progressstorageid="49371">
+            <description>Mate 1500 Conhecimentos Descontrolados e volte ao Silas para receber sua recompensa.</description>
+            <monster name="Conhecimento descontrolado" count="1500" />
+            <reward id="2152" count="150" />
+        </mission>
+    </quest>
+
+    <quest name="A Pantera das Sombras" id="38" looktype="1171" startstorageid="49380" startstoragevalue="1">
+        <description>As panteras negras estao caçando os animais da floresta e aterrorizando a vila.</description>
+        <mission name="Cacar as Panteras Negras" storageid="49380" startvalue="1" endvalue="2" progressstorageid="49381">
+            <description>Mate 2000 Panteras Negras e volte a Nair para receber sua recompensa.</description>
+            <monster name="Pantera negra" count="2000" />
+            <reward id="2152" count="200" />
+        </mission>
+    </quest>
+
 </quests>

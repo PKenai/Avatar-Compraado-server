@@ -76,6 +76,19 @@ local defs = {
     { id = 22, type = "creature", creature = "rafinha", target = 1, name = "Pescou o anel do Rafinha", title = "Pescador nato", description = "Complete a quest O Anel do Rafinha." },
     -- Quest: desbloqueada manualmente pelo NPC (repolhos sao itens, nao criaturas)
     { id = 23, type = "creature", creature = "senhor dos repolhos", target = 1, name = "Recuperou os 50 repolhos", title = "Repolhudo", description = "Complete a quest Os Repolhos Roubados e recupere todos os 50 repolhos." },
+    -- Quests custom: titulos por NPC
+    { id = 24, type = "creature", creature = "carlos", target = 1, name = "Completou a quest de Carlos", title = "Forjador de Aco", description = "Complete a quest A Carapaca de Carlos." },
+    { id = 25, type = "creature", creature = "haroldo", target = 1, name = "Completou a quest de Haroldo", title = "Vigia dos Segredos", description = "Complete a quest O Erro de Haroldo." },
+    { id = 26, type = "creature", creature = "coronel fuligem", target = 1, name = "Completou a quest do Coronel Fuligem", title = "O Fuligem", description = "Complete a quest A Vinganca do Coronel." },
+    { id = 27, type = "creature", creature = "lumina", target = 1, name = "Completou a quest de Lumina", title = "Luz da Caverna", description = "Complete a quest A Caverna de Lumina." },
+    { id = 28, type = "creature", creature = "dona fofinha", target = 1, name = "Completou a quest da Dona Fofinha", title = "Protetor da Hortela", description = "Complete a quest A Hortela da Dona Fofinha." },
+    { id = 29, type = "creature", creature = "rosalinda", target = 1, name = "Completou a quest da Rosalinda", title = "Guardiao do Cemiterio", description = "Complete a quest O Cemiterio da Rosalinda." },
+    { id = 30, type = "creature", creature = "coral", target = 1, name = "Completou a quest da Coral", title = "Coletor de Conchas", description = "Complete a quest A Praia da Coral." },
+    { id = 31, type = "creature", creature = "dr. ferreira", target = 1, name = "Completou a quest do Dr. Ferreira", title = "Mao de Obra", description = "Complete a quest A Experiencia do Dr. Ferreira." },
+    { id = 32, type = "creature", creature = "marcos", target = 1, name = "Completou a quest de Marcos", title = "Domador de Hipos", description = "Complete a quest O Rio dos Hipos." },
+    { id = 33, type = "creature", creature = "victor", target = 1, name = "Completou a quest de Victor", title = "Cacador de Felinos", description = "Complete a quest A Selva das Oncas." },
+    { id = 34, type = "creature", creature = "silas", target = 1, name = "Completou a quest de Silas", title = "Mao de Ferro", description = "Complete a quest O Conhecimento Proibido." },
+    { id = 35, type = "creature", creature = "nair", target = 1, name = "Completou a quest de Nair", title = "Cacador Noturno", description = "Complete a quest A Pantera das Sombras." },
 }
 
 for _, def in ipairs(defs) do
