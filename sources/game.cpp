@@ -223,6 +223,10 @@ void Game::setGameState(GameState_t newState)
 				loadStatuslist();
 				loadGameState();
 
+				auras.loadFromXml();
+				wings.loadFromXml();
+				shaders.loadFromXml();
+
 				g_globalEvents->startup();
 				if(g_config.getBool(ConfigManager::INIT_PREMIUM_UPDATE))
 					IOLoginData::getInstance()->updatePremiumDays();
@@ -6611,6 +6615,36 @@ bool Game::reloadInfo(ReloadInfo_t reload, uint32_t playerId/* = 0*/, bool compl
 			//TODO
 			std::clog << "[Notice - Game::reloadInfo] Reload type does not work." << std::endl;
 			done = true;
+			break;
+		}
+
+		case RELOAD_AURAS:
+		{
+			if(auras.reload())
+				done = true;
+			else
+				std::clog << "[Error - Game::reloadInfo] Failed to reload auras." << std::endl;
+
+			break;
+		}
+
+		case RELOAD_WINGS:
+		{
+			if(wings.reload())
+				done = true;
+			else
+				std::clog << "[Error - Game::reloadInfo] Failed to reload wings." << std::endl;
+
+			break;
+		}
+
+		case RELOAD_SHADERS:
+		{
+			if(shaders.reload())
+				done = true;
+			else
+				std::clog << "[Error - Game::reloadInfo] Failed to reload shaders." << std::endl;
+
 			break;
 		}
 

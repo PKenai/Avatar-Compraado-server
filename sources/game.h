@@ -31,6 +31,9 @@
 #include "player.h"
 #include "npc.h"
 #include "monster.h"
+#include "auras.h"
+#include "wings.h"
+#include "shaders.h"
 
 class Creature;
 class Player;
@@ -103,9 +106,12 @@ enum ReloadInfo_t
 	RELOAD_TALKACTIONS = 20,
 	RELOAD_VOCATIONS = 21,
 	RELOAD_WEAPONS = 22,
-	RELOAD_MODS = 23,
-	RELOAD_ALL = 24,
-	RELOAD_LAST = RELOAD_WEAPONS
+	RELOAD_AURAS = 23,
+	RELOAD_WINGS = 24,
+	RELOAD_SHADERS = 25,
+	RELOAD_MODS = 26,
+	RELOAD_ALL = 27,
+	RELOAD_LAST = RELOAD_SHADERS
 };
 
 enum SaveFlag_t
@@ -614,6 +620,10 @@ class Game
 		void addMagicEffect(const SpectatorVec& list, const Position& pos, uint16_t effect, bool ghostMode = false);
 		void addDistanceEffect(const SpectatorVec& list, const Position& fromPos, const Position& toPos, uint8_t effect);
 		void addDistanceEffect(const Position& fromPos, const Position& toPos, uint8_t effect);
+
+		Auras auras;
+		Wings wings;
+		Shaders shaders;
 
 		void addStatsMessage(const SpectatorVec& list, MessageClasses mClass, const std::string& message,
 			const Position& pos, MessageDetails* details = NULL);

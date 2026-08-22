@@ -891,7 +891,7 @@ void Player::dropLoot(Container* corpse)
 bool Player::setStorage(const std::string& key, const std::string& value)
 {
 	uint32_t numericKey = atol(key.c_str());
-	if(!IS_IN_KEYRANGE(numericKey, RESERVED_RANGE) || IS_IN_KEYRANGE(numericKey, MOUNTS_RANGE))
+	if(!IS_IN_KEYRANGE(numericKey, RESERVED_RANGE) || IS_IN_KEYRANGE(numericKey, MOUNTS_RANGE) || IS_IN_KEYRANGE(numericKey, WINGS_RANGE) || IS_IN_KEYRANGE(numericKey, AURAS_RANGE) || IS_IN_KEYRANGE(numericKey, SHADERS_RANGE))
 	{
 		if(!Creature::setStorage(key, value))
 			return false;
@@ -5985,4 +5985,89 @@ bool Player::untameMount(uint8_t mountId)
 
 	setStorage(asString(key), asString(value));
 	return true;
+}
+
+bool Player::hasWing(const Wing* wing) const
+{
+	if(hasCustomFlag(PlayerCustomFlag_GamemasterPrivileges))
+		return true;
+
+	if(wing->premium && !isPremium())
+		return false;
+
+	const uint8_t tmpWingId = wing->id - 1;
+
+	int32_t key = PSTRG_WINGS_RANGE_START + (tmpWingId / 31), value = 0;
+	std::string tmp;
+	if(!getStorage(asString(key), tmp))
+		return false;
+
+	value = atoi(tmp.c_str());
+	return ((1 << (tmpWingId % 31)) & value) != 0;
+}
+
+uint8_t Player::getCurrentWing() const
+{
+	int32_t value = 0;
+	std::string tmp;
+	if(getStorage(asString(PSTRG_WINGS_CURRENTWINGS), tmp))
+		value = atoi(tmp.c_str());
+	return value;
+}
+
+void Player::setCurrentWing(uint8_t wingId)
+{
+	setStorage(asString(PSTRG_WINGS_CURRENTWINGS), asString(wingId));
+}
+
+bool Player::hasAura(const Aura* aura) const
+{
+	if(hasCustomFlag(PlayerCustomFlag_GamemasterPrivileges))
+		return true;
+
+	if(aura->premium && !isPremium())
+		return false;
+
+	const uint8_t tmpAuraId = aura->id - 1;
+
+	int32_t key = PSTRG_AURAS_RANGE_START + (tmpAuraId / 31), value = 0;
+	std::string tmp;
+	if(!getStorage(asString(key), tmp))
+		return false;
+
+	value = atoi(tmp.c_str());
+	return ((1 << (tmpAuraId % 31)) & value) != 0;
+}
+
+uint8_t Player::getCurrentAura() const
+{
+	int32_t value = 0;
+	std::string tmp;
+	if(getStorage(asString(PSTRG_AURAS_CURRENTAURA), tmp))
+		value = atoi(tmp.c_str());
+	return value;
+}
+
+void Player::setCurrentAura(uint8_t auraId)
+{
+	setStorage(asString(PSTRG_AURAS_CURRENTAURA), asString(auraId));
+}
+
+bool Player::hasShader(const Shader* shader) const
+{
+	if(hasCustomFlag(PlayerCustomFlag_GamemasterPrivileges))
+		return true;
+
+	if(shader->premium && !isPremium())
+		return false;
+
+	const uint8_t tmpShaderId = shader->id - 1;
+
+	int32_t key = PSTRG_SHADERS_RANGE_START + (tmpShaderId / 31), value = 0;
+	std::string tmp;
+	if(!getStorage(asString(key), tmp))
+		return false;
+
+	value = atoi(tmp.c_str());
+	return ((1 << (tmpShaderId % 31)) & value) != 0;
 }

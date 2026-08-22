@@ -1189,6 +1189,18 @@ bool Monsters::loadMonster(const std::string& file, const std::string& monsterNa
 
 				if(readXMLInteger(p, "mount", intValue))
 					mType->outfit.lookMount = intValue;
+
+				if(readXMLInteger(p, "aura", intValue))
+					mType->outfit.lookAura = intValue;
+
+				if(readXMLInteger(p, "wings", intValue))
+					mType->outfit.lookWings = intValue;
+
+				if(readXMLString(p, "shader", strValue))
+				{
+					Shader* shader = g_game.shaders.getShaderByName(strValue);
+					mType->outfit.lookShader = shader ? shader->id : 0;
+				}
 			}
 			else if(readXMLInteger(p, "typeex", intValue))
 				mType->outfit.lookTypeEx = intValue;

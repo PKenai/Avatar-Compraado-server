@@ -326,21 +326,25 @@ struct Outfit_t
 	Outfit_t()
 	{
 		lookType = lookTypeEx = lookMount = 0;
+		lookWings = lookAura = lookShader = 0;
 		lookHead = lookBody = lookLegs = lookFeet = lookAddons = 0;
 	}
 	Outfit_t(uint16_t _lookType)
 	{
 		lookType = _lookType;
 		lookTypeEx = lookMount = 0;
+		lookWings = lookAura = lookShader = 0;
 		lookHead = lookBody = lookLegs = lookFeet = lookAddons = 0;
 	}
 
 	uint16_t lookType, lookMount, lookTypeEx;
+	uint16_t lookWings, lookAura, lookShader;
 	uint8_t lookHead, lookBody, lookLegs, lookFeet, lookAddons;
 
 	bool operator==(const Outfit_t& o) const
 	{
 		return (o.lookAddons == lookAddons && o.lookMount == lookMount
+			&& o.lookWings == lookWings && o.lookAura == lookAura && o.lookShader == lookShader
 			&& o.lookType == lookType && o.lookTypeEx == lookTypeEx
 			&& o.lookHead == lookHead && o.lookBody == lookBody
 			&& o.lookLegs == lookLegs && o.lookFeet == lookFeet);

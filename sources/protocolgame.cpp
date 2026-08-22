@@ -1327,6 +1327,12 @@ void ProtocolGame::parseSetOutfit(NetworkMessage& msg)
 	else
 		msg.skip(2);
 
+	newOutfit.lookWings = msg.get<uint16_t>();
+	newOutfit.lookAura = msg.get<uint16_t>();
+	std::string shaderName = msg.getString();
+	Shader* shader = g_game.shaders.getShaderByName(shaderName);
+	newOutfit.lookShader = shader ? shader->id : 0;
+
 	addGameTask(&Game::playerChangeOutfit, player->getID(), newOutfit);
 }
 
@@ -2710,6 +2716,48 @@ void ProtocolGame::sendOutfitWindow()
 	else
 		msg->put<char>(0);
 
+	// Send wings
+	std::vector<const Wing*> wingList;
+	for(const Wing& wing : g_game.wings.getWings())
+	{
+		if(player->hasWing(&wing))
+			wingList.push_back(&wing);
+	}
+	msg->put<char>(wingList.size());
+	for(const Wing* wing : wingList)
+	{
+		msg->put<uint16_t>(wing->clientId);
+		msg->putString(wing->name);
+	}
+
+	// Send auras
+	std::vector<const Aura*> auraList;
+	for(const Aura& aura : g_game.auras.getAuras())
+	{
+		if(player->hasAura(&aura))
+			auraList.push_back(&aura);
+	}
+	msg->put<char>(auraList.size());
+	for(const Aura* aura : auraList)
+	{
+		msg->put<uint16_t>(aura->clientId);
+		msg->putString(aura->name);
+	}
+
+	// Send shaders
+	std::vector<const Shader*> shaderList;
+	for(const Shader& shader : g_game.shaders.getShaders())
+	{
+		if(player->hasShader(&shader))
+			shaderList.push_back(&shader);
+	}
+	msg->put<char>(shaderList.size());
+	for(const Shader* shader : shaderList)
+	{
+		msg->put<uint16_t>(shader->id);
+		msg->putString(shader->name);
+	}
+
 	player->hasRequestedOutfit(true);
 }
 
@@ -3182,6 +3230,11 @@ void ProtocolGame::AddCreatureOutfit(NetworkMessage_ptr msg, const Creature* cre
 			msg->put<uint16_t>(outfit.lookMount);
 		else
 			msg->put<uint16_t>(0x00);
+
+		msg->put<uint16_t>(outfit.lookWings);
+		msg->put<uint16_t>(outfit.lookAura);
+		Shader* shader = g_game.shaders.getShaderByID(outfit.lookShader);
+		msg->putString(shader ? shader->name : "");
 	}
 	else
 	{

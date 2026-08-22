@@ -95,8 +95,8 @@
 	<spawn centerx="474" centery="625" centerz="3" radius="2">
 		<npc name="Gyatso" x="-1" y="-1" z="3" spawntime="40" />
 	</spawn>
-	<spawn centerx="637" centery="237" centerz="4" radius="1">
-		<npc name="Victor" x="0" y="0" z="4" spawntime="60" direction="2" />
+	<spawn centerx="638" centery="237" centerz="4" radius="1">
+		<npc name="Victor" x="-1" y="0" z="4" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="441" centery="379" centerz="4" radius="1">
 		<monster name="Joaninha da terra" x="0" y="0" z="4" spawntime="60" direction="2" />
@@ -578,8 +578,8 @@
 	<spawn centerx="413" centery="437" centerz="5" radius="1">
 		<monster name="Joaninha da terra" x="0" y="0" z="5" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="637" centery="441" centerz="5" radius="1">
-		<monster name="Defensor da montanha" x="0" y="0" z="5" spawntime="60" direction="2" />
+	<spawn centerx="636" centery="441" centerz="5" radius="1">
+		<monster name="Defensor da montanha" x="1" y="0" z="5" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="663" centery="455" centerz="5" radius="1">
 		<monster name="Lobo selvagem" x="0" y="0" z="5" spawntime="60" direction="2" />
@@ -633,8 +633,8 @@
 	<spawn centerx="601" centery="561" centerz="5" radius="1">
 		<monster name="Abelha" x="0" y="0" z="5" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="598" centery="563" centerz="5" radius="1">
-		<monster name="Abelha" x="0" y="0" z="5" spawntime="60" direction="2" />
+	<spawn centerx="598" centery="562" centerz="5" radius="1">
+		<monster name="Abelha" x="0" y="1" z="5" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="596" centery="565" centerz="5" radius="1">
 		<monster name="Abelha" x="0" y="0" z="5" spawntime="60" direction="2" />
@@ -767,8 +767,8 @@
 	<spawn centerx="705" centery="186" centerz="6" radius="1">
 		<monster name="Onca" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="651" centery="187" centerz="6" radius="1">
-		<monster name="Onca" x="0" y="0" z="6" spawntime="60" direction="2" />
+	<spawn centerx="652" centery="187" centerz="6" radius="1">
+		<monster name="Onca" x="-1" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="655" centery="187" centerz="6" radius="1">
 		<monster name="Onca" x="0" y="0" z="6" spawntime="60" direction="2" />
@@ -980,8 +980,8 @@
 	<spawn centerx="347" centery="255" centerz="6" radius="1">
 		<npc name="capitain leopoldo north" x="0" y="0" z="6" spawntime="40" />
 	</spawn>
-	<spawn centerx="591" centery="256" centerz="6" radius="1">
-		<monster name="Elefante" x="0" y="0" z="6" spawntime="60" direction="2" />
+	<spawn centerx="592" centery="256" centerz="6" radius="1">
+		<monster name="Elefante" x="-1" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="672" centery="256" centerz="6" radius="1">
 		<monster name="Onca" x="-1" y="0" z="6" spawntime="60" direction="2" />
@@ -1223,8 +1223,8 @@
 	<spawn centerx="659" centery="452" centerz="6" radius="1">
 		<monster name="Lobo selvagem" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="670" centery="454" centerz="6" radius="5">
-		<npc name="Aiano" x="0" y="0" z="6" spawntime="60" direction="2" />
+	<spawn centerx="669" centery="453" centerz="6" radius="5">
+		<npc name="Aiano" x="1" y="1" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="288" centery="455" centerz="6" radius="1">
 		<npc name="capitain leopoldo fire" x="0" y="0" z="6" spawntime="40" />
@@ -1457,8 +1457,8 @@
 	<spawn centerx="335" centery="196" centerz="7" radius="1">
 		<npc name="astor" x="1" y="0" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="561" centery="200" centerz="7" radius="1">
-		<monster name="Pantera negra" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="562" centery="200" centerz="7" radius="1">
+		<monster name="Pantera negra" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="571" centery="200" centerz="7" radius="1">
 		<monster name="Pantera negra" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1484,9 +1484,7 @@
 	<spawn centerx="365" centery="203" centerz="7" radius="1">
 		<npc name="Maria" x="-1" y="0" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="564" centery="203" centerz="7" radius="1">
-		<npc name="Nair" x="0" y="1" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="564" centery="203" centerz="7" radius="1" />
 	<spawn centerx="601" centery="207" centerz="7" radius="1">
 		<monster name="Onca" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -1514,8 +1512,8 @@
 	<spawn centerx="666" centery="223" centerz="7" radius="1">
 		<monster name="Onca" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="605" centery="227" centerz="7" radius="1">
-		<monster name="Onca" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="606" centery="227" centerz="7" radius="1">
+		<monster name="Onca" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="687" centery="231" centerz="7" radius="1">
 		<monster name="Onca" x="-1" y="-1" z="7" spawntime="60" direction="2" />
@@ -1533,8 +1531,8 @@
 	<spawn centerx="637" centery="235" centerz="7" radius="1">
 		<monster name="Onca" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="488" centery="241" centerz="7" radius="1">
-		<monster name="Hippo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="489" centery="241" centerz="7" radius="1">
+		<monster name="Hippo" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="623" centery="244" centerz="7" radius="1">
 		<monster name="Onca" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1883,8 +1881,8 @@
 	<spawn centerx="557" centery="418" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="604" centery="418" centerz="7" radius="1">
-		<monster name="Aranha cospe pedra" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="605" centery="418" centerz="7" radius="1">
+		<monster name="Aranha cospe pedra" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="521" centery="419" centerz="7" radius="1">
 		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1895,8 +1893,8 @@
 	<spawn centerx="582" centery="420" centerz="7" radius="1">
 		<monster name="Aranha cospe pedra" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="630" centery="422" centerz="7" radius="1">
-		<monster name="Leao de ba sin se" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="631" centery="422" centerz="7" radius="1">
+		<monster name="Leao de ba sin se" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="587" centery="424" centerz="7" radius="1">
 		<monster name="Lobo selvagem" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2434,8 +2432,8 @@
 	<spawn centerx="530" centery="526" centerz="7" radius="1">
 		<monster name="Abelha urubu" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="642" centery="527" centerz="7" radius="1">
-		<monster name="Centopeia carapaca de aco" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="643" centery="526" centerz="7" radius="1">
+		<monster name="Centopeia carapaca de aco" x="-1" y="1" z="7" spawntime="60" direction="3" />
 	</spawn>
 	<spawn centerx="634" centery="528" centerz="7" radius="1">
 		<monster name="Centopeia carapaca de aco" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2579,14 +2577,14 @@
 	<spawn centerx="476" centery="552" centerz="7" radius="1">
 		<monster name="Abelha urubu" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="499" centery="552" centerz="7" radius="1">
+		<npc name="Coral" x="0" y="1" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="532" centery="552" centerz="7" radius="1">
 		<monster name="Abelha urubu" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="488" centery="553" centerz="7" radius="1">
 		<monster name="Abelha urubu" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
-	<spawn centerx="499" centery="553" centerz="7" radius="1">
-		<npc name="Coral" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="511" centery="553" centerz="7" radius="1">
 		<monster name="Abelha urubu" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -3473,8 +3471,8 @@
 	<spawn centerx="576" centery="324" centerz="8" radius="1">
 		<monster name="Terra beetle" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="593" centery="324" centerz="8" radius="1">
-		<monster name="Terra beetle" x="0" y="0" z="8" spawntime="60" direction="2" />
+	<spawn centerx="594" centery="324" centerz="8" radius="1">
+		<monster name="Terra beetle" x="-1" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="614" centery="324" centerz="8" radius="1">
 		<monster name="Terra beetle" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -4609,8 +4607,8 @@
 	<spawn centerx="489" centery="553" centerz="8" radius="1">
 		<monster name="Carangueijo Hermitao" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="499" centery="553" centerz="8" radius="1">
-		<monster name="Carangueijo Hermitao" x="0" y="0" z="8" spawntime="60" direction="2" />
+	<spawn centerx="500" centery="553" centerz="8" radius="1">
+		<monster name="Carangueijo Hermitao" x="-1" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="502" centery="553" centerz="8" radius="1">
 		<monster name="Carangueijo Hermitao" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -4681,8 +4679,8 @@
 	<spawn centerx="591" centery="570" centerz="8" radius="1">
 		<monster name="Traidor" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="589" centery="576" centerz="8" radius="1">
-		<monster name="Traidor" x="0" y="0" z="8" spawntime="60" direction="2" />
+	<spawn centerx="590" centery="576" centerz="8" radius="1">
+		<monster name="Traidor" x="-1" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="592" centery="576" centerz="8" radius="1">
 		<monster name="Traidor" x="1" y="0" z="8" spawntime="60" direction="2" />
@@ -6129,8 +6127,8 @@
 		<monster name="Traidor" x="0" y="0" z="11" spawntime="60" direction="2" />
 		<monster name="Traidor" x="1" y="1" z="11" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="547" centery="547" centerz="11" radius="1">
-		<monster name="Livro de dobras proibidas" x="0" y="0" z="11" spawntime="60" direction="2" />
+	<spawn centerx="548" centery="547" centerz="11" radius="1">
+		<monster name="Livro de dobras proibidas" x="-1" y="0" z="11" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="579" centery="547" centerz="11" radius="1">
 		<monster name="Livro de dobras proibidas" x="0" y="0" z="11" spawntime="60" direction="2" />

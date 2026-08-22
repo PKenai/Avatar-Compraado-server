@@ -1147,6 +1147,9 @@ void LuaInterface::pushOutfit(lua_State* L, const Outfit_t& outfit)
 	setField(L, "lookFeet", outfit.lookFeet);
 	setField(L, "lookAddons", outfit.lookAddons);
 	setField(L, "lookMount", outfit.lookMount);
+	setField(L, "lookWings", outfit.lookWings);
+	setField(L, "lookAura", outfit.lookAura);
+	setField(L, "lookShader", outfit.lookShader);
 }
 
 void LuaInterface::pushCallback(lua_State* L, int32_t callback)
@@ -1257,6 +1260,9 @@ Outfit_t LuaInterface::popOutfit(lua_State* L)
 {
 	Outfit_t outfit;
 	outfit.lookMount = getField(L, "lookMount");
+	outfit.lookWings = getField(L, "lookWings");
+	outfit.lookAura = getField(L, "lookAura");
+	outfit.lookShader = getField(L, "lookShader");
 	outfit.lookAddons = getField(L, "lookAddons");
 
 	outfit.lookFeet = getField(L, "lookFeet");

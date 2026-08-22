@@ -235,6 +235,15 @@
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\actions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\auras.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\wings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\shaders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\CMakeLists.txt" />

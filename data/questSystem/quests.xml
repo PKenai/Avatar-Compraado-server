@@ -67,7 +67,7 @@
 
     <quest name="A Pena de John" id="19" looktype="1268" startstorageid="49190" startstoragevalue="1">
         <description>John faz vestimentas com itens de animais e precisa de uma pena de pica-pau da terra para sua próxima criação.</description>
-        <mission name="Entregar a pena" storageid="49190" startvalue="1" endvalue="2" maxprogress="1">
+        <mission name="Entregar a pena" storageid="49190" startvalue="1" endvalue="2" progressstorageid="49191" maxprogress="1">
             <description>Consiga uma pena de pica-pau da terra e entregue ao John.</description>
             <reward id="18872" count="1" />
         </mission>

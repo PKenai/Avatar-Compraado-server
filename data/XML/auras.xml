@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<auras>
+    <aura id="1" clientid="1304" name="Simple fire" speed="0" />
+    <aura id="2" clientid="1305" name="Simple air" speed="0" />
+    <aura id="3" clientid="1306" name="Simple bubbles" speed="0" />
+</auras>

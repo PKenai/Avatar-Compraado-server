@@ -74,7 +74,7 @@ optionalWarAttackableAlly = false
 worldId = 0
 ip = "127.0.0.1"
 bindOnlyGlobalAddress = true
-fullMapOnLogin = true
+fullMapOnLogin = false
 -- Envia o effect id dos magic effects com 2 bytes (0-65535) no lugar de 1 byte
 -- (0-255). Use SOMENTE se o seu client tiver a feature OTC 'GameMagicEffectU16'
 -- habilitada (g_game.enableFeature(GameMagicEffectU16)) - se o client nao tiver,
@@ -87,8 +87,8 @@ retryTimeout = 5 * 1000
 loginTimeout = 60 * 1000
 maxPlayers = 1000
 motd = "Welcome to Avatar Eclipse!"
-displayOnOrOffAtCharlist = true
-onePlayerOnlinePerAccount = true
+displayOnOrOffAtCharlist = false
+onePlayerOnlinePerAccount = false
 allowClones = 0
 serverName = "Eclipse"
 loginMessageEN = "Welcome to the amazing world of Avatar, enjoy!"

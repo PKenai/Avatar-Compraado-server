@@ -29,6 +29,9 @@
 #include "outfit.h"
 #include "vocation.h"
 #include "group.h"
+#include "auras.h"
+#include "wings.h"
+#include "shaders.h"
 
 #include "spectators.h"
 #include "ioguild.h"
@@ -622,6 +625,22 @@ class Player : public Creature, public Cylinder
 
 		bool tameMount(uint8_t mountId);
 		bool untameMount(uint8_t mountId);
+
+		//wings/auras/shaders
+		bool hasMount() const {return defaultOutfit.lookMount != 0;}
+		bool hasAura() const {return defaultOutfit.lookAura != 0;}
+		bool hasWings() const {return defaultOutfit.lookWings != 0;}
+		bool hasShader() const {return defaultOutfit.lookShader != 0;}
+
+		bool hasWing(const Wing* wing) const;
+		uint8_t getCurrentWing() const;
+		void setCurrentWing(uint8_t wingId);
+
+		bool hasAura(const Aura* aura) const;
+		uint8_t getCurrentAura() const;
+		void setCurrentAura(uint8_t auraId);
+
+		bool hasShader(const Shader* shader) const;
 
 		//event methods
 		virtual void onUpdateTileItem(const Tile* tile, const Position& pos, const Item* oldItem,

@@ -597,7 +597,7 @@ function qsSendQuestList(cid)
                         if mStatus == MISSION_STATUS.COMPLETED then
                             missionProgress = maxProgress
                         else
-                            missionProgress = math.min(qsGetMissionProgress(cid, quest.id or 0, mission.id or 0), maxProgress)
+                            missionProgress = math.min(qsGetMissionProgress(cid, tonumber(quest.id) or 0, tonumber(mission.id) or 0), maxProgress)
                         end
 
                         totalMax = totalMax + maxProgress

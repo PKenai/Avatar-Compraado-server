@@ -87,7 +87,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>C:\vcpkg\installed\x86-windows\include\mysql;C:\vcpkg\installed\x86-windows\include\libxml2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/vcpkg/installed/x86-windows/include" /external:I "C:/vcpkg/installed/x86-windows/include/libxml2" /external:I "C:/vcpkg/installed/x86-windows/include/luajit" /bigobj</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/vcpkg/installed/x86-windows/include" /external:I "C:/vcpkg/installed/x86-windows/include/libxml2" /external:I "C:/vcpkg/installed/x86-windows/include/luajit" /bigobj /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <ConformanceMode>true</ConformanceMode>
@@ -140,7 +140,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>C:\vcpkg\installed\x86-windows\include\mysql;C:\vcpkg\installed\x86-windows\include\libxml2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/vcpkg/installed/x86-windows/include" /external:I "C:/vcpkg/installed/x86-windows/include/libxml2" /external:I "C:/vcpkg/installed/x86-windows/include/luajit" /bigobj</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/vcpkg/installed/x86-windows/include" /external:I "C:/vcpkg/installed/x86-windows/include/libxml2" /external:I "C:/vcpkg/installed/x86-windows/include/luajit" /bigobj /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ConformanceMode>true</ConformanceMode>
@@ -193,7 +193,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>C:\vcpkg\installed\x86-windows\include\mysql;C:\vcpkg\installed\x86-windows\include\libxml2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/vcpkg/installed/x86-windows/include" /external:I "C:/vcpkg/installed/x86-windows/include/libxml2" /external:I "C:/vcpkg/installed/x86-windows/include/luajit" /bigobj</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/vcpkg/installed/x86-windows/include" /external:I "C:/vcpkg/installed/x86-windows/include/libxml2" /external:I "C:/vcpkg/installed/x86-windows/include/luajit" /bigobj /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ConformanceMode>true</ConformanceMode>
@@ -246,7 +246,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>C:\vcpkg\installed\x86-windows\include\mysql;C:\vcpkg\installed\x86-windows\include\libxml2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/vcpkg/installed/x86-windows/include" /external:I "C:/vcpkg/installed/x86-windows/include/libxml2" /external:I "C:/vcpkg/installed/x86-windows/include/luajit" /bigobj</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/vcpkg/installed/x86-windows/include" /external:I "C:/vcpkg/installed/x86-windows/include/libxml2" /external:I "C:/vcpkg/installed/x86-windows/include/luajit" /bigobj /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ConformanceMode>true</ConformanceMode>
@@ -432,6 +432,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\allocator.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\admin.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\actions.cpp" />
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\auras.cpp" />
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\wings.cpp" />
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\shaders.cpp" />
     <Natvis Include="C:\vcpkg\installed\x86-windows\share\boost-1.90.0\assert\boost_assert.natvis">
     </Natvis>
   </ItemGroup>

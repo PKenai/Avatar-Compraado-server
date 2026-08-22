@@ -147,15 +147,27 @@ bool Npcs::parseNpcNode(xmlNodePtr node, FileType_t path, bool reloading/* = fal
 					nType->outfit.lookFeet = intValue;
 
 				if(readXMLInteger(q, "addons", intValue))
-					nType->outfit.lookAddons = intValue;
+					nType->outfit.lookAddons = intValue;					if(readXMLInteger(q, "mount", intValue))
+						nType->outfit.lookMount = intValue;
 
-				if(readXMLInteger(q, "mount", intValue))
-					nType->outfit.lookMount = intValue;
+					if(readXMLInteger(q, "aura", intValue))
+						nType->outfit.lookAura = intValue;
+
+					if(readXMLInteger(q, "wings", intValue))
+						nType->outfit.lookWings = intValue;
+
+					if(readXMLString(q, "shader", strValue))
+					{
+						Shader* shader = g_game.shaders.getShaderByName(strValue);
+						nType->outfit.lookShader = shader ? shader->id : 0;
+					}
+				}
+				else if(readXMLInteger(q, "typeex", intValue))
+					nType->outfit.lookTypeEx = intValue;
 			}
-			else if(readXMLInteger(q, "typeex", intValue))
-				nType->outfit.lookTypeEx = intValue;
 		}
-	}
+ 
+
  
 	if(new_nType)
 		data[name] = nType;
@@ -437,15 +449,25 @@ bool Npc::loadFromXml()
 					nType->outfit.lookFeet = intValue;
 
 				if(readXMLInteger(p, "addons", intValue))
-					nType->outfit.lookAddons = intValue;
-
-				if(readXMLInteger(p, "mount", intValue))
+					nType->outfit.lookAddons = intValue;					if(readXMLInteger(p, "mount", intValue))
 					nType->outfit.lookMount = intValue;
+
+					if(readXMLInteger(p, "aura", intValue))
+					nType->outfit.lookAura = intValue;
+
+					if(readXMLInteger(p, "wings", intValue))
+					nType->outfit.lookWings = intValue;
+
+					if(readXMLString(p, "shader", strValue))
+					{
+						Shader* shader = g_game.shaders.getShaderByName(strValue);
+						nType->outfit.lookShader = shader ? shader->id : 0;
+					}
+				}
+				else if(readXMLInteger(p, "typeex", intValue))
+					nType->outfit.lookTypeEx = intValue;
 			}
-			else if(readXMLInteger(p, "typeex", intValue))
-				nType->outfit.lookTypeEx = intValue;
-		}
-		else if(!xmlStrcmp(p->name, (const xmlChar*)"voices"))
+			else if(!xmlStrcmp(p->name, (const xmlChar*)"voices"))
 		{
 			for(xmlNodePtr q = p->children; q != NULL; q = q->next)
 			{
