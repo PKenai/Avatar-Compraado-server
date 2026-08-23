@@ -32,7 +32,9 @@ function useExpScroll(cid, item)
         return false
     end
 
-    setPlayerStorageValue(cid, "hasExpScroll", os.time() + EXP_SCROLL_TIME)
+    local endTime = os.time() + EXP_SCROLL_TIME
+    setPlayerStorageValue(cid, "hasExpScroll", endTime)
+    doCreatureAddBuffWithTime(cid, 11, EXP_SCROLL_TIME * 1000) -- buff icon com timer
     doSendMagicEffect(getThingPos(cid), 13)
     doRemoveItem(item.uid, 1)
     sendBlueMessage(cid, getLangString(cid, "Your experience gain was increased by 50% for 45 minutes!", "Seu ganho de experiência foi aumentado em 50% por 45 minutos!"))

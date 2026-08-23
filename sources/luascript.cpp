@@ -1806,6 +1806,21 @@ void LuaInterface::registerFunctions()
 	//doSendPlayerExtendedOpcode(cid, opcode, buffer)1
 	lua_register(m_luaState, "doSendPlayerExtendedOpcode", LuaInterface::luaDoSendPlayerExtendedOpcode);
 
+	//registerBuffType(id, name, description, icon, border, stacked, maxStacks, ticks, isDebuff)
+	lua_register(m_luaState, "registerBuffType", LuaInterface::luaRegisterBuffType);
+
+	//doCreatureAddBuff(cid, buffId)
+	lua_register(m_luaState, "doCreatureAddBuff", LuaInterface::luaDoCreatureAddBuff);
+
+	//doCreatureAddBuffWithTime(cid, buffId, remainingMs)
+	lua_register(m_luaState, "doCreatureAddBuffWithTime", LuaInterface::luaDoCreatureAddBuffWithTime);
+
+	//doCreatureRemoveBuff(cid, buffId)
+	lua_register(m_luaState, "doCreatureRemoveBuff", LuaInterface::luaDoCreatureRemoveBuff);
+
+	//doCreatureHasBuff(cid, buffId)
+	lua_register(m_luaState, "doCreatureHasBuff", LuaInterface::luaDoCreatureHasBuff);
+
 	//doPlayerAddItem(cid, itemid[, count/subtype = 1[, canDropOnMap = true[, slot = 0]]])
 	//doPlayerAddItem(cid, itemid[, count = 1[, canDropOnMap = true[, subtype = 1[, slot = 0]]]])
 	//Returns uid of the created item
@@ -4597,6 +4612,129 @@ int32_t LuaInterface::luaDoSendPlayerExtendedOpcode(lua_State* L)
 	}
 
 	lua_pushboolean(L, false);
+	return 1;
+}
+
+// Buffs
+int32_t LuaInterface::luaRegisterBuffType(lua_State* L)
+{
+	//registerBuffType(id, name, description, icon, border, stacked, maxStacks, ticks, isDebuff, persistent)
+	// TFS 0.4 pop order: last arg first (top of stack)
+	int32_t params = lua_gettop(L);
+
+	bool persistent = false;
+	if(params >= 10) {
+		persistent = popBoolean(L);
+	}
+
+	bool isDebuff = false;
+	if(params >= 9) {
+		isDebuff = popBoolean(L);
+	}
+
+	int32_t ticks = (int32_t)popNumber(L);
+	uint8_t maxStacks = (uint8_t)popNumber(L);
+	bool stacked = popBoolean(L);
+	std::string border = popString(L);
+	std::string icon = popString(L);
+	std::string description = popString(L);
+	std::string name = popString(L);
+	uint8_t id = (uint8_t)popNumber(L);
+
+	if(id >= BUFF_LAST) {
+		std::clog << "[Error - registerBuffType] BuffId can't be bigger than BUFF_LAST" << std::endl;
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	// Resize if needed
+	if(id >= g_game.getBuffs().size()) {
+		g_game.getBuffs().resize(id + 1);
+	}
+
+	BuffType& buffType = g_game.getBuffs()[id];
+	buffType.setId((BuffId_t)id);
+	buffType.setName(name);
+	buffType.setDescription(description);
+	buffType.setIcon(icon);
+	buffType.setBorder(border);
+	buffType.setStacked(stacked);
+	buffType.setMaxStacks(maxStacks);
+	buffType.setTicks(ticks);
+	buffType.setDebuff(isDebuff);
+	buffType.setPersistent(persistent);
+
+	lua_pushboolean(L, true);
+	return 1;
+}
+
+int32_t LuaInterface::luaDoCreatureAddBuff(lua_State* L)
+{
+	//doCreatureAddBuff(cid, buffId)
+	uint8_t buffId = (uint8_t)popNumber(L);
+	uint32_t cid = (uint32_t)popNumber(L);
+
+	ScriptEnviroment* env = getEnv();
+	Creature* creature = env->getCreatureByUID(cid);
+	if(!creature) {
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	lua_pushboolean(L, creature->addBuff((BuffId_t)buffId));
+	return 1;
+}
+
+int32_t LuaInterface::luaDoCreatureAddBuffWithTime(lua_State* L)
+{
+	//doCreatureAddBuffWithTime(cid, buffId, remainingMs)
+	int64_t remainingMs = (int64_t)popNumber(L);
+	uint8_t buffId = (uint8_t)popNumber(L);
+	uint32_t cid = (uint32_t)popNumber(L);
+
+	ScriptEnviroment* env = getEnv();
+	Creature* creature = env->getCreatureByUID(cid);
+	if(!creature) {
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	lua_pushboolean(L, creature->addBuffWithEndTime((BuffId_t)buffId, remainingMs));
+	return 1;
+}
+
+int32_t LuaInterface::luaDoCreatureRemoveBuff(lua_State* L)
+{
+	//doCreatureRemoveBuff(cid, buffId)
+	uint8_t buffId = (uint8_t)popNumber(L);
+	uint32_t cid = (uint32_t)popNumber(L);
+
+	ScriptEnviroment* env = getEnv();
+	Creature* creature = env->getCreatureByUID(cid);
+	if(!creature) {
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	creature->removeBuff((BuffId_t)buffId);
+	lua_pushboolean(L, true);
+	return 1;
+}
+
+int32_t LuaInterface::luaDoCreatureHasBuff(lua_State* L)
+{
+	//doCreatureHasBuff(cid, buffId)
+	uint8_t buffId = (uint8_t)popNumber(L);
+	uint32_t cid = (uint32_t)popNumber(L);
+
+	ScriptEnviroment* env = getEnv();
+	Creature* creature = env->getCreatureByUID(cid);
+	if(!creature) {
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	lua_pushboolean(L, creature->hasBuff((BuffId_t)buffId));
 	return 1;
 }
 

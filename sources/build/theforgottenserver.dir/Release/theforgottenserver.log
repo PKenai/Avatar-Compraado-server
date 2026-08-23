@@ -81,6 +81,7 @@
   auras.cpp
   wings.cpp
   shaders.cpp
+  buff.cpp
   theforgottenserver.vcxproj -> C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\build\Release\theforgottenserver.exe
   'pwsh.exe' não é reconhecido como um comando interno
   ou externo, um programa operável ou um arquivo em lotes.

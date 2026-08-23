@@ -416,6 +416,14 @@ class LuaInterface
 		static int32_t luaDoPlayerRemoveItem(lua_State* L);
 		static int32_t luaIsPlayerUsingOtclient(lua_State* L);
 		static int32_t luaDoSendPlayerExtendedOpcode(lua_State* L);
+
+		// Buffs
+		static int32_t luaRegisterBuffType(lua_State* L);
+		static int32_t luaDoCreatureAddBuff(lua_State* L);
+		static int32_t luaDoCreatureAddBuffWithTime(lua_State* L);
+		static int32_t luaDoCreatureRemoveBuff(lua_State* L);
+		static int32_t luaDoCreatureHasBuff(lua_State* L);
+
 		static int32_t luaDoPlayerAddSoul(lua_State* L);
 		static int32_t luaDoPlayerSetStamina(lua_State* L);
 		static int32_t luaDoPlayerAddExperience(lua_State* L);

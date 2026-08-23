@@ -39,7 +39,7 @@ set(SRC
     databasemanager.cpp database.cpp cylinder.cpp creatureevent.cpp
     creature.cpp container.cpp connection.cpp configmanager.cpp condition.cpp
     combat.cpp chat.cpp beds.cpp baseevents.cpp allocator.cpp admin.cpp
-    actions.cpp auras.cpp wings.cpp shaders.cpp
+    actions.cpp auras.cpp wings.cpp shaders.cpp buff.cpp
 )
 
 add_executable(theforgottenserver ${SRC})

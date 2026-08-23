@@ -1,5 +1,26 @@
 dofile(getDataDir().."creaturescripts/scripts/loginLogout/loginFuncs.lua")
- 
+
+-- ========================================================================
+-- Restore persistent buffs on login
+-- Checks storage values and re-adds buff icons for active persistent buffs
+-- ========================================================================
+local PERSISTENT_BUFFS = {
+    -- {storageKey, buffId, description}
+    {"hasExpScroll", 11, "Experience Scroll"},
+}
+
+function restorePersistentBuffs(cid)
+    local now = os.time()
+    for _, entry in ipairs(PERSISTENT_BUFFS) do
+        local storageKey, buffId, desc = entry[1], entry[2], entry[3]
+        local endTime = tonumber(getPlayerStorageValue(cid, storageKey)) or 0
+        if endTime > now then
+            local remainingMs = (endTime - now) * 1000
+            doCreatureAddBuffWithTime(cid, buffId, remainingMs)
+        end
+    end
+end
+
 local config = {
     loginMessageEN = getConfigValue('loginMessageEN'),
     loginMessagePT = getConfigValue('loginMessagePT'),
@@ -543,6 +564,13 @@ function onLogin(cid)
             HuntWaypoint.sendList(cid)
         end
     end, 1000, cid)
+
+    -- Restore persistent buffs on login (delay to ensure client opcode is registered)
+    addEvent(function(cid)
+        if isCreature(cid) then
+            restorePersistentBuffs(cid)
+        end
+    end, 2000, cid)
 
     return true
 end

@@ -32,6 +32,8 @@
 #include "configmanager.h"
 #include "game.h"
 
+#include <sstream>
+
 boost::recursive_mutex AutoId::lock;
 uint32_t AutoId::count = 1000;
 AutoId::List AutoId::list;
@@ -229,6 +231,7 @@ void Creature::onThink(uint32_t interval)
 	onAttacking(interval);
 #endif
 	executeConditions(interval);
+	executeBuffs(interval);
 
 	//OnThinkg FlySystem// Mod by Mirto, ele checa se o player est� em solo e tira storage.
 	/*if(this->getPlayer()){
@@ -736,6 +739,8 @@ bool Creature::onDeath()
 	if(deny){
 		return false;
 	}
+
+	clearBuffs();
 
 	int32_t i = 0, size = deathList.size(), limit = g_config.getNumber(ConfigManager::DEATH_ASSISTS) + 1;
 	if(limit > 0 && size > limit)
@@ -1840,5 +1845,242 @@ bool FrozenPathingConditionCall::operator()(const Position& startPos, const Posi
 		}
 	}
 
+	return false;
+}
+
+// Buffs
+bool Creature::addBuff(BuffId_t buffId, Creature* caster)
+{
+	if(buffId >= g_game.getBuffs().size()) {
+		std::clog << "[Error - Creature::addBuff] Invalid buff id: " << buffId << std::endl;
+		return false;
+	}
+
+	const BuffType& buffType = g_game.getBuffs()[buffId];
+	if(!buffType.getId()) {
+		std::clog << "[Error - Creature::addBuff] Invalid buff id (not registered): " << buffId << std::endl;
+		return false;
+	}
+
+	Buff* buff = NULL;
+
+	if(hasBuff(buffId)) {
+		buff = getBuff(buffId);
+		if(buffType.isStacked() && buff->getStacks() < buffType.getMaxStacks()) {
+			buff->addStacks(1);
+		}
+		else {
+			buff->refresh();
+		}
+	}
+	else {
+		buff = new Buff(buffType);
+		buffs.push_back(buff);
+	}
+
+	// Send to client
+	if(buff) {
+		Player* player = dynamic_cast<Player*>(this);
+		if(player) {
+			std::ostringstream d;
+			std::string q = "\"";
+			d << '{' << q << "action" << q << ":" << q << "add" << q;
+			d << ',' << q << "data" << q << ":{" << q << "id" << q << ":" << (int)buff->getId();
+			d << ',' << q << "name" << q << ":" << q << buffType.getName() << q;
+			d << ',' << q << "description" << q << ":" << q << buffType.getDescription() << q;
+			d << ',' << q << "icon" << q << ":" << q << buffType.getIcon() << q;
+			d << ',' << q << "border" << q << ":" << q << buffType.getBorder() << q;
+			d << ',' << q << "stacks" << q << ":" << (int)buff->getStacks();
+			d << ',' << q << "ticks" << q << ":" << buff->getTicks();
+			d << ',' << q << "endTime" << q << ":" << buff->getEndTime();
+			d << ',' << q << "server_time" << q << ":" << time(NULL);
+			d << ',' << q << "debuff" << q << ":" << (buffType.isDebuff() ? "true" : "false");
+			d << "}}";
+			player->sendExtendedOpcode(100, d.str());
+		}
+	}
+
+	return true;
+}
+
+bool Creature::addBuffWithEndTime(BuffId_t buffId, int64_t endTimeMs)
+{
+	if(buffId >= g_game.getBuffs().size()) {
+		std::clog << "[Error - Creature::addBuffWithEndTime] Invalid buff id: " << buffId << std::endl;
+		return false;
+	}
+
+	const BuffType& buffType = g_game.getBuffs()[buffId];
+	if(!buffType.getId()) {
+		std::clog << "[Error - Creature::addBuffWithEndTime] Invalid buff id (not registered): " << buffId << std::endl;
+		return false;
+	}
+
+	Buff* buff = NULL;
+
+	if(hasBuff(buffId)) {
+		buff = getBuff(buffId);
+		if(buffType.isStacked() && buff->getStacks() < buffType.getMaxStacks()) {
+			buff->addStacks(1);
+		}
+		else {
+			buff->refresh();
+		}
+	}
+	else {
+		buff = new Buff(buffType);
+		buffs.push_back(buff);
+	}
+
+	// Override end time for persistent buff restoration
+	if(buff && endTimeMs > 0) {
+		buff->setTicks(endTimeMs);
+	}
+
+	// Send to client
+	if(buff) {
+		Player* player = dynamic_cast<Player*>(this);
+		if(player) {
+			std::ostringstream d;
+			std::string q = "\"";
+			d << '{' << q << "action" << q << ":" << q << "add" << q;
+			d << ',' << q << "data" << q << ":{" << q << "id" << q << ":" << (int)buff->getId();
+			d << ',' << q << "name" << q << ":" << q << buffType.getName() << q;
+			d << ',' << q << "description" << q << ":" << q << buffType.getDescription() << q;
+			d << ',' << q << "icon" << q << ":" << q << buffType.getIcon() << q;
+			d << ',' << q << "border" << q << ":" << q << buffType.getBorder() << q;
+			d << ',' << q << "stacks" << q << ":" << (int)buff->getStacks();
+			d << ',' << q << "ticks" << q << ":" << buff->getTicks();
+			d << ',' << q << "endTime" << q << ":" << buff->getEndTime();
+			d << ',' << q << "server_time" << q << ":" << time(NULL);
+			d << ',' << q << "debuff" << q << ":" << (buffType.isDebuff() ? "true" : "false");
+			d << "}}";
+			player->sendExtendedOpcode(100, d.str());
+		}
+	}
+
+	return true;
+}
+
+
+void Creature::removeBuff(BuffId_t buffId)
+{
+	for(BuffList::iterator it = buffs.begin(); it != buffs.end(); ++it) {
+		Buff* buff = *it;
+		if(buff->getId() != buffId)
+			continue;
+
+		buffs.erase(it);
+
+		// Send to client
+		Player* player = dynamic_cast<Player*>(this);
+		if(player) {
+			std::ostringstream d;
+			std::string q = "\"";
+			d << '{' << q << "action" << q << ":" << q << "remove" << q;
+			d << ',' << q << "data" << q << ":{" << q << "id" << q << ":" << (int)buff->getId();
+			d << ',' << q << "debuff" << q << ":" << (buff->isDebuff() ? "true" : "false");
+			player->sendExtendedOpcode(100, d.str());
+		}
+
+		delete buff;
+		return;
+	}
+}
+
+void Creature::clearBuffs()
+{
+	BuffList tempBuffs = buffs;
+	for(BuffList::iterator it = tempBuffs.begin(); it != tempBuffs.end(); ++it) {
+		Buff* buff = *it;
+
+		Player* player = dynamic_cast<Player*>(this);
+		if(player) {
+			std::ostringstream d;
+			std::string q = "\"";
+			d << '{' << q << "action" << q << ":" << q << "remove" << q;
+			d << ',' << q << "data" << q << ":{" << q << "id" << q << ":" << (int)buff->getId();
+			d << ',' << q << "debuff" << q << ":" << (buff->isDebuff() ? "true" : "false");
+			d << "}}";
+			player->sendExtendedOpcode(100, d.str());
+		}
+
+		delete buff;
+	}
+	buffs.clear();
+}
+
+Buff* Creature::getBuff(BuffId_t buffId) const
+{
+	for(BuffList::const_iterator it = buffs.begin(); it != buffs.end(); ++it) {
+		if((*it)->getId() == buffId)
+			return *it;
+	}
+	return NULL;
+}
+
+void Creature::executeBuffs(uint32_t interval)
+{
+	BuffList tempBuffs = buffs;
+	for(BuffList::iterator it = tempBuffs.begin(); it != tempBuffs.end(); ++it) {
+		Buff* buff = *it;
+
+		BuffList::iterator found = std::find(buffs.begin(), buffs.end(), buff);
+		if(found == buffs.end())
+			continue;
+
+		// Remove haste buffs if CONDITION_HASTE is no longer active
+		BuffId_t bid = buff->getId();
+		if(bid == BUFF_UTANI_HUR || bid == BUFF_UTANI_GRAN_HUR || bid == BUFF_UTAMO_TEMPO_SAN || bid == BUFF_UTANI_TEMPO_HUR) {
+			if(!hasCondition(CONDITION_HASTE, -1, false)) {
+				buffs.erase(found);
+				Player* player = dynamic_cast<Player*>(this);
+				if(player) {
+					std::ostringstream d;
+					std::string q = "\"";
+					d << '{' << q << "action" << q << ":" << q << "remove" << q;
+					d << ',' << q << "data" << q << ":{" << q << "id" << q << ":" << (int)buff->getId();
+					d << ',' << q << "debuff" << q << ":" << (buff->isDebuff() ? "true" : "false");
+					d << "}}";
+					player->sendExtendedOpcode(100, d.str());
+				}
+				delete buff;
+				continue;
+			}
+		}
+
+		if(!buff->executeBuff(this, interval)) {
+			found = std::find(buffs.begin(), buffs.end(), buff);
+			if(found != buffs.end()) {
+				buffs.erase(found);
+
+				Player* player = dynamic_cast<Player*>(this);
+				if(player) {
+					std::ostringstream d;
+					std::string q = "\"";
+					d << '{' << q << "action" << q << ":" << q << "remove" << q;
+					d << ',' << q << "data" << q << ":{" << q << "id" << q << ":" << (int)buff->getId();
+					d << ',' << q << "debuff" << q << ":" << (buff->isDebuff() ? "true" : "false");
+					d << "}}";
+					player->sendExtendedOpcode(100, d.str());
+				}
+
+				delete buff;
+			}
+		}
+	}
+}
+
+bool Creature::hasBuff(BuffId_t buffId) const
+{
+	int64_t timeNow = OTSYS_TIME();
+	for(BuffList::const_iterator it = buffs.begin(); it != buffs.end(); ++it) {
+		Buff* buff = *it;
+		if(buff->getId() != buffId)
+			continue;
+
+		if(buff->getEndTime() >= timeNow || buff->getTicks() == -1)
+			return true;
+	}
 	return false;
 }

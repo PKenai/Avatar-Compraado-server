@@ -34,6 +34,7 @@
 #include "auras.h"
 #include "wings.h"
 #include "shaders.h"
+#include "buff.h"
 
 class Creature;
 class Player;
@@ -651,6 +652,9 @@ class Game
 		std::map<Item*, int32_t> grounds;
 #endif
 
+		std::vector<BuffType>& getBuffs() { return buffs; }
+		const std::vector<BuffType>& getBuffs() const { return buffs; }
+
 	protected:
 		bool playerWhisper(Player* player, const std::string& text, uint32_t statementId);
 		bool playerYell(Player* player, const std::string& text, uint32_t statementId);
@@ -672,6 +676,8 @@ class Game
 		size_t checkCreatureLastIndex;
 		std::vector<Creature*> checkCreatureVectors[EVENT_CREATURECOUNT];
 		std::vector<Creature*> toAddCheckCreatureVector;
+
+		std::vector<BuffType> buffs;
 
 		void checkDecay();
 		void internalDecayItem(Item* item);

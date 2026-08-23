@@ -28,6 +28,9 @@
 #include "map.h"
 #include "condition.h"
 #include "creatureevent.h"
+#include "buff.h"
+
+using BuffList = std::list<Buff*>;
 
 enum slots_t
 {
@@ -328,6 +331,15 @@ class Creature : public AutoId, virtual public Thing
 		void removeConditions(ConditionEnd_t reason, bool onlyPersistent = true);
 		Condition* getCondition(ConditionType_t type, ConditionId_t id, uint32_t subId = 0) const;
 		void executeConditions(uint32_t interval);
+
+		// Buffs
+		bool addBuff(BuffId_t buffId, Creature* caster = NULL);
+		bool addBuffWithEndTime(BuffId_t buffId, int64_t endTimeMs);
+		void removeBuff(BuffId_t buffId);
+		void clearBuffs();
+		Buff* getBuff(BuffId_t buffId) const;
+		void executeBuffs(uint32_t interval);
+		bool hasBuff(BuffId_t buffId) const;
 		bool hasCondition(ConditionType_t type, int32_t subId = 0, bool checkTime = true) const;
 		virtual bool isImmune(ConditionType_t type) const;
 		virtual bool isImmune(CombatType_t type) const;
@@ -552,6 +564,7 @@ class Creature : public AutoId, virtual public Thing
 		VocationEmblems_t vocationEmblem;
 		Direction direction;
 		ConditionList conditions;
+		BuffList buffs;
 		LightInfo internalLight;
 
 		//summon variables
