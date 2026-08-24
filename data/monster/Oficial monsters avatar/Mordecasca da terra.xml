@@ -31,4 +31,7 @@
 	<script>
 		<event name="RogerioLoot"/>
 	</script>
+<script>
+<event name="mobsKill"/>
+</script>
 </monster>

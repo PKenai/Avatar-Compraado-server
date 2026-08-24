@@ -732,9 +732,8 @@ bool Houses::loadFromXml(std::string filename)
 		House* house = Houses::getInstance()->getHouse(houseId);
 		if(!house)
 		{
-			std::clog << "[Error - Houses::loadFromXml] Unknown house with id: " << houseId << std::endl;
-			xmlFreeDoc(doc);
-			return false;
+			houseNode = houseNode->next;
+			continue;
 		}
 
 		Position entry(0, 0, 0);

@@ -243,11 +243,11 @@ pvpBlessingThreshold = 40
 fairFightTimeRange = 60
 
 experienceStages = false
-rateExperience = 1.5
-rateExperienceFromPlayers = 1.0
+rateExperience = 1
+rateExperienceFromPlayers = 1
 rateSkill = 1
-rateMagic = 0.0
-rateLoot = 1.0
+rateMagic = 1
+rateLoot = 1
 
 rateLootPercent = 1.0
 

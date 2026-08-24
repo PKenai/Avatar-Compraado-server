@@ -25,4 +25,7 @@
 	<loot>
 		<item id="2148" countmax="100" chance="100000"/><!-- moedas -->
 	</loot>
+<script>
+<event name="mobsKill"/>
+</script>
 </monster>

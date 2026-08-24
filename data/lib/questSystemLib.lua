@@ -392,6 +392,12 @@ function qsStartQuest(cid, questId, npcName, skipSound)
         setPlayerStorageValue(cid, firstMission.storageId, firstMission.startValue)
     end
 
+    -- Efeito visual ao iniciar a quest
+    local pos = getCreaturePosition(cid)
+    if pos then
+        doSendMagicEffect(pos, 199)
+    end
+
     qsSendQuestList(cid)
     doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. quest.name)
 

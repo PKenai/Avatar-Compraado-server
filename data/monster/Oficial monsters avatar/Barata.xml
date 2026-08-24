@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Cockroach" nameDescription="a cockroach" race="undead" experience="875" speed="200" manacost="0">
+<monster name="Barata" nameDescription="a Barata" race="undead" experience="475" speed="200" manacost="0">
 	<health now="60" max="60"/>
 	<look type="1220" corpse="18160"/>
 	<targetchange interval="5000" chance="10"/>
@@ -25,4 +25,7 @@
 	<loot>
 		<item id="2148" countmax="15" chance="100000"/><!-- moedas -->
 	</loot>
+<script>
+<event name="mobsKill"/>
+</script>
 </monster>

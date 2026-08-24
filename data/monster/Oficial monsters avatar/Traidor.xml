@@ -29,4 +29,7 @@
 	<script>
 		<event name="TraidorDeath"/>
 	</script>
+<script>
+<event name="mobsKill"/>
+</script>
 </monster>

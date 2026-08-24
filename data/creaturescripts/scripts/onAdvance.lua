@@ -19,7 +19,7 @@ function onAdvance(cid, skill, oldLevel, newLevel)
 		doCreatureAddHealth(cid, getCreatureMaxHealth(cid) - getCreatureHealth(cid))
 		doCreatureAddMana(cid, getCreatureMaxMana(cid) - getCreatureMana(cid))
 		local posicao = getThingPos(cid)
-		doSendMagicEffect({x = posicao.x + 1, y = posicao.y + 1, z = posicao.z}, 166)
+		doSendMagicEffect(posicao, 173)
 
 		-- 1 attribute point per level gained
 		local lastAwarded = getPlayerStorageValue(cid, 188100)

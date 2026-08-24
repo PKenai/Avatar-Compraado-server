@@ -30,4 +30,7 @@
 		<voice sentence="Grrrrrr"/>
 		<voice sentence="GROARRR!" yell="1"/>
 	</voices>
+<script>
+<event name="mobsKill"/>
+</script>
 </monster>

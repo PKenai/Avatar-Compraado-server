@@ -57,7 +57,7 @@
 
 	  <!-- Annelids -->
 	<monster name="Clawed Rotworm"                       file="clawed rotworm.xml"/>
-	<monster name="Cockroach"                              file="Oficial monsters avatar/Cockroach.xml"/>	
+	<monster name="Barata"                               file="Oficial monsters avatar/Barata.xml"/>	
 	
 	  <!-- Apes -->
 	<monster name="Kongra"                               file="kongra.xml"/>

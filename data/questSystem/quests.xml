@@ -241,4 +241,13 @@
         </mission>
     </quest>
 
+    <quest name="A Praga das Baratas" id="39" looktype="1274" startstorageid="49390" startstoragevalue="1">
+        <description>O templo da cidade esta sendo invadido por baratas e Carla precisa de ajuda para extermina-las.</description>
+        <mission name="Exterminar baratas" storageid="49390" startvalue="1" endvalue="2" progressstorageid="49391">
+            <description>Mate 50 Baratas e volte a Carla para receber sua recompensa.</description>
+            <monster name="Barata" count="50" />
+            <reward id="2148" count="200" />
+        </mission>
+    </quest>
+
 </quests>

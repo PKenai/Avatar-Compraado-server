@@ -59,6 +59,10 @@ local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     print("[Joana] startQuest cid=" .. cid)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
+    local pos = getCreaturePosition(cid)
+    if pos then
+        doSendMagicEffect(pos, 199)
+    end
     sendNotification(cid, QUEST_NAME, "Nova missão: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)

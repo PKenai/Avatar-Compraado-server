@@ -4,7 +4,7 @@
     <npc name="Gyatso" x="-1" y="-1" z="3" spawntime="40"/>
   </spawn>
   <spawn centerx="513" centery="658" centerz="4" radius="1">
-    <npc name="kurt" x="0" y="0" z="4" spawntime="40"/>
+    <npc name="Tadeu" x="0" y="0" z="4" spawntime="40"/>
   </spawn>
   <spawn centerx="481" centery="662" centerz="4" radius="1">
     <npc name="banker" x="-1" y="0" z="4" spawntime="40"/>
@@ -33,7 +33,7 @@
     <npc name="astor" x="0" y="0" z="5" spawntime="40"/>
   </spawn>
   <spawn centerx="513" centery="658" centerz="5" radius="1">
-    <npc name="mithlock" x="1" y="0" z="5" spawntime="40"/>
+    <npc name="Tadeu" x="1" y="0" z="5" spawntime="40"/>
   </spawn>
   <spawn centerx="562" centery="658" centerz="5" radius="1">
     <npc name="olgaz" x="-1" y="0" z="5" spawntime="40"/>
@@ -60,7 +60,7 @@
     <npc name="sony" x="-29" y="30" z="6" spawntime="40"/>
   </spawn>
   <spawn centerx="496" centery="346" centerz="6" radius="1">
-    <npc name="kurt" x="-1" y="0" z="6" spawntime="40"/>
+    <npc name="Tadeu" x="-1" y="0" z="6" spawntime="40"/>
   </spawn>
   <spawn centerx="574" centery="350" centerz="6" radius="1">
     <npc name="capitain leopoldo sing" x="-1" y="0" z="6" spawntime="40"/>
@@ -123,13 +123,13 @@
     <npc name="dink" x="0" y="-1" z="7" spawntime="40"/>
   </spawn>
   <spawn centerx="364" centery="211" centerz="7" radius="1">
-    <npc name="mithlock" x="0" y="0" z="7" spawntime="40"/>
+    <npc name="Tadeu" x="0" y="0" z="7" spawntime="40"/>
   </spawn>
   <spawn centerx="333" centery="213" centerz="7" radius="1">
     <npc name="sony" x="0" y="0" z="7" spawntime="40"/>
   </spawn>
   <spawn centerx="320" centery="215" centerz="7" radius="1">
-    <npc name="kurt" x="0" y="1" z="7" spawntime="40"/>
+    <npc name="Tadeu" x="0" y="1" z="7" spawntime="40"/>
   </spawn>
   <spawn centerx="364" centery="220" centerz="7" radius="1">
     <npc name="olgaz" x="-1" y="-1" z="7" spawntime="40"/>
@@ -141,7 +141,7 @@
     <npc name="Borkas" x="1" y="1" z="7" spawntime="40"/>
   </spawn>
   <spawn centerx="486" centery="352" centerz="7" radius="30">
-    <npc name="mithlock" x="6" y="-8" z="7" spawntime="40"/>
+    <npc name="Tadeu" x="6" y="-8" z="7" spawntime="40"/>
     <npc name="astor" x="28" y="-8" z="7" spawntime="40"/>
   </spawn>
   <spawn centerx="534" centery="359" centerz="7" radius="2">
@@ -163,7 +163,7 @@
     <npc name="Edward Colin" x="0" y="0" z="7" spawntime="40"/>
   </spawn>
   <spawn centerx="216" centery="447" centerz="7" radius="1">
-    <npc name="mithlock" x="-1" y="0" z="7" spawntime="40"/>
+    <npc name="Tadeu" x="-1" y="0" z="7" spawntime="40"/>
   </spawn>
   <spawn centerx="239" centery="459" centerz="7" radius="4">
     <npc name="banker" x="-2" y="0" z="7" spawntime="40"/>
@@ -173,7 +173,7 @@
     <npc name="astor" x="1" y="0" z="7" spawntime="40"/>
   </spawn>
   <spawn centerx="210" centery="473" centerz="7" radius="1">
-    <npc name="kurt" x="0" y="0" z="7" spawntime="40"/>
+    <npc name="Tadeu" x="0" y="0" z="7" spawntime="40"/>
   </spawn>
   <spawn centerx="267" centery="473" centerz="7" radius="2">
     <npc name="Maria" x="-1" y="-1" z="7" spawntime="40"/>

@@ -40,4 +40,7 @@
 		<voice sentence="Ninguem passa pelas montanhas!"/>
 		<voice sentence="As montanhas sao minhas!"/>
 	</voices>
+<script>
+<event name="mobsKill"/>
+</script>
 </monster>
