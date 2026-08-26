@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Vacaceronte" nameDescription="um vacaceronte" race="blood" experience="12000" speed="500" manacost="0">
+	<health now="7500" max="7500"/>
+	<look type="1314" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="5000" chance="10"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="140" attack="155"/>
+		<attack name="physical" interval="2000" chance="25" range="1" min="-200" max="-350"/>
+		<attack name="earth" interval="2500" chance="15" range="7" min="-220" max="-340"/>
+		<attack name="energy" interval="3000" chance="10" range="5" min="-180" max="-280"/>
+	</attacks>
+	<defenses armor="35" defense="30">
+		<defense name="healing" interval="5000" chance="8" min="150" max="300">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<elements>
+		<element earthPercent="15"/>
+		<element physicalPercent="10"/>
+		<element firePercent="-15"/>
+		<element energyPercent="-10"/>
+	</elements>
+	<loot>
+		<item id="2148" countmax="100" chance="100000"/><!-- gold coins -->
+		<item id="2671" countmax="5" chance="80000"/><!-- ham -->
+		<item id="9633" countmax="3" chance="20000"/><!-- Snail Shell -->
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="MUUUUU!" yell="1"/>
+		<voice sentence="VRRRRRRR!" yell="1"/>
+		<voice sentence="GRRRRMMMM!" yell="1"/>
+	</voices>
+</monster>

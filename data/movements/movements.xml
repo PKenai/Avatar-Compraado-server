@@ -416,6 +416,7 @@
 
     <movevent type="StepIn" actionid="14199" event="script" value="initialItens.lua"/>
 	<movevent type="StepIn" actionid="58880;58881" event="script" value="catapultaDown.lua"/>	<movevent type="Equip" itemid="4864;4863" slot="ammo" event="script" value="waterPounch.lua"/>
+	<movevent type="Equip" itemid="18999" slot="ammo" event="script" value="waterPounchInfinite.lua"/>
 
 	<!-- Bomberman Event: power-ups (18373-18377) e chute da bomba (18372) -->
 	<movevent type="StepIn" itemid="18372" script="bomberman.lua"/>

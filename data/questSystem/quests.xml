@@ -250,4 +250,12 @@
         </mission>
     </quest>
 
+    <quest name="A Fornecadora" id="40" looktype="1256" startstorageid="49400" startstoragevalue="1">
+        <description>Valdemira precisa de 150 hams para alimentar seus animais. Entregue os hams e receba uma recompensa generosa de experiencia.</description>
+        <mission name="Entregar 150 Ham" storageid="49400" startvalue="1" endvalue="2" progressstorageid="49401">
+            <description>Traga 150 hams para Valdemira. Requisito: level 200+.</description>
+            <reward experience="2400000" />
+        </mission>
+    </quest>
+
 </quests>

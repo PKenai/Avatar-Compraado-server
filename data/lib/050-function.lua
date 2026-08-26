@@ -1457,7 +1457,13 @@ end
 function setWaterOnPounchPlayer(cid, water, waterPounch)
   local waterPounchFull = 4864
   local waterPounchEmpty = 4863
+  local infinitePouchId = 18999
 --  local waterPounch = getPlayerSlotItem(cid, 10)
+
+  -- Agua milagrosa do oasis - item infinito, sempre retorna true
+  if waterPounch.itemid == infinitePouchId then
+    return true
+  end
 
   if waterPounch.itemid == waterPounchFull or waterPounch.itemid == waterPounchEmpty then
     if water <= 0 or water == nil then

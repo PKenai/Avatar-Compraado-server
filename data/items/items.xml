@@ -15706,4 +15706,11 @@
 		<attribute key="transformUseTo" value="18924"/>
 	</item>
 
+
+	<!-- Agua milagrosa do oasis (item infinito de agua) -->
+	<item id="18999" article="a" name="agua milagrosa do oasis">
+		<attribute key="description" value="It is an infinite source of water." />
+		<attribute key="weight" value="500" />
+	</item>
+
 </items>

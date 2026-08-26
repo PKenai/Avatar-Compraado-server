@@ -181,6 +181,7 @@
 
     	<!-- Other Liquids -->
     	<action itemid="4863;4864" event="script" value="liquids/waterPouch/pouchs.lua"/>
+	<action itemid="18999" event="script" value="liquids/waterPouch/pouchsInfinite.lua"/>
     	<action itemid="7620;7589;7590" event="script" value="liquids/manaPotions.lua"/>
 
     	<!-- Quests -->

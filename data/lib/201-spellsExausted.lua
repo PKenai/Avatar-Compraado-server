@@ -334,6 +334,13 @@ function canUseWaterSpell(cid, countWater, distance, onlyAmbient)
     return false
   end
 
+  -- Agua milagrosa do oasis (ID 18999) - item infinito, nunca consome agua
+  local infinitePouch = getPlayerItemById(cid, true, 18999)
+  if infinitePouch.uid > 0 then
+    doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, getLangString(cid, "Using infinite oasis water.", "Usando agua infinita do oasis."))
+    return true
+  end
+
 --  local waterPouch, pouchWater = getPlayerSlotItem(cid, 10), nil
   local waterPouch, pouchWater = getPlayerItemById(cid, true, 4864), nil
   
