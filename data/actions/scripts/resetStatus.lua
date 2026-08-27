@@ -27,6 +27,10 @@ local function getManality(cid)
 return getPlayerStorageValue(cid, "speedvalue")
 end 
 function resetAtributos(cid)
+	-- Zera pontos de pedras elementais no MySQL
+	local guid = getPlayerGUID(cid)
+	db.executeQuery("UPDATE pedra_elemental SET pontos = 0 WHERE player_id = " .. guid)
+
 	if getAgility(cid) > 0 then 
 		doChangeSpeed(cid, -(6*(getAgility(cid))))
 	end

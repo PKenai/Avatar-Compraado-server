@@ -15713,4 +15713,39 @@
 		<attribute key="weight" value="500" />
 	</item>
 
+<!-- Baú Elemental - dropado por monstros, dropa 1 pedra elementar aleatória ao abrir -->
+	<item id="19004" article="a" name="Bau elemental">
+		<attribute key="type" value="container" />
+		<attribute key="weight" value="2000" />
+		<attribute key="description" value="Um bau misterioso irradiando energia elemental. Ao abri-lo, uma pedra elemental aparece." />
+	</item>
+
+<!-- Pedra Elemental do Ar - item key, uso restrito ao dobrador de ar -->
+	<item id="19002" article="a" name="Pedra elemental do ar">
+		<attribute key="type" value="key" />
+		<attribute key="weight" value="100" />
+		<attribute key="description" value="Uma pedra que pulsa com a energia do vento. Apenas dobradores do ar podem usar." />
+	</item>
+
+<!-- Pedra Elemental da Agua - item key, uso restrito ao dobrador de agua -->
+	<item id="19003" article="a" name="Pedra elemental da agua">
+		<attribute key="type" value="key" />
+		<attribute key="weight" value="100" />
+		<attribute key="description" value="Uma pedra que pulsa com a energia da agua. Apenas dobradores da agua podem usar." />
+	</item>
+
+<!-- Pedra Elemental do Fogo - item key, uso restrito ao dobrador de fogo -->
+	<item id="19005" article="a" name="Pedra elemental do fogo">
+		<attribute key="type" value="key" />
+		<attribute key="weight" value="100" />
+		<attribute key="description" value="Uma pedra que pulsa com a energia do fogo. Apenas dobradores do fogo podem usar." />
+	</item>
+
+<!-- Pedra Elemental da Terra - item key, uso restrito ao dobrador de terra -->
+	<item id="19006" article="a" name="Pedra elemental da terra">
+		<attribute key="type" value="key" />
+		<attribute key="weight" value="100" />
+		<attribute key="description" value="Uma pedra que pulsa com a energia da terra. Apenas dobradores da terra podem usar." />
+	</item>
+
 </items>

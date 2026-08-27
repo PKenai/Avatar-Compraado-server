@@ -1408,6 +1408,14 @@ void Monster::dropLoot(Container* corpse)
 				}
 			}
 		}
+
+		// Baú Elemental: ~1 em 3500 chances de dropar o item 19004
+		if(random_range(1, 3500) == 1)
+		{
+			Item* bauElemental = Item::CreateItem(19004, 1);
+			if(bauElemental)
+				corpse->addItem(bauElemental);
+		}
 	}
 }
 

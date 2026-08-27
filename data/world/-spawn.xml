@@ -3,6 +3,9 @@
   <spawn centerx="474" centery="625" centerz="3" radius="2">
     <npc name="Gyatso" x="-1" y="-1" z="3" spawntime="40"/>
   </spawn>
+  <spawn centerx="515" centery="658" centerz="4" radius="1">
+    <npc name="Vincente" x="0" y="0" z="4" spawntime="40" direction="2"/>
+  </spawn>
   <spawn centerx="513" centery="658" centerz="4" radius="1">
     <npc name="Tadeu" x="0" y="0" z="4" spawntime="40"/>
   </spawn>

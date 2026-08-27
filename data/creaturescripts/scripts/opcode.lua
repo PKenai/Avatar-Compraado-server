@@ -1,5 +1,11 @@
 dofile(getDataDir().."creaturescripts/scripts/creature_manager.lua")
 
+-- Carrega o sistema de crafting server-side (uma vez so)
+if not _craftingSystemLoaded and type(CraftingSystem) ~= "table" then
+  dofile(getDataDir().."lib/craftingSystem.lua")
+  _craftingSystemLoaded = true
+end
+
 local function changeAutoloot(cid, value)
 	if type(value) ~= "string" or (value ~= "false" and value ~= "true") then
 		return true
@@ -102,6 +108,21 @@ function onExtendedOpcode(cid, opcode, buffer)
 			-- Potion Craft System
 			if type(PotionCraft) == "table" and type(PotionCraft.onOpcode) == "function" then
 				PotionCraft.onOpcode(cid, buffer)
+			end
+		elseif opcode == 106 then
+			-- Crafting System (game_crafting) - 100% Server-Side
+			if type(CraftingSystem) ~= "table" then
+				dofile(getDataDir().."lib/craftingSystem.lua")
+			end
+			if type(CraftingSystem) == "table" then
+				-- NPC envia "open>profId" para abrir a janela
+				if type(buffer) == "string" and string.sub(buffer, 1, 5) == "open>" then
+					local profId = tonumber(string.sub(buffer, 6)) or 1
+					CraftingSystem.sendWindow(cid, profId)
+				else
+					-- Client envia JSON com acao de craft
+					CraftingSystem.onOpcode(cid, buffer)
+				end
 			end
 		elseif opcode > 0 and opcode < 4 then
 			local handler = onReceiveOpCode and onReceiveOpCode[opcode]

@@ -308,4 +308,10 @@
 
 	<!-- Repolhos da quest do Senhor dos repolhos (item 18929) -->
 	<action itemid="18929" event="script" value="senhorRepolhos.lua"/>
+
+	<!-- Baú Elemental: ao usar, dropa 1 pedra elemental aleatória (25% cada) -->
+	<action itemid="19004" event="script" value="bauElemental.lua"/>
+
+	<!-- Pedras Elementais: uso restrito ao dobrador do elemento correspondente, +1 ponto de atributo -->
+	<action itemid="19002;19003;19005;19006" event="script" value="pedraElemental.lua"/>
 </actions>
