@@ -4607,11 +4607,10 @@ int32_t LuaInterface::luaDoSendPlayerExtendedOpcode(lua_State* L)
 	ScriptEnviroment* env = getEnv();
 	if(Player* player = env->getPlayerByUID(popNumber(L))) {
 		player->sendExtendedOpcode(opcode, buffer);
-
 		lua_pushboolean(L, true);
+	} else {
+		lua_pushboolean(L, false);
 	}
-
-	lua_pushboolean(L, false);
 	return 1;
 }
 

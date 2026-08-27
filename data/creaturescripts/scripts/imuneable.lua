@@ -1,3 +1,5 @@
+dofile(getDataDir() .. "lib/custom/healcut_lib.lua")
+
 local effects = {5, 86, 76, 36}
 
 local config = {
@@ -456,7 +458,15 @@ local function runeEffect(cid, attacker, combat)
 end
 
 function onStatsChange(cid, attacker, type, combat, value)
-  if not isCreature(attacker) then return true end  
+  -- === GRIEVOUS WOUNDS (Heal Cut) Detection ===
+  if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and attacker > 0 and isCreature(attacker) and isPlayer(attacker) and cid ~= attacker and combat ~= COMBAT_HEALING then
+    if HEALCUT and HEALCUT.apply then
+      HEALCUT.apply(cid)
+    end
+  end
+  -- === END GRIEVOUS WOUNDS ===
+
+  if not isCreature(attacker) then return true end
     if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and isPlayer(attacker) and getCreatureTarget(attacker) ~= cid and getPlayerStorageValue(cid, "antiloopDois") == -1 then 
     setPlayerStorageValue(cid, "antiloopDois", 1)	
 	if value < 0 then 

@@ -44,6 +44,7 @@
 
 	<event type="think" name="Idle" event="script" value="idle.lua"/>
 	<event type="think" name="SkullCheck" event="script" value="skullcheck.lua"/>
+	<event type="think" name="HungerIcon" event="script" value="hunger_icon.lua"/>
 
 	<!-- Inquisition Full Quest -->
 	<event type="kill" name="Inquisition" event="script" value="inquisition.lua"/>

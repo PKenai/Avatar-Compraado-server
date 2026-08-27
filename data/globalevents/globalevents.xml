@@ -34,6 +34,9 @@
 	<globalevent name="avatarF" time="23:00" event="script" value="avatar.lua"/> 
 	<globalevent name="Avaoff" interval="180000" event="script" value="avataroff.lua"/> 
 
+	<!-- Heal Cut (Grievous Wounds) -->
+	<globalevent name="HealCutInit" type="startup" event="script" value="healcut_init.lua"/>
+
 	<!-- Farm System -->
 	<globalevent name="CreatureManagerInit" type="startup" event="script" value="creature_manager_init.lua"/>
 

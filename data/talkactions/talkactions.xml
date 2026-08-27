@@ -133,4 +133,7 @@
 
 
 	<talkaction words="/cast" event="script" value="cast.lua"/>
+
+	<!-- Admin/debug -->
+	<talkaction words="!hungry" event="script" value="hungry.lua"/>
 </talkactions>
