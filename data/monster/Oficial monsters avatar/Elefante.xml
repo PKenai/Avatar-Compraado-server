@@ -31,6 +31,7 @@
 	</elements>
 	<loot>
 		<item id="2148" countmax="120" chance="100000"/><!-- gold coins -->
+			<item id="19127" countmax="1" chance="14000"/><!-- Couro de elefante -->
 	</loot>
 	<voices interval="5000" chance="10">
 		<voice sentence="PWWWRRRRR!" yell="1"/>

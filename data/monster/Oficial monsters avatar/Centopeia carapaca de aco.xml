@@ -33,6 +33,7 @@
 	</elements>
 	<loot>
 		<item id="2148" countmax="90" chance="100000"/><!-- gold coins -->
+			<item id="19123" countmax="1" chance="16000"/><!-- Pecado metalico -->
 	</loot>
 	<voices interval="5000" chance="10">
 		<voice sentence="CLACK CLACK CLACK!" yell="0"/>

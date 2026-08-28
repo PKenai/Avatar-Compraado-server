@@ -41,6 +41,7 @@
 	<loot>
 		<item id="2148" countmax="70" chance="100000"/><!-- gold coins -->
 		<item id="9633" countmax="2" chance="25000"/><!-- Snail Shell -->
+			<item id="19139" countmax="1" chance="7000"/><!-- Escamas marinhas -->
 	</loot>
 <script>
 <event name="mobsKill"/>

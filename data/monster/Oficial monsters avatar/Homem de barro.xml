@@ -27,5 +27,6 @@
 	<defenses armor="5" defense="5"/>
 	<loot>
 		<item id="2148" countmax="60" chance="100000"/><!-- gold coins -->
+			<item id="19117" countmax="1" chance="22000"/><!-- Frasco com barro -->
 	</loot>
 </monster>

@@ -25,6 +25,7 @@
 	<defenses armor="20" defense="10"/>
 	<loot>
 		<item id="2148" countmax="438" chance="100000"/><!-- moedas (25% a mais que a Mordecasca) -->
+			<item id="19137" countmax="1" chance="9000"/><!-- Pano sombrio -->
 	</loot>
 	<script>
 		<event name="TraidorDeath"/>

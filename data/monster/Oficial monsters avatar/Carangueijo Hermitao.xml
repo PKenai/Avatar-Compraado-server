@@ -34,6 +34,7 @@
 	</elements>
 	<loot>
 		<item id="2148" countmax="200" chance="100000"/><!-- gold coins -->
+			<item id="19143" countmax="1" chance="6000"/><!-- Concha de hermitao -->
 	</loot>
 	<voices interval="5000" chance="10">
 		<voice sentence="CLICK CLICK CLICK!" yell="0"/>

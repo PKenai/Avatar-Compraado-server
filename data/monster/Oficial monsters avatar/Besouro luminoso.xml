@@ -33,6 +33,7 @@
 	</elements>
 	<loot>
 		<item id="2148" countmax="70" chance="100000"/><!-- gold coins -->
+			<item id="19119" countmax="1" chance="20000"/><!-- Frasco de luz -->
 	</loot>
 	<voices interval="5000" chance="10">
 		<voice sentence="BZZZZZZZ!" yell="0"/>

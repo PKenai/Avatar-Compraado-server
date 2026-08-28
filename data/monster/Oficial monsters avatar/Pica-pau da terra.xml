@@ -25,6 +25,7 @@
 	<loot>
 		<item id="2148" countmax="150" chance="100000"/><!-- moedas -->
 		<item id="18873" countmax="1" chance="400"/><!-- pena de pica-pau da terra -->
+			<item id="19129" countmax="1" chance="14000"/><!-- Bico de pica pau -->
 	</loot>
 <script>
 <event name="mobsKill"/>

@@ -15748,4 +15748,455 @@
 		<attribute key="description" value="Uma pedra que pulsa com a energia da terra. Apenas dobradores da terra podem usar." />
 	</item>
 
+
+<!-- === LUVAS (Armas Fist) === -->
+<item id="19098" article="a" name="Luva simples">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="2"/>
+	<attribute key="defense" value="1"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="10"/>
+	<attribute key="healthGain" value="1"/>
+	<attribute key="healthTicks" value="1000"/>
+</item>
+<item id="19100" article="a" name="Luva pegajosa">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="3"/>
+	<attribute key="defense" value="2"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="12"/>
+	<attribute key="healthGain" value="2"/>
+	<attribute key="healthTicks" value="1000"/>
+</item>
+<item id="19102" article="a" name="Luva funebre">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="5"/>
+	<attribute key="defense" value="2"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="18"/>
+	<attribute key="lifesteal" value="1"/>
+</item>
+<item id="19104" article="a" name="Luva pinca vermelha">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="6"/>
+	<attribute key="defense" value="3"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="20"/>
+	<attribute key="criticalhitchance" value="2"/>
+</item>
+<item id="19106" article="a" name="Luva de joaninha">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="7"/>
+	<attribute key="defense" value="3"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="25"/>
+	<attribute key="healthGain" value="3"/>
+	<attribute key="healthTicks" value="1000"/>
+</item>
+<item id="19108" article="a" name="Luvas da fera">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="6"/>
+	<attribute key="defense" value="3"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="20"/>
+	<attribute key="criticalhitchance" value="2"/>
+</item>
+<item id="19110" article="a" name="Luvas tecidas">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="6"/>
+	<attribute key="defense" value="3"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxmanapoints" value="15"/>
+	<attribute key="lifesteal" value="1"/>
+</item>
+<item id="19112" article="a" name="Luvas da rainha">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="8"/>
+	<attribute key="defense" value="4"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxmanapoints" value="20"/>
+	<attribute key="lifesteal" value="2"/>
+</item>
+<item id="19114" article="a" name="Luvas de teia">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="12"/>
+	<attribute key="defense" value="5"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxmanapoints" value="35"/>
+	<attribute key="criticalhitchance" value="3"/>
+</item>
+<item id="19116" article="a" name="Luvas de barro">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="11"/>
+	<attribute key="defense" value="5"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="40"/>
+	<attribute key="extraAttack" value="2"/>
+</item>
+<item id="19118" article="a" name="Luvas reluzentes">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="13"/>
+	<attribute key="defense" value="6"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="45"/>
+	<attribute key="lifesteal" value="2"/>
+</item>
+<item id="19120" article="a" name="Luvas reais">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="15"/>
+	<attribute key="defense" value="7"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="50"/>
+	<attribute key="criticalhitchance" value="4"/>
+</item>
+<item id="19122" article="a" name="Luvas metalicas">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="18"/>
+	<attribute key="defense" value="8"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxmanapoints" value="60"/>
+	<attribute key="extraAttack" value="2"/>
+	<attribute key="criticalhitchance" value="2"/>
+	<attribute key="lifesteal" value="2"/>
+	<attribute key="armor" value="2"/>
+	<attribute key="increasemagicpercent" value="105"/>
+	<attribute key="description" value="[+5% Bend Damage]"/>
+</item>
+<item id="19124" article="a" name="Luvas gosmentas">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="20"/>
+	<attribute key="defense" value="9"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="65"/>
+	<attribute key="extraAttack" value="2"/>
+	<attribute key="criticalhitchance" value="3"/>
+	<attribute key="lifesteal" value="2"/>
+	<attribute key="armor" value="2"/>
+	<attribute key="increasemagicpercent" value="106"/>
+	<attribute key="description" value="[+6% Bend Damage]"/>
+</item>
+<item id="19126" article="a" name="Luvas de couro cinza">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="22"/>
+	<attribute key="defense" value="10"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxmanapoints" value="70"/>
+	<attribute key="extraAttack" value="3"/>
+	<attribute key="criticalhitchance" value="3"/>
+	<attribute key="lifesteal" value="2"/>
+	<attribute key="armor" value="2"/>
+	<attribute key="increasemagicpercent" value="107"/>
+	<attribute key="description" value="[+7% Bend Damage]"/>
+</item>
+<item id="19128" article="a" name="Luvas da terra">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="22"/>
+	<attribute key="defense" value="10"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="75"/>
+	<attribute key="extraAttack" value="3"/>
+	<attribute key="criticalhitchance" value="3"/>
+	<attribute key="lifesteal" value="2"/>
+	<attribute key="armor" value="2"/>
+	<attribute key="increasemagicpercent" value="108"/>
+	<attribute key="description" value="[+8% Bend Damage]"/>
+</item>
+<item id="19130" article="a" name="Luvas da natureza">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="24"/>
+	<attribute key="defense" value="11"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="80"/>
+	<attribute key="speed" value="10"/>
+	<attribute key="healthGain" value="3"/>
+	<attribute key="healthTicks" value="1000"/>
+	<attribute key="increasemagicpercent" value="108"/>
+	<attribute key="description" value="[+8% Bend Damage]"/>
+</item>
+<item id="19132" article="a" name="Luvas carniceiras">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="26"/>
+	<attribute key="defense" value="12"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="85"/>
+	<attribute key="extraAttack" value="3"/>
+	<attribute key="criticalhitchance" value="4"/>
+	<attribute key="lifesteal" value="3"/>
+	<attribute key="armor" value="3"/>
+	<attribute key="increasemagicpercent" value="109"/>
+	<attribute key="description" value="[+9% Bend Damage]"/>
+</item>
+<item id="19134" article="a" name="Luvas cascudas">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="28"/>
+	<attribute key="defense" value="13"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxmanapoints" value="90"/>
+	<attribute key="extraAttack" value="4"/>
+	<attribute key="criticalhitchance" value="5"/>
+	<attribute key="lifesteal" value="3"/>
+	<attribute key="armor" value="3"/>
+	<attribute key="increasemagicpercent" value="110"/>
+	<attribute key="description" value="[+10% Bend Damage]"/>
+</item>
+<item id="19136" article="a" name="Luvas da rebeliao">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="34"/>
+	<attribute key="defense" value="15"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="130"/>
+	<attribute key="extraAttack" value="5"/>
+	<attribute key="criticalhitchance" value="6"/>
+	<attribute key="lifesteal" value="4"/>
+	<attribute key="armor" value="4"/>
+	<attribute key="increasemagicpercent" value="111"/>
+	<attribute key="description" value="[+11% Bend Damage]"/>
+</item>
+<item id="19138" article="a" name="Luvas marinhas">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="36"/>
+	<attribute key="defense" value="16"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxmanapoints" value="140"/>
+	<attribute key="extraAttack" value="6"/>
+	<attribute key="criticalhitchance" value="7"/>
+	<attribute key="lifesteal" value="5"/>
+	<attribute key="armor" value="4"/>
+	<attribute key="increasemagicpercent" value="112"/>
+	<attribute key="description" value="[+12% Bend Damage]"/>
+</item>
+<item id="19140" article="a" name="Luvas da coragem">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="38"/>
+	<attribute key="defense" value="17"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="150"/>
+	<attribute key="extraAttack" value="7"/>
+	<attribute key="criticalhitchance" value="7"/>
+	<attribute key="lifesteal" value="5"/>
+	<attribute key="armor" value="5"/>
+	<attribute key="increasemagicpercent" value="112"/>
+	<attribute key="description" value="[+12% Bend Damage]"/>
+</item>
+<item id="19142" article="a" name="Luvas do hermitao">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="40"/>
+	<attribute key="defense" value="18"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxmanapoints" value="160"/>
+	<attribute key="extraAttack" value="8"/>
+	<attribute key="criticalhitchance" value="8"/>
+	<attribute key="lifesteal" value="6"/>
+	<attribute key="armor" value="5"/>
+	<attribute key="increasemagicpercent" value="113"/>
+	<attribute key="description" value="[+13% Bend Damage]"/>
+</item>
+<item id="19144" article="a" name="Luvas do conhecimento">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="42"/>
+	<attribute key="defense" value="20"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="180"/>
+	<attribute key="extraAttack" value="9"/>
+	<attribute key="criticalhitchance" value="9"/>
+	<attribute key="lifesteal" value="7"/>
+	<attribute key="armor" value="6"/>
+	<attribute key="increasemagicpercent" value="114"/>
+	<attribute key="description" value="[+14% Bend Damage]"/>
+</item>
+<item id="19146" article="a" name="Luvas da dobra obscura">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="50"/>
+	<attribute key="defense" value="24"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="240"/>
+	<attribute key="extraAttack" value="11"/>
+	<attribute key="criticalhitchance" value="11"/>
+	<attribute key="lifesteal" value="9"/>
+	<attribute key="armor" value="8"/>
+	<attribute key="increasemagicpercent" value="115"/>
+	<attribute key="description" value="[+15% Bend Damage]"/>
+</item>
+<item id="19148" article="a" name="Luvas deserticas">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="54"/>
+	<attribute key="defense" value="26"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxmanapoints" value="260"/>
+	<attribute key="extraAttack" value="12"/>
+	<attribute key="criticalhitchance" value="12"/>
+	<attribute key="lifesteal" value="10"/>
+	<attribute key="armor" value="9"/>
+	<attribute key="increasemagicpercent" value="117"/>
+	<attribute key="description" value="[+17% Bend Damage]"/>
+</item>
+<item id="19150" article="a" name="Luvas de pedregulho">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="56"/>
+	<attribute key="defense" value="28"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="280"/>
+	<attribute key="extraAttack" value="13"/>
+	<attribute key="criticalhitchance" value="13"/>
+	<attribute key="lifesteal" value="12"/>
+	<attribute key="armor" value="10"/>
+	<attribute key="increasemagicpercent" value="118"/>
+	<attribute key="description" value="[+18% Bend Damage]"/>
+</item>
+<item id="19152" article="a" name="Luvas do conhecimento perdido">
+	<attribute key="weaponType" value="fist"/>
+	<attribute key="slotType" value="hand"/>
+	<attribute key="attack" value="60"/>
+	<attribute key="defense" value="30"/>
+	<attribute key="weight" value="200"/>
+	<attribute key="maxhealthpoints" value="350"/>
+	<attribute key="maxmanapoints" value="300"/>
+	<attribute key="extraAttack" value="15"/>
+	<attribute key="criticalhitchance" value="15"/>
+	<attribute key="lifesteal" value="14"/>
+	<attribute key="armor" value="12"/>
+	<attribute key="increasemagicpercent" value="120"/>
+	<attribute key="description" value="[+20% Bend Damage]"/>
+</item>
+
+<!-- === MATERIAIS DE MONSTROS === -->
+<item id="19099" article="a" name="Linho">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19101" article="a" name="Casca de besouro da terra">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19103" article="a" name="Cabeca de verme">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19105" article="a" name="Pinca de carangueijo">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19107" article="a" name="Antena de joaninha">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19109" article="a" name="Pelo de urso">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19111" article="a" name="Teia forte">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19113" article="a" name="Asas de abelha de barro">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19115" article="a" name="Teia velha">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19117" article="a" name="Frasco com barro">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19119" article="a" name="Frasco de luz">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19121" article="a" name="Juba de leao">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19123" article="a" name="Pecado metalico">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19125" article="a" name="Frasco com liquido de caracol">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19127" article="a" name="Couro de elefante">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19129" article="a" name="Bico de pica pau">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19131" article="a" name="Perna de grilo">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19133" article="a" name="Ferrao de abelha urubu">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19135" article="a" name="Pedriscos de mordecasca">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19137" article="a" name="Pano sombrio">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19139" article="a" name="Escamas marinhas">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19141" article="a" name="Pele de onca">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19143" article="a" name="Concha de hermitao">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19145" article="a" name="Paginas estranhas">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19147" article="a" name="Pata negra">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19149" article="a" name="Pedras do deserto">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19151" article="a" name="Mineral esquisito">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
+<item id="19153" article="a" name="Paginas gigantes">
+	<attribute key="weight" value="50"/>
+	<attribute key="description" value="Material para forjar luvas."/>
+</item>
 </items>

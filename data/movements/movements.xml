@@ -1372,4 +1372,62 @@
 		<!-- Magical Torch -->
 	<movevent type="Equip" itemid="9956" slot="pickupable" event="function" value="onEquipItem"/>
 	<movevent type="DeEquip" itemid="9956" slot="pickupable" event="function" value="onDeEquipItem"/>
+
+<!-- === LUVAS DE MONSTROS (Slot Hand) === -->
+	<movevent type="Equip" itemid="19098" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19098" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19100" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19100" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19102" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19102" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19104" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19104" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19106" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19106" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19108" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19108" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19110" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19110" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19112" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19112" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19114" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19114" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19116" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19116" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19118" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19118" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19120" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19120" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19122" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19122" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19124" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19124" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19126" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19126" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19128" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19128" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19130" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19130" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19132" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19132" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19134" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19134" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19136" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19136" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19138" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19138" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19140" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19140" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19142" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19142" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19144" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19144" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19146" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19146" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19148" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19148" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19150" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19150" slot="hand" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19152" slot="hand" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19152" slot="hand" event="function" value="onDeEquipItem"/>
 </movements>

@@ -25,6 +25,7 @@
 	<loot>
 		<item id="2671" countmax="3" chance="75000"/><!-- HAM: 0 a 3 -->
 		<item id="2666" countmax="3" chance="75000"/><!-- MEAT: 0 a 3 -->
+			<item id="19109" countmax="1" chance="25000"/><!-- Pelo de urso -->
 	</loot>
 	<voices interval="5000" chance="10">
 		<voice sentence="Grrrrrr"/>

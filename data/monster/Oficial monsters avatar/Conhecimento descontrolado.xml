@@ -35,6 +35,7 @@
 	</elements>
 	<loot>
 		<item id="2148" countmax="650" chance="100000"/><!-- gold coins -->
+			<item id="19145" countmax="1" chance="5000"/><!-- Paginas estranhas -->
 	</loot>
 	<voices interval="5000" chance="10">
 		<voice sentence="WRRRRRRR!" yell="1"/>

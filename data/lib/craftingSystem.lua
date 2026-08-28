@@ -28,118 +28,473 @@ local PROFESSIONS = {
 
 -- Receitas: TUDO definido no server
 local RECIPES = {
-  -- ==================== BLACKSMITH (profId = 1) ====================
+  -- ==================== BLACKSMITH - LUVAS (profId = 1) ====================
   {
     profId = 1,
-    name = "Leather Armor",
+    name = "Luva simples",
     tier = 1,
-    resultItemId = 2467,    -- leather armor
-    resultCount = 1,
-    cost = 50,
-    requiredSkill = 1,
-    storageRequirement = 0,
-    ingredients = {
-      {itemId = 5876, count = 3},  -- lizard leather x3
-      {itemId = 18232, count = 1}, -- fire fruit x1
-    },
-  },
-  {
-    profId = 1,
-    name = "Chain Armor",
-    tier = 1,
-    resultItemId = 2464,    -- chain armor
+    resultItemId = 19098,
     resultCount = 1,
     cost = 100,
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 5876, count = 5},  -- lizard leather x5
-      {itemId = 18232, count = 2}, -- fire fruit x2
+      {itemId = 19099, count = 3},  -- Linho x3
     },
   },
   {
     profId = 1,
-    name = "Spike Sword",
-    tier = 2,
-    resultItemId = 2383,    -- spike sword
-    resultCount = 1,
-    cost = 300,
-    requiredSkill = 1,
-    storageRequirement = 0,
-    ingredients = {
-      {itemId = 5877, count = 3},  -- green dragon leather x3
-      {itemId = 18232, count = 2}, -- fire fruit x2
-    },
-  },
-  {
-    profId = 1,
-    name = "Plate Armor",
-    tier = 2,
-    resultItemId = 2463,    -- plate armor
-    resultCount = 1,
-    cost = 500,
-    requiredSkill = 1,
-    storageRequirement = 0,
-    ingredients = {
-      {itemId = 5877, count = 5},  -- green dragon leather x5
-      {itemId = 18232, count = 3}, -- fire fruit x3
-    },
-  },
-  {
-    profId = 1,
-    name = "Mastermind Shield",
-    tier = 3,
-    resultItemId = 2514,    -- mastermind shield
-    resultCount = 1,
-    cost = 1000,
-    requiredSkill = 1,
-    storageRequirement = 0,
-    ingredients = {
-      {itemId = 5877, count = 8},  -- green dragon leather x8
-      {itemId = 18232, count = 5}, -- fire fruit x5
-    },
-  },
-  {
-    profId = 1,
-    name = "Demon Armor",
-    tier = 3,
-    resultItemId = 2494,    -- demon armor
-    resultCount = 1,
-    cost = 2000,
-    requiredSkill = 1,
-    storageRequirement = 0,
-    ingredients = {
-      {itemId = 18232, count = 5},  -- fire fruit x5
-    },
-  },
-
-  -- ==================== ALCHEMY (profId = 2) ====================
-  {
-    profId = 2,
-    name = "Devil Helmet",
+    name = "Luva pegajosa",
     tier = 1,
-    resultItemId = 2462,    -- devil helmet
+    resultItemId = 19100,
     resultCount = 1,
-    cost = 80,
+    cost = 150,
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 5876, count = 4},  -- lizard leather x4
-      {itemId = 18232, count = 1}, -- fire fruit x1
+      {itemId = 19099, count = 5},  -- Linho x5
+      {itemId = 19101, count = 3},  -- Casca de besouro x3
     },
   },
   {
-    profId = 2,
-    name = "Demon Helmet",
-    tier = 2,
-    resultItemId = 2493,    -- demon helmet
+    profId = 1,
+    name = "Luva funebre",
+    tier = 1,
+    resultItemId = 19102,
     resultCount = 1,
     cost = 200,
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 5877, count = 3},  -- green dragon leather x3
-      {itemId = 18232, count = 2}, -- fire fruit x2
+      {itemId = 19099, count = 8},  -- Linho x8
+      {itemId = 19103, count = 5},  -- Cabeca de verme x5
+      {itemId = 19101, count = 3},  -- Casca de besouro x3
+    },
+  },
+  {
+    profId = 1,
+    name = "Luva pinca vermelha",
+    tier = 1,
+    resultItemId = 19104,
+    resultCount = 1,
+    cost = 300,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 10}, -- Linho x10
+      {itemId = 19105, count = 6},  -- Pinca de carangueijo x6
+      {itemId = 19101, count = 4},  -- Casca de besouro x4
+    },
+  },
+  {
+    profId = 1,
+    name = "Luva de joaninha",
+    tier = 1,
+    resultItemId = 19106,
+    resultCount = 1,
+    cost = 400,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 12}, -- Linho x12
+      {itemId = 19107, count = 8},  -- Antena de joaninha x8
+      {itemId = 19101, count = 5},  -- Casca de besouro x5
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas da fera",
+    tier = 1,
+    resultItemId = 19108,
+    resultCount = 1,
+    cost = 550,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 10}, -- Linho x10
+      {itemId = 19109, count = 6},  -- Pelo de urso x6
+      {itemId = 19111, count = 4},  -- Teia forte x4
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas tecidas",
+    tier = 1,
+    resultItemId = 19110,
+    resultCount = 1,
+    cost = 750,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 10}, -- Linho x10
+      {itemId = 19111, count = 6},  -- Teia forte x6
+      {itemId = 19109, count = 4},  -- Pelo de urso x4
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas da rainha",
+    tier = 1,
+    resultItemId = 19112,
+    resultCount = 1,
+    cost = 1000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 15}, -- Linho x15
+      {itemId = 19113, count = 8},  -- Asas de abelha x8
+      {itemId = 19111, count = 6},  -- Teia forte x6
+      {itemId = 19109, count = 4},  -- Pelo de urso x4
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas de teia",
+    tier = 2,
+    resultItemId = 19114,
+    resultCount = 1,
+    cost = 1500,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 25}, -- Linho x25
+      {itemId = 19115, count = 15}, -- Teia velha x15
+      {itemId = 19111, count = 10}, -- Teia forte x10
+      {itemId = 19109, count = 8},  -- Pelo de urso x8
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas de barro",
+    tier = 2,
+    resultItemId = 19116,
+    resultCount = 1,
+    cost = 2000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 20}, -- Linho x20
+      {itemId = 19117, count = 12}, -- Frasco com barro x12
+      {itemId = 19111, count = 8},  -- Teia forte x8
+      {itemId = 19101, count = 6},  -- Casca de besouro x6
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas reluzentes",
+    tier = 2,
+    resultItemId = 19118,
+    resultCount = 1,
+    cost = 3000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 25}, -- Linho x25
+      {itemId = 19119, count = 15}, -- Frasco de luz x15
+      {itemId = 19107, count = 10}, -- Antena de joaninha x10
+      {itemId = 19111, count = 8},  -- Teia forte x8
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas reais",
+    tier = 2,
+    resultItemId = 19120,
+    resultCount = 1,
+    cost = 4500,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 30}, -- Linho x30
+      {itemId = 19121, count = 18}, -- Juba de leao x18
+      {itemId = 19109, count = 12}, -- Pelo de urso x12
+      {itemId = 19111, count = 10}, -- Teia forte x10
+      {itemId = 19107, count = 6},  -- Antena de joaninha x6
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas metalicas",
+    tier = 3,
+    resultItemId = 19122,
+    resultCount = 1,
+    cost = 6000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 35}, -- Linho x35
+      {itemId = 19123, count = 20}, -- Peca metalica x20
+      {itemId = 19111, count = 15}, -- Teia forte x15
+      {itemId = 19117, count = 10}, -- Frasco com barro x10
+      {itemId = 19101, count = 8},  -- Casca de besouro x8
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas gosmentas",
+    tier = 3,
+    resultItemId = 19124,
+    resultCount = 1,
+    cost = 8500,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 40}, -- Linho x40
+      {itemId = 19125, count = 22}, -- Frasco de caracol x22
+      {itemId = 19111, count = 15}, -- Teia forte x15
+      {itemId = 19107, count = 10}, -- Antena de joaninha x10
+      {itemId = 19109, count = 8},  -- Pelo de urso x8
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas de couro cinza",
+    tier = 3,
+    resultItemId = 19126,
+    resultCount = 1,
+    cost = 12000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 40}, -- Linho x40
+      {itemId = 19127, count = 22}, -- Couro de elefante x22
+      {itemId = 19109, count = 15}, -- Pelo de urso x15
+      {itemId = 19111, count = 12}, -- Teia forte x12
+      {itemId = 19113, count = 8},  -- Asas de abelha x8
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas da terra",
+    tier = 3,
+    resultItemId = 19128,
+    resultCount = 1,
+    cost = 17000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 40}, -- Linho x40
+      {itemId = 19129, count = 22}, -- Bico de pica-pau x22
+      {itemId = 19111, count = 15}, -- Teia forte x15
+      {itemId = 19101, count = 10}, -- Casca de besouro x10
+      {itemId = 19117, count = 8},  -- Frasco com barro x8
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas da natureza",
+    tier = 3,
+    resultItemId = 19130,
+    resultCount = 1,
+    cost = 24000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 45}, -- Linho x45
+      {itemId = 19131, count = 25}, -- Perna de grilo x25
+      {itemId = 19111, count = 18}, -- Teia forte x18
+      {itemId = 19109, count = 12}, -- Pelo de urso x12
+      {itemId = 19113, count = 10}, -- Asas de abelha x10
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas carniceiras",
+    tier = 3,
+    resultItemId = 19132,
+    resultCount = 1,
+    cost = 33000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 50}, -- Linho x50
+      {itemId = 19133, count = 28}, -- Ferrao de abelha urubu x28
+      {itemId = 19111, count = 20}, -- Teia forte x20
+      {itemId = 19109, count = 15}, -- Pelo de urso x15
+      {itemId = 19119, count = 10}, -- Frasco de luz x10
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas cascudas",
+    tier = 4,
+    resultItemId = 19134,
+    resultCount = 1,
+    cost = 47000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 55}, -- Linho x55
+      {itemId = 19135, count = 30}, -- Pedriscos de mordecasca x30
+      {itemId = 19111, count = 22}, -- Teia forte x22
+      {itemId = 19101, count = 15}, -- Casca de besouro x15
+      {itemId = 19109, count = 12}, -- Pelo de urso x12
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas da rebeliao",
+    tier = 4,
+    resultItemId = 19136,
+    resultCount = 1,
+    cost = 66000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 65}, -- Linho x65
+      {itemId = 19137, count = 35}, -- Pano sombrio x35
+      {itemId = 19111, count = 25}, -- Teia forte x25
+      {itemId = 19109, count = 18}, -- Pelo de urso x18
+      {itemId = 19113, count = 12}, -- Asas de abelha x12
+      {itemId = 19117, count = 8},  -- Frasco com barro x8
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas da coragem",
+    tier = 4,
+    resultItemId = 19140,
+    resultCount = 1,
+    cost = 93000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 80}, -- Linho x80
+      {itemId = 19141, count = 42}, -- Pele de onca x42
+      {itemId = 19111, count = 30}, -- Teia forte x30
+      {itemId = 19101, count = 20}, -- Casca de besouro x20
+      {itemId = 19107, count = 15}, -- Antena de joaninha x15
+      {itemId = 19109, count = 10}, -- Pelo de urso x10
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas marinhas",
+    tier = 4,
+    resultItemId = 19138,
+    resultCount = 1,
+    cost = 130000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 80}, -- Linho x80
+      {itemId = 19139, count = 42}, -- Escamas marinhas x42
+      {itemId = 19111, count = 30}, -- Teia forte x30
+      {itemId = 19109, count = 20}, -- Pelo de urso x20
+      {itemId = 19119, count = 15}, -- Frasco de luz x15
+      {itemId = 19121, count = 10}, -- Juba de leao x10
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas do hermitao",
+    tier = 4,
+    resultItemId = 19142,
+    resultCount = 1,
+    cost = 184000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 90}, -- Linho x90
+      {itemId = 19143, count = 48}, -- Concha de hermitao x48
+      {itemId = 19111, count = 35}, -- Teia forte x35
+      {itemId = 19109, count = 22}, -- Pelo de urso x22
+      {itemId = 19113, count = 18}, -- Asas de abelha x18
+      {itemId = 19117, count = 12}, -- Frasco com barro x12
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas do conhecimento",
+    tier = 4,
+    resultItemId = 19144,
+    resultCount = 1,
+    cost = 258000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 90}, -- Linho x90
+      {itemId = 19145, count = 48}, -- Paginas estranhas x48
+      {itemId = 19111, count = 35}, -- Teia forte x35
+      {itemId = 19101, count = 22}, -- Casca de besouro x22
+      {itemId = 19109, count = 18}, -- Pelo de urso x18
+      {itemId = 19119, count = 12}, -- Frasco de luz x12
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas da dobra obscura",
+    tier = 5,
+    resultItemId = 19146,
+    resultCount = 1,
+    cost = 363000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 100}, -- Linho x100
+      {itemId = 19147, count = 55},  -- Pata negra x55
+      {itemId = 19111, count = 40},  -- Teia forte x40
+      {itemId = 19109, count = 25},  -- Pelo de urso x25
+      {itemId = 19117, count = 20},  -- Frasco com barro x20
+      {itemId = 19121, count = 15},  -- Juba de leao x15
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas deserticas",
+    tier = 5,
+    resultItemId = 19148,
+    resultCount = 1,
+    cost = 511000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 120}, -- Linho x120
+      {itemId = 19149, count = 65},  -- Pedras do deserto x65
+      {itemId = 19111, count = 50},  -- Teia forte x50
+      {itemId = 19109, count = 30},  -- Pelo de urso x30
+      {itemId = 19119, count = 22},  -- Frasco de luz x22
+      {itemId = 19127, count = 18},  -- Couro de elefante x18
+      {itemId = 19129, count = 12},  -- Bico de pica-pau x12
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas de pedregulho",
+    tier = 5,
+    resultItemId = 19150,
+    resultCount = 1,
+    cost = 718000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 120}, -- Linho x120
+      {itemId = 19151, count = 65},  -- Mineral esquisito x65
+      {itemId = 19111, count = 50},  -- Teia forte x50
+      {itemId = 19109, count = 30},  -- Pelo de urso x30
+      {itemId = 19107, count = 22},  -- Antena de joaninha x22
+      {itemId = 19113, count = 18},  -- Asas de abelha x18
+      {itemId = 19117, count = 12},  -- Frasco com barro x12
+    },
+  },
+  {
+    profId = 1,
+    name = "Luvas do conhecimento perdido",
+    tier = 5,
+    resultItemId = 19152,
+    resultCount = 1,
+    cost = 1000000,
+    requiredSkill = 1,
+    storageRequirement = 0,
+    ingredients = {
+      {itemId = 19099, count = 130}, -- Linho x130
+      {itemId = 19153, count = 70},  -- Paginas gigantes x70
+      {itemId = 19111, count = 55},  -- Teia forte x55
+      {itemId = 19101, count = 35},  -- Casca de besouro x35
+      {itemId = 19109, count = 25},  -- Pelo de urso x25
+      {itemId = 19119, count = 20},  -- Frasco de luz x20
+      {itemId = 19121, count = 15},  -- Juba de leao x15
+      {itemId = 19123, count = 10},  -- Peca metalica x10
     },
   },
 }
@@ -299,6 +654,7 @@ function CraftingSystem.sendWindow(cid, profId)
   }
 
   -- Coleta receitas da profissao (converte IDs para client)
+  -- Todos os campos estao presentes para compatibilidade com game_crafting.
   local recipes = {}
   local globalIdx = 0
   for i, recipe in ipairs(RECIPES) do
@@ -306,13 +662,11 @@ function CraftingSystem.sendWindow(cid, profId)
     if recipe.profId == profId then
       -- Gera descricao estilo "look" do item (usando getItemInfo)
       local info = getItemInfo(recipe.resultItemId)
-      local lookDesc = recipe.name
+      local lookDesc = recipe.name or 'Unknown'
       if info then
-        -- Descricao real do item
         if info.description and info.description ~= "" then
           lookDesc = lookDesc .. "\n" .. info.description
         end
-        -- Atributos do item
         local attrs = {}
         if info.armor and info.armor > 0 then
           table.insert(attrs, "Armor: " .. info.armor)
@@ -333,25 +687,26 @@ function CraftingSystem.sendWindow(cid, profId)
 
       local r = {
         globalId = globalIdx,
-        spriteId = toClientId(recipe.resultItemId),
-        count = recipe.resultCount,
-        name = recipe.name,
-        tier = recipe.tier,
+        spriteId = toClientId(recipe.resultItemId) or 0,
+        count = recipe.resultCount or 1,
+        name = recipe.name or 'Unknown',
+        tier = recipe.tier or 1,
         desc = lookDesc,
-        cost = recipe.cost,
-        requiredSkill = recipe.requiredSkill,
-        recipestorage = recipe.storageRequirement,
-        storagevalue = getPlayerStorageValue(cid, recipe.storageRequirement),
+        cost = recipe.cost or 0,
+        requiredSkill = recipe.requiredSkill or 1,
+        recipestorage = recipe.storageRequirement or 0,
+        storagevalue = getPlayerStorageValue(cid, recipe.storageRequirement or 0) or 0,
         ingredients = {},
       }
 
-      -- Conta quantos itens o player tem de cada ingrediente (converte IDs)
       for _, ingr in ipairs(recipe.ingredients) do
+        local ingrName = getItemNameById(ingr.itemId)
+        if not ingrName or ingrName == '' then ingrName = 'Unknown' end
         table.insert(r.ingredients, {
-          name = getItemNameById(ingr.itemId),
-          spriteId = toClientId(ingr.itemId),
-          count = ingr.count,
-          playerCount = getPlayerItemCount(cid, ingr.itemId),
+          name = ingrName,
+          spriteId = toClientId(ingr.itemId) or 0,
+          count = ingr.count or 1,
+          playerCount = getPlayerItemCount(cid, ingr.itemId) or 0,
         })
       end
 
@@ -369,6 +724,8 @@ function CraftingSystem.sendWindow(cid, profId)
     print("[CraftingSystem] ERRO json.encode: " .. tostring(json_data))
     return
   end
+
+  print("[CraftingSystem] Enviando JSON para cid=" .. cid .. " tamanho=" .. #json_data .. " recipes=" .. #recipes)
 
   local send_ok, send_err = pcall(doSendPlayerExtendedOpcode, cid, CRAFTING_OPCODE, json_data)
   if not send_ok then

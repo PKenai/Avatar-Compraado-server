@@ -24,6 +24,7 @@
 	<defenses armor="0" defense="0"/>
 	<loot>
 		<item id="2148" countmax="100" chance="100000"/><!-- moedas -->
+			<item id="19121" countmax="1" chance="18000"/><!-- Juba de leao -->
 	</loot>
 <script>
 <event name="mobsKill"/>
