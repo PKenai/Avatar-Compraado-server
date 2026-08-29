@@ -573,5 +573,12 @@ function onLogin(cid)
         end
     end, 2000, cid)
 
+    -- Sincroniza os tiers de todos os itens do player no inventario/backpack
+    addEvent(function(cid)
+        if isCreature(cid) then
+            syncPlayerItemTiers(cid)
+        end
+    end, 1200, cid)
+
     return true
 end

@@ -1997,6 +1997,9 @@
 		<monster name="Joaninha da terra" x="-1" y="-1" z="7" spawntime="60" direction="2" />
 		<monster name="Joaninha da terra" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="558" centery="381" centerz="7" radius="1">
+		<npc name="gan bler" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="429" centery="383" centerz="7" radius="1">
 		<monster name="Joaninha da terra" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>

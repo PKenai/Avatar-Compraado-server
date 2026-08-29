@@ -984,6 +984,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 
 		if(it.hasAbilities())
 		{
+			int32_t tier = item ? item->getTier() : 0;
 			for(uint16_t i = SKILL_FIRST; i <= SKILL_LAST; ++i)
 			{
 				if(!it.abilities->skills[i])
@@ -997,7 +998,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				else
 					s << ", ";
 
-				s << getSkillName(i) << " " << std::showpos << (int32_t)it.abilities->skills[i] << std::noshowpos;
+				s << getSkillName(i) << " " << std::showpos << ((int32_t)it.abilities->skills[i] + tier) << std::noshowpos;
 			}
 
 			if(it.abilities->stats[STAT_MAGICLEVEL])
@@ -1010,7 +1011,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				else
 					s << ", ";
 
-				s << "bend level " << std::showpos << (int32_t)it.abilities->stats[STAT_MAGICLEVEL] << std::noshowpos;
+				s << "bend level " << std::showpos << ((int32_t)it.abilities->stats[STAT_MAGICLEVEL] + tier) << std::noshowpos;
 			}
 
 
@@ -1180,7 +1181,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				else
 					s << ", ";
 
-				s << "speed " << std::showpos << (int32_t)(it.abilities->speed) << std::noshowpos;
+				s << "speed " << std::showpos << ((int32_t)(it.abilities->speed) + (item ? item->getTier() : 0)) << std::noshowpos;
 			}
 
 			if(it.abilities->invisible)
@@ -1206,13 +1207,14 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				else
 					s << ", ";
 
+				int32_t t = item ? item->getTier() : 0;
 				if(it.abilities->healthGain > 0){
-					s << "life regeneration " << it.abilities->healthGain << " HP/" << ((it.abilities->healthTicks)/1000) << "s";
+					s << "life regeneration " << (it.abilities->healthGain + t) << " HP/" << ((it.abilities->healthTicks)/1000) << "s";
 					if(it.abilities->manaGain > 0)
-						s << ", mana regeneration " << it.abilities->manaGain << " MP/" << ((it.abilities->manaTicks)/1000) << "s";
+						s << ", mana regeneration " << (it.abilities->manaGain + t) << " MP/" << ((it.abilities->manaTicks)/1000) << "s";
 				}
 				else
-					s << "mana regeneration " << it.abilities->manaGain << " MP/" << ((it.abilities->manaTicks)/1000) << "s";
+					s << "mana regeneration " << (it.abilities->manaGain + t) << " MP/" << ((it.abilities->manaTicks)/1000) << "s";
 			}
 
 			if(it.abilities->manaShield)
@@ -1284,6 +1286,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 
 		if(it.hasAbilities())
 		{
+			int32_t tier = item ? item->getTier() : 0;
 			for(uint16_t i = SKILL_FIRST; i <= SKILL_LAST; ++i)
 			{
 				if(!it.abilities->skills[i])
@@ -1297,7 +1300,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				else
 					s << ", ";
 
-				s << getSkillName(i) << " " << std::showpos << (int32_t)it.abilities->skills[i] << std::noshowpos;
+				s << getSkillName(i) << " " << std::showpos << ((int32_t)it.abilities->skills[i] + tier) << std::noshowpos;
 			}
 
 			if(it.abilities->stats[STAT_MAGICLEVEL])
@@ -1310,7 +1313,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				else
 					s << ", ";
 
-				s << "bend level " << std::showpos << (int32_t)it.abilities->stats[STAT_MAGICLEVEL] << std::noshowpos;
+				s << "bend level " << std::showpos << ((int32_t)it.abilities->stats[STAT_MAGICLEVEL] + tier) << std::noshowpos;
 			}
 
 			int32_t show = it.abilities->absorb[COMBAT_ALL];
@@ -1438,7 +1441,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				else
 					s << ", ";
 
-				s << "speed " << std::showpos << (int32_t)(it.abilities->speed) << std::noshowpos;
+				s << "speed " << std::showpos << ((int32_t)(it.abilities->speed) + (item ? item->getTier() : 0)) << std::noshowpos;
 			}
 
 			if(it.abilities->invisible)
@@ -1464,13 +1467,14 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				else
 					s << ", ";
 
+				int32_t t = item ? item->getTier() : 0;
 				if(it.abilities->healthGain > 0){
-					s << "life regeneration " << it.abilities->healthGain << " HP/" << ((it.abilities->healthTicks)/1000) << "s";
+					s << "life regeneration " << (it.abilities->healthGain + t) << " HP/" << ((it.abilities->healthTicks)/1000) << "s";
 					if(it.abilities->manaGain > 0)
-						s << ", mana regeneration " << it.abilities->manaGain << " MP/" << ((it.abilities->manaTicks)/1000) << "s";
+						s << ", mana regeneration " << (it.abilities->manaGain + t) << " MP/" << ((it.abilities->manaTicks)/1000) << "s";
 				}
 				else
-					s << "mana regeneration " << it.abilities->manaGain << " MP/" << ((it.abilities->manaTicks)/1000) << "s";
+					s << "mana regeneration " << (it.abilities->manaGain + t) << " MP/" << ((it.abilities->manaTicks)/1000) << "s";
 			}
 
 			if(it.abilities->manaShield)
@@ -1652,6 +1656,19 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 		{
 			std::string elementosList[] = {"Energy Rune", "Ice Rune", "Metal Rune"};
 			s << std::endl << "[Elemental slot: " << elementosList[item->getElementalRuneType()-11] << " " << levelList[item->getElementalRuneLevel()-1] <<", Charges: "<< item->getElementalRuneCharges() <<"].";
+		}
+	}
+
+	// Tier display
+	if(item) {
+		int32_t tier = item->getTier();
+		if(tier > 0 && tier <= 10) {
+			static const char* tierNames[] = {
+				"",
+				"Tier I", "Tier II", "Tier III", "Tier IV", "Tier V",
+				"Tier VI", "Tier VII", "Tier VIII", "Tier IX", "Tier X"
+			};
+			s << std::endl << "[" << tierNames[tier] << "]";
 		}
 	}
 

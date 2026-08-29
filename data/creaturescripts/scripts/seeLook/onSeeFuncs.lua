@@ -11,7 +11,7 @@ function doMessageCheck(message, keyword)
     
     local keyword = stripAccents(keyword:lower())
     local message = stripAccents(message:lower())
-
+    
     local a, b = message:find(keyword)
     if keyword == "hi" or keyword == "oi" then
         if a == 1 and b == 2 then
@@ -22,7 +22,7 @@ function doMessageCheck(message, keyword)
             return true
         end
     end
-
+    
     return false
 end
 
@@ -55,7 +55,7 @@ function setItemToRealPrice(cid, item)
     
     if priceInList then
         doItemSetAttribute(item.uid, "price", priceInList)
-        doItemSetAttribute(item.uid, "description", getItemDescriptionsById(item.itemid).description..""..getLangString(cid, "Price", "Preço")..": "..getPriceByItem(item).." gold.")  
+        doItemSetAttribute(item.uid, "description", getItemDescriptionsById(item.itemid).description..""..getLangString(cid, "Price", "Preço")..": "..getPriceByItem(item)..".")     
     else
         doItemSetAttribute(item.uid, "price", "Unsellable")
         doItemSetAttribute(item.uid, "description", getItemDescriptionsById(item.itemid).description.."")
@@ -77,5 +77,25 @@ function setDescriptionItemBonus(cid, item)
             end
         end
     end
+
+    -- Mostra tier do item na descricao
+    local tier = getItemAttribute(item.uid, "tier")
+    if tier ~= nil and tier ~= "" then
+        tier = tonumber(tier) or 0
+        if tier > 0 and tier <= 10 then
+            local desc = getItemAttribute(item.uid, "description") or ""
+            local tierNames = {
+                [1] = "I", [2] = "II", [3] = "III", [4] = "IV", [5] = "V",
+                [6] = "VI", [7] = "VII", [8] = "VIII", [9] = "IX", [10] = "X"
+            }
+            local tierText = "Tier " .. (tierNames[tier] or tostring(tier))
+            if desc ~= "" then
+                doItemSetAttribute(item.uid, "description", tierText .. "\n" .. desc)
+            else
+                doItemSetAttribute(item.uid, "description", tierText)
+            end
+        end
+    end
+
     return true
 end

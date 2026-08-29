@@ -1029,6 +1029,10 @@ bool MoveEvent::EquipItem(MoveEvent* moveEvent, Player* player, Item* item, slot
 	{
 		int32_t runeSpeed = runeType == 3 ? runeSpeeds[runeLevel-1] : 0;
 		int32_t itemSpeed = it.abilities->speed ? it.abilities->speed : 0;
+		// Tier bonus: speed
+		int32_t tier = item->getTier();
+		if(tier > 0)
+			itemSpeed += tier;
 		g_game.changeSpeed(player, itemSpeed+runeSpeed);
 	}
 
@@ -1056,12 +1060,16 @@ bool MoveEvent::EquipItem(MoveEvent* moveEvent, Player* player, Item* item, slot
 		player->addCondition(condition);
 	}
 
+	// Tier bonus: all skills, stats, and regen
+	int32_t tier = item->getTier();
+
 	bool needUpdateSkills = false;
 	for(uint32_t i = SKILL_FIRST; i <= SKILL_LAST; ++i)
 	{
 		if(it.abilities->skills[i])
 		{
-			player->setVarSkill((skills_t)i, it.abilities->skills[i]);
+			int32_t val = it.abilities->skills[i] + tier;
+			player->setVarSkill((skills_t)i, val);
 			if(!needUpdateSkills)
 				needUpdateSkills = true;
 		}
@@ -1082,7 +1090,8 @@ bool MoveEvent::EquipItem(MoveEvent* moveEvent, Player* player, Item* item, slot
 	{
 		if(it.abilities->stats[s])
 		{
-			player->setVarStats((stats_t)s, it.abilities->stats[s]);
+			int32_t val = it.abilities->stats[s] + tier;
+			player->setVarStats((stats_t)s, val);
 			if(!needUpdateStats)
 				needUpdateStats = true;
 		}
@@ -1131,15 +1140,17 @@ bool MoveEvent::DeEquipItem(MoveEvent*, Player* player, Item* item, slots_t slot
 		player->removeCondition(CONDITION_INVISIBLE, (ConditionId_t)slot);
 
 	if(it.abilities->manaShield)
-		player->removeCondition(CONDITION_MANASHIELD, (ConditionId_t)slot);
-
-
-	if(it.abilities->speed || (runeType == 3 && runeLevel > 0 && runeLevel < 4))
+		player->removeCondition(CONDITION_MANASHIELD, (ConditionId_t)slot);	if(it.abilities->speed || (runeType == 3 && runeLevel > 0 && runeLevel < 4))
 	{
 		int32_t runeSpeed = runeType == 3 ? runeSpeeds[runeLevel-1] : 0;
 		int32_t itemSpeed = it.abilities->speed ? it.abilities->speed : 0;
+		// Tier bonus: speed (mirror equip)
+		int32_t tier = item->getTier();
+		if(tier > 0)
+			itemSpeed += tier;
 		g_game.changeSpeed(player, -(itemSpeed+runeSpeed));
 	}
+
 
 	if(it.abilities->conditionSuppressions)
 	{
@@ -1150,13 +1161,17 @@ bool MoveEvent::DeEquipItem(MoveEvent*, Player* player, Item* item, slots_t slot
 	if(it.abilities->regeneration)
 		player->removeCondition(CONDITION_REGENERATION, (ConditionId_t)slot);
 
+	// Tier bonus: skills, stats (mirror equip)
+	int32_t tier = item->getTier();
+
 	bool needUpdateSkills = false;
 	for(uint32_t i = SKILL_FIRST; i <= SKILL_LAST; ++i)
 	{
 		if(it.abilities->skills[i])
 		{
+			int32_t val = it.abilities->skills[i] + tier;
 			needUpdateSkills = true;
-			player->setVarSkill((skills_t)i, -it.abilities->skills[i]);
+			player->setVarSkill((skills_t)i, -val);
 		}
 
 		if(it.abilities->skillsPercent[i])
@@ -1174,8 +1189,9 @@ bool MoveEvent::DeEquipItem(MoveEvent*, Player* player, Item* item, slots_t slot
 	{
 		if(it.abilities->stats[s])
 		{
+			int32_t val = it.abilities->stats[s] + tier;
 			needUpdateStats = true;
-			player->setVarStats((stats_t)s, -it.abilities->stats[s]);
+			player->setVarStats((stats_t)s, -val);
 		}
 
 		if(it.abilities->statsPercent[s])

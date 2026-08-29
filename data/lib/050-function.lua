@@ -2148,3 +2148,50 @@ function verifyBot(cid)
 	addEvent(checkafkBot, (2*60*1000)+3000, cid) -- nao respondeu
 	return true
 end
+
+function sendItemTierOpcode(cid, itemUid)
+	if not isPlayer(cid) or not itemUid or itemUid <= 0 then return end
+	local tier = getItemAttribute(itemUid, "tier")
+	if tier ~= nil and tier ~= "" then
+		tier = tonumber(tier) or 0
+		if tier > 0 and tier <= 10 then
+			local item = getThing(itemUid)
+			if item and item.itemid > 0 then
+				local clientId = 0
+				local ok, result = pcall(ItemType, item.itemid)
+				if ok and result and not result:isNull() then
+					local c = result:getClientId()
+					if c and c > 0 then clientId = c end
+				end
+				if clientId == 0 then clientId = item.itemid end
+				doSendPlayerExtendedOpcode(cid, 111, "set," .. clientId .. "," .. tier)
+			end
+		end
+	end
+end
+
+function syncPlayerItemTiers(cid)
+	if not isPlayer(cid) then return end
+
+	local function checkAndSend(itemUid)
+		if not itemUid or itemUid <= 0 then return end
+		sendItemTierOpcode(cid, itemUid)
+		if isContainer(itemUid) then
+			local size = getContainerSize(itemUid)
+			for slot = 0, size - 1 do
+				local subItem = getContainerItem(itemUid, slot)
+				if subItem and subItem.uid > 0 then
+					checkAndSend(subItem.uid)
+				end
+			end
+		end
+	end
+
+	for slot = 1, 10 do
+		local item = getPlayerSlotItem(cid, slot)
+		if item and item.uid > 0 then
+			checkAndSend(item.uid)
+		end
+	end
+end
+

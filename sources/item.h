@@ -257,6 +257,8 @@ class Item : virtual public Thing, public ItemAttributes
 		bool isScriptProtected() const;
 		bool isDualWield() const;
 
+		int32_t getTier() const;
+
 		int32_t getAttack() const;
 		int32_t getCriticalHitChance() const;
 		int32_t getExtraAttack() const;
@@ -411,6 +413,16 @@ inline int32_t Item::getCriticalHitChance() const
 	return items[id].criticalHitChance;
 }
 
+inline int32_t Item::getTier() const
+{
+	bool ok;
+	int32_t v = getIntegerAttribute("tier", ok);
+	if(ok)
+		return v;
+
+	return 0;
+}
+
 inline int32_t Item::getAttack() const
 {
 	bool ok;
@@ -418,7 +430,11 @@ inline int32_t Item::getAttack() const
 	if(ok)
 		return v;
 
-	return items[id].attack;
+	int32_t base = items[id].attack;
+	int32_t tier = getTier();
+	if(tier > 0)
+		base += tier;
+	return base;
 }
 
 inline int32_t Item::getExtraAttack() const
@@ -438,7 +454,11 @@ inline int32_t Item::getDefense() const
 	if(ok)
 		return v;
 
-	return items[id].defense;
+	int32_t base = items[id].defense;
+	int32_t tier = getTier();
+	if(tier > 0)
+		base += tier;
+	return base;
 }
 
 inline int32_t Item::getExtraDefense() const
@@ -458,7 +478,11 @@ inline int32_t Item::getArmor() const
 	if(ok)
 		return v;
 
-	return items[id].armor;
+	int32_t base = items[id].armor;
+	int32_t tier = getTier();
+	if(tier > 0)
+		base += tier;
+	return base;
 }
 
 inline int32_t Item::getAttackSpeed() const
