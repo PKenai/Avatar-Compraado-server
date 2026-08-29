@@ -1258,9 +1258,6 @@
 	<spawn centerx="82" centery="344" centerz="6" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="574" centery="350" centerz="6" radius="1">
-		<npc name="capitain leopoldo sing" x="-1" y="0" z="6" spawntime="40" />
-	</spawn>
 	<spawn centerx="93" centery="354" centerz="6" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
@@ -1965,11 +1962,14 @@
 	<spawn centerx="445" centery="362" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="586" centery="362" centerz="7" radius="1">
-		<monster name="Sapo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="586" centery="363" centerz="7" radius="1">
+		<monster name="Sapo" x="0" y="-1" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="596" centery="365" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="535" centery="369" centerz="7" radius="1">
+		<npc name="camila" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="556" centery="369" centerz="7" radius="1">
 		<npc name="Maria" x="1" y="-1" z="7" spawntime="40" direction="1" />

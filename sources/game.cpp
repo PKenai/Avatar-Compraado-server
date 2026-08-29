@@ -5254,9 +5254,19 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 						if(!attacker)
 							ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << ".";
 						else if(attacker != target)
-							ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to an attack by " << attacker->getNameDescription() << ".";
+						{
+							if(params.isCritical)
+								ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to a CRITICAL attack by " << attacker->getNameDescription() << ".";
+							else
+								ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to an attack by " << attacker->getNameDescription() << ".";
+						}
 						else
-							ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to a self attack.";
+						{
+							if(params.isCritical)
+								ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to a self CRITICAL attack.";
+							else
+								ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to a self attack.";
+						}
 
 						addStatsMessage(textList, MSG_DAMAGE_OTHERS, ss.str(), targetPos, details);
 						ss.str("");
@@ -5266,9 +5276,19 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 					if(attacker && (player = attacker->getPlayer()))
 					{
 						if(attacker != target)
-							ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to your attack.";
+						{
+							if(params.isCritical)
+								ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to your CRITICAL attack.";
+							else
+								ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to your attack.";
+						}
 						else
-							ss << "You lose " << totalDamage << " hitpoint" << plural << " due to your attack.";
+						{
+							if(params.isCritical)
+								ss << "You lose " << totalDamage << " hitpoint" << plural << " due to your CRITICAL attack.";
+							else
+								ss << "You lose " << totalDamage << " hitpoint" << plural << " due to your attack.";
+						}
 
 						player->sendStatsMessage(MSG_DAMAGE_DEALT, ss.str(), targetPos, details);
 						ss.str("");
@@ -5277,7 +5297,12 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 					if((player = target->getPlayer()) && attacker != target)
 					{
 						if(attacker)
-							ss << "You lose " << totalDamage << " hitpoint" << plural << " due to an attack by " << attacker->getNameDescription() << ".";
+						{
+							if(params.isCritical)
+								ss << "You lose " << totalDamage << " hitpoint" << plural << " due to a CRITICAL attack by " << attacker->getNameDescription() << ".";
+							else
+								ss << "You lose " << totalDamage << " hitpoint" << plural << " due to an attack by " << attacker->getNameDescription() << ".";
+						}
 						else
 							ss << "You lose " << totalDamage << " hitpoint" << plural << ".";
 

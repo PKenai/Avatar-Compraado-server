@@ -73,7 +73,7 @@ struct CombatParams
 {
 	CombatParams()
 	{
-		blockedByArmor = blockedByShield = targetCasterOrTopMost = targetPlayersOrSummons = differentAreaDamage = false;
+		blockedByArmor = blockedByShield = targetCasterOrTopMost = targetPlayersOrSummons = differentAreaDamage = isCritical = false;
 		isAggressive = useCharges = true;
 		dispelType = CONDITION_NONE;
 		combatType = COMBAT_NONE;
@@ -84,7 +84,7 @@ struct CombatParams
 		tileCallback = NULL;
 	}
 
-	bool blockedByArmor, blockedByShield, targetCasterOrTopMost, targetPlayersOrSummons, differentAreaDamage, useCharges, isAggressive;
+	bool blockedByArmor, blockedByShield, targetCasterOrTopMost, targetPlayersOrSummons, differentAreaDamage, useCharges, isAggressive, isCritical;
 	ConditionType_t dispelType;
 	CombatType_t combatType, elementType;
 	uint32_t itemId, elementDamage;

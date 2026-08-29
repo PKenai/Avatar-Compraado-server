@@ -46,5 +46,3 @@ function HUNGER_ICON.checkAndUpdate(cid)
         HUNGER_ICON.broadcastIcon(cid, false)
     end
 end
-
-print(">> Hunger Icon Lib loaded.")

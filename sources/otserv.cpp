@@ -135,10 +135,10 @@ bool argumentsHandler(StringVec args)
 
 		if((*it) == "--version" || (*it) == "-v")
 		{
-			std::clog << SOFTWARE_NAME << ", version " << SOFTWARE_VERSION << " (" << SOFTWARE_CODENAME << ")\n"
+			std::clog << SOFTWARE_NAME << "," << SOFTWARE_VERSION << " (" << SOFTWARE_CODENAME << ")\n"
 			"Compiled with " << BOOST_COMPILER << " (x86_64: " << __x86_64__ << ") at " << __DATE__ << ", " << __TIME__ << ".\n"
 			"A server developed by " << SOFTWARE_DEVELOPERS << ".\n"
-			"Visit our forum for updates, support and resources: http://otland.net.\n";
+			"Visit instagram.com/avatar.eclipse\n";
 			return false;
 		}
 
@@ -412,10 +412,10 @@ void otserv(StringVec, ServiceManager* services)
 #endif
 	g_game.setGameState(GAMESTATE_STARTUP);
 
-	std::clog << SOFTWARE_NAME << ", version " << SOFTWARE_VERSION << " (" << SOFTWARE_CODENAME << ")" << std::endl
+	std::clog << SOFTWARE_NAME << "," << SOFTWARE_VERSION << " (" << SOFTWARE_CODENAME << ")" << std::endl
 		<< "Compiled with " << BOOST_COMPILER << " (x86_64: " << __x86_64__ << ") at " << __DATE__ << ", " << __TIME__ << "." << std::endl
 		<< "A server developed by " << SOFTWARE_DEVELOPERS << "." << std::endl
-		<< "Visit our forum for updates, support and resources: http://otland.net." << std::endl << std::endl;
+		<< "Visit instagram.com/avatar.eclipse" << std::endl << std::endl;
 	std::stringstream ss;
 #ifdef __DEBUG__
 	ss << " GLOBAL";

@@ -27,10 +27,10 @@
 #define CLIENT_VERSION_PIC 0
 //#define CLIENT_VERSION_DATA
 
-#define SOFTWARE_NAME "The Forgotten Server"
+#define SOFTWARE_NAME "TFS"
 #define SOFTWARE_VERSION "1.1"
 #define SOFTWARE_CODENAME "Crying Damson"
-#define SOFTWARE_DEVELOPERS "Elf, Talaturen, Dalkon, BeniS, Tryller and Kornholijo"
+#define SOFTWARE_DEVELOPERS "Sirius"
 #define SOFTWARE_PROTOCOL "8.60"
 
 #define VERSION_CHECK "http://forgottenserver.otland.net/version.xml"

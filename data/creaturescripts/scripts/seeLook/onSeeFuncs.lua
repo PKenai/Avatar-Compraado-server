@@ -78,24 +78,5 @@ function setDescriptionItemBonus(cid, item)
         end
     end
 
-    -- Mostra tier do item na descricao
-    local tier = getItemAttribute(item.uid, "tier")
-    if tier ~= nil and tier ~= "" then
-        tier = tonumber(tier) or 0
-        if tier > 0 and tier <= 10 then
-            local desc = getItemAttribute(item.uid, "description") or ""
-            local tierNames = {
-                [1] = "I", [2] = "II", [3] = "III", [4] = "IV", [5] = "V",
-                [6] = "VI", [7] = "VII", [8] = "VIII", [9] = "IX", [10] = "X"
-            }
-            local tierText = "Tier " .. (tierNames[tier] or tostring(tier))
-            if desc ~= "" then
-                doItemSetAttribute(item.uid, "description", tierText .. "\n" .. desc)
-            else
-                doItemSetAttribute(item.uid, "description", tierText)
-            end
-        end
-    end
-
     return true
 end

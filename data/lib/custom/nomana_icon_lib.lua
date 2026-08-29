@@ -48,5 +48,3 @@ function NOMANA_ICON.checkAndUpdate(cid)
         NOMANA_ICON.broadcastIcon(cid, false)
     end
 end
-
-print(">> NoMana Icon Lib loaded.")

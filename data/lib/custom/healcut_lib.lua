@@ -52,5 +52,3 @@ function HEALCUT.apply(cid)
         end
     end, HEALCUT.DURATION * 1000 + 100, cid)
 end
-
-print(">> HealCut Lib loaded.")

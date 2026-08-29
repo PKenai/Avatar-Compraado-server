@@ -1532,6 +1532,9 @@ void LuaInterface::registerFunctions()
 	//getPlayerSkillLevel(cid, skill[, ignoreModifiers = false])
 	lua_register(m_luaState, "getPlayerSkillLevel", LuaInterface::luaGetPlayerSkillLevel);
 
+	//getPlayerCriticalHitChance(cid)
+	lua_register(m_luaState, "getPlayerCriticalHitChance", LuaInterface::luaGetPlayerCriticalHitChance);
+
 	//getPlayerSkillTries(cid, skill)
 	lua_register(m_luaState, "getPlayerSkillTries", LuaInterface::luaGetPlayerSkillTries);
 
@@ -5117,6 +5120,21 @@ int32_t LuaInterface::luaGetPlayerSkillLevel(lua_State* L)
 		else
 			lua_pushboolean(L, false);
 	}
+	else
+	{
+		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+	}
+
+	return 1;
+}
+
+int32_t LuaInterface::luaGetPlayerCriticalHitChance(lua_State* L)
+{
+	//getPlayerCriticalHitChance(cid)
+	ScriptEnviroment* env = getEnv();
+	if(const Player* player = env->getPlayerByUID(popNumber(L)))
+		lua_pushnumber(L, player->getCriticalHitChance());
 	else
 	{
 		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));

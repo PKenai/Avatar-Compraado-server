@@ -904,8 +904,8 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 			if(it.attackSpeed || (item && item->getAttackSpeed()))
 				s << ", AttackSpeed Bonus: +" << 100 - (item ? 100 - (2000 - item->getAttackSpeed())/20 : 100 - (2000 - it.attackSpeed)/20) << "%";
 
-			if (it.lifeSteal) {
-				s << ", Life Steal: +" << it.lifeSteal << "%";
+			if (it.lifeSteal || (item && item->getLifeSteal())) {
+				s << ", Life Steal: +" << int32_t(item ? item->getLifeSteal() : it.lifeSteal) << "%";
 			}
 		}
 		else if(it.weaponType != WEAPON_AMMO && it.weaponType != WEAPON_WAND)
@@ -971,7 +971,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 			s << "AttackSpeed:+" << 100 - (item ? 100 - (2000 - item->getAttackSpeed())/20 : 100 - (2000 - it.attackSpeed)/20) << "%";
 		}
 
-		if (it.lifeSteal) {
+		if (it.lifeSteal || (item && item->getLifeSteal())) {
 			if (begin) {
 				begin = false;
 				s << " (";
@@ -979,7 +979,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				s << ", ";
 			}
 
-			s << "Life Steal:+" << it.lifeSteal << "%";
+			s << "Life Steal:+" << int32_t(item ? item->getLifeSteal() : it.lifeSteal) << "%";
 		}
 
 		if(it.hasAbilities())
@@ -1012,6 +1012,40 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 					s << ", ";
 
 				s << "bend level " << std::showpos << ((int32_t)it.abilities->stats[STAT_MAGICLEVEL] + tier) << std::noshowpos;
+			}
+
+			if(it.abilities->stats[STAT_MAXHEALTH])
+			{
+				if(begin)
+				{
+					begin = false;
+					s << " (";
+				}
+				else
+					s << ", ";
+
+				int32_t hp = it.abilities->stats[STAT_MAXHEALTH];
+				if(tier > 0)
+					hp = (int32_t)std::round(hp * (1.0f + tier * 0.10f));
+
+				s << "health " << std::showpos << hp << std::noshowpos;
+			}
+
+			if(it.abilities->stats[STAT_MAXMANA])
+			{
+				if(begin)
+				{
+					begin = false;
+					s << " (";
+				}
+				else
+					s << ", ";
+
+				int32_t mp = it.abilities->stats[STAT_MAXMANA];
+				if(tier > 0)
+					mp = (int32_t)std::round(mp * (1.0f + tier * 0.10f));
+
+				s << "mana " << std::showpos << mp << std::noshowpos;
 			}
 
 
@@ -1316,6 +1350,40 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				s << "bend level " << std::showpos << ((int32_t)it.abilities->stats[STAT_MAGICLEVEL] + tier) << std::noshowpos;
 			}
 
+			if(it.abilities->stats[STAT_MAXHEALTH])
+			{
+				if(begin)
+				{
+					begin = false;
+					s << " (";
+				}
+				else
+					s << ", ";
+
+				int32_t hp = it.abilities->stats[STAT_MAXHEALTH];
+				if(tier > 0)
+					hp = (int32_t)std::round(hp * (1.0f + tier * 0.10f));
+
+				s << "health " << std::showpos << hp << std::noshowpos;
+			}
+
+			if(it.abilities->stats[STAT_MAXMANA])
+			{
+				if(begin)
+				{
+					begin = false;
+					s << " (";
+				}
+				else
+					s << ", ";
+
+				int32_t mp = it.abilities->stats[STAT_MAXMANA];
+				if(tier > 0)
+					mp = (int32_t)std::round(mp * (1.0f + tier * 0.10f));
+
+				s << "mana " << std::showpos << mp << std::noshowpos;
+			}
+
 			int32_t show = it.abilities->absorb[COMBAT_ALL];
 			if(!show)
 			{
@@ -1341,7 +1409,11 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 					else
 						s << ", ";
 
-					s << getCombatName((CombatType_t)i) << " " << std::showpos << it.abilities->absorb[i] << std::noshowpos << "%";
+					int32_t elAbsorb = it.abilities->absorb[i];
+					if(tier > 0)
+						elAbsorb = (int32_t)std::round(elAbsorb * (1.0f + tier * 0.10f));
+
+					s << getCombatName((CombatType_t)i) << " " << std::showpos << elAbsorb << std::noshowpos << "%";
 				}
 			}
 			else
@@ -1353,6 +1425,9 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				}
 				else
 					s << ", ";
+
+				if(tier > 0)
+					show = (int32_t)std::round(show * (1.0f + tier * 0.10f));
 
 				s << "protection all " << std::showpos << show << std::noshowpos << "%";
 			}

@@ -441,12 +441,18 @@ int32_t Player::getArmor() const
 
 int32_t Player::getCriticalHitChance() const
 {
-	int32_t i = SLOT_FIRST, crit = 0;
-	for(; i < SLOT_LAST && i != SLOT_AMMO; ++i)
+	int32_t crit = g_config.getNumber(ConfigManager::CRITICAL_HIT_CHANCE);
+	for(int32_t i = SLOT_FIRST; i <= SLOT_HAND; ++i)
 	{
+		if(i == SLOT_BACKPACK || i == SLOT_DEPOT)
+			continue;
+
 		if(Item* item = getInventoryItem((slots_t)i))
 			crit += item->getCriticalHitChance();
-		}
+	}
+
+	if(weapon && weapon != getInventoryItem(SLOT_LEFT) && weapon != getInventoryItem(SLOT_RIGHT))
+		crit += weapon->getCriticalHitChance();
 
 	return crit;
 }
@@ -2457,8 +2463,11 @@ BlockType_t Player::blockHit(Creature* attacker, CombatType_t combatType, int32_
 		bool transform = false;
 		if(it.abilities->absorb[combatType])
 		{
-			totalAbsorbPercent += it.abilities->absorb[combatType];
-			//blocked += (int32_t)std::ceil((double)(damage * it.abilities->absorb[combatType]) / 100.);
+			int32_t absorbVal = it.abilities->absorb[combatType];
+			int32_t tier = item->getTier();
+			if(tier > 0)
+				absorbVal = (int32_t)std::round(absorbVal * (1.0f + tier * 0.10f));
+			totalAbsorbPercent += absorbVal;
 			if(item->hasCharges())
 				transform = true;
 
@@ -5856,15 +5865,16 @@ bool Player::transferMoneyTo(const std::string& name, uint64_t amount)
 	return true;
 }
 
+void Player::sendCritical(const Position& pos) const
+{
+	SpectatorVec list;
+	g_game.getSpectators(list, pos, false, true);
+	g_game.addMagicEffect(list, pos, 199);
+}
+
 void Player::sendCritical() const
 {
-	if(g_config.getBool(ConfigManager::DISPLAY_CRITICAL_HIT))
-		sendTextMessage(MSG_STATUS_DEFAULT, "You strike a critical hit!");
-	
-	Player* self = const_cast<Player*>(this);
-	SpectatorVec selfList;
-	selfList.push_back(self);
-	g_game.addMagicEffect(selfList, getPosition(), MAGIC_EFFECT_INSECTS);
+	sendCritical(getPosition());
 }
 
 void Player::setMounted(bool mounting)

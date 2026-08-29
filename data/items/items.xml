@@ -16199,4 +16199,87 @@
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
+
+<!-- === CAPAS (Tadeu) === -->
+<item id="19158" article="a" name="Capa de viajante">
+	<attribute key="weight" value="1800" />
+	<attribute key="armor" value="8" />
+	<attribute key="maxhealthpoints" value="100" />
+	<attribute key="maxmanapoints" value="50" />
+	<attribute key="speed" value="10" />
+	<attribute key="slotType" value="body" />
+</item>
+<item id="19159" article="a" name="Capa reforcada">
+	<attribute key="weight" value="2200" />
+	<attribute key="armor" value="12" />
+	<attribute key="maxhealthpoints" value="180" />
+	<attribute key="maxmanapoints" value="40" />
+	<attribute key="absorbPercentAll" value="1" />
+	<attribute key="slotType" value="body" />
+</item>
+<item id="19160" article="a" name="Capa resistente">
+	<attribute key="weight" value="1700" />
+	<attribute key="armor" value="7" />
+	<attribute key="increasemagicpercent" value="102" />
+	<attribute key="maxhealthpoints" value="80" />
+	<attribute key="maxmanapoints" value="200" />
+	<attribute key="speed" value="15" />
+	<attribute key="slotType" value="body" />
+</item>
+<item id="19161" article="a" name="Capa aprimorada">
+	<attribute key="weight" value="1800" />
+	<attribute key="armor" value="10" />
+	<attribute key="criticalhitchance" value="3" />
+	<attribute key="maxhealthpoints" value="180" />
+	<attribute key="maxmanapoints" value="120" />
+	<attribute key="speed" value="35" />
+	<attribute key="slotType" value="body" />
+</item>
+<item id="19162" article="a" name="Capa nobre">
+	<attribute key="weight" value="2400" />
+	<attribute key="armor" value="15" />
+	<attribute key="maxhealthpoints" value="400" />
+	<attribute key="maxmanapoints" value="100" />
+	<attribute key="absorbPercentAll" value="2" />
+	<attribute key="slotType" value="body" />
+</item>
+<item id="19163" article="a" name="Capa de protecao">
+	<attribute key="weight" value="1700" />
+	<attribute key="armor" value="10" />
+	<attribute key="increasemagicpercent" value="104" />
+	<attribute key="maxhealthpoints" value="200" />
+	<attribute key="maxmanapoints" value="450" />
+	<attribute key="manaGain" value="3" />
+	<attribute key="manaTicks" value="2000" />
+	<attribute key="slotType" value="body" />
+</item>
+<item id="19164" article="a" name="Capa majestosa">
+	<attribute key="weight" value="1900" />
+	<attribute key="armor" value="13" />
+	<attribute key="criticalhitchance" value="8" />
+	<attribute key="increasemagicpercent" value="103" />
+	<attribute key="maxhealthpoints" value="350" />
+	<attribute key="maxmanapoints" value="200" />
+	<attribute key="speed" value="50" />
+	<attribute key="slotType" value="body" />
+</item>
+<item id="19165" article="a" name="Capa gloriosa">
+	<attribute key="weight" value="1600" />
+	<attribute key="armor" value="11" />
+	<attribute key="increasemagicpercent" value="107" />
+	<attribute key="criticalhitchance" value="4" />
+	<attribute key="maxhealthpoints" value="250" />
+	<attribute key="maxmanapoints" value="700" />
+	<attribute key="speed" value="25" />
+	<attribute key="slotType" value="body" />
+</item>
+<item id="19166" article="a" name="Capa soberana">
+	<attribute key="weight" value="2600" />
+	<attribute key="armor" value="20" />
+	<attribute key="maxhealthpoints" value="800" />
+	<attribute key="maxmanapoints" value="150" />
+	<attribute key="absorbPercentAll" value="4" />
+	<attribute key="speed" value="15" />
+	<attribute key="slotType" value="body" />
+</item>
 </items>

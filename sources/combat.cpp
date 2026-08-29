@@ -606,12 +606,26 @@ bool Combat::CombatHealthFunc(Creature* caster, Creature* target, const CombatPa
 			change = random_range(var->minChange, var->maxChange, DISTRO_NORMAL);
 	}
 
-	if(g_game.combatBlockHit(params.combatType, caster, target, change, params.blockedByShield, params.blockedByArmor, params.itemId != 0))
+	CombatParams _params = params;
+	if(caster && target && caster != target && change < 0)
+	{
+		if(Player* player = caster->getPlayer())
+		{
+			int32_t critChance = player->getCriticalHitChance() / 4;
+			if(!_params.isCritical && critChance > 0 && random_range(1, 100) <= critChance)
+			{
+				_params.isCritical = true;
+				change = (int32_t)std::floor(change * 1.35);
+				player->sendCritical(target->getPosition());
+			}
+		}
+	}
+
+	if(g_game.combatBlockHit(_params.combatType, caster, target, change, _params.blockedByShield, _params.blockedByArmor, _params.itemId != 0))
 		return false;
 
-	CombatParams _params = params;
 	if(_params.element.damage && _params.element.type != COMBAT_NONE)
-		g_game.combatBlockHit(_params.element.type, caster, target, _params.element.damage, params.blockedByShield, params.blockedByArmor, params.itemId != 0, true);
+		g_game.combatBlockHit(_params.element.type, caster, target, _params.element.damage, _params.blockedByShield, _params.blockedByArmor, _params.itemId != 0, true);
 
 	if(caster && caster->getPlayer() && target->getPlayer() && target->getSkull() != SKULL_BLACK)
 	{
@@ -623,8 +637,8 @@ bool Combat::CombatHealthFunc(Creature* caster, Creature* target, const CombatPa
 	if(!g_game.combatChangeHealth(_params, caster, target, change, false))
 		return false;
 
-	CombatConditionFunc(caster, target, params, NULL);
-	CombatDispelFunc(caster, target, params, NULL);
+	CombatConditionFunc(caster, target, _params, NULL);
+	CombatDispelFunc(caster, target, _params, NULL);
 	return true;
 }
 

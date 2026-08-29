@@ -1430,4 +1430,24 @@
 	<movevent type="DeEquip" itemid="19150" slot="hand" event="function" value="onDeEquipItem"/>
 	<movevent type="Equip" itemid="19152" slot="hand" event="function" value="onEquipItem"/>
 	<movevent type="DeEquip" itemid="19152" slot="hand" event="function" value="onDeEquipItem"/>
+
+	<!-- === CAPAS (Tadeu) === -->
+	<movevent type="Equip" itemid="19158" slot="armor" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19158" slot="armor" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19159" slot="armor" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19159" slot="armor" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19160" slot="armor" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19160" slot="armor" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19161" slot="armor" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19161" slot="armor" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19162" slot="armor" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19162" slot="armor" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19163" slot="armor" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19163" slot="armor" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19164" slot="armor" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19164" slot="armor" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19165" slot="armor" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19165" slot="armor" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19166" slot="armor" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19166" slot="armor" event="function" value="onDeEquipItem"/>
 </movements>

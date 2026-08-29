@@ -35,5 +35,3 @@ function doCreatureAddHealth(cid, health, ...)
     end
     return originalDoCreatureAddHealth(cid, health, ...)
 end
-
-print(">> HealCut Hooks loaded.")

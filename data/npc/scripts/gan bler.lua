@@ -15,6 +15,22 @@ local MAX_TIER = 10
 local NUM_OPTIONS = 5
 local TIER_OPCODE = 111
 
+-- Semente inicial de aleatoriedade
+math.randomseed(os.time() + (tonumber(tostring({}):sub(8)) or 0))
+for i = 1, 5 do math.random() end
+
+local function getRandomNumber(min, max)
+    math.randomseed(os.time() + math.floor(os.clock() * 1000000) + (tonumber(tostring({}):sub(8)) or 0) + math.random(1, 10000))
+    math.random()
+    return math.random(min, max)
+end
+
+local function getRandomPercent()
+    math.randomseed(os.time() + math.floor(os.clock() * 1000000) + (tonumber(tostring({}):sub(8)) or 0) + math.random(1, 10000))
+    math.random()
+    return math.random(1, 10000) / 10000.0 -- 0.0001 a 1.0000
+end
+
 -- Chance de GANHAR por tier atual (fixa, independente da luva)
 local WIN_CHANCES = {
     [0] = 0.80,  -- T0 -> T1: 80%
@@ -319,7 +335,7 @@ function creatureSayCallback(cid, type, msg)
                 return true
             end
             if count > 1 then
-                selfSay("Voce tem mais de 1 luva. So aceito 1.", cid)
+                selfSay("Voce tem mais de uma luva. So aceito uma de cada vez.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -343,18 +359,21 @@ function creatureSayCallback(cid, type, msg)
             -- CALCULA CHANCE (fixa por tier)
             -- ============================================================
             local winChance = WIN_CHANCES[realTier] or 0.01
-
-            local roll = math.random()
+            local roll = getRandomPercent()
             local won = false
             local secretNumber
 
-            if roll < winChance then
+            if roll <= winChance then
                 won = true
                 secretNumber = chosenNumber
             else
-                repeat
-                    secretNumber = math.random(1, NUM_OPTIONS)
-                until secretNumber ~= chosenNumber
+                local otherOptions = {}
+                for i = 1, NUM_OPTIONS do
+                    if i ~= chosenNumber then
+                        table.insert(otherOptions, i)
+                    end
+                end
+                secretNumber = otherOptions[getRandomNumber(1, #otherOptions)]
             end
 
             if won then
@@ -366,7 +385,7 @@ function creatureSayCallback(cid, type, msg)
                 local clientId = toClientId(gloveItem.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
-                doSendMagicEffect(getCreaturePosition(cid), CONST_ME_MAGIC_BLUE)
+                doSendMagicEffect(getCreaturePosition(cid), 201)
                 selfSay("Voce acertou! " .. glove.name .. " agora e Tier " .. newTier .. "!", cid)
             else
                 -- ERROU - remove luva
@@ -376,7 +395,7 @@ function creatureSayCallback(cid, type, msg)
                 local clientId = toClientId(gloveItem.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "clear," .. clientId)
 
-                doSendMagicEffect(getCreaturePosition(cid), CONST_ME_MORTAREA)
+                doSendMagicEffect(getCreaturePosition(cid), 202)
                 selfSay("Errou! O numero era " .. secretNumber .. ". Fiquei com sua " .. glove.name .. " e seu gold.", cid)
             end
 

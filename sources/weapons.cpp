@@ -360,28 +360,33 @@ bool Weapon::useFist(Player* player, Creature* target)
 	float attackFactor = player->getAttackFactor();
 	int32_t attackSkill = player->getSkill(SKILL_FIST, SKILL_LEVEL), attackValue = g_config.getNumber(ConfigManager::FIST_BASE_ATTACK);
 
-	double minDamage = 0;
-	double maxDamage = Weapons::getMaxWeaponDamage(player->getLevel(), attackSkill, attackValue, attackFactor);
-	if(random_range(1, 100) < player->getCriticalHitChance())
-	{
-		minDamage = maxDamage;
-		maxDamage *= 1.4;
-		player->sendCritical();
-	}
-
+	double maxValue = Weapons::getMaxWeaponDamage(player->getLevel(), attackSkill, attackValue, attackFactor);
 	Vocation* vocation = player->getVocation();
 	if(vocation && vocation->getMultiplier(MULTIPLIER_MELEE) != 1.0)
-		maxDamage *= vocation->getMultiplier(MULTIPLIER_MELEE);
+		maxValue *= vocation->getMultiplier(MULTIPLIER_MELEE);
 
-	maxDamage = std::floor(maxDamage);
-	int32_t damage = -random_range((int32_t)minDamage, (int32_t)maxDamage, DISTRO_NORMAL);
+	int32_t maxDam = (int32_t)std::floor(maxValue);
+	int32_t baseDamage = random_range(0, maxDam, DISTRO_NORMAL);
+
+	bool isCritical = false;
+	int32_t critChance = player->getCriticalHitChance() / 4;
+	if(critChance > 0 && random_range(1, 100) <= critChance)
+	{
+		isCritical = true;
+		baseDamage = (int32_t)std::floor(baseDamage * 1.35);
+		if(baseDamage < 1)
+			baseDamage = 1;
+
+		player->sendCritical(targetPos);
+	}
 
 	CombatParams fist;
 	fist.blockedByArmor = true;
 	fist.blockedByShield = true;
 	fist.combatType = COMBAT_PHYSICALDAMAGE;
+	fist.isCritical = isCritical;
 
-	Combat::doCombatHealth(player, target, damage, damage, fist);
+	Combat::doCombatHealth(player, target, -baseDamage, -baseDamage, fist);
 	if(!player->hasFlag(PlayerFlag_NotGainSkill) && player->getAddAttackSkill())
 		player->addSkillAdvance(SKILL_FIST, 1);
 
@@ -448,14 +453,17 @@ bool Weapon::internalUseWeapon(Player* player, Item* item, Creature* target, int
 		_params.element.type = item->getElementType();
 		_params.element.damage = getWeaponElementDamage(player, item);
 
-		int32_t damage = (getWeaponDamage(player, target, item) * modifier) / 100;
+		bool isCritical = false;
+		int32_t damage = (getWeaponDamage(player, target, item, false, &isCritical) * modifier) / 100;
+		_params.isCritical = isCritical;
 		Combat::doCombatHealth(player, target, damage, damage, _params);
 
 		const ItemType& it = Item::items[id];
-		if (it.lifeSteal) {
+		int32_t lifeSteal = item ? item->getLifeSteal() : it.lifeSteal;
+		if (lifeSteal > 0) {
 			CombatParams heal = params;
 			heal.combatType = COMBAT_HEALING;
-			int32_t steal = ((it.lifeSteal/100.0) * damage);
+			int32_t steal = ((lifeSteal / 100.0) * damage);
 			Combat::doCombatHealth(target, player, -steal, -steal, heal);
 		}
 		int32_t runeCharges = item->getElementalRuneCharges() ? item->getElementalRuneCharges() : 0;
@@ -769,30 +777,40 @@ bool WeaponMelee::getSkillType(const Player* player, const Item* item,
 	return false;
 }
 
-int32_t WeaponMelee::getWeaponDamage(const Player* player, const Creature*, const Item* item, bool maxDamage /*= false*/) const
+int32_t WeaponMelee::getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage /*= false*/, bool* isCritical /*= NULL*/) const
 {
 	int32_t attackSkill = player->getWeaponSkill(item), attackValue = std::max((int32_t)0,
 		(int32_t(item->getAttack() + item->getExtraAttack()) - item->getElementDamage()));
 	float attackFactor = player->getAttackFactor();
 
-	double minValue = 0;
 	double maxValue = Weapons::getMaxWeaponDamage(player->getLevel(), attackSkill, attackValue, attackFactor);
-	if(random_range(1, 100) < player->getCriticalHitChance()  )
-	{
-		minValue = maxValue;
-		maxValue *= 1.4;
-		player->sendCritical();
-	}
-
 	Vocation* vocation = player->getVocation();
 	if(vocation && vocation->getMultiplier(MULTIPLIER_MELEE) != 1.0)
 		maxValue *= vocation->getMultiplier(MULTIPLIER_MELEE);
 
-	int32_t ret = (int32_t)std::floor(maxValue);
+	int32_t maxDam = (int32_t)std::floor(maxValue);
 	if(maxDamage)
-		return -ret;
+		return -maxDam;
 
-	return -random_range((int32_t)minValue, ret, DISTRO_NORMAL);
+	int32_t baseDamage = random_range(0, maxDam, DISTRO_NORMAL);
+
+	int32_t critChance = player->getCriticalHitChance() / 4;
+	if(item && critChance == 0)
+		critChance = item->getCriticalHitChance() / 4;
+
+	if(critChance > 0 && random_range(1, 100) <= critChance)
+	{
+		if(isCritical)
+			*isCritical = true;
+
+		baseDamage = (int32_t)std::floor(baseDamage * 1.35);
+		if(baseDamage < 1)
+			baseDamage = 1;
+
+		player->sendCritical(target ? target->getPosition() : player->getPosition());
+	}
+
+	return -baseDamage;
 }
 
 int32_t WeaponMelee::getWeaponElementDamage(const Player* player, const Item* item, bool maxDamage/* = false*/) const
@@ -1029,7 +1047,7 @@ void WeaponDistance::onUsedAmmo(Player* player, Item* item, Tile* destTile) cons
 		Weapon::onUsedAmmo(player, item, destTile);
 }
 
-int32_t WeaponDistance::getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage /*= false*/) const
+int32_t WeaponDistance::getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage /*= false*/, bool* isCritical /*= NULL*/) const
 {
 	int32_t attackValue = attack;
 	if(item->getWeaponType() == WEAPON_AMMO)
@@ -1041,22 +1059,14 @@ int32_t WeaponDistance::getWeaponDamage(const Player* player, const Creature* ta
 	int32_t attackSkill = player->getSkill(SKILL_DIST, SKILL_LEVEL);
 	float attackFactor = player->getAttackFactor();
 
-	double theMinValue = 0;
 	double maxValue = Weapons::getMaxWeaponDamage(player->getLevel(), attackSkill, attackValue, attackFactor);
-	if(random_range(1, 100) < player->getCriticalHitChance())
-	{
-		theMinValue = maxValue;
-		maxValue *= 1.4;
-		player->sendCritical();
-	}
-
 	Vocation* vocation = player->getVocation();
 	if(vocation && vocation->getMultiplier(MULTIPLIER_DISTANCE) != 1.0)
 		maxValue *= vocation->getMultiplier(MULTIPLIER_DISTANCE);
 
-	int32_t ret = (int32_t)std::floor(maxValue);
+	int32_t maxDam = (int32_t)std::floor(maxValue);
 	if(maxDamage)
-		return -ret;
+		return -maxDam;
 
 	int32_t minValue = 0;
 	if(target)
@@ -1066,10 +1076,26 @@ int32_t WeaponDistance::getWeaponDamage(const Player* player, const Creature* ta
 		else
 			minValue = (int32_t)std::ceil(player->getLevel() * 0.2);
 	}
-	if ((int32_t)theMinValue > minValue)
-		minValue = (int32_t)theMinValue;
+
+	int32_t baseDamage = random_range(minValue, maxDam, DISTRO_NORMAL);
+
+	int32_t critChance = player->getCriticalHitChance() / 4;
+	if(item && critChance == 0)
+		critChance = item->getCriticalHitChance() / 4;
+
+	if(critChance > 0 && random_range(1, 100) <= critChance)
+	{
+		if(isCritical)
+			*isCritical = true;
+
+		baseDamage = (int32_t)std::floor(baseDamage * 1.35);
+		if(baseDamage < 1)
+			baseDamage = 1;
+
+		player->sendCritical(target ? target->getPosition() : player->getPosition());
+	}
 	
-	return -random_range(minValue, ret, DISTRO_NORMAL);
+	return -baseDamage;
 }
 
 bool WeaponDistance::getSkillType(const Player* player, const Item*,
@@ -1128,7 +1154,7 @@ bool WeaponWand::configureWeapon(const ItemType& it)
 	return Weapon::configureWeapon(it);
 }
 
-int32_t WeaponWand::getWeaponDamage(const Player* player, const Creature*, const Item*, bool maxDamage /* = false*/) const
+int32_t WeaponWand::getWeaponDamage(const Player* player, const Creature* target, const Item*, bool maxDamage /* = false*/, bool* isCritical /*= NULL*/) const
 {
 	float multiplier = 1.0f;
 	if(Vocation* vocation = player->getVocation())
@@ -1137,7 +1163,9 @@ int32_t WeaponWand::getWeaponDamage(const Player* player, const Creature*, const
 	int32_t maxValue = (int32_t)(maxChange * multiplier);
 	if(maxDamage)
 	{
-		player->sendCritical();
+		if(isCritical)
+			*isCritical = true;
+		player->sendCritical(target ? target->getPosition() : player->getPosition());
 		return -maxValue;
 	}
 

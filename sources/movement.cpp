@@ -1090,7 +1090,14 @@ bool MoveEvent::EquipItem(MoveEvent* moveEvent, Player* player, Item* item, slot
 	{
 		if(it.abilities->stats[s])
 		{
-			int32_t val = it.abilities->stats[s] + tier;
+			int32_t val = it.abilities->stats[s];
+			if(tier > 0)
+			{
+				if(s == STAT_MAXHEALTH || s == STAT_MAXMANA)
+					val = (int32_t)std::round(val * (1.0f + tier * 0.10f));
+				else
+					val += tier;
+			}
 			player->setVarStats((stats_t)s, val);
 			if(!needUpdateStats)
 				needUpdateStats = true;
@@ -1189,7 +1196,14 @@ bool MoveEvent::DeEquipItem(MoveEvent*, Player* player, Item* item, slots_t slot
 	{
 		if(it.abilities->stats[s])
 		{
-			int32_t val = it.abilities->stats[s] + tier;
+			int32_t val = it.abilities->stats[s];
+			if(tier > 0)
+			{
+				if(s == STAT_MAXHEALTH || s == STAT_MAXMANA)
+					val = (int32_t)std::round(val * (1.0f + tier * 0.10f));
+				else
+					val += tier;
+			}
 			needUpdateStats = true;
 			player->setVarStats((stats_t)s, -val);
 		}

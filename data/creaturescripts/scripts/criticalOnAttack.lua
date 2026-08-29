@@ -31,7 +31,12 @@ function config.calculateDamage(cid, weapon)
 end
 
 function config.calculateChance(cid, weapon)
-  return math.ceil(config.chanceToCritical+(getItemInfo(weapon.itemid).attack*0.2))
+  local baseChance = config.chanceToCritical + (getItemInfo(weapon.itemid).attack * 0.2)
+  local tier = tonumber(getItemAttribute(weapon.uid, "tier")) or 0
+  if tier > 0 then
+    baseChance = baseChance * (1 + tier * 0.1)
+  end
+  return math.ceil(baseChance)
 end
 
 function onAttack(cid, target)

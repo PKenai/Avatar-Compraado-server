@@ -266,6 +266,7 @@ class Item : virtual public Thing, public ItemAttributes
 		int32_t getExtraDefense() const;
 
 		int32_t getArmor() const;
+		int32_t getLifeSteal() const;
 		int32_t getAttackSpeed() const;
 		int32_t getElementalRuneType() const;
 		int32_t getElementalRuneLevel() const;
@@ -407,10 +408,15 @@ inline int32_t Item::getCriticalHitChance() const
 {
 	bool ok;
 	const int32_t v = getIntegerAttribute("criticalhitchance", ok);
-	if(ok)
-		return v;
+	int32_t base = ok ? v : items[id].criticalHitChance;
+	if(base <= 0)
+		return 0;
 
-	return items[id].criticalHitChance;
+	int32_t tier = getTier();
+	if(tier > 0)
+		base = (int32_t)std::round(base * (1.0f + tier * 0.10f));
+
+	return base;
 }
 
 inline int32_t Item::getTier() const
@@ -432,8 +438,8 @@ inline int32_t Item::getAttack() const
 
 	int32_t base = items[id].attack;
 	int32_t tier = getTier();
-	if(tier > 0)
-		base += tier;
+	if(tier > 0 && base > 0)
+		base = (int32_t)std::round(base * (1.0f + tier * 0.10f));
 	return base;
 }
 
@@ -456,8 +462,8 @@ inline int32_t Item::getDefense() const
 
 	int32_t base = items[id].defense;
 	int32_t tier = getTier();
-	if(tier > 0)
-		base += tier;
+	if(tier > 0 && base > 0)
+		base = (int32_t)std::round(base * (1.0f + tier * 0.10f));
 	return base;
 }
 
@@ -480,8 +486,23 @@ inline int32_t Item::getArmor() const
 
 	int32_t base = items[id].armor;
 	int32_t tier = getTier();
+	if(tier > 0 && base > 0)
+		base = (int32_t)std::round(base * (1.0f + tier * 0.10f));
+	return base;
+}
+
+inline int32_t Item::getLifeSteal() const
+{
+	bool ok;
+	int32_t v = getIntegerAttribute("lifesteal", ok);
+	int32_t base = ok ? v : items[id].lifeSteal;
+	if(base <= 0)
+		return 0;
+
+	int32_t tier = getTier();
 	if(tier > 0)
-		base += tier;
+		base = (int32_t)std::round(base * (1.0f + tier * 0.10f));
+
 	return base;
 }
 
