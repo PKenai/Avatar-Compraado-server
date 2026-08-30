@@ -1968,8 +1968,8 @@
 	<spawn centerx="596" centery="365" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="535" centery="369" centerz="7" radius="1">
-		<npc name="camila" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="536" centery="369" centerz="7" radius="1">
+		<npc name="camila" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="556" centery="369" centerz="7" radius="1">
 		<npc name="Maria" x="1" y="-1" z="7" spawntime="40" direction="1" />

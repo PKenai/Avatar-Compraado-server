@@ -100,6 +100,7 @@
 	<talkaction words="!apostarvermelho" event="script" value="slotmachineVermelho.lua"/>
 	<talkaction words="!luvatier" event="script" value="luvatier.lua"/>
 	<talkaction words="!capatier" event="script" value="capatier.lua"/>
+	<talkaction words="!calcatier" event="script" value="calcatier.lua"/>
 	<talkaction words="!setshader" event="script" value="setshader.lua"/>
 
 	<!-- Bomberman Event -->

@@ -50,7 +50,8 @@ local CAPE_DIFFICULTY_FACTOR = {
     [6] = 0.75, -- Capa de protecao
     [7] = 0.70, -- Capa majestosa
     [8] = 0.65, -- Capa gloriosa
-    [9] = 0.60, -- Capa soberana (mais desafiadora)
+    [9] = 0.60, -- Capa soberana
+    [10] = 0.50, -- Capa das nacoes (mais desafiadora)
 }
 
 -- Chance base de sucesso por tier
@@ -115,6 +116,7 @@ local CAPES = {
     {itemId = 19164, name = "capa majestosa",   craftCost = 380000,  linho = 140},
     {itemId = 19165, name = "capa gloriosa",    craftCost = 650000,  linho = 170},
     {itemId = 19166, name = "capa soberana",    craftCost = 1000000, linho = 200},
+    {itemId = 19167, name = "capa das nacoes",   craftCost = 1500000, linho = 250},
 }
 
 -- ============================================================
@@ -158,10 +160,23 @@ local function getGambleCost(craftCost, currentTier)
     return cost
 end
 
+local function sanitizeText(str)
+    if not str then return "" end
+    local s = str:lower()
+    s = s:gsub("ã", "a"):gsub("á", "a"):gsub("à", "a"):gsub("â", "a")
+    s = s:gsub("é", "e"):gsub("ê", "e")
+    s = s:gsub("í", "i")
+    s = s:gsub("ó", "o"):gsub("õ", "o"):gsub("ô", "o")
+    s = s:gsub("ú", "u")
+    s = s:gsub("ç", "c")
+    return s
+end
+
 local function findCapeByName(name)
-    local name = name:lower()
+    local cleanName = sanitizeText(name)
     for i, cape in ipairs(CAPES) do
-        if name == cape.name or name:find(cape.name) or cape.name:find(name) then
+        local cleanCape = sanitizeText(cape.name)
+        if cleanName == cleanCape or cleanName:find(cleanCape, 1, true) or cleanCape:find(cleanName, 1, true) then
             return i, cape
         end
     end

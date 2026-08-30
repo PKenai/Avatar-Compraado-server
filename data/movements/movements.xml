@@ -1450,4 +1450,28 @@
 	<movevent type="DeEquip" itemid="19165" slot="armor" event="function" value="onDeEquipItem"/>
 	<movevent type="Equip" itemid="19166" slot="armor" event="function" value="onEquipItem"/>
 	<movevent type="DeEquip" itemid="19166" slot="armor" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19167" slot="armor" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19167" slot="armor" event="function" value="onDeEquipItem"/>
+
+	<!-- === CALCAS (Tadeu / Robson) === -->
+	<movevent type="Equip" itemid="19169" slot="legs" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19169" slot="legs" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19170" slot="legs" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19170" slot="legs" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19171" slot="legs" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19171" slot="legs" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19172" slot="legs" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19172" slot="legs" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19173" slot="legs" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19173" slot="legs" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19174" slot="legs" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19174" slot="legs" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19175" slot="legs" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19175" slot="legs" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19176" slot="legs" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19176" slot="legs" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19177" slot="legs" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19177" slot="legs" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19178" slot="legs" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19178" slot="legs" event="function" value="onDeEquipItem"/>
 </movements>

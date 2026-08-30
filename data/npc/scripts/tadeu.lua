@@ -31,7 +31,7 @@ npcHandler:setCallback(CALLBACK_GREET, onGreet)
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())
 
--- === CAPAS (19158 a 19166) ===
+-- === CAPAS (19158 a 19167) ===
 shopModule:addBuyableItem('capa de viajante', 5000, 19158, '')
 shopModule:addSellableItem('capa de viajante', 2500, 19158, '')
 
@@ -58,3 +58,39 @@ shopModule:addSellableItem('capa gloriosa', 325000, 19165, '')
 
 shopModule:addBuyableItem('capa soberana', 1000000, 19166, '')
 shopModule:addSellableItem('capa soberana', 500000, 19166, '')
+
+shopModule:addBuyableItem('capa das nacoes', 1500000, 19167, '')
+shopModule:addSellableItem('capa das nacoes', 750000, 19167, '')
+
+-- === CALCAS (19169 a 19178) ===
+shopModule:addBuyableItem('calca de viajante', 4000, 19169, '')
+shopModule:addSellableItem('calca de viajante', 2000, 19169, '')
+
+shopModule:addBuyableItem('calca reforcada', 12000, 19170, '')
+shopModule:addSellableItem('calca reforcada', 6000, 19170, '')
+
+shopModule:addBuyableItem('calca resistente', 28000, 19171, '')
+shopModule:addSellableItem('calca resistente', 14000, 19171, '')
+
+shopModule:addBuyableItem('calca aprimorada', 55000, 19172, '')
+shopModule:addSellableItem('calca aprimorada', 27500, 19172, '')
+
+shopModule:addBuyableItem('calca nobre', 100000, 19173, '')
+shopModule:addSellableItem('calca nobre', 50000, 19173, '')
+
+shopModule:addBuyableItem('calca de protecao', 175000, 19174, '')
+shopModule:addSellableItem('calca de protecao', 87500, 19174, '')
+
+shopModule:addBuyableItem('calca majestosa', 300000, 19175, '')
+shopModule:addSellableItem('calca majestosa', 150000, 19175, '')
+
+shopModule:addBuyableItem('calca gloriosa', 500000, 19176, '')
+shopModule:addSellableItem('calca gloriosa', 250000, 19176, '')
+
+shopModule:addBuyableItem('calca soberana', 800000, 19177, '')
+shopModule:addSellableItem('calca soberana', 400000, 19177, '')
+
+shopModule:addBuyableItem('calca das nacoes', 1200000, 19178, '')
+shopModule:addSellableItem('calca das nacoes', 600000, 19178, '')
+
+

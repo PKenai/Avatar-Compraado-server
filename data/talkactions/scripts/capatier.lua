@@ -3,7 +3,7 @@
 
 local CAPES = {
     19158, 19159, 19160, 19161, 19162,
-    19163, 19164, 19165, 19166,
+    19163, 19164, 19165, 19166, 19167,
 }
 
 local CAPE_NAMES = {
@@ -16,6 +16,7 @@ local CAPE_NAMES = {
     [19164] = "Capa majestosa",
     [19165] = "Capa gloriosa",
     [19166] = "Capa soberana",
+    [19167] = "Capa das nacoes",
 }
 
 function onSay(cid, words, param, channel)
