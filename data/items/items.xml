@@ -16398,4 +16398,183 @@
 	<attribute key="speed" value="22" />
 	<attribute key="slotType" value="legs" />
 </item>
+
+<!-- === CAPACETES (Bend + Mana + Regen) === -->
+<item id="19180" article="um" name="Capacete de viajante">
+	<attribute key="weight" value="900" />
+	<attribute key="armor" value="4" />
+	<attribute key="maxmanapoints" value="60" />
+	<attribute key="absorbPercentAll" value="1" />
+	<attribute key="slotType" value="head" />
+</item>
+<item id="19181" article="um" name="Capacete reforcado">
+	<attribute key="weight" value="1100" />
+	<attribute key="armor" value="6" />
+	<attribute key="maxmanapoints" value="45" />
+	<attribute key="absorbPercentAll" value="1" />
+	<attribute key="slotType" value="head" />
+</item>
+<item id="19182" article="um" name="Capacete resistente">
+	<attribute key="weight" value="800" />
+	<attribute key="armor" value="3" />
+	<attribute key="maxmanapoints" value="160" />
+	<attribute key="manaGain" value="2" />
+	<attribute key="manaTicks" value="2000" />
+	<attribute key="absorbPercentAll" value="1" />
+	<attribute key="slotType" value="head" />
+</item>
+<item id="19183" article="um" name="Capacete aprimorado">
+	<attribute key="weight" value="900" />
+	<attribute key="armor" value="5" />
+	<attribute key="maxmanapoints" value="100" />
+	<attribute key="manaGain" value="2" />
+	<attribute key="manaTicks" value="2000" />
+	<attribute key="absorbPercentAll" value="1" />
+	<attribute key="slotType" value="head" />
+</item>
+<item id="19184" article="um" name="Capacete nobre">
+	<attribute key="weight" value="1300" />
+	<attribute key="armor" value="8" />
+	<attribute key="maxmanapoints" value="85" />
+	<attribute key="absorbPercentAll" value="1" />
+	<attribute key="slotType" value="head" />
+</item>
+<item id="19185" article="um" name="Capacete de protecao">
+	<attribute key="weight" value="800" />
+	<attribute key="armor" value="5" />
+	<attribute key="maxmanapoints" value="380" />
+	<attribute key="manaGain" value="3" />
+	<attribute key="manaTicks" value="2000" />
+	<attribute key="absorbPercentAll" value="1" />
+	<attribute key="slotType" value="head" />
+</item>
+<item id="19186" article="um" name="Capacete majestoso">
+	<attribute key="weight" value="1000" />
+	<attribute key="armor" value="7" />
+	<attribute key="maxmanapoints" value="180" />
+	<attribute key="manaGain" value="3" />
+	<attribute key="manaTicks" value="2000" />
+	<attribute key="absorbPercentAll" value="2" />
+	<attribute key="slotType" value="head" />
+</item>
+<item id="19187" article="um" name="Capacete glorioso">
+	<attribute key="weight" value="700" />
+	<attribute key="armor" value="5" />
+	<attribute key="maxmanapoints" value="550" />
+	<attribute key="manaGain" value="4" />
+	<attribute key="manaTicks" value="2000" />
+	<attribute key="absorbPercentAll" value="1" />
+	<attribute key="slotType" value="head" />
+</item>
+<item id="19188" article="um" name="Capacete soberano">
+	<attribute key="weight" value="1500" />
+	<attribute key="armor" value="10" />
+	<attribute key="maxmanapoints" value="120" />
+	<attribute key="absorbPercentAll" value="2" />
+	<attribute key="healthGain" value="3" />
+	<attribute key="healthTicks" value="2000" />
+	<attribute key="slotType" value="head" />
+</item>
+<item id="19189" article="um" name="Capacete das nacoes">
+	<attribute key="weight" value="1400" />
+	<attribute key="armor" value="8" />
+	<attribute key="maxmanapoints" value="340" />
+	<attribute key="manaGain" value="3" />
+	<attribute key="manaTicks" value="2000" />
+	<attribute key="healthGain" value="2" />
+	<attribute key="healthTicks" value="2000" />
+	<attribute key="absorbPercentAll" value="2" />
+	<attribute key="slotType" value="head" />
+</item>
+
+<!-- === BOTAS (Speed + HP/Armor) === -->
+<item id="19191" article="a" name="Bota de viajante">
+	<attribute key="weight" value="700" />
+	<attribute key="armor" value="3" />
+	<attribute key="maxhealthpoints" value="40" />
+	<attribute key="speed" value="8" />
+	<attribute key="slotType" value="feet" />
+</item>
+<item id="19192" article="a" name="Bota reforcada">
+	<attribute key="weight" value="900" />
+	<attribute key="armor" value="5" />
+	<attribute key="speed" value="6" />
+	<attribute key="absorbPercentAll" value="1" />
+	<attribute key="slotType" value="feet" />
+</item>
+<item id="19193" article="a" name="Bota resistente">
+	<attribute key="weight" value="600" />
+	<attribute key="armor" value="2" />
+	<attribute key="maxhealthpoints" value="70" />
+	<attribute key="healthGain" value="1" />
+	<attribute key="healthTicks" value="2000" />
+	<attribute key="speed" value="12" />
+	<attribute key="slotType" value="feet" />
+</item>
+<item id="19194" article="a" name="Bota aprimorada">
+	<attribute key="weight" value="700" />
+	<attribute key="armor" value="4" />
+	<attribute key="maxhealthpoints" value="50" />
+	<attribute key="healthGain" value="2" />
+	<attribute key="healthTicks" value="2000" />
+	<attribute key="speed" value="22" />
+	<attribute key="slotType" value="feet" />
+</item>
+<item id="19195" article="a" name="Bota nobre">
+	<attribute key="weight" value="1100" />
+	<attribute key="armor" value="7" />
+	<attribute key="speed" value="10" />
+	<attribute key="absorbPercentAll" value="2" />
+	<attribute key="slotType" value="feet" />
+</item>
+<item id="19196" article="a" name="Bota de protecao">
+	<attribute key="weight" value="600" />
+	<attribute key="armor" value="3" />
+	<attribute key="maxhealthpoints" value="160" />
+	<attribute key="healthGain" value="2" />
+	<attribute key="healthTicks" value="2000" />
+	<attribute key="absorbPercentElements" value="2" />
+	<attribute key="speed" value="15" />
+	<attribute key="slotType" value="feet" />
+</item>
+<item id="19197" article="a" name="Bota majestosa">
+	<attribute key="weight" value="800" />
+	<attribute key="armor" value="5" />
+	<attribute key="maxhealthpoints" value="100" />
+	<attribute key="healthGain" value="3" />
+	<attribute key="healthTicks" value="2000" />
+	<attribute key="absorbPercentAll" value="2" />
+	<attribute key="speed" value="32" />
+	<attribute key="slotType" value="feet" />
+</item>
+<item id="19198" article="a" name="Bota gloriosa">
+	<attribute key="weight" value="500" />
+	<attribute key="armor" value="3" />
+	<attribute key="maxhealthpoints" value="280" />
+	<attribute key="healthGain" value="3" />
+	<attribute key="healthTicks" value="2000" />
+	<attribute key="absorbPercentMagic" value="3" />
+	<attribute key="speed" value="22" />
+	<attribute key="slotType" value="feet" />
+</item>
+<item id="19199" article="a" name="Bota soberana">
+	<attribute key="weight" value="1200" />
+	<attribute key="armor" value="9" />
+	<attribute key="speed" value="12" />
+	<attribute key="absorbPercentAll" value="3" />
+	<attribute key="manaGain" value="3" />
+	<attribute key="manaTicks" value="2000" />
+	<attribute key="slotType" value="feet" />
+</item>
+<item id="19200" article="a" name="Bota das nacoes">
+	<attribute key="weight" value="1100" />
+	<attribute key="armor" value="6" />
+	<attribute key="maxhealthpoints" value="180" />
+	<attribute key="healthGain" value="2" />
+	<attribute key="healthTicks" value="2000" />
+	<attribute key="absorbPercentAll" value="2" />
+	<attribute key="absorbPercentElements" value="3" />
+	<attribute key="speed" value="28" />
+	<attribute key="slotType" value="feet" />
+</item>
 </items>

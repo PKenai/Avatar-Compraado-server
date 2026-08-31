@@ -1474,4 +1474,48 @@
 	<movevent type="DeEquip" itemid="19177" slot="legs" event="function" value="onDeEquipItem"/>
 	<movevent type="Equip" itemid="19178" slot="legs" event="function" value="onEquipItem"/>
 	<movevent type="DeEquip" itemid="19178" slot="legs" event="function" value="onDeEquipItem"/>
+
+	<!-- === CAPACETES (Bend + Mana + Regen) === -->
+	<movevent type="Equip" itemid="19180" slot="head" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19180" slot="head" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19181" slot="head" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19181" slot="head" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19182" slot="head" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19182" slot="head" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19183" slot="head" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19183" slot="head" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19184" slot="head" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19184" slot="head" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19185" slot="head" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19185" slot="head" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19186" slot="head" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19186" slot="head" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19187" slot="head" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19187" slot="head" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19188" slot="head" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19188" slot="head" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19189" slot="head" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19189" slot="head" event="function" value="onDeEquipItem"/>
+
+	<!-- === BOTAS (Speed + HP/Armor) === -->
+	<movevent type="Equip" itemid="19191" slot="feet" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19191" slot="feet" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19192" slot="feet" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19192" slot="feet" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19193" slot="feet" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19193" slot="feet" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19194" slot="feet" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19194" slot="feet" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19195" slot="feet" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19195" slot="feet" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19196" slot="feet" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19196" slot="feet" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19197" slot="feet" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19197" slot="feet" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19198" slot="feet" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19198" slot="feet" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19199" slot="feet" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19199" slot="feet" event="function" value="onDeEquipItem"/>
+	<movevent type="Equip" itemid="19200" slot="feet" event="function" value="onEquipItem"/>
+	<movevent type="DeEquip" itemid="19200" slot="feet" event="function" value="onDeEquipItem"/>
 </movements>

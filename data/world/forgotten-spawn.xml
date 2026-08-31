@@ -101,6 +101,9 @@
 	<spawn centerx="638" centery="237" centerz="4" radius="1">
 		<npc name="Victor" x="-1" y="0" z="4" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="495" centery="378" centerz="4" radius="1">
+		<npc name="valentina" x="0" y="0" z="4" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="441" centery="379" centerz="4" radius="1">
 		<monster name="Joaninha da terra" x="0" y="0" z="4" spawntime="60" direction="2" />
 	</spawn>
@@ -2128,15 +2131,11 @@
 	<spawn centerx="838" centery="398" centerz="7" radius="1">
 		<monster name="Carangueijo capa quente" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="496" centery="399" centerz="7" radius="1">
-		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="498" centery="399" centerz="7" radius="1">
+		<npc name="vagner" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="786" centery="399" centerz="7" radius="1">
 		<monster name="Carangueijo capa quente" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
-	<spawn centerx="494" centery="400" centerz="7" radius="1">
-		<monster name="Galinha" x="0" y="-1" z="7" spawntime="60" direction="2" />
-		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="506" centery="400" centerz="7" radius="1">
 		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />

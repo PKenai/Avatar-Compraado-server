@@ -436,7 +436,7 @@ function creatureSayCallback(cid, type, msg)
                 local clientId = toClientId(capeItem.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
-                doSendMagicEffect(getCreaturePosition(cid), 201)
+                doSendMagicEffect(getCreaturePosition(cid), 200)
                 selfSay("Perfeito! O " .. STITCH_TECHNIQUES[chosenNumber] .. " assentou perfeitamente no tecido! Sua " .. cape.name .. " agora e Tier " .. newTier .. "!", cid)
             else
                 -- ERROU - rasgou a capa (remove item)
@@ -446,7 +446,7 @@ function creatureSayCallback(cid, type, msg)
                 local clientId = toClientId(capeItem.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "clear," .. clientId)
 
-                doSendMagicEffect(getCreaturePosition(cid), 202)
+                doSendMagicEffect(getCreaturePosition(cid), 201)
                 selfSay("Ai nao! O ponto correto para esse tecido era o " .. STITCH_TECHNIQUES[secretNumber] .. ", e o " .. STITCH_TECHNIQUES[chosenNumber] .. " acabou rasgando sua " .. cape.name .. "... Desculpe pelo prejuizo!", cid)
             end
 

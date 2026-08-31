@@ -350,7 +350,7 @@ function creatureSayCallback(cid, type, msg)
                 local clientId = toClientId(pantItem.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
-                doSendMagicEffect(getCreaturePosition(cid), 201)
+                doSendMagicEffect(getCreaturePosition(cid), 200)
                 selfSay("Excelente trabalho! A solda e o reforco das placas aguentaram perfeitamente! Sua " .. pant.name .. " agora e Tier " .. newTier .. "!", cid)
             else
                 -- FALHA - destroi a calça
@@ -360,7 +360,7 @@ function creatureSayCallback(cid, type, msg)
                 local clientId = toClientId(pantItem.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "clear," .. clientId)
 
-                doSendMagicEffect(getCreaturePosition(cid), 202)
+                doSendMagicEffect(getCreaturePosition(cid), 201)
                 selfSay("Droga! A estrutura nao aguentou a pressao do forjamento e o tecido se despedacou... Sua " .. pant.name .. " foi destruida no processo. Sinto muito!", cid)
             end
 

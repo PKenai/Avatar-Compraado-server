@@ -93,4 +93,65 @@ shopModule:addSellableItem('calca soberana', 400000, 19177, '')
 shopModule:addBuyableItem('calca das nacoes', 1200000, 19178, '')
 shopModule:addSellableItem('calca das nacoes', 600000, 19178, '')
 
+-- === CAPACETES (19180 a 19189) ===
+shopModule:addBuyableItem('capacete de viajante', 3500, 19180, '')
+shopModule:addSellableItem('capacete de viajante', 1750, 19180, '')
+
+shopModule:addBuyableItem('capacete reforcado', 10000, 19181, '')
+shopModule:addSellableItem('capacete reforcado', 5000, 19181, '')
+
+shopModule:addBuyableItem('capacete resistente', 25000, 19182, '')
+shopModule:addSellableItem('capacete resistente', 12500, 19182, '')
+
+shopModule:addBuyableItem('capacete aprimorado', 50000, 19183, '')
+shopModule:addSellableItem('capacete aprimorado', 25000, 19183, '')
+
+shopModule:addBuyableItem('capacete nobre', 95000, 19184, '')
+shopModule:addSellableItem('capacete nobre', 47500, 19184, '')
+
+shopModule:addBuyableItem('capacete de protecao', 165000, 19185, '')
+shopModule:addSellableItem('capacete de protecao', 82500, 19185, '')
+
+shopModule:addBuyableItem('capacete majestoso', 280000, 19186, '')
+shopModule:addSellableItem('capacete majestoso', 140000, 19186, '')
+
+shopModule:addBuyableItem('capacete glorioso', 475000, 19187, '')
+shopModule:addSellableItem('capacete glorioso', 237500, 19187, '')
+
+shopModule:addBuyableItem('capacete soberano', 750000, 19188, '')
+shopModule:addSellableItem('capacete soberano', 375000, 19188, '')
+
+shopModule:addBuyableItem('capacete das nacoes', 1100000, 19189, '')
+shopModule:addSellableItem('capacete das nacoes', 550000, 19189, '')
+
+-- === BOTAS (19191 a 19200) ===
+shopModule:addBuyableItem('bota de viajante', 3000, 19191, '')
+shopModule:addSellableItem('bota de viajante', 1500, 19191, '')
+
+shopModule:addBuyableItem('bota reforcada', 9000, 19192, '')
+shopModule:addSellableItem('bota reforcada', 4500, 19192, '')
+
+shopModule:addBuyableItem('bota resistente', 22000, 19193, '')
+shopModule:addSellableItem('bota resistente', 11000, 19193, '')
+
+shopModule:addBuyableItem('bota aprimorada', 45000, 19194, '')
+shopModule:addSellableItem('bota aprimorada', 22500, 19194, '')
+
+shopModule:addBuyableItem('bota nobre', 85000, 19195, '')
+shopModule:addSellableItem('bota nobre', 42500, 19195, '')
+
+shopModule:addBuyableItem('bota de protecao', 150000, 19196, '')
+shopModule:addSellableItem('bota de protecao', 75000, 19196, '')
+
+shopModule:addBuyableItem('bota majestosa', 250000, 19197, '')
+shopModule:addSellableItem('bota majestosa', 125000, 19197, '')
+
+shopModule:addBuyableItem('bota gloriosa', 425000, 19198, '')
+shopModule:addSellableItem('bota gloriosa', 212500, 19198, '')
+
+shopModule:addBuyableItem('bota soberana', 680000, 19199, '')
+shopModule:addSellableItem('bota soberana', 340000, 19199, '')
+
+shopModule:addBuyableItem('bota das nacoes', 1000000, 19200, '')
+shopModule:addSellableItem('bota das nacoes', 500000, 19200, '')
 

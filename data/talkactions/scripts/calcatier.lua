@@ -70,7 +70,7 @@ function onSay(cid, words, param, channel)
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_WARNING,
         "[TIER] Voce recebeu " .. pantName .. " com Tier " .. tier .. "!"
     )
-    doSendMagicEffect(getCreaturePosition(cid), 201)
+    doSendMagicEffect(getCreaturePosition(cid), 200)
 
     return true
 end

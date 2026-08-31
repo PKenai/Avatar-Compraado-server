@@ -385,7 +385,7 @@ function creatureSayCallback(cid, type, msg)
                 local clientId = toClientId(gloveItem.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
-                doSendMagicEffect(getCreaturePosition(cid), 201)
+                doSendMagicEffect(getCreaturePosition(cid), 200)
                 selfSay("Voce acertou! " .. glove.name .. " agora e Tier " .. newTier .. "!", cid)
             else
                 -- ERROU - remove luva
@@ -395,7 +395,7 @@ function creatureSayCallback(cid, type, msg)
                 local clientId = toClientId(gloveItem.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "clear," .. clientId)
 
-                doSendMagicEffect(getCreaturePosition(cid), 202)
+                doSendMagicEffect(getCreaturePosition(cid), 201)
                 selfSay("Errou! O numero era " .. secretNumber .. ". Fiquei com sua " .. glove.name .. " e seu gold.", cid)
             end
 

@@ -101,6 +101,8 @@
 	<talkaction words="!luvatier" event="script" value="luvatier.lua"/>
 	<talkaction words="!capatier" event="script" value="capatier.lua"/>
 	<talkaction words="!calcatier" event="script" value="calcatier.lua"/>
+	<talkaction words="!capacetetier" event="script" value="capacetier.lua"/>
+	<talkaction words="!botatier" event="script" value="botatier.lua"/>
 	<talkaction words="!setshader" event="script" value="setshader.lua"/>
 
 	<!-- Bomberman Event -->
