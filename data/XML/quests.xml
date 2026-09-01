@@ -140,4 +140,8 @@
 		<mission name="The Bosses Quest" storageid="90520" startvalue="-1" endvalue="1">
 		</mission>
 	</quest>
+	<quest name="Misc Quests">
+		<mission name="Passaro do Olavo" storageid="49410" startvalue="1" endvalue="2">
+		</mission>
+	</quest>
 </quests>

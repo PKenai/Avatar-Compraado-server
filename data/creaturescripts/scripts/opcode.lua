@@ -30,6 +30,11 @@ function onExtendedOpcode(cid, opcode, buffer)
 
 	local ok, err = pcall(function()
 		if opcode == opcodeMarket then
+			-- Ignore market requests during the first 5 seconds after login
+			local loginTime = getPlayerStorageValue(cid, "timeLogin")
+			if type(loginTime) == "number" and loginTime > 0 and os.time() - loginTime < 5 then
+				return true
+			end
 			local parts = buffer:explode(">")
 			local action = parts[1]
 

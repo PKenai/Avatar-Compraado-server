@@ -240,6 +240,9 @@
 
 	<movevent type="StepIn" actionid="62126" script="questnova1.lua"/>
 
+	<!-- Buraco do Passaro do Olavo: so quem completou a quest pode entrar -->
+	<movevent type="StepIn" itemid="3311" event="script" value="passaroHole.lua"/>
+
 	<movevent type="StepIn" actionid="62348" script="ilhanovaquest1.lua"/>
 
 	<movevent type="StepIn" actionid="62347" script="ilhanovaearth.lua"/>

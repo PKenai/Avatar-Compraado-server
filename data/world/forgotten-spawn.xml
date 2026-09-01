@@ -1814,14 +1814,47 @@
 	<spawn centerx="541" centery="291" centerz="7" radius="1">
 		<npc name="Rafinha" x="-1" y="1" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="739" centery="295" centerz="7" radius="1">
+		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="733" centery="296" centerz="7" radius="1">
+		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="731" centery="298" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="97" centery="299" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="92" centery="301" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="733" centery="301" centerz="7" radius="1">
+		<npc name="civilian" x="1" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="751" centery="301" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="98" centery="303" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="-1" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="698" centery="303" centerz="7" radius="1">
+		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="704" centery="303" centerz="7" radius="1">
+		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="715" centery="304" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="746" centery="305" centerz="7" radius="1">
+		<npc name="civilian" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="737" centery="308" centerz="7" radius="1">
+		<npc name="civilian" x="0" y="-1" z="7" spawntime="60" direction="1" />
+	</spawn>
+	<spawn centerx="717" centery="309" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="94" centery="312" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1829,8 +1862,20 @@
 	<spawn centerx="441" centery="312" centerz="7" radius="1">
 		<monster name="Abelha de barro" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="739" centery="312" centerz="7" radius="1">
+		<npc name="civilian" x="1" y="0" z="7" spawntime="60" direction="1" />
+	</spawn>
+	<spawn centerx="742" centery="312" centerz="7" radius="1">
+		<npc name="civilian" x="-1" y="0" z="7" spawntime="60" direction="3" />
+	</spawn>
 	<spawn centerx="446" centery="313" centerz="7" radius="1">
 		<monster name="Abelha de barro" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="687" centery="313" centerz="7" radius="1">
+		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="757" centery="313" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="97" centery="315" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1844,6 +1889,9 @@
 	<spawn centerx="449" centery="317" centerz="7" radius="1">
 		<monster name="Abelha de barro" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="748" centery="317" centerz="7" radius="1">
+		<npc name="civilian" x="1" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="319" centery="318" centerz="7" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -1852,6 +1900,15 @@
 	</spawn>
 	<spawn centerx="452" centery="318" centerz="7" radius="1">
 		<monster name="Abelha de barro" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="731" centery="318" centerz="7" radius="1">
+		<npc name="civilian" x="0" y="0" z="7" spawntime="60" direction="3" />
+	</spawn>
+	<spawn centerx="738" centery="318" centerz="7" radius="1">
+		<npc name="Olavo" x="0" y="1" z="7" spawntime="60" direction="1" />
+	</spawn>
+	<spawn centerx="763" centery="318" centerz="7" radius="1">
+		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="291" centery="319" centerz="7" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1870,6 +1927,9 @@
 		<monster name="Cisne" x="-1" y="2" z="7" spawntime="60" direction="2" />
 		<monster name="Sapo" x="0" y="5" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="744" centery="321" centerz="7" radius="1">
+		<npc name="civilian" x="0" y="1" z="7" spawntime="60" direction="1" />
+	</spawn>
 	<spawn centerx="287" centery="322" centerz="7" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -1879,14 +1939,26 @@
 	<spawn centerx="323" centery="322" centerz="7" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="723" centery="322" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="756" centery="322" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="297" centery="323" centerz="7" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="124" centery="326" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="752" centery="327" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="97" centery="328" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="744" centery="328" centerz="7" radius="1">
+		<npc name="civilian" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="539" centery="329" centerz="7" radius="1">
 		<npc name="Eliot" x="0" y="-1" z="7" spawntime="40" />
@@ -1894,17 +1966,26 @@
 	<spawn centerx="119" centery="330" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="743" centery="330" centerz="7" radius="1">
+		<npc name="civilian" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="101" centery="331" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="566" centery="331" centerz="7" radius="1">
 		<npc name="Astro" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="758" centery="332" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="116" centery="336" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="441" centery="340" centerz="7" radius="1">
 		<npc name="Katata" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="730" centery="340" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="94" centery="341" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1918,8 +1999,14 @@
 	<spawn centerx="497" centery="342" centerz="7" radius="1">
 		<npc name="Koin" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="750" centery="343" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="112" centery="344" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="737" centery="344" centerz="7" radius="1">
+		<monster name="Galinha" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="98" centery="345" centerz="7" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1968,8 +2055,14 @@
 	<spawn centerx="586" centery="363" centerz="7" radius="1">
 		<monster name="Sapo" x="0" y="-1" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="744" centery="364" centerz="7" radius="1">
+		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="596" centery="365" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="738" centery="368" centerz="7" radius="1">
+		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="536" centery="369" centerz="7" radius="1">
 		<npc name="camila" x="-1" y="0" z="7" spawntime="60" direction="2" />
@@ -1992,6 +2085,9 @@
 	</spawn>
 	<spawn centerx="602" centery="374" centerz="7" radius="1">
 		<monster name="Cisne" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="728" centery="374" centerz="7" radius="1">
+		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="623" centery="375" centerz="7" radius="1">
 		<monster name="Leao de ba sin se" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -4080,6 +4176,9 @@
 	<spawn centerx="112" centery="321" centerz="8" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="698" centery="322" centerz="8" radius="1">
+		<monster name="Barata" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="103" centery="323" centerz="8" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
@@ -4149,6 +4248,9 @@
 	<spawn centerx="614" centery="326" centerz="8" radius="1">
 		<monster name="Terra beetle" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="699" centery="326" centerz="8" radius="1">
+		<monster name="Barata" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="209" centery="327" centerz="8" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
@@ -4167,6 +4269,9 @@
 	<spawn centerx="593" centery="327" centerz="8" radius="1">
 		<monster name="Terra beetle" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="703" centery="327" centerz="8" radius="1">
+		<monster name="Barata" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="80" centery="328" centerz="8" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
@@ -4181,6 +4286,9 @@
 	</spawn>
 	<spawn centerx="612" centery="328" centerz="8" radius="1">
 		<monster name="Terra beetle" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="695" centery="328" centerz="8" radius="1">
+		<monster name="Barata" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="97" centery="329" centerz="8" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -6348,8 +6456,14 @@
 	<spawn centerx="241" centery="297" centerz="9" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="715" centery="297" centerz="9" radius="1">
+		<monster name="Barata" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="115" centery="298" centerz="9" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="710" centery="298" centerz="9" radius="1">
+		<monster name="Barata" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="459" centery="300" centerz="9" radius="1">
 		<monster name="Abelha de barro" x="0" y="0" z="9" spawntime="60" direction="2" />
@@ -6365,6 +6479,12 @@
 	</spawn>
 	<spawn centerx="453" centery="303" centerz="9" radius="1">
 		<monster name="Abelha de barro" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="697" centery="304" centerz="9" radius="1">
+		<monster name="Barata" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="714" centery="306" centerz="9" radius="1">
+		<monster name="Barata" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="118" centery="307" centerz="9" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="9" spawntime="60" direction="2" />
@@ -6405,6 +6525,12 @@
 	<spawn centerx="215" centery="312" centerz="9" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="694" centery="312" centerz="9" radius="1">
+		<monster name="Barata" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="708" centery="312" centerz="9" radius="1">
+		<monster name="Barata" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="109" centery="313" centerz="9" radius="1">
 		<monster name="Caracol gigante" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
@@ -6426,6 +6552,9 @@
 	<spawn centerx="244" centery="319" centerz="9" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="709" centery="319" centerz="9" radius="1">
+		<monster name="Barata" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="244" centery="321" centerz="9" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
@@ -6438,17 +6567,26 @@
 	<spawn centerx="260" centery="322" centerz="9" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="706" centery="323" centerz="9" radius="1">
+		<monster name="Barata" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="260" centery="325" centerz="9" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="265" centery="325" centerz="9" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="698" centery="327" centerz="9" radius="1">
+		<monster name="Barata" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="261" centery="329" centerz="9" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="263" centery="330" centerz="9" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="707" centery="332" centerz="9" radius="1">
+		<monster name="Barata" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="248" centery="333" centerz="9" radius="1">
 		<monster name="Barata come rocha" x="0" y="0" z="9" spawntime="60" direction="2" />
@@ -7141,6 +7279,15 @@
 	<spawn centerx="667" centery="615" centerz="9" radius="1">
 		<monster name="Iguana-Marinha" x="1" y="-1" z="9" spawntime="60" direction="2" />
 		<monster name="Iguana-Marinha" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="686" centery="315" centerz="10" radius="1">
+		<monster name="Barata" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="697" centery="320" centerz="10" radius="1">
+		<monster name="Barata" x="0" y="0" z="10" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="700" centery="322" centerz="10" radius="1">
+		<monster name="Barata" x="0" y="0" z="10" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="747" centery="349" centerz="10" radius="1">
 		<monster name="Carangueijo capa quente" x="0" y="0" z="10" spawntime="60" direction="2" />
@@ -8138,5 +8285,8 @@
 	</spawn>
 	<spawn centerx="678" centery="635" centerz="11" radius="1">
 		<monster name="Iguana-Marinha" x="0" y="0" z="11" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="709" centery="311" centerz="12" radius="1">
+		<monster name="Besouro guardiao" x="0" y="0" z="12" spawntime="60" direction="2" />
 	</spawn>
 </spawns>

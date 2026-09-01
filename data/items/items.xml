@@ -6421,6 +6421,11 @@
 		<attribute key="description" value="You can see the other side through it." />
 		<attribute key="type" value="teleport" />
 	</item>
+
+	<item id="19204" article="an" name="air tornado">
+		<attribute key="description" value="A swirling air tornado portal." />
+		<attribute key="type" value="teleport" />
+	</item>
 	
 	
 	<item id="1388" article="a" name="ramp">
@@ -15618,6 +15623,12 @@
 		<attribute key="weight" value="10"/>
 		<attribute key="description" value="Uma moeda especial usada para comprar itens de treino."/>
 	</item>
+	<item id="18341" article="a" name="Treino elemental">
+		<attribute key="description" value="Use it on an Exercise Dummy to train your magic level. Consumes 1 charge per hit."/>
+		<attribute key="charges" value="500"/>
+		<attribute key="sendcharges" value="1"/>
+		<attribute key="weight" value="1200"/>
+	</item>
 	<item id="18432" article="a" name="Camera">
 		<attribute key="weight" value="10"/>
 		<attribute key="description" value="Use it to turn on or off your channel."/>
@@ -16577,4 +16588,9 @@
 	<attribute key="speed" value="28" />
 	<attribute key="slotType" value="feet" />
 </item>
+	<!-- Coletor de Recompensas Diarias -->
+	<item id="19009" article="a" name="Coletor de recompensas">
+		<attribute key="weight" value="100" />
+		<attribute key="description" value="Use to open your daily reward window. Collect rewards for 7 consecutive days!" />
+	</item>
 </items>

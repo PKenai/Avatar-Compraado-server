@@ -106,4 +106,7 @@
 	<event type="death" name="RogerioLoot" event="script" value="rogerioLoot.lua"/>
 	<event type="death" name="DefensorMontanha" event="script" value="defensorMontanha.lua"/>
 	<event type="death" name="TraidorDeath" event="script" value="traidorDeath.lua"/>
+
+	<!-- Daily Reward: opcode 170 -->
+	<event type="extendedopcode" name="DailyRewardOpcode" event="script" value="dailyReward.lua"/>
 </creaturescripts>

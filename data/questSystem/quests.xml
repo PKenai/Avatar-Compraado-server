@@ -258,4 +258,12 @@
         </mission>
     </quest>
 
+    <quest name="Passaro do Olavo" id="41" looktype="128" startstorageid="49410" startstoragevalue="1">
+        <description>O passaro do Olavo fugiu e ele quer saber onde esta. Encontre o passaro, descubra praonde foi e volte pra contar.</description>
+        <mission name="Encontrar o passaro" storageid="49410" startvalue="1" endvalue="2" progressstorageid="49411" maxprogress="1">
+            <description>Encontre o passaro do Olavo na ilha, fale com ele pra descobrir que ele foi pro oeste, e volte ao Olavo dizendo 'oeste'.</description>
+            <reward id="2152" count="10" />
+        </mission>
+    </quest>
+
 </quests>

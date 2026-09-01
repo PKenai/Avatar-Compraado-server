@@ -8,6 +8,7 @@
   <!-- Aracnideos -->
   <monster name="Aranha cospe pedra" file="Oficial monsters avatar/Aranha cospe pedra.xml"/>
   <monster name="Besouro luminoso" file="Oficial monsters avatar/Besouro luminoso.xml"/>
+  <monster name="Besouro guardiao" file="Oficial monsters avatar/Besouro guardiao.xml"/>
   <monster name="Terra beetle" file="Oficial monsters avatar/Terra beetle.xml"/>
   <monster name="Tarantula de pedra" file="Oficial monsters avatar/Tarantula de pedra.xml"/>
   <monster name="Joaninha da terra" file="Oficial monsters avatar/Joaninha da terra.xml"/>

@@ -499,6 +499,7 @@ function onLogin(cid)
     registerCreatureEvent(cid, "AchievementsKill")
     registerCreatureEvent(cid, "AchievementsAdvance")
     registerCreatureEvent(cid, "AchievementsOpcode")
+    registerCreatureEvent(cid, "DailyRewardOpcode")
     cameraNormalizeOnLogin(cid)
     sendOpCode(cid, 19, tostring(getPlayerVocation(cid)))
  

@@ -76,6 +76,7 @@ local WANDS = {
     [18337] = { name = "Fire Training Wand",  skill = "magic", value = 600, effect = CONST_ME_HITBYFIRE },
     [18338] = { name = "Air Training Wand",   skill = "magic", value = 600, effect = CONST_ME_NEWVIII },
     [18339] = { name = "Earth Training Wand", skill = "magic", value = 600, effect = CONST_ME_NEWXXV },
+    [18341] = { name = "Treino elemental",    skill = "magic", value = 600, effect = CONST_ME_MAGIC_BLUE },
 }
 
 local SKILL_TYPES = {
