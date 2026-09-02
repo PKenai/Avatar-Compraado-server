@@ -726,6 +726,7 @@ class LuaInterface
 		static int32_t luaGetItemWeight(lua_State* L);
 		static int32_t luaGetItemDescr(lua_State* L);
 		static int32_t luaGetItemParent(lua_State* L);
+		static int32_t luaGetItemRealUID(lua_State* L);
 		static int32_t luaGetItemAttribute(lua_State* L);
 		static int32_t luaDoItemSetAttribute(lua_State* L);
 	static int32_t luaDoSendItemUpdate(lua_State* L);

@@ -2514,6 +2514,9 @@ void LuaInterface::registerFunctions()
 	//ItemType(serverId) -- returns a Lua object with :getClientId(), :getServerId(), :isNull()
 	lua_register(m_luaState, "ItemType", LuaInterface::luaItemType);
 
+	//getItemRealUID(uid)
+	lua_register(m_luaState, "getItemRealUID", LuaInterface::luaGetItemRealUID);
+
 	//getItemAttribute(uid, key)
 	lua_register(m_luaState, "getItemAttribute", LuaInterface::luaGetItemAttribute);
 
@@ -11746,6 +11749,8 @@ int32_t LuaInterface::luaGetItemInfo(lua_State* L)
 	setField(L, "breakChance", item->breakChance);
 	setField(L, "hitChance", item->hitChance);
 	setField(L, "maxHitChance", item->maxHitChance);
+	setField(L, "criticalHitChance", item->criticalHitChance);
+	setField(L, "lifeSteal", item->lifeSteal);
 	setField(L, "runeLevel", item->runeLevel);
 	setField(L, "runeMagicLevel", item->runeMagLevel);
 	setField(L, "lightLevel", item->lightLevel);
@@ -11786,12 +11791,75 @@ int32_t LuaInterface::luaGetItemInfo(lua_State* L)
 	setField(L, "manaTicks", item->hasAbilities() ? item->abilities->manaTicks : 0);
 	setField(L, "conditionSuppressions", item->hasAbilities() ? item->abilities->conditionSuppressions : 0);
 
-	//TODO: absorb, increment, reflect, skills, skillsPercent, stats, statsPercent
+	if(item->hasAbilities()) {
+		// absorb array
+		lua_pushstring(L, "absorb");
+		lua_newtable(L);
+		for(int32_t i = COMBAT_FIRST; i <= COMBAT_LAST; ++i) {
+			lua_pushnumber(L, i);
+			lua_pushnumber(L, item->abilities->absorb[i]);
+			lua_settable(L, -3);
+		}
+		lua_settable(L, -3);
+
+		// skills array
+		lua_pushstring(L, "skills");
+		lua_newtable(L);
+		for(int32_t i = SKILL_FIRST; i <= SKILL_LAST; ++i) {
+			lua_pushnumber(L, i);
+			lua_pushnumber(L, item->abilities->skills[i]);
+			lua_settable(L, -3);
+		}
+		lua_settable(L, -3);
+
+		// skillsPercent array
+		lua_pushstring(L, "skillsPercent");
+		lua_newtable(L);
+		for(int32_t i = SKILL_FIRST; i <= SKILL_LAST; ++i) {
+			lua_pushnumber(L, i);
+			lua_pushnumber(L, item->abilities->skillsPercent[i]);
+			lua_settable(L, -3);
+		}
+		lua_settable(L, -3);
+
+		// stats array
+		lua_pushstring(L, "stats");
+		lua_newtable(L);
+		for(int32_t i = STAT_FIRST; i <= STAT_LAST; ++i) {
+			lua_pushnumber(L, i);
+			lua_pushnumber(L, item->abilities->stats[i]);
+			lua_settable(L, -3);
+		}
+		lua_settable(L, -3);
+
+		// statsPercent array
+		lua_pushstring(L, "statsPercent");
+		lua_newtable(L);
+		for(int32_t i = STAT_FIRST; i <= STAT_LAST; ++i) {
+			lua_pushnumber(L, i);
+			lua_pushnumber(L, item->abilities->statsPercent[i]);
+			lua_settable(L, -3);
+		}
+		lua_settable(L, -3);
+	}
 
 	pushTable(L);
 	setField(L, "group", (int32_t)item->group);
 	setField(L, "type", (int32_t)item->type);
 	setFieldFloat(L, "weight", item->weight);
+	return 1;
+}
+
+int32_t LuaInterface::luaGetItemRealUID(lua_State* L)
+{
+	//getItemRealUID(uid)
+	ScriptEnviroment* env = getEnv();
+	Item* item = env->getItemByUID(popNumber(L));
+	if(item) {
+		lua_pushnumber(L, item->getRealUID());
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 

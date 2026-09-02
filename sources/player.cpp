@@ -6081,3 +6081,30 @@ bool Player::hasShader(const Shader* shader) const
 	value = atoi(tmp.c_str());
 	return ((1 << (tmpShaderId % 31)) & value) != 0;
 }
+
+//TOOLTIPS
+Item* Player::getItemByUID(uint32_t uid) const
+{
+	if(uid == 0)
+		return NULL;
+
+	for(int32_t i = SLOT_FIRST; i <= SLOT_LAST; i++)
+	{
+		Item* item = inventory[i];
+		if(!item)
+			continue;
+
+		if(item->getRealUID() == uid)
+			return item;
+		else if(Container* container = item->getContainer())
+		{
+			for(ItemList::const_iterator cit = container->getItems(); cit != container->getEnd(); ++cit)
+			{
+				if((*cit)->getRealUID() == uid)
+					return (*cit);
+			}
+		}
+	}
+	return NULL;
+}
+//TOOLTIPSEND

@@ -892,6 +892,10 @@ class Player : public Creature, public Cylinder
 		bool isPromoted(uint32_t pLevel = 1) const {return promotionLevel >= pLevel;}
 		bool hasCapacity(const Item* item, uint32_t count) const;
 
+		//TOOLTIPS
+		Item* getItemByUID(uint32_t uid) const;
+		//TOOLTIPS END
+
 	private:
 		bool talkState[13];
 		bool inventoryAbilities[SLOT_LAST + 1];

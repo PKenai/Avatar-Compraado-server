@@ -333,7 +333,7 @@
 		<vocation id="3"/>
 	</instant>
 
-	<instant name="Earth Crush" words="earth crush" lvl="1" mana="2" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="earth/crush.lua">
+	<instant name="Earth Crush" words="earth crush" lvl="1" mana="2" aggressive="1" selftarget="1" exhaustion="800" needlearn="0" event="script" value="earth/crush.lua">
 		<vocation id="4"/>
 	</instant>
 

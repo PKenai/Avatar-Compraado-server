@@ -378,7 +378,10 @@ void Creature::addEventWalk(bool firstStep/* = false*/)
 		return;
 
 	if(ticks == 1)
+	{
 		g_game.checkCreatureWalk(getID());
+		ticks = getStepDuration();
+	}
 
 	eventWalk = Scheduler::getInstance().addEvent(createSchedulerTask(std::max((int64_t)SCHEDULER_MINTICKS, ticks),
 		boost::bind(&Game::checkCreatureWalk, &g_game, id)));
@@ -1713,7 +1716,7 @@ int32_t Creature::getStepDuration() const
 	if(!tile || !tile->ground)
 		return 0;
 
-	return ((1000 * Item::items[tile->ground->getID()].speed) / stepSpeed) * lastStepCost;
+	return (1000 * Item::items[tile->ground->getID()].speed) / stepSpeed;
 }
 
 int64_t Creature::getEventStepTicks(bool onlyDelay/* = false*/) const

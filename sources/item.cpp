@@ -46,6 +46,9 @@ extern ConfigManager g_config;
 extern MoveEvents* g_moveEvents;
 
 Items Item::items;
+//TOOLTIPS
+static uint32_t lastRealUID = 0;
+//TOOLTIPS END
 Item* Item::CreateItem(const uint16_t type, uint16_t amount/* = 0*/)
 {
 	const ItemType& it = Item::items[type];
@@ -93,6 +96,11 @@ Item* Item::CreateItem(const uint16_t type, uint16_t amount/* = 0*/)
 		newItem = new Item(6300, amount);
 	else
 		newItem = new Item(type, amount);
+
+	//TOOLTIPS
+	if(it.pickupable)
+		newItem->setRealUID(++lastRealUID);
+	//TOOLTIPS END
 
 	newItem->addRef();
 	return newItem;

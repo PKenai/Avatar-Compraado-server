@@ -6,6 +6,12 @@ if not _craftingSystemLoaded and type(CraftingSystem) ~= "table" then
   _craftingSystemLoaded = true
 end
 
+-- Carrega o tooltip lib (uma vez so)
+if not _tooltipLibLoaded and type(TooltipLib) ~= "table" then
+  dofile(getDataDir().."lib/tooltipLib.lua")
+  _tooltipLibLoaded = true
+end
+
 local function changeAutoloot(cid, value)
 	if type(value) ~= "string" or (value ~= "false" and value ~= "true") then
 		return true
@@ -113,6 +119,14 @@ function onExtendedOpcode(cid, opcode, buffer)
 			-- Potion Craft System
 			if type(PotionCraft) == "table" and type(PotionCraft.onOpcode) == "function" then
 				PotionCraft.onOpcode(cid, buffer)
+			end
+		elseif opcode == 105 then
+			-- Tooltips (game_tooltips)
+			print(string.format("[TOOLTIPS] opcode=105 cid=%s buffer=%s", tostring(cid), tostring(buffer)))
+			if type(TooltipLib) == "table" and type(TooltipLib.onTooltipRequest) == "function" then
+				TooltipLib.onTooltipRequest(cid, buffer)
+			else
+				print("[TOOLTIPS] ERROR: TooltipLib not loaded")
 			end
 		elseif opcode == 106 then
 			-- Crafting System (game_crafting) - 100% Server-Side

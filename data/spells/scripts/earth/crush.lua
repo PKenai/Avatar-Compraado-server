@@ -16,8 +16,11 @@ setCombatCondition(combat2, condition)
 
 local t = {combat2, combat1, combat1}
 
+-- 3x3 area centered on the player, hits all 8 surrounding squares
 local arr = {
-{1, 3, 1}
+  {1, 1, 1},
+  {1, 3, 1},
+  {1, 1, 1}
 }
 
 local area = createCombatArea(arr)
@@ -49,11 +52,12 @@ for x = 1, 2 do
 end
 
 local function earthCrush(cid, times)
-	local lookPos = getCreatureLookPosition(cid)
-	if times == 0 or not isCreature(cid) or isInPz(cid) or (lookPos and hasSqm(lookPos) and getTileInfo(lookPos).protection) then 
+	local playerPos = getCreaturePosition(cid)
+	if times == 0 or not isCreature(cid) or isInPz(cid) or getTileInfo(playerPos).protection then 
 		return false 
 	end
-	doCombat(cid, t[times], {type=2, pos=lookPos})
+	-- Hit all 8 squares around the player using the area
+	doCombat(cid, t[times], {type=2, pos=playerPos})
 	addEvent(earthCrush, 500, cid, times-1)
 end 
 
@@ -69,5 +73,5 @@ function onCastSpell(cid, var)
         return true
     end
 	earthCrush(cid, 3)
-  return true 
+  return true
 end

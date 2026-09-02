@@ -356,12 +356,21 @@ class Item : virtual public Thing, public ItemAttributes
 
 		static uint32_t countByType(const Item* item, int32_t checkType);
 
+		//TOOLTIPS
+		void setRealUID(uint32_t uid) { realUId = uid; }
+		uint32_t getRealUID() const { return realUId; }
+		//TOOLTIPS END
+
 	protected:
 		uint16_t id;
 		uint8_t count;
 
 		Raid* raid;
 		bool loadedFromMap;
+
+		//TOOLTIPS
+		uint32_t realUId = 0;
+		//TOOLTIPS END
 };
 
 inline std::string Item::getName() const
