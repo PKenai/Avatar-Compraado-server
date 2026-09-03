@@ -20,6 +20,9 @@ setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxVal
 function onTargetCreature(cid, target)
   local playerPos = getCreaturePos(cid)
   local targetPos = getCreaturePos(target)
+  if getDistanceBetween(playerPos, targetPos) > 7 then
+    return false
+  end
   doPushCreature(target, getDirectionTo(playerPos, targetPos))
   doCombat(cid, combat2, numberToVariant(target))
   doCreateItem(MyLocal.earthId, targetPos)

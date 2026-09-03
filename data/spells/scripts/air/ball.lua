@@ -38,6 +38,14 @@ function onCastSpell(cid, var)
     local checks = allSpellChecks(cid, "air ball", airExausted.ball+dif) --Nova func em beta :D
 
     if checks == "ready" then
+        local target = variantToNumber(var)
+        if target and isCreature(target) then
+            local casterPos = getCreaturePosition(cid)
+            local targetPos = getCreaturePosition(target)
+            if casterPos.z ~= targetPos.z then
+                return false
+            end
+        end
 		if dif == 1 then 
 			addEvent(function() if isCreature(cid) and isCreature(variantToNumber(var)) and not isInPz(cid) and not isInPz(variantToNumber(var)) then doCombat(cid, combat, var) end end, 250)
 		end

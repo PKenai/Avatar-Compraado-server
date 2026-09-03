@@ -87,4 +87,9 @@
   <monster name="Galinha" file="Oficial monsters avatar/Galinha.xml"/>
   <monster name="Lobo selvagem" file="Oficial monsters avatar/Lobo selvagem.xml"/>
 
+
+  <!-- Monstro do Pantano (Boss) -->
+  <monster name="Monstro do pantano" file="Oficial monsters avatar/Monstro do pantano.xml"/>
+  <monster name="Tentaculos do pantano" file="Oficial monsters avatar/Tentaculos do pantano.xml"/>
+
 </monsters>

@@ -20,6 +20,7 @@
 #include "game.h"
 #include "spells.h"
 #include "const.h"
+#include "player.h"
 
 extern Game g_game;
 
@@ -49,11 +50,23 @@ void TrashHolder::__addThing(Creature* actor, int32_t, Thing* thing)
 	else if(g_game.isSwimmingPool(this, getTile(), false) && thing->getCreature())
 	{
 		Player* player = thing->getCreature()->getPlayer();
-		if(player && player->getPosition() == player->getLastPosition())
+		if(player)
 		{
-			//player has just logged in a swimming pool
-			static Outfit_t outfit(SWIMMING_OUTFIT);
-			Spell::CreateIllusion(player, outfit, -1);
+			// Apply vocation-based swimming outfit
+			static Outfit_t swimmingOutfits[9] = {
+				Outfit_t(267),   // index 0 (unused)
+				Outfit_t(1345),  // 1 = Fire
+				Outfit_t(1344),  // 2 = Water
+				Outfit_t(1347),  // 3 = Air
+				Outfit_t(1346),  // 4 = Earth
+				Outfit_t(1345),  // 5 = Fire (promoted)
+				Outfit_t(1344),  // 6 = Water (promoted)
+				Outfit_t(1347),  // 7 = Air (promoted)
+				Outfit_t(1346),  // 8 = Earth (promoted)
+			};
+			int32_t vocId = player->getVocationId();
+			if(vocId < 1 || vocId > 8) vocId = 0;
+			Spell::CreateIllusion(player, swimmingOutfits[vocId], -1);
 		}
 	}
 }

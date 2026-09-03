@@ -144,7 +144,7 @@ function onCastSpell(cid)
 		return false
 	end
 
-   -- if MyLocal.playersCanUse[cid] == nil then
+   if MyLocal.playersCanUse[cid] == nil then
         if canUseWaterSpell(cid, 1, 3, false) then
             if getPlayerHasStun(cid) then
                 removeTable(cid)
@@ -170,8 +170,8 @@ function onCastSpell(cid)
         else
             return false
         end
-   -- else
-    --    doPlayerSendCancelEf(cid, "You're already using this fold.")
-    --    return false
-  --  end
+   else
+        doPlayerSendCancelEf(cid, "You're already using this fold.")
+        return false
+    end
 end

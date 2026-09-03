@@ -205,10 +205,25 @@ function dailyRewardClaim(cid)
         return false, "You cannot claim a reward right now."
     end
 
+    -- Re-read after getData (which may have reset cycle) to stay consistent
     local claimedStr = getPlayerStorageValue(cid, "dailyReward_claimed")
     if claimedStr == -1 then claimedStr = "" end
 
     local dayIndex = data.currentDay - 1 -- 0-indexed
+
+    -- Safety: verify the day hasn't already been claimed (double-check after re-read)
+    local alreadyClaimed = false
+    if claimedStr and claimedStr ~= "" then
+        for dayStr in string.gmatch(claimedStr, "(%d+)") do
+            if tonumber(dayStr) == dayIndex then
+                alreadyClaimed = true
+                break
+            end
+        end
+    end
+    if alreadyClaimed then
+        return false, "Day " .. data.currentDay .. " was already claimed."
+    end
 
     -- Adiciona o dia a lista de coletados
     if claimedStr == "" then

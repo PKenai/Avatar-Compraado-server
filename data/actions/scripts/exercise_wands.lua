@@ -171,6 +171,13 @@ end
 -- com outros scripts) — o fork deste TFS 0.4 recusa callback LOCAL no
 -- addEvent (todos os scripts do servidor usam globais ou anonimas).
 function exerciseWandsHit(cid, t)
+    if isPlayer(cid) then
+        local pos = getCreaturePosition(cid)
+        if getDistanceBetween(pos, t.dummyPos) > 1 then
+            stopTraining(cid, "You are too far away and stop training.")
+            return
+        end
+    end
     local wand = findWand(cid, t.itemid)
     if not wand then
         stopTraining(cid, "You no longer have your training wand.")

@@ -66,7 +66,14 @@ end
 
 function sendBlessIfActive(cid)
     local bless = getPlayerStorageValue(cid, "blessExp")
-    local expLoss = getPlayerStorageValue(cid, "expBeforeDie")-getPlayerExperience(cid)
+    local expBeforeDie = getPlayerStorageValue(cid, "expBeforeDie")
+    -- Guard: if player never died (storage unset = -1), skip entirely
+    if not expBeforeDie or expBeforeDie == -1 or expBeforeDie == 0 then
+        setPlayerHasDeath(cid, "unknow", 0, false)
+        setPlayerStorageValue(cid, "expBeforeDie", -1)
+        return
+    end
+    local expLoss = expBeforeDie - getPlayerExperience(cid)
     local expToWin = expLoss
     local supremeBless = getPlayerStorageValue(cid, "playerWithSupremeBless")
 

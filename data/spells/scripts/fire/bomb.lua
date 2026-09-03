@@ -73,6 +73,12 @@ function onCastSpell(cid, var)
     end
 
     local target = getCreatureTarget(cid)
+    if not isCreature(target) then
+        return false
+    end
+    if cantReceiveDisable(cid, target) then
+        return false
+    end
 	local targpos = getThingPos(target)
 	doSendMagicEffect({x=targpos.x+1, y=targpos.y+1, z=targpos.z}, 118)
     if getPlayerOverPower(cid, "fire", true, true) == true then

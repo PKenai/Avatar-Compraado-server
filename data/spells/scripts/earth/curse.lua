@@ -146,7 +146,7 @@ if not isCreature(cid) or not isCreature(target) or times < 1 then return false 
   end
     if not isInPz(cid) then 
 	  createTerra(bombPos, 500)
-      doCombat(cid, combat2, {type=2, pos=bombPos})
+      doCombat(cid, combat, {type=2, pos=bombPos})
 	end 
 return not isInPz(cid) and addEvent(doBomb, 1000, cid, combat, var, times-1)
 end
@@ -172,7 +172,7 @@ function onCastSpell(cid, var)
         return true
     end
 	doSendDistanceShoot(getCreaturePosition(cid), getCreaturePosition(variantToNumber(var)), 38)
-	doBomb(cid, combat, var, 3)
+	doBomb(cid, combat2, var, 3)
 	exhaustion.set(variantToNumber(var), "earthCursed", 5)
   return true 
 end

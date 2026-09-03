@@ -83,7 +83,6 @@ function onCastSpell(cid, var)
         return false
     end
     if MyLocal.players[cid] == nil then
-     positionsimune = {}
          doPlayerAddExaust(cid, "earth", "leech", earthExausted.leech)
             if getPlayerHasStun(cid) then
                -- workAllCdAndAndPrevCd(cid, "earth", "leech", nil, 1)
@@ -92,7 +91,7 @@ function onCastSpell(cid, var)
 			doPlayerAddExaust(cid, "earth", "leech", earthExausted.leech)
 			exhaustion.set(cid, "cantEarthArmor", 4)
             MyLocal.players[cid] = 0
-            addEvent(removeTable, 250, cid)
+            addEvent(removeTable, 1000, cid)
             --workAllCdAndAndPrevCd(cid, "earth", "leech", nil, 1)
       local mypos = getCreaturePosition(cid)
 		exhaustion.set(cid, "canturecover", 3)

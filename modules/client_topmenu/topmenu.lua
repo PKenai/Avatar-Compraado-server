@@ -11,6 +11,7 @@ local fpsText = ''
 local idleTimer = nil
 local isHidden = false
 local isAnimating = false
+local animEvents = {} -- track slide animation event IDs for cleanup
 local IDLE_TIMEOUT = 15000 -- 15 seconds
 local ANIM_DURATION = 300  -- ms
 local ANIM_STEPS = 20
@@ -48,6 +49,13 @@ local function addButton(id, description, icon, callback, panel, toggle, front)
 end
 
 -- drawer functions
+local function cancelAnimEvents()
+  for _, evt in ipairs(animEvents) do
+    removeEvent(evt)
+  end
+  animEvents = {}
+end
+
 local function resetIdleTimer()
   if idleTimer then
     removeEvent(idleTimer)
@@ -57,6 +65,7 @@ local function resetIdleTimer()
     idleTimer = scheduleEvent(function()
       if isHidden or isAnimating then return end
       isAnimating = true
+      cancelAnimEvents()
       local startY = topMenu:getY()
       local height = topMenu:getHeight()
       local targetY = startY - height
@@ -70,7 +79,7 @@ local function resetIdleTimer()
 
       -- animate slide up
       for i = 1, ANIM_STEPS do
-        scheduleEvent(function()
+        local evt = scheduleEvent(function()
           if topMenu and isAnimating then
             local progress = i / ANIM_STEPS
             local eased = 1 - (1 - progress) * (1 - progress) -- ease out quad
@@ -80,9 +89,11 @@ local function resetIdleTimer()
               topMenu:setY(targetY)
               isHidden = true
               isAnimating = false
+              animEvents = {}
             end
           end
         end, math.floor(i * ANIM_DURATION / ANIM_STEPS))
+        table.insert(animEvents, evt)
       end
     end, IDLE_TIMEOUT)
   end
@@ -91,20 +102,22 @@ end
 local function slideDown()
   if isAnimating or not isHidden then return end
   isAnimating = true
+  cancelAnimEvents()
 
   -- hide drop button
   if dropButton then
     g_effects.fadeOut(dropButton, 150)
-    scheduleEvent(function()
+    local hideEvt = scheduleEvent(function()
       if dropButton then dropButton:hide() end
     end, 160)
+    table.insert(animEvents, hideEvt)
   end
 
   local startY = topMenu:getY()
   local targetY = originalY or 0
 
   for i = 1, ANIM_STEPS do
-    scheduleEvent(function()
+    local evt = scheduleEvent(function()
       if topMenu and isAnimating then
         local progress = i / ANIM_STEPS
         local eased = progress * progress -- ease in quad
@@ -114,10 +127,12 @@ local function slideDown()
           topMenu:setY(targetY)
           isHidden = false
           isAnimating = false
+          animEvents = {}
           resetIdleTimer()
         end
       end
     end, math.floor(i * ANIM_DURATION / ANIM_STEPS))
+    table.insert(animEvents, evt)
   end
 end
 
@@ -202,6 +217,10 @@ function terminate()
     idleTimer = nil
   end
 
+  -- Cancel any pending slide animation events
+  cancelAnimEvents()
+  isAnimating = false
+
   if dropButton then
     dropButton:destroy()
     dropButton = nil
@@ -235,12 +254,13 @@ function offline()
     removeEvent(idleTimer)
     idleTimer = nil
   end
-  -- reset drawer state when going offline
+  -- Cancel pending animation events and reset drawer state
+  cancelAnimEvents()
+  isAnimating = false
   if isHidden then
     topMenu:show()
     topMenu:setY(originalY or 0)
     isHidden = false
-    isAnimating = false
   end
   if dropButton then
     dropButton:hide()

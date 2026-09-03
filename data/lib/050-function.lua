@@ -61,7 +61,7 @@ function doPlayerCancelFollow(cid)
 end 
 
 function dismountPlayer(cid)
-	if isCreature(cid) then 
+	if not isCreature(cid) then 
 		return true
 	end
     if getPlayerStorageValue(cid, "inMount") == 1 then
@@ -2023,10 +2023,16 @@ end
 
 
 function addPlayerTimeOnline(cid, secs)
+  if not isPlayer(cid) then return end
   local guid = getPlayerGUID(cid)
+  if not guid or guid == 0 then return end
   local result = db.getResult("SELECT * FROM players WHERE id = '"..guid.."'")
-
-  db.executeQuery('UPDATE `players` SET `timeOnline` = "'..result:getDataInt("timeOnline")+(os.time()-getPlayerStorageValue(cid, "timeLogin"))..'" WHERE `id` = "'..guid..'"')
+  if result:getID() == -1 then return end
+  local timeLogin = getPlayerStorageValue(cid, "timeLogin")
+  if not timeLogin or timeLogin == -1 then timeLogin = os.time() end
+  local newTime = result:getDataInt("timeOnline") + (os.time() - timeLogin)
+  if newTime < 0 then newTime = 0 end
+  db.executeQuery('UPDATE `players` SET `timeOnline` = "'..newTime..'" WHERE `id` = "'..guid..'"')
 end
 
 function getWeaponSkill(itemuid)

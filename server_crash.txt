@@ -67,3 +67,47 @@
   10: [ntdll.dll] RtlInitializeExceptionChain +0x6b
   11: [ntdll.dll] RtlGetAppContainerNamedObjectPath +0x231
 
+== ACCESS VIOLATION at 0x6a8401
+  0: [theforgottenserver.exe] LuaInterface::executeTimer +0x121
+  1: [theforgottenserver.exe] boost::detail::function::void_function_obj_invoker<boost::_bi::bind_t<boost::_bi::unspecified,boost::_mfi::mf<bool (__thiscall Raid::*)(RaidEvent *),bool,Raid,RaidEvent *>,boost::_bi::list<boost::_bi::value<Raid *>,boost::_bi::value<RaidEvent *> > >,void> “GuC:\Users\imfis\Desktop\Avatar-Compraado-server\theforgottenserver.exe +0x10
+  2: [theforgottenserver.exe] boost::function_n<void>::operator() +0x37
+  3: [theforgottenserver.exe] Dispatcher::dispatcherThread +0x1a2
+  4: [boost_thread-vc143-mt-x32-1_90.dll] boost::`anonymous namespace'::thread_start_function +0x5e
+  5: [ucrtbase.dll] isgraph +0x21b
+  6: [KERNEL32.DLL] BaseThreadInitThunk +0x19
+  7: [ntdll.dll] RtlInitializeExceptionChain +0x6b
+  8: [ntdll.dll] RtlGetAppContainerNamedObjectPath +0x231
+
+== ACCESS VIOLATION at 0x6a8401
+  0: [theforgottenserver.exe] LuaInterface::executeTimer +0x121
+  1: [theforgottenserver.exe] boost::detail::function::void_function_obj_invoker<boost::_bi::bind_t<boost::_bi::unspecified,boost::_mfi::mf<bool (__thiscall Raid::*)(RaidEvent *),bool,Raid,RaidEvent *>,boost::_bi::list<boost::_bi::value<Raid *>,boost::_bi::value<RaidEvent *> > >,void>u¨C:\Users\imfis\Desktop\Avatar-Compraado-server\theforgottenserver.exe +0x10
+  2: [theforgottenserver.exe] boost::function_n<void>::operator() +0x37
+  3: [theforgottenserver.exe] Dispatcher::dispatcherThread +0x1a2
+  4: [boost_thread-vc143-mt-x32-1_90.dll] boost::`anonymous namespace'::thread_start_function +0x5e
+  5: [ucrtbase.dll] isgraph +0x21b
+  6: [KERNEL32.DLL] BaseThreadInitThunk +0x19
+  7: [ntdll.dll] RtlInitializeExceptionChain +0x6b
+  8: [ntdll.dll] RtlGetAppContainerNamedObjectPath +0x231
+
+== ACCESS VIOLATION at 0x248401
+  0: [theforgottenserver.exe] LuaInterface::executeTimer +0x121
+  1: [theforgottenserver.exe] boost::detail::function::void_function_obj_invoker<boost::_bi::bind_t<boost::_bi::unspecified,boost::_mfi::mf<bool (__thiscall Raid::*)(RaidEvent *),bool,Raid,RaidEvent *>,boost::_bi::list<boost::_bi::value<Raid *>,boost::_bi::value<RaidEvent *> > >,void> “GuC:\Users\imfis\Desktop\Avatar-Compraado-server\theforgottenserver.exe +0x10
+  2: [theforgottenserver.exe] boost::function_n<void>::operator() +0x37
+  3: [theforgottenserver.exe] Dispatcher::dispatcherThread +0x1a2
+  4: [boost_thread-vc143-mt-x32-1_90.dll] boost::`anonymous namespace'::thread_start_function +0x5e
+  5: [ucrtbase.dll] isgraph +0x21b
+  6: [KERNEL32.DLL] BaseThreadInitThunk +0x19
+  7: [ntdll.dll] RtlInitializeExceptionChain +0x6b
+  8: [ntdll.dll] RtlGetAppContainerNamedObjectPath +0x231
+
+== ACCESS VIOLATION at 0x248401
+  0: [theforgottenserver.exe] LuaInterface::executeTimer +0x121
+  1: [theforgottenserver.exe] boost::detail::function::void_function_obj_invoker<boost::_bi::bind_t<boost::_bi::unspecified,boost::_mfi::mf<bool (__thiscall Raid::*)(RaidEvent *),bool,Raid,RaidEvent *>,boost::_bi::list<boost::_bi::value<Raid *>,boost::_bi::value<RaidEvent *> > >,void> “GuC:\Users\imfis\Desktop\Avatar-Compraado-server\theforgottenserver.exe +0x10
+  2: [theforgottenserver.exe] boost::function_n<void>::operator() +0x37
+  3: [theforgottenserver.exe] Dispatcher::dispatcherThread +0x1a2
+  4: [boost_thread-vc143-mt-x32-1_90.dll] boost::`anonymous namespace'::thread_start_function +0x5e
+  5: [ucrtbase.dll] isgraph +0x21b
+  6: [KERNEL32.DLL] BaseThreadInitThunk +0x19
+  7: [ntdll.dll] RtlInitializeExceptionChain +0x6b
+  8: [ntdll.dll] RtlGetAppContainerNamedObjectPath +0x231
+

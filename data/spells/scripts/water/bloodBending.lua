@@ -104,6 +104,9 @@ local function rollClock(cid, target, times)
 	if not isCreature(cid) or not isCreature(target) or isInPz(cid) or isInPz(target) then
 		return false
 	end
+	if isPlayer(target) and cantReceiveDisable(cid, target) then
+		return false
+	end
 	local targpos = getCreaturePosition(target)
 	centerPoses[cid] = targpos
 	doSendMagicEffect({x=targpos.x+1, y=targpos.y+1, z=targpos.z}, 135)

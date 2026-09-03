@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Tentaculos do pantano" nameDescription="os Tentaculos do pantano" race="blood" experience="1000" speed="180" manacost="0">
+	<health now="5000" max="5000"/>
+	<look type="1335"/>
+	<script>
+		<event name="mobsKill"/>
+	</script>
+	<targetchange interval="5000" chance="15"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="0"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="80"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="100" attack="120"/>
+		<attack name="earth" interval="2500" chance="25" range="5" min="-200" max="-500"/>
+		<attack name="poison" interval="2000" chance="20" range="3" min="-150" max="-350"/>
+		<attack name="physical" interval="2000" chance="15" range="1" min="-250" max="-450"/>
+	</attacks>
+	<defenses armor="25" defense="20"/>
+</monster>

@@ -159,7 +159,8 @@ local function normalizeNumberStorage(cid)
     if getPlayerStorageValue(cid, "addedPointsMore2") == -1 then
         setPlayerStorageValue(cid, "getPointsInStones", -1)
  
-        local result = db.getResult('SELECT * FROM  `web_ats_shop_historico` WHERE  `status` =  "entregue" AND `produto_type` = "pontos" AND `to_player` = "'..getPlayerGUID(cid)..'"')
+        local guid = tonumber(getPlayerGUID(cid)) or 0
+        local result = db.getResult('SELECT * FROM `web_ats_shop_historico` WHERE `status` = "entregue" AND `produto_type` = "pontos" AND `to_player` = "'..guid..'"')
         local pointsMore = 0
  
         if result:getID() ~= -1 then
@@ -233,7 +234,6 @@ local function runeRegen(cid, sequenceCount, lastRegenCount)
 	if sequenceCount == 5 and lastRegenCount and newRegenCount == lastRegenCount and newRegenCount > 0 then
 		sequenceCount = 0
 		doCreatureAddHealth(cid, newRegenCount, 1)
-		--doTargetCombatHealth(0, cid, newRegenCount, newRegenCount, -1, false)
 	end
 	if (not lastRegenCount and newRegenCount > 0) or (lastRegenCount == newRegenCount) then
 		sequenceCount = sequenceCount+1
@@ -499,7 +499,7 @@ function onLogin(cid)
     registerCreatureEvent(cid, "AchievementsKill")
     registerCreatureEvent(cid, "AchievementsAdvance")
     registerCreatureEvent(cid, "AchievementsOpcode")
-    registerCreatureEvent(cid, "DailyRewardOpcode")
+
     cameraNormalizeOnLogin(cid)
     sendOpCode(cid, 19, tostring(getPlayerVocation(cid)))
  

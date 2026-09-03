@@ -107,6 +107,9 @@
 	<event type="death" name="DefensorMontanha" event="script" value="defensorMontanha.lua"/>
 	<event type="death" name="TraidorDeath" event="script" value="traidorDeath.lua"/>
 
+	<!-- Boss Room Pantano: ao matar o Monstro do pantano, teleporta players apos 1 min -->
+	<event type="death" name="BossRoomPantano" event="script" value="bossRoomPantano.lua"/>
+
 	<!-- Daily Reward: opcode 170 -->
 	<event type="extendedopcode" name="DailyRewardOpcode" event="script" value="dailyReward.lua"/>
 </creaturescripts>

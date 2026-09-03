@@ -101,6 +101,7 @@ for x = 1, #combats do
     setCombatCallback(combats[x], CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
  
     function onTargetCreature(cid, target)
+		if not MyLocal.players[cid] then return false end
 		if getTileInfo(getCreaturePosition(cid)).protection then return false end
         local playerDir = MyLocal.players[cid].dir or NORTH
         local times = MyLocal.players[cid].times

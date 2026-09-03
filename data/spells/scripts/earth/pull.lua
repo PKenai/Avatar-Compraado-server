@@ -34,6 +34,10 @@ setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxVal
 function onTargetCreature(cid, target)
   local playerPos = getCreaturePos(cid)
   local targetPos = getCreaturePos(target)
+  if getDistanceBetween(playerPos, targetPos) > 7 then
+    doPlayerSendCancelEf(cid, "The target is too far.")
+    return false
+  end
   if getDistanceBetween(playerPos, targetPos) > 1 and getPlayerStorageValue(target, "playerOnAir") == 1 then							
 	doPushCreature(target, getDirectionTo(targetPos, playerPos), 1, 500, false, true)
   elseif getDistanceBetween(playerPos, targetPos) > 1 then
