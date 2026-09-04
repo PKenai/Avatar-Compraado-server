@@ -90,6 +90,8 @@
 
   <!-- Monstro do Pantano (Boss) -->
   <monster name="Monstro do pantano" file="Oficial monsters avatar/Monstro do pantano.xml"/>
+  <monster name="Cabeca do Homem do pantano" file="Oficial monsters avatar/Cabeca do Homem do pantano.xml"/>
+  <monster name="Braco do Homem do pantano" file="Oficial monsters avatar/Braco do Homem do pantano.xml"/>
   <monster name="Tentaculos do pantano" file="Oficial monsters avatar/Tentaculos do pantano.xml"/>
 
 </monsters>

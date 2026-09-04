@@ -306,6 +306,10 @@
 <!-- Boss Room Pantano: alavanca que teleports players para sala do boss -->
 	<action actionid="50010" event="script" value="bossRoom.lua"/>
 
+	<!-- Boss Room Pantano: bau de recompensa do Homem do pantano (ActionID 50011 / ItemID 18878) -->
+	<action actionid="50011" event="script" value="bossPantanoChest.lua"/>
+	<action itemid="18878" event="script" value="bossPantanoChest.lua"/>
+
 <!-- Alavanca do Passaro do Olavo: coloca buraco (item 3311) em 696,323,7 por 5 min -->
 	<action actionid="50002" event="script" value="alavancaPassaro.lua"/>
 

@@ -140,12 +140,22 @@ function TooltipLib.buildTooltip(uid, itemid, count)
     end
     local tierMult = 1.0 + tier * 0.10
 
+    local cId = 0
+    local it = ItemType(itemid)
+    if it and it.getClientId then
+        cId = it:getClientId()
+    end
+    if not cId or cId == 0 then
+        cId = info.clientId or 0
+    end
+
     local item_data = {
         uid = uid,
-        clientId = info.clientId or 0,
+        clientId = cId,
         itemName = info.name or "",
         count = count or 0,
         weight = info.weight or 0,
+        tier = tier,
         itemType = TooltipLib.formatItemType(info.slotPosition or 0, info.weaponType or 0)
     }
 
@@ -384,6 +394,20 @@ function TooltipLib.onTooltipRequest(cid, buffer)
                 local tooltipData = TooltipLib.buildTooltip(thing.uid, thing.itemid, thing.type)
                 if tooltipData then
                     doSendPlayerExtendedOpcode(cid, CODE_TOOLTIPS, json.encode({action = "new", data = tooltipData}))
+                end
+            end
+        elseif #data == 4 and data[1] == 65535 then
+            -- Container item hover: {65535, containerIndex + 64, slotIndex, 0}
+            local containerIndex = data[2] - 64
+            local slotIndex = data[3]
+            local container = getPlayerContainer(cid, containerIndex)
+            if container then
+                local thing = getContainerItem(container, slotIndex)
+                if thing and thing.uid and thing.uid > 0 and thing.itemid and thing.itemid > 0 then
+                    local tooltipData = TooltipLib.buildTooltip(thing.uid, thing.itemid, thing.type)
+                    if tooltipData then
+                        doSendPlayerExtendedOpcode(cid, CODE_TOOLTIPS, json.encode({action = "new", data = tooltipData}))
+                    end
                 end
             end
         elseif #data == 4 then

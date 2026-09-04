@@ -16593,4 +16593,9 @@
 		<attribute key="weight" value="100" />
 		<attribute key="description" value="Use to open your daily reward window. Collect rewards for 7 consecutive days!" />
 	</item>
+	<!-- Bau do Homem do Pantano -->
+	<item id="18878" article="a" name="bau do homem do pantano">
+		<attribute key="type" value="chest" />
+		<attribute key="weight" value="1000" />
+	</item>
 </items>

@@ -1,27 +1,5 @@
---[[
- * BossRoomPantano - Evento ao morrer do "Monstro do pantano":
- *   * Remove todos os tentaculos da sala
- *   * Para os timers de cura e manutencao
- *   * Apos 1 minuto, teleporta todos os players para fora
- *   * Reseta a alavanca
- *
- * Limites da sala: {x=120, y=1924, z=7} ate {x=177, y=1968, z=7}
- * Saida: {x=799, y=519, z=6}
- *
- * Registrado em data/creaturescripts/creaturescripts.xml (type="death") e
- * anexado ao monstro via <script><event name="BossRoomPantano"/></script>.
- * Depende das funcoes globais bossRoomStopTimers() e bossRoomRemoveTentacles()
- * definidas em data/actions/scripts/bossRoom.lua.
-]]
+local CLEANUP_DELAY = 120 * 1000
 
--- ============================================================
--- Configuracao (usa constantes globais do bossRoomLib.lua)
--- ============================================================
-local CLEANUP_DELAY = 60 * 1000  -- 1 minuto
-
--- ============================================================
--- Reseta a alavanca
--- ============================================================
 local function resetLever()
     for i = 1, #ENTRY_TILES do
         local pos = ENTRY_TILES[i]
@@ -40,58 +18,99 @@ local function resetLever()
     return false
 end
 
--- ============================================================
--- Teleporta todos os players da sala do boss para fora
--- ============================================================
 local function teleportPlayersOut()
     local specs = getSpectators(ROOM_CENTER, ROOM_RANGEX, ROOM_RANGEY)
-
     if specs and #specs > 0 then
         for i = 1, #specs do
             if isPlayer(specs[i]) then
                 doTeleportThing(specs[i], EXIT_POS)
                 doSendMagicEffect(EXIT_POS, CONST_ME_TELEPORT)
                 doPlayerSendTextMessage(specs[i], MESSAGE_EVENT_ADVANCE,
-                    "Boss derrotado! Voces foram teleportados para fora.")
+                    "Tempo esgotado! Voces foram teleportados para fora da sala do boss.")
             end
         end
     end
 
-    -- Reseta a alavanca
     resetLever()
+    bossRoomResetAll()
 end
 
--- ============================================================
--- onDeath
--- ============================================================
 function onDeath(cid, corpse, deathList)
     if not isMonster(cid) then
         return true
     end
 
-    if getCreatureName(cid) ~= BOSS_NAME then
-        return true
-    end
+    local partKey = getBossKeyByCid(cid)
+    local creatureName = getCreatureName(cid)
 
-    -- 1) Remove todos os tentaculos da sala
-    bossRoomRemoveTentacles()
-
-    -- 2) Para os timers de cura e manutencao
-    bossRoomStopTimers()
-
-    -- 3) Avisa que o boss foi derrotado
-    local specs = getSpectators(ROOM_CENTER, ROOM_RANGEX, ROOM_RANGEY)
-    if specs and #specs > 0 then
-        for i = 1, #specs do
-            if isPlayer(specs[i]) then
-                doPlayerSendTextMessage(specs[i], MESSAGE_EVENT_ADVANCE,
-                    "O Monstro do Pantano foi derrotado! Saindo em 1 minuto...")
+    if not partKey then
+        if creatureName == "Cabeca do Homem do pantano" then
+            partKey = "head"
+        elseif creatureName == "Braco do Homem do pantano" then
+            if not bossRoomState.bosses.leftArm.isDead then
+                partKey = "leftArm"
+            else
+                partKey = "rightArm"
             end
+        elseif creatureName == "Monstro do pantano" then
+            partKey = "head"
         end
     end
 
-    -- 4) Agenda o teleporte para fora apos 1 minuto
-    addEvent(teleportPlayersOut, CLEANUP_DELAY)
+    if not partKey or not bossRoomState.bosses[partKey] then
+        return true
+    end
+
+    local dyingBoss = bossRoomState.bosses[partKey]
+    dyingBoss.isDead = true
+    dyingBoss.cid = nil
+
+    if areAllBossesDead() then
+        for _, b in pairs(bossRoomState.bosses) do
+            if b.respawnTimer then
+                stopEvent(b.respawnTimer)
+                b.respawnTimer = nil
+            end
+        end
+
+        bossRoomRemoveTentacles()
+
+        if bossRoomState.healTimerId then
+            stopEvent(bossRoomState.healTimerId)
+            bossRoomState.healTimerId = nil
+        end
+        if bossRoomState.tentacleTimerId then
+            stopEvent(bossRoomState.tentacleTimerId)
+            bossRoomState.tentacleTimerId = nil
+        end
+
+        bossRoomSpawnChest()
+
+        local specs = getSpectators(ROOM_CENTER, ROOM_RANGEX, ROOM_RANGEY)
+        if specs and #specs > 0 then
+            for i = 1, #specs do
+                if isPlayer(specs[i]) then
+                    doPlayerSendTextMessage(specs[i], MESSAGE_EVENT_ADVANCE,
+                        "Parabens! O Homem do Pantano foi totalmente derrotado! O bau de recompensas apareceu. Voces tem 2 minutos para abrir o bau antes de serem teleportados!")
+                end
+            end
+        end
+
+        bossRoomState.exitTimerId = addEvent(teleportPlayersOut, CLEANUP_DELAY)
+
+    else
+        dyingBoss.respawnTimer = addEvent(respawnBossPart, SYNC_DEATH_WINDOW, partKey)
+
+        local specs = getSpectators(ROOM_CENTER, ROOM_RANGEX, ROOM_RANGEY)
+        if specs and #specs > 0 then
+            for i = 1, #specs do
+                if isPlayer(specs[i]) then
+                    doPlayerSendTextMessage(specs[i], MESSAGE_STATUS_WARNING,
+                        dyingBoss.label .. " do Homem do Pantano foi derrotado(a)! Mate os membros restantes em no maximo 5 segundos ou ele(a) se regenerara!")
+                end
+            end
+        end
+    end
 
     return true
 end

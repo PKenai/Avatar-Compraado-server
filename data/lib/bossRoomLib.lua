@@ -1,33 +1,8 @@
---[[
- * BossRoomLib - Shared functions and state for the Boss Room system
- * Loaded globally via data/lib/, accessible from all script types.
- *
- * Used by:
- *   data/actions/scripts/bossRoom.lua (lever action)
- *   data/creaturescripts/scripts/bossRoomPantano.lua (boss death event)
-]]
-
--- ============================================================
--- Global state (persists across calls)
--- ============================================================
-bossRoomState = bossRoomState or {
-    active = false,
-    bossId = nil,
-    healTimerId = nil,
-    tentacleTimerId = nil,
-}
-
--- ============================================================
--- Constants
--- ============================================================
 BOSS_ROOM_FROM = BOSS_ROOM_FROM or {x = 120, y = 1924, z = 7}
 BOSS_ROOM_TO   = BOSS_ROOM_TO   or {x = 177, y = 1968, z = 7}
 ROOM_CENTER    = ROOM_CENTER    or {x = 149, y = 1946, z = 7}
 ROOM_RANGEX    = ROOM_RANGEX    or 30
 ROOM_RANGEY    = ROOM_RANGEY    or 23
-
-BOSS_NAME      = BOSS_NAME      or "Monstro do pantano"
-BOSS_SPAWN     = BOSS_SPAWN     or {x = 147, y = 1940, z = 7}
 
 TENTACLE_NAME     = TENTACLE_NAME     or "Tentaculos do pantano"
 TENTACLE_MIN_DIST = TENTACLE_MIN_DIST or 3
@@ -44,12 +19,78 @@ ENTRY_TILES = ENTRY_TILES or {
 }
 
 EXIT_POS = EXIT_POS or {x = 799, y = 519, z = 6}
+TELEPORT_POS = TELEPORT_POS or {x = 142, y = 1953, z = 7}
 
--- ============================================================
--- Shared functions
--- ============================================================
+CHEST_ITEMID   = 18878
+CHEST_ACTIONID = 50011
+CHEST_POS      = {x = 145, y = 1944, z = 7}
 
--- Remove all tentacles from the boss room
+REWARD_CRYSTAL_COIN  = 2160
+REWARD_CRYSTAL_COUNT = 2
+REWARD_PLATINUM_COIN = 2152
+REWARD_PLATINUM_COUNT = 50
+
+BOSS_COOLDOWN_STORAGE  = 50010
+BOSS_COOLDOWN_TIME     = 5 * 3600
+
+CHEST_COOLDOWN_STORAGE = 50011
+CHEST_COOLDOWN_TIME    = 1 * 3600
+
+SYNC_DEATH_WINDOW = 5000
+
+bossRoomState = bossRoomState or {
+    active = false,
+    bosses = {
+        head = {
+            name = "Cabeca do Homem do pantano",
+            pos = {x = 145, y = 1939, z = 7},
+            cid = nil,
+            isDead = false,
+            respawnTimer = nil,
+            label = "A cabeça",
+        },
+        leftArm = {
+            name = "Braco do Homem do pantano",
+            pos = {x = 143, y = 1941, z = 7},
+            cid = nil,
+            isDead = false,
+            respawnTimer = nil,
+            label = "O braço esquerdo",
+        },
+        rightArm = {
+            name = "Braco do Homem do pantano",
+            pos = {x = 148, y = 1941, z = 7},
+            cid = nil,
+            isDead = false,
+            respawnTimer = nil,
+            label = "O braço direito",
+        },
+    },
+    healTimerId = nil,
+    tentacleTimerId = nil,
+    exitTimerId = nil,
+}
+
+function bossRoomRemoveChest()
+    local item = getTileItemById(CHEST_POS, CHEST_ITEMID)
+    if item and item.uid and item.uid > 0 then
+        doRemoveItem(item.uid)
+        return true
+    end
+    return false
+end
+
+function bossRoomSpawnChest()
+    bossRoomRemoveChest()
+    local chest = doCreateItem(CHEST_ITEMID, 1, CHEST_POS)
+    if chest and chest > 0 then
+        doSetItemActionId(chest, CHEST_ACTIONID)
+        doSendMagicEffect(CHEST_POS, CONST_ME_MAGIC_BLUE)
+        return true
+    end
+    return false
+end
+
 function bossRoomRemoveTentacles()
     local specs = getSpectators(ROOM_CENTER, ROOM_RANGEX, ROOM_RANGEY)
     if specs and #specs > 0 then
@@ -61,7 +102,17 @@ function bossRoomRemoveTentacles()
     end
 end
 
--- Stop all timers and clean up state
+function bossRoomRemoveAllMonsters()
+    local specs = getSpectators(ROOM_CENTER, ROOM_RANGEX, ROOM_RANGEY)
+    if specs and #specs > 0 then
+        for i = 1, #specs do
+            if isMonster(specs[i]) then
+                doRemoveCreature(specs[i])
+            end
+        end
+    end
+end
+
 function bossRoomStopTimers()
     bossRoomState.active = false
     if bossRoomState.healTimerId then
@@ -72,6 +123,68 @@ function bossRoomStopTimers()
         stopEvent(bossRoomState.tentacleTimerId)
         bossRoomState.tentacleTimerId = nil
     end
-    bossRoomRemoveTentacles()
-    bossRoomState.bossId = nil
+    if bossRoomState.exitTimerId then
+        stopEvent(bossRoomState.exitTimerId)
+        bossRoomState.exitTimerId = nil
+    end
+
+    for key, boss in pairs(bossRoomState.bosses) do
+        if boss.respawnTimer then
+            stopEvent(boss.respawnTimer)
+            boss.respawnTimer = nil
+        end
+        boss.cid = nil
+        boss.isDead = false
+    end
+end
+
+function bossRoomResetAll()
+    bossRoomStopTimers()
+    bossRoomRemoveAllMonsters()
+    bossRoomRemoveChest()
+end
+
+function areAllBossesDead()
+    for key, boss in pairs(bossRoomState.bosses) do
+        if not boss.isDead then
+            return false
+        end
+    end
+    return true
+end
+
+function getBossKeyByCid(cid)
+    for key, boss in pairs(bossRoomState.bosses) do
+        if boss.cid == cid then
+            return key
+        end
+    end
+    return nil
+end
+
+function respawnBossPart(partKey)
+    if not bossRoomState.active then return end
+    local boss = bossRoomState.bosses[partKey]
+    if not boss or not boss.isDead then return end
+
+    boss.respawnTimer = nil
+
+    if areAllBossesDead() then return end
+
+    local newCid = doCreateMonster(boss.name, boss.pos, false, false)
+    if newCid and newCid > 0 then
+        boss.cid = newCid
+        boss.isDead = false
+        doSendMagicEffect(boss.pos, CONST_ME_TELEPORT)
+
+        local specs = getSpectators(ROOM_CENTER, ROOM_RANGEX, ROOM_RANGEY)
+        if specs and #specs > 0 then
+            for i = 1, #specs do
+                if isPlayer(specs[i]) then
+                    doPlayerSendTextMessage(specs[i], MESSAGE_STATUS_WARNING,
+                        boss.label .. " do Homem do Pântano se regenerou! Todos devem morrer em até 5 segundos de diferença!")
+                end
+            end
+        end
+    end
 end

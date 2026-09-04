@@ -3015,8 +3015,8 @@
 	<spawn centerx="434" centery="539" centerz="7" radius="1">
 		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="445" centery="540" centerz="7" radius="1">
-		<monster name="Caranguejo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="445" centery="541" centerz="7" radius="1">
+		<monster name="Caranguejo" x="0" y="-1" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="476" centery="541" centerz="7" radius="1">
 		<monster name="Abelha urubu" x="0" y="0" z="7" spawntime="60" direction="2" />
