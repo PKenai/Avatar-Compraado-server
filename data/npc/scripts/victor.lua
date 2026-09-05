@@ -1,7 +1,7 @@
 -- Victor - Quest: matar 1000 Oncas (quest id 36)
 -- Storages: 49360 = status, 49361 = progresso
--- Recompensa: 100 platinum coins (2152) + 500.000 exp
--- Titulo: "Cacador de Felinos" (conquista 33)
+-- Reward: 100 platinum coins (2152) + 500.000 exp
+-- Title: "Cacador de Felinos" (achievement 33)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -48,7 +48,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -56,7 +56,7 @@ end
 
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. QUEST_NAME)
     end)
@@ -71,7 +71,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Voce parece ser um {caçador} de verdade. Tenho um trabalho perigoso pra voce na selva. Interessado?", cid)
+    selfSay("You seem like a real {hunter}. I have a dangerous job for you in the jungle. Interested?", cid)
     return true
 end
 
@@ -90,38 +90,38 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja caçou todas as oncas! A selva esta mais segura agora!", cid)
+                selfSay("You already hunted all the jaguars! The jungle is safer now!", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Incrivel! Voce caçou as 1000 oncas! Quer sua recompensa?", cid)
+                    selfSay("Incredible! You hunted the 1000 jaguars! Want your reward?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda faltam " .. (NEEDED - progress) .. " oncas. Eas selva e perigosa, va com cuidado!", cid)
+                    selfSay("Still need " .. (NEEDED - progress) .. " jaguars. The jungle is dangerous, be careful!", cid)
                 end
             else
-                selfSay("As oncas estao atacando os viajantes na selva. Mate 1000 delas e eu te recompensarei como um verdadeiro {caçador}!", cid)
+                selfSay("The jaguars are attacking travelers in the jungle. Kill 1000 of them and I will reward you as a true {hunter}!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "onca") or msgcontains(msg, "selva") or msgcontains(msg, "caçador") or msgcontains(msg, "ajuda") then
+        elseif msgcontains(msg, "onca") or msgcontains(msg, "selva") or msgcontains(msg, "caçador") or msgcontains(msg, "help") then
             if started and not completed then
-                selfSay("Ainda faltam " .. (NEEDED - progress) .. " oncas. A selva e perigosa, va com cuidado!", cid)
+                selfSay("Still need " .. (NEEDED - progress) .. " jaguars. The jungle is dangerous, be careful!", cid)
             else
-                selfSay("Eu sou o {Victor}! As oncas da selva estao ficando agressivas e atacando viajantes. Preciso de um caçador corajoso pra elimina-las.", cid)
+                selfSay("I am {Victor}! The jungle jaguars are becoming aggressive and attacking travelers. I need a brave hunter to eliminate them.", cid)
             end
         else
-            selfSay("Nao entendi. Voce quer aceitar o trabalho de {caçador}?", cid)
+            selfSay("I didn't understand. Do you want to accept the {hunter} job?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Aqui estao seus 100 platinum coins e 500 mil de experiencia! Voce e um cacador de felinos nato!", cid)
+            selfSay("Here are your 100 platinum coins and 500 thousand experience! You're a born feline hunter!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, volte quando quiser receber sua recompensa.", cid)
+            selfSay("Alright, come back when you want to receive your reward.", cid)
             talkState[talkUser] = 1
         end
     end

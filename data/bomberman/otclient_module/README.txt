@@ -24,7 +24,8 @@ Copie a pasta "bomberman_button" para a pasta de modulos do client:
 Reinicie o client. Quando a partida de Bomberman comecar, a janelinha "BOMB"
 aparece no canto inferior direito da tela. Clique nela para soltar a bomba.
 
-Opcodes: 160 = servidor -> client (abre/fecha), 161 = client -> servidor (clique).
+Opcodes: 171 = servidor -> client (abre/fecha), 161 = client -> servidor (clique).
+(NOTA: o opcode de recebimento foi movido de 160 para 171 para nao colidir com o modulo do party icons (mods/game_partyIcons), que usa o 160. O 163 nao serve: pertence ao game_monsterloot.)
 
 ================================================================================
 2) MUSICA DO EVENTO (por area, estilo shader)

@@ -1,18 +1,18 @@
 -- Felipinho - Quest: Massacre da familia do Traidor
--- Historia: um cara estranho roubou o dinheirinho do pirulito do Felipinho e,
+-- Story: um cara estranho roubou o dinheirinho do pirulito do Felipinho e,
 -- quando ele tentou recuperar, o homem (muito forte) deu um soco na cara dele.
 -- Felipinho pede ao jogador para MASSACRAR a familia desse homem (os
 -- Traidores) e devolver o dinheiro: 100k de gold.
 --
 -- Storages (string, por player):
---   "felipinhoQuest"  = 0 (nao iniciou) / 1 (em andamento) / 2 (recompensa dada)
+--   "felipinhoQuest"  = 0 (nao iniciou) / 1 (em andamento) / 2 (reward dada)
 --   "felipinhoKills"  = quantidade de Traidores mortos (max 800)
 --   (o contador e incrementado por data/creaturescripts/scripts/traidorDeath.lua)
 --
--- Requisitos: level 155+ (o Set de um traidor exige level 155) e a missao so
+-- Requisitos: level 155+ (o Set de um traidor exige level 155) e a mission so
 -- pode ser feita UMA vez por player.
 --
--- Recompensa: UMA peca do Set de um traidor (ids 13636-13640), escolhida pelo
+-- Reward: UMA peca do Set de um traidor (ids 13636-13640), escolhida pelo
 -- jogador. Para completar: matar 800 Traidores + entregar 100k de gold.
 
 local keywordHandler = KeywordHandler:new()
@@ -59,9 +59,9 @@ end
 local function remainingPhrase(cid)
     local n = MAX_KILLS - killsCount(cid)
     if n == 1 then
-        return "falta 1 Traidor"
+        return "1 Traitor left"
     end
-    return "faltam " .. n .. " Traidores"
+    return n .. " Traitors left"
 end
 
 
@@ -86,25 +86,25 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     if getPlayerLevel(cid) < LEVEL_REQUIRED then
-        selfSay("Nossa, você é muito fraquinho! Aquele homem me deu um soco que quase me derrubou... só guerreiros de level 155 ou mais podem encarar a família dele.", cid)
+        selfSay("Wow, you are very weak! That man punched me and almost knocked me down... only warriors of level 155 or higher can face his family.", cid)
         return true
     end
     talkState[cid] = 1
     local name = playerName(cid)
 
     if questCompleted(cid) then
-        selfSay("Olá, " .. name .. "! Muito obrigado por ter recuperado meu dinheiro. Agora posso comprar meus pirulitos em paz!", cid)
+        selfSay("Hello, " .. name .. "! Thank you so much for recovering my money. Now I can buy my lollipops in peace!", cid)
     elseif rewardReady(cid) then
-        selfSay("Olá, " .. name .. "! Você massacrou a família toda e trouxe meu dinheiro! Enquanto fugia, peguei uns equipamentos dos Traidores. Qual peça você quer? {elmo}, {armadura}, {calça}, {bota} ou {escudo}?", cid)
+        selfSay("Hello, " .. name .. "! You massacred the whole family and brought my money! While fleeing, I grabbed some equipment from the Traitors. Which piece do you want? {helmet}, {armor}, {pants}, {boots} or {shield}?", cid)
         talkState[cid] = 2
     elseif questStarted(cid) then
         if not massacreDone(cid) then
-            selfSay("Olá, " .. name .. "! Ainda " .. remainingPhrase(cid) .. " para o massacre ficar completo. E não esqueça de trazer meu dinheiro!", cid)
+            selfSay("Hello, " .. name .. "! Still " .. remainingPhrase(cid) .. " for the massacre to be complete. And don't forget to bring my money!", cid)
         else
-            selfSay("Olá, " .. name .. "! O massacre foi um sucesso! Agora me devolva meu dinheiro: são 100k de gold.", cid)
+            selfSay("Hello, " .. name .. "! The massacre was a success! Now return my money: it's 100k gold.", cid)
         end
     else
-        selfSay("Olá, " .. name .. "! Um cara estranho roubou o dinheirinho do meu pirulito! Eu tentei pegar de volta, mas ele é muito forte e me deu um soco na cara... Quer massacrar a família desse homem pra mim e recuperar meu dinheiro?", cid)
+        selfSay("Hello, " .. name .. "! A strange man stole my lollipop money! I tried to get it back, but he is very strong and punched me in the face... Want to massacre this man's family for me and recover my money?", cid)
     end
     return true
 end
@@ -114,7 +114,7 @@ function creatureSayCallback(cid, type, msg)
         return false
     end
     if getPlayerLevel(cid) < LEVEL_REQUIRED then
-        selfSay("Nossa, você ainda e muito fraquinho pra encarar a família dele. Volte com level 155 ou mais!", cid)
+        selfSay("Wow, you are still too weak to face his family. Come back with level 155 or higher!", cid)
         return false
     end
     local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
@@ -127,49 +127,49 @@ function creatureSayCallback(cid, type, msg)
     local ready = rewardReady(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Você já me ajudou, " .. name .. "! Minha família de pirulitos agradece.", cid)
+                selfSay("You already helped me, " .. name .. "! My lollipop family thanks you.", cid)
             elseif ready then
-                selfSay("Qual peça do set de um traidor você quer? {elmo}, {armadura}, {calça}, {bota} ou {escudo}?", cid)
+                selfSay("Which piece of a Traitor's set do you want? {helmet}, {armor}, {pants}, {boots} or {shield}?", cid)
                 talkState[talkUser] = 2
             elseif questStarted(cid) then
                 if not massacreDone(cid) then
-                    selfSay("Você já aceitou! Massacre " .. MAX_KILLS .. " Traidores e volte com meu dinheiro. Não esqueça os 100k!", cid)
+                    selfSay("You already accepted! Massacre " .. MAX_KILLS .. " Traitors and come back with my money. Don't forget the 100k!", cid)
                 else
-                    selfSay("O massacre já está completo! Agora me devolva meu dinheiro: 100k de gold.", cid)
+                    selfSay("The massacre is already complete! Now return my money: 100k gold.", cid)
                 end
             else
-                selfSay("Ótimo! A família dele são os Traidores. Massacre " .. MAX_KILLS .. " deles, pegue meu dinheiro de volta e traga pra mim!", cid)
+                selfSay("Great! His family are the Traitors. Massacre " .. MAX_KILLS .. " of them, get my money back and bring it to me!", cid)
                 setPlayerStorageValue(cid, QUEST_STORAGE, 1)
                 setPlayerStorageValue(cid, KILLS_STORAGE, 0)
                 setPlayerStorageValue(cid, QUEST_SYSTEM_STORAGE, 1)
                 doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest: Massacre " .. MAX_KILLS .. " Traidores e recupere os 100k do Felipinho!")
             end
-        elseif msgcontains(msg, "não") or msgcontains(msg, "no") then
+        elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
             if completed then
-                selfSay("Tudo bem, " .. name .. ". Muito obrigado por tudo!", cid)
+                selfSay("Alright, " .. name .. ". Thank you very much for everything!", cid)
             else
-                selfSay("Entendido, " .. name .. ". Se mudar de ideia, volta aqui. Aquele soco ainda doi...", cid)
+                selfSay("Understood, " .. name .. ". If you change your mind, come back here. That punch still hurts...", cid)
             end
         elseif msgcontains(msg, "traidor") or msgcontains(msg, "família") or msgcontains(msg, "dinheiro")
             or msgcontains(msg, "pirulito") or msgcontains(msg, "soco") then
             if completed then
-                selfSay("Você já me ajudou com a família dele, " .. name .. ". Não preciso de mais nada!", cid)
+                selfSay("You already helped me with his family, " .. name .. ". I don't need anything else!", cid)
             elseif ready then
-                selfSay("Você conseguiu! Qual peça do set de um traidor você quer?", cid)
+                selfSay("You did it! Which piece of a Traitor's set do you want?", cid)
                 talkState[talkUser] = 2
             elseif questStarted(cid) then
                 if not massacreDone(cid) then
-                    selfSay("A família dele são os Traidores! Ainda " .. remainingPhrase(cid) .. ". Massacre todos e traga meu dinheiro.", cid)
+                    selfSay("His family are the Traitors! Still " .. remainingPhrase(cid) .. ". Massacre them all and bring my money.", cid)
                 else
-                    selfSay("O massacre acabou! Agora me devolva meu dinheiro: 100k de gold.", cid)
+                    selfSay("The massacre is over! Now return my money: 100k gold.", cid)
                 end
             else
-                selfSay("Um cara estranho roubou o dinheirinho do meu pirulito e me deu um soco na cara! Quer massacrar a família dele e recuperar meu dinheiro?", cid)
+                selfSay("A strange man stole my lollipop money and punched me in the face! Want to massacre his family and recover my money?", cid)
             end
         else
-            selfSay("Não entendi. Quer massacrar a família do homem que roubou meu dinheiro?", cid)
+            selfSay("I didn't understand. Do you want to massacre the family of the man who stole my money?", cid)
         end
     elseif talkState[talkUser] == 2 then
         local chosen = nil
@@ -193,14 +193,14 @@ function creatureSayCallback(cid, type, msg)
                 doPlayerAddItem(cid, chosen.id, 1)
                 setPlayerStorageValue(cid, QUEST_STORAGE, 2)
                 setPlayerStorageValue(cid, QUEST_SYSTEM_STORAGE, 2)
-                selfSay("Aqui está, " .. name .. "! " .. chosen.article .. " " .. chosen.name .. " de um traidor. Use bem... e obrigado por recuperar meu dinheiro!", cid)
+                selfSay("Here it is, " .. name .. "! " .. chosen.article .. " " .. chosen.name .. " of a Traitor. Use it well... and thank you for recovering my money!", cid)
                 talkState[talkUser] = 1
             else
-                selfSay("Calma, " .. name .. "! Primeiro massacre os " .. MAX_KILLS .. " Traidores e traga meu dinheiro: 100k de gold.", cid)
+                selfSay("Calm down, " .. name .. "! First massacre the " .. MAX_KILLS .. " Traitors and bring my money: 100k gold.", cid)
                 talkState[talkUser] = 1
             end
         else
-            selfSay("Qual peça? {elmo}, {armadura}, {calça}, {bota} ou {escudo}?", cid)
+            selfSay("Which piece? {helmet}, {armor}, {pants}, {boots} or {shield}?", cid)
         end
     end
     return true

@@ -1,5 +1,5 @@
 -- Rafinha - Quest: O Anel do Rafinha (quest id 25)
--- Historia: Rafinha perdeu o anel do pai dentro do lago onde eles costumam
+-- Story: Rafinha perdeu o anel do pai dentro do lago onde eles costumam
 -- pescar e pede ajuda pra recupera-lo antes do pai voltar. O jogador usa a
 -- vara de pescar (2580) no ponto do lago com actionid 49252 (5% de chance
 -- de pescar o Anel de tubarao, 18880 - integrado no tools/fishing.lua) e
@@ -8,8 +8,8 @@
 --   49250 = status (1 = em andamento, 2 = anel pescado, 3 = completa)
 --   49251 = progresso (1 = anel pescado; setado pelo fishing.lua)
 -- Item: Anel de tubarao (18880) - fica com o jogador
--- Recompensa: 100.000 de experiencia + titulo "Pescador nato"
--- (conquista id 22, achievementsLib.lua)
+-- Reward: 100.000 de experiencia + titulo "Pescador nato"
+-- (achievement id 22, achievementsLib.lua)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -58,7 +58,7 @@ local function startQuest(cid)
     end
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     print("[Rafinha] startQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Nova missão: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -69,7 +69,7 @@ local function deliverQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 3)
     doSendMagicEffect(getCreaturePosition(cid), CONST_ME_MAGIC_BLUE)
 
-    -- Titulo "Pescador nato": conquista id 22 (achievementsLib.lua), mesmo
+    -- Titulo "Pescador nato": achievement id 22 (achievementsLib.lua), mesmo
     -- padrao manual do "Amigo dos animais" (desbloqueio via NPC).
     setPlayerStorageValue(cid, "achCreatureKill_22", 1)
     local ok = pcall(function()
@@ -83,7 +83,7 @@ local function deliverQuest(cid)
     end
 
     print("[Rafinha] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missão concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. QUEST_NAME)
     end)
@@ -98,21 +98,21 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     if getPlayerLevel(cid) < LEVEL_REQUIRED then
-        selfSay("Olá, acho que vou precisar de ajuda logo logo antes do meu pai chegar!", cid)
+        selfSay("Hello, I think I'll need help soon before my dad arrives!", cid)
         return true
     end
     talkState[cid] = 1
     local name = getCreatureName(cid)
 
     if questCompleted(cid) then
-        selfSay("Olá, " .. name .. "! Obrigado de novo por me ajudar com o anel! Meu pai adorou a história que eu contei pra ele!", cid)
+        selfSay("Hello, " .. name .. "! Thank you again for helping me with the ring! My dad loved the story I told him!", cid)
     elseif ringCaught(cid) then
         deliverQuest(cid)
-        selfSay("Nossa, esse anel era meu há muito tempo atrás, não e o do meu pai, mas, obrigado mesmo assim, eu vou contar pro meu pai o que aconteceu, mas pode ficar com meu anel de tubarão pra você, ele costumava ser meu favorito, obrigado pela ajuda!", cid)
+        selfSay("Wow, this ring was mine a long time ago, it's not my dad's, but thank you anyway. I'll tell my dad what happened, but you can keep my shark ring, it used to be my favorite. Thank you for the help!", cid)
     elseif questStarted(cid) then
-        selfSay("Olá, " .. name .. "! Você já achou o anel do meu pai no lago? Ele vai voltar logo e eu não posso chegar em casa sem o anel...", cid)
+        selfSay("Hello, " .. name .. "! Have you already found my dad's ring in the lake? He's coming back soon and I can't go home without the ring...", cid)
     else
-        selfSay("Olá, " .. name .. "! Meu pai e eu costumamos pescar no lago aqui perto, mas hoje eu perdi o anel dele dentro da água! Ele vai voltar logo e eu não posso chegar em casa sem o anel... Você pode me ajudar a pegar o anel de novo antes que meu pai volte?", cid)
+        selfSay("Hello, " .. name .. "! My dad and I used to fish in the lake nearby, but today I lost his ring in the water! He's coming back soon and I can't go home without the ring... Can you help me get the ring back before my dad returns?", cid)
     end
     return true
 end
@@ -122,7 +122,7 @@ function creatureSayCallback(cid, type, msg)
         return false
     end
     if getPlayerLevel(cid) < LEVEL_REQUIRED then
-        selfSay("Você ainda e muito novinho pra essa aventura. Volte com level 50 ou mais!", cid)
+        selfSay("You're still too young for this adventure. Come back with level 50 or higher!", cid)
         return false
     end
     local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
@@ -136,31 +136,31 @@ function creatureSayCallback(cid, type, msg)
     local caught = ringCaught(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Você já me ajudou, " .. name .. "! Obrigado por tudo!", cid)
+                selfSay("You already me ajudou, " .. name .. "! Thank you por tudo!", cid)
             elseif caught then
                 deliverQuest(cid)
-                selfSay("Nossa, esse anel era meu há muito tempo atrás, não e o do meu pai, mas, obrigado mesmo assim, eu vou contar pro meu pai o que aconteceu, mas pode ficar com meu anel de tubarão pra você, ele costumava ser meu favorito, obrigado pela ajuda!", cid)
+                selfSay("Wow, this ring was mine a long time ago, it's not my dad's, but thank you anyway. I'll tell my dad what happened, but you can keep my shark ring, it used to be my favorite. Thank you for the help!", cid)
             elseif questStarted(cid) then
-                selfSay("Você já aceitou! Use a vara de pescar no lago e tente achar o anel. Eu fico te esperando aqui!", cid)
+                selfSay("You already aceitou! Use a vara of pescar no lago e tente achar o anel. Eu fico te esperando aqui!", cid)
             else
                 selfSay("Muito obrigado, " .. name .. "! Use esta vara de pescar no lago e tente achar o anel! Eu fico te esperando aqui!", cid)
                 startQuest(cid)
             end
         elseif msgcontains(msg, "anel") or msgcontains(msg, "lago") or msgcontains(msg, "pai")
-            or msgcontains(msg, "pescar") or msgcontains(msg, "ajuda") or msgcontains(msg, "vara") then
+            or msgcontains(msg, "pescar") or msgcontains(msg, "help") or msgcontains(msg, "vara") then
             if completed then
-                selfSay("Obrigado por ter recuperado o anel, " .. name .. "! Foi uma grande aventura!", cid)
+                selfSay("Thank you por ter recuperado o anel, " .. name .. "! Foi uma grande aventura!", cid)
             elseif caught then
-                selfSay("Você pescou o anel! Volte aqui pra me entregar!", cid)
+                selfSay("You caught the ring! Come back here to give it to me!", cid)
             elseif questStarted(cid) then
                 selfSay("Use a vara de pescar no lago e tente achar o anel do meu pai antes que ele volte!", cid)
             else
-                selfSay("Meu pai e eu costumamos pescar no lago aqui perto, e eu perdi o anel dele dentro da água! Você pode me ajudar a pegar o anel de novo antes que meu pai volte?", cid)
+                selfSay("My dad and I used to fish in the lake nearby, and I lost his ring in the water! Can you help me get the ring back before my dad returns?", cid)
             end
         else
-            selfSay("Não entendi. Está falando do {anel} do meu pai no lago?", cid)
+            selfSay("I didn't understand. Are you talking about my dad's {ring} in the lake?", cid)
         end
     end
     return true

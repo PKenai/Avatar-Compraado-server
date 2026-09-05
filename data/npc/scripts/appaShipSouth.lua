@@ -18,20 +18,20 @@ npcHandler:setMessage(MESSAGE_WALKAWAY, "")
 
 local function tryTravel(cid, destination)
 	if isAppaFlying and isAppaFlying(cid) then
-		selfSay(getLangString(cid, "You are already flying!", "Você já está voando!"), cid)
+		selfSay("You are already flying!", cid)
 		if appaFlightUnlock then appaFlightUnlock(cid) end
 		return
 	end
 	if doPlayerRemoveMoney(cid, 50) then
-		selfSay(getLangString(cid, "We are leaving!", "Estamos saindo!"), cid)
+		selfSay("We are leaving!", cid)
 		if not startAppaFlight(cid, destination) then
 			doPlayerAddMoney(cid, 50)
 			if appaFlightUnlock then appaFlightUnlock(cid) end
-			selfSay(getLangString(cid, "Something went wrong with the Appa flight.", "Algo deu errado com o voo do Appa."), cid)
+			selfSay("Something went wrong with the Appa flight.", cid)
 		end
 	else
 		if appaFlightUnlock then appaFlightUnlock(cid) end
-		selfSay(getLangString(cid, "You dont have 50 gold coins.", "Você não tem 50 gold coins."), cid)
+		selfSay("You dont have 50 gold coins.", cid)
 	end
 end
 
@@ -60,22 +60,22 @@ function creatureSayCallback(cid, type, msg)
 		elseif msgcontains(msg, "no") then
 			pendingDest[cid] = nil
 			talkState[talkUser] = 1
-			selfSay(getLangString(cid, "Maybe next time.", "Talvez na próxima."), cid)
+			selfSay("Maybe next time.", cid)
 		end
 		return true
 	end
 
 	if talkState[talkUser] == 1 then
 		if msgcontains(msg, "routes") or msgcontains(msg, "rotas") or msgcontains(msg, "travel") then
-			selfSay(getLangString(cid, "I can take you to: {Ba Sing Se} or {West Field} for 50 gold coins.", "Eu posso levar você para: {Ba Sing Se} ou {West Field} por 50 gold coins."), cid)
+			selfSay("I can take you to: {Ba Sing Se} or {West Field} for 50 gold coins.", cid)
 		elseif msgcontains(msg, "sing") then
 			pendingDest[cid] = {x = 552, y = 344, z = 6}
 			talkState[talkUser] = 2
-			selfSay(getLangString(cid, "Travel to Ba Sing Se for 50 gold? Say {yes} or {no}.", "Viajar para Ba Sing Se por 50 gold? Digite {yes} ou {no}."), cid)
+			selfSay("Travel to Ba Sing Se for 50 gold? Say {yes} or {no}.", cid)
 		elseif msgcontains(msg, "west") then
 			pendingDest[cid] = {x = 716, y = 529, z = 5}
 			talkState[talkUser] = 2
-			selfSay(getLangString(cid, "Travel to West Field for 50 gold? Say {yes} or {no}.", "Viajar para West Field por 50 gold? Digite {yes} ou {no}."), cid)
+			selfSay("Travel to West Field for 50 gold? Say {yes} or {no}.", cid)
 		end
 	end
 	return true
@@ -84,7 +84,7 @@ end
 function onGreet(cid)
 	talkState[cid] = 1
 	pendingDest[cid] = nil
-	selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", do you want to {travel}?", "Olá "..getCreatureName(cid).."! Eu posso lhe transportar para varios lugares, deseja ver minhas {rotas}?"), cid)
+	selfSay("Hello "..getCreatureName(cid)..", do you want to {travel}?", cid)
 	return true
 end
 

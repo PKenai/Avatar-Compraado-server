@@ -14,7 +14,7 @@ function onCreatureSay(cid, type, msg)
 			return false 
 		end 
 		if not isInPz(cid) and (isPlayerPzLocked(cid) or getCreatureCondition(cid, CONDITION_INFIGHT)) then
-			npcGen:say('Não posso falar com você agora.', 'Não posso falar com você agora.') 
+			npcGen:say("I can't talk to you right now.", "I can't talk to you right now.") 
 			return false
 		end
         if stage == 1 then
@@ -46,26 +46,26 @@ function onCreatureSay(cid, type, msg)
                         end    
                        ]]
                 elseif stage == 4 then
-                        if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+                        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                                 if getPlayerStorageValue(cid, "canAttackable") == 1 then
-                                        npcGen:say("You alredy have this blessing.", "Você já tem esta benção.")
+                                        npcGen:say("You alredy have this blessing.", "You already tem esta benção.")
                                 elseif exhaustion.check(cid, "Archangel_Start") then
                                         local segundos = exhaustion.get(cid, "Archangel_Start")
                                         local minutos = segundos/60 
                                         local horas = minutos/60
                                         minutos = math.ceil(minutos)
                                         horas = math.ceil(horas)
-                                        local strBR = "Você já teve sua benção recentemente, volte em "
+                                        local strBR = "You already teve sua benção recentemente, volte em "
                                         local strEN = "You've got your blessing recently, come back in"
                                         if horas > 0 then 
-                                            strBR = strBR .. ""..horas.." hora(s)."
-                                            strEN = strEN .. ""..horas.." hour(s)."
+                                            strBR = strBR .. " " .. horas .. " hora(s)."
+                                            strEN = strEN .. " " .. horas .. " hour(s)."
                                         elseif minutos > 0 then 
-                                            strBR = strBR .. ""..minutos.." minuto(s)."
-                                            strEN = strEN .. ""..minutos.." minute(s)."
+                                            strBR = strBR .. " " .. minutos .. " minuto(s)."
+                                            strEN = strEN .. " " .. minutos .. " minute(s)."
                                         else
-                                            strBR = strBR .. ""..segundos.." segundo(s)."
-                                            strEN = strEN .. ""..segundos.." second(s)."
+                                            strBR = strBR .. " " .. segundos .. " segundo(s)."
+                                            strEN = strEN .. " " .. segundos .. " second(s)."
                                         end 
                                         npcGen:say(strEN, strBR)
                              --   elseif doPlayerRemoveItem(cid, 6527, 2) then
@@ -91,7 +91,7 @@ function onCreatureSay(cid, type, msg)
                                 end
                         end
             --[[    elseif stage >= 10 then
-                        if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+                        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
 								if (stage-10) >= 1 then 
 									if doPlayerRemoveItem(cid, 6527,  (stage - 10)*10) then
                                         npcGen:say("Did you get your coins elemental.", "Você recebeu suas elemental coins.")

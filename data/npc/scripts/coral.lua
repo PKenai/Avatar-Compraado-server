@@ -1,7 +1,7 @@
 -- Coral - Quest: matar 200 Carangueijos Ermitaos (quest id 33)
 -- Storages: 49330 = status, 49331 = progresso
--- Recompensa: 60 platinum coins (2152) + 140.000 exp
--- Titulo: "Resgatador de Conchas" (conquista 30)
+-- Reward: 60 platinum coins (2152) + 140.000 exp
+-- Title: "Resgatador de Conchas" (achievement 30)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -48,7 +48,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -56,7 +56,7 @@ end
 
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. QUEST_NAME)
     end)
@@ -90,38 +90,38 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja salvou os carangueijos! Obrigada, voce e meu heroi da praia!", cid)
+                selfSay("You already salvou os carangueijos! Thank you, voce e meu heroi da praia!", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Incrivel! Voce eliminou os 200 carangueijos ermitaos! Quer sua recompensa?", cid)
+                    selfSay("Incredible! Voce eliminou os 200 carangueijos ermitaos! Quer sua recompensa?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda faltam " .. (NEEDED - progress) .. " carangueijos ermitaos. Eles estao bravos nas rochas!", cid)
+                    selfSay("Still need " .. (NEEDED - progress) .. " carangueijos ermitaos. Eles estao bravos nas rochas!", cid)
                 end
             else
                 selfSay("Eu encontrei um carangueijo ermitao de casca dourada na praia! Mas os ermitaos perigosos estao atacando os mansos. Voce pode me {ajudar} a proteger os carangueijos mansos?", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "carangueijo") or msgcontains(msg, "ermitao") or msgcontains(msg, "praia") or msgcontains(msg, "ajuda") then
+        elseif msgcontains(msg, "carangueijo") or msgcontains(msg, "ermitao") or msgcontains(msg, "praia") or msgcontains(msg, "help") then
             if started and not completed then
-                selfSay("Ainda faltam " .. (NEEDED - progress) .. " carangueijos ermitaos. Eles estao bravos nas rochas!", cid)
+                selfSay("Still need " .. (NEEDED - progress) .. " carangueijos ermitaos. Eles estao bravos nas rochas!", cid)
             else
                 selfSay("Eu sou a {Coral}! Amo carangueijos, mas os ermitaos perigosos estao atacando os mansos na praia. Voce pode me ajudar a proteger eles?", cid)
             end
         else
-            selfSay("Nao entendi. Voce quer me {ajudar} com os carangueijos?", cid)
+            selfSay("I didn't understand. Voce quer me {ajudar} com os carangueijos?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Aqui estao seus 60 platinum coins e 140 mil de experiencia! Voce agora e o Coletor de Conchas!", cid)
+            selfSay("Here are your 60 platinum coins e 140 mil experience! Voce agora e o Coletor de Conchas!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, volte quando quiser receber sua recompensa!", cid)
+            selfSay("Alright, volte quando quiser receber sua recompensa!", cid)
             talkState[talkUser] = 1
         end
     end

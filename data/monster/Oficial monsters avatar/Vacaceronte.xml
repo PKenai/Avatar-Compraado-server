@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Vacaceronte" nameDescription="um vacaceronte" race="blood" experience="12000" speed="500" manacost="0">
+<monster name="Vacaceronte" nameDescription="a vacaceronte" race="blood" experience="12000" speed="500" manacost="0">
 	<health now="7500" max="7500"/>
 	<look type="1314" corpse="18160"/>
 	<script>

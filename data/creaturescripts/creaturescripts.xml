@@ -25,6 +25,7 @@
 	<event type="death" name="mobsKill" event="script" value="mobsKill.lua"/>
 
 	<event type="statschange" name="reflect" event="script" value="reflect.lua"/>
+	<event type="statschange" name="ProficiencyCombat" event="script" value="proficiencyCombat.lua"/>
 	<!--<event type="login" name="PlayerMessages" event="script" value="loginLogout/login_popup.lua"/>-->
 
 
@@ -66,6 +67,7 @@
 	<event type="kill" name="LinkedTasksKill" event="script" value="linkedTasksKill.lua"/>
 	<event type="kill" name="QuestKill" event="script" value="questSystem.lua"/>
 	<event type="kill" name="AchievementsKill" event="script" value="achievements.lua"/>
+	<event type="kill" name="WeaponProficiencyKill" event="script" value="weaponProficiencyKill.lua"/>
 	<event type="advance" name="AchievementsAdvance" event="script" value="achievements.lua"/>
 	<event type="extendedopcode" name="AchievementsOpcode" event="script" value="achievements.lua"/>
 	<event type="extendedopcode" name="QuestsOpcode" event="script" value="questSystem.lua"/>
@@ -112,4 +114,18 @@
 
 	<!-- Daily Reward: opcode 170 -->
 	<event type="extendedopcode" name="DailyRewardOpcode" event="script" value="dailyReward.lua"/>
+
+	<!-- Battle Royale (Cajado de Sonam) -->
+	<event type="login" name="BattleRoyaleLogin" event="script" value="battleRoyale.lua"/>
+	<event type="logout" name="BattleRoyaleLogout" event="script" value="battleRoyale.lua"/>
+	<event type="preparedeath" name="BattleRoyaleDeath" event="script" value="battleRoyale.lua"/>
+
+	<!-- Party Icon HUD (opcode 160) -->
+	<event type="think" name="partyUpdate" event="script" value="partyUpdate.lua"/>
+	<event type="logout" name="partyUpdateLogout" event="script" value="partyUpdate.lua"/>
+
+	<!-- Avatar Tracker (marcador do Avatar no minimapa dos participantes do BR, opcode 160) -->
+	<event type="think" name="avatarTracker" event="script" value="avatarTracker.lua"/>
+	<event type="logout" name="avatarTrackerLogout" event="script" value="avatarTracker.lua"/>
+
 </creaturescripts>

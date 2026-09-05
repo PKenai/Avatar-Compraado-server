@@ -1574,6 +1574,9 @@ void LuaInterface::registerFunctions()
 	//getPlayerSlotItem(cid, slot)
 	lua_register(m_luaState, "getPlayerSlotItem", LuaInterface::luaGetPlayerSlotItem);
 
+	//getPlayerContainer(cid, containerIndex)
+	lua_register(m_luaState, "getPlayerContainer", LuaInterface::luaGetPlayerContainer);
+
 	//getPlayerWeapon(cid[, ignoreAmmo = false])
 	lua_register(m_luaState, "getPlayerWeapon", LuaInterface::luaGetPlayerWeapon);
 
@@ -6707,6 +6710,28 @@ int32_t LuaInterface::luaGetPlayerSlotItem(lua_State* L)
 	{
 		if(Thing* thing = player->__getThing(slot))
 			pushThing(L, thing, env->addThing(thing));
+		else
+			pushThing(L, NULL, 0);
+	}
+	else
+	{
+		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+		pushThing(L, NULL, 0);
+	}
+
+	return 1;
+}
+
+int32_t LuaInterface::luaGetPlayerContainer(lua_State* L)
+{
+	//getPlayerContainer(cid, containerIndex)
+	uint32_t index = popNumber(L);
+
+	ScriptEnviroment* env = getEnv();
+	if(Player* player = env->getPlayerByUID(popNumber(L)))
+	{
+		if(Container* container = player->getContainer(index))
+			pushThing(L, container, env->addThing(container));
 		else
 			pushThing(L, NULL, 0);
 	}

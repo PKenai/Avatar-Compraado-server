@@ -1,12 +1,12 @@
 -- Joana - Quest: matar 150 ursos ferozes (quest id 24)
--- Historia: os ursos ferozes estao tentando invadir a casa da Joana.
+-- Story: os ursos ferozes estao tentando invadir a casa da Joana.
 -- Storages (data/questSystem/quests.xml):
 --   49240 = status da quest (1 = em andamento, 2 = completa)
 --   49241 = kills acumulados (progresso)
--- Recompensa: redhot hat (12901)
--- Titulo "Abraca urso": conquista id 21 (achievementsLib.lua), desbloqueada
+-- Reward: redhot hat (12901)
+-- Titulo "Abraca urso": achievement id 21 (achievementsLib.lua), desbloqueada
 -- automaticamente ao matar 150 ursos ferozes (rastreio por kill no sistema
--- de conquistas, mesmo padrao do "Alpinista").
+-- de achievements, mesmo padrao do "Alpinista").
 --
 -- Obs: o NPC nao depende da questSystemLib (o estado Lua dos NPCs e
 -- separado do global). Usa apenas storages nativas + notificacao manual;
@@ -63,7 +63,7 @@ local function startQuest(cid)
     if pos then
         doSendMagicEffect(pos, 199)
     end
-    sendNotification(cid, QUEST_NAME, "Nova missão: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -72,7 +72,7 @@ end
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
     print("[Joana] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missão concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. QUEST_NAME)
     end)
@@ -87,7 +87,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Olá! Esses ursos ferozes estão tentando invadir a minha casa e eu não aguento mais! Você pode me ajudar a caçá-los?", cid)
+    selfSay("Hello! These fierce bears are trying to invade my house and I can't take it anymore! Can you help me hunt them?", cid)
     return true
 end
 
@@ -106,37 +106,37 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Você já salvou a minha casa dos ursos. Obrigada pela ajuda!", cid)
+                selfSay("You already salvou a minha casa dos ursos. Thank you pela ajuda!", cid)
             elseif started then
                 if progress >= URSOS_NEEDED then
-                    selfSay("Você caçou os 150 ursos ferozes! Quer receber seu presente?", cid)
+                    selfSay("You hunted the 150 fierce bears! Want to receive your gift?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda não acabou! Faltam " .. (URSOS_NEEDED - progress) .. " ursos ferozes para acabar com essa invasão.", cid)
+                    selfSay("It's not over yet! Still need " .. (URSOS_NEEDED - progress) .. " fierce bears to end this invasion.", cid)
                 end
             else
-                selfSay("Ótimo! Vá lá, cace 150 ursos ferozes e depois volte aqui pra receber seu presente!", cid)
+                selfSay("Great! Go there, hunt 150 fierce bears and then come back here to receive your gift!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "urso") or msgcontains(msg, "invadir") or msgcontains(msg, "invasa") or msgcontains(msg, "casa") or msgcontains(msg, "ajuda") or msgcontains(msg, "caca") then
+        elseif msgcontains(msg, "urso") or msgcontains(msg, "invadir") or msgcontains(msg, "invasa") or msgcontains(msg, "home") or msgcontains(msg, "help") or msgcontains(msg, "caca") then
             if started and not completed then
-                selfSay("Ainda não acabou! Faltam " .. (URSOS_NEEDED - progress) .. " ursos ferozes para acabar com essa invasão.", cid)
+                selfSay("It's not over yet! Still need " .. (URSOS_NEEDED - progress) .. " fierce bears to end this invasion.", cid)
             else
-                selfSay("Sim, uma {invasão}! Os ursos ferozes estão tentando invadir a minha casa e eu não aguento mais. Cace 150 deles pra mim!", cid)
+                selfSay("Yes, an {invasion}! The fierce bears are trying to invade my house and I can't take it anymore. Hunt 150 of them for me!", cid)
             end
         else
-            selfSay("Não entendi. Está falando da {invasão} dos ursos ferozes?", cid)
+            selfSay("I didn't understand. Are you talking about the fierce bears' {invasion}?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             completeQuest(cid)
-            selfSay("Aqui está o seu presente! Com 150 ursos ferozes derrotados, você agora é oficialmente um {Abraça urso}! Obrigada por salvar a minha casa!", cid)
+            selfSay("Here is your gift! With 150 fierce bears defeated, you are now officially a {Bear Hugger}! Thank you for saving my house!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, volte quando quiser receber seu presente.", cid)
+            selfSay("Alright, volte quando quiser receber seu presente.", cid)
             talkState[talkUser] = 1
         end
     end

@@ -22,8 +22,8 @@ function creatureSayCallback(cid, type, msg)
 		talkState[talkUser] = 1 
 	end
     local msg = msg:lower()
-    if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "voltar") or msgcontains(msg, "back") then
-		selfSay(getLangString(cid, "Alright then, get ready, we are leaving!", "Certo então, se segure, vamos embora daqui!"), cid)
+    if msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "return") or msgcontains(msg, "back") then
+		selfSay("Alright then, get ready, we are leaving!", cid)
 		doTeleportThing(cid, {x = 1008, y = 267, z = 7})
 		doSendMagicEffect(getCreaturePosition(cid), CONST_ME_TELEPORT)
 	end
@@ -32,7 +32,7 @@ end
 
 function onGreet(cid) 
 	talkState[cid] = 1
-	selfSay(getLangString(cid, "I need to get out of here, "..getCreatureName(cid)..". This place is too dangerous, we are crossing the line. I can take you with me, this time for free. Do you want to go {back}?", "Preciso sair daqui, "..getCreatureName(cid)..". Este lugar é muito perigoso, estamos ultrapassando o limite. Posso te levar comigo, não irei cobrar nada. Você quer {voltar}?"), cid)
+	selfSay("I need to get out of here, "..getCreatureName(cid)..". This place is too dangerous, we are crossing the line. I can take you with me, this time for free. Do you want to go {back}?", cid)
 	return true
 end
 

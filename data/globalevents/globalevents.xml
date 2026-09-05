@@ -26,18 +26,21 @@
 
 	<globalevent name="HouseClean" interval="5850000" event="script" value="houseclean.lua"/> 
 
-	<globalevent name="avatarA" time="05:00" event="script" value="avatar.lua"/>
-	<globalevent name="avatarB" time="09:00" event="script" value="avatar.lua"/>
-	<globalevent name="avatarC" time="13:00" event="script" value="avatar.lua"/>
-	<globalevent name="avatarD" time="18:00" event="script" value="avatar.lua"/>
-	<globalevent name="avatarE" time="21:00" event="script" value="avatar.lua"/>
-	<globalevent name="avatarF" time="23:00" event="script" value="avatar.lua"/> 
-	<globalevent name="Avaoff" interval="180000" event="script" value="avataroff.lua"/> 
+	<globalevent name="eclipseA" time="05:00" event="script" value="eclipse.lua"/>
+	<globalevent name="eclipseB" time="09:00" event="script" value="eclipse.lua"/>
+	<globalevent name="eclipseC" time="13:00" event="script" value="eclipse.lua"/>
+	<globalevent name="eclipseD" time="18:00" event="script" value="eclipse.lua"/>
+	<globalevent name="eclipseE" time="21:00" event="script" value="eclipse.lua"/>
+	<globalevent name="eclipseF" time="23:00" event="script" value="eclipse.lua"/>
 
 	<!-- Heal Cut (Grievous Wounds) -->
 	<globalevent name="HealCutInit" type="startup" event="script" value="healcut_init.lua"/>
 
 	<!-- Farm System -->
 	<globalevent name="CreatureManagerInit" type="startup" event="script" value="creature_manager_init.lua"/>
+
+	<!-- Battle Royale (Cajado de Sonam) -->
+	<globalevent name="BattleRoyaleInit" type="startup" event="script" value="battleRoyale.lua"/>
+	<globalevent name="BattleRoyaleTick" interval="5000" event="script" value="battleRoyale.lua"/>
 
 </globalevents>

@@ -1,7 +1,7 @@
 -- Silas - Quest: matar 1500 Conhecimentos Descontrolados (quest id 37)
 -- Storages: 49370 = status, 49371 = progresso
--- Recompensa: 150 platinum coins (2152) + 750.000 exp
--- Titulo: "Mao de Ferro" (conquista 34)
+-- Reward: 150 platinum coins (2152) + 750.000 exp
+-- Title: "Mao de Ferro" (achievement 34)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -48,7 +48,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -56,7 +56,7 @@ end
 
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. QUEST_NAME)
     end)
@@ -90,38 +90,38 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja contein o caos! O conhecimento esta sob controle novamente!", cid)
+                selfSay("You already contein o caos! O conhecimento esta sob controle novamente!", cid)
             elseif started then
                 if progress >= NEEDED then
                     selfSay("Voce derrotou os 1500 conhecimentos descontrolados! Quer sua recompensa?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda faltam " .. (NEEDED - progress) .. " conhecimentos descontrolados. Eles estao espalhados por toda parte!", cid)
+                    selfSay("Still need " .. (NEEDED - progress) .. " conhecimentos descontrolados. Eles estao espalhados por toda parte!", cid)
                 end
             else
                 selfSay("Esses seres de conhecimento proibido estao causando caos. Mate 1500 deles e eu te pagarei como um verdadeiro combatente!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "conhecimento") or msgcontains(msg, "proibido") or msgcontains(msg, "caos") or msgcontains(msg, "ajuda") then
+        elseif msgcontains(msg, "conhecimento") or msgcontains(msg, "proibido") or msgcontains(msg, "caos") or msgcontains(msg, "help") then
             if started and not completed then
-                selfSay("Ainda faltam " .. (NEEDED - progress) .. " conhecimentos descontrolados. Eles estao espalhados por toda parte!", cid)
+                selfSay("Still need " .. (NEEDED - progress) .. " conhecimentos descontrolados. Eles estao espalhados por toda parte!", cid)
             else
                 selfSay("Eu sou o {Silas}! Um conhecimento proibido escapou e esta criando seres descontrolados por toda parte. Preciso de ajuda pra conter o caos!", cid)
             end
         else
-            selfSay("Nao entendi. Voce quer me {ajudar} a conter o caos?", cid)
+            selfSay("I didn't understand. Voce quer me {ajudar} a conter o caos?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Aqui estao seus 150 platinum coins e 750 mil de experiencia! Voce agora e Mao de Ferro!", cid)
+            selfSay("Here are your 150 platinum coins e 750 mil experience! Voce agora e Mao de Iron!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, volte quando quiser receber sua recompensa.", cid)
+            selfSay("Alright, come back when you want to receive your reward.", cid)
             talkState[talkUser] = 1
         end
     end

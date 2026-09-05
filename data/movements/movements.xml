@@ -240,8 +240,6 @@
 
 	<movevent type="StepIn" actionid="62126" script="questnova1.lua"/>
 
-	<!-- Buraco do Passaro do Olavo: so quem completou a quest pode entrar -->
-	<movevent type="StepIn" itemid="3311" event="script" value="passaroHole.lua"/>
 
 	<movevent type="StepIn" actionid="62348" script="ilhanovaquest1.lua"/>
 
@@ -1521,4 +1519,7 @@
 	<movevent type="DeEquip" itemid="19199" slot="feet" event="function" value="onDeEquipItem"/>
 	<movevent type="Equip" itemid="19200" slot="feet" event="function" value="onEquipItem"/>
 	<movevent type="DeEquip" itemid="19200" slot="feet" event="function" value="onDeEquipItem"/>
+
+	<!-- Battle Royale: portal do tornado (air tornado 19204 criado em runtime) -->
+	<movevent type="StepIn" actionid="63001" event="script" value="battleRoyale.lua"/>
 </movements>

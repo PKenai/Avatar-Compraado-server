@@ -34,25 +34,25 @@ function creatureSayCallback(cid, type, msg)
     local msg = msg:lower()
         if talkState[talkUser] == 1 then
       if msgcontains(msg, "offer") or msgcontains(msg, "offers") or msgcontains(msg, "offering") then
-               selfSay(getLangString(cid, "You can check the balance of your bank account, deposit money or withdraw it.", "Você pode checar o balance da sua conta, deposit gold ou withdraw."), cid)
+               selfSay("You can check the balance of your bank account, deposit money or withdraw it.", cid)
             
             elseif msgcontains(msg, "balance") then
                 local balance = getPlayerBalance(cid)
-               selfSay(getLangString(cid, "Your account balance is "..balance.." gold coins.", "O seu saldo é de "..balance.." gold coins."), cid)
+               selfSay("Your account balance is "..balance.." gold coins.", cid)
             
             elseif msgcontains(msg, "deposit all") then
                 local count = getPlayerMoney(cid)
         setPlayerStorageValue(cid, "depositCount", count)
 
                 if count > 0 then
-                   selfSay(getLangString(cid, "Are you sure you wish to deposit "..count.." gold coins into your account?", "Você tem certeza que deseja depositar "..count.." gold coins em sua conta?"), cid)
+                   selfSay("Are you sure you wish to deposit "..count.." gold coins into your account?", cid)
                     talkState[talkUser] = 3
                 else
-                   selfSay(getLangString(cid, "You don't have any money to deposit.", "Você não tem nenhum dinheiro para depositar."), cid)
+                   selfSay("You don't have any money to deposit.", cid)
                 end
 
             elseif msgcontains(msg, "deposit") then
-               selfSay(getLangString(cid, "Please tell me how much gold it is you would like to deposit.", "Me diga quantos gold coins você deseja depositar."), cid)
+               selfSay("Please tell me how much gold it is you would like to deposit.", cid)
                 talkState[talkUser] = 2
 
             elseif msgcontains(msg, "withdraw all") then
@@ -60,14 +60,14 @@ function creatureSayCallback(cid, type, msg)
         setPlayerStorageValue(cid, "withdrawCount", balance)
 
                 if balance > 0 then
-                   selfSay(getLangString(cid, "Are you sure you wish to withdraw "..balance.." gold from your bank account?", "Você tem certeja que deseja sacar "..balance.." gold coins da sua conta?"), cid)
+                   selfSay("Are you sure you wish to withdraw "..balance.." gold from your bank account?", cid)
                     talkState[talkUser] = 5
                 else
-                   selfSay(getLangString(cid, "You don't have any money to withdraw in your account.", "Você não tem nenhuma quantia disponível em sua conta para sacar."), cid)
+                   selfSay("You don't have any money to withdraw in your account.", cid)
                 end
 
             elseif msgcontains(msg, "withdraw") then
-               selfSay(getLangString(cid, "Please tell me how much gold you would like to withdraw.", "Me diga quantos gold coins você deseja sacar."), cid)
+               selfSay("Please tell me how much gold you would like to withdraw.", cid)
                 talkState[talkUser] = 4
             end
 
@@ -76,20 +76,20 @@ function creatureSayCallback(cid, type, msg)
             local count = getNumberMsg(msg, maxGoldToWork) > 0 and getNumberMsg(msg, maxGoldToWork) or 0
       if count == maxGoldToWork or count < 1 then count = getPlayerMoney(cid) end
       setPlayerStorageValue(cid, "depositCount", count)
-           selfSay(getLangString(cid, "Are you sure you wish to deposit "..count.." gold coins into your account?", "Você tem certeza que deseja depositar "..count.." gold coins em sua conta?"), cid)
+           selfSay("Are you sure you wish to deposit "..count.." gold coins into your account?", cid)
             talkState[talkUser] = 3
 
         elseif talkState[talkUser] == 3 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 if doPlayerDepositMoney(cid, getPlayerStorageValue(cid, "depositCount")) then
                     local balance = getPlayerBalance(cid)
 
-                   selfSay(getLangString(cid, "Done. The money was deposited, now your balance is "..balance.." gold coins.", "Feito. Seu dinheiro foi depositado, agora seu saldo é de "..balance.." gold coins."), cid)
+                   selfSay("Done. The money was deposited, now your balance is "..balance.." gold coins.", cid)
                 else
-                   selfSay(getLangString(cid, "Sorry, you don't have this money to deposit.", "Desculpe, você não tem essa quantia para depositar."), cid)
+                   selfSay("Sorry, you don't have this money to deposit.", cid)
                 end
             else
-               selfSay(getLangString(cid, "OK, I think.", "OK, eu acho."), cid)
+               selfSay("OK, I think.", cid)
             end
 
             talkState[talkUser] = 1
@@ -98,20 +98,20 @@ function creatureSayCallback(cid, type, msg)
             local count = getNumberMsg(msg, maxGoldToWork) > 0 and getNumberMsg(msg, maxGoldToWork) or 0
       if count == maxGoldToWork or count < 1 then count = getPlayerBalance(cid) end
       setPlayerStorageValue(cid, "withdrawCount", count)
-           selfSay(getLangString(cid, "Are you sure you wish to withdraw "..count.." gold coins from your account?", "Você tem certeza que você deseja retirar "..count.." gold coins da sua conta?"), cid)
+           selfSay("Are you sure you wish to withdraw "..count.." gold coins from your account?", cid)
             talkState[talkUser] = 5
 
         elseif talkState[talkUser] == 5 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 if doPlayerWithdrawMoney(cid, getPlayerStorageValue(cid, "withdrawCount")) then
                     local balance = getPlayerBalance(cid)
 
-                   selfSay(getLangString(cid, "Done. there is your money, now your balance is "..balance.." gold coins.", "Feito. Aqui está o seu dinheiro, agora seu saldo é de "..balance.." gold coins."), cid)
+                   selfSay("Done. there is your money, now your balance is "..balance.." gold coins.", cid)
                 else
-                   selfSay(getLangString(cid, "Sorry, you don't have this money in the bank to withdraw.", "Desculpe, você não tem essa quantia para sacar."), cid)
+                   selfSay("Sorry, you don't have this money in the bank to withdraw.", cid)
                 end
             else
-               selfSay(getLangString(cid, "OK, I think.", "OK, eu acho."), cid)
+               selfSay("OK, I think.", cid)
             end
 
             talkState[talkUser] = 1
@@ -126,7 +126,7 @@ function onGreet(cid)
   talkState[cid] = 1
   setPlayerStorageValue(cid, "withdrawCount", 0)
   setPlayerStorageValue(cid, "depositCount", 0)
-  selfSay(getLangString(cid, "Hello, "..getCreatureName(cid)..". What can i do for you? {Deposit}, {withdraw} or maybe check {balance}?", "Olá, "..getCreatureName(cid)..". O que eu posso fazer por você? {Deposit}, {withdraw}, ou check {balance}?"), cid)
+  selfSay("Hello, "..getCreatureName(cid)..". What can i do for you? {Deposit}, {withdraw} or maybe check {balance}?", cid)
   return true
 end
 

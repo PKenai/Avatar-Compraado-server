@@ -63,7 +63,7 @@ function onCreatureSay(cid, type, msg)
             end
 
         elseif stage == 2 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 local number = npcGen:numberValid(npcGen:getStorage("numberStones"))
                 if doPlayerRemoveItem(cid, getStoneItemId(elementPlayer), number) then
                     doPlayerSetElementPoints(cid, elementPlayer, getPlayerElementPoints(cid, elementPlayer)+number)
@@ -78,7 +78,7 @@ function onCreatureSay(cid, type, msg)
             npcGen:setStage(1)
 
         elseif stage == 3 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 local number = npcGen:numberValid(npcGen:getStorage("numberMana"))
                 local price = getPriceOffNumber(cid, "mana", number)
 
@@ -97,7 +97,7 @@ function onCreatureSay(cid, type, msg)
             npcGen:setStage(1)
 
         elseif stage == 4 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 local number = npcGen:numberValid(npcGen:getStorage("numberHealth"))
                 local price = getPriceOffNumber(cid, "health", number)
                 if getPlayerElementPoints(cid, elementPlayer) >= price then
@@ -115,7 +115,7 @@ function onCreatureSay(cid, type, msg)
             npcGen:setStage(1)
 
         elseif stage == 5 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 local number = npcGen:numberValid(npcGen:getStorage("numberBend"))
                 local price = getPriceOffNumber(cid, "bend", number)
                 if getPlayerElementPoints(cid, elementPlayer) >= price then
@@ -132,7 +132,7 @@ function onCreatureSay(cid, type, msg)
             npcGen:setStage(1)
 
         elseif stage == 6 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 local number = npcGen:numberValid(npcGen:getStorage("numberDodge"))
                 local price = getPriceOffNumber(cid, "dodge", number)
 

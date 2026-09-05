@@ -1,7 +1,7 @@
 -- Lumina - Quest: matar 100 Besouros Luminosos (quest id 30)
 -- Storages: 49300 = status, 49301 = progresso
--- Recompensa: 25 platinum coins (2152) + 50.000 exp
--- Titulo: "Exploradora da Caverna" (conquista 27)
+-- Reward: 25 platinum coins (2152) + 50.000 exp
+-- Title: "Exploradora da Caverna" (achievement 27)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -48,7 +48,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -56,7 +56,7 @@ end
 
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. MISSION_NAME)
     end)
@@ -90,38 +90,38 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja limpou a caverna! Obrigada, agora posso estudar os besouros em paz.", cid)
+                selfSay("You already limpou a caverna! Thank you, agora posso estudar os besouros em paz.", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Incrivel! Voce eliminou os 100 besouros! Quer sua recompensa?", cid)
+                    selfSay("Incredible! Voce eliminou os 100 besouros! Quer sua recompensa?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda faltam " .. (NEEDED - progress) .. " besouros luminosos. Cuidado, eles sao mais perigosos do que parecem!", cid)
+                    selfSay("Still need " .. (NEEDED - progress) .. " besouros luminosos. Cuidado, eles sao mais perigosos do que parecem!", cid)
                 end
             else
                 selfSay("Encontrei uma caverna cheia de besouros brilhantes, mas eles estao bloqueando a entrada! Voce pode me {ajudar} a limpar o caminho?", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "caverna") or msgcontains(msg, "besouro") or msgcontains(msg, "lumina") or msgcontains(msg, "ajuda") then
+        elseif msgcontains(msg, "caverna") or msgcontains(msg, "besouro") or msgcontains(msg, "lumina") or msgcontains(msg, "help") then
             if started and not completed then
-                selfSay("Ainda faltam " .. (NEEDED - progress) .. " besouros luminosos. Cuidado, eles sao mais perigosos do que parecem!", cid)
+                selfSay("Still need " .. (NEEDED - progress) .. " besouros luminosos. Cuidado, eles sao mais perigosos do que parecem!", cid)
             else
                 selfSay("Eu sou a {Lumina}! Amo estudar insetos brilhantes, mas os besouros da caverna estao perigosos. Preciso que voce limpe a entrada pra mim!", cid)
             end
         else
-            selfSay("Nao entendi. Voce quer saber sobre a {caverna}?", cid)
+            selfSay("I didn't understand. Voce quer saber sobre a {caverna}?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Aqui estao seus 25 platinum coins e 50 mil de experiencia. Voce agora e a Luz da Caverna!", cid)
+            selfSay("Here are your 25 platinum coins e 50 mil experience. Voce agora e a Luz da Caverna!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, volte quando quiser receber sua recompensa.", cid)
+            selfSay("Alright, come back when you want to receive your reward.", cid)
             talkState[talkUser] = 1
         end
     end

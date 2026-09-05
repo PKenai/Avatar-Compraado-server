@@ -16,15 +16,15 @@ function onCreatureSay(cid, type, msg)
                     npcGen:say("Huum, you are a new here, to enter in the Academy, you need only a once payment, so you can enter in academy when you want, it's costs 5.000 gold coins, you want to join?", "Huum, você é novo por aqui? Para entrar na academia você precisa fazer um pagamento único, então você poderá entrar aqui quando quiser, esse pagamento custa 5.000 gold coins, você deseja se inscrever?")
                     npcGen:setStage(2)
                 else
-                    npcGen:say("Let's me see... You was already registered in academy, enter and enjoy!", "Deixe-me ver... Você já é membro da academia, entre e aproveite!")
+                    npcGen:say("Let's me see... You was already registered in academy, enter and enjoy!", "Deixe-me ver... You already é membro da academia, entre e aproveite!")
                 end
             end
 
         elseif stage == 2 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 if getPlayerStorageValue(cid, storageRegister) == -1 then
                     if doPlayerRemoveMoney(cid, 5000) then
-                        npcGen:say("CONGRATULATIONS! Now you are a member of Air Academy, enjoy it.", "Parabéns! Você é o mais novo membro de nossa academia, entre e aproveite!")
+                        npcGen:say("CONGRATULATIONS! Now you are a member of Air Academy, enjoy it.", "Congratulations! Você é o mais novo membro de nossa academia, entre e aproveite!")
                         setPlayerStorageValue(cid, storageRegister, 1)
                     else
                         npcGen:say("Sorry sir, you don't have money for it, please come back when you have the money.", "Desculpe, mas você não tem o dinheiro necessário para isso, porfavor volte quando tiver.")

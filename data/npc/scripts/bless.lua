@@ -39,29 +39,29 @@ function creatureSayCallback(cid, type, msg)
 
         if talkState[talkUser] == 1 then
             if msgcontains(msg, "bless") or msgcontains(msg, "blessed") or msgcontains(msg, "abençoado") then
-                selfSay(getLangString(cid, "With this blessing you will lose 50% less experience when you die (and will not lose any item, unless you're red skulled). The price is {"..getPriceBless(cid).."} gold coins, are you interested?", "Ao adquirir isso você perderá 50% menos expêriencia ao morrer (e nenhum item, a menos que esteja com red skull). O preço é {"..getPriceBless(cid).."} gold coins, você está interresado?"), cid)
+                selfSay("With this blessing you will lose 50% less experience when you die (and will not lose any item, unless you're red skulled). The price is {"..getPriceBless(cid).."} gold coins, are you interested?", cid)
                 talkState[talkUser] = 2
             end
         elseif talkState[talkUser] == 2 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 if getPlayerLevel(cid) >= 50 then
                     if getPlayerStorageValue(cid, "playerWithBless") ~= 1 then
                         if doPlayerRemoveMoney(cid, getPriceBless(cid)) then
                             setPlayerStorageValue(cid, "playerWithBless", 1)
                             setPlayerStorageValue(cid, "blessExpName", "Sony")
-                            selfSay(getLangString(cid, "You will be protected until the next death, thank you.", "Agora você está protegido até a proxíma morte, obrigado."), cid)
-                            doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "You will be protected until the next death, thank you.", "Você recebeu a benção de Sony."))
+                            selfSay("You will be protected until the next death, thank you.", cid)
+                            doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You will be protected until the next death, thank you.")
                         else
-                            selfSay(getLangString(cid, "You dont have money for this, I'm sorry.", "Você não tem dinheiro para isso, desculpe."), cid)
+                            selfSay("You dont have money for this, I'm sorry.", cid)
                         end
                     else
-                        selfSay(getLangString(cid, "Sorry, you are already blessed.", "Desculpe, você já está abençoado."), cid)
+                        selfSay("Sorry, you are already blessed.", cid)
                     end
                 else
-                    selfSay(getLangString(cid, "Sorry, only level 50 or higher players can get blessings.", "Desculpe, apenas jogadores level 50 ou mais podem adquirir blessings."), cid)
+                    selfSay("Sorry, only level 50 or higher players can get blessings.", cid)
                 end
             else
-                selfSay(getLangString(cid, "Ok, I think.", "Ok então."), cid) 
+                selfSay("Ok, I think.", cid) 
             end
             talkState[talkUser] = 1
        end
@@ -70,7 +70,7 @@ end
 
 function onGreet(cid) 
     talkState[cid] = 1      
-    selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", do you want to be {blessed} by me or to {trade} with me?", "Olá "..getCreatureName(cid)..", deseja receber uma {bless} por mim ou {comprar} algo comigo?"), cid)
+    selfSay("Hello "..getCreatureName(cid)..", do you want to be {blessed} by me or to {trade} with me?", cid)
     return true
 end
 

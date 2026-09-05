@@ -554,6 +554,7 @@ class LuaInterface
 		static int32_t luaGetPlayerLight(lua_State* L);
 		static int32_t luaGetCharges(lua_State* L);
 		static int32_t luaGetPlayerSlotItem(lua_State* L);
+		static int32_t luaGetPlayerContainer(lua_State* L);
 		static int32_t luaGetPlayerWeapon(lua_State* L);
 		static int32_t luaGetPlayerItemById(lua_State* L);
 		static int32_t luaGetPlayerRequiredMana(lua_State* L);

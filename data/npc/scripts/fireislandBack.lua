@@ -25,18 +25,18 @@ function creatureSayCallback(cid, type, msg)
 		talkState[talkUser] = 1 
 	end
         if talkState[talkUser] == 1 then
-    		if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "viajar") or msgcontains(msg, "travel") then
+    		if msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "viajar") or msgcontains(msg, "travel") then
 				if getPlayerStorageValue(cid, "tutorialback") ~= 1 then
-					selfSay(getLangString(cid, "You didn't spoke with fire lord Izumi yet. Follow the path, you'll find her. Be quick, we don't have much time, the lava is closing our way out!", "Você ainda não falou com a senhora do fogo Izumi. Siga o caminho para encontrá-la. Seja rápido, não temos muito tempo, a lava já está fechando a nossa saída!"), cid)
+					selfSay("You didn't spoke with fire lord Izumi yet. Follow the path, you'll find her. Be quick, we don't have much time, the lava is closing our way out!", cid)
 					talkState[talkUser] = 1         
 				else
-					selfSay(getLangString(cid, "I see that you are already fit to {travel}. It will be a long trip, are you ready?", "Vejo que você já está apto para {viajar}. Será uma viagem longa, está preparado?"), cid)
+					selfSay("I see that you are already fit to {travel}. It will be a long trip, are you ready?", cid)
 					talkState[talkUser] = 2
             	end
 			end
 		elseif talkState[talkUser] == 2 then
-    		if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "viajar") or msgcontains(msg, "travel") then
-				selfSay(getLangString(cid, "Alright then, get ready, we are leaving!", "Certo então, se segure, estamos saindo!"), cid)
+    		if msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "viajar") or msgcontains(msg, "travel") then
+				selfSay("Alright then, get ready, we are leaving!", cid)
 				doTeleportThing(cid, {x = 226, y = 441, z = 7})
 				doSendMagicEffect(getCreaturePosition(cid), CONST_ME_TELEPORT)
 				--sendInitialItens(cid)
@@ -49,10 +49,10 @@ end
 
 function onGreet(cid) 
 	if getPlayerStorageValue(cid, "tutorialback") ~= 1 then
-		selfSay(getLangString(cid, "You didn't spoke with fire lord Izumi yet. Follow the path, you'll find her. Be quick, we don't have much time, the lava is closing our way out!", "Você ainda não falou com a senhora do fogo Izumi. Siga o caminho para encontrá-la. Seja rápido, não temos muito tempo, a lava já está fechando a nossa saída!"), cid)
+		selfSay("You didn't spoke with fire lord Izumi yet. Follow the path, you'll find her. Be quick, we don't have much time, the lava is closing our way out!", cid)
 		talkState[cid] = 1         
 	else
-		selfSay(getLangString(cid, "I see that you are already fit to {travel}. It will be a long trip, are you ready?", "Vejo que você já está apto para {viajar}. Será uma viagem longa, está preparado?"), cid)
+		selfSay("I see that you are already fit to {travel}. It will be a long trip, are you ready?", cid)
 		talkState[cid] = 2
 	end
 	return true

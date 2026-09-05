@@ -130,7 +130,7 @@ function onPlayerCloseChannel(cid)   npcHandler:onPlayerCloseChannel(cid) end
 function onGreet(cid)
     talkState[cid] = 1
     for i = 0, 5 do setPlayerStorageValue(cid, CONVO_BASE + i, 0) end
-    selfSay("Saudacoes... Meu nome e Valentina. Eu canalizo a energia da lua nos capacetes. Quer que eu tente {encantar} o seu?", cid)
+    selfSay("Greetings... My name is Valentina. I channel the moon's energy into helmets. Would you like me to try to {enchant} yours?", cid)
     return true
 end
 
@@ -157,26 +157,26 @@ function creatureSayCallback(cid, type, msg)
             end
             lista = lista .. "\nSo encanto 1 por vez. Escolha pelo nome."
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, lista)
-            selfSay("Lembre-se: se a energia for canalizada com a fase errada da lua, o capacete pode se quebrar. Qual capacete voce quer encantar?", cid)
+            selfSay("Remember: if the energy is channeled during the wrong moon phase, the helmet may shatter. Which helmet do you want to enchant?", cid)
             talkState[talkUser] = 2
         elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") or msgcontains(msg, "ola") then
-            selfSay("Diga {encantar} se quiser encantar seu capacete.", cid)
+            selfSay("Say {enchant} if you want to enchant your helmet.", cid)
         elseif msgcontains(msg, "tchau") or msgcontains(msg, "bye") then
-            selfSay("Que a lua guie seus passos.", cid)
+            selfSay("May the moon guide your steps.", cid)
             talkState[talkUser] = 0
             npcHandler:releaseFocus(cid)
         end
 
     elseif talkState[talkUser] == 2 then
         local idx, helmet = findHelmetByName(msg)
-        if not helmet then selfSay("Nao conheco esse capacete.", cid); return true end
+        if not helmet then selfSay("I don't know that helmet.", cid); return true end
         local count = getPlayerItemCount(cid, helmet.itemId)
         if count <= 0 then selfSay("Voce nao tem " .. helmet.name .. ".", cid); talkState[talkUser] = 1; return true end
-        if count > 1 then selfSay("So aceito uma por vez.", cid); talkState[talkUser] = 1; return true end
+        if count > 1 then selfSay("I only accept one at a time.", cid); talkState[talkUser] = 1; return true end
         local item = getPlayerItemById(cid, true, helmet.itemId)
-        if not item or not item.uid then selfSay("Erro.", cid); talkState[talkUser] = 1; return true end
+        if not item or not item.uid then selfSay("Error.", cid); talkState[talkUser] = 1; return true end
         local tier = getItemTier(item.uid)
-        if tier >= MAX_TIER then selfSay("Ja esta no maximo!", cid); talkState[talkUser] = 1; return true end
+        if tier >= MAX_TIER then selfSay("It's already at maximum!", cid); talkState[talkUser] = 1; return true end
         local cost = getGambleCost(helmet.craftCost, tier)
         setPlayerStorageValue(cid, CONVO_BASE, 1)
         setPlayerStorageValue(cid, CONVO_BASE + 1, helmet.itemId)
@@ -194,15 +194,15 @@ function creatureSayCallback(cid, type, msg)
     elseif talkState[talkUser] == 3 then
         local choice = tonumber(msg)
         if not choice or choice < 1 or choice > 5 then
-            selfSay("Escolha de 1 a 5.", cid)
+            selfSay("Choose from 1 to 5.", cid)
             return true
         end
         setPlayerStorageValue(cid, CONVO_BASE + 5, choice)
-        selfSay("Voce escolheu " .. MOON_NAMES[choice] .. ". Confirma? {sim} ou {nao}", cid)
+        selfSay("Voce escolheu " .. MOON_NAMES[choice] .. ". Confirm? {yes} or {no}", cid)
         talkState[talkUser] = 4
 
     elseif talkState[talkUser] == 4 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             local cost = getPlayerStorageValue(cid, CONVO_BASE + 3)
             local itemId = getPlayerStorageValue(cid, CONVO_BASE + 1)
             local idx = getPlayerStorageValue(cid, CONVO_BASE + 4)
@@ -210,9 +210,9 @@ function creatureSayCallback(cid, type, msg)
             local helmet = HELMETS[idx]
             if getPlayerMoney(cid) < cost then selfSay("Precisa de " .. doNumberFormat(cost) .. " gold.", cid); talkState[talkUser] = 1; setPlayerStorageValue(cid, CONVO_BASE, 0); return true end
             local count = getPlayerItemCount(cid, itemId)
-            if count <= 0 then selfSay("Voce nao tem mais o capacete!", cid); talkState[talkUser] = 1; setPlayerStorageValue(cid, CONVO_BASE, 0); return true end
+            if count <= 0 then selfSay("You no longer have the helmet!", cid); talkState[talkUser] = 1; setPlayerStorageValue(cid, CONVO_BASE, 0); return true end
             local item = getPlayerItemById(cid, true, itemId)
-            if not item or not item.uid then selfSay("Erro.", cid); talkState[talkUser] = 1; setPlayerStorageValue(cid, CONVO_BASE, 0); return true end
+            if not item or not item.uid then selfSay("Error.", cid); talkState[talkUser] = 1; setPlayerStorageValue(cid, CONVO_BASE, 0); return true end
             local realTier = getItemTier(item.uid)
             doPlayerRemoveMoney(cid, cost)
             local winChance = getWinChance(idx, realTier)
@@ -223,18 +223,18 @@ function creatureSayCallback(cid, type, msg)
                 local clientId = toClientId(item.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
                 doSendMagicEffect(getCreaturePosition(cid), 200)
-                selfSay("A lua " .. MOON_NAMES[choice] .. " brilhou! " .. helmet.name .. " agora e Tier " .. newTier .. "!", cid)
+                selfSay("A lua " .. MOON_NAMES[choice] .. " shone! " .. helmet.name .. " is now Tier " .. newTier .. "!", cid)
             else
                 doRemoveItem(item.uid, 1)
                 local clientId = toClientId(item.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "clear," .. clientId)
                 doSendMagicEffect(getCreaturePosition(cid), 201)
-                selfSay("A " .. MOON_NAMES[choice] .. " nao era a certa... O capacete estilhaçou.", cid)
+                selfSay("The " .. MOON_NAMES[choice] .. " was not the right one... The helmet shattered.", cid)
             end
             talkState[talkUser] = 1
             for i = 0, 5 do setPlayerStorageValue(cid, CONVO_BASE + i, 0) end
-        elseif msgcontains(msg, "nao") or msgcontains(msg, "no") then
-            selfSay("Volte quando estiver pronto.", cid)
+        elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
+            selfSay("Come back when you're ready.", cid)
             talkState[talkUser] = 1
             setPlayerStorageValue(cid, CONVO_BASE, 0)
         end

@@ -1,7 +1,7 @@
 -- Carlos - Quest: matar 200 Centopeias Carapaca de Aco (quest id 27)
 -- Storages: 49270 = status, 49271 = progresso
--- Recompensa: 50 platinum coins (2152)
--- Titulo: "Forjador de Aco" (conquista 24)
+-- Reward: 50 platinum coins (2152)
+-- Title: "Forjador de Aco" (achievement 24)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -51,7 +51,7 @@ local function startQuest(cid)
     if pos then
         doSendMagicEffect(pos, 199)
     end
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -59,7 +59,7 @@ end
 
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. MISSION_NAME)
     end)
@@ -74,7 +74,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("E ai, voce parece ser um cara de fibra. Preciso de ajuda com umas {centopeias} que estao atrapalhando meu trabalho.", cid)
+    selfSay("Hey, you seem like a tough guy. I need help with some {centipedes} that are getting in the way of my work.", cid)
     return true
 end
 
@@ -93,37 +93,37 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja me ajudou com as centopeias. Valeu, parceiro!", cid)
+                selfSay("You already helped me with the centipedes. Thanks, partner!", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Boa! Voce derrotou as 200 centopeias! Quer sua recompensa?", cid)
+                    selfSay("Nice! You defeated the 200 centipedes! Want your reward?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda faltam " .. (NEEDED - progress) .. " centopeias. Vai la e me traz essas carapacas!", cid)
+                    selfSay("Still need " .. (NEEDED - progress) .. " centipedes. Go out there and bring me those carapaces!", cid)
                 end
             else
-                selfSay("Beleza! Vai la e me traz 200 carapacas de aco dessas centopeias. Tô precisando pra forjar umas armaduras.", cid)
+                selfSay("Alright! Go out there and bring me 200 steel carapaces from those centipedes. I need them to forge some armor.", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "centopeia") or msgcontains(msg, "carapaca") or msgcontains(msg, "ajuda") or msgcontains(msg, "desafio") then
+        elseif msgcontains(msg, "centopeia") or msgcontains(msg, "carapaca") or msgcontains(msg, "help") or msgcontains(msg, "desafio") then
             if started and not completed then
-                selfSay("Ainda faltam " .. (NEEDED - progress) .. " centopeias. Vai la e me traz essas carapacas!", cid)
+                selfSay("Still need " .. (NEEDED - progress) .. " centipedes. Go out there and bring me those carapaces!", cid)
             else
-                selfSay("Preciso de carapacas de aco das centopeias pra minha forja. Quer me {ajudar}?", cid)
+                selfSay("I need steel carapaces from centipedes for my forge. Want to {help} me?", cid)
             end
         else
-            selfSay("Nao entendi. Voce quer me {ajudar} com as centopeias?", cid)
+            selfSay("I didn't understand. Do you want to {help} me with the centipedes?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             completeQuest(cid)
-            selfSay("Aqui estao seus 50 platinum coins. Voce e um verdadeiro forjador de aco!", cid)
+            selfSay("Here are your 50 platinum coins. You're a true steel forger!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, volte quando quiser pegar sua recompensa.", cid)
+            selfSay("Alright, volte quando quiser pegar sua recompensa.", cid)
             talkState[talkUser] = 1
         end
     end

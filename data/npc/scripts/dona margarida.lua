@@ -1,15 +1,15 @@
 -- Dona Margarida - Quest: O Coelho da Margarida (quest id 23)
--- Historia: o coelho dela fugiu de medo e entrou na toca das aranhas
+-- Story: o coelho dela fugiu de medo e entrou na toca das aranhas
 -- cospe pedra. O jogador encontra o Coelho da Margarida la dentro, diz
--- {resgatar} e volta pra Dona Margarida para receber a recompensa.
+-- {resgatar} e volta pra Dona Margarida para receber a reward.
 -- Storages (data/questSystem/quests.xml):
 --   49230 = status da quest (1 = em andamento, 2 = coelho resgatado,
---           3 = completa / recompensa entregue)
+--           3 = completa / reward entregue)
 --   49231 = progresso (1 = coelho resgatado; setado pelo NPC Coelho)
 -- Item: Filhote de coelho (18879)
--- Recompensa: 1 Filhote de coelho + 20 platinum coins (2152) + 50.000 de
--- experiencia + titulo "Amigo dos animais" (conquista id 20,
--- achievementsLib.lua, desbloqueada aqui ao entregar a recompensa)
+-- Reward: 1 Filhote de coelho + 20 platinum coins (2152) + 50.000 de
+-- experiencia + titulo "Amigo dos animais" (achievement id 20,
+-- achievementsLib.lua, desbloqueada aqui ao entregar a reward)
 --
 -- Obs: o NPC nao depende da questSystemLib (o estado Lua dos NPCs e
 -- separado do global). Usa apenas storages nativas + notificacao manual.
@@ -59,7 +59,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     print("[Dona Margarida] startQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Nova missão: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -74,7 +74,7 @@ local function deliverQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 3)
     doSendMagicEffect(getCreaturePosition(cid), CONST_ME_MAGIC_BLUE)
 
-    -- Titulo "Amigo dos animais": marca o progresso da conquista e deixa o
+    -- Titulo "Amigo dos animais": marca o progresso da achievement e deixa o
     -- Achievements.check desbloquear (envia a notificacao e atualiza o client).
     -- Se a lib nao estiver disponivel no estado do NPC, desbloqueia direto;
     -- o client sincroniza ao abrir o painel de Conquistas ou no proximo login.
@@ -90,7 +90,7 @@ local function deliverQuest(cid)
     end
 
     print("[Dona Margarida] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missão concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. QUEST_NAME)
     end)
@@ -106,14 +106,14 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 function onGreet(cid)
     talkState[cid] = 1
     if questCompleted(cid) then
-        selfSay("Olá, " .. getCreatureName(cid) .. "! Que alegria ver você de novo. Meu coelho está em casa, salvo e feliz. Obrigada por tudo!", cid)
+        selfSay("Hello, " .. getCreatureName(cid) .. "! What a joy to see you again. My rabbit is at home, safe and happy. Thank you for everything!", cid)
     elseif rabbitRescued(cid) then
         deliverQuest(cid)
-        selfSay("Você resgatou o meu coelho! Que alívio, eu estava tão preocupada! Aqui está o seu Filhote de coelho e a sua recompensa: 20 platinum coins e 50.000 de experiência. Obrigada, " .. getCreatureName(cid) .. "!", cid)
+        selfSay("You rescued my rabbit! What a relief, I was so worried! Here is your Rabbit Pet and your reward: 20 platinum coins and 50,000 experience. Thank you, " .. getCreatureName(cid) .. "!", cid)
     elseif questStarted(cid) then
-        selfSay("Meu coelho ainda esta lá dentro, na toca das aranhas cospe pedra... Estou rezando pra que ele esteja vivo! Por favor, encontre ele e diga {resgatar}!", cid)
+        selfSay("My rabbit is still in there, in the stone-spitting spiders' den... I'm praying that he's alive! Please, find him and say {rescue}!", cid)
     else
-        selfSay("Ah, " .. getCreatureName(cid) .. "! Meu coelho fugiu de medo e entrou na toca das aranhas cospe pedra! Estou rezando pra que ele ainda esteja vivo... Você me ajudaria a procurar o meu coelho?", cid)
+        selfSay("Ah, " .. getCreatureName(cid) .. "! My rabbit ran away in fear and entered the stone-spitting spiders' den! I'm praying that he's still alive... Would you help me find my rabbit?", cid)
     end
     return true
 end
@@ -134,27 +134,27 @@ function creatureSayCallback(cid, type, msg)
 
     if talkState[talkUser] == 1 then
         if completed then
-            selfSay("Obrigada de novo, " .. getCreatureName(cid) .. "! Se quiser, pode vir visitar o coelho quando quiser!", cid)
-        elseif msgcontains(msg, "sim") or msgcontains(msg, "yes") or msgcontains(msg, "ajudar") or msgcontains(msg, "ajuda") or msgcontains(msg, "procurar") then
+            selfSay("Thank you de novo, " .. getCreatureName(cid) .. "! Se quiser, pode vir visitar o coelho quando quiser!", cid)
+        elseif msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "help") or msgcontains(msg, "help") or msgcontains(msg, "procurar") then
             if rescued then
                 deliverQuest(cid)
-                selfSay("Você resgatou o meu coelho! Que alívio! Aqui está o seu Filhote de coelho e a sua recompensa: 20 platinum coins e 50.000 de experiência!", cid)
+                selfSay("You rescued my rabbit! What a relief! Here is your Rabbit Pet and your reward: 20 platinum coins and 50,000 experience!", cid)
             elseif started then
-                selfSay("Meu coelho ainda está na toca das aranhas cospe pedra! Encontre ele e diga {resgatar} pra traze-lo de volta!", cid)
+                selfSay("My rabbit is still in the stone-spitting spiders' den! Find him and say {rescue} to bring him back!", cid)
             else
                 selfSay("Muito obrigada, " .. getCreatureName(cid) .. "! Ele fugiu de medo e entrou na toca das aranhas cospe pedra. Quando o encontrar, diga {resgatar} pra ele e traga ele de volta pra mim!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "coelho") or msgcontains(msg, "toca") or msgcontains(msg, "aranha") or msgcontains(msg, "resgatar") then
+        elseif msgcontains(msg, "coelho") or msgcontains(msg, "toca") or msgcontains(msg, "aranha") or msgcontains(msg, "rescue") then
             if rescued then
-                selfSay("Você resgatou o coelho! Volte aqui pra receber sua recompensa!", cid)
+                selfSay("You rescued the rabbit! Come back here to receive your reward!", cid)
             elseif started then
-                selfSay("Meu coelho está na toca das aranhas cospe pedra... Encontre ele e diga {resgatar}! Estou rezando pra que ele esteja vivo!", cid)
+                selfSay("My rabbit is in the stone-spitting spiders' den... Find him and say {rescue}! I'm praying that he's alive!", cid)
             else
-                selfSay("Meu coelho fugiu de medo e entrou na toca das aranhas cospe pedra! Você me ajudaria a procurar o meu coelho?", cid)
+                selfSay("My rabbit ran away in fear and entered the stone-spitting spiders' den! Would you help me find my rabbit?", cid)
             end
         else
-            selfSay("Não entendi. Está falando do meu {coelho}?", cid)
+            selfSay("I didn't understand. Are you talking about my {rabbit}?", cid)
         end
     end
     return true

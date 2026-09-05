@@ -24,43 +24,43 @@ function creatureSayCallback(cid, type, msg)
         talkState[talkUser] = 1 
     end
 	if getPlayerLevel(cid) < 230  then
-		selfSay(getLangString(cid, "You need Level 230+  to help me.", "Você precisa de Level 230+  para me ajudar."), cid)
+		selfSay("You need Level 230+  to help me.", cid)
 		return true
 	end
 	if getPlayerStorageValue(cid, "demonAccess") == 2 then
 		setPlayerStorageValue(cid, "demonAccess", 3)
 		setPlayerStorageValue(cid, "90518", 1)
-		selfSay(getLangString(cid, "Did you kill him?! Good job, you're the strongest bender that i have ever seen! Please, accept this reward.", "Você o matou?! Bom trabalho, você é o dobrador mais forte que já vi! Por favor, aceite esta minha recompensa."), cid)
+		selfSay("Did you kill him?! Good job, you're the strongest bender that i have ever seen! Please, accept this reward.", cid)
 		doPlayerAddMoney(cid, 300000)
 		doPlayerAddItem(cid, 17980, 1)
 		local finalExp = getExperienceForLevel(221) - getExperienceForLevel(220)
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você completou a The Source of Power Quest. Como recompensa, você recebeu "..finalExp.." pontos de experiência, 1x Power Source Ring e 300000 gold coins.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Congratulations! You completed a The Source of Power Quest. Como recompensa, você recebeu "..finalExp.." pontos de experiência, 1x Power Source Ring e 300000 gold coins.")
 		return true
 	elseif getPlayerStorageValue(cid, "demonAccess") == 1 then
-		selfSay(getLangString(cid, "What are you waiting for? You need to defeat the demon quickly!", "O que você está esperando?! Você precisa derrotar o demônio imediatamente!"), cid)
+		selfSay("What are you waiting for? You need to defeat the demon quickly!", cid)
 		return true
 	end
         if talkState[talkUser] == 1 then
-            if msgcontains(msg, "access") or msgcontains(msg, "acesso") or msgcontains(msg, "mission") or msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "access") or msgcontains(msg, "acesso") or msgcontains(msg, "mission") or msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 if getPlayerStorageValue(cid, "90518") >= 1 then
-                    selfSay(getLangString(cid, "Sorry, you already did your job.", "Desculpe, você já fez sua parte."), cid)
+                    selfSay("Sorry, you already did your job.", cid)
                     talkState[talkUser] = 1         
                 else
-                    selfSay(getLangString(cid, "I'm trying to make an access for a long time, but no succeed. I believe that we can stop those monsters if we kill the source of power, the boss. Maybe i need some sacrifices to make it work.. Bringe to me {35x demon prey} and i'll try to make the access. Can you get it for me?", "Estou há muito tempo tentando criar um acesso por este portal. Eu acredito que podemos parar estes monstros se matarmos a fonte do poder, seu líder. Talvez eu precise de alguns sacrifícios para fazê-lo funcionar.. Poderia me trazer {35x demon prey}?"), cid)
+                    selfSay("I'm trying to make an access for a long time, but no succeed. I believe that we can stop those monsters if we kill the source of power, the boss. Maybe i need some sacrifices to make it work.. Bringe to me {35x demon prey} and i'll try to make the access. Can you get it for me?", cid)
                     talkState[talkUser] = 2
                 end
             end
         elseif talkState[talkUser] == 2 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "prey") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "prey") then
                 if doPlayerRemoveItem(cid, 12447, 35) then
-                    selfSay(getLangString(cid, "Thank you, now you probably can access the portal to defeat him, but you should go with more benders. Good luck!", "Obrigado, agora você deve conseguir acessar o portal para derrotá-lo, mas eu não aconselharia a ir sozinho. Boa sorte!"), cid)
+                    selfSay("Thank you, now you probably can access the portal to defeat him, but you should go with more benders. Good luck!", cid)
                     setPlayerStorageValue(cid, "demonAccess", 1)
 					doSendMagicEffect(getCreaturePosition(cid), 14)
                     talkState[talkUser] = 2
                 else
-                    selfSay(getLangString(cid, "Get the demon preys and come back immediately!", "Junte as demon preys e volte imediatamente!"), cid)
+                    selfSay("Get the demon preys and come back immediately!", cid)
                     talkState[talkUser] = 2
                 end
             end
@@ -70,7 +70,7 @@ end
 
 function onGreet(cid) 
     talkState[cid] = 1  
-	selfSay(getLangString(cid, "Hello, "..getCreatureName(cid)..". I'm busy trying to make an {access} to the portal.", "Olá, "..getCreatureName(cid)..". Eu estou ocupado tentando criar um {acesso} ao portal."), cid)
+	selfSay("Hello, "..getCreatureName(cid)..". I'm busy trying to make an {access} to the portal.", cid)
     return true
 end
 

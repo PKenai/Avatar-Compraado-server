@@ -1,15 +1,15 @@
--- Valdemira - Quest: A Fornecadora (quest id 40)
--- Historia: Valdemira e uma velha fazendeira que precisa de ham para
+-- Valdemira - Quest: A Supplier (quest id 40)
+-- Story: Valdemira e uma velha fazendeira que precisa de ham para
 -- alimentar seus animais. O jogador deve entregar 150 hams e recebe
--- uma recompensa generosa de experiencia.
+-- uma reward generosa experience.
 --
 -- Storages (data/questSystem/quests.xml):
 --   49400 = status da quest (0 = nao iniciada, 1 = em andamento, 2 = completa)
 --   49401 = ham entregues (0-150)
 --
--- Requisito: level 200+
--- Entrega: 150 ham (item 2671)
--- Recompensa: 2.400.000 exp (200x a exp do Vacaceronte = 200 * 12000)
+-- Requirement: level 200+
+-- Delivery: 150 ham (item 2671)
+-- Reward: 2.400.000 exp (200x a exp do Vacaceronte = 200 * 12000)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -71,7 +71,7 @@ local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     setPlayerStorageValue(cid, COUNT_STORAGE, 0)
     print("[Valdemira] startQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -83,10 +83,10 @@ local function deliverQuest(cid)
     doSendMagicEffect(getCreaturePosition(cid), CONST_ME_MAGIC_BLUE)
 
     print("[Valdemira] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE,
-            "Mission completed: " .. QUEST_NAME .. "! Voce recebeu " .. REWARD_EXP .. " de experiencia!")
+            "Mission completed: " .. QUEST_NAME .. "! Voce recebeu " .. REWARD_EXP .. " experience!")
     end)
 end
 
@@ -107,22 +107,22 @@ function onGreet(cid)
 
     -- Verificar level minimo
     if level < MIN_LEVEL then
-        selfSay("Desculpe, " .. name .. ". O que eu preciso e trabalho pesado. Voce ainda e novo demais para me ajudar. Volte quando estiver level " .. MIN_LEVEL .. " ou mais.", cid)
+        selfSay("Sorry, " .. name .. ". What I need is hard work. You're still too young to help me. Come back when you're level " .. MIN_LEVEL .. " or higher.", cid)
         return true
     end
 
     if questCompleted(cid) then
-        selfSay("Ola, " .. name .. "! Muito obrigada por todos os hams! Meus animais estao bem alimentados graças a voce. Voce e um grande aliado!", cid)
+        selfSay("Hello, " .. name .. "! Thank you so much for all the hams! My animals are well fed thanks to you. You're a great ally!", cid)
     elseif questStarted(cid) then
         local count = getHamCount(cid)
         local remaining = REQUIRED_HAM - count
         if remaining <= 0 then
-            selfSay("Ola, " .. name .. "! Voce trouxe todos os hams! Entregue-os para mim agora e receba sua recompensa! Diga {entregar}!", cid)
+            selfSay("Hello, " .. name .. "! You brought all the hams! Deliver them to me now and receive your reward! Say {deliver}!", cid)
         else
-            selfSay("Ola, " .. name .. "! Voce ja trouxe " .. count .. " hams. Ainda faltam " .. remaining .. ". Traga os hams e diga {entregar} quando tiver todos!", cid)
+            selfSay("Hello, " .. name .. "! You already brought " .. count .. " hams. Still need " .. remaining .. ". Bring the hams and say {deliver} when you have all of them!", cid)
         end
     else
-        selfSay("Ola, " .. name .. "! Sou a Valdemira, a velha fazendeira das montanhas. Meus animais estao passando fome e preciso de muita comida. Voce pode me trazer 150 hams? Prometo uma recompensa generosa! Diga {aceitar} se quiser me ajudar!", cid)
+        selfSay("Hello, " .. name .. "! I am Valdemira, the old farmer from the mountains. My animals are starving and I need lots of food. Can you bring me 150 hams? I promise a generous reward! Say {accept} if you want to help me!", cid)
     end
     return true
 end
@@ -146,38 +146,38 @@ function creatureSayCallback(cid, type, msg)
 
     -- Verificar level minimo
     if level < MIN_LEVEL then
-        selfSay("Voce ainda e novo demais, " .. name .. ". Volte quando estiver level " .. MIN_LEVEL .. " ou mais!", cid)
+        selfSay("You're still too young, " .. name .. ". Come back when you're level " .. MIN_LEVEL .. " or higher!", cid)
         return true
     end
 
     if talkState[talkUser] == 1 then
         -- Aceitar a quest
-        if msgcontains(msg, "aceitar") or msgcontains(msg, "sim") or msgcontains(msg, "yes") or msgcontains(msg, "ajudar") or msgcontains(msg, "ajuda") then
+        if msgcontains(msg, "accept") or msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "help") or msgcontains(msg, "help") then
             if completed then
-                selfSay("Voce ja me ajudou com tudo, " .. name .. "! Todos os meus animais estao alimentados. Obrigada!", cid)
+                selfSay("You already helped me with everything, " .. name .. "! All my animals are fed. Thank you!", cid)
             elseif started then
-                selfSay("Voce ja comecou a me ajudar! Traga os hams e diga {entregar} quando tiver todos os 150!", cid)
+                selfSay("You already comecou a me ajudar! Traga os hams e diga {entregar} quando tiver todos os 150!", cid)
             else
-                selfSay("Muito obrigada, " .. name .. "! Va caçar Vacacerontes e traga 150 hams para mim. Quando tiver todos, volte e diga {entregar}!", cid)
+                selfSay("Muito obrigada, " .. name .. "! Go hunt Vacacerontes and bring me 150 hams. When you have all of them, come back and say {deliver}!", cid)
                 startQuest(cid)
             end
 
         -- Contexto da quest
-        elseif msgcontains(msg, "ham") or msgcontains(msg, "comida") or msgcontains(msg, "animal") or msgcontains(msg, "fome") or msgcontains(msg, "vacaceronte") then
+        elseif msgcontains(msg, "ham") or msgcontains(msg, "food") or msgcontains(msg, "animal") or msgcontains(msg, "hunger") or msgcontains(msg, "vacaceronte") then
             if completed then
-                selfSay("Todos os meus animais estao bem alimentados agora! Obrigada de coracao, " .. name .. "!", cid)
+                selfSay("All my animals are well fed now! Thank you from the heart, " .. name .. "!", cid)
             elseif started then
-                selfSay("Voce ja trouxe " .. count .. " de " .. REQUIRED_HAM .. " hams. Continue caçando os Vacacerontes e traga os hams para mim!", cid)
+                selfSay("You already brought " .. count .. " of " .. REQUIRED_HAM .. " hams. Keep hunting the Vacacerontes and bring the hams to me!", cid)
             else
-                selfSay("Meus animais estao passando fome! Preciso de 150 hams para alimenta-los. Voce pode me ajudar? Diga {aceitar}!", cid)
+                selfSay("My animals are starving! I need 150 hams to feed them. Can you help me? Say {accept}!", cid)
             end
 
         -- Entregar ham
-        elseif msgcontains(msg, "entregar") or msgcontains(msg, "entrega") or msgcontains(msg, "trazer") then
+        elseif msgcontains(msg, "deliver") or msgcontains(msg, "deliver") or msgcontains(msg, "bring") then
             if completed then
-                selfSay("Voce ja entregou tudo, " .. name .. "! Obrigada por tudo!", cid)
+                selfSay("You already delivered everything, " .. name .. "! Thank you for everything!", cid)
             elseif not started then
-                selfSay("Voce ainda nao comecou a me ajudar! Diga {aceitar} se quiser comecar!", cid)
+                selfSay("You haven't started helping me yet! Say {accept} if you want to start!", cid)
             else
                 local currentCount = getHamCount(cid)
                 local playerHamCount = getPlayerItemCount(cid, HAM_ITEM)
@@ -191,12 +191,12 @@ function creatureSayCallback(cid, type, msg)
                 setPlayerStorageValue(cid, COUNT_STORAGE, newCount)
 
                 if newCount >= REQUIRED_HAM then
-                    -- Tem todos os hams, entregar recompensa
+                    -- Tem todos os hams, entregar reward
                     deliverQuest(cid)
-                    selfSay("INCRAVEL, " .. name .. "! Voce trouxe todos os " .. REQUIRED_HAM .. " hams! Aqui esta sua recompensa: " .. REWARD_EXP .. " de experiencia! Voce e um heroi para mim e meus animais!", cid)
+                    selfSay("AMAZING, " .. name .. "! You brought all the " .. REQUIRED_HAM .. " hams! Here is your reward: " .. REWARD_EXP .. " experience! You're a hero to me and my animals!", cid)
                 else
                     local remaining = REQUIRED_HAM - newCount
-                    selfSay("Voce entregou " .. playerHamCount .. " hams! Agora tem " .. newCount .. " de " .. REQUIRED_HAM .. ". Ainda faltam " .. remaining .. ". Volte quando tiver mais hams!", cid)
+                    selfSay("You delivered " .. playerHamCount .. " hams! Now you have " .. newCount .. " of " .. REQUIRED_HAM .. ". Still need " .. remaining .. ". Come back when you have more hams!", cid)
                     if playerHamCount > 0 then
                         doSendMagicEffect(getCreaturePosition(cid), CONST_ME_MAGIC_BLUE)
                     end
@@ -204,18 +204,18 @@ function creatureSayCallback(cid, type, msg)
             end
 
         -- Verificar progresso
-        elseif msgcontains(msg, "quanto") or msgcontains(msg, "progresso") or msgcontains(msg, "falta") then
+        elseif msgcontains(msg, "how much") or msgcontains(msg, "progress") or msgcontains(msg, "missing") then
             if completed then
-                selfSay("Voce ja completou a missao! Todos os animais estao alimentados!", cid)
+                selfSay("You already completed the mission! All animals are fed!", cid)
             elseif started then
                 local remaining = REQUIRED_HAM - count
-                selfSay("Voce ja trouxe " .. count .. " de " .. REQUIRED_HAM .. " hams. Ainda faltam " .. remaining .. ". Continue caçando!", cid)
+                selfSay("You already brought " .. count .. " of " .. REQUIRED_HAM .. " hams. Still need " .. remaining .. ". Keep hunting!", cid)
             else
-                selfSay("Voce ainda nao comecou! Diga {aceitar} para comecar a me ajudar!", cid)
+                selfSay("You haven't started yet! Say {accept} to start helping me!", cid)
             end
 
         else
-            selfSay("Nao entendi. Voce esta falando dos {hams} para os meus {animais}? Diga {aceitar} para comecar ou {entregar} para entregar os hams!", cid)
+            selfSay("I didn't understand. Are you talking about the {hams} for my {animals}? Say {accept} to start or {deliver} to deliver the hams!", cid)
         end
     end
     return true

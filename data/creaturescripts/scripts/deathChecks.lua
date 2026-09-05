@@ -43,14 +43,6 @@ function onDeath(cid, corpse, deathList)
   --local expLoss, hasBless = getLostExp(cid), false
 --	 doAddContainerItemEx(corpse, copyItem(getPlayerSlotItem(cid, CONST_SLOT_RING)))
 -- doAddContainerItemsFromContainer(getPlayerSlotItem(cid, CONST_SLOT_RING), corpse)
-	local lastHit = getPlayerStorageValue(cid, "lastHit")
-	if getPlayerStorageValue(cid, "isAvatar") == 1 then
-		if isCreature(lastHit) and isPlayer(lastHit) and math.random(1, 100) >= 51 then
-			makeNewAvatar(lastHit)
-		else
-			randomizeNewAvatar()
-		end
-	end
 if getPlayerLevel(cid) < 50 then 
 	setPlayerStorageValue(cid, "morreuD", 1)
 end

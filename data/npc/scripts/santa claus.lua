@@ -43,23 +43,23 @@ function creatureSayCallback(cid, type, msg)
 	end
     local msg = msg:lower()
 	if getPlayerLevel(cid) < 80 then
-		if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "presente") or msgcontains(msg, "present") or msgcontains(msg, "presents") or msgcontains(msg, "presentes") then
-			selfSay(getLangString(cid, 'You still do not deserve an Christmas gift! Come back when you reach level 80.', 'Você ainda não merece um presente de natal! Volte quando atingir o nível 80.'), cid)
+		if msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "presente") or msgcontains(msg, "present") or msgcontains(msg, "presents") or msgcontains(msg, "presentes") then
+			selfSay('You still do not deserve an Christmas gift! Come back when you reach level 80.', cid)
 			return true
 		else 
-			selfSay(getLangString(cid, 'Do you want a {present}?', 'Você quer um {presente}?'), cid) 
+			selfSay('Do you want a {present}?', cid) 
 			return true
 		end
 	elseif getPlayerStorageValue(cid, "natal2018") == 1 then 
-		if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "presente") or msgcontains(msg, "present") or msgcontains(msg, "presents") or msgcontains(msg, "presentes") then
-			selfSay(getLangString(cid, 'You have already received your Christmas gift this year. Come back next Christmas!', 'Você já recebeu seu presente de natal este ano. Volte no próximo natal!'), cid)
+		if msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "presente") or msgcontains(msg, "present") or msgcontains(msg, "presents") or msgcontains(msg, "presentes") then
+			selfSay('You have already received your Christmas gift this year. Come back next Christmas!', cid)
 			return true
 		else 
-			selfSay(getLangString(cid, 'Do you want a {present}?', 'Você quer um {presente}?'), cid) 
+			selfSay('Do you want a {present}?', cid) 
 			return true
 		end
 	end
-	if msgcontains(msg, "yes") or msgcontains(msg, "sim") or msgcontains(msg, "presente") or msgcontains(msg, "present") or msgcontains(msg, "presents") or msgcontains(msg, "presentes") then
+	if msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "presente") or msgcontains(msg, "present") or msgcontains(msg, "presents") or msgcontains(msg, "presentes") then
 		if getPlayerStorageValue(cid, "natal2018") ~= 1 and getPlayerLevel(cid) >= 80 then 
 			local sorteado, quantia = 0, 0
 			for i = 1, #presentes do 
@@ -75,17 +75,17 @@ function creatureSayCallback(cid, type, msg)
 			end 
 			doPlayerAddItem(cid, sorteado, quantia)
 			setPlayerStorageValue(cid, "natal2018", 1)
-			selfSay(getLangString(cid, 'I have '..quantia..' '..getItemNameById(sorteado)..' for you. Merry Christmas!', 'Eu tenho '..quantia..' '..getItemNameById(sorteado)..' para você. Feliz natal!'), cid)
+			selfSay('I have '..quantia..' '..getItemNameById(sorteado)..' for you. Merry Christmas!', cid)
 		end
 	else 
-		selfSay(getLangString(cid, 'Do you want a {present}?', 'Você quer um {presente}?'), cid) 
+		selfSay('Do you want a {present}?', cid) 
     end
 	return true
 end
 
 function onGreet(cid) 
 	talkState[cid] = 1 	
-	selfSay(getLangString(cid, "HOW HOW HOW! Merry Christmas, "..getCreatureName(cid)..". I brought {presents} for the good people!", "HOW HOW HOW! Feliz natal, "..getCreatureName(cid)..". Eu trouxe {presentes} para as boas pessoas!"), cid)
+	selfSay("HOW HOW HOW! Merry Christmas, "..getCreatureName(cid)..". I brought {presents} for the good people!", cid)
 	return true
 end
 

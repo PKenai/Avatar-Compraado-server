@@ -178,7 +178,7 @@ function onGreet(cid)
     for i = 0, 5 do
         setPlayerStorageValue(cid, CONVO_BASE + i, 0)
     end
-    selfSay("Ola, " .. getCreatureName(cid) .. "! Meu nome e Gan Bler, o apostador.", cid)
+    selfSay("Hello, " .. getCreatureName(cid) .. "! Meu nome e Gan Bler, o apostador.", cid)
     return true
 end
 
@@ -303,7 +303,7 @@ function creatureSayCallback(cid, type, msg)
 
         setPlayerStorageValue(cid, CONVO_BASE + 5, chosenNumber)
 
-        selfSay("Voce escolheu " .. chosenNumber .. ". Confirma? {sim} ou {nao}", cid)
+        selfSay("Voce escolheu " .. chosenNumber .. ". Confirm? {yes} or {no}", cid)
         talkState[talkUser] = 4
 
     -- ============================================================
@@ -311,7 +311,7 @@ function creatureSayCallback(cid, type, msg)
     -- ============================================================
     elseif talkState[talkUser] == 4 then
 
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             local cost = getPlayerStorageValue(cid, CONVO_BASE + 3)
             local itemId = getPlayerStorageValue(cid, CONVO_BASE + 1)
             local idx = getPlayerStorageValue(cid, CONVO_BASE + 4)
@@ -386,7 +386,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
                 doSendMagicEffect(getCreaturePosition(cid), 200)
-                selfSay("Voce acertou! " .. glove.name .. " agora e Tier " .. newTier .. "!", cid)
+                selfSay("Voce acertou! " .. glove.name .. " is now Tier " .. newTier .. "!", cid)
             else
                 -- ERROU - remove luva
                 doRemoveItem(gloveItem.uid, 1)
@@ -405,7 +405,7 @@ function creatureSayCallback(cid, type, msg)
                 setPlayerStorageValue(cid, CONVO_BASE + i, 0)
             end
 
-        elseif msgcontains(msg, "nao") or msgcontains(msg, "no") then
+        elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
             selfSay("Mudou de ideia? Sem problemas.", cid)
             talkState[talkUser] = 1
             setPlayerStorageValue(cid, CONVO_BASE, 0)

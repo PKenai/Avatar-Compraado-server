@@ -299,7 +299,7 @@ function creatureSayCallback(cid, type, msg)
     -- ESTADO 4: Confirmacao
     elseif talkState[talkUser] == 4 then
 
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             local cost = getPlayerStorageValue(cid, CONVO_BASE + 3)
             local itemId = getPlayerStorageValue(cid, CONVO_BASE + 1)
             local idx = getPlayerStorageValue(cid, CONVO_BASE + 4)
@@ -352,7 +352,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
                 doSendMagicEffect(getCreaturePosition(cid), 200)
-                selfSay("O " .. metalName .. " assentou perfeitamente na solha! Sua " .. boot.name .. " agora e Tier " .. newTier .. "! Hmph, ate que voce sabe escolher.", cid)
+                selfSay("O " .. metalName .. " assentou perfeitamente na solha! Sua " .. boot.name .. " is now Tier " .. newTier .. "! Hmph, ate que voce sabe escolher.", cid)
             else
                 -- FALHA
                 doRemoveItem(bootItem.uid, 1)
@@ -369,7 +369,7 @@ function creatureSayCallback(cid, type, msg)
                 setPlayerStorageValue(cid, CONVO_BASE + i, 0)
             end
 
-        elseif msgcontains(msg, "nao") or msgcontains(msg, "no") then
+        elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
             selfSay("Covarde! Volte quando tiver coragem de arriscar.", cid)
             talkState[talkUser] = 1
             setPlayerStorageValue(cid, CONVO_BASE, 0)

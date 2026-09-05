@@ -108,7 +108,7 @@ function creatureSayCallback(cid, type, msg)
 	end
     local msg = msg:lower()
 	if not isInPz(cid) and (isPlayerPzLocked(cid) or getCreatureCondition(cid, CONDITION_INFIGHT)) then
-		selfSay(getLangString(cid, 'Não posso falar com você agora.', 'Não posso falar com você agora.'), cid)
+		selfSay("I can\'t talk to you right now.", cid)
 		return false
 	end
 	if getPlayerStorageValue(cid, "ativoBot") == 1 then
@@ -116,27 +116,27 @@ function creatureSayCallback(cid, type, msg)
 		return false
 	end
     if talkState[talkUser] == 1 then            
-        if msgcontains(msg, "reset") or msgcontains(msg, "resetar") or msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+        if msgcontains(msg, "reset") or msgcontains(msg, "reset") or msgcontains(msg, "yes") or msgcontains(msg, "yes") then
 			local price = getPlayerLevel(cid) * 5000
-			selfSay(getLangString(cid, "All your attributes (health, bend level, mana and dodge) will reset and you will receive the points wasted back. This will cost you "..price.." gold coins. Do you want to pay?", "Todos os seus atributos (health, bend level, mana e dodge) irão zerar e você receberá os pontos gastos de volta. Isso irá te custar "..price.." gold coins. Deseja pagar?"), cid)
+			selfSay("All your attributes (health, bend level, mana and dodge) will reset and you will receive the points wasted back. This will cost you "..price.." gold coins. Do you want to pay?", cid)
             talkState[talkUser] = 2
 		else 
-			selfSay(getLangString(cid, "I don't understand you. Do you want to reset your attributes?", "Eu não te entendi. Você deseja resetar seus atributos?"), cid)
+			selfSay("I don't understand you. Do you want to reset your attributes?", cid)
         end
     elseif talkState[talkUser] == 2 then
-		if msgcontains(msg, "gold") or msgcontains(msg, "gold coins") or msgcontains(msg, "moedas") or msgcontains(msg, "ouro") or msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+		if msgcontains(msg, "gold") or msgcontains(msg, "gold coins") or msgcontains(msg, "coins") or msgcontains(msg, "gold") or msgcontains(msg, "yes") or msgcontains(msg, "yes") then
 			local price = getPlayerLevel(cid) * 5000
 			if doPlayerRemoveMoney(cid, price) then 	
-				selfSay(getLangString(cid, "Your attributes have been reset and your points wasted returned. Enjoy!", "Seus atributos foram resetados e seus pontos gastos devolvidos. Aproveite!"), cid)
+				selfSay("Your attributes have been reset and your points wasted returned. Enjoy!", cid)
 				doSendMagicEffect(getCreaturePosition(cid), 29)
 				talkState[talkUser] = 1
 				addEvent(resetAtributos, 1500, cid)
 			else
-				selfSay(getLangString(cid, "You don't have "..price.." gold coins, sorry.", "Você não possui "..price.." gold coins, desculpe."), cid)
+				selfSay("You don't have "..price.." gold coins, sorry.", cid)
 			end
 		else 
 			local price = getPlayerLevel(cid) * 5000
-			selfSay(getLangString(cid, "I don't understand you. Do you want to reset your attributes for "..price.." gold coins?", "Eu não te entendi. Você deseja resetar seus atributos por "..price.." gold coins?"), cid)
+			selfSay("I don't understand you. Do you want to reset your attributes for "..price.." gold coins?", cid)
         end
     end
 	return true
@@ -145,7 +145,7 @@ end
 
 function onGreet(cid) 
 	talkState[cid] = 1 	
-	selfSay(getLangString(cid, "Hello, "..getCreatureName(cid)..". I can {reset} your stats.", "Olá, "..getCreatureName(cid)..". Eu posso {resetar} seus atributos."), cid)
+	selfSay("Hello, "..getCreatureName(cid)..". I can {reset} your stats.", cid)
 	return true
 end
 

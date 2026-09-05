@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <monsters>
   <!-- Abelhas -->
-  <monster name="Abelha" file="Oficial monsters avatar/Abelha.xml"/>
-  <monster name="Abelha de barro" file="Oficial monsters avatar/Abelha de barro.xml"/>
-  <monster name="Abelha urubu" file="Oficial monsters avatar/Abelha urubu.xml"/>
+  <monster name="Bee" file="Oficial monsters avatar/Bee.xml"/>
+  <monster name="Mud Bee" file="Oficial monsters avatar/Mud Bee.xml"/>
+  <monster name="Vulture Bee" file="Oficial monsters avatar/Vulture Bee.xml"/>
 
   <!-- Aracnideos -->
-  <monster name="Aranha cospe pedra" file="Oficial monsters avatar/Aranha cospe pedra.xml"/>
-  <monster name="Besouro luminoso" file="Oficial monsters avatar/Besouro luminoso.xml"/>
-  <monster name="Besouro guardiao" file="Oficial monsters avatar/Besouro guardiao.xml"/>
-  <monster name="Terra beetle" file="Oficial monsters avatar/Terra beetle.xml"/>
-  <monster name="Tarantula de pedra" file="Oficial monsters avatar/Tarantula de pedra.xml"/>
-  <monster name="Joaninha da terra" file="Oficial monsters avatar/Joaninha da terra.xml"/>
+  <monster name="Stone-Spitting Spider" file="Oficial monsters avatar/Stone-Spitting Spider.xml"/>
+  <monster name="Gleaming Beetle" file="Oficial monsters avatar/Gleaming Beetle.xml"/>
+  <monster name="Guardian Beetle" file="Oficial monsters avatar/Guardian Beetle.xml"/>
+  <monster name="Earth Beetle" file="Oficial monsters avatar/Earth Beetle.xml"/>
+  <monster name="Stone Tarantula" file="Oficial monsters avatar/Stone Tarantula.xml"/>
+  <monster name="Earth Ladybug" file="Oficial monsters avatar/Earth Ladybug.xml"/>
 
   <!-- Baratas -->
-  <monster name="Barata" file="Oficial monsters avatar/Barata.xml"/>
-  <monster name="Barata come rocha" file="Oficial monsters avatar/Barata come rocha.xml"/>
+  <monster name="Cockroach" file="Oficial monsters avatar/Cockroach.xml"/>
+  <monster name="Rock-Eating Cockroach" file="Oficial monsters avatar/Rock-Eating Cockroach.xml"/>
 
   <!-- Caracol -->
-  <monster name="Caracol gigante" file="Oficial monsters avatar/Caracol gigante.xml"/>
+  <monster name="Giant Snail" file="Oficial monsters avatar/Giant Snail.xml"/>
 
   <!-- Carangueijos -->
-  <monster name="Caranguejo" file="Oficial monsters avatar/Caranguejo.xml"/>
-  <monster name="Carangueijo capa quente" file="Oficial monsters avatar/Carangueijo capa quente.xml"/>
-  <monster name="Carangueijo Hermitao" file="Oficial monsters avatar/Carangueijo Hermitao.xml"/>
+  <monster name="Crab" file="Oficial monsters avatar/Crab.xml"/>
+  <monster name="Warm Cape Crab" file="Oficial monsters avatar/Warm Cape Crab.xml"/>
+  <monster name="Hermit Crab" file="Oficial monsters avatar/Hermit Crab.xml"/>
 
   <!-- Centopeia -->
-  <monster name="Centopeia carapaca de aco" file="Oficial monsters avatar/Centopeia carapaca de aco.xml"/>
+  <monster name="Steel Shell Centipede" file="Oficial monsters avatar/Steel Shell Centipede.xml"/>
 
   <!-- Crocodilo -->
-  <monster name="Crocodilo do Deserto" file="Oficial monsters avatar/crocodilo do deserto.xml"/>
+  <monster name="Desert Crocodile" file="Oficial monsters avatar/Desert Crocodile.xml"/>
 
   <!-- Conhecimento -->
-  <monster name="Conhecimento descontrolado" file="Oficial monsters avatar/Conhecimento descontrolado.xml"/>
+  <monster name="Uncontrolled Knowledge" file="Oficial monsters avatar/Uncontrolled Knowledge.xml"/>
 
   <!-- Defensor da montanha -->
-  <monster name="Defensor da montanha" file="Oficial monsters avatar/Defensor da montanha.xml"/>
+  <monster name="Mountain Defender" file="Oficial monsters avatar/Mountain Defender.xml"/>
 
   <!-- Elefantes / Hippo -->
-  <monster name="Elefante" file="Oficial monsters avatar/Elefante.xml"/>
+  <monster name="Elephant" file="Oficial monsters avatar/Elephant.xml"/>
   <monster name="Hippo" file="Oficial monsters avatar/hippo.xml"/>
 
   <!-- Grilo -->
-  <monster name="Grilo gigante" file="Oficial monsters avatar/Grilo gigante.xml"/>
+  <monster name="Giant Cricket" file="Oficial monsters avatar/Giant Cricket.xml"/>
 
   <!-- Homem de barro -->
-  <monster name="Homem de barro" file="Oficial monsters avatar/Homem de barro.xml"/>
+  <monster name="Mud Man" file="Oficial monsters avatar/Mud Man.xml"/>
 
   <!-- Iguana -->
-  <monster name="Iguana-Marinha" file="Oficial monsters avatar/Iguana-Marinha.xml"/>
+  <monster name="Sea Iguana" file="Oficial monsters avatar/Sea Iguana.xml"/>
 
   <!-- Leao -->
-  <monster name="Leao de ba sin se" file="Oficial monsters avatar/Leao de ba sin se.xml"/>
+  <monster name="Ba Sing Se Lion" file="Oficial monsters avatar/Ba Sing Se Lion.xml"/>
 
   <!-- Livro -->
-  <monster name="Livro de dobras proibidas" file="Oficial monsters avatar/Livro de dobras proibidas.xml"/>
+  <monster name="Forbidden Folds Book" file="Oficial monsters avatar/Forbidden Folds Book.xml"/>
 
   <!-- Mordecasca -->
-  <monster name="Mordecasca da terra" file="Oficial monsters avatar/Mordecasca da terra.xml"/>
+  <monster name="Earth Mordecai" file="Oficial monsters avatar/Earth Mordecai.xml"/>
 
   <!-- Onca / Pantera / Urso -->
-  <monster name="Onca" file="Oficial monsters avatar/Onca.xml"/>
-  <monster name="Pantera negra" file="Oficial monsters avatar/Pantera negra.xml"/>
-  <monster name="Urso feroz" file="Oficial monsters avatar/Urso feroz.xml"/>
+  <monster name="Jaguar" file="Oficial monsters avatar/Jaguar.xml"/>
+  <monster name="Black Panther" file="Oficial monsters avatar/Black Panther.xml"/>
+  <monster name="Fierce Bear" file="Oficial monsters avatar/Fierce Bear.xml"/>
 
   <!-- Pica-pau -->
-  <monster name="Pica-pau da terra" file="Oficial monsters avatar/Pica-pau da terra.xml"/>
+  <monster name="Earth Woodpecker" file="Oficial monsters avatar/Earth Woodpecker.xml"/>
 
   <!-- Traidor -->
-  <monster name="Traidor" file="Oficial monsters avatar/Traidor.xml"/>
+  <monster name="Traitor" file="Oficial monsters avatar/Traitor.xml"/>
 
   <!-- Vacaceronte -->
   <monster name="Vacaceronte" file="Oficial monsters avatar/Vacaceronte.xml"/>
 
   <!-- Vermes -->
-  <monster name="Verme de cemiterio" file="Oficial monsters avatar/Verme de cemiterio.xml"/>
+  <monster name="Cemetery Worm" file="Oficial monsters avatar/Cemetery Worm.xml"/>
 
   <!-- Momo (summon/convince) -->
   <monster name="Momo" file="Oficial monsters avatar/Momo.xml"/>
 
   <!-- Animais decorativos (1 HP, sem loot, passivos) -->
-  <monster name="Cisne" file="Oficial monsters avatar/Cisne.xml"/>
-  <monster name="Sapo" file="Oficial monsters avatar/Sapo.xml"/>
-  <monster name="Ovelha" file="Oficial monsters avatar/Ovelha.xml"/>
-  <monster name="Coelho" file="Oficial monsters avatar/Coelho.xml"/>
-  <monster name="Galinha" file="Oficial monsters avatar/Galinha.xml"/>
-  <monster name="Lobo selvagem" file="Oficial monsters avatar/Lobo selvagem.xml"/>
+  <monster name="Swan" file="Oficial monsters avatar/Swan.xml"/>
+  <monster name="Frog" file="Oficial monsters avatar/Frog.xml"/>
+  <monster name="Sheep" file="Oficial monsters avatar/Sheep.xml"/>
+  <monster name="Rabbit" file="Oficial monsters avatar/Rabbit.xml"/>
+  <monster name="Chicken" file="Oficial monsters avatar/Chicken.xml"/>
+  <monster name="Wild Wolf" file="Oficial monsters avatar/Wild Wolf.xml"/>
 
 
   <!-- Monstro do Pantano (Boss) -->
-  <monster name="Monstro do pantano" file="Oficial monsters avatar/Monstro do pantano.xml"/>
-  <monster name="Cabeca do Homem do pantano" file="Oficial monsters avatar/Cabeca do Homem do pantano.xml"/>
-  <monster name="Braco do Homem do pantano" file="Oficial monsters avatar/Braco do Homem do pantano.xml"/>
-  <monster name="Tentaculos do pantano" file="Oficial monsters avatar/Tentaculos do pantano.xml"/>
+  <monster name="Swamp Monster" file="Oficial monsters avatar/Swamp Monster.xml"/>
+  <monster name="Swamp Man Head" file="Oficial monsters avatar/Swamp Man Head.xml"/>
+  <monster name="Swamp Man Arm" file="Oficial monsters avatar/Swamp Man Arm.xml"/>
+  <monster name="Swamp Tentacles" file="Oficial monsters avatar/Swamp Tentacles.xml"/>
 
 </monsters>

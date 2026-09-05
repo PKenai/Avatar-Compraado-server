@@ -35,34 +35,26 @@ function onBuy(cid, itemid, subType, amount, ignoreCap, inBackpacks)
   local totalCost = COST * amount
 
   if getPlayerItemCount(cid, COIN_AVATAR) < totalCost then
-    doPlayerSendCancel(cid, getLangString(cid,
-      "You need "..totalCost.." Moedas Avatar to buy that.",
-      "Você precisa de "..totalCost.." Moedas Avatar para comprar isso."))
+    doPlayerSendCancel(cid, "You need "..totalCost.." Moedas Avatar to buy that.")
     return false
   end
 
   local backpack = 1988
   local a, b = doNpcSellItem(cid, itemid, amount, WAND_CHARGES, ignoreCap, inBackpacks, backpack)
   if a < amount then
-    doPlayerSendCancel(cid, getLangString(cid,
-      "You do not have enough space.",
-      "Você não tem espaço suficiente."))
+    doPlayerSendCancel(cid, "You do not have enough space.")
     return false
   end
 
   doPlayerRemoveItem(cid, COIN_AVATAR, totalCost)
-  doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid,
-    "You bought "..amount.." "..getItemNameById(itemid).." for "..totalCost.." Moedas Avatar.",
-    "Você comprou "..amount.." "..getItemNameById(itemid).." por "..totalCost.." Moedas Avatar."))
+  doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You bought "..amount.." "..getItemNameById(itemid).." for "..totalCost.." Moedas Avatar.")
   return false
 end
 npcHandler:setCallback(CALLBACK_ONBUY, onBuy)
 
 -- Koin não compra itens de volta.
 function onSell(cid, itemid, subType, amount, ignoreCap, inBackpacks)
-  doPlayerSendCancel(cid, getLangString(cid,
-    "I do not buy items.",
-    "Eu não compro itens."))
+  doPlayerSendCancel(cid, "I do not buy items.")
   return false
 end
 npcHandler:setCallback(CALLBACK_ONSELL, onSell)
@@ -74,9 +66,7 @@ function creatureSayCallback(cid, type, msg)
   msg = msg:lower()
 
   if msgcontains(msg, "wand") or msgcontains(msg, "varinha") or msgcontains(msg, "moeda") or msgcontains(msg, "coin") then
-    selfSay(getLangString(cid,
-      "Say {trade} to see my training wands!",
-      "Diga {trade} para ver minhas varinhas de treino!"), cid)
+    selfSay("Say {trade} to see my training wands!", cid)
     return true
   end
 
@@ -84,9 +74,7 @@ function creatureSayCallback(cid, type, msg)
 end
 
 function onGreet(cid)
-  selfSay(getLangString(cid,
-    "Hello "..getCreatureName(cid).."! I sell {training wands} for 5 {Moeda Avatar} each. Say {trade} to see my offers!",
-    "Olá "..getCreatureName(cid).."! Eu vendo {varinhas de treino} por 5 {Moedas Avatar} cada. Diga {trade} para ver minhas ofertas!"), cid)
+  selfSay("Hello "..getCreatureName(cid).."! I sell {training wands} for 5 {Moeda Avatar} each. Say {trade} to see my offers!", cid)
   return true
 end
 

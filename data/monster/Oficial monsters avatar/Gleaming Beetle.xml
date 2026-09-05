@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Gleaming Beetle" nameDescription="a gleaming beetle" race="undead" experience="2200" speed="370" manacost="0">
+	<health now="800" max="800"/>
+	<look type="1283" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="5000" chance="10"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="78" attack="80"/>
+		<attack name="energy" interval="2000" chance="25" range="7" min="-70" max="-130"/>
+		<attack name="physical" interval="2500" chance="15" range="1" min="-50" max="-90"/>
+	</attacks>
+	<defenses armor="8" defense="6"/>
+	<elements>
+		<element energyPercent="15"/>
+		<element earthPercent="10"/>
+		<element firePercent="-15"/>
+	</elements>
+	<loot>
+		<item id="2148" countmax="70" chance="100000"/><!-- gold coins -->
+			<item id="19119" countmax="1" chance="20000"/><!-- Frasco de luz -->
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="BZZZZZZZ!" yell="0"/>
+		<voice sentence="FLASH!" yell="1"/>
+	</voices>
+</monster>

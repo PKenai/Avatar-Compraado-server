@@ -181,7 +181,7 @@ function onGreet(cid)
     for i = 0, 4 do
         setPlayerStorageValue(cid, CONVO_BASE + i, 0)
     end
-    selfSay("Ola, " .. getCreatureName(cid) .. "! Sou Robson, mestre armeiro e curtidor. Posso fazer um {reforco} na sua calca para elevar o Tier dela! Deseja aprimorar sua armadura?", cid)
+    selfSay("Hello, " .. getCreatureName(cid) .. "! Sou Robson, mestre armeiro e curtidor. Posso fazer um {reforco} na sua calca para elevar o Tier dela! Deseja aprimorar sua armadura?", cid)
     return true
 end
 
@@ -292,7 +292,7 @@ function creatureSayCallback(cid, type, msg)
     -- ============================================================
     elseif talkState[talkUser] == 3 then
 
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             local cost = getPlayerStorageValue(cid, CONVO_BASE + 3)
             local itemId = getPlayerStorageValue(cid, CONVO_BASE + 1)
             local idx = getPlayerStorageValue(cid, CONVO_BASE + 4)
@@ -351,7 +351,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
                 doSendMagicEffect(getCreaturePosition(cid), 200)
-                selfSay("Excelente trabalho! A solda e o reforco das placas aguentaram perfeitamente! Sua " .. pant.name .. " agora e Tier " .. newTier .. "!", cid)
+                selfSay("Excelente trabalho! A solda e o reforco das placas aguentaram perfeitamente! Sua " .. pant.name .. " is now Tier " .. newTier .. "!", cid)
             else
                 -- FALHA - destroi a calça
                 doRemoveItem(pantItem.uid, 1)
@@ -370,8 +370,8 @@ function creatureSayCallback(cid, type, msg)
                 setPlayerStorageValue(cid, CONVO_BASE + i, 0)
             end
 
-        elseif msgcontains(msg, "nao") or msgcontains(msg, "no") then
-            selfSay("Entendido. Prudencia e sempre uma boa escolha quando se trata de itens de valor.", cid)
+        elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
+            selfSay("Understood. Prudencia e sempre uma boa escolha quando se trata de itens de valor.", cid)
             talkState[talkUser] = 1
             setPlayerStorageValue(cid, CONVO_BASE, 0)
         end

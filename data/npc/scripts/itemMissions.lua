@@ -34,7 +34,7 @@ function getMissionItemString(cid) -- retorna mensagem completa informando quais
 		local task = v
 		if canDoMission(cid, task) then 
 			if count == 0 then 
-				missions = getLangString(cid, "The following missions are available for you: ", "As seguintes missões estão disponíveis para você: ")
+				missions = "The following missions are available for you: "
 				missions = missions .. "{" .. k .. "}"
 				count = 1
 			else 
@@ -47,7 +47,7 @@ function getMissionItemString(cid) -- retorna mensagem completa informando quais
 	end 
 	if missions then 
 		missions = missions .. ". "
-		missions = missions .. getLangString(cid, "Choose one.", "Qual deseja executar?")
+		missions = missions .. "Choose one."
 	end 
 return missions 
 end 
@@ -125,7 +125,7 @@ end
 function getMsgByMission(tabela) -- Mensagem informando os itens necessários e perguntando se tem
 	local strbr = "On this mission you need to bring to me: " .. getRequiredItems(tabela) .. ". Do you have all of this?"
 	local stren = "Nesta missão você precisa me trazer: " .. getRequiredItems(tabela) .. ". Você possui todos estes itens?"
-return getLangString(cid, stren, strbr)
+return stren
 end 
 
 function canDoMission(cid, tabela)
@@ -159,10 +159,10 @@ function creatureSayCallback(cid, type, msg)
 				local missions = getMissionItemString(cid)
 				if missions then
 					local misStr = getMissionItemString(cid)
-					selfSay(getLangString(cid, misStr, misStr), cid)
+					selfSay(misStr, cid)
 					talkState[talkUser] = 2
 				else 
-					selfSay(getLangString(cid, "I don't have missions for you right now or you're not strong enough to do then.", "Eu não tenho missões para você no momento ou você não é forte o suficiente para me ajudar com as mesmas."), cid)
+					selfSay("I don't have missions for you right now or you're not strong enough to do then.", cid)
 					talkState[talkUser] = 1
 					return false
 				end 
@@ -172,18 +172,18 @@ function creatureSayCallback(cid, type, msg)
 			if itemMission then
 				if canDoMission(cid, itemMission) then
 					local msgByMis = getMsgByMission(itemMission)
-					selfSay(getLangString(cid, msgByMis, msgByMis), cid)
+					selfSay(msgByMis, cid)
 					talkState[talkUser] = 3
 					setPlayerStorageValue(cid, "itemMission", msg)
 				else 
-					selfSay(getLangString(cid, "You can't do this mission.", "Você somente pode fazer as missões que foram listadas."), cid)
+					selfSay("You can't do this mission.", cid)
 				end 	
             else
-                selfSay(getLangString(cid, "I don't get it. Tell me the exactly mission name.", "Não entendi. Fale o nome da missão corretamente."), cid)
+                selfSay("I don't get it. Tell me the exactly mission name.", cid)
 				talkState[talkUser] = 2
             end
 		elseif talkState[talkUser] == 3 then 
-			if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+			if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
 				local itemMission = itemTaskInfo[getPlayerStorageValue(cid, "itemMission")]
 				if not itemMission then 
 					talkState[talkUser] = 1
@@ -191,20 +191,20 @@ function creatureSayCallback(cid, type, msg)
 				end 
 				if haveAllItems(cid, itemMission) then 
 					rewardPlayer(cid, itemMission)
-					selfSay(getLangString(cid, "Here you are. Thank you!", "Obrigado! Aqui está a sua recompensa."), cid)
+					selfSay("Here you are. Thank you!", cid)
 					talkState[talkUser] = 1
 					return false
 				else 					
 				--	local itemsString = getRequiredItems(itemMission)
-					selfSay(getLangString(cid, "You don't have all the items that i need. Come back when you have all!", "Você não me trouxe todos os itens que preciso. Volte quando terminar de coletar!"), cid)
+					selfSay("You don't have all the items that i need. Come back when you have all!", cid)
 					talkState[talkUser] = 1
 					return false
 				end 
-			elseif msgcontains(msg, "no") or msgcontains(msg, "não") or msgcontains(msg, "não") then
+			elseif msgcontains(msg, "no") or msgcontains(msg, "no") or msgcontains(msg, "no") then
 					talkState[talkUser] = 1
 					return false 
 			else 
-					selfSay(getLangString(cid, "What? Yes or no?", "Não entendi. Sim ou não?"), cid)
+					selfSay("What? Yes or no?", cid)
             end
            -- talkState[talkUser] = 1
 	   end
@@ -214,7 +214,7 @@ end
 
 function onGreet(cid) 
 	talkState[cid] = 1 	
-	selfSay(getLangString(cid, "Hello "..getCreatureName(cid)..", i have important {missions} for you.", "Olá "..getCreatureName(cid)..", eu tenho {missões} importantes para você."), cid)
+	selfSay("Hello "..getCreatureName(cid)..", i have important {missions} for you.", cid)
 	return true
 end
 

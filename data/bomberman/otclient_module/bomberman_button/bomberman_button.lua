@@ -2,15 +2,20 @@
 -- BOMBERMAN BUTTON (modulo OTClient)
 -- ----------------------------------------------------------------------------
 -- Janelinha "BOMB" do evento Bomberman.
---   * O SERVIDOR envia o opcode 160 ("open" / "close") para mostrar/ocultar.
+--   * O SERVIDOR envia o opcode 171 ("open" / "close") para mostrar/ocultar.
 --   * O CLIENT envia o opcode 161 ("bomb") quando o botao e clicado.
 --
 -- A janela e definida no bomberman_button.otui (MainWindow + UIButton) e
 -- criada na hora (g_ui.createWidget), ancorada no canto inferior direito.
 -- INSTALACAO: copie a pasta inteira para <client>/modules/ e reinicie o client.
+--
+-- NOTA: o opcode de recebimento foi movido de 160 para 171 porque o modulo
+-- do party icons (mods/game_partyIcons) ja registra o 160 no client (o OTClient
+-- so permite UM modulo por opcode -> "Opcode is already taken").
+-- 163 tambem nao serve: pertence ao game_monsterloot.
 -- ============================================================================
 
-local OPCODE_SHOW = 160  -- servidor -> client
+local OPCODE_SHOW = 171  -- servidor -> client
 local OPCODE_CLICK = 161 -- client -> servidor
 
 local bombWindow = nil

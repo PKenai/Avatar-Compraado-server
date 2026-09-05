@@ -1,28 +1,28 @@
 -- Senhor dos Repolhos - Quest: Os Repolhos Roubados (quest id 26)
--- Historia: Um arruaceiro roubou os repolhos do Senhor dos Repolhos e
+-- Story: Um arruaceiro roubou os repolhos do Senhor dos Repolhos e
 -- espalhou pela cidade. O jogador clica nos repolhos no chao (item 18929)
 -- para incrementar o contador (o repolho NAO e coletado, fica no chao
--- para outras pessoas pegarem). Ao falar com o NPC, ele entrega recompensas
+-- para outras pessoas pegarem). Ao falar com o NPC, ele entrega rewards
 -- em 5 tiers conforme o jogador vai recuperando repolhos.
 --
 -- Storages (data/questSystem/quests.xml):
 --   49260 = status da quest (0 = nao iniciada, 1 = em andamento, 2 = completa)
 --   49261 = total de repolhos recuperados pelo player (0-50)
---   49262 = ultimo tier de recompensa resgatado (0-5)
+--   49262 = ultimo tier de reward resgatado (0-5)
 --   cabbage_<actionId> = repolhos individuais coletados (string storage por repolho)
 --
 -- Repolhos: item 18929 no chao, com action IDs unicos.
 -- Cada repolho tem uma action ID. Ao clicar, o script checa se o player
 -- ja coletou aquele repolho especifico e incrementa o contador.
 --
--- Tiers de recompensa:
+-- Tiers de reward:
 --   Tier 1:  1 repolho  -> 10.000 exp + 2 crystal coins
 --   Tier 2: 10 repolhos -> 30.000 exp + 2 crystal coins
 --   Tier 3: 20 repolhos -> 75.000 exp + 2 crystal coins
 --   Tier 4: 35 repolhos -> 150.000 exp + 2 crystal coins
 --   Tier 5: 50 repolhos -> 250.000 exp + 2 crystal coins + titulo "Repolhudo"
 --
--- Titulo "Repolhudo": conquista id 23 (achievementsLib.lua)
+-- Titulo "Repolhudo": achievement id 23 (achievementsLib.lua)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -112,7 +112,7 @@ local function startQuest(cid)
     setPlayerStorageValue(cid, COUNT_STORAGE, 0)
     setPlayerStorageValue(cid, TIER_STORAGE, 0)
     print("[Senhor dos repolhos] startQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -122,7 +122,7 @@ local function claimReward(cid, tier)
     local t = TIERS[tier]
     if not t then return end
 
-    -- Dar recompensas
+    -- Dar rewards
     if t.exp > 0 then
         doPlayerAddExperience(cid, t.exp)
     end
@@ -137,7 +137,7 @@ local function claimReward(cid, tier)
         setPlayerStorageValue(cid, STATUS_STORAGE, 2)
         doSendMagicEffect(getCreaturePosition(cid), CONST_ME_MAGIC_BLUE)
 
-        -- Titulo "Repolhudo": conquista id 23
+        -- Titulo "Repolhudo": achievement id 23
         setPlayerStorageValue(cid, "achCreatureKill_" .. ACHIEVEMENT_REPOLHUDO, 1)
         local ok = pcall(function()
             Achievements.check(cid, ACHIEVEMENT_REPOLHUDO)
@@ -185,17 +185,17 @@ function onGreet(cid)
     local count = getCabbageCount(cid)
 
     if questCompleted(cid) then
-        selfSay("Ola, " .. name .. "! Meus repolhos estao todos de volta gracas a voce! Muito obrigado, voce e um heroi para mim!", cid)
+        selfSay("Hello, " .. name .. "! Meus repolhos estao todos de volta gracas a voce! Muito obrigado, voce e um heroi para mim!", cid)
     elseif questStarted(cid) then
         local nextTier = getNextTier(cid)
         if nextTier then
-            selfSay("Ola, " .. name .. "! Vejo que voce ja recuperou " .. count .. " repolhos! Posso te dar uma recompensa agora! Fale {recompensa} para receber!", cid)
+            selfSay("Hello, " .. name .. "! Vejo que voce ja recuperou " .. count .. " repolhos! Posso te dar uma recompensa agora! Fale {recompensa} para receber!", cid)
         else
             local nextMin = getNextTierMin(cid)
-            selfSay("Ola, " .. name .. "! Voce ja recuperou " .. count .. " repolhos! Faltam " .. (nextMin - count) .. " para a proxima recompensa. Continue procurando os repolhos espalhados pela cidade!", cid)
+            selfSay("Hello, " .. name .. "! You already recuperou " .. count .. " repolhos! Faltam " .. (nextMin - count) .. " para a proxima recompensa. Continue procurando os repolhos espalhados pela cidade!", cid)
         end
     else
-        selfSay("Ola, " .. name .. "! Socorro! Um arruaceiro desalmado roubou todos os meus repolhos e saiu espalhando pela cidade! Eu cultivei esses repolhos com tanto carinho... Voce pode me ajudar a {recuperar} os repolhos?", cid)
+        selfSay("Hello, " .. name .. "! Help! Um arruaceiro desalmado roubou todos os meus repolhos e saiu espalhando pela cidade! Eu cultivei esses repolhos com tanto carinho... Voce pode me ajudar a {recuperar} os repolhos?", cid)
     end
     return true
 end
@@ -218,11 +218,11 @@ function creatureSayCallback(cid, type, msg)
 
     if talkState[talkUser] == 1 then
         -- Aceitar a quest
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") or msgcontains(msg, "ajudar") or msgcontains(msg, "recuperar") or msgcontains(msg, "ajuda") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "help") or msgcontains(msg, "recuperar") or msgcontains(msg, "help") then
             if completed then
-                selfSay("Voce ja me ajudou com tudo, " .. name .. "! Todos os meus repolhos estao de volta. Obrigado!", cid)
+                selfSay("You already helped me with everything, " .. name .. "! Todos os meus repolhos estao de volta. Thank you!", cid)
             elseif started then
-                selfSay("Voce ja comecou a procurar! Va la e encontre os repolhos espalhados pela cidade. Clique neles para registrar a coleta. Quando tiver repolhos suficientes, volte e fale {recompensa}!", cid)
+                selfSay("You already comecou a procurar! Va la e encontre os repolhos espalhados pela cidade. Clique neles para registrar a coleta. Quando tiver repolhos suficientes, volte e fale {recompensa}!", cid)
             else
                 selfSay("Muito obrigado, " .. name .. "! Va pela cidade e clique nos repolhos que estao no chao. Cada repolho que voce encontrar sera contabilizado. Volte quando tiver recuperado alguns e fale {recompensa} para ganhar recompensas!", cid)
                 startQuest(cid)
@@ -233,15 +233,15 @@ function creatureSayCallback(cid, type, msg)
             if completed then
                 selfSay("Agora meus repolhos estao todos de volta! Um arruaceiro nao vai me derrubar facilmente!", cid)
             elseif started then
-                selfSay("Os meus repolhos ainda estao espalhados por ai! Voce ja recuperou " .. count .. " de " .. TOTAL_CABBAGES .. ". Continue procurando e clique neles quando encontrar!", cid)
+                selfSay("Os meus repolhos ainda estao espalhados por ai! You already recuperou " .. count .. " of " .. TOTAL_CABBAGES .. ". Continue procurando e clique neles quando encontrar!", cid)
             else
                 selfSay("Um arruaceiro desalmado roubou todos os meus repolhos e saiu espalhando pela cidade! Eu cultivei esses repolhos com tanto carinho... Voce pode me ajudar a {recuperar} os repolhos?", cid)
             end
 
-        -- Entregar recompensa
+        -- Entregar reward
         elseif msgcontains(msg, "recompensa") or msgcontains(msg, "recompensas") then
             if completed then
-                selfSay("Voce ja recebeu todas as recompensas, " .. name .. "! Obrigado por tudo!", cid)
+                selfSay("You already recebeu todas as recompensas, " .. name .. "! Thank you por tudo!", cid)
             elseif not started then
                 selfSay("Voce ainda nao comecou a me ajudar! Diga {sim} se quiser comecar a recuperar os meus repolhos!", cid)
             else
@@ -249,19 +249,19 @@ function creatureSayCallback(cid, type, msg)
                 if nextTier then
                     local rewardText = formatReward(nextTier)
                     claimReward(cid, nextTier)
-                    selfSay("Increivel, " .. name .. "! Voce ja recuperou " .. getCabbageCount(cid) .. " repolhos! Aqui esta sua recompensa: " .. rewardText .. "!", cid)
+                    selfSay("Increivel, " .. name .. "! You already recuperou " .. getCabbageCount(cid) .. " repolhos! Here is your reward: " .. rewardText .. "!", cid)
                 else
                     local nextMin = getNextTierMin(cid)
                     if nextMin then
                         selfSay("Ainda nao atingiu o proximo nivel de recompensa! Voce tem " .. count .. " repolhos e precisa de " .. nextMin .. " para a proxima recompensa. Continue procurando!", cid)
                     else
-                        selfSay("Voce ja recebeu todas as recompensas disponiveis, " .. name .. "! Obrigado!", cid)
+                        selfSay("You already recebeu todas as recompensas disponiveis, " .. name .. "! Thank you!", cid)
                     end
                 end
             end
 
         else
-            selfSay("Nao entendi. Voce esta falando dos meus {repolhos} que foram {roubados}? Diga {sim} para me ajudar a {recuperar} ou {recompensa} para ver suas recompensas!", cid)
+            selfSay("I didn't understand. Voce esta falando dos meus {repolhos} que foram {roubados}? Diga {sim} para me ajudar a {recuperar} ou {recompensa} para ver suas recompensas!", cid)
         end
     end
     return true

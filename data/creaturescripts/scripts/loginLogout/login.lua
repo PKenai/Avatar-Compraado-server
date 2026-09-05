@@ -198,17 +198,6 @@ local vocOuts =
 	}
 }
 
-local function imNotAvatar(cid)
-	local inStorage = getStorage(73991)
-	if inStorage > 0 then
-		local theAvatar = getPlayerByNameWildcard(getPlayerNameByGUID(inStorage))
-		if theAvatar and theAvatar == cid then
-			return false
-		end
-	end
-	return true
-end
-
 local function calculateSetRegen(cid)
 	local totalRegen = 0
 	local slots = {1, 4, 7, 8}
@@ -284,15 +273,9 @@ function onLogin(cid)
 		setPlayerStorageValue(cid, "canAttackable", 0)
 		setPlayerStorageValue(cid, "Archangel", 0)
 	end
-	if imNotAvatar(cid) then
-		setPlayerStorageValue(cid, "isAvatar", 0)
-	else
-		setPlayerStorageValue(cid, "isAvatar", 1)
-		local avatarPos = getCreaturePosition(cid)
-		doSendMagicEffect({x=avatarPos.x+1, y=avatarPos.y+1, z=avatarPos.z}, 134)
-		doSendMagicEffect({x=avatarPos.x+1, y=avatarPos.y+1, z=avatarPos.z}, 135)
-		doSendMagicEffect({x=avatarPos.x+1, y=avatarPos.y+1, z=avatarPos.z}, 121)
-	end
+	-- Avatar state never survives a login: it is lost on logout/death.
+	-- (The Battle Royale / Sonam's Staff system manages isAvatar itself.)
+	setPlayerStorageValue(cid, "isAvatar", 0)
 	if getCreatureMaxHealth(cid, true) > getRealMaxHp(cid) then 
 		local old = getCreatureMaxHealth(cid, true)
 		local new = getRealMaxHp(cid)

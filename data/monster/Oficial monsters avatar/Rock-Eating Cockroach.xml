@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Rock-Eating Cockroach" nameDescription="a rock-eating cockroach" race="undead" experience="20000" speed="680" manacost="0">
+	<health now="15000" max="15000"/>
+	<look type="1301" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="5000" chance="10"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="180" attack="200"/>
+		<attack name="physical" interval="2000" chance="30" range="1" min="-400" max="-600"/>
+		<attack name="earth" interval="2000" chance="20" range="7" min="-400" max="-550"/>
+		<attack name="poison" interval="2500" chance="15" range="3" min="-250" max="-400"/>
+	</attacks>
+	<defenses armor="50" defense="40"/>
+	<elements>
+		<element earthPercent="20"/>
+		<element physicalPercent="15"/>
+		<element firePercent="-20"/>
+		<element icePercent="-10"/>
+	</elements>
+	<loot>
+		<item id="2148" countmax="1000" chance="100000"/><!-- gold coins -->
+			<item id="19151" countmax="1" chance="3000"/><!-- Mineral esquisito -->
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="SKREEEEEEE!" yell="1"/>
+		<voice sentence="CRUNCH CRUNCH CRUNCH" yell="0"/>
+	</voices>
+</monster>

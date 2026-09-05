@@ -65,7 +65,7 @@ Bomberman.CONFIG = {
 	TEMPLE = {x = 505, y = 342, z = 7},
 
 	-- opcodes usados com o client (OTClient)
-	OPCODE_SHOW = 160,   -- servidor -> client: abre/fecha a janelinha BOMB
+	OPCODE_SHOW = 171,   -- servidor -> client: abre/fecha a janelinha BOMB (171: 160 e do party icons, 163 e do monsterloot)
 	OPCODE_CLICK = 161,  -- client -> servidor: botao BOMB foi clicado
 	MUSIC_OPCODE = 162,  -- servidor -> client: "play" / "stop" da musica do evento
 

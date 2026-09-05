@@ -1,7 +1,7 @@
 -- Marcos - Quest: matar 150 Hippos (quest id 35)
 -- Storages: 49350 = status, 49351 = progresso
--- Recompensa: 50 platinum coins (2152) + 100.000 exp
--- Titulo: "Domador de Hipos" (conquista 32)
+-- Reward: 50 platinum coins (2152) + 100.000 exp
+-- Title: "Domador de Hipos" (achievement 32)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -48,7 +48,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -56,7 +56,7 @@ end
 
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. QUEST_NAME)
     end)
@@ -90,38 +90,38 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja controlou os hipos! O rio esta seguro novamente!", cid)
+                selfSay("You already controlou os hipos! O rio esta seguro novamente!", cid)
             elseif started then
                 if progress >= NEEDED then
                     selfSay("Voce derrotou os 150 hipos! O rio esta limpo! Quer sua recompensa?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda faltam " .. (NEEDED - progress) .. " hipos. Eles estao espalhados pelo rio, cuidado!", cid)
+                    selfSay("Still need " .. (NEEDED - progress) .. " hipos. Eles estao espalhados pelo rio, cuidado!", cid)
                 end
             else
                 selfSay("Esses hipos estao espalhados pelo rio e atacam quem tenta atravessar. Mate 150 deles pra mim!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "hipo") or msgcontains(msg, "rio") or msgcontains(msg, "ajuda") or msgcontains(msg, "animal") then
+        elseif msgcontains(msg, "hipo") or msgcontains(msg, "rio") or msgcontains(msg, "help") or msgcontains(msg, "animal") then
             if started and not completed then
-                selfSay("Ainda faltam " .. (NEEDED - progress) .. " hipos. Eles estao espalhados pelo rio, cuidado!", cid)
+                selfSay("Still need " .. (NEEDED - progress) .. " hipos. Eles estao espalhados pelo rio, cuidado!", cid)
             else
                 selfSay("Eu sou o {Marcos}! Cuido do rio da vila, mas uns hipos invadiram e estao atacando todos que tentam passar. Voce pode me ajudar?", cid)
             end
         else
-            selfSay("Nao entendi. Voce quer me {ajudar} com os hipos do rio?", cid)
+            selfSay("I didn't understand. Voce quer me {ajudar} com os hipos do rio?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Aqui estao seus 50 platinum coins e 100 mil de experiencia! Voce agora e o Domador de Hipos!", cid)
+            selfSay("Here are your 50 platinum coins e 100 mil experience! Voce agora e o Domador de Hipos!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, volte quando quiser receber sua recompensa.", cid)
+            selfSay("Alright, come back when you want to receive your reward.", cid)
             talkState[talkUser] = 1
         end
     end

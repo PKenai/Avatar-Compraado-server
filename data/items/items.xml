@@ -5117,7 +5117,7 @@
 		<attribute key="increasemagicpercent" value="112" />
 		<attribute key="slotType" value="body" />
 	</item>
-	<item id="13403" article="a" name="Calca da montanha">
+	<item id="13403" article="a" name="Mountain Pants">
 		<attribute key="description" value="[+6% Bend Damage]. " />
 		<attribute key="weight" value="2200" />
 		<attribute key="armor" value="15" />
@@ -5128,7 +5128,7 @@
 		<attribute key="speed" value="30" />
 		<attribute key="increasemagicpercent" value="106" />
 	</item>
-	<item id="13404" article="a" name="Botas da montanha">
+	<item id="13404" article="a" name="Mountain Boots">
 		<attribute key="description" value="[+5% Bend Damage]. " />
 		<attribute key="weight" value="1000" />
 		<attribute key="armor" value="5" />
@@ -5201,7 +5201,7 @@
 		<attribute key="increasemagicpercent" value="105" />
 		<attribute key="slotType" value="head" />
 	</item>
-	<item id="13638" article="a" name="Calca de um traidor">
+	<item id="13638" article="a" name="Traitor's Pants">
 		<attribute key="description" value="[+5% Bend Damage]. " />
 		<attribute key="weight" value="2300" />
 		<attribute key="absorbPercentAll" value="3"/>
@@ -5219,7 +5219,7 @@
 		<attribute key="increasemagicpercent" value="105" />
 		<attribute key="slotType" value="body" />
 	</item>
-	<item id="13639" article="a" name="Botas de um traidor">
+	<item id="13639" article="a" name="Traitor's Boots">
 		<attribute key="description" value="[+5% Bend Damage]. " />
 		<attribute key="weight" value="800" />
 		<attribute key="armor" value="6" />
@@ -6425,6 +6425,10 @@
 	<item id="19204" article="an" name="air tornado">
 		<attribute key="description" value="A swirling air tornado portal." />
 		<attribute key="type" value="teleport" />
+	</item>
+
+	<item id="19218" article="a" name="Sonam's Staff">
+		<attribute key="description" value="A mystical staff radiating immense spiritual power." />
 	</item>
 	
 	
@@ -15761,7 +15765,7 @@
 
 
 <!-- === LUVAS (Armas Fist) === -->
-<item id="19098" article="a" name="Luva simples">
+<item id="19098" article="a" name="Simple Glove">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="2"/>
@@ -15771,7 +15775,7 @@
 	<attribute key="healthGain" value="1"/>
 	<attribute key="healthTicks" value="1000"/>
 </item>
-<item id="19100" article="a" name="Luva pegajosa">
+<item id="19100" article="a" name="Sticky Glove">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="3"/>
@@ -15781,7 +15785,7 @@
 	<attribute key="healthGain" value="2"/>
 	<attribute key="healthTicks" value="1000"/>
 </item>
-<item id="19102" article="a" name="Luva funebre">
+<item id="19102" article="a" name="Funeral Glove">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="5"/>
@@ -15790,7 +15794,7 @@
 	<attribute key="maxhealthpoints" value="18"/>
 	<attribute key="lifesteal" value="1"/>
 </item>
-<item id="19104" article="a" name="Luva pinca vermelha">
+<item id="19104" article="a" name="Red Pincer Glove">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="6"/>
@@ -15799,7 +15803,7 @@
 	<attribute key="maxhealthpoints" value="20"/>
 	<attribute key="criticalhitchance" value="2"/>
 </item>
-<item id="19106" article="a" name="Luva de joaninha">
+<item id="19106" article="a" name="Ladybug Glove">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="7"/>
@@ -15809,7 +15813,7 @@
 	<attribute key="healthGain" value="3"/>
 	<attribute key="healthTicks" value="1000"/>
 </item>
-<item id="19108" article="a" name="Luvas da fera">
+<item id="19108" article="a" name="Beast Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="6"/>
@@ -15818,7 +15822,7 @@
 	<attribute key="maxhealthpoints" value="20"/>
 	<attribute key="criticalhitchance" value="2"/>
 </item>
-<item id="19110" article="a" name="Luvas tecidas">
+<item id="19110" article="a" name="Woven Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="6"/>
@@ -15827,7 +15831,7 @@
 	<attribute key="maxmanapoints" value="15"/>
 	<attribute key="lifesteal" value="1"/>
 </item>
-<item id="19112" article="a" name="Luvas da rainha">
+<item id="19112" article="a" name="Queen's Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="8"/>
@@ -15836,7 +15840,7 @@
 	<attribute key="maxmanapoints" value="20"/>
 	<attribute key="lifesteal" value="2"/>
 </item>
-<item id="19114" article="a" name="Luvas de teia">
+<item id="19114" article="a" name="Web Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="12"/>
@@ -15845,7 +15849,7 @@
 	<attribute key="maxmanapoints" value="35"/>
 	<attribute key="criticalhitchance" value="3"/>
 </item>
-<item id="19116" article="a" name="Luvas de barro">
+<item id="19116" article="a" name="Mud Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="11"/>
@@ -15854,7 +15858,7 @@
 	<attribute key="maxhealthpoints" value="40"/>
 	<attribute key="extraAttack" value="2"/>
 </item>
-<item id="19118" article="a" name="Luvas reluzentes">
+<item id="19118" article="a" name="Gleaming Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="13"/>
@@ -15863,7 +15867,7 @@
 	<attribute key="maxhealthpoints" value="45"/>
 	<attribute key="lifesteal" value="2"/>
 </item>
-<item id="19120" article="a" name="Luvas reais">
+<item id="19120" article="a" name="Royal Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="15"/>
@@ -15872,7 +15876,7 @@
 	<attribute key="maxhealthpoints" value="50"/>
 	<attribute key="criticalhitchance" value="4"/>
 </item>
-<item id="19122" article="a" name="Luvas metalicas">
+<item id="19122" article="a" name="Metallic Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="18"/>
@@ -15886,7 +15890,7 @@
 	<attribute key="increasemagicpercent" value="105"/>
 	<attribute key="description" value="[+5% Bend Damage]"/>
 </item>
-<item id="19124" article="a" name="Luvas gosmentas">
+<item id="19124" article="a" name="Slimy Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="20"/>
@@ -15900,7 +15904,7 @@
 	<attribute key="increasemagicpercent" value="106"/>
 	<attribute key="description" value="[+6% Bend Damage]"/>
 </item>
-<item id="19126" article="a" name="Luvas de couro cinza">
+<item id="19126" article="a" name="Grey Leather Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="22"/>
@@ -15914,7 +15918,7 @@
 	<attribute key="increasemagicpercent" value="107"/>
 	<attribute key="description" value="[+7% Bend Damage]"/>
 </item>
-<item id="19128" article="a" name="Luvas da terra">
+<item id="19128" article="a" name="Earth Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="22"/>
@@ -15928,7 +15932,7 @@
 	<attribute key="increasemagicpercent" value="108"/>
 	<attribute key="description" value="[+8% Bend Damage]"/>
 </item>
-<item id="19130" article="a" name="Luvas da natureza">
+<item id="19130" article="a" name="Nature Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="24"/>
@@ -15941,7 +15945,7 @@
 	<attribute key="increasemagicpercent" value="108"/>
 	<attribute key="description" value="[+8% Bend Damage]"/>
 </item>
-<item id="19132" article="a" name="Luvas carniceiras">
+<item id="19132" article="a" name="Butcher Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="26"/>
@@ -15955,7 +15959,7 @@
 	<attribute key="increasemagicpercent" value="109"/>
 	<attribute key="description" value="[+9% Bend Damage]"/>
 </item>
-<item id="19134" article="a" name="Luvas cascudas">
+<item id="19134" article="a" name="Tough Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="28"/>
@@ -15969,7 +15973,7 @@
 	<attribute key="increasemagicpercent" value="110"/>
 	<attribute key="description" value="[+10% Bend Damage]"/>
 </item>
-<item id="19136" article="a" name="Luvas da rebeliao">
+<item id="19136" article="a" name="Rebellion Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="34"/>
@@ -15983,7 +15987,7 @@
 	<attribute key="increasemagicpercent" value="111"/>
 	<attribute key="description" value="[+11% Bend Damage]"/>
 </item>
-<item id="19138" article="a" name="Luvas marinhas">
+<item id="19138" article="a" name="Marine Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="36"/>
@@ -15997,7 +16001,7 @@
 	<attribute key="increasemagicpercent" value="112"/>
 	<attribute key="description" value="[+12% Bend Damage]"/>
 </item>
-<item id="19140" article="a" name="Luvas da coragem">
+<item id="19140" article="a" name="Courage Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="38"/>
@@ -16011,7 +16015,7 @@
 	<attribute key="increasemagicpercent" value="112"/>
 	<attribute key="description" value="[+12% Bend Damage]"/>
 </item>
-<item id="19142" article="a" name="Luvas do hermitao">
+<item id="19142" article="a" name="Hermit's Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="40"/>
@@ -16025,7 +16029,7 @@
 	<attribute key="increasemagicpercent" value="113"/>
 	<attribute key="description" value="[+13% Bend Damage]"/>
 </item>
-<item id="19144" article="a" name="Luvas do conhecimento">
+<item id="19144" article="a" name="Knowledge Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="42"/>
@@ -16039,7 +16043,7 @@
 	<attribute key="increasemagicpercent" value="114"/>
 	<attribute key="description" value="[+14% Bend Damage]"/>
 </item>
-<item id="19146" article="a" name="Luvas da dobra obscura">
+<item id="19146" article="a" name="Dark Fold Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="50"/>
@@ -16053,7 +16057,7 @@
 	<attribute key="increasemagicpercent" value="115"/>
 	<attribute key="description" value="[+15% Bend Damage]"/>
 </item>
-<item id="19148" article="a" name="Luvas deserticas">
+<item id="19148" article="a" name="Desert Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="54"/>
@@ -16067,7 +16071,7 @@
 	<attribute key="increasemagicpercent" value="117"/>
 	<attribute key="description" value="[+17% Bend Damage]"/>
 </item>
-<item id="19150" article="a" name="Luvas de pedregulho">
+<item id="19150" article="a" name="Boulder Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="56"/>
@@ -16081,7 +16085,7 @@
 	<attribute key="increasemagicpercent" value="118"/>
 	<attribute key="description" value="[+18% Bend Damage]"/>
 </item>
-<item id="19152" article="a" name="Luvas do conhecimento perdido">
+<item id="19152" article="a" name="Lost Knowledge Gloves">
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="60"/>
@@ -16102,117 +16106,117 @@
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19101" article="a" name="Casca de besouro da terra">
+<item id="19101" article="a" name="Earth Beetle Shell">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19103" article="a" name="Cabeca de verme">
+<item id="19103" article="a" name="Worm Head">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19105" article="a" name="Pinca de carangueijo">
+<item id="19105" article="a" name="Crab Pincer">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19107" article="a" name="Antena de joaninha">
+<item id="19107" article="a" name="Ladybug Antenna">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19109" article="a" name="Pelo de urso">
+<item id="19109" article="a" name="Bear Fur">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19111" article="a" name="Teia forte">
+<item id="19111" article="a" name="Strong Web">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19113" article="a" name="Asas de abelha de barro">
+<item id="19113" article="a" name="Mud Bee Wings">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19115" article="a" name="Teia velha">
+<item id="19115" article="a" name="Old Web">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19117" article="a" name="Frasco com barro">
+<item id="19117" article="a" name="Flask of Mud">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19119" article="a" name="Frasco de luz">
+<item id="19119" article="a" name="Flask of Light">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19121" article="a" name="Juba de leao">
+<item id="19121" article="a" name="Lion Mane">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19123" article="a" name="Pecado metalico">
+<item id="19123" article="a" name="Metallic Sin">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19125" article="a" name="Frasco com liquido de caracol">
+<item id="19125" article="a" name="Snail Liquid Flask">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19127" article="a" name="Couro de elefante">
+<item id="19127" article="a" name="Elephant Leather">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19129" article="a" name="Bico de pica pau">
+<item id="19129" article="a" name="Woodpecker Beak">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19131" article="a" name="Perna de grilo">
+<item id="19131" article="a" name="Cricket Leg">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19133" article="a" name="Ferrao de abelha urubu">
+<item id="19133" article="a" name="Vulture Bee Stinger">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19135" article="a" name="Pedriscos de mordecasca">
+<item id="19135" article="a" name="Mordecasca Pebbles">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19137" article="a" name="Pano sombrio">
+<item id="19137" article="a" name="Sombre Cloth">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19139" article="a" name="Escamas marinhas">
+<item id="19139" article="a" name="Marine Scales">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19141" article="a" name="Pele de onca">
+<item id="19141" article="a" name="Jaguar Skin">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19143" article="a" name="Concha de hermitao">
+<item id="19143" article="a" name="Hermit's Shell">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19145" article="a" name="Paginas estranhas">
+<item id="19145" article="a" name="Strange Pages">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19147" article="a" name="Pata negra">
+<item id="19147" article="a" name="Black Paw">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19149" article="a" name="Pedras do deserto">
+<item id="19149" article="a" name="Desert Stones">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19151" article="a" name="Mineral esquisito">
+<item id="19151" article="a" name="Odd Mineral">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
-<item id="19153" article="a" name="Paginas gigantes">
+<item id="19153" article="a" name="Giant Pages">
 	<attribute key="weight" value="50"/>
 	<attribute key="description" value="Material para forjar luvas."/>
 </item>
 
 <!-- === CAPAS (Tadeu) === -->
-<item id="19158" article="a" name="Capa de viajante">
+<item id="19158" article="a" name="Traveler's Cape">
 	<attribute key="weight" value="1800" />
 	<attribute key="armor" value="8" />
 	<attribute key="maxhealthpoints" value="100" />
@@ -16220,7 +16224,7 @@
 	<attribute key="speed" value="10" />
 	<attribute key="slotType" value="body" />
 </item>
-<item id="19159" article="a" name="Capa reforcada">
+<item id="19159" article="a" name="Reinforced Cape">
 	<attribute key="weight" value="2200" />
 	<attribute key="armor" value="12" />
 	<attribute key="maxhealthpoints" value="180" />
@@ -16228,7 +16232,7 @@
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="body" />
 </item>
-<item id="19160" article="a" name="Capa resistente">
+<item id="19160" article="a" name="Tough Cape">
 	<attribute key="weight" value="1700" />
 	<attribute key="armor" value="7" />
 	<attribute key="increasemagicpercent" value="102" />
@@ -16237,7 +16241,7 @@
 	<attribute key="speed" value="15" />
 	<attribute key="slotType" value="body" />
 </item>
-<item id="19161" article="a" name="Capa aprimorada">
+<item id="19161" article="a" name="Improved Cape">
 	<attribute key="weight" value="1800" />
 	<attribute key="armor" value="10" />
 	<attribute key="criticalhitchance" value="3" />
@@ -16246,7 +16250,7 @@
 	<attribute key="speed" value="35" />
 	<attribute key="slotType" value="body" />
 </item>
-<item id="19162" article="a" name="Capa nobre">
+<item id="19162" article="a" name="Noble Cape">
 	<attribute key="weight" value="2400" />
 	<attribute key="armor" value="15" />
 	<attribute key="maxhealthpoints" value="400" />
@@ -16254,7 +16258,7 @@
 	<attribute key="absorbPercentAll" value="2" />
 	<attribute key="slotType" value="body" />
 </item>
-<item id="19163" article="a" name="Capa de protecao">
+<item id="19163" article="a" name="Protective Cape">
 	<attribute key="weight" value="1700" />
 	<attribute key="armor" value="10" />
 	<attribute key="increasemagicpercent" value="104" />
@@ -16264,7 +16268,7 @@
 	<attribute key="manaTicks" value="2000" />
 	<attribute key="slotType" value="body" />
 </item>
-<item id="19164" article="a" name="Capa majestosa">
+<item id="19164" article="a" name="Majestic Cape">
 	<attribute key="weight" value="1900" />
 	<attribute key="armor" value="13" />
 	<attribute key="criticalhitchance" value="8" />
@@ -16274,7 +16278,7 @@
 	<attribute key="speed" value="50" />
 	<attribute key="slotType" value="body" />
 </item>
-<item id="19165" article="a" name="Capa gloriosa">
+<item id="19165" article="a" name="Glorious Cape">
 	<attribute key="weight" value="1600" />
 	<attribute key="armor" value="11" />
 	<attribute key="increasemagicpercent" value="107" />
@@ -16284,7 +16288,7 @@
 	<attribute key="speed" value="25" />
 	<attribute key="slotType" value="body" />
 </item>
-<item id="19166" article="a" name="Capa soberana">
+<item id="19166" article="a" name="Sovereign Cape">
 	<attribute key="weight" value="2600" />
 	<attribute key="armor" value="20" />
 	<attribute key="maxhealthpoints" value="800" />
@@ -16293,7 +16297,7 @@
 	<attribute key="speed" value="15" />
 	<attribute key="slotType" value="body" />
 </item>
-<item id="19167" article="a" name="Capa das nacoes">
+<item id="19167" article="a" name="Nations Cape">
 	<attribute key="weight" value="2500" />
 	<attribute key="armor" value="18" />
 	<attribute key="increasemagicpercent" value="105" />
@@ -16308,7 +16312,7 @@
 </item>
 
 <!-- === CALCAS (Tadeu / Robson) === -->
-<item id="19169" article="a" name="Calca de viajante">
+<item id="19169" article="a" name="Traveler's Pants">
 	<attribute key="weight" value="1400" />
 	<attribute key="armor" value="6" />
 	<attribute key="maxhealthpoints" value="75" />
@@ -16316,7 +16320,7 @@
 	<attribute key="speed" value="8" />
 	<attribute key="slotType" value="legs" />
 </item>
-<item id="19170" article="a" name="Calca reforcada">
+<item id="19170" article="a" name="Reinforced Pants">
 	<attribute key="weight" value="1700" />
 	<attribute key="armor" value="9" />
 	<attribute key="maxhealthpoints" value="135" />
@@ -16324,7 +16328,7 @@
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="legs" />
 </item>
-<item id="19171" article="a" name="Calca resistente">
+<item id="19171" article="a" name="Tough Pants">
 	<attribute key="weight" value="1300" />
 	<attribute key="armor" value="5" />
 	<attribute key="maxhealthpoints" value="60" />
@@ -16334,7 +16338,7 @@
 	<attribute key="speed" value="10" />
 	<attribute key="slotType" value="legs" />
 </item>
-<item id="19172" article="a" name="Calca aprimorada">
+<item id="19172" article="a" name="Improved Pants">
 	<attribute key="weight" value="1400" />
 	<attribute key="armor" value="8" />
 	<attribute key="maxhealthpoints" value="135" />
@@ -16344,7 +16348,7 @@
 	<attribute key="speed" value="25" />
 	<attribute key="slotType" value="legs" />
 </item>
-<item id="19173" article="a" name="Calca nobre">
+<item id="19173" article="a" name="Noble Pants">
 	<attribute key="weight" value="1800" />
 	<attribute key="armor" value="11" />
 	<attribute key="maxhealthpoints" value="300" />
@@ -16352,7 +16356,7 @@
 	<attribute key="absorbPercentAll" value="2" />
 	<attribute key="slotType" value="legs" />
 </item>
-<item id="19174" article="a" name="Calca de protecao">
+<item id="19174" article="a" name="Protective Pants">
 	<attribute key="weight" value="1300" />
 	<attribute key="armor" value="8" />
 	<attribute key="maxhealthpoints" value="150" />
@@ -16362,7 +16366,7 @@
 	<attribute key="absorbPercentElements" value="2" />
 	<attribute key="slotType" value="legs" />
 </item>
-<item id="19175" article="a" name="Calca majestosa">
+<item id="19175" article="a" name="Majestic Pants">
 	<attribute key="weight" value="1500" />
 	<attribute key="armor" value="10" />
 	<attribute key="maxhealthpoints" value="260" />
@@ -16373,7 +16377,7 @@
 	<attribute key="speed" value="38" />
 	<attribute key="slotType" value="legs" />
 </item>
-<item id="19176" article="a" name="Calca gloriosa">
+<item id="19176" article="a" name="Glorious Pants">
 	<attribute key="weight" value="1200" />
 	<attribute key="armor" value="8" />
 	<attribute key="maxhealthpoints" value="190" />
@@ -16384,7 +16388,7 @@
 	<attribute key="speed" value="20" />
 	<attribute key="slotType" value="legs" />
 </item>
-<item id="19177" article="a" name="Calca soberana">
+<item id="19177" article="a" name="Sovereign Pants">
 	<attribute key="weight" value="2000" />
 	<attribute key="armor" value="15" />
 	<attribute key="maxhealthpoints" value="600" />
@@ -16395,7 +16399,7 @@
 	<attribute key="speed" value="12" />
 	<attribute key="slotType" value="legs" />
 </item>
-<item id="19178" article="a" name="Calca das nacoes">
+<item id="19178" article="a" name="Nations Pants">
 	<attribute key="weight" value="1900" />
 	<attribute key="armor" value="14" />
 	<attribute key="maxhealthpoints" value="375" />
@@ -16411,21 +16415,21 @@
 </item>
 
 <!-- === CAPACETES (Bend + Mana + Regen) === -->
-<item id="19180" article="um" name="Capacete de viajante">
+<item id="19180" article="um" name="Traveler's Helmet">
 	<attribute key="weight" value="900" />
 	<attribute key="armor" value="4" />
 	<attribute key="maxmanapoints" value="60" />
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="head" />
 </item>
-<item id="19181" article="um" name="Capacete reforcado">
+<item id="19181" article="um" name="Reinforced Helmet">
 	<attribute key="weight" value="1100" />
 	<attribute key="armor" value="6" />
 	<attribute key="maxmanapoints" value="45" />
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="head" />
 </item>
-<item id="19182" article="um" name="Capacete resistente">
+<item id="19182" article="um" name="Tough Helmet">
 	<attribute key="weight" value="800" />
 	<attribute key="armor" value="3" />
 	<attribute key="maxmanapoints" value="160" />
@@ -16434,7 +16438,7 @@
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="head" />
 </item>
-<item id="19183" article="um" name="Capacete aprimorado">
+<item id="19183" article="um" name="Improved Helmet">
 	<attribute key="weight" value="900" />
 	<attribute key="armor" value="5" />
 	<attribute key="maxmanapoints" value="100" />
@@ -16443,14 +16447,14 @@
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="head" />
 </item>
-<item id="19184" article="um" name="Capacete nobre">
+<item id="19184" article="um" name="Noble Helmet">
 	<attribute key="weight" value="1300" />
 	<attribute key="armor" value="8" />
 	<attribute key="maxmanapoints" value="85" />
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="head" />
 </item>
-<item id="19185" article="um" name="Capacete de protecao">
+<item id="19185" article="um" name="Protective Helmet">
 	<attribute key="weight" value="800" />
 	<attribute key="armor" value="5" />
 	<attribute key="maxmanapoints" value="380" />
@@ -16459,7 +16463,7 @@
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="head" />
 </item>
-<item id="19186" article="um" name="Capacete majestoso">
+<item id="19186" article="um" name="Majestic Helmet">
 	<attribute key="weight" value="1000" />
 	<attribute key="armor" value="7" />
 	<attribute key="maxmanapoints" value="180" />
@@ -16468,7 +16472,7 @@
 	<attribute key="absorbPercentAll" value="2" />
 	<attribute key="slotType" value="head" />
 </item>
-<item id="19187" article="um" name="Capacete glorioso">
+<item id="19187" article="um" name="Glorious Helmet">
 	<attribute key="weight" value="700" />
 	<attribute key="armor" value="5" />
 	<attribute key="maxmanapoints" value="550" />
@@ -16477,7 +16481,7 @@
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="head" />
 </item>
-<item id="19188" article="um" name="Capacete soberano">
+<item id="19188" article="um" name="Sovereign Helmet">
 	<attribute key="weight" value="1500" />
 	<attribute key="armor" value="10" />
 	<attribute key="maxmanapoints" value="120" />
@@ -16486,7 +16490,7 @@
 	<attribute key="healthTicks" value="2000" />
 	<attribute key="slotType" value="head" />
 </item>
-<item id="19189" article="um" name="Capacete das nacoes">
+<item id="19189" article="um" name="Nations Helmet">
 	<attribute key="weight" value="1400" />
 	<attribute key="armor" value="8" />
 	<attribute key="maxmanapoints" value="340" />
@@ -16499,21 +16503,21 @@
 </item>
 
 <!-- === BOTAS (Speed + HP/Armor) === -->
-<item id="19191" article="a" name="Bota de viajante">
+<item id="19191" article="a" name="Traveler's Boots">
 	<attribute key="weight" value="700" />
 	<attribute key="armor" value="3" />
 	<attribute key="maxhealthpoints" value="40" />
 	<attribute key="speed" value="8" />
 	<attribute key="slotType" value="feet" />
 </item>
-<item id="19192" article="a" name="Bota reforcada">
+<item id="19192" article="a" name="Reinforced Boots">
 	<attribute key="weight" value="900" />
 	<attribute key="armor" value="5" />
 	<attribute key="speed" value="6" />
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="feet" />
 </item>
-<item id="19193" article="a" name="Bota resistente">
+<item id="19193" article="a" name="Tough Boots">
 	<attribute key="weight" value="600" />
 	<attribute key="armor" value="2" />
 	<attribute key="maxhealthpoints" value="70" />
@@ -16522,7 +16526,7 @@
 	<attribute key="speed" value="12" />
 	<attribute key="slotType" value="feet" />
 </item>
-<item id="19194" article="a" name="Bota aprimorada">
+<item id="19194" article="a" name="Improved Boots">
 	<attribute key="weight" value="700" />
 	<attribute key="armor" value="4" />
 	<attribute key="maxhealthpoints" value="50" />
@@ -16531,14 +16535,14 @@
 	<attribute key="speed" value="22" />
 	<attribute key="slotType" value="feet" />
 </item>
-<item id="19195" article="a" name="Bota nobre">
+<item id="19195" article="a" name="Noble Boots">
 	<attribute key="weight" value="1100" />
 	<attribute key="armor" value="7" />
 	<attribute key="speed" value="10" />
 	<attribute key="absorbPercentAll" value="2" />
 	<attribute key="slotType" value="feet" />
 </item>
-<item id="19196" article="a" name="Bota de protecao">
+<item id="19196" article="a" name="Protective Boots">
 	<attribute key="weight" value="600" />
 	<attribute key="armor" value="3" />
 	<attribute key="maxhealthpoints" value="160" />
@@ -16548,7 +16552,7 @@
 	<attribute key="speed" value="15" />
 	<attribute key="slotType" value="feet" />
 </item>
-<item id="19197" article="a" name="Bota majestosa">
+<item id="19197" article="a" name="Majestic Boots">
 	<attribute key="weight" value="800" />
 	<attribute key="armor" value="5" />
 	<attribute key="maxhealthpoints" value="100" />
@@ -16558,7 +16562,7 @@
 	<attribute key="speed" value="32" />
 	<attribute key="slotType" value="feet" />
 </item>
-<item id="19198" article="a" name="Bota gloriosa">
+<item id="19198" article="a" name="Glorious Boots">
 	<attribute key="weight" value="500" />
 	<attribute key="armor" value="3" />
 	<attribute key="maxhealthpoints" value="280" />
@@ -16568,7 +16572,7 @@
 	<attribute key="speed" value="22" />
 	<attribute key="slotType" value="feet" />
 </item>
-<item id="19199" article="a" name="Bota soberana">
+<item id="19199" article="a" name="Sovereign Boots">
 	<attribute key="weight" value="1200" />
 	<attribute key="armor" value="9" />
 	<attribute key="speed" value="12" />
@@ -16577,7 +16581,7 @@
 	<attribute key="manaTicks" value="2000" />
 	<attribute key="slotType" value="feet" />
 </item>
-<item id="19200" article="a" name="Bota das nacoes">
+<item id="19200" article="a" name="Nations Boots">
 	<attribute key="weight" value="1100" />
 	<attribute key="armor" value="6" />
 	<attribute key="maxhealthpoints" value="180" />
@@ -16589,13 +16593,13 @@
 	<attribute key="slotType" value="feet" />
 </item>
 	<!-- Coletor de Recompensas Diarias -->
-	<item id="19009" article="a" name="Coletor de recompensas">
+	<item id="19009" article="a" name="Daily Reward Collector">
 		<attribute key="weight" value="100" />
 		<attribute key="description" value="Use to open your daily reward window. Collect rewards for 7 consecutive days!" />
 	</item>
 	<!-- Bau do Homem do Pantano -->
-	<item id="18878" article="a" name="bau do homem do pantano">
-		<attribute key="type" value="chest" />
+	<item id="18878" article="a" name="Swamp Man Chest">
+		<attribute key="type" value="container" />
 		<attribute key="weight" value="1000" />
 	</item>
 </items>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Giant Cricket" nameDescription="a giant cricket" race="undead" experience="5500" speed="280" manacost="0">
+	<health now="1600" max="1600"/>
+	<look type="1308" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="5000" chance="10"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="55" attack="45"/>
+		<attack name="physical" interval="2500" chance="25" range="1" min="-40" max="-80"/>
+		<attack name="poison" interval="3000" chance="15" range="4" min="-20" max="-40"/>
+	</attacks>
+	<defenses armor="15" defense="20"/>
+	<elements>
+		<element earthPercent="15"/>
+		<element icePercent="10"/>
+		<element firePercent="-10"/>
+	</elements>
+	<loot>
+		<item id="2148" countmax="50" chance="100000"/><!-- gold coins -->
+		<item id="2671" countmax="3" chance="70000"/><!-- ham -->
+			<item id="19131" countmax="1" chance="13000"/><!-- Perna de grilo -->
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="Splash!"/>
+		<voice sentence="GRRRRRRR"/>
+		<voice sentence="HRRRRMMMM!" yell="1"/>
+	</voices>
+</monster>

@@ -1,9 +1,9 @@
 -- Carla - Quest: matar 50 Baratas (quest id 39)
--- Historia: o templo da cidade esta sendo invadido por baratas e Carla precisa que voce extermina-las.
+-- Story: o templo da cidade esta sendo invadido por baratas e Carla precisa que voce extermina-las.
 -- Storages (data/questSystem/quests.xml):
 --   49390 = status da quest (1 = em andamento, 2 = completa)
 --   49391 = kills acumulados (progresso)
--- Recompensa: 200 gold coins (2148)
+-- Reward: 200 gold coins (2148)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -54,7 +54,7 @@ local function startQuest(cid)
     if pos then
         doSendMagicEffect(pos, 199)
     end
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -63,7 +63,7 @@ end
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
     print("[Carla] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. QUEST_NAME)
     end)
@@ -97,9 +97,9 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja resolveu o problema das baratas, obrigada mesmo! Nao sei o que eu faria sem voce.", cid)
+                selfSay("You already resolveu o problema das baratas, obrigada mesmo! Nao sei o que eu faria sem voce.", cid)
             elseif started then
                 if progress >= NEEDED then
                     selfSay("Eba! Voce matou todas as 50 baratas! Toma sua grana, voco merece!", cid)
@@ -111,7 +111,7 @@ function creatureSayCallback(cid, type, msg)
                 selfSay("Demais! Mata 50 baratas la no {templo} e volta aqui que eu te dou 200 gold! Bora!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "barata") or msgcontains(msg, "templo") or msgcontains(msg, "ajuda") or msgcontains(msg, "invasa") or msgcontains(msg, "praga") then
+        elseif msgcontains(msg, "barata") or msgcontains(msg, "templo") or msgcontains(msg, "help") or msgcontains(msg, "invasa") or msgcontains(msg, "praga") then
             if started and not completed then
                 selfSay("Faltam ainda " .. (NEEDED - progress) .. " baratas. Corre la no {templo} e mata essas praga!", cid)
             else
@@ -121,7 +121,7 @@ function creatureSayCallback(cid, type, msg)
             selfSay("To falando das {baratas} do {templo}! Ta cheio delas, quer me ajudar a limpar?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             completeQuest(cid)
             selfSay("Toma, 200 gold coins! Voce e um craque, valeu demais pela ajuda!", cid)

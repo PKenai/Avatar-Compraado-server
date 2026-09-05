@@ -1,268 +1,260 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Quest Log - definição das quests (client: modules/game_quests)
-  Arquivo próprio do quest system (NÃO é o data/XML/quests.xml do quest log nativo do TFS).
-  Carregado no startup por data/globalevents/scripts/questSystemInit.lua.
+  Quest Log - definition das quests (client: modules/game_quests)
+  Own file do quest system (is NOT the data/XML/quests.xml of the native TFS quest log).
+  Loaded at startup por data/globalevents/scripts/questSystemInit.lua.
   ======================================================================
-  FORMATO:
-    Cada quest usa uma tag de quest com os atributos: name, id,
-    looktype (outfit do icone) ou looktypeex (id de item),
-    startstorageid + startstoragevalue (a quest só aparece no log
-    quando o storage do player atinge o valor). Dentro da quest:
+  FORMAT:
+    Each quest uses uma tag de quest com os atributos: name, id,
+    looktype (icon outfit) ou looktypeex (id de item),
+    startstorageid + startstoragevalue (the quest only appears in the log
+    quando o storage do player atinge o valor). Inside the quest:
     description, mission (name, storageid, startvalue, endvalue,
     progressstorageid), monster (name, count, storageid opcional,
     outfit opcional) e reward (id, count).
 
-  OBS:
-    - Kills contam automaticamente quando a quest esta ativa.
-    - Para INICIAR a quest no NPC, use os storages direto (o estado Lua
-      dos NPCs e separado do global; a questSystemLib so roda no global):
+  NOTE:
+    - Kills count automatically quando the quest is active.
+    - To START the quest no NPC, use the storages directly (the Lua state
+      dos NPCs is separate from global; a questSystemLib only runs in global):
         setPlayerStorageValue(cid, startstorageid, startstoragevalue)
         setPlayerStorageValue(cid, progressstorageid, 0)  (zera o progresso)
-    - Para CONCLUIR a missão: setPlayerStorageValue(cid, storageid, endvalue)
-    - STORAGES: usa a faixa 49000-49999 (livre neste servidor). NÃO use
-      storages desta faixa em outros sistemas, senão as quests conflitam.
-    - O loader usa padrões de texto (gmatch) sobre o arquivo CRU: NÃO
-      escreva tags literais de quest neste comentário, senão o padrão
-      casa com o comentário e engole as quests reais.
+    - To COMPLETE the mission: setPlayerStorageValue(cid, storageid, endvalue)
+    - STORAGES: uses the range 49000-49999 (free on this server). DO NOT use
+      storages desta faixa em outros sistemas, otherwise the quests conflict.
+    - The loader uses text patterns (gmatch) on the RAW file: DO NOT
+      write literal quest tags in this comment, otherwise the pattern
+      matches the comment and swallows the real quests.
 -->
 <quests>
 
-    <quest name="Caçada de Alcion" id="15" looktype="1169" startstorageid="49150" startstoragevalue="1">
-        <description>Alcion precisa de ajuda para conter a invasão das Tarântulas de pedra na região.</description>
-        <mission name="Eliminar Tarântulas" storageid="49150" startvalue="1" endvalue="2" progressstorageid="49151">
-            <description>Mate 250 Tarântulas de pedra e volte ao Alcion para receber sua recompensa.</description>
-            <monster name="Tarantula de pedra" count="250" />
+    <quest name="Alcion's Hunt" id="15" looktype="1169" startstorageid="49150" startstoragevalue="1">
+        <description>Alcion needs help containing the Stone Tarantula invasion in the region.</description>
+        <mission name="Eliminate Tarantulas" storageid="49150" startvalue="1" endvalue="2" progressstorageid="49151">
+            <description>Kill 250 Stone Tarantulas and return to Alcion for your reward.</description>
+            <monster name="Stone Tarantula" count="250" />
             <reward id="2152" count="30" />
         </mission>
     </quest>
 
-    <quest name="Infestação no Bueiro" id="16" looktype="1172" startstorageid="49160" startstoragevalue="1">
-        <description>Astro está sofrendo com uma infestação de Terra beetles no bueiro na frente da casa dele.</description>
-        <mission name="Exterminar Terra beetles" storageid="49160" startvalue="1" endvalue="2" progressstorageid="49161">
-            <description>Mate 150 Terra beetles no bueiro e volte ao Astro para receber sua recompensa.</description>
-            <monster name="Terra beetle" count="150" />
+    <quest name="Sewer Infestation" id="16" looktype="1172" startstorageid="49160" startstoragevalue="1">
+        <description>Astro is suffering from an Earth Beetle infestation in the sewer in front of his house.</description>
+        <mission name="Exterminate Earth Beetles" storageid="49160" startvalue="1" endvalue="2" progressstorageid="49161">
+            <description>Kill 150 Earth Beetles in the sewer and return to Astro for your reward.</description>
+            <monster name="Earth Beetle" count="150" />
             <reward id="2152" count="10" />
         </mission>
     </quest>
 
-    <quest name="O Mel de Katata" id="17" looktype="1179" startstorageid="49170" startstoragevalue="1">
-        <description>Katata teve sua colmeia de mel roubada pelas abelhas de barro e precisa dela de volta para não passar fome.</description>
-        <mission name="Recuperar a Colmeia de barro" storageid="49170" startvalue="1" endvalue="2" progressstorageid="49171" maxprogress="1">
-            <description>Encontre a Colmeia de barro na toca das abelhas de barro e devolva ao Katata.</description>
+    <quest name="Katata's Honey" id="17" looktype="1179" startstorageid="49170" startstoragevalue="1">
+        <description>Katata had his honey hive stolen by mud bees and needs it back so he doesn't starve.</description>
+        <mission name="Recover the Mud Hive" storageid="49170" startvalue="1" endvalue="2" progressstorageid="49171" maxprogress="1">
+            <description>Find the Mud Hive in the mud bees' den and return it to Katata.</description>
             <reward id="2152" count="20" />
         </mission>
     </quest>
 
-    <quest name="Extermínio dos Leões" id="18" looktype="1184" startstorageid="49180" startstoragevalue="1">
-        <description>Tong Lee encontrou o santuário dos leões, mas não liga para o santuário: ele só quer exterminar todos os leões.</description>
-        <mission name="Exterminar os Leões" storageid="49180" startvalue="1" endvalue="2" progressstorageid="49181">
-            <description>Mate 300 Leao de ba sin se no santuário e volte ao Tong Lee para receber sua recompensa.</description>
-            <monster name="Leao de ba sin se" count="300" />
+    <quest name="Lion Extermination" id="18" looktype="1184" startstorageid="49180" startstoragevalue="1">
+        <description>Tong Lee found the lion sanctuary, but doesn't care about the sanctuary: he just wants to exterminate all the lions.</description>
+        <mission name="Exterminate the Lions" storageid="49180" startvalue="1" endvalue="2" progressstorageid="49181">
+            <description>Kill 300 Ba Sing Se Lions in the sanctuary and return to Tong Lee for your reward.</description>
+            <monster name="Ba Sing Se Lion" count="300" />
             <reward id="2152" count="50" />
             <reward id="12810" count="1" />
         </mission>
     </quest>
 
 
-    <quest name="A Pena de John" id="19" looktype="1268" startstorageid="49190" startstoragevalue="1">
-        <description>John faz vestimentas com itens de animais e precisa de uma pena de pica-pau da terra para sua próxima criação.</description>
-        <mission name="Entregar a pena" storageid="49190" startvalue="1" endvalue="2" progressstorageid="49191" maxprogress="1">
-            <description>Consiga uma pena de pica-pau da terra e entregue ao John.</description>
+    <quest name="John's Feather" id="19" looktype="1268" startstorageid="49190" startstoragevalue="1">
+        <description>John makes clothing from animal items and needs an earth woodpecker feather for his next creation.</description>
+        <mission name="Deliver the Feather" storageid="49190" startvalue="1" endvalue="2" progressstorageid="49191" maxprogress="1">
+            <description>Get an earth woodpecker feather and deliver it to John.</description>
             <reward id="18872" count="1" />
         </mission>
     </quest>
 
-    <quest name="As Fotos de Rogerio" id="20" looktype="1263" startstorageid="49200" startstoragevalue="1">
-        <description>Rogerio estava fotografando as paisagens quando um Mordecasca da terra roubou todas as suas fotos. Ajuda a recupera-las (level 115+).</description>
-        <mission name="Recuperar as fotos roubadas" storageid="49200" startvalue="1" endvalue="2" progressstorageid="49201" maxprogress="3">
-            <description>Mate Mordecascas da terra para recuperar as 3 fotos roubadas e devolva ao Rogerio.</description>
+    <quest name="Rogerio's Photos" id="20" looktype="1263" startstorageid="49200" startstoragevalue="1">
+        <description>Rogerio was photographing landscapes when an Earth Mordecai stole all his photos. Help recover them (level 115+).</description>
+        <mission name="Recover the stolen photos" storageid="49200" startvalue="1" endvalue="2" progressstorageid="49201" maxprogress="3">
+            <description>Kill Earth Mordecai to recover the 3 stolen photos and return them to Rogerio.</description>
             <reward id="2152" count="100" />
         </mission>
     </quest>
 
 
 
-    <quest name="Massacre dos Traidores" id="21" looktype="1286" startstorageid="49210" startstoragevalue="1">
-        <description>Um homem estranho roubou o dinheirinho do pirulito do Felipinho e ainda deu um soco na cara dele. Massacre a familia desse homem, os Traidores, e recupere os 100k de gold.</description>
-        <mission name="Massacre a familia do Traidor" storageid="49210" startvalue="1" endvalue="2" progressstorageid="49211">
-            <description>Mate 800 Traidores e volte ao Felipinho com 100k de gold para receber uma peça do Set de um traidor (a sua escolha).</description>
-            <monster name="Traidor" count="800" />
+    <quest name="Traitor Massacre" id="21" looktype="1286" startstorageid="49210" startstoragevalue="1">
+        <description>A strange man stole Felipinho's lollipop money and even punched him. Massacre this man's family, the Traitors, and recover the 100k gold.</description>
+        <mission name="Massacre the Traitor's family" storageid="49210" startvalue="1" endvalue="2" progressstorageid="49211">
+            <description>Kill 800 Traitors and return to Felipinho with 100k gold to receive a piece of the Traitor Set (your choice).</description>
+            <monster name="Traitor" count="800" />
         </mission>
     </quest>
 
-    <quest name="O Tesouro do Defensor da Montanha" id="22" looktype="1285" startstorageid="49220" startstoragevalue="1">
-        <description>Aiano estava subindo a montanha quando encontrou um monstro enorme e branco, o Defensor da montanha, que guarda um tesouro. Derrote-o e roube uma peça do tesouro.</description>
-        <mission name="Roubar o tesouro do guardião" storageid="49220" startvalue="1" endvalue="2" progressstorageid="49221" maxprogress="1">
-            <description>Derrote o Defensor da montanha, pegue o baú do tesouro e volte ao Aiano para escolher uma peça do Set da montanha.</description>
+    <quest name="Mountain Defender's Treasure" id="22" looktype="1285" startstorageid="49220" startstoragevalue="1">
+        <description>Aiano was climbing the mountain when he found a huge white monster, the Mountain Defender, who guards a treasure. Defeat it and steal a piece of the treasure.</description>
+        <mission name="Steal the guardian's treasure" storageid="49220" startvalue="1" endvalue="2" progressstorageid="49221" maxprogress="1">
+            <description>Defeat the Mountain Defender, take the treasure chest and return to Aiano to choose a piece of the Mountain Set.</description>
         </mission>
     </quest>
 
-    <quest name="O Coelho da Margarida" id="23" looktype="1254" startstorageid="49230" startstoragevalue="1">
-        <description>O coelho da Dona Margarida fugiu de medo e entrou na toca das aranhas cospe pedra. Resgate-o e devolva-o a ela.</description>
-        <mission name="Resgatar o coelho" storageid="49230" startvalue="1" endvalue="3" progressstorageid="49231" maxprogress="1">
-            <description>Encontre o Coelho da Margarida na toca das aranhas cospe pedra, diga resgatar e volte para a Dona Margarida.</description>
+    <quest name="Margarida's Rabbit" id="23" looktype="1254" startstorageid="49230" startstoragevalue="1">
+        <description>Mrs. Margarida's rabbit ran away in fear and entered the stone-spitting spiders' den. Rescue it and return it to her.</description>
+        <mission name="Rescue the rabbit" storageid="49230" startvalue="1" endvalue="3" progressstorageid="49231" maxprogress="1">
+            <description>Find Margarida's Rabbit in the stone-spitting spiders' den, say rescue and return to Mrs. Margarida.</description>
             <reward id="18879" count="1" />
             <reward id="2152" count="20" />
         </mission>
     </quest>
 
-    <quest name="Invasão dos Ursos" id="24" looktype="1175" startstorageid="49240" startstoragevalue="1">
-        <description>Joana está sendo incomodada por ursos ferozes tentando invadir a casa dela. Cace 150 deles e ganhe um presente.</description>
-        <mission name="Eliminar ursos ferozes" storageid="49240" startvalue="1" endvalue="2" progressstorageid="49241">
-            <description>Mate 150 ursos ferozes e volte a Joana para receber sua recompensa.</description>
-            <monster name="Urso feroz" count="150" />
+    <quest name="Bear Invasion" id="24" looktype="1175" startstorageid="49240" startstoragevalue="1">
+        <description>Joana is being bothered by fierce bears trying to invade her house. Hunt 150 of them and earn a gift.</description>
+        <mission name="Eliminate fierce bears" storageid="49240" startvalue="1" endvalue="2" progressstorageid="49241">
+            <description>Kill 150 fierce bears and return to Joana for your reward.</description>
+            <monster name="Fierce Bear" count="150" />
             <reward id="12901" count="1" />
         </mission>
     </quest>
 
-    <quest name="O Anel do Rafinha" id="25" looktype="1178" startstorageid="49250" startstoragevalue="1">
-        <description>Rafinha perdeu o anel do pai dentro do lago onde eles costumam pescar e pede ajuda para recupera-lo antes do pai voltar.</description>
-        <mission name="Pegar o anel no lago" storageid="49250" startvalue="1" endvalue="3" progressstorageid="49251" maxprogress="1">
-            <description>Pesque no ponto do lago marcado para encontrar o anel de tubarão e volte até o Rafinha.</description>
+    <quest name="Rafinha's Ring" id="25" looktype="1178" startstorageid="49250" startstoragevalue="1">
+        <description>Rafinha lost his dad's ring in the lake where they usually fish and asks for help to recover it before his dad returns.</description>
+        <mission name="Get the ring in the lake" storageid="49250" startvalue="1" endvalue="3" progressstorageid="49251" maxprogress="1">
+            <description>Fish at the marked lake spot to find the shark ring and return to Rafinha.</description>
             <reward id="18880" count="1" />
         </mission>
     </quest>
 
 
-    <quest name="Os Repolhos Roubados" id="26" looktype="1300" startstorageid="49260" startstoragevalue="1">
-        <description>Um arruaceiro roubou os repolhos do Senhor dos Repolhos e espalhou pela cidade. Clique nos repolhos no chao para recupera-los (level 1+).</description>
-        <mission name="Recuperar os repolhos roubados" storageid="49260" startvalue="1" endvalue="2" progressstorageid="49261" maxprogress="50">
-            <description>Encontre e clique nos 50 repolhos espalhados pela cidade. Volte ao Senhor dos Repolhos para receber recompensas a cada nivel atingido (1, 10, 20, 35 e 50 repolhos).</description>
+    <quest name="Stolen Cabbages" id="26" looktype="1300" startstorageid="49260" startstoragevalue="1">
+        <description>A troublemaker stole the Lord of Cabbages' cabbages and scattered them around the city. Click the cabbages on the ground to recover them (level 1+).</description>
+        <mission name="Recover the stolen cabbages" storageid="49260" startvalue="1" endvalue="2" progressstorageid="49261" maxprogress="50">
+            <description>Find and click the 50 cabbages scattered around the city. Return to the Lord of Cabbages for rewards at each level reached (1, 10, 20, 35 and 50 cabbages).</description>
             <reward id="2152" count="85" />
             <reward id="2148" count="1030000" />
         </mission>
     </quest>
 
-    <quest name="A Carapaca de Carlos" id="27" looktype="1296" startstorageid="49270" startstoragevalue="1">
-        <description>Carlos e um ferreiro que precisa de carapacas de aco das centopeias pra forjar armaduras da guarda.</description>
-        <mission name="Recolher Carapacas de Aco" storageid="49270" startvalue="1" endvalue="2" progressstorageid="49271">
-            <description>Mate 200 Centopeias Carapaca de Aco e volte ao Carlos para receber sua recompensa.</description>
-            <monster name="Centopeia carapaca de aco" count="200" />
+    <quest name="Carlos' Carapace" id="27" looktype="1296" startstorageid="49270" startstoragevalue="1">
+        <description>Carlos is a blacksmith who needs steel carapaces from centipedes to forge guard armor.</description>
+        <mission name="Collect Steel Carapaces" storageid="49270" startvalue="1" endvalue="2" progressstorageid="49271">
+            <description>Kill 200 Steel Shell Centipedes and return to Carlos for your reward.</description>
+            <monster name="Steel Shell Centipede" count="200" />
             <reward id="2152" count="50" />
         </mission>
     </quest>
 
-    <quest name="O Erro de Haroldo" id="28" looktype="1267" startstorageid="49280" startstoragevalue="1">
-        <description>Haroldo era um professor que estudou textos proibidos e sem querer libertou conhecimentos que ganharam vida.</description>
-        <mission name="Destruir Livros Proibidos" storageid="49280" startvalue="1" endvalue="2" progressstorageid="49281">
-            <description>Mate 2500 Livros de Dobras Proibidas e volte ao Haroldo para receber sua recompensa.</description>
-            <monster name="Livro de dobras proibidas" count="2500" />
+    <quest name="Haroldo's Mistake" id="28" looktype="1267" startstorageid="49280" startstoragevalue="1">
+        <description>Haroldo was a teacher who studied forbidden texts and accidentally freed knowledge that came to life.</description>
+        <mission name="Destroy Forbidden Books" storageid="49280" startvalue="1" endvalue="2" progressstorageid="49281">
+            <description>Kill 2500 Forbidden Folds Books and return to Haroldo for your reward.</description>
+            <monster name="Forbidden Folds Book" count="2500" />
             <reward id="2152" count="25" />
         </mission>
     </quest>
 
-    <quest name="A Vinganca do Coronel" id="29" looktype="1265" startstorageid="49290" startstoragevalue="1">
-        <description>Um coronel aposentado perdeu seu batalhao pra uma horda de abelhas urubu no deserto e agora quer vinganca.</description>
-        <mission name="Cacar Abelhas Urubu" storageid="49290" startvalue="1" endvalue="2" progressstorageid="49291">
-            <description>Mate 300 Abelhas Urubu e volte ao Coronel Fuligem para receber sua recompensa.</description>
-            <monster name="Abelha urubu" count="300" />
+    <quest name="The Colonel's Revenge" id="29" looktype="1265" startstorageid="49290" startstoragevalue="1">
+        <description>A retired colonel lost his battalion to a horde of vulture bees in the desert and now wants revenge.</description>
+        <mission name="Hunt Vulture Bees" storageid="49290" startvalue="1" endvalue="2" progressstorageid="49291">
+            <description>Kill 300 Vulture Bees and return to Colonel Fuligem for your reward.</description>
+            <monster name="Vulture Bee" count="300" />
             <reward id="2152" count="80" />
         </mission>
     </quest>
 
-    <quest name="A Caverna de Lumina" id="30" looktype="1257" startstorageid="49300" startstoragevalue="1">
-        <description>Lumina encontrou uma caverna cheia de besouros brilhantes, mas eles estao bloqueando a entrada.</description>
-        <mission name="Limpar a Caverna" storageid="49300" startvalue="1" endvalue="2" progressstorageid="49301">
-            <description>Mate 100 Besouros Luminosos na caverna e volte a Lumina para receber sua recompensa.</description>
-            <monster name="Besouro luminoso" count="100" />
+    <quest name="Lumina's Cave" id="30" looktype="1257" startstorageid="49300" startstoragevalue="1">
+        <description>Lumina found a cave full of gleaming beetles, but they are blocking the entrance.</description>
+        <mission name="Clear the Cave" storageid="49300" startvalue="1" endvalue="2" progressstorageid="49301">
+            <description>Kill 100 Gleaming Beetles in the cave and return to Lumina for your reward.</description>
+            <monster name="Gleaming Beetle" count="100" />
             <reward id="2152" count="25" />
         </mission>
     </quest>
 
-    <quest name="A Hortela da Dona Fofinha" id="31" looktype="1258" startstorageid="49310" startstoragevalue="1">
-        <description>Dona Fofinha plantou uma horta enorme e os elefantes estao destruindo tudo.</description>
-        <mission name="Proteger a Hortela" storageid="49310" startvalue="1" endvalue="2" progressstorageid="49311">
-            <description>Mate 150 Elefantes e volte a Dona Fofinha para receber sua recompensa.</description>
-            <monster name="Elefante" count="150" />
+    <quest name="Mrs. Fofinha's Garden" id="31" looktype="1258" startstorageid="49310" startstoragevalue="1">
+        <description>Mrs. Fofinha planted a huge garden and the elephants are destroying everything.</description>
+        <mission name="Protect the Garden" storageid="49310" startvalue="1" endvalue="2" progressstorageid="49311">
+            <description>Kill 150 Elephants and return to Mrs. Fofinha for your reward.</description>
+            <monster name="Elephant" count="150" />
             <reward id="2152" count="70" />
         </mission>
     </quest>
 
-    <quest name="O Cemiterio da Rosalinda" id="32" looktype="1253" startstorageid="49320" startstoragevalue="1">
-        <description>Rosalinda perdeu o brinquedo favorito da avo no cemiterio e os vermes estao comendo tudo.</description>
-        <mission name="Limpar o Cemiterio" storageid="49320" startvalue="1" endvalue="2" progressstorageid="49321">
-            <description>Mate 100 Vermes de Cemiterio e volte a Rosalinda para receber sua recompensa.</description>
-            <monster name="Verme de cemiterio" count="100" />
+    <quest name="Rosalinda's Cemetery" id="32" looktype="1253" startstorageid="49320" startstoragevalue="1">
+        <description>Rosalinda lost her grandmother's favorite toy in the cemetery and the worms are eating everything.</description>
+        <mission name="Clear the Cemetery" storageid="49320" startvalue="1" endvalue="2" progressstorageid="49321">
+            <description>Kill 100 Cemetery Worms and return to Rosalinda for your reward.</description>
+            <monster name="Cemetery Worm" count="100" />
         </mission>
     </quest>
 
-    <quest name="A Praia da Coral" id="33" looktype="1266" startstorageid="49330" startstoragevalue="1">
-        <description>Coral encontrou um carangueijo ermitao de casca dourada na praia e quer proteger os ermitaos mansos.</description>
-        <mission name="Proteger os Carangueijos" storageid="49330" startvalue="1" endvalue="2" progressstorageid="49331">
-            <description>Mate 200 Carangueijos Ermitaos e volte a Coral para receber sua recompensa.</description>
-            <monster name="Carangueijo Hermitao" count="200" />
+    <quest name="Coral's Beach" id="33" looktype="1266" startstorageid="49330" startstoragevalue="1">
+        <description>Coral found a golden-shelled hermit crab on the beach and wants to protect the gentle hermits.</description>
+        <mission name="Protect the Crabs" storageid="49330" startvalue="1" endvalue="2" progressstorageid="49331">
+            <description>Kill 200 Hermit Crabs and return to Coral for your reward.</description>
+            <monster name="Hermit Crab" count="200" />
             <reward id="2152" count="60" />
         </mission>
     </quest>
 
-    <quest name="A Experiencia do Dr. Ferreira" id="34" looktype="1265" startstorageid="49340" startstoragevalue="1">
-        <description>O Dr. Ferreira e um cientista que precisa de argila dos homens de barro pra uma experiencia no laboratorio.</description>
-        <mission name="Coletar Argila" storageid="49340" startvalue="1" endvalue="2" progressstorageid="49341">
-            <description>Mate 100 Homens de Barro e volte ao Dr. Ferreira para receber sua recompensa.</description>
-            <monster name="Homem de barro" count="100" />
+    <quest name="Dr. Ferreira's Experiment" id="34" looktype="1265" startstorageid="49340" startstoragevalue="1">
+        <description>Dr. Ferreira is a scientist who needs clay from mud men for an experiment in the laboratory.</description>
+        <mission name="Collect Clay" storageid="49340" startvalue="1" endvalue="2" progressstorageid="49341">
+            <description>Kill 100 Mud Men and return to Dr. Ferreira for your reward.</description>
+            <monster name="Mud Man" count="100" />
             <reward id="2152" count="20" />
         </mission>
     </quest>
 
-    <quest name="O Rio dos Hipos" id="35" looktype="1168" startstorageid="49350" startstoragevalue="1">
-        <description>Marcos cuida do rio da vila, mas uns hipos invadiram e estao atacando quem tenta passar.</description>
-        <mission name="Conter os Hipos" storageid="49350" startvalue="1" endvalue="2" progressstorageid="49351">
-            <description>Mate 150 Hippos e volte ao Marcos para receber sua recompensa.</description>
+    <quest name="The River of Hippos" id="35" looktype="1168" startstorageid="49350" startstoragevalue="1">
+        <description>Marcos takes care of the village river, but some hippos invaded and are attacking anyone who tries to pass.</description>
+        <mission name="Contain the Hippos" storageid="49350" startvalue="1" endvalue="2" progressstorageid="49351">
+            <description>Kill 150 Hippos and return to Marcos for your reward.</description>
             <monster name="Hippo" count="150" />
             <reward id="2152" count="50" />
         </mission>
     </quest>
 
-    <quest name="A Selva das Oncas" id="36" looktype="1169" startstorageid="49360" startstoragevalue="1">
-        <description>As oncas da selva estao ficando agressivas e atacando viajantes.</description>
-        <mission name="Cacar as Oncas" storageid="49360" startvalue="1" endvalue="2" progressstorageid="49361">
-            <description>Mate 1000 Oncas e volte ao Victor para receber sua recompensa.</description>
-            <monster name="Onca" count="1000" />
+    <quest name="Jungle of Jaguars" id="36" looktype="1169" startstorageid="49360" startstoragevalue="1">
+        <description>The jungle jaguars are becoming aggressive and attacking travelers.</description>
+        <mission name="Hunt the Jaguars" storageid="49360" startvalue="1" endvalue="2" progressstorageid="49361">
+            <description>Kill 1000 Jaguars and return to Victor for your reward.</description>
+            <monster name="Jaguar" count="1000" />
             <reward id="2152" count="100" />
         </mission>
     </quest>
 
-    <quest name="O Conhecimento Proibido" id="37" looktype="1170" startstorageid="49370" startstoragevalue="1">
-        <description>Um conhecimento proibido escapou e esta criando seres descontrolados por toda parte.</description>
-        <mission name="Conter o Caos" storageid="49370" startvalue="1" endvalue="2" progressstorageid="49371">
-            <description>Mate 1500 Conhecimentos Descontrolados e volte ao Silas para receber sua recompensa.</description>
-            <monster name="Conhecimento descontrolado" count="1500" />
+    <quest name="Forbidden Knowledge" id="37" looktype="1170" startstorageid="49370" startstoragevalue="1">
+        <description>A forbidden knowledge escaped and is creating uncontrolled beings everywhere.</description>
+        <mission name="Contain the Chaos" storageid="49370" startvalue="1" endvalue="2" progressstorageid="49371">
+            <description>Kill 1500 Uncontrolled Knowledge and return to Silas for your reward.</description>
+            <monster name="Uncontrolled Knowledge" count="1500" />
             <reward id="2152" count="150" />
         </mission>
     </quest>
 
-    <quest name="A Pantera das Sombras" id="38" looktype="1171" startstorageid="49380" startstoragevalue="1">
-        <description>As panteras negras estao caçando os animais da floresta e aterrorizando a vila.</description>
-        <mission name="Cacar as Panteras Negras" storageid="49380" startvalue="1" endvalue="2" progressstorageid="49381">
-            <description>Mate 2000 Panteras Negras e volte a Nair para receber sua recompensa.</description>
-            <monster name="Pantera negra" count="2000" />
+    <quest name="Shadow Panther" id="38" looktype="1171" startstorageid="49380" startstoragevalue="1">
+        <description>The black panthers are hunting the forest animals and terrorizing the village.</description>
+        <mission name="Hunt the Black Panthers" storageid="49380" startvalue="1" endvalue="2" progressstorageid="49381">
+            <description>Kill 2000 Black Panthers and return to Nair for your reward.</description>
+            <monster name="Black Panther" count="2000" />
             <reward id="2152" count="200" />
         </mission>
     </quest>
 
-    <quest name="A Praga das Baratas" id="39" looktype="1274" startstorageid="49390" startstoragevalue="1">
-        <description>O templo da cidade esta sendo invadido por baratas e Carla precisa de ajuda para extermina-las.</description>
-        <mission name="Exterminar baratas" storageid="49390" startvalue="1" endvalue="2" progressstorageid="49391">
-            <description>Mate 50 Baratas e volte a Carla para receber sua recompensa.</description>
-            <monster name="Barata" count="50" />
+    <quest name="Cockroach Plague" id="39" looktype="1274" startstorageid="49390" startstoragevalue="1">
+        <description>The city temple is being invaded by cockroaches and Carla needs help exterminating them.</description>
+        <mission name="Exterminate cockroaches" storageid="49390" startvalue="1" endvalue="2" progressstorageid="49391">
+            <description>Kill 50 Cockroaches and return to Carla for your reward.</description>
+            <monster name="Cockroach" count="50" />
             <reward id="2148" count="200" />
         </mission>
     </quest>
 
-    <quest name="A Fornecadora" id="40" looktype="1256" startstorageid="49400" startstoragevalue="1">
-        <description>Valdemira precisa de 150 hams para alimentar seus animais. Entregue os hams e receba uma recompensa generosa de experiencia.</description>
-        <mission name="Entregar 150 Ham" storageid="49400" startvalue="1" endvalue="2" progressstorageid="49401">
-            <description>Traga 150 hams para Valdemira. Requisito: level 200+.</description>
+    <quest name="The Supplier" id="40" looktype="1256" startstorageid="49400" startstoragevalue="1">
+        <description>Valdemira needs 150 hams to feed her animals. Deliver the hams and receive a generous experience reward.</description>
+        <mission name="Deliver 150 Ham" storageid="49400" startvalue="1" endvalue="2" progressstorageid="49401">
+            <description>Bring 150 hams to Valdemira. Requirement: level 200+.</description>
             <reward experience="2400000" />
-        </mission>
-    </quest>
-
-    <quest name="Passaro do Olavo" id="41" looktype="128" startstorageid="49410" startstoragevalue="1">
-        <description>O passaro do Olavo fugiu e ele quer saber onde esta. Encontre o passaro, descubra praonde foi e volte pra contar.</description>
-        <mission name="Encontrar o passaro" storageid="49410" startvalue="1" endvalue="2" progressstorageid="49411" maxprogress="1">
-            <description>Encontre o passaro do Olavo na ilha, fale com ele pra descobrir que ele foi pro oeste, e volte ao Olavo dizendo 'oeste'.</description>
-            <reward id="2152" count="10" />
         </mission>
     </quest>
 

@@ -1,6 +1,6 @@
 -- John - Quest: entregar uma pena de pica-pau da terra (quest id 19)
 -- Item: pena de pica-pau da terra (18873) - drop do monstro Pica-pau da terra
--- Recompensa: Saia de penas (18872)
+-- Reward: Saia de penas (18872)
 -- Storages (data/questSystem/quests.xml):
 --   49190 = status da quest (1 = em andamento, 2 = completa)
 --
@@ -45,7 +45,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     print("[John] startQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Nova missão: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -54,7 +54,7 @@ end
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
     print("[John] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missão concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. MISSION_NAME)
     end)
@@ -69,14 +69,14 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     if getPlayerLevel(cid) < LEVEL_REQUIRED then
-        selfSay("Você não deveria nem estar aqui, cuidado, suma!", cid)
+        selfSay("You shouldn't even be here, be careful, disappear!", cid)
         return true
     end
     talkState[cid] = 1
     if getPlayerStorageValue(cid, STATUS_STORAGE) < 1 then
         startQuest(cid)
     end
-    selfSay("Olá! Eu sou John. Meu hobby e fazer vestimentas com itens de animais, e agora estou precisando de uma {pena} de pica-pau da terra. Você pode conseguir uma para mim?", cid)
+    selfSay("Hello! I'm John. My hobby is making clothing from animal items, and now I need a {feather} from an earth woodpecker. Can you get one for me?", cid)
     return true
 end
 
@@ -85,7 +85,7 @@ function creatureSayCallback(cid, type, msg)
         return false
     end
     if getPlayerLevel(cid) < LEVEL_REQUIRED then
-        selfSay("Você não deveria nem estar aqui, cuidado, suma!", cid)
+        selfSay("You shouldn't even be here, be careful, disappear!", cid)
         return false
     end
     local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
@@ -96,18 +96,18 @@ function creatureSayCallback(cid, type, msg)
 
     if talkState[talkUser] == 1 then
         if questCompleted(cid) then
-            selfSay("Obrigado pela pena! Já fiz a {saia} com ela. Aproveite!", cid)
-        elseif msgcontains(msg, "pena") or msgcontains(msg, "saia") or msgcontains(msg, "entregar") or msgcontains(msg, "hobby") or msgcontains(msg, "pica-pau") or msgcontains(msg, "ajuda") or msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+            selfSay("Thanks for the feather! I already made the {skirt} with it. Enjoy!", cid)
+        elseif msgcontains(msg, "pena") or msgcontains(msg, "saia") or msgcontains(msg, "deliver") or msgcontains(msg, "hobby") or msgcontains(msg, "pica-pau") or msgcontains(msg, "help") or msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if hasFeather(cid) then
                 doPlayerRemoveItem(cid, FEATHER_ITEM, 1)
                 doPlayerAddItem(cid, SKIRT_ITEM, 1)
                 completeQuest(cid)
-                selfSay("Que pena linda! Meu hobby e fazer vestimentas com itens de animais, e com essa pena eu fiz essa {saia}. Tome, estou te dando de presente, mesmo achando que não combina muito com você!", cid)
+                selfSay("What a beautiful feather! My hobby is making clothing from animal items, and with this feather I made this {skirt}. Here, I'm giving it to you as a gift, even though I think it doesn't match you very well!", cid)
             else
-                selfSay("Você ainda não tem a pena! Vá atrás de um pica-pau da terra e me traga uma {pena} de pica-pau da terra.", cid)
+                selfSay("You don't have the feather yet! Go after an earth woodpecker and bring me a {feather} from an earth woodpecker.", cid)
             end
         else
-            selfSay("Não entendi. Está falando da {pena} de pica-pau da terra?", cid)
+            selfSay("I didn't understand. Are you talking about the {feather} from an earth woodpecker?", cid)
         end
     end
     return true

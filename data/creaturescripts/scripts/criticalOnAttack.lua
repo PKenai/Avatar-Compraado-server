@@ -27,7 +27,22 @@ function config.calculateDamage(cid, weapon)
   local attack = getItemInfo(weapon.itemid).attack + getItemInfo(weapon.itemid).extraAttack
   local skillWeapon = getPlayerSkillLevel(cid, getWeaponSkill(weapon.uid))
 
-  return (math.ceil(attack+skillWeapon+(getPlayerLevel(cid)/2))+math.random(1, 5))*config.nerf
+  local dmg = (math.ceil(attack+skillWeapon+(getPlayerLevel(cid)/2))+math.random(1, 5))*config.nerf
+  if type(WeaponProficiency) == "table" and type(WeaponProficiency.getActiveBonuses) == "function" then
+    local profBonuses = WeaponProficiency.getActiveBonuses(cid)
+    if profBonuses then
+      if profBonuses.critDamage and profBonuses.critDamage > 0 then
+        dmg = dmg * (1 + (profBonuses.critDamage / 100))
+      end
+      if profBonuses.physicalDamage and profBonuses.physicalDamage > 0 then
+        dmg = dmg * (1 + (profBonuses.physicalDamage / 100))
+      end
+      if profBonuses.skillBoost and profBonuses.skillBoost > 0 then
+        dmg = dmg + profBonuses.skillBoost
+      end
+    end
+  end
+  return dmg
 end
 
 function config.calculateChance(cid, weapon)
@@ -35,6 +50,12 @@ function config.calculateChance(cid, weapon)
   local tier = tonumber(getItemAttribute(weapon.uid, "tier")) or 0
   if tier > 0 then
     baseChance = baseChance * (1 + tier * 0.1)
+  end
+  if type(WeaponProficiency) == "table" and type(WeaponProficiency.getActiveBonuses) == "function" then
+    local profBonuses = WeaponProficiency.getActiveBonuses(cid)
+    if profBonuses and profBonuses.critChance and profBonuses.critChance > 0 then
+      baseChance = baseChance + profBonuses.critChance
+    end
   end
   return math.ceil(baseChance)
 end

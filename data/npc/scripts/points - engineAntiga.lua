@@ -310,7 +310,7 @@ function onCreatureSay(cid, type, msg)
             end
 
         elseif talk_state == 2 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 if doPlayerRemoveItem(cid, getStoneItemId(elementPlayer), amountOfItem) then
                     doPlayerSetElementPoints(cid, elementPlayer, getPlayerElementPoints(cid, elementPlayer)+amountOfItem)
                     if lang == EN then
@@ -338,7 +338,7 @@ function onCreatureSay(cid, type, msg)
             end
 
         elseif talk_state == 3 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 local price = getPriceOffNumber(cid, "mana", amount)
                 if getPlayerElementPoints(cid, elementPlayer) >= price then
                     if lang == EN then
@@ -369,7 +369,7 @@ function onCreatureSay(cid, type, msg)
             end
 
         elseif talk_state == 4 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 local price = getPriceOffNumber(cid, "health", amount)
                 if getPlayerElementPoints(cid, elementPlayer) >= price then
                     if lang == EN then
@@ -400,7 +400,7 @@ function onCreatureSay(cid, type, msg)
             end
 
         elseif talk_state == 5 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 local price = getPriceOffNumber(cid, "bend", amount)
                 if getPlayerElementPoints(cid, elementPlayer) >= price then
                     if lang == EN then
@@ -430,7 +430,7 @@ function onCreatureSay(cid, type, msg)
             end
 
         elseif talk_state == 6 then
-            if msgcontains(msg, "yes") or msgcontains(msg, "sim") then
+            if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
                 local price = getPriceOffNumber(cid, "dodge", amount)
 
                 if getPointsUsedInSkill(cid, "dodge")+amount > 15 then

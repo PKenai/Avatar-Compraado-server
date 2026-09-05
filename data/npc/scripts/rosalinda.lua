@@ -1,7 +1,7 @@
 -- Rosalinda - Quest: matar 100 Vermes de Cemiterio (quest id 32)
 -- Storages: 49320 = status, 49321 = progresso
--- Recompensa: 20.000 exp + item (a definir)
--- Titulo: "Defensora do Cemiterio" (conquista 29)
+-- Reward: 20.000 exp + item (a definir)
+-- Title: "Defensora do Cemiterio" (achievement 29)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -46,7 +46,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -54,7 +54,7 @@ end
 
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. QUEST_NAME)
     end)
@@ -88,37 +88,37 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja limpou o cemiterio! O brinquedo da vovozinha esta salvo! Obrigada!", cid)
+                selfSay("You already limpou o cemiterio! O brinquedo da vovozinha esta salvo! Thank you!", cid)
             elseif started then
                 if progress >= NEEDED then
                     selfSay("Voce eliminou os 100 vermes! O cemiterio esta limpo! Quer sua recompensa?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda faltam " .. (NEEDED - progress) .. " vermes. Eles estao comendo tudo no cemiterio!", cid)
+                    selfSay("Still need " .. (NEEDED - progress) .. " vermes. Eles estao comendo tudo no cemiterio!", cid)
                 end
             else
                 selfSay("Meu brinquedo favorito da vovozinha caiu no cemiterio e tem vermes comendo tudo! Voce pode me {ajudar} a limpar o cemiterio?", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "cemiterio") or msgcontains(msg, "verme") or msgcontains(msg, "brinquedo") or msgcontains(msg, "ajuda") then
+        elseif msgcontains(msg, "cemiterio") or msgcontains(msg, "verme") or msgcontains(msg, "brinquedo") or msgcontains(msg, "help") then
             if started and not completed then
-                selfSay("Ainda faltam " .. (NEEDED - progress) .. " vermes. Eles estao comendo tudo no cemiterio!", cid)
+                selfSay("Still need " .. (NEEDED - progress) .. " vermes. Eles estao comendo tudo no cemiterio!", cid)
             else
                 selfSay("Eu sou a {Rosalinda}! Perdi o brinquedo da vovozinha no cemiterio e tem vermes por toda parte! Voce consegue limpar pra mim?", cid)
             end
         else
-            selfSay("Nao entendi. Voce quer me {ajudar} com os vermes do cemiterio?", cid)
+            selfSay("I didn't understand. Voce quer me {ajudar} com os vermes do cemiterio?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
             selfSay("Aqui esta sua experiencia! Voce salvou o brinquedo da vovozinha! Voce agora e o Guardiao do Cemiterio!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, volte quando quiser receber sua recompensa!", cid)
+            selfSay("Alright, volte quando quiser receber sua recompensa!", cid)
             talkState[talkUser] = 1
         end
     end

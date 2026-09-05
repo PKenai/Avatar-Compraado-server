@@ -1,7 +1,7 @@
 -- Nair - Quest: matar 2000 Panteras Negras (quest id 38)
 -- Storages: 49380 = status, 49381 = progresso
--- Recompensa: 200 platinum coins (2152) + 1.000.000 exp
--- Titulo: "Cacador Noturno" (conquista 35)
+-- Reward: 200 platinum coins (2152) + 1.000.000 exp
+-- Title: "Cacador Noturno" (achievement 35)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -48,7 +48,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -56,7 +56,7 @@ end
 
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. QUEST_NAME)
     end)
@@ -71,7 +71,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Voce tem coragem de enfrentar as sombras? Preciso de um {caçador} noturno pra eliminar um predador perigoso.", cid)
+    selfSay("Do you have the courage to face the shadows? I need a nocturnal {hunter} to eliminate a dangerous predator.", cid)
     return true
 end
 
@@ -90,38 +90,38 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja caçou todas as panteras negras! As sombras estao seguras novamente!", cid)
+                selfSay("You already hunted all the black panthers! The shadows are safe again!", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Incrivel! Voce caçou as 2000 panteras negras! Quer sua recompensa?", cid)
+                    selfSay("Incredible! You hunted the 2000 black panthers! Want your reward?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda faltam " .. (NEEDED - progress) .. " panteras negras. Elas caçam a noite, va com cuidado!", cid)
+                    selfSay("Still need " .. (NEEDED - progress) .. " black panthers. They hunt at night, be careful!", cid)
                 end
             else
-                selfSay("As panteras negras estao caçando os animais da floresta e aterrorizando a vila. Mate 2000 delas e eu te pagarei como um verdadeiro {caçador} noturno!", cid)
+                selfSay("The black panthers are hunting the forest animals and terrorizing the village. Kill 2000 of them and I will pay you as a true nocturnal {hunter}!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "pantera") or msgcontains(msg, "negra") or msgcontains(msg, "sombra") or msgcontains(msg, "noite") or msgcontains(msg, "ajuda") then
+        elseif msgcontains(msg, "pantera") or msgcontains(msg, "negra") or msgcontains(msg, "sombra") or msgcontains(msg, "noite") or msgcontains(msg, "help") then
             if started and not completed then
-                selfSay("Ainda faltam " .. (NEEDED - progress) .. " panteras negras. Elas caçam a noite, va com cuidado!", cid)
+                selfSay("Still need " .. (NEEDED - progress) .. " black panthers. They hunt at night, be careful!", cid)
             else
-                selfSay("Eu sou a {Nair}! As panteras negras estao caçando os animais da floresta e aterrorizando a vila. Preciso de um caçador noturno pra elimina-las!", cid)
+                selfSay("I am {Nair}! The black panthers are hunting the forest animals and terrorizing the village. I need a nocturnal hunter to eliminate them!", cid)
             end
         else
-            selfSay("Nao entendi. Voce quer ser um {caçador} noturno?", cid)
+            selfSay("I didn't understand. Do you want to be a nocturnal {hunter}?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Aqui estao seus 200 platinum coins e 1 milhao de experiencia! Voce e o cacador noturno mais temido da floresta!", cid)
+            selfSay("Here are your 200 platinum coins and 1 million experience! You're the most feared nocturnal hunter of the forest!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, volte quando quiser receber sua recompensa.", cid)
+            selfSay("Alright, come back when you want to receive your reward.", cid)
             talkState[talkUser] = 1
         end
     end

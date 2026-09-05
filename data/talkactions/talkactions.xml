@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talkactions>
-	<talkaction log="no" words="!avatar" event="script" value="avatar.lua"/>
 	<talkaction log="no" words="!dominantguildcastle" event="script" value="castle.lua"/>
+	<talkaction log="no" words="!battleroyale" access="3" event="script" value="battleRoyale.lua"/>
 	<talkaction log="no" words="!loot;/loot" event="script" value="loot.lua"/>
 	<talkaction log="no" words="!crit;!critico;/crit" event="script" value="checkCrit.lua"/>
 	<talkaction log="no" words="!inspect" event="script" value="inspect.lua"/>
@@ -12,7 +12,6 @@
 	<talkaction words="/recipeshelmet" event="script" value="recipeshelmet.lua"/>
 	
 	<!-- Gods -->
-	<!-- <talkaction log="yes" words="!testavatar" access="5" event="script" value="testAvatar.lua"/> -->
 	<talkaction log="yes" words="/attr" access="5" event="function" value="thingProporties"/>
 	<talkaction log="yes" words="!realonline" access="5" event="script" value="realonline.lua"/>
 	<talkaction log="yes" words="/lua" access="5" event="script" value="lua.lua"/>
@@ -143,4 +142,7 @@
 
 	<!-- Admin/debug -->
 	<talkaction words="!hungry" event="script" value="hungry.lua"/>
+
+	<!-- Weapon Proficiency -->
+	<talkaction words="/weaponprof" separator=" " script="weaponProficiencyTalk.lua"/>
 </talkactions>

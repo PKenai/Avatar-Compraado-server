@@ -370,6 +370,57 @@ function TooltipLib.buildTooltip(uid, itemid, count)
     return item_data
 end
 
+local function getOpenContainerFallback(cid, containerIndex)
+    local containers = {}
+    local function collect(itemUid)
+        if not itemUid or itemUid <= 0 or not isContainer(itemUid) then return end
+        table.insert(containers, itemUid)
+        local size = getContainerSize(itemUid)
+        for i = 0, size - 1 do
+            local sub = getContainerItem(itemUid, i)
+            if sub and sub.uid > 0 and isContainer(sub.uid) then
+                collect(sub.uid)
+            end
+        end
+    end
+
+    -- Priority 1: Backpack slot (slot 3)
+    local bp = getPlayerSlotItem(cid, 3)
+    if bp and bp.uid > 0 and isContainer(bp.uid) then
+        collect(bp.uid)
+    end
+    -- Priority 2: Other slots
+    for slot = 1, 10 do
+        if slot ~= 3 then
+            local item = getPlayerSlotItem(cid, slot)
+            if item and item.uid > 0 and isContainer(item.uid) then
+                collect(item.uid)
+            end
+        end
+    end
+
+    local targetUid = containers[containerIndex + 1]
+    if targetUid then
+        return {uid = targetUid}
+    end
+    if #containers > 0 then
+        return {uid = containers[1]}
+    end
+    return nil
+end
+
+local function resolvePlayerContainer(cid, containerIndex)
+    if getPlayerContainer then
+        local ok, c = pcall(getPlayerContainer, cid, containerIndex)
+        if ok and c and (type(c) == "table" and c.uid and c.uid > 0) then
+            return c
+        elseif ok and type(c) == "number" and c > 0 then
+            return {uid = c}
+        end
+    end
+    return getOpenContainerFallback(cid, containerIndex)
+end
+
 function TooltipLib.onTooltipRequest(cid, buffer)
     local status, data = pcall(function() return json.decode(buffer) end)
     if not status or not data then
@@ -400,9 +451,10 @@ function TooltipLib.onTooltipRequest(cid, buffer)
             -- Container item hover: {65535, containerIndex + 64, slotIndex, 0}
             local containerIndex = data[2] - 64
             local slotIndex = data[3]
-            local container = getPlayerContainer(cid, containerIndex)
+            local container = resolvePlayerContainer(cid, containerIndex)
             if container then
-                local thing = getContainerItem(container, slotIndex)
+                local contUid = container.uid or container
+                local thing = getContainerItem(contUid, slotIndex)
                 if thing and thing.uid and thing.uid > 0 and thing.itemid and thing.itemid > 0 then
                     local tooltipData = TooltipLib.buildTooltip(thing.uid, thing.itemid, thing.type)
                     if tooltipData then

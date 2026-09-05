@@ -12,6 +12,7 @@ if not _tooltipLibLoaded and type(TooltipLib) ~= "table" then
   _tooltipLibLoaded = true
 end
 
+
 local function changeAutoloot(cid, value)
 	if type(value) ~= "string" or (value ~= "false" and value ~= "true") then
 		return true
@@ -122,11 +123,8 @@ function onExtendedOpcode(cid, opcode, buffer)
 			end
 		elseif opcode == 105 then
 			-- Tooltips (game_tooltips)
-			print(string.format("[TOOLTIPS] opcode=105 cid=%s buffer=%s", tostring(cid), tostring(buffer)))
 			if type(TooltipLib) == "table" and type(TooltipLib.onTooltipRequest) == "function" then
 				TooltipLib.onTooltipRequest(cid, buffer)
-			else
-				print("[TOOLTIPS] ERROR: TooltipLib not loaded")
 			end
 		elseif opcode == 106 then
 			-- Crafting System (game_crafting) - 100% Server-Side
@@ -142,6 +140,14 @@ function onExtendedOpcode(cid, opcode, buffer)
 					-- Client envia JSON com acao de craft
 					CraftingSystem.onOpcode(cid, buffer)
 				end
+			end
+		elseif opcode == 188 then
+			-- Weapon Proficiency System (Extended Opcode 188)
+			if type(WeaponProficiency) ~= "table" then
+				dofile(getDataDir().."lib/weaponProficiency.lua")
+			end
+			if type(WeaponProficiency) == "table" and type(WeaponProficiency.onOpcode) == "function" then
+				WeaponProficiency.onOpcode(cid, buffer)
 			end
 		elseif opcode > 0 and opcode < 4 then
 			local handler = onReceiveOpCode and onReceiveOpCode[opcode]

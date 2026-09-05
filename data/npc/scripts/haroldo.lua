@@ -1,7 +1,7 @@
 -- Haroldo - Quest: matar 2500 Livros de Dobras Proibidas (quest id 28)
 -- Storages: 49280 = status, 49281 = progresso
--- Recompensa: 25 crystal coins (2152 = 250.000 gold)
--- Titulo: "Vigia dos Segredos" (conquista 25)
+-- Reward: 25 crystal coins (2152 = 250.000 gold)
+-- Title: "Vigia dos Segredos" (achievement 25)
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -47,7 +47,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     setPlayerStorageValue(cid, PROGRESS_STORAGE, 0)
-    sendNotification(cid, QUEST_NAME, "Nova missao: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -55,7 +55,7 @@ end
 
 local function completeQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
-    sendNotification(cid, QUEST_NAME, "Missao concluida: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. MISSION_NAME)
     end)
@@ -89,9 +89,9 @@ function creatureSayCallback(cid, type, msg)
     local progress = questProgress(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Voce ja derrotou os livros. Meu erro foi corrigido. Obrigado.", cid)
+                selfSay("You already derrotou os livros. Meu erro foi corrigido. Thank you.", cid)
             elseif started then
                 if progress >= NEEDED then
                     selfSay("Os livros foram todos destruidos! Quer sua recompensa?", cid)
@@ -103,23 +103,23 @@ function creatureSayCallback(cid, type, msg)
                 selfSay("Esses livros ganharam vida propria e estao causando caos. Mate 2500 deles pra mim!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "livro") or msgcontains(msg, "erro") or msgcontains(msg, "proibido") or msgcontains(msg, "ajuda") then
+        elseif msgcontains(msg, "livro") or msgcontains(msg, "erro") or msgcontains(msg, "proibido") or msgcontains(msg, "help") then
             if started and not completed then
                 selfSay("Ainda restam " .. (NEEDED - progress) .. " livros. Cuidado, eles sao perigosos!", cid)
             else
                 selfSay("Eu era um {professor} e estudei textos proibidos. Sem querer, eles ganharam vida. Preciso de ajuda para desfazer meu erro.", cid)
             end
         else
-            selfSay("Nao entendi. Voce quer saber sobre meu {erro}?", cid)
+            selfSay("I didn't understand. Voce quer saber sobre meu {erro}?", cid)
         end
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             completeQuest(cid)
-            selfSay("Aqui estao seus 25 crystal coins. Voce salvou muita gente do meu erro. Voce agora e um Vigia dos Segredos!", cid)
+            selfSay("Here are your 25 crystal coins. Voce salvou muita gente do meu erro. Voce agora e um Vigia dos Segredos!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tudo bem, volte quando quiser receber sua recompensa.", cid)
+            selfSay("Alright, come back when you want to receive your reward.", cid)
             talkState[talkUser] = 1
         end
     end

@@ -4,7 +4,7 @@
 --   49171 = progresso (1 = colmeia encontrada no bau; tambem e o storage
 --           do "1x so" do bau da colmeia, actionid 49175)
 -- Item: Colmeia de barro (18869)
--- Recompensa: 20 platinum coins (2152) + 40.000 de experiencia
+-- Reward: 20 platinum coins (2152) + 40.000 de experiencia
 --
 -- Obs: o NPC nao depende da questSystemLib (o estado Lua dos NPCs e
 -- separado do global). Usa apenas storages nativas + notificacao manual.
@@ -54,7 +54,7 @@ end
 local function startQuest(cid)
     setPlayerStorageValue(cid, STATUS_STORAGE, 1)
     print("[Katata] startQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Nova missão: " .. MISSION_NAME .. "!", "#FFA500", "start")
+    sendNotification(cid, QUEST_NAME, "New mission: " .. MISSION_NAME .. "!", "#FFA500", "start")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Quest started: " .. QUEST_NAME)
     end)
@@ -66,7 +66,7 @@ local function deliverQuest(cid)
     doPlayerAddExperience(cid, REWARD_EXP)
     setPlayerStorageValue(cid, STATUS_STORAGE, 2)
     print("[Katata] completeQuest cid=" .. cid)
-    sendNotification(cid, QUEST_NAME, "Missão concluída: " .. MISSION_NAME .. "!", "#00FF00", "end")
+    sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Mission completed: " .. MISSION_NAME)
     end)
@@ -81,7 +81,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Zzz... Ah! Você aí! Eu estava dormindo e tive meu mel roubado... Tenho certeza que foram as abelhas de barro! Sem minha colmeia, vou passar fome!", cid)
+    selfSay("Zzz... Ah! You there! I was sleeping and had my honey stolen... I'm sure it was the mud bees! Without my hive, I'll starve!", cid)
     return true
 end
 
@@ -99,28 +99,28 @@ function creatureSayCallback(cid, type, msg)
     local completed = questCompleted(cid)
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") then
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("Você já me devolveu a colmeia. Obrigado, agora posso voltar a comer mel!", cid)
+                selfSay("You already me devolveu a colmeia. Thank you, agora posso voltar a comer mel!", cid)
             elseif hasColmeia(cid) then
                 deliverQuest(cid)
-                selfSay("Você trouxe minha colmeia de volta! Aqui está sua recompensa: 20 platinum coins e 40.000 de experiência!", cid)
+                selfSay("You brought my hive back! Here is your reward: 20 platinum coins and 40,000 experience!", cid)
             elseif started then
-                selfSay("Ainda estou sem minha colmeia! Vá atrás das abelhas de barro e recupere-a, senão vou passar fome!", cid)
+                selfSay("I still don't have my hive! Go after the mud bees and recover it, or I'll starve!", cid)
             else
-                selfSay("Ótimo! Vá até a toca das abelhas de barro e recupere minha colmeia!", cid)
+                selfSay("Great! Go to the mud bees' den and recover my hive!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "colmeia") or msgcontains(msg, "mel") or msgcontains(msg, "abelha") or msgcontains(msg, "fome") or msgcontains(msg, "ajuda") then
+        elseif msgcontains(msg, "colmeia") or msgcontains(msg, "mel") or msgcontains(msg, "abelha") or msgcontains(msg, "hunger") or msgcontains(msg, "help") then
             if hasColmeia(cid) then
-                selfSay("Você recuperou minha colmeia! Diga que quer me devolver para receber sua recompensa.", cid)
+                selfSay("You recovered my hive! Say you want to return it to receive your reward.", cid)
             elseif started then
-                selfSay("Minha colmeia ainda está com as abelhas de barro... Recupere-a, senão vou passar fome!", cid)
+                selfSay("My hive is still with the mud bees... Recover it, or I'll starve!", cid)
             else
-                selfSay("As abelhas de barro roubaram meu mel enquanto eu dormia! Recupere minha colmeia pra mim, senão vou passar fome!", cid)
+                selfSay("The mud bees stole my honey while I was sleeping! Recover my hive for me, or I'll starve!", cid)
             end
         else
-            selfSay("Não entendi. Está falando da minha {colmeia}?", cid)
+            selfSay("I didn't understand. Are you talking about my {hive}?", cid)
         end
     end
     return true

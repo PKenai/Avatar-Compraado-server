@@ -1,6 +1,6 @@
 -- NPC Vincente - Forjador
 -- Ao dizer "hi", pergunta se quer usar a forja.
--- Ao dizer "sim", envia dados de crafting e abre o modulo no client.
+-- Ao dizer "yes", envia dados de crafting e abre o modulo no client.
 -- Quando o player anda, o modulo fecha (tratado no client).
 
 local keywordHandler = KeywordHandler:new()
@@ -42,7 +42,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Ola, " .. getCreatureName(cid) .. "! Sou Vincente, o forjador. Deseja usar minha forja?", cid)
+    selfSay("Hello, " .. getCreatureName(cid) .. "! Sou Vincente, o forjador. Deseja usar minha forja?", cid)
     return true
 end
 
@@ -60,12 +60,12 @@ function creatureSayCallback(cid, type, msg)
 
     -- Stage 1: Pergunta se quer usar a forja
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "sim") or msgcontains(msg, "yes") or msgcontains(msg, "forja") then
-            selfSay("Otimo! Abrindo a forja agora...", cid)
+        if msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "forja") then
+            selfSay("Great! Abrindo a forja agora...", cid)
             talkState[talkUser] = 2
             -- Envia a janela de crafting para o client
             sendCraftingWindow(cid, 1)
-        elseif msgcontains(msg, "nao") or msgcontains(msg, "no") then
+        elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
             selfSay("Sem problemas! Volte quando precisar.", cid)
             talkState[talkUser] = 0
             npcHandler:releaseFocus(cid)
