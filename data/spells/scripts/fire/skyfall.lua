@@ -172,7 +172,11 @@ function onCastSpell(cid, var)
 	if getPlayerOverPower(cid, "fire", true, true) then
 		exhaustion.set(cid, "isFocusSkyfall", 2)
 	end
-    local mypos = getThingPos(cid)
+	local target = getCreatureTarget(cid)
+	local mypos = getThingPos(cid)
+	if isCreature(target) then
+		mypos = getThingPos(target)
+	end
 	local poses = getPositionsByTable(mypos, area, 0, 9, 1)
 	poses = poses[1]
     doSendMagicEffect(mypos, 48)

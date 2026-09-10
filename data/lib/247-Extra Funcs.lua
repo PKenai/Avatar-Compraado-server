@@ -216,3 +216,46 @@ local fromVit = vitality*20
 
 return base + fromLevel + fromVit
 end
+
+-- ============================================================
+-- applyFloat(cid, duration)
+-- Faz a criatura 'cid' flutuar visivelmente por 'duration' ms
+-- no client de todos os jogadores que estiverem no range.
+-- Opcode 114 = game_specialfx no Avatar Client
+-- ============================================================
+local SPECIALFX_OPCODE = 114
+
+function applyFloat(cid, duration)
+    if not isCreature(cid) then return end
+    duration = duration or 5000
+
+    local targetId = getCreatureId and getCreatureId(cid) or cid
+    local pos = getCreaturePosition(cid)
+    if not pos then return end
+
+    local specs = getSpectators(pos, false, true, 10, 10, 8, 8)
+    if not specs then return end
+
+    for _, spec in ipairs(specs) do
+        if isPlayer(spec) then
+            doSendPlayerExtendedOpcode(spec, SPECIALFX_OPCODE, "float|" .. targetId .. "|" .. duration)
+        end
+    end
+end
+
+function stopFloat(cid)
+    if not isCreature(cid) then return end
+
+    local targetId = getCreatureId and getCreatureId(cid) or cid
+    local pos = getCreaturePosition(cid)
+    if not pos then return end
+
+    local specs = getSpectators(pos, false, true, 10, 10, 8, 8)
+    if not specs then return end
+
+    for _, spec in ipairs(specs) do
+        if isPlayer(spec) then
+            doSendPlayerExtendedOpcode(spec, SPECIALFX_OPCODE, "stopfloat|" .. targetId)
+        end
+    end
+end

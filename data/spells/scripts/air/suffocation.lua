@@ -58,8 +58,7 @@ local function sendDistanceEffect(cid, finish, target)
 					exhaustion.set(target, "stopDashs", 2) 
 				end 
                 --sendFiresAround(target)
-                doSendMagicEffect(posTarget, 120)
-				doSendAnimatedText(posTarget, "Suffocated!", 215)
+                doSendMagicEffect(posTarget, 211)
             else
                 doPlayerSendCancelEf(cid, "The target is gone, the fold was failed.")
                 return true
@@ -68,10 +67,37 @@ local function sendDistanceEffect(cid, finish, target)
     end
 end
 
+local AIR_FLOAT_OPCODE = 114
+
+local function sendFloatToTarget(target, duration)
+    local specs = getSpectators(getCreaturePosition(target), 12, 12)
+    if specs then
+        local payload = "float|" .. target .. "|" .. duration
+        for _, spec in ipairs(specs) do
+            if isPlayer(spec) then
+                doSendPlayerExtendedOpcode(spec, AIR_FLOAT_OPCODE, payload)
+            end
+        end
+    end
+end
+
+local function sendStopFloatToTarget(target)
+    if not isCreature(target) then return end
+    local specs = getSpectators(getCreaturePosition(target), 12, 12)
+    if specs then
+        local payload = "stopfloat|" .. target
+        for _, spec in ipairs(specs) do
+            if isPlayer(spec) then
+                doSendPlayerExtendedOpcode(spec, AIR_FLOAT_OPCODE, payload)
+            end
+        end
+    end
+end
+
 function onCastSpell(cid, var)
     if getSpellCancels(cid, "air") == true then
         return false
-    end 
+    end
   --  if MyLocal.players[cid] == nil then
         if getPlayerExaust(cid, "air", "suffocation") == false then
             return false
@@ -93,13 +119,23 @@ function onCastSpell(cid, var)
         end
 
         local target = getCreatureTarget(cid)
-        doCreatureSetMoveImmuneTime(target, 2701)
+        local totalDuration = 150 * 18  -- 18 ticks * 150ms = 2700ms
+
+        -- Trava o movimento do alvo desde o início
+        doCreatureSetMoveImmuneTime(target, totalDuration + 200)
+
+        -- Levita o alvo durante todo o tempo de dano
+        sendFloatToTarget(target, totalDuration + 200)
+
+        -- Interrompe a levitação ao fim do dano
+        addEvent(sendStopFloatToTarget, totalDuration + 200, target)
+
         MyLocal.players[cid] = true
         for x = 1, 18 do
             addEvent(sendDistanceEffect, 150*x, cid, x == 18, target)
         end
         workAllCdAndAndPrevCd(cid, "air", "suffocation", nil, 1)
-		
+
 			if getDobrasLevel(cid) >= 11 then
 				doPlayerAddExaust(cid, "air", "suffocation", airExausted.suffocation-7)
 			else

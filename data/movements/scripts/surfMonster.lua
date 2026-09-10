@@ -87,11 +87,6 @@ function mountPlayer(cid, mountID)
        -- sendBlueMessage(cid, getLangString(cid, "Sorry, you don't have a mount.", "Desculpe, você não tem uma montaria."))
         return false
     end
-    if getPlayerStorageValue(cid, "playerOnAir") == 1 then
-    --    sendBlueMessage(cid, getLangString(cid, "You can't mount with fly or surf, sorry.", "Você não pode montar utilizando fly ou surf, desculpe."))
-        return false
-    end
-
     if getCreatureCondition(cid, CONDITION_OUTFIT) or currentMount == nil then
     --    sendBlueMessage(cid, getLangString(cid, "You need to be wearing your normal outfit to get mounted. You can't also mount with fly or surf, sorry.", "Você precisa estar com sua roupa normal para montar. Você também não pode montar utilizando fly ou surf, desculpe."))
         return false

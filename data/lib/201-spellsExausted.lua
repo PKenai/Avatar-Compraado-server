@@ -296,6 +296,15 @@ function doPlayerAddExaust(cid, element, spellName, time)
     end
   end
 
+  -- Talent Tree: Cooldown Reduction (max 30% via talentos)
+  if isPlayer(cid) then
+    local talentCDR = getPlayerStorageValue(cid, "talentCooldownReduction")
+    if type(talentCDR) == "number" and talentCDR > 0 and time >= 5 then
+      local cdrPct = math.min(talentCDR, 30) -- cap at 30%
+      time = math.ceil(time - (time * cdrPct / 100))
+    end
+  end
+
   if time == nil then
     print("problem with spellExausted name "..spellName.." in element "..element)
     doPlayerSendCancelEf(cid, "Error with this spell, report to gameMaster.")
@@ -394,11 +403,6 @@ function getSpellCancels(cid, spellName, isFury, isDash)
     doPlayerSendCancelEf(cid, getLangString(cid, "You are unable to bend now.", "Você não pode dobrar agora."))  
     return true
   end
-  if getPlayerStorageValue(cid, "playerCantDown") == 1 and not isFury then 
-    doPlayerSendCancelEf(cid, getLangString(cid, "You are unable to bend flying.", "Você não pode dobrar voando."))  
-    return true
-  end
-
   if isDash then
     return false
   end

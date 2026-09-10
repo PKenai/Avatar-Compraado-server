@@ -51,7 +51,6 @@
 	<event type="kill" name="Inquisition" event="script" value="inquisition.lua"/>
 
 	<!--coisas Mirto-->
-	<event type="move" name="onMove" event="script" value="flyAndSurf/onMove.lua"/>
 	<event type="advance" name="onAdvancePoint" event="script" value="onAdvance.lua"/>
 	<event type="look" name="onSee" event="script" value="seeLook/onSee.lua"/>
 	<event type="think" name="flySystem" event="script" value="flyAndSurf/onThink.lua"/>

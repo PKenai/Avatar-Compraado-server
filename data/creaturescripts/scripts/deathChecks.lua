@@ -60,7 +60,6 @@ end
     end
 
     setPlayerStorageValue(cid, "expBeforeDie", getPlayerExperience(cid))
-    event.death(cid)
   end
   
   return true

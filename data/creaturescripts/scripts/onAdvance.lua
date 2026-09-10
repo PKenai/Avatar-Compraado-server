@@ -43,7 +43,13 @@ function onAdvance(cid, skill, oldLevel, newLevel)
 			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você ganhou " .. gained .. " attribute point(s). Total pendente: " .. pendentes .. ".")
 		end
 
+		-- Talent Tree: verifica se o player ganhou talent points
+		if type(TalentTree) == "table" and type(TalentTree.onLevelUp) == "function" then
+			TalentTree.onLevelUp(cid, newLevel)
+		end
+
 	end
 
 	return true
 end
+

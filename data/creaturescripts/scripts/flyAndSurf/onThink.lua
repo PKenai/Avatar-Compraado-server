@@ -23,8 +23,8 @@ function onThink(cid, interval)
     local item = getThingfromPos({x=currentPos.x,y=currentPos.y,z=currentPos.z,stackpos=0})
 
     if item.itemid == 1 or item.itemid == 460 or item.itemid == 0 then
-        if getPlayerStorageValue(cid, "playerCantDown") == -1 then
-            doPlayerDown(cid, true)
+        if getPlayerStorageValue(cid, "playerOnAir") == 1 then
+            doPlayerDown(cid)
         end
     end
 

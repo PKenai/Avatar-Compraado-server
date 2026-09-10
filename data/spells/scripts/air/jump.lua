@@ -74,7 +74,7 @@ function onCastSpell(cid, var)
 
                local position = getPlayerPosition(cid)   
 				dismountPlayer(cid)
-               doPlayerAddUp(cid, false)
+               doPlayerAddUp(cid)
                MyLocal.players[cid] = {x=position.x,y=position.y,z=position.z-1}
                sendMagicEff(cid)
                doCreateItem(12966, 1, position)

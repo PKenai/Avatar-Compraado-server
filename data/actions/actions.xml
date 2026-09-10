@@ -213,7 +213,12 @@
 	<!-- Tools -->
 	<action itemid="2420;2442" event="script" value="tools/machete.lua"/>
 	<action itemid="2550" event="script" value="tools/scythe.lua"/>
-	<action itemid="2580;10223" event="script" value="tools/fishing.lua" allowfaruse="1"/>
+	<action itemid="10223" event="script" value="tools/fishing.lua" allowfaruse="1"/>
+
+	<!-- Fishing System (minigame no cliente): a vara 2580 abre a HUD de pesca -->
+	<action itemid="2580" event="script" value="fishing_rod.lua" allowfaruse="1"/>
+	<!-- Cooking System (minigame no cliente): clicar na cooking table 19219/19220 abre a cozinha (a frigideira 2563 e so o icone do minigame) -->
+	<action itemid="19219;19220" event="script" value="cooking.lua" allowfaruse="1"/>
 	<action itemid="2554;5710" event="script" value="tools/shovel.lua"/>
 	<action itemid="2120;7731" event="script" value="tools/rope.lua"/>
 	<action itemid="5908;5942" event="script" value="tools/skinning.lua"/>

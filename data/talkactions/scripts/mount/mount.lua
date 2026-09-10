@@ -34,10 +34,6 @@ function mountPlayer(cid, mountID)
         sendBlueMessage(cid, getLangString(cid, "Sorry, you don't have this mount.", "Desculpe, você não tem essa montaria."))
         return false
     end
-    if getPlayerStorageValue(cid, "playerOnAir") == 1 then
-        sendBlueMessage(cid, getLangString(cid, "You can't mount with fly or surf, sorry.", "Você não pode montar utilizando fly ou surf, desculpe."))
-        return false
-    end
 	
 	if getTileInfo(getCreaturePosition(cid)).protection then
         sendBlueMessage(cid, getLangString(cid, "Sorry, you can't mount in a protection zone.", "Desculpe, você não pode montar dentro de uma zona protegida (PZ)."))
@@ -60,8 +56,7 @@ function mountPlayer(cid, mountID)
         local bonusAtual = getCreatureStorage(cid, "bonusMount")
         if bonusAtual < 1 then 
 			bonusAtual = 0
-        end
-		local vddSpeed = moreSpeed
+        end        local vddSpeed = moreSpeed
 		if isInArray(freeMounts, mountID) then 
 			vddSpeed = 40
 			if mountID == "uniwheel" or mountID == "hellgrip" then 
@@ -69,7 +64,11 @@ function mountPlayer(cid, mountID)
 			end 
 		end 
         if bonusAtual < vddSpeed then
-			doChangeSpeed(cid, vddSpeed-bonusAtual)
+			-- Bônus relativo ao speed atual: se o bônus anterior ficou stale
+			-- (morte/crash montado, login reaproveitando storage), o delta
+			-- absoluto antigo aplicaria a speed errada (ex: montar sem ganhar
+			-- nada e depois perder a diferença ao desmontar).
+			doChangeSpeed(cid, vddSpeed - (getCreatureSpeed(cid) - getCreatureBaseSpeed(cid)))
 			doCreatureSetStorage(cid, "bonusMount", vddSpeed)
         end
     end

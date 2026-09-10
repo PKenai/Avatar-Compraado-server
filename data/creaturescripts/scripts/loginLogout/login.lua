@@ -460,7 +460,6 @@ function onLogin(cid)
     --addPremiumOutfit(cid)                                   --Adiciona outfit premium;
     --sendOutfitToNormal(cid)                                 --Flag para arrumar outfit;
     registerEvents(cid)                                     --Registra todos eventos;
-    event.login(cid)                                        --FlySystem, faz checagems, teleport, etc;
     sendBlessIfActive(cid)                                  --Manda bless exp, se ativa;
     setPlayerStorageValue(cid, "playerCanMoveDirection", 0) --Tira bloqueio de movimento para os lados;
     setPlayerStorageValue(cid, "timeLogin", os.time())      --Registra data ultimo login;
@@ -563,6 +562,19 @@ function onLogin(cid)
             syncPlayerItemTiers(cid)
         end
     end, 1200, cid)
+
+    -- Talent Tree: reaplica os efeitos dos talentos aprendidos e envia dados ao client
+    addEvent(function(cid)
+        if isCreature(cid) then
+            if type(TalentTree) ~= "table" then
+                dofile(getDataDir().."lib/talentTree.lua")
+            end
+            if type(TalentTree) == "table" then
+                TalentTree.reapplyAll(cid)
+                TalentTree.sendData(cid)
+            end
+        end
+    end, 2500, cid)
 
     return true
 end

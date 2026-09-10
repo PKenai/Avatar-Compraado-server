@@ -2,6 +2,10 @@ local spellName = "water heal"
 local cf = {heal = spellsInfo[spellName].heal}
 local WATER_HEAL_TARGET_STORAGE = 87654
 
+if type(TalentPassives) ~= "table" then
+    dofile(getDataDir() .. "lib/talentPassives.lua")
+end
+
 local function isNonPvp(cid)
     return isMonster(cid) or getPlayerStorageValue(cid, "canAttackable") == 1
 end
@@ -36,6 +40,9 @@ local function calcHeal(cid, target)
     end
     if getDobrasLevel(cid) >= 3 then
         heal = heal * 1.2
+    end
+    if type(TalentPassives) == "table" and type(TalentPassives.applyHealCrit) == "function" then
+        heal = TalentPassives.applyHealCrit(cid, target, heal)
     end
     return heal
 end

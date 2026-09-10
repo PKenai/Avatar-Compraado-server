@@ -1273,9 +1273,6 @@
 	<spawn centerx="94" centery="358" centerz="6" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="515" centery="360" centerz="6" radius="1">
-		<npc name="Farmer" x="0" y="0" z="6" spawntime="60" direction="2" />
-	</spawn>
 	<spawn centerx="509" centery="369" centerz="6" radius="1">
 		<npc name="banker" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>

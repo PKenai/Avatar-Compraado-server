@@ -950,11 +950,3 @@ Storage_meta =
 
 STORAGE = {}
 setmetatable(STORAGE, Storage_meta)
-
-conditionVoarMale = createConditionObject(CONDITION_OUTFIT)
-setConditionParam(conditionVoarMale, CONDITION_PARAM_TICKS, -1)
-addOutfitCondition(conditionVoarMale, {lookType = 373})
-
-conditionVoarFemale = createConditionObject(CONDITION_OUTFIT)
-setConditionParam(conditionVoarFemale, CONDITION_PARAM_TICKS, -1)
-addOutfitCondition(conditionVoarFemale, {lookType = 374})

@@ -12,6 +12,18 @@ if not _tooltipLibLoaded and type(TooltipLib) ~= "table" then
   _tooltipLibLoaded = true
 end
 
+-- Carrega o sistema de pesca (opcode 103) - uma vez so
+if not _fishingSystemLoaded and type(FishingSystem) ~= "table" then
+  dofile(getDataDir().."lib/fishingLib.lua")
+  _fishingSystemLoaded = true
+end
+
+-- Carrega o Talent Tree (opcode 222) - uma vez so
+if not _talentTreeLoaded and type(TalentTree) ~= "table" then
+  dofile(getDataDir().."lib/talentTree.lua")
+  _talentTreeLoaded = true
+end
+
 
 local function changeAutoloot(cid, value)
 	if type(value) ~= "string" or (value ~= "false" and value ~= "true") then
@@ -141,6 +153,14 @@ function onExtendedOpcode(cid, opcode, buffer)
 					CraftingSystem.onOpcode(cid, buffer)
 				end
 			end
+		elseif opcode == 107 then
+			-- Cooking System (client: modules/game_cooking) - cozinha com minigame
+			if type(CookingSystem) ~= "table" then
+				dofile(getDataDir().."lib/cookingSystem.lua")
+			end
+			if type(CookingSystem) == "table" and type(CookingSystem.onOpcode) == "function" then
+				CookingSystem.onOpcode(cid, buffer)
+			end
 		elseif opcode == 188 then
 			-- Weapon Proficiency System (Extended Opcode 188)
 			if type(WeaponProficiency) ~= "table" then
@@ -148,6 +168,29 @@ function onExtendedOpcode(cid, opcode, buffer)
 			end
 			if type(WeaponProficiency) == "table" and type(WeaponProficiency.onOpcode) == "function" then
 				WeaponProficiency.onOpcode(cid, buffer)
+			end
+		elseif opcode == 103 then
+			-- Fishing System (client: modules/game_fishing) - minigame da vara de pesca
+			if type(FishingSystem) ~= "table" then
+				dofile(getDataDir().."lib/fishingLib.lua")
+			end
+			local okFish, dadosFish = pcall(json.decode, buffer)
+			if okFish and type(dadosFish) == "table" and type(FishingSystem) == "table" then
+				if dadosFish.action == "fish" then
+					-- Cada tentativa do minigame (gastou 1 worm)
+					FishingSystem.onFish(cid, dadosFish.success == true)
+				elseif dadosFish.action == "cancel" then
+					-- Fechou a janela (ESC / andou / acabaram as tentativas)
+					FishingSystem.onCancel(cid)
+				end
+			end
+		elseif opcode == 222 then
+			-- Talent Tree System (client: modules/game_talenttree)
+			if type(TalentTree) ~= "table" then
+				dofile(getDataDir().."lib/talentTree.lua")
+			end
+			if type(TalentTree) == "table" and type(TalentTree.onOpcode) == "function" then
+				TalentTree.onOpcode(cid, buffer)
 			end
 		elseif opcode > 0 and opcode < 4 then
 			local handler = onReceiveOpCode and onReceiveOpCode[opcode]

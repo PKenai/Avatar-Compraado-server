@@ -6430,6 +6430,13 @@
 	<item id="19218" article="a" name="Sonam's Staff">
 		<attribute key="description" value="A mystical staff radiating immense spiritual power." />
 	</item>
+
+	<item id="19219" article="a" name="Cooking table">
+		<attribute key="description" value="A sturdy table for preparing meals." />
+	</item>
+	<item id="19220" article="a" name="Cooking table">
+		<attribute key="description" value="A sturdy table for preparing meals." />
+	</item>
 	
 	
 	<item id="1388" article="a" name="ramp">

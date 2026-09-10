@@ -67,9 +67,17 @@ function dismountPlayer(cid)
     if getPlayerStorageValue(cid, "inMount") == 1 then
         doCreatureSetStorage(cid, "inMount", -1)
         doRemoveCondition(cid, CONDITION_OUTFIT)
-        
+
+        -- Guarda: bonusMount pode estar stale (morte/crash montado apos um doSlow,
+        -- relogin etc). Remover mais do que o speed atual TEM viraria speed <= 0
+        -- (servidor cancela a walk = "paralyze" ate o relogin).
         local speedAdded = getPlayerStorageValue(cid, "bonusMount")
-        doChangeSpeed(cid, -speedAdded)
+        if type(speedAdded) ~= "number" or speedAdded < 0 then speedAdded = 0 end
+        local atual = getCreatureSpeed(cid) - getCreatureBaseSpeed(cid)
+        if speedAdded > atual then speedAdded = atual end
+        if speedAdded > 0 then
+            doChangeSpeed(cid, -speedAdded)
+        end
         doCreatureSetStorage(cid, "bonusMount", 0)
         return true
     end    
@@ -824,17 +832,7 @@ function doCreateTile(id, pos)
   addEvent(removeTiles, 490, {posCreated})
 end
 
-local avatarVoadorMale, avatarVoadorFemale = {lookType = 373}, {lookType = 374}
-
-local conditionMale = createConditionObject(CONDITION_OUTFIT)
-setConditionParam(conditionMale, CONDITION_PARAM_TICKS, -1)
-addOutfitCondition(conditionMale, avatarVoadorMale)
-
-local conditionFemale = createConditionObject(CONDITION_OUTFIT)
-setConditionParam(conditionFemale, CONDITION_PARAM_TICKS, -1)
-addOutfitCondition(conditionFemale, avatarVoadorFemale)
-
-function doPlayerAddUp(cid, fly)
+function doPlayerAddUp(cid)
    local currentPos = getCreaturePosition(cid)
    local newPos = {x=currentPos.x,y=currentPos.y,z=currentPos.z-1}
 
@@ -842,27 +840,13 @@ function doPlayerAddUp(cid, fly)
          doCreateTile(460, newPos)
     doTeleportThing(cid, newPos)
     setPlayerStorageValue(cid, "playerOnAir", 1)
-
-    if fly == true then
-      dismountPlayer(cid)
-
-      if getPlayerSex(cid) == 0 then
-              doAddCondition(cid, conditionFemale)
-            else
-                 doAddCondition(cid, conditionMale)
-            end
-         
-         setPlayerStorageValue(cid, "playerCantDown", 1)
-        else
-             setPlayerStorageValue(cid, "playerCantDown", -1)
-        end
     return true
   else
      return false
    end
 end
 
-function doPlayerDown(cid, removeFly)
+function doPlayerDown(cid)
     local currentPosition = getThingPos(cid)
     local newPosition = {x=currentPosition.x,y=currentPosition.y,z=currentPosition.z+1}
 
@@ -873,12 +857,7 @@ function doPlayerDown(cid, removeFly)
     local item = getThingfromPos({x=currentPosition.x, y=currentPosition.y, z=currentPosition.z, stackpos=0})
     if item.itemid ~= 1 and item.itemid ~= 460 and item.itemid ~= 0 then
        setPlayerStorageValue(cid, "playerOnAir", -1)
-       setPlayerStorageValue(cid, "playerCantDown", -1)
        return false
-    end
-
-    if removeFly then
-     setPlayerStorageValue(cid, "playerCantDown", -1)
     end
 
     if hasSqm(newPosition) == false then
@@ -894,13 +873,10 @@ function doPlayerDown(cid, removeFly)
 
   if item.itemid ~= 1 and item.itemid ~= 460 then
          setPlayerStorageValue(cid, "playerOnAir", -1)
-         setPlayerStorageValue(cid, "playerCantDown", -1)
 
          if getPlayerInWater(cid) then
            doSendMagicEffect(newPosition, 53)
          else
-       dismountPlayer(cid)
-           doRemoveCondition(cid, CONDITION_OUTFIT)
            doSendMagicEffect(newPosition, 34)
       end
     end
@@ -1167,64 +1143,97 @@ function getTimeString(time)
   end
 end
 
-function doPushCreature(uid, direction, distance, speed, ignoreMove, itsFlySpell, diagonalPos, onlyDir)
+function doPushCreature(uid, direction, distance, speed, ignoreMove, itsFlySpell, diagonalPos, onlyDir, _noJump)
   if isNpc(uid) or not isCreature(uid) or getCreatureSpeed(uid) < 30 then
     return false
   end
- 
   if getCreatureNoMove(uid) and ignoreMove ~= true then
     return false
   end
- 
+
   local pos = getThingPos(uid)
   local d, dir, newtile, rand
   local PARAM = {{1}, {500}}
   local DIRECTION = {{{0,0},{6,7},{1,3}}, {{1,1},{5,7},{0,2}}, {{2,2},{4,5},{1,3}}, {{3,3},{4,6},{0,2}},{{4,4},{2,3}}, {{5,5}, {1,2}}, {{6,6},{0,1}}, {{7,7},{0,3}}}
   table.insert(PARAM[1], distance)
   table.insert(PARAM[2], speed)
-    for dvar = 1, #DIRECTION[direction+1] do
-      rand = math.random(2)
-        d = DIRECTION[direction+1][dvar][rand]
-        dir = {x = (math.fmod(d,2)*(-(d-2))+math.floor(d/4)*math.fmod(d,2)*d-math.floor(d/4)), y = (((d-1)*(d-1-(d-1)*math.abs(d-2))*(1-math.floor(d/4)))-(math.floor(d/4)*(math.floor(d/6)*2-1)))}
-        newtile = {x = (pos.x+dir.x), y = (pos.y+dir.y), z = pos.z}
-    if diagonalPos then 
-      newtile = {x=diagonalPos.x, y=diagonalPos.y, z=diagonalPos.z}
-    end 
-        if getPlayerCanWalk({player = uid, position = newtile, checkPZ = false, checkHouse = true, createTile = itsFlySpell and isPlayer(uid)}) then
-          break
-     elseif diagonalPos then 
-        newtile = {x = (pos.x+dir.x), y = (pos.y+dir.y), z = pos.z}
+  for dvar = 1, #DIRECTION[direction+1] do
+    rand = math.random(2)
+    d = DIRECTION[direction+1][dvar][rand]
+    dir = {x = (math.fmod(d,2)*(-(d-2))+math.floor(d/4)*math.fmod(d,2)*d-math.floor(d/4)), y = (((d-1)*(d-1-(d-1)*math.abs(d-2))*(1-math.floor(d/4)))-(math.floor(d/4)*(math.floor(d/6)*2-1)))}
+    newtile = {x = (pos.x+dir.x), y = (pos.y+dir.y), z = pos.z}
+    if diagonalPos then newtile = {x=diagonalPos.x, y=diagonalPos.y, z=diagonalPos.z} end
+    if getPlayerCanWalk({player = uid, position = newtile, checkPZ = false, checkHouse = true, createTile = itsFlySpell and isPlayer(uid)}) then
+      break
+    elseif diagonalPos then
+      newtile = {x = (pos.x+dir.x), y = (pos.y+dir.y), z = pos.z}
       if getPlayerCanWalk({player = uid, position = newtile, checkPZ = false, checkHouse = true, createTile = itsFlySpell and isPlayer(uid)}) then
-        break 
-      end   
-    elseif onlyDir then 
-      return false 
-        end
-        rand = (math.fmod(rand,2)+1)
-        d = DIRECTION[direction+1][dvar][rand]
-        dir = {x = (math.fmod(d,2)*(-(d-2))+math.floor(d/4)*math.fmod(d,2)*d-math.floor(d/4)), y = (((d-1)*(d-1-(d-1)*math.abs(d-2))*(1-math.floor(d/4)))-(math.floor(d/4)*(math.floor(d/6)*2-1)))}
-        newtile = {x = (pos.x+dir.x), y = (pos.y+dir.y), z = pos.z}
-    if diagonalPos then 
-      newtile = {x=diagonalPos.x, y=diagonalPos.y, z=diagonalPos.z}
-    end 
-        if getPlayerCanWalk({player = uid, position = newtile, checkPZ = false, checkHouse = true, createTile = itsFlySpell and isPlayer(uid)}) then
-          break
-     elseif diagonalPos then 
-        newtile = {x = (pos.x+dir.x), y = (pos.y+dir.y), z = pos.z}
-      if getPlayerCanWalk({player = uid, position = newtile, checkPZ = false, checkHouse = true, createTile = itsFlySpell and isPlayer(uid)}) then
-        break 
+        break
       end
-        end
-        if (dvar == #DIRECTION[direction+1]) then
-            newtile = pos
-        end
+    elseif onlyDir then
+      return false
     end
-    doTeleportThing(uid, newtile, true, true)
-    if (PARAM[1][#PARAM[1]] > 1) then
-      addEvent(doPushCreature, PARAM[2][#PARAM[2]], uid, direction, (distance-1), speed, nil, nil, diagonalPos)
-     end    
+    rand = (math.fmod(rand,2)+1)
+    d = DIRECTION[direction+1][dvar][rand]
+    dir = {x = (math.fmod(d,2)*(-(d-2))+math.floor(d/4)*math.fmod(d,2)*d-math.floor(d/4)), y = (((d-1)*(d-1-(d-1)*math.abs(d-2))*(1-math.floor(d/4)))-(math.floor(d/4)*(math.floor(d/6)*2-1)))}
+    newtile = {x = (pos.x+dir.x), y = (pos.y+dir.y), z = pos.z}
+    if diagonalPos then newtile = {x=diagonalPos.x, y=diagonalPos.y, z=diagonalPos.z} end
+    if getPlayerCanWalk({player = uid, position = newtile, checkPZ = false, checkHouse = true, createTile = itsFlySpell and isPlayer(uid)}) then
+      break
+    elseif diagonalPos then
+      newtile = {x = (pos.x+dir.x), y = (pos.y+dir.y), z = pos.z}
+      if getPlayerCanWalk({player = uid, position = newtile, checkPZ = false, checkHouse = true, createTile = itsFlySpell and isPlayer(uid)}) then
+        break
+      end
+    end
+    if (dvar == #DIRECTION[direction+1]) then
+      newtile = pos
+    end
+  end
 
+  -- Primeira chamada: levita a criatura
+  if not _noJump then
+    local spd  = speed or PARAM[2][#PARAM[2]] or 500
+    local dist = distance or PARAM[1][#PARAM[1]] or 1
+    local floatDuration = dist * spd
+    local specs = getSpectators(pos, 12, 12)
+    if specs then
+      local startPayload = "float|" .. uid .. "|" .. floatDuration
+      for _, spec in ipairs(specs) do
+        if isPlayer(spec) then
+          doSendPlayerExtendedOpcode(spec, 108, startPayload)
+        end
+      end
+    end
+  end
+
+  -- Move 1 sqm
+  doTeleportThing(uid, newtile, true, true)
+
+  if (PARAM[1][#PARAM[1]] > 1) then
+    -- Ainda tem hops: continua
+    addEvent(doPushCreature, PARAM[2][#PARAM[2]], uid, direction, (distance-1), speed, nil, nil, diagonalPos, true)
+  else
+    -- Último hop: pousa a criatura
+    local specs2 = getSpectators(newtile, 12, 12)
+    if specs2 then
+      local stopPayload = "stopfloat|" .. uid
+      for _, spec in ipairs(specs2) do
+        if isPlayer(spec) then
+          doSendPlayerExtendedOpcode(spec, 108, stopPayload)
+        end
+      end
+    end
+  end
 end
+
+
+
+
+
+
+
+
 
 function removeTileItemById(pos, itemId, effect)
   --[[if type(pos) ~= "table" then

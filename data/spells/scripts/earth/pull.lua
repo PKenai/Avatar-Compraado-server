@@ -34,6 +34,15 @@ setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxVal
 function onTargetCreature(cid, target)
   local playerPos = getCreaturePos(cid)
   local targetPos = getCreaturePos(target)
+
+  -- Guarda: posições devem ser tabelas válidas
+  if type(playerPos) ~= "table" or type(targetPos) ~= "table" then
+    return false
+  end
+
+  -- Congela a posição do item ANTES de qualquer movimento
+  local itemPos = {x = targetPos.x, y = targetPos.y, z = targetPos.z}
+
   if getDistanceBetween(playerPos, targetPos) > 7 then
     doPlayerSendCancelEf(cid, "The target is too far.")
     return false
@@ -44,8 +53,8 @@ function onTargetCreature(cid, target)
     doPushCreature(target, getDirectionTo(targetPos, playerPos))
   end
   doCombat(cid, combat2, numberToVariant(target))
-  doCreateItem(MyLocal.earthId, targetPos)
-  addEvent(removeTileItemById, MyLocal.time*1000, targetPos, MyLocal.earthId)
+  doCreateItem(MyLocal.earthId, itemPos)
+  addEvent(removeTileItemById, MyLocal.time*1000, itemPos, MyLocal.earthId)
 end
 
 setCombatCallback(combat, CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")

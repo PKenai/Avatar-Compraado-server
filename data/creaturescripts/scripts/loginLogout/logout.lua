@@ -20,7 +20,7 @@ function onLogout(cid, forceLogout)
 	end
 	local posicao = getThingPos(cid)
 	doSendMagicEffect({x=posicao.x+1, y=posicao.y+1, z=posicao.z}, 119)
-	pcall(function() event.logout(cid) end)
+	
 	pcall(function() dismountPlayer(cid) end)
 	local guid = getPlayerGUID(cid)
 	if getPlayerStorageValue(cid, "isPromoted") == 1 then
@@ -28,5 +28,15 @@ function onLogout(cid, forceLogout)
 	end
 	pcall(function() addPlayerTimeOnline(cid, os.time()-getPlayerStorageValue(cid, "timeLogin")) end)
 	pcall(function() db.executeQuery("UPDATE `players` SET `broadcasting` = 0, `viewers` = 0 WHERE `id` = " .. getPlayerGUID(cid) .. " LIMIT 1") end)
+
+	-- Fishing System: limpa o estado de pesca se deslogou no meio do minigame
+	if type(FishingSystem) == "table" and type(FishingSystem.onLogout) == "function" then
+		pcall(FishingSystem.onLogout, cid)
+	end
+
+	-- Cooking System: limpa o estado de cozinha se deslogou no meio do minigame
+	if type(CookingSystem) == "table" and type(CookingSystem.onLogout) == "function" then
+		pcall(CookingSystem.onLogout, cid)
+	end
 	return true
 end
