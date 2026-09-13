@@ -22,6 +22,7 @@
 		<attack name="earth" interval="2500" chance="20" range="5" min="-15" max="-30">
 			<attribute key="shootEffect" value="poison"/>
 		</attack>
+		<attack name="Scalding Tide" interval="3000" chance="20" range="3" min="-10" max="-20"/>
 	</attacks>
 	<defenses armor="12" defense="10"/>
 	<elements>

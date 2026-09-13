@@ -31,6 +31,8 @@
 #include "configmanager.h"
 #include "game.h"
 
+#include "rewardtrees.h"
+
 extern ConfigManager g_config;
 extern Game g_game;
 
@@ -88,6 +90,14 @@ Tile* IOMap::createTile(Item*& ground, Item* item, uint16_t px, uint16_t py, uin
 
 bool IOMap::loadMap(Map* map, const std::string& identifier)
 {
+	// quais arvores participam vem do config.lua (rewardTreeIds = {...})
+	std::vector<int64_t> rewardTreeConfigIds;
+	g_config.getGlobalNumbers("rewardTreeIds", rewardTreeConfigIds);
+	setRewardTreeIds(rewardTreeConfigIds);
+
+	// zera a lista: o mapa que vai ser lido agora e a unica fonte das arvores
+	rewardTreeCandidates().clear();
+
 	FileLoader f;
 	if(!f.openFile(identifier.c_str(), "OTBM", false, true))
 	{
@@ -363,6 +373,10 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 								if(item->getItemCount() <= 0)
 									item->setItemCount(1);
 
+								// guarda a arvore pro sistema de arvores de recompensa
+								if(isRewardTreeId(item->getID()))
+									rewardTreeCandidates().push_back(RewardTreeCandidate(px, py, pz, item->getID()));
+
 								if(house && item->isMovable())
 								{
 									std::clog << "[Warning - IOMap::loadMap] Movable item in house: " << house->getId()
@@ -467,6 +481,10 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 							{
 								if(item->getItemCount() <= 0)
 									item->setItemCount(1);
+
+								// guarda a arvore pro sistema de arvores de recompensa
+								if(isRewardTreeId(item->getID()))
+									rewardTreeCandidates().push_back(RewardTreeCandidate(px, py, pz, item->getID()));
 
 								if(house && item->isMovable())
 								{
@@ -682,6 +700,8 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 
 	groundCache.clear();
 #endif
+
+	std::clog << "> Reward trees: " << rewardTreeCandidates().size() << " candidates found in the map." << std::endl;
 	return true;
 }
 

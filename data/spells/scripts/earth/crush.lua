@@ -4,11 +4,11 @@ local cf = {atk = spellsInfo[spellName].atk}
 
 local combat1 = createCombatObject()
 setCombatParam(combat1, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
-setCombatParam(combat1, COMBAT_PARAM_EFFECT, CONST_ME_GROUNDSHAKER)
+setCombatParam(combat1, COMBAT_PARAM_EFFECT, 287)
 
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
-setCombatParam(combat2, COMBAT_PARAM_EFFECT, CONST_ME_STUN)
+setCombatParam(combat2, COMBAT_PARAM_EFFECT, 287)
 
 local condition = createConditionObject(CONDITION_DRUNK)
 setConditionParam(condition, CONDITION_PARAM_TICKS, 5000)

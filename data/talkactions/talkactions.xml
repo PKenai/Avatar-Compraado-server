@@ -110,7 +110,7 @@
 	<!-- Magias -->
 	<talkaction words="air ball" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/air ball.lua"/>
 	<talkaction words="earth crush" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/earth crush.lua"/>
-	<talkaction words="fire whip" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/fire whip.lua"/>
+	<talkaction words="fire wave" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/fire whip.lua"/>
 	<talkaction words="water whip" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/water whip.lua"/>
 
 	<talkaction words="water heal" case-sensitive="no" filter="word-spaced" event="script" value="water heal.lua"/>

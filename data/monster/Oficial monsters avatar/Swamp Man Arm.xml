@@ -26,6 +26,7 @@
 		<attack name="earth" interval="2500" chance="25" range="5" min="-300" max="-800"/>
 		<attack name="poison" interval="2000" chance="20" range="4" min="-250" max="-600"/>
 		<attack name="physical" interval="2000" chance="20" range="1" min="-400" max="-800"/>
+		<attack name="Swamp Slam" interval="3500" chance="20" range="3" min="-350" max="-600"/>
 	</attacks>
 	<defenses armor="60" defense="50"/>
 	<voices interval="8000" chance="15">

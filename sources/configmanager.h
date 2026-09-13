@@ -19,6 +19,8 @@
 #define __CONFIG_MANAGER__
 #include "luascript.h"
 
+#include <vector>
+
 class ConfigManager
 {
 	public:
@@ -331,6 +333,7 @@ class ConfigManager
 			ENABLE_LIVE_CASTING,
 			FULL_MAP_ON_LOGIN,
 			MAGIC_EFFECT_U16, // client uses 16-bit magic effect ids (OTC GameMagicEffectU16)
+			MAGIC_EFFECT_SOURCE, // envia quem causou o efeito junto do effect (opcode 72)
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 
@@ -351,6 +354,31 @@ class ConfigManager
 		bool setBool(uint32_t _what, bool _value);
 
 		void getValue(const std::string& key, lua_State* _L) {LuaInterface::getValue(key, L, _L);}
+
+		// le uma tabela de numeros do config.lua (ex.: rewardTreeIds = {1, 2, 3}).
+		// retorna false quando a chave nao existe ou nao e' uma tabela
+		bool getGlobalNumbers(const std::string& _identifier, std::vector<int64_t>& _values)
+		{
+			_values.clear();
+			lua_getglobal(L, _identifier.c_str());
+			if(!lua_istable(L, -1))
+			{
+				lua_pop(L, 1);
+				return false;
+			}
+
+			lua_pushnil(L);
+			while(lua_next(L, -2))
+			{
+				if(lua_isnumber(L, -1))
+					_values.push_back((int64_t)lua_tonumber(L, -1));
+
+				lua_pop(L, 1);
+			}
+
+			lua_pop(L, 1);
+			return true;
+		}
 
 	private:
 		static void moveValue(lua_State* fromL, lua_State* toL);

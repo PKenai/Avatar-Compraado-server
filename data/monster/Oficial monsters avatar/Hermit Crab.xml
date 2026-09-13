@@ -24,6 +24,7 @@
 		<attack name="melee" interval="2000" skill="110" attack="125"/>
 		<attack name="physical" interval="2000" chance="30" range="1" min="-150" max="-250"/>
 		<attack name="earth" interval="2000" chance="20" range="7" min="-180" max="-280"/>
+		<attack name="Shell Smash" interval="3500" chance="20" range="4" target="1" min="-90" max="-180"/>
 	</attacks>
 	<defenses armor="20" defense="15"/>
 	<elements>

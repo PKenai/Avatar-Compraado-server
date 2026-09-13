@@ -23,6 +23,7 @@
 	<attacks>
 		<attack name="melee" interval="2000" skill="85" attack="90"/>
 		<attack name="physical" interval="2500" chance="30" range="1" min="-100" max="-180"/>
+		<attack name="Tusk Stampede" interval="3000" chance="25" range="4" min="-60" max="-110"/>
 	</attacks>
 	<defenses armor="15" defense="12"/>
 	<elements>

@@ -17,6 +17,8 @@
 		<flag staticattack="0"/>
 		<flag runonhealth="0"/>
 	</flags>
+	<attacks>
+	</attacks>
 	<defenses armor="0" defense="0"/>
 <script>
 <event name="mobsKill"/>

@@ -73,7 +73,7 @@ function onSay(cid, words, param, channel)
     if (upgradeStones == 0) then
         lastDobra = "Você ainda não aprimorou nenhuma dobra"
     elseif ((upgradeStones == 1) and playerLevel == 1) then
-        lastDobra = "Fire Whip"
+        lastDobra = "Fire Wave"
     elseif ((upgradeStones == 2) and playerLevel == 1) then
         lastDobra = "Fire Kick"
     elseif ((upgradeStones == 3) and playerLevel == 1) then
@@ -85,7 +85,7 @@ function onSay(cid, words, param, channel)
     elseif ((upgradeStones == 6) and playerLevel == 1) then
         lastDobra = "Fire Bolt"
     elseif ((upgradeStones == 7) and playerLevel == 1) then
-        lastDobra = "Fire Res"
+        lastDobra = "Fire Cinder"
     elseif ((upgradeStones == 8) and playerLevel == 1) then
         lastDobra = "Fire Star"
     elseif ((upgradeStones == 9) and playerLevel == 1) then

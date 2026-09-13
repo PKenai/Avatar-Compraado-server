@@ -43,4 +43,8 @@
 	<globalevent name="BattleRoyaleInit" type="startup" event="script" value="battleRoyale.lua"/>
 	<globalevent name="BattleRoyaleTick" interval="5000" event="script" value="battleRoyale.lua"/>
 
+	<!-- Arvores de recompensa (tronco brilhante) -->
+	<globalevent name="RewardTreesInit" type="startup" event="script" value="rewardTreesStart.lua"/>
+	<globalevent name="RewardTreesTick" interval="5000" event="script" value="rewardTreesTick.lua"/>
+
 </globalevents>

@@ -794,16 +794,51 @@ function getPosesAround(pos)
     return poses
 end
 
-function removeTiles(tablePos)
+VOID_TILE_ID = 460
+
+-- Retorna o itemid do chao de um sqm, ignorando criaturas (itemid == 1).
+-- Nao da pra usar getThingfromPos(stackpos=0) direto: quando tem uma criatura
+-- em cima do piso falso (460) ou quando o sqm nao tem chao nenhum, o stackpos 0
+-- devolve a propria criatura (itemid 1) ou um "item" vazio (itemid 0), e nao o
+-- que esta embaixo dela. Por isso varremos o stack.
+-- O piso falso (460) so conta como chao se nao tiver mais nada no sqm: as
+-- dobras criam o 460 e colocam o item de verdade EM CIMA dele (ex: a arena de
+-- terra), e nesse caso o player esta pisando em algo real.
+function getSqmFloorId(pos)
+  local p = {x = pos.x, y = pos.y, z = pos.z}
+  local voidTile = false
+  for i = 0, 15 do
+    p.stackpos = i
+    local item = getThingfromPos(p)
+    if item.uid and item.uid > 0 and item.itemid ~= 1 then
+      if item.itemid ~= VOID_TILE_ID then
+        return item.itemid
+      end
+      voidTile = true
+    end
+  end
+  return voidTile and VOID_TILE_ID or 0
+end
+
+-- true = o sqm esta "no vazio": sem chao de verdade (sem chao nenhum ou so
+-- com o piso falso 460 criado pelas dobras).
+function isSqmVoid(pos)
+  local floorId = getSqmFloorId(pos)
+  return floorId == 0 or floorId == VOID_TILE_ID
+end
+
+function removeTiles(tablePos, id)
   if tablePos[1] == nil then
     return true
   end
+  id = id or VOID_TILE_ID
   for x = 1, #tablePos do
-    tablePos[x].stackpos = 0
-    local itemUid = getThingFromPos(tablePos[x]).uid
-    if itemUid > 0 then
-      doRemoveItem(itemUid)
-    end
+    -- Nao usar stackpos 0 + uid aqui: se o player estiver EM CIMA do piso
+    -- falso, o stackpos 0 pode ser a propria criatura, o uid devolvido seria o
+    -- do player e o doRemoveItem nao removia nada - o piso falso ficava no mapa
+    -- para sempre e o player ficava "voando" no vazio (bug do Water Surf).
+    -- removeTileItemById varre o stack inteiro e acha o item pelo id.
+    removeTileItemById({x = tablePos[x].x, y = tablePos[x].y, z = tablePos[x].z}, id)
   end
 end
 
@@ -818,7 +853,7 @@ function doCreateTiles(id, pos)
       table.insert(tilesPoses, posesAround[x])
     end
   end
-  addEvent(removeTiles, 100, tilesPoses)
+  addEvent(removeTiles, 100, tilesPoses, id)
 end
 
 function doCreateTile(id, pos)
@@ -829,7 +864,7 @@ function doCreateTile(id, pos)
     local tileUid = doCreateItem(id, 1, pos)
     posCreated = pos
   end
-  addEvent(removeTiles, 490, {posCreated})
+  addEvent(removeTiles, 490, {posCreated}, id)
 end
 
 function doPlayerAddUp(cid)
@@ -854,8 +889,8 @@ function doPlayerDown(cid)
       return false
     end
 
-    local item = getThingfromPos({x=currentPosition.x, y=currentPosition.y, z=currentPosition.z, stackpos=0})
-    if item.itemid ~= 1 and item.itemid ~= 460 and item.itemid ~= 0 then
+    -- Chão de verdade embaixo dos pés = não está no ar, não desce.
+    if not isSqmVoid(currentPosition) then
        setPlayerStorageValue(cid, "playerOnAir", -1)
        return false
     end
@@ -869,9 +904,8 @@ function doPlayerDown(cid)
   end
 
     currentPosition = getThingPos(cid)
-    item = getThingfromPos({x=currentPosition.x, y=currentPosition.y, z=currentPosition.z, stackpos=0})
 
-  if item.itemid ~= 1 and item.itemid ~= 460 then
+  if not isSqmVoid(currentPosition) then
          setPlayerStorageValue(cid, "playerOnAir", -1)
 
          if getPlayerInWater(cid) then
@@ -885,7 +919,7 @@ end
 
 function getPlayerInWater(cid)
   local tilePos = getCreaturePosition(cid)
-  return isInArray(tilesWater, getThingfromPos({x=tilePos.x,y=tilePos.y,z=tilePos.z,stackpos=0}).itemid)
+  return isInArray(tilesWater, getSqmFloorId(tilePos))
 end
 
 function isAvaliableTileWaterByPos(pos, forDragon, acceptMonsterWalkable)

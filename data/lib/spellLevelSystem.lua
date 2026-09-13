@@ -35,13 +35,13 @@ spellsInfos =
                         [3] = {needLevel = 14, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [4] = {needLevel = 18, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [5] = {needLevel = 20, porcentageDamage = 0, effectSpell = false, needStorage = {
-                                ["levelFireWhip"] = {value = 3, storageName ="Fire Whip", isSpell = true},
+                                ["levelFireWhip"] = {value = 3, storageName ="Fire Wave", isSpell = true},
                 				["fireWaveLvL5"] = {value = 1, storageName="completado missão do Mentor Iroh", isSpell = false}}
             			},
                         [6] = {needLevel = 22, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [7] = {needLevel = 25, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [8] = {needLevel = 27, porcentageDamage = 0, effectSpell = false, needStorage = {
-                                ["levelFireWhip"] = {value = 5, storageName ="Fire Whip", isSpell = true},
+                                ["levelFireWhip"] = {value = 5, storageName ="Fire Wave", isSpell = true},
                                 ["levelFireField"] = {value = 2, storageName ="Fire Field", isSpell = true},
                 				["fireWaveLvL8"] = {value = 1, storageName="conversar com Mentor Iroh", isSpell = false}}
             			},
@@ -134,7 +134,7 @@ spellsInfos =
                         [2] = {needLevel = 40, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [3] = {needLevel = 45, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [4] = {needLevel = 53, porcentageDamage = 0, effectSpell = false, needStorage = {
-                        		["levelFireRes"] = {value = 6, storageName ="Fire Res", isSpell = true},
+                        		["levelFireCinder"] = {value = 6, storageName ="Fire Cinder", isSpell = true},
                                 ["FireCannonLvL4"] = {value = 1, storageName ="conversar com Mentor Iroh", isSpell = false}}
             			},
                         [5] = {needLevel = 65, porcentageDamage = 0, effectSpell = false, needStorage = false},

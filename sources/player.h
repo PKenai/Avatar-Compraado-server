@@ -185,6 +185,11 @@ class Player : public Creature, public Cylinder
 		void setPromotionLevel(uint32_t pLevel);
 		void setResets(int32_t amount) {resets = amount;}  
 
+		//Avatar: true while the player wears one of the "untargetable" lookTypes
+		//(see untargetableOutfits in player.cpp). Monsters ignore him as a target and
+		//o monstro que largou o alvo regenera 5% da vida a cada 0.5s enquanto durar.
+		bool isUntargetableOutfit() const;
+
 		bool changeOutfit(Outfit_t outfit, bool checkList);
 		void hasRequestedOutfit(bool v) {requestedOutfit = v;}
 
@@ -712,8 +717,8 @@ class Player : public Creature, public Cylinder
 		void sendClosePrivate(uint16_t channelId) const
 			{if(client) client->sendClosePrivate(channelId);}
 		void sendIcons() const;
-		void sendMagicEffect(const Position& pos, uint16_t type) const
-			{if(client) client->sendMagicEffect(pos, type);}
+		void sendMagicEffect(const Position& pos, uint16_t type, uint32_t sourceId = 0) const
+			{if(client) client->sendMagicEffect(pos, type, sourceId);}
 		void sendAnimatedText(const Position& pos, uint8_t color, const std::string& text) const
 			{if(client) client->sendAnimatedText(pos, color, text);}
 		void sendSkills() const

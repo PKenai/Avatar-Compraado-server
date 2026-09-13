@@ -204,14 +204,14 @@ class Spectators
 			for(SpectatorList::iterator it = spectators.begin(); it != spectators.end(); ++it)
 				it->first->sendDistanceShoot(from, to, type);
 		}
-		void sendMagicEffect(const Position& pos, uint16_t type)
+		void sendMagicEffect(const Position& pos, uint16_t type, uint32_t sourceId = 0)
 		{
 			if(!owner)
 				return;
 
-			owner->sendMagicEffect(pos, type);
+			owner->sendMagicEffect(pos, type, sourceId);
 			for(SpectatorList::iterator it = spectators.begin(); it != spectators.end(); ++it)
-				it->first->sendMagicEffect(pos, type);
+				it->first->sendMagicEffect(pos, type, sourceId);
 		}
 		void sendAnimatedText(const Position& pos, uint8_t color, const std::string& text)
 		{

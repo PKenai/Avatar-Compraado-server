@@ -206,7 +206,7 @@ function qsIsQuestStarted(cid, questId)
     if not quest then return false end
 
     if quest.startStorageId and quest.startStorageValue then
-        local currentValue = getPlayerStorageValue(cid, quest.startStorageId)
+        local currentValue = tonumber(getPlayerStorageValue(cid, quest.startStorageId)) or -1
         return currentValue >= quest.startStorageValue
     end
 
@@ -221,7 +221,7 @@ function qsIsMissionStarted(cid, questId, missionId)
     if not mission then return false end
 
     if mission.storageId and mission.startValue then
-        local currentValue = getPlayerStorageValue(cid, mission.storageId)
+        local currentValue = tonumber(getPlayerStorageValue(cid, mission.storageId)) or -1
         return currentValue >= mission.startValue
     end
 
@@ -236,7 +236,7 @@ function qsIsMissionCompleted(cid, questId, missionId)
     if not mission then return false end
 
     if mission.storageId and mission.endValue then
-        local currentValue = getPlayerStorageValue(cid, mission.storageId)
+        local currentValue = tonumber(getPlayerStorageValue(cid, mission.storageId)) or -1
         return currentValue >= mission.endValue
     end
 
@@ -294,7 +294,8 @@ function qsGetMissionProgress(cid, questId, missionId)
     local hasMonsterStorages = false
     for _, monster in ipairs(mission.monsters) do
         if monster.storageId then
-            totalProgress = totalProgress + math.min(monster.count, math.max(0, getPlayerStorageValue(cid, monster.storageId)))
+            local sv = tonumber(getPlayerStorageValue(cid, monster.storageId)) or -1
+            totalProgress = totalProgress + math.min(monster.count, math.max(0, sv))
             hasMonsterStorages = true
         end
     end
@@ -305,7 +306,8 @@ function qsGetMissionProgress(cid, questId, missionId)
 
     -- Usa o storage custom de tracking ou o fallback padrao
     local trackingStorage = mission.progressStorageId or (MISSION_PROGRESS_TRACKING_BASE + (questId * 100) + missionId)
-    return math.max(0, getPlayerStorageValue(cid, trackingStorage))
+    local sv = tonumber(getPlayerStorageValue(cid, trackingStorage)) or -1
+    return math.max(0, sv)
 end
 
 function qsSetMissionProgress(cid, questId, missionId, progress)
@@ -335,7 +337,7 @@ function qsOnKillMonster(cid, monsterName)
                             if monster.name:lower() == monsterName then
                                 -- Rastreamento por monstro (storageId no XML)
                                 if monster.storageId then
-                                    local mProgress = math.max(0, getPlayerStorageValue(cid, monster.storageId))
+                                    local mProgress = math.max(0, tonumber(getPlayerStorageValue(cid, monster.storageId)) or -1)
                                     if mProgress < monster.count then
                                         setPlayerStorageValue(cid, monster.storageId, mProgress + 1)
                                     end
@@ -531,7 +533,7 @@ function qsSendQuestDetails(cid, questId)
                         name = monster.name,
                         count = monster.count,
                         outfit = monster.outfit or 0,
-                        progress = monster.storageId and math.max(0, getPlayerStorageValue(cid, monster.storageId)) or 0
+                        progress = monster.storageId and math.max(0, tonumber(getPlayerStorageValue(cid, monster.storageId)) or -1) or 0
                     })
                 end
 

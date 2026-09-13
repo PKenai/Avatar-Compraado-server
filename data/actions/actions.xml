@@ -315,6 +315,13 @@
 	<action actionid="50011" event="script" value="bossPantanoChest.lua"/>
 	<action itemid="18878" event="script" value="bossPantanoChest.lua"/>
 
+	<!-- Hydra Boss Room: alavanca (ActionID 50020) -->
+	<action actionid="50020" event="script" value="hydraRoomLever.lua"/>
+
+	<!-- Hydra Boss Room: Silver Chest (ActionID 50021 / ItemID 28873) -->
+	<action actionid="50021" event="script" value="hydraChest.lua"/>
+	<action itemid="28873" event="script" value="hydraChest.lua"/>
+
 <!-- Recompensa 30k: uso unico, level 50+ -->
 	<action actionid="50004" event="script" value="recompensa30k.lua"/>
 
@@ -338,4 +345,7 @@
 
 	<!-- Battle Royale: Cajado de Sonam (item 19218) -->
 	<action itemid="19218" event="script" value="battleRoyale.lua"/>
+
+	<!-- Arvores de recompensa (troncos brilhantes) -->
+	<action itemid="19248;19249;19250;19251" event="script" value="rewardTreesUse.lua"/>
 </actions>

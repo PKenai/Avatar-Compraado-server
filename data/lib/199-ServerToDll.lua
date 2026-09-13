@@ -10,7 +10,7 @@ fireSpells = { --[[MUITO IMPORTANTE: Tem que estar na ordem dos leveis.]]
   "firejump",
   "fireimpulse",
   "firebolt",
-  "fireres",
+  "firecinder",
   "firestar",
   "firecannon",
   "firewrath",

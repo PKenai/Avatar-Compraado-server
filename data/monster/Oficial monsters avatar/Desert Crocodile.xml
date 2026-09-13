@@ -26,16 +26,14 @@
 			<attribute key="shootEffect" value="poison"/>
 			<attribute key="areaEffect" value="greenspark"/>
 		</attack>
-		<attack name="earth" interval="3000" chance="20" length="6" spread="3" min="-222" max="-356">
-			<attribute key="areaEffect" value="poison"/>
-		</attack>
 		<attack name="poisoncondition" interval="2000" chance="18" range="7" target="1" min="-178" max="-297">
 			<attribute key="shootEffect" value="poison"/>
 			<attribute key="areaEffect" value="redspark"/>
 		</attack>
 		<attack name="physical" interval="2000" chance="22" range="1" radius="1" target="1" min="-297" max="-519">
-			<attribute key="areaEffect" value="mortalarea"/>
+			<attribute key="areaEffect" value="mortarea"/>
 		</attack>
+		<attack name="Sandwater Ambush" interval="3500" chance="20" range="5" min="-180" max="-300"/>
 	</attacks>
 	<defenses armor="38" defense="40">
 		<defense name="healing" interval="5000" chance="12" min="300" max="500">

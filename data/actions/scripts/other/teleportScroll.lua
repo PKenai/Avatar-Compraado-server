@@ -27,7 +27,10 @@ local function canSave(cid)
     return false
   end
 
-  if hasSqm(playerPos, 460) then
+  -- isSqmVoid (050-function.lua): pega piso falso (460) e sqm sem chao nenhum.
+  -- O hasSqm(pos, 460) antigo olhava so o stackpos 0 e, com o player em cima do
+  -- piso falso, o que aparece ali e a propria criatura (itemid 1).
+  if isSqmVoid(playerPos) then
     return false
   end
 
@@ -71,7 +74,7 @@ local function canTeleport(cid, finalPos)
     return false
   end
 
-  if hasSqm(finalPos, 460) then
+  if isSqmVoid(finalPos) then
     return false
   end
 

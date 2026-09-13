@@ -49,6 +49,12 @@ extern MoveEvents* g_moveEvents;
 extern Weapons* g_weapons;
 extern CreatureEvents* g_creatureEvents;
 
+//Avatar: players wearing one of these lookTypes are ignored by monsters while the
+//outfit lasts (Monster::isTarget / updateTargetList) e o monstro que larga o alvo
+//passa a regenerar 5% da vida maxima a cada 0.5s (Monster::updateUntargetableOutfitHeal).
+//Add or remove lookTypes here.
+static const uint32_t untargetableOutfits[] = {1344, 1345, 1346, 1347};
+
 AutoList<Player> Player::autoList;
 #ifdef __ENABLE_SERVER_DIAGNOSTIC__
 uint32_t Player::playerCount = 0;
@@ -78,7 +84,6 @@ Player::Player(const std::string& _name, ProtocolGame* p):
 	conditionImmunities = conditionSuppressions = groupId = managerNumber2 = town = skullEnd = 0;
 	lastLogin = lastLogout = lastIP = messageTicks = messageBuffer = nextAction = editListId = maxWriteLen = 0;
 	windowTextId = nextExAction = 0;
-
 	purchaseCallback = saleCallback = -1;
 	level = 1;
 	rates[SKILL__MAGLEVEL] = rates[SKILL__LEVEL] = 1.0f;
@@ -2042,6 +2047,7 @@ void Player::sendPing()
 void Player::onThink(uint32_t interval)
 {
 	Creature::onThink(interval);
+
 	int64_t timeNow = OTSYS_TIME();
 	//const Player* usuario = this->getPlayer();
 	//usuario->setStorage(84594, timeNow - lastPing);
@@ -4651,6 +4657,21 @@ void Player::changeSoul(int32_t soulChange)
 		soul = std::min((int32_t)soulMax, (int32_t)soul + soulChange);
 
 	sendStats();
+}
+
+//Avatar: monstros nunca escolhem como alvo um player com um destes outfits
+//(1344-1347). Quem regenera 5% da vida a cada 0.5s enquanto isso e' o monstro
+//que largou o alvo - ver Monster::updateUntargetableOutfitHeal.
+bool Player::isUntargetableOutfit() const
+{
+	uint32_t lookType = getCurrentOutfit().lookType;
+	for(uint32_t i = 0; i < sizeof(untargetableOutfits) / sizeof(untargetableOutfits[0]); ++i)
+	{
+		if(untargetableOutfits[i] == lookType)
+			return true;
+	}
+
+	return false;
 }
 
 bool Player::changeOutfit(Outfit_t outfit, bool checkList)

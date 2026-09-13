@@ -27,6 +27,7 @@
 			<attribute key="areaEffect" value="poison"/>
 		</attack>
 		<attack name="physical" interval="2000" chance="15" range="1" min="-80" max="-130"/>
+		<attack name="Tidal Snap" interval="3000" chance="20" range="4" min="-50" max="-90"/>
 	</attacks>
 	<defenses armor="30" defense="30">
 		<defense name="healing" interval="4000" chance="12" min="200" max="350">

@@ -5,9 +5,12 @@ local cf = {atk = spellsInfo[spellName].atk}
 local MyLocal = {}
 MyLocal.players = {}
 
+-- Avatar: efeito da area da Air Burst (era o 2 / POFF)
+local AIR_BURST_EFFECT = 388
+
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
-setCombatParam(combat, COMBAT_PARAM_EFFECT, 2)
+setCombatParam(combat, COMBAT_PARAM_EFFECT, AIR_BURST_EFFECT)
 
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = level+(magLevel/4)*0.3

@@ -50,15 +50,29 @@ function getPriceByItem(item)
     return price
 end
 
+-- Escreve o atributo apenas quando o valor muda de verdade. Do jeito antigo o
+-- item era marcado como alterado a cada look (mesmo com o mesmo texto) e
+-- reescrito no banco no proximo save.
+local function setItemAttributeIfChanged(item, key, value)
+    local current = getItemAttribute(item.uid, key)
+    if current ~= nil and tostring(current) == tostring(value) then
+        return
+    end
+
+    doItemSetAttribute(item.uid, key, value)
+end
+
 function setItemToRealPrice(cid, item)
     local priceInList = getItemPriceById(item.itemid)
-    
+    local template = getItemDescriptionsById(item.itemid)
+    local base = (template and template.description or "") .. ""
+
     if priceInList then
-        doItemSetAttribute(item.uid, "price", priceInList)
-        doItemSetAttribute(item.uid, "description", getItemDescriptionsById(item.itemid).description..""..getLangString(cid, "Price", "Preço")..": "..getPriceByItem(item)..".")     
+        setItemAttributeIfChanged(item, "price", priceInList)
+        setItemAttributeIfChanged(item, "description", base .. getLangString(cid, "Price", "Preço") .. ": " .. getPriceByItem(item) .. ".")
     else
-        doItemSetAttribute(item.uid, "price", "Unsellable")
-        doItemSetAttribute(item.uid, "description", getItemDescriptionsById(item.itemid).description.."")
+        setItemAttributeIfChanged(item, "price", "Unsellable")
+        setItemAttributeIfChanged(item, "description", base)
     end
 	--addEvent(function()    doItemSetAttribute(item.uid, "description", getItemDescriptionsById(item.itemid).description) end, 50)
     return true
@@ -71,9 +85,9 @@ function setDescriptionItemBonus(cid, item)
             local desc = getItemAttribute(item.uid, "description")
             local level = getItemAttribute(item.uid, v)
             if desc ~= nil then
-                doItemSetAttribute(item.uid, "description", i .. " Additional: " .. level .. ".\n" .. desc .. "")
+                setItemAttributeIfChanged(item, "description", i .. " Additional: " .. level .. ".\n" .. desc .. "")
             else
-                doItemSetAttribute(item.uid, "description", i .. " Additional: " .. level .. ".")
+                setItemAttributeIfChanged(item, "description", i .. " Additional: " .. level .. ".")
             end
         end
     end

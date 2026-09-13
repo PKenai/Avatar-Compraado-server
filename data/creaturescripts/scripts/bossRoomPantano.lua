@@ -18,7 +18,12 @@ local function resetLever()
     return false
 end
 
-local function teleportPlayersOut()
+local function teleportPlayersOut(timerId)
+    -- Este callback E' o exitTimerId: zerar antes de resetar, senao o
+    -- bossRoomStopTimers chama stopEvent no proprio evento em execucao e o
+    -- executeTimer do C++ le' um no' ja' apagado -> access violation (crash).
+    bossRoomState.exitTimerId = nil
+
     local specs = getSpectators(ROOM_CENTER, ROOM_RANGEX, ROOM_RANGEY)
     if specs and #specs > 0 then
         for i = 1, #specs do
@@ -32,7 +37,7 @@ local function teleportPlayersOut()
     end
 
     resetLever()
-    bossRoomResetAll()
+    bossRoomResetAll(timerId)
 end
 
 function onDeath(cid, corpse, deathList)
@@ -44,15 +49,15 @@ function onDeath(cid, corpse, deathList)
     local creatureName = getCreatureName(cid)
 
     if not partKey then
-        if creatureName == "Cabeca do Homem do pantano" then
+        if creatureName == "Swamp Man Head" then
             partKey = "head"
-        elseif creatureName == "Braco do Homem do pantano" then
+        elseif creatureName == "Swamp Man Arm" then
             if not bossRoomState.bosses.leftArm.isDead then
                 partKey = "leftArm"
             else
                 partKey = "rightArm"
             end
-        elseif creatureName == "Monstro do pantano" then
+        elseif creatureName == "Swamp Monster" then
             partKey = "head"
         end
     end

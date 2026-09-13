@@ -70,13 +70,13 @@ spellsInfo =
 ["fire lightning"] = {atk = 455},
 ["fire meteor"] = {atk = 100},
 ["fire overload"] = {atk = 96},
-["fire res"] = {segundos = 60},
+["fire cinder"] = {atk = 52},
 ["fire skyfall"] = {atk = 230},
 ["fire star"] = {atk = 60},
 ["fire striker"] = {atk = 130},
 ["fire thunderbolt"] = {atk = 145},
 ["fire thunderstorm"] = {atk = 350},
-["fire voltage"] = {segundos = 60},
+["fire voltage"] = {atk = 500},
 ["fire wave"] = {atk = 220},
 ["fire whip"] = {atk = 115},
 ["fire wrath"] = {segundos = 2},
@@ -156,7 +156,7 @@ fireExausted = {
   blast = 2,
   bolt = 10,
   jump = 12,
-  skyfall = 10,
+  skyfall = 3,
   star = 25,
   impulse = 30,
   focus = 60,
@@ -168,7 +168,7 @@ fireExausted = {
   striker = 45,
   discharge = 60,
   conflagration = 90,
-  res = 60,
+  cinder = 8,
   voltage = 120,
   kick = 3,
   clock = 20,
@@ -409,8 +409,10 @@ function getSpellCancels(cid, spellName, isFury, isDash)
 
   if spellName == "earth" or spellName == "fire" or spellName == "water" then
     local currentPosition = getCreaturePosition(cid)
-    local groundItem = getThingfromPos({x=currentPosition.x, y=currentPosition.y, z=currentPosition.z, stackpos=0})
-    local isSqmFlying = not groundItem or groundItem.itemid == 1 or groundItem.id == 460
+    -- isSqmVoid (050-function.lua) varre o stack: quando o player esta em cima
+    -- do piso falso (460), o stackpos 0 devolve a propria criatura (itemid 1) e
+    -- o teste antigo nao enxergava que ele estava no ar.
+    local isSqmFlying = isSqmVoid(currentPosition)
 
     if getPlayerStorageValue(cid, "playerOnAir") == 1 or isSqmFlying then
       doPlayerSendCancelEf(cid, getLangString(cid, "You can't use this bend on air.", "Você não pode usar essa dobra no ar."))

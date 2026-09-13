@@ -22,6 +22,7 @@
 	</flags>
 	<attacks>
 		<attack name="melee" interval="2000" skill="0" attack="0"/>
+		<attack name="Little Fury" interval="3000" chance="25" range="4" target="1" min="-20" max="-40"/>
 	</attacks>
 	<defenses armor="1" defense="2"/>
 	

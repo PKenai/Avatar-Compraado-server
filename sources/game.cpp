@@ -5532,17 +5532,17 @@ void Game::addAnimatedText(const SpectatorVec& list, const Position& pos, uint8_
 	}
 }
 
-void Game::addMagicEffect(const Position& pos, uint16_t effect, bool ghostMode/* = false*/)
+void Game::addMagicEffect(const Position& pos, uint16_t effect, bool ghostMode/* = false*/, uint32_t sourceId/* = 0*/)
 {
 	if(ghostMode)
 		return;
 
 	const SpectatorVec& list = getSpectators(pos);
-	addMagicEffect(list, pos, effect);
+	addMagicEffect(list, pos, effect, false, sourceId);
 }
 
 void Game::addMagicEffect(const SpectatorVec& list, const Position& pos, uint16_t effect,
-	bool ghostMode/* = false*/)
+	bool ghostMode/* = false*/, uint32_t sourceId/* = 0*/)
 {
 	if(ghostMode)
 		return;
@@ -5551,7 +5551,7 @@ void Game::addMagicEffect(const SpectatorVec& list, const Position& pos, uint16_
 	for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
 	{
 		if((player = (*it)->getPlayer()))
-			player->sendMagicEffect(pos, effect);
+			player->sendMagicEffect(pos, effect, sourceId);
 	}
 }
 
@@ -6676,7 +6676,9 @@ bool Game::reloadInfo(ReloadInfo_t reload, uint32_t playerId/* = 0*/, bool compl
 		case RELOAD_ALL:
 		{
 			done = true;
-			for(int32_t i = RELOAD_FIRST; i <= RELOAD_LAST; ++i)
+			// Iterate concrete types only (never RELOAD_MODS/RELOAD_ALL — mods are
+			// reloaded explicitly below; ALL would recurse forever).
+			for(int32_t i = RELOAD_FIRST; i <= RELOAD_SHADERS; ++i)
 			{
 				if(!reloadInfo((ReloadInfo_t)i, 0, true) && done)
 					done = false;

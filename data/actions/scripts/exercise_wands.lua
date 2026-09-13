@@ -62,7 +62,7 @@ local CONFIG = {
     requirePZ     = true,                  -- exige protection zone para treinar
     houseBonus    = 1.1,                   -- dummy dentro de casa: +10% (1.0 = desliga)
     dummyIds      = {18334, 18335},        -- ids de ITEM (moveis) do dummy
-    dummyNames    = {"exercise dummy"},    -- nomes de CRIATURA do dummy (minusculas)
+    dummyNames    = {"exercise dummy", "dummy"},  -- nomes de CRIATURA do dummy (minusculas)
 }
 
 -- Cada varinha: itemid -> configuração

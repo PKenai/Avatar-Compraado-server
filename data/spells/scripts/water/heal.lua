@@ -1,6 +1,8 @@
 local spellName = "water heal"
 local cf = {heal = spellsInfo[spellName].heal}
 local WATER_HEAL_TARGET_STORAGE = 87654
+-- Avatar: efeito que sai em quem esta' sendo curado
+local WATER_HEAL_EFFECT = 398
 
 if type(TalentPassives) ~= "table" then
     dofile(getDataDir() .. "lib/talentPassives.lua")
@@ -52,13 +54,17 @@ local function doSendHealthPos(cid, pos)
     if player.uid > 0 then
         if isNonPvp(cid) and not isNonPvp(player.uid) then
             -- bloqueado PvP
+            doSendMagicEffect(pos, CONST_ME_MAGIC_BLUE)
         else
             local heal = calcHeal(cid, player.uid)
             doCreatureAddHealth(player.uid, heal)
             purify(player.uid)
+            -- Avatar: o 398 sai na pessoa curada, nao no sqm do look
+            doSendMagicEffect(getCreaturePosition(player.uid), WATER_HEAL_EFFECT)
         end
+    else
+        doSendMagicEffect(pos, CONST_ME_MAGIC_BLUE)
     end
-    doSendMagicEffect(pos, CONST_ME_MAGIC_BLUE)
 end
 
 local function doSendHealthTarget(cid, target)
@@ -85,7 +91,7 @@ local function doSendHealthTarget(cid, target)
     end
     local heal = calcHeal(cid, target)
     doCreatureAddHealth(target, heal)
-    doSendMagicEffect(getCreaturePosition(target), CONST_ME_MAGIC_BLUE)
+    doSendMagicEffect(getCreaturePosition(target), WATER_HEAL_EFFECT)
     purify(target)
     return true
 end

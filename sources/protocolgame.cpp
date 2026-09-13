@@ -1091,6 +1091,7 @@ void ProtocolGame::checkCreatureAsKnown(uint32_t id, bool& known, uint32_t& remo
 		knownCreatureList.push_back(id);
 
 		known = true;
+		removedKnown = 0;
 		return;
 	}
 
@@ -2236,7 +2237,7 @@ void ProtocolGame::sendDistanceShoot(const Position& from, const Position& to, u
 	AddDistanceShoot(msg, from, to, type);
 }
 
-void ProtocolGame::sendMagicEffect(const Position& pos, uint16_t type)
+void ProtocolGame::sendMagicEffect(const Position& pos, uint16_t type, uint32_t sourceId)
 {
 	if(!canSee(pos))
 		return;
@@ -2256,7 +2257,7 @@ void ProtocolGame::sendMagicEffect(const Position& pos, uint16_t type)
 		return;
 
 	TRACK_MESSAGE(msg);
-	AddMagicEffect(msg, pos, type);
+	AddMagicEffect(msg, pos, type, sourceId);
 }
 
 void ProtocolGame::sendAnimatedText(const Position& pos, uint8_t color, std::string text)
@@ -3023,8 +3024,23 @@ void ProtocolGame::AddAnimatedText(NetworkMessage_ptr msg, const Position& pos,
 	msg->putString(text);
 }
 
-void ProtocolGame::AddMagicEffect(NetworkMessage_ptr msg, const Position& pos, uint16_t type)
+void ProtocolGame::AddMagicEffect(NetworkMessage_ptr msg, const Position& pos, uint16_t type, uint32_t sourceId)
 {
+	// Com MAGIC_EFFECT_SOURCE o effect vai no opcode 72, que carrega tambem quem
+	// o causou (u32) - e' assim que o client separa a opacidade em
+	// Self bend / Others bend / Monsters bend.
+	if(g_config.getBool(ConfigManager::MAGIC_EFFECT_SOURCE))
+	{
+		msg->put<char>(0x48);
+		msg->putPosition(pos);
+		if(g_config.getBool(ConfigManager::MAGIC_EFFECT_U16))
+			msg->put<uint16_t>(type + 1);
+		else
+			msg->put<char>(type + 1);
+		msg->put<uint32_t>(sourceId);
+		return;
+	}
+
 	msg->put<char>(0x83);
 	msg->putPosition(pos);
 	// este client OTC trabalha com o protocolo classico (effect id + 1):

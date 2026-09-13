@@ -447,6 +447,20 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 	}
 
 	Group* group = Groups::getInstance()->getGroup(result->getDataInt("group_id"));
+	if(!group)
+	{
+		// grupo inexistente no banco: antes isso derrubava o servidor no login
+		std::clog << "[Error - IOLoginData::loadPlayer] Player " << name << " has an invalid group_id ("
+			<< result->getDataInt("group_id") << "), falling back to group 1." << std::endl;
+
+		group = Groups::getInstance()->getGroup(1);
+		if(!group)
+		{
+			result->free();
+			return false;
+		}
+	}
+
 	if(!group->hasCustomFlag(PlayerCustomFlag_GamemasterPrivileges) &&
 		result->getDataInt("world_id") != g_config.getNumber(ConfigManager::WORLD_ID))
 	{
@@ -706,6 +720,11 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 
 	ItemMap itemMap;
 	ItemMap::iterator it;
+	// Itens que foram carregados do banco e que conseguiram ser anexados em
+	// algum lugar (inventario, container, locker, reward box). Todo o resto e'
+	// liberado no fim, em vez de ficar largado quando o itemMap e' limpo.
+	std::set<Item*> attached;
+	std::vector<Item*> loadedItems;
 
 	//load inventory items
 	query.str("");
@@ -713,19 +732,31 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 	if((result = db->storeQuery(query.str())))
 	{
 		loadItems(itemMap, result);
+		for(ItemMap::iterator lit = itemMap.begin(); lit != itemMap.end(); ++lit)
+			loadedItems.push_back(lit->second.first);
+
 		for(ItemMap::reverse_iterator rit = itemMap.rbegin(); rit != itemMap.rend(); ++rit)
 		{
 			Item* item = rit->second.first;
 			int32_t pid = rit->second.second;
 			if(pid > 0 && pid < SLOT_LAST)
+			{
 				player->__internalAddThing(pid, item);
+				// __internalAddThing() ignora em silencio um slot ja' ocupado
+				if(player->getInventoryItem((slots_t)pid) == item)
+					attached.insert(item);
+			}
 			else
 			{
 				it = itemMap.find(pid);
 				if(it != itemMap.end())
 				{
 					if(Container* container = it->second.first->getContainer())
+					{
 						container->__internalAddThing(item);
+						if(item->getParent() == container)
+							attached.insert(item);
+					}
 				}
 			}
 		}
@@ -740,6 +771,9 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 	if((result = db->storeQuery(query.str())))
 	{
 		loadItems(itemMap, result);
+		for(ItemMap::iterator lit = itemMap.begin(); lit != itemMap.end(); ++lit)
+			loadedItems.push_back(lit->second.first);
+
 		for(ItemMap::reverse_iterator rit = itemMap.rbegin(); rit != itemMap.rend(); ++rit)
 		{
 			Item* item = rit->second.first;
@@ -752,11 +786,16 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 					if(Reward* reward = c->getReward())
 					{
 						player->setRewardBox(reward);
+						attached.insert(item);
 					}
 					else if((it = itemMap.find(pid)) != itemMap.end())
 					{
 						if(Container* container = it->second.first->getContainer())
+						{
 							container->__internalAddThing(item);
+							if(item->getParent() == container)
+								attached.insert(item);
+						}
 					}
 					else
 						std::clog << "[Error - IOLoginData::loadPlayer] Cannot load reward mailbox for player " << name << std::endl;
@@ -764,7 +803,11 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 				else if((it = itemMap.find(pid)) != itemMap.end())
 				{
 					if(Container* container = it->second.first->getContainer())
+					{
 						container->__internalAddThing(item);
+						if(item->getParent() == container)
+							attached.insert(item);
+					}
 				}
 				else
 					std::clog << "[Error - IOLoginData::loadPlayer] Cannot load reward mailbox for player " << name << std::endl;
@@ -774,7 +817,10 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 				if(Container* c = item->getContainer())
 				{
 					if(Depot* depot = c->getDepot())
-						player->addDepot(depot, pid);
+					{
+						if(player->addDepot(depot, pid))
+							attached.insert(item);
+					}
 					else
 						std::clog << "[Error - IOLoginData::loadPlayer] Cannot load depot " << pid << " for player " << name << std::endl;
 				}
@@ -784,7 +830,11 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 			else if((it = itemMap.find(pid)) != itemMap.end())
 			{
 				if(Container* container = it->second.first->getContainer())
+				{
 					container->__internalAddThing(item);
+					if(item->getParent() == container)
+						attached.insert(item);
+				}
 			}
 		}
 
@@ -799,6 +849,26 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 					primary->addItem(box);
 			}
 		}
+
+		// libera os itens que nao conseguiram ser anexados em lugar nenhum
+		// (slot ocupado, container pai inexistente, locker invalido). Antes eles
+		// ficavam largados de vez quando o itemMap era limpo, vazando memoria a
+		// cada login de um personagem com linha corrompida em player_items.
+		// Quem esta' em attached nunca e' tocado aqui: se um container orfao for
+		// liberado, ele ja' leva os filhos junto.
+		for(std::vector<Item*>::iterator oit = loadedItems.begin(); oit != loadedItems.end(); ++oit)
+		{
+			Item* orphan = *oit;
+			if(!orphan || attached.find(orphan) != attached.end())
+				continue;
+
+			std::clog << "[Warning - IOLoginData::loadPlayer] Item " << orphan->getID()
+				<< " could not be attached to player " << name << ", discarding it." << std::endl;
+			delete orphan;
+		}
+
+		loadedItems.clear();
+		attached.clear();
 
 		itemMap.clear();
 		result->free();
@@ -854,7 +924,18 @@ void IOLoginData::loadItems(ItemMap& itemMap, DBResult* result)
 			if(!item->unserializeAttr(propStream))
 				std::clog << "[Warning - IOLoginData::loadItems] Unserialize error for item with id " << item->getID() << std::endl;
 
-			itemMap[result->getDataInt("sid")] = std::make_pair(item, result->getDataInt("pid"));
+			int32_t sid = result->getDataInt("sid");
+			ItemMap::iterator existing = itemMap.find(sid);
+			if(existing != itemMap.end())
+			{
+				// sid repetido no banco: a entrada antiga seria sobrescrita e perdida
+				std::clog << "[Warning - IOLoginData::loadItems] Duplicated sid " << sid
+					<< ", discarding the previous item." << std::endl;
+				delete existing->second.first;
+				itemMap.erase(existing);
+			}
+
+			itemMap[sid] = std::make_pair(item, result->getDataInt("pid"));
 		}
 	}
 	while(result->next());

@@ -111,6 +111,9 @@
 	<!-- Boss Room Pantano: ao matar o Monstro do pantano, teleporta players apos 1 min -->
 	<event type="death" name="BossRoomPantano" event="script" value="bossRoomPantano.lua"/>
 
+	<!-- Hydra Boss Room: ao matar Green/Blue Hydra Head -->
+	<event type="death" name="HydraRoomDeath" event="script" value="hydraRoomDeath.lua"/>
+
 	<!-- Daily Reward: opcode 170 -->
 	<event type="extendedopcode" name="DailyRewardOpcode" event="script" value="dailyReward.lua"/>
 

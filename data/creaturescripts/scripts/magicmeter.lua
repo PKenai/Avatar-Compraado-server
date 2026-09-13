@@ -27,6 +27,15 @@ local ATTRIB_WINDOW = 10 -- seconds: damage is attributed to a spell cast within
 local LOG_SIZE = 5
 local PUSH_THROTTLE = 0.1 -- seconds: at most one live push per player per 100ms
 
+-- Chave dos dados: GUID do player, nunca o cid. O cid e' reciclado pelo
+-- servidor, e quem herdasse um cid usado antes aparecia com os totais do outro.
+local function keyOf(cid)
+    if not isPlayer(cid) then
+        return nil
+    end
+    return getPlayerGUID(cid)
+end
+
 -- Prettify spell words ("fire whip" -> "Fire Whip") as a fallback name.
 local function prettify(words)
     local result = tostring(words):gsub("^%l", string.upper)
@@ -52,8 +61,8 @@ local function getSpellName(words)
     return sanitizeName(prettify(words))
 end
 
-local function buildMagicString(cid)
-    local data = g_magicMeter[cid]
+local function buildMagicString(key)
+    local data = g_magicMeter[key]
     if not data then return "" end
     local buf = {}
     for name, damage in pairs(data) do
@@ -66,15 +75,20 @@ end
 
 -- Throttled live push (multi-target AoE spells can otherwise flood the client).
 local function pushMagicMeter(cid, force)
+    local key = keyOf(cid)
+    if not key then
+        return
+    end
+
     if not force then
         local now = os.clock()
-        local last = g_magicLastPush[cid] or 0
+        local last = g_magicLastPush[key] or 0
         if now - last < PUSH_THROTTLE then
             return
         end
-        g_magicLastPush[cid] = now
+        g_magicLastPush[key] = now
     end
-    local buf = buildMagicString(cid)
+    local buf = buildMagicString(key)
     if buf == "" then buf = "reset" end
     doSendPlayerExtendedOpcode(cid, OPCODE, buf)
 end
@@ -102,22 +116,29 @@ function onCastSpell(cid, words)
     end
     if source == "" then return true end
 
-    if not g_magicSpellLog[cid] then g_magicSpellLog[cid] = {} end
-    table.insert(g_magicSpellLog[cid], { name = getSpellName(source), time = os.time() })
-    if #g_magicSpellLog[cid] > LOG_SIZE then
-        table.remove(g_magicSpellLog[cid], 1)
+    local key = keyOf(cid)
+    if not key then return true end
+
+    if not g_magicSpellLog[key] then g_magicSpellLog[key] = {} end
+    table.insert(g_magicSpellLog[key], { name = getSpellName(source), time = os.time() })
+    if #g_magicSpellLog[key] > LOG_SIZE then
+        table.remove(g_magicSpellLog[key], 1)
     end
     return true
 end
 
 local function addDamage(cid, amount)
     if amount <= 0 then return end
-    if not g_magicMeter[cid] then g_magicMeter[cid] = {} end
+
+    local key = keyOf(cid)
+    if not key then return end
+
+    if not g_magicMeter[key] then g_magicMeter[key] = {} end
 
     -- Attribute the damage to the most recent spell cast within the window.
     local now = os.time()
     local spellName = "Outros"
-    local log = g_magicSpellLog[cid]
+    local log = g_magicSpellLog[key]
     if log then
         for i = #log, 1, -1 do
             if now - log[i].time <= ATTRIB_WINDOW then
@@ -138,7 +159,7 @@ local function addDamage(cid, amount)
         end
     end
 
-    g_magicMeter[cid][spellName] = (g_magicMeter[cid][spellName] or 0) + amount
+    g_magicMeter[key][spellName] = (g_magicMeter[key][spellName] or 0) + amount
 
     -- Always push (throttled) - the meter works even with the window closed.
     pushMagicMeter(cid)
@@ -176,15 +197,21 @@ end
 
 -- Called from logout.lua to free memory
 function magicMeterCleanup(cid)
-    g_magicMeter[cid] = nil
-    g_magicSpellLog[cid] = nil
-    g_magicLastPush[cid] = nil
+    if not isPlayer(cid) then return end
+
+    local key = getPlayerGUID(cid)
+    g_magicMeter[key] = nil
+    g_magicSpellLog[key] = nil
+    g_magicLastPush[key] = nil
 end
 
 -- Called from opcode.lua when the client sends opcode 116 ("request" / "reset")
 function magicMeterOnOpcode(cid, buffer)
     if buffer == "reset" then
-        g_magicMeter[cid] = {}
+        local key = keyOf(cid)
+        if key then
+            g_magicMeter[key] = {}
+        end
         doSendPlayerExtendedOpcode(cid, OPCODE, "reset")
         return true
     end

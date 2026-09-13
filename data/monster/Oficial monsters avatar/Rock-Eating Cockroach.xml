@@ -25,6 +25,7 @@
 		<attack name="physical" interval="2000" chance="30" range="1" min="-400" max="-600"/>
 		<attack name="earth" interval="2000" chance="20" range="7" min="-400" max="-550"/>
 		<attack name="poison" interval="2500" chance="15" range="3" min="-250" max="-400"/>
+		<attack name="Rock Crunch" interval="3500" chance="20" range="5" target="1" min="-250" max="-380"/>
 	</attacks>
 	<defenses armor="50" defense="40"/>
 	<elements>

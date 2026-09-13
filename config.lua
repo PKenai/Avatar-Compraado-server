@@ -80,6 +80,12 @@ fullMapOnLogin = false
 -- habilitada (g_game.enableFeature(GameMagicEffectU16)) - se o client nao tiver,
 -- todos os effects quebram. Habilita effects custom acima de 255 (ex.: 183+).
 magicEffectU16 = true
+-- Envia quem causou cada magic effect (opcode 72) junto do effect, pro client
+-- conseguir separar a opacidade em Self bend / Others bend / Monsters bend.
+-- Precisa de um client que entenda o opcode 72 (o oficial deste projeto).
+-- Effects sem origem (do proprio motor) vao com 0.
+-- Desligue se algum client antigo for jogar, senao os effects dele quebram.
+magicEffectSource = true
 loginPort = 9191
 gamePort = "9192"
 loginTries = 10
@@ -243,13 +249,13 @@ pvpBlessingThreshold = 40
 fairFightTimeRange = 60
 
 experienceStages = false
-rateExperience = 1
-rateExperienceFromPlayers = 1
+rateExperience = 0.1
+rateExperienceFromPlayers = 0.3
 rateSkill = 1
 rateMagic = 1
-rateLoot = 1
+rateLoot = 0.1
 
-rateLootPercent = 1.0
+rateLootPercent = 0.1
 
 
 rateSpawnMin = 1
@@ -326,3 +332,26 @@ adminConnectionsLimit = 1
 adminRequireLogin = true
 adminEncryption = ""
 adminEncryptionData = ""
+-- =========================================================================
+--  ARVORES DE RECOMPENSA (tronco brilhante)
+-- =========================================================================
+--  Arvores do mapa que podem virar um tronco brilhante com recompensa.
+--  O servidor procura esses ids enquanto carrega o mapa, entao basta editar
+--  a lista aqui e reiniciar o server: nao precisa mexer no mapa nem
+--  recompilar nada.
+--
+--  Um tronco, ao dar use, entrega o premio e some. A arvore original volta
+--  quando nao tiver nenhum player no raio configurado abaixo.
+rewardTreeIds = {2700, 2708, 2701, 2703, 2704, 2705, 2707}
+
+rewardTreeChance        = 60  -- 1 em cada N arvores do mapa vira tronco (~24 troncos no mapa inteiro;
+                                --  andando na mata o player cruza ~1 tronco a cada 5 min)
+rewardTreeCrystalChance = 300   -- entre os troncos, 1 em VALOR POSTO é o de crystal coin
+rewardTreeRespawnRadius = 12    -- tiles sem player pra arvore original voltar
+rewardTreeMinDistance   = 100   -- tiles minimos entre dois troncos (0 = desligado; alto demais = menos troncos)
+rewardTreeReroll        = true -- a arvore volta original (true = pode sortear de novo)
+rewardTreeMaintain      = true  -- repoe troncos com o tempo (senao o estoque acaba)
+rewardTreeRefillSeconds = 600   -- de quanto em quanto tempo tenta repor (segundos)
+rewardTreeEffect        = 207    -- efeito de magia ao abrir/aparecer (0 = nenhum)
+rewardTreeSendText      = false -- mensagem pro player ao achar o premio (silencioso)
+rewardTreeVerbose       = false -- prints do console do server (silencioso)

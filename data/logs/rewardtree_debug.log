@@ -1,0 +1,140 @@
+[13/9/2026 11:3:25] > Using SHA1 encryption
+[13/9/2026 11:3:25] >> Checking software version...
+[13/9/2026 11:3:25] > Ignoring version check, using SVN
+[13/9/2026 11:3:25] >> Loading RSA key done
+[13/9/2026 11:3:25] >> Starting SQL connection
+[13/9/2026 11:3:25] >> Running Database Manager
+[13/9/2026 11:3:25] > No tables were optimized.
+[13/9/2026 11:3:25] >> Loading items (OTB)
+[13/9/2026 11:3:25] >> Loading items (XML)
+[13/9/2026 11:3:25] >> Loading groups
+[13/9/2026 11:3:25] >> Loading vocations
+[13/9/2026 11:3:25] >> Loading outfits
+[13/9/2026 11:3:25] >> Loading mounts
+[13/9/2026 11:3:25] >> Loading chat channels
+[13/9/2026 11:3:25] >> Loading script systems
+[13/9/2026 11:3:26] > Loading weapons... done.
+[13/9/2026 11:3:26] > Preparing weapons... done.
+[13/9/2026 11:3:28] > Loading spells... done.
+[13/9/2026 11:3:31] > Loading actions... done.
+[13/9/2026 11:3:32] > Loading talkactions... done.
+[13/9/2026 11:3:36] > Loading movements... done.
+[13/9/2026 11:3:37] > Loading creaturescripts... done.
+[13/9/2026 11:3:38] > Loading globalscripts... done.
+[13/9/2026 11:3:38] >> Loading mods...
+[13/9/2026 11:3:38] > Loading custommonsters.xml... done.
+[13/9/2026 11:3:38] > Loading raridade.xml... done.
+[13/9/2026 11:3:38] > 2 mods were loaded.
+[13/9/2026 11:3:38] >> Loading experience stages
+[13/9/2026 11:3:38] >> Loading quests
+[13/9/2026 11:3:38] >> Loading monsters
+[13/9/2026 11:3:38] [Warning - Monsters::loadMonster] Missing look type/typeex (data/monster/Oficial monsters avatar/Dummy.xml).
+[13/9/2026 11:3:38] >> Loading raids
+[13/9/2026 11:3:38] >> Loading map and spawns...
+[13/9/2026 11:3:38] > Map size: 2048x2048.
+[13/9/2026 11:3:38] > Map descriptions: 
+[13/9/2026 11:3:38] "Saved with OTAcademy Map Editor 4.2.0"
+[13/9/2026 11:3:38] "No map description available."
+[13/9/2026 11:3:40] > Reward trees: 1452 candidates found in the map.
+[13/9/2026 11:3:40] > Loading time: 2.329 seconds.
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Pica-pau da terra"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Spawn::addMonster] Cannot find "Sapo"
+[13/9/2026 11:3:40] [Warning - Houses::loadFromXml] House entry not set for:  (37)
+[13/9/2026 11:3:40] > Parsing time: 0.08 seconds.
+[13/9/2026 11:3:40] > Synchronization time: 0.016 seconds.
+[13/9/2026 11:3:40] > Unserialization time: 0.001 seconds.
+[13/9/2026 11:3:40] >> Checking world type... Open PvP
+[13/9/2026 11:3:40] >> Starting to dominate the world... done.
+[13/9/2026 11:3:40] >> Initializing game state and binding services...
+[13/9/2026 11:3:40] [RIFT] "Traitor" opened (663/583/11)
+[13/9/2026 11:3:40] [RIFT] "Rock-Eating Cockroach" opened (194/346/8)
+[13/9/2026 11:3:40] > Global IP address(es): 127.0.0.1
+[13/9/2026 11:3:40] > Bound ports: 9191	9192	9194	9195	
+[13/9/2026 11:3:40] >> Everything smells good, server is starting up...
+[13/9/2026 11:3:41] >> Eclipse server Online!
+
+[13/9/2026 11:3:51] Player has logged in.
+[13/9/2026 11:3:57] [RTDBG] parseUseItem pos=526,398,7 sprite=18253 stackpos=1 index=0
+[13/9/2026 11:3:57] [RTDBG] internalGetThing USEITEM 526,398,7 down=19251 top2=0 topTop=0 -> escolhido=19251
+[13/9/2026 11:3:57] [RTDBG] playerUseItem Player from=526,398,7 stackpos=1 sprite=18253 thing=19251
+[13/9/2026 11:3:57] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:3:57] [RTDBG] internalUseItem action itemid=19251 script executou=0
+[13/9/2026 11:3:57] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:3:57] [RTDBG] playerUseItem -> g_actions->useItem = 0 (item=19251)
+[13/9/2026 11:3:59] [RTDBG] parseUseItem pos=526,398,7 sprite=18253 stackpos=1 index=0
+[13/9/2026 11:3:59] [RTDBG] internalGetThing USEITEM 526,398,7 down=19251 top2=0 topTop=0 -> escolhido=19251
+[13/9/2026 11:3:59] [RTDBG] playerUseItem Player from=526,398,7 stackpos=1 sprite=18253 thing=19251
+[13/9/2026 11:3:59] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:3:59] [RTDBG] internalUseItem action itemid=19251 script executou=0
+[13/9/2026 11:3:59] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:3:59] [RTDBG] playerUseItem -> g_actions->useItem = 0 (item=19251)
+[13/9/2026 11:3:59] [RTDBG] parseUseItem pos=526,398,7 sprite=18253 stackpos=1 index=0
+[13/9/2026 11:3:59] [RTDBG] internalGetThing USEITEM 526,398,7 down=19251 top2=0 topTop=0 -> escolhido=19251
+[13/9/2026 11:3:59] [RTDBG] playerUseItem Player from=526,398,7 stackpos=1 sprite=18253 thing=19251
+[13/9/2026 11:3:59] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:3:59] [RTDBG] internalUseItem action itemid=19251 script executou=0
+[13/9/2026 11:3:59] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:3:59] [RTDBG] playerUseItem -> g_actions->useItem = 0 (item=19251)
+[13/9/2026 11:4:0] [RTDBG] parseUseItem pos=525,398,7 sprite=17582 stackpos=0 index=0
+[13/9/2026 11:4:0] [RTDBG] parseUseItem pos=526,398,7 sprite=18253 stackpos=1 index=0
+[13/9/2026 11:4:0] [RTDBG] internalGetThing USEITEM 526,398,7 down=19251 top2=0 topTop=0 -> escolhido=19251
+[13/9/2026 11:4:0] [RTDBG] playerUseItem Player from=526,398,7 stackpos=1 sprite=18253 thing=19251
+[13/9/2026 11:4:0] [RTDBG] playerUseItem canDoAction=false, reagendado
+[13/9/2026 11:4:0] [RTDBG] internalGetThing USEITEM 526,398,7 down=19251 top2=0 topTop=0 -> escolhido=19251
+[13/9/2026 11:4:0] [RTDBG] playerUseItem Player from=526,398,7 stackpos=1 sprite=18253 thing=19251
+[13/9/2026 11:4:0] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:4:0] [RTDBG] internalUseItem action itemid=19251 script executou=0
+[13/9/2026 11:4:0] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:4:0] [RTDBG] playerUseItem -> g_actions->useItem = 0 (item=19251)
+[13/9/2026 11:4:2] [RTDBG] parseUseItem pos=527,399,7 sprite=6217 stackpos=1 index=0
+[13/9/2026 11:4:3] [RTDBG] parseUseItem pos=527,399,7 sprite=6217 stackpos=1 index=0
+[13/9/2026 11:4:4] [RTDBG] parseUseItem pos=526,398,7 sprite=18253 stackpos=1 index=0
+[13/9/2026 11:4:4] [RTDBG] internalGetThing USEITEM 526,398,7 down=19251 top2=0 topTop=0 -> escolhido=19251
+[13/9/2026 11:4:4] [RTDBG] playerUseItem Player from=526,398,7 stackpos=1 sprite=18253 thing=19251
+[13/9/2026 11:4:4] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:4:4] [RTDBG] internalUseItem action itemid=19251 script executou=0
+[13/9/2026 11:4:4] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:4:4] [RTDBG] playerUseItem -> g_actions->useItem = 0 (item=19251)
+[13/9/2026 11:4:5] [RTDBG] parseUseItem pos=526,398,7 sprite=18253 stackpos=1 index=0
+[13/9/2026 11:4:5] [RTDBG] internalGetThing USEITEM 526,398,7 down=19251 top2=0 topTop=0 -> escolhido=19251
+[13/9/2026 11:4:5] [RTDBG] playerUseItem Player from=526,398,7 stackpos=1 sprite=18253 thing=19251
+[13/9/2026 11:4:5] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:4:5] [RTDBG] internalUseItem action itemid=19251 script executou=0
+[13/9/2026 11:4:5] [RTDBG] executeUse lua retornou 0 para item 19251
+[13/9/2026 11:4:5] [RTDBG] playerUseItem -> g_actions->useItem = 0 (item=19251)
+[13/9/2026 11:4:5] [RTDBG] parseUseItem pos=526,398,7 sprite=18253 stackpos=1 index=0
+[13/9/2026 11:4:5] [RTDBG] internalGetThing USEITEM 526,398,7 down=19251 top2=0 topTop=0 -> escolhido=19251
+[13/9/2026 11:4:5] [RTDBG] playerUseItem Player from=526,398,7 stackpos=1 sprite=18253 thing=19251
+[13/9/2026 11:4:5] [RTDBG] playerUseItem canDoAction=false, reagendado
+[13/9/2026 11:4:5] [RTDBG] parseUseItem pos=526,398,7 sprite=18253 stackpos=1 index=0
+[13/9/2026 11:4:5] [RTDBG] internalGetThing USEITEM 526,398,7 down=19251 top2=0 topTop=0 -> escolhido=19251
+[13/9/2026 11:4:5] [RTDBG] playerUseItem Player from=526,398,7 stackpos=1 sprite=18253 thing=19251
+[13/9/2026 11:4:5] [RTDBG] playerUseItem canDoAction=false, reagendado

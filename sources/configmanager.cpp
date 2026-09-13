@@ -119,6 +119,7 @@ bool ConfigManager::load()
 		m_confBool[RANDOMIZE_TILES] = getGlobalBool("randomizeTiles", true);
 		m_confBool[STORE_TRASH] = getGlobalBool("storeTrash", true);
 		m_confBool[MAGIC_EFFECT_U16] = getGlobalBool("magicEffectU16", false);
+		m_confBool[MAGIC_EFFECT_SOURCE] = getGlobalBool("magicEffectSource", false);
 		m_confString[DEFAULT_PRIORITY] = getGlobalString("defaultPriority", "high");
 		m_confBool[BIND_ONLY_GLOBAL_ADDRESS] = getGlobalBool("bindOnlyGlobalAddress", false);
 		m_confBool[GUILD_HALLS] = getGlobalBool("guildHalls", false);

@@ -23,6 +23,7 @@
 	<attacks>
 		<attack name="melee" interval="2000" skill="75" attack="75"/>
 		<attack name="physical" interval="2500" chance="30" range="1" min="-50" max="-100"/>
+		<attack name="River Crush" interval="3500" chance="20" range="2" min="-40" max="-80"/>
 	</attacks>
 	<defenses armor="10" defense="10"/>
 	<elements>

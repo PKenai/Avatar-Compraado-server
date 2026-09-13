@@ -150,6 +150,13 @@ class Monster : public Creature
 		bool extraMeleeAttack;
 		bool lootPercent;
 
+		//Avatar: quando o player veste um dos outfits elementares (1344-1347) o
+		//monstro larga o alvo e passa a regenerar 5% da vida maxima a cada 0.5s,
+		//enquanto o player mantiver o outfit. Guardamos o ID do player (e nao o
+		//ponteiro) porque ele pode morrer/deslogar no meio do caminho.
+		uint32_t untargetableOutfitTargetId;
+		uint32_t untargetableOutfitHealTicks;
+
 		Spawn* spawn;
 		Raid* raid;
 
@@ -178,6 +185,7 @@ class Monster : public Creature
 
 		void setIdle(bool _idle);
 		void updateIdleStatus();
+		void updateUntargetableOutfitHeal(uint32_t interval);
 
 		virtual void onAddCondition(ConditionType_t type, bool hadCondition);
 		virtual void onEndCondition(ConditionType_t type);

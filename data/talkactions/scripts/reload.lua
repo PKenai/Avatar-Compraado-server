@@ -27,24 +27,43 @@ local reloadInfo = {
   {RELOAD_ALL, "all", "everything"}
 }
 
-function onSay(cid, words, param, channel)
- 
-  if(param == '') then
-    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Command param required.")
-    return true
-  end
+-- Types that exist in the command list but are disabled / unused in C++ Game::reloadInfo
+local disabledReload = {
+  [RELOAD_GROUPS] = "groups (precisa restart — pointers de group nos players)",
+  [RELOAD_HIGHSCORES] = "highscores (nao implementado no C++)",
+  [RELOAD_ITEMS] = "items (nao implementado — precisa restart)",
+  [RELOAD_MOUNTS] = "mounts (nao implementado no C++)",
+  [RELOAD_OUTFITS] = "outfits (nao implementado — precisa restart)",
+  [RELOAD_VOCATIONS] = "vocations (precisa restart — pointers nos players)",
+  [RELOAD_WEAPONS] = "weapons (nao implementado — precisa restart)",
+}
 
-  if param:lower() == "movements" or param:lower() == "movement" then
-    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "This type of reload is not available at this time.")
+local function matchReloadAlias(param, entry)
+  -- entry[1] is the numeric RELOAD_* id; only compare string aliases
+  local aliases = {}
+  for i = 2, #entry do
+    aliases[#aliases + 1] = entry[i]
+  end
+  return table.isStrIn(param, aliases)
+end
+
+function onSay(cid, words, param, channel)
+  if(param == '') then
+    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Command param required. Ex: /reload spells")
     return true
   end
 
   param = param:lower()
   local str = "Reload type not found."
   for _, v in ipairs(reloadInfo) do
-    if(table.isStrIn(param, v)) then
-      doReloadInfo(v[1], cid)
-      str = "Reloading " .. v[2] .. "..."
+    if(matchReloadAlias(param, v)) then
+      local reloadId = v[1]
+      if disabledReload[reloadId] then
+        str = "Reload indisponivel: " .. disabledReload[reloadId]
+      else
+        doReloadInfo(reloadId, cid)
+        str = "Reloading " .. v[2] .. "..."
+      end
       break
     end
   end

@@ -16609,4 +16609,27 @@
 		<attribute key="type" value="container" />
 		<attribute key="weight" value="1000" />
 	</item>
+	<!-- Hydra Boss Room: Silver Chest -->
+	<item id="28873" article="a" name="Silver Chest">
+		<attribute key="type" value="container" />
+		<attribute key="weight" value="1000" />
+		<attribute key="description" value="A chest gleaming with the power of the Hydra. Open to receive your reward." />
+	</item>
+
+	<!-- ==================================================================== -->
+	<!-- Arvores de recompensa: troncos brilhantes espalhados pelo mapa.       -->
+	<!-- Aparecem no lugar de uma arvore normal (ver data/lib/rewardTrees*)    -->
+	<!-- ==================================================================== -->
+	<item id="19251" article="a" name="vital reward trunk">
+		<attribute key="description" value="A humming trunk with life energy inside. Use it to collect 10-20 ultimate health potions." />
+	</item>
+	<item id="19250" article="a" name="gilded reward trunk">
+		<attribute key="description" value="The bark glitters like gold. Use it to collect 10-15 platinum coins." />
+	</item>
+	<item id="19249" article="a" name="arcane reward trunk">
+		<attribute key="description" value="A trunk charged with raw magic. Use it to collect 20-30 great mana potions." />
+	</item>
+	<item id="19248" article="a" name="prismatic reward trunk">
+		<attribute key="description" value="A rare trunk of shifting lights. Use it to collect a crystal coin." />
+	</item>
 </items>

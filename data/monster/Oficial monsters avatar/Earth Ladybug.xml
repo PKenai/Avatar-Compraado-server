@@ -20,6 +20,7 @@
 	<attacks>
 		<attack name="melee" interval="2000" skill="45" attack="45"/>
 		<attack name="earth" interval="2000" chance="20" range="7" min="-30" max="-60"/>
+		<attack name="Ladybug Quake" interval="3000" chance="20" range="4" min="-20" max="-40"/>
 	</attacks>
 	<defenses armor="0" defense="0"/>
 	<loot>

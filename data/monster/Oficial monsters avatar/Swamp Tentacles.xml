@@ -25,6 +25,7 @@
 		<attack name="earth" interval="2500" chance="25" range="5" min="-200" max="-500"/>
 		<attack name="poison" interval="2000" chance="20" range="3" min="-150" max="-350"/>
 		<attack name="physical" interval="2000" chance="15" range="1" min="-250" max="-450"/>
+		<attack name="Tentacle Drag" interval="3500" chance="20" range="4" min="-150" max="-300"/>
 	</attacks>
 	<defenses armor="25" defense="20"/>
 </monster>

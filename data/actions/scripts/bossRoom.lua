@@ -106,11 +106,17 @@ local function healAllAliveBosses()
     end
 end
 
-local function healBossTick()
+local function healBossTick(timerId)
+    -- Eu SOU o timer que esta' rodando: nao estou mais pendente. Zerar aqui
+    -- evita que o bossRoomStopTimers (via bossRoomResetAll) chame stopEvent no
+    -- proprio evento em execucao - isso apagava o no' que o executeTimer do C++
+    -- ainda ia ler e derrubava o server (ver a nota em bossRoomLib.lua).
+    bossRoomState.healTimerId = nil
+
     if not bossRoomState.active then return end
 
     if countPlayersInBossRoom() == 0 then
-        bossRoomResetAll()
+        bossRoomResetAll(timerId)
         return
     end
 
@@ -126,6 +132,9 @@ local function healBossTick()
 end
 
 local function maintainTentacles()
+    -- Mesma regra do healBossTick: zerar o proprio id enquanto executa.
+    bossRoomState.tentacleTimerId = nil
+
     if not bossRoomState.active then return end
     if areAllBossesDead() then return end
 

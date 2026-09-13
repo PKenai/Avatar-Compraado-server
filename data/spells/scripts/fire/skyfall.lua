@@ -61,6 +61,9 @@ end
 local combat=createCombatObject() 
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE) 
 
+-- Avatar: efeito de explosao de cada sqm da area (antes era o 378)
+local SKYFALL_EXPLOSION_EFFECT = 409
+
 
 local spellName = "fire skyfall"
 local cf = {atk = spellsInfo[spellName].atk}
@@ -137,7 +140,7 @@ local function startExplosion(cid, poses)
 					end 
 				end 
 				local random = 200+(-20*i)
-				addEvent(doSendMagicEffect, random+50, posHit, 6)
+				addEvent(doSendMagicEffect, random+50, posHit, SKYFALL_EXPLOSION_EFFECT)
 			end
         end 
 end

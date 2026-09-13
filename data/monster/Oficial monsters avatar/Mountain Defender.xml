@@ -25,6 +25,7 @@
 		<attack name="physical" interval="2500" chance="45" range="1" min="-400" max="-850"/>
 		<attack name="fire blast" interval="3000" chance="25" range="3" min="-350" max="-750"/>
 		<attack name="earth" interval="3000" chance="20" range="5" min="-300" max="-650"/>
+		<attack name="Mountain Slam" interval="4000" chance="20" range="3" min="-300" max="-600"/>
 	</attacks>
 	<defenses armor="45" defense="40"/>
 	<loot>

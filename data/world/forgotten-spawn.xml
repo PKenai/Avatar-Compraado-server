@@ -262,6 +262,9 @@
 	<spawn centerx="570" centery="576" centerz="4" radius="1">
 		<monster name="Bee" x="0" y="0" z="4" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="268" centery="603" centerz="4" radius="1">
+		<monster name="Trenix" x="0" y="0" z="4" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="513" centery="658" centerz="4" radius="1">
 		<npc name="tadeu" x="0" y="0" z="4" spawntime="40" />
 	</spawn>
@@ -720,6 +723,30 @@
 	<spawn centerx="581" centery="573" centerz="5" radius="1">
 		<monster name="Bee" x="0" y="0" z="5" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="275" centery="602" centerz="5" radius="1">
+		<monster name="Trenix" x="0" y="0" z="5" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="274" centery="605" centerz="5" radius="1">
+		<monster name="Trenix" x="0" y="0" z="5" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="281" centery="609" centerz="5" radius="1">
+		<monster name="Trenix" x="0" y="0" z="5" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="281" centery="612" centerz="5" radius="1">
+		<monster name="Trenix" x="0" y="0" z="5" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="297" centery="613" centerz="5" radius="1">
+		<monster name="Trenix" x="0" y="0" z="5" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="293" centery="618" centerz="5" radius="1">
+		<monster name="Trenix" x="0" y="0" z="5" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="286" centery="621" centerz="5" radius="1">
+		<monster name="Trenix" x="0" y="0" z="5" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="300" centery="622" centerz="5" radius="1">
+		<monster name="Trenix" x="0" y="0" z="5" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="580" centery="631" centerz="5" radius="1">
 		<npc name="dink" x="0" y="0" z="5" spawntime="40" />
 	</spawn>
@@ -933,6 +960,9 @@
 	<spawn centerx="771" centery="206" centerz="6" radius="1">
 		<npc name="Valdemira" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="531" centery="207" centerz="6" radius="1">
+		<monster name="Frog" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="666" centery="209" centerz="6" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="6" spawntime="60" direction="2" />
 		<monster name="Jaguar" x="0" y="1" z="6" spawntime="60" direction="2" />
@@ -948,6 +978,9 @@
 	<spawn centerx="584" centery="216" centerz="6" radius="1">
 		<monster name="Elephant" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="623" centery="216" centerz="6" radius="1">
+		<monster name="Frog" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="594" centery="217" centerz="6" radius="1">
 		<monster name="Elephant" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
@@ -956,12 +989,27 @@
 		<monster name="Jaguar" x="1" y="0" z="6" spawntime="60" direction="2" />
 		<monster name="Jaguar" x="-1" y="1" z="6" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="525" centery="218" centerz="6" radius="1">
+		<monster name="Frog" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="603" centery="218" centerz="6" radius="1">
 		<monster name="Elephant" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="690" centery="218" centerz="6" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="6" spawntime="60" direction="2" />
 		<monster name="Jaguar" x="1" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="539" centery="220" centerz="6" radius="1">
+		<monster name="Frog" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="553" centery="220" centerz="6" radius="1">
+		<monster name="Frog" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="499" centery="223" centerz="6" radius="1">
+		<monster name="Frog" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="565" centery="223" centerz="6" radius="1">
+		<monster name="Frog" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="583" centery="223" centerz="6" radius="1">
 		<monster name="Elephant" x="0" y="0" z="6" spawntime="60" direction="2" />
@@ -984,6 +1032,9 @@
 	</spawn>
 	<spawn centerx="697" centery="230" centerz="6" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="558" centery="231" centerz="6" radius="1">
+		<monster name="Frog" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="642" centery="231" centerz="6" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="6" spawntime="60" direction="2" />
@@ -1083,9 +1134,6 @@
 	</spawn>
 	<spawn centerx="620" centery="267" centerz="6" radius="1">
 		<monster name="Elephant" x="0" y="0" z="6" spawntime="60" direction="2" />
-	</spawn>
-	<spawn centerx="1008" centery="268" centerz="6" radius="1">
-		<npc name="doom island" x="0" y="0" z="6" spawntime="40" />
 	</spawn>
 	<spawn centerx="628" centery="270" centerz="6" radius="1">
 		<monster name="Elephant" x="0" y="0" z="6" spawntime="60" direction="2" />
@@ -1192,6 +1240,9 @@
 	<spawn centerx="124" centery="317" centerz="6" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="706" centery="318" centerz="6" radius="1">
+		<monster name="Earth Woodpecker" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="66" centery="319" centerz="6" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
@@ -1227,6 +1278,9 @@
 	</spawn>
 	<spawn centerx="69" centery="331" centerz="6" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="721" centery="332" centerz="6" radius="1">
+		<monster name="Frog" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="89" centery="333" centerz="6" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="6" spawntime="60" direction="2" />
@@ -1606,6 +1660,9 @@
 	<spawn centerx="486" centery="554" centerz="6" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="673" centery="557" centerz="6" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="594" centery="562" centerz="6" radius="1">
 		<monster name="Bee" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
@@ -1614,6 +1671,105 @@
 	</spawn>
 	<spawn centerx="575" centery="570" centerz="6" radius="1">
 		<monster name="Bee" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="276" centery="586" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="257" centery="589" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="268" centery="589" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="271" centery="590" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="256" centery="591" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="282" centery="594" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="251" centery="596" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="279" centery="598" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="232" centery="599" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="290" centery="600" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="233" centery="601" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="288" centery="604" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="299" centery="605" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="306" centery="605" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="253" centery="607" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="302" centery="607" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="257" centery="608" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="256" centery="610" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="310" centery="613" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="311" centery="615" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="276" centery="617" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+		<monster name="Trenix" x="1" y="1" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="319" centery="620" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+		<monster name="Trenix" x="1" y="1" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="276" centery="625" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="311" centery="625" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+		<monster name="Trenix" x="1" y="1" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="310" centery="627" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="277" centery="628" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="299" centery="633" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="285" centery="634" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="297" centery="634" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="299" centery="635" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="287" centery="639" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="280" centery="640" centerz="6" radius="1">
+		<monster name="Trenix" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="1220" centery="652" centerz="6" radius="1">
 		<npc name="aang" x="0" y="0" z="6" spawntime="40" />
@@ -1630,31 +1786,125 @@
 	<spawn centerx="181" centery="1059" centerz="6" radius="1">
 		<npc name="Ascelot" x="0" y="0" z="6" spawntime="40" />
 	</spawn>
+	<spawn centerx="963" centery="155" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="935" centery="159" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="953" centery="159" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="940" centery="160" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="904" centery="162" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="642" centery="164" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
 		<monster name="Jaguar" x="-1" y="1" z="7" spawntime="60" direction="2" />
 		<monster name="Jaguar" x="1" y="1" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="919" centery="165" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="971" centery="165" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="917" centery="166" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="552" centery="167" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="926" centery="167" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="545" centery="168" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="920" centery="168" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="918" centery="169" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="947" centery="169" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="564" centery="170" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="959" centery="170" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="961" centery="170" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="977" centery="170" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="540" centery="171" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="861" centery="171" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="866" centery="171" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="964" centery="171" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="960" centery="173" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="986" centery="173" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="867" centery="174" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="932" centery="174" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="569" centery="175" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="885" centery="175" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+		<monster name="White Scarab" x="1" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="862" centery="176" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="865" centery="176" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="973" centery="176" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="884" centery="177" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="887" centery="177" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="538" centery="178" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="889" centery="179" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="577" centery="180" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="960" centery="180" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="996" centery="180" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="793" centery="181" centerz="7" radius="1">
 		<monster name="Vacaceronte" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1662,29 +1912,96 @@
 	<spawn centerx="781" centery="182" centerz="7" radius="1">
 		<monster name="Vacaceronte" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="973" centery="182" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="965" centery="183" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="802" centery="184" centerz="7" radius="1">
 		<monster name="Vacaceronte" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="839" centery="184" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="941" centery="184" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="582" centery="186" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="836" centery="186" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="893" centery="186" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="936" centery="186" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+		<monster name="White Scarab" x="1" y="1" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="940" centery="186" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="537" centery="187" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="844" centery="187" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="934" centery="187" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="909" centery="188" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="964" centery="190" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="780" centery="191" centerz="7" radius="1">
 		<monster name="Vacaceronte" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="867" centery="191" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="966" centery="191" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="970" centery="191" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="803" centery="192" centerz="7" radius="1">
 		<monster name="Vacaceronte" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="847" centery="192" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="962" centery="192" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="628" centery="193" centerz="7" radius="1">
+		<monster name="Sheep" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="971" centery="193" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="990" centery="193" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="579" centery="194" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="614" centery="194" centerz="7" radius="1">
+		<monster name="Sheep" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="616" centery="194" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="545" centery="195" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="916" centery="195" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="328" centery="196" centerz="7" radius="1">
 		<npc name="Borkas" x="0" y="0" z="7" spawntime="40" />
@@ -1695,17 +2012,53 @@
 	<spawn centerx="562" centery="196" centerz="7" radius="1">
 		<npc name="Nair" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="1000" centery="196" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="914" centery="197" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="962" centery="197" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="856" centery="198" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="987" centery="198" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="950" centery="199" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="562" centery="200" centerz="7" radius="1">
 		<monster name="Black Panther" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="571" centery="200" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="855" centery="200" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="858" centery="200" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="913" centery="200" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="970" centery="200" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="995" centery="200" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="551" centery="201" centerz="7" radius="1">
 		<monster name="Black Panther" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="801" centery="201" centerz="7" radius="1">
 		<monster name="Vacaceronte" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="601" centery="202" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="605" centery="202" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1719,6 +2072,9 @@
 	<spawn centerx="782" centery="202" centerz="7" radius="1">
 		<monster name="Vacaceronte" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="858" centery="202" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="321" centery="203" centerz="7" radius="1">
 		<npc name="Hugo" x="1" y="1" z="7" spawntime="40" />
 	</spawn>
@@ -1729,17 +2085,49 @@
 		<npc name="Maria" x="-1" y="0" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="564" centery="203" centerz="7" radius="1" />
+	<spawn centerx="890" centery="203" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="931" centery="203" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="596" centery="205" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="792" centery="205" centerz="7" radius="1">
 		<monster name="Vacaceronte" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="891" centery="205" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+		<monster name="White Scarab" x="1" y="1" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="840" centery="206" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="601" centery="207" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="838" centery="207" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+		<monster name="White Scarab" x="1" y="1" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="642" centery="208" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="841" centery="208" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="891" centery="208" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="934" centery="209" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="616" centery="210" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="946" centery="210" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="320" centery="211" centerz="7" radius="1">
 		<npc name="dink" x="0" y="-1" z="7" spawntime="40" />
@@ -1753,14 +2141,84 @@
 	<spawn centerx="320" centery="215" centerz="7" radius="1">
 		<npc name="tadeu" x="0" y="1" z="7" spawntime="40" />
 	</spawn>
+	<spawn centerx="945" centery="215" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="975" centery="215" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="931" centery="216" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="947" centery="217" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="999" centery="217" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="516" centery="218" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="875" centery="218" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="926" centery="218" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="986" centery="218" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="877" centery="219" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="364" centery="220" centerz="7" radius="1">
 		<npc name="olgaz" x="-1" y="-1" z="7" spawntime="40" />
+	</spawn>
+	<spawn centerx="873" centery="220" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="875" centery="220" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="921" centery="220" centerz="7" radius="1">
+		<monster name="White Scarab" x="1" y="-1" z="7" spawntime="60" direction="2" />
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="923" centery="221" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="946" centery="221" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="1000" centery="221" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="1013" centery="222" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="666" centery="223" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="998" centery="223" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="983" centery="224" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="606" centery="227" centerz="7" radius="1">
 		<monster name="Jaguar" x="-1" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="571" centery="228" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="903" centery="230" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="905" centery="230" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="497" centery="231" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="687" centery="231" centerz="7" radius="1">
 		<monster name="Jaguar" x="-1" y="-1" z="7" spawntime="60" direction="2" />
@@ -1769,8 +2227,35 @@
 		<monster name="Jaguar" x="-1" y="1" z="7" spawntime="60" direction="2" />
 		<monster name="Jaguar" x="1" y="1" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="968" centery="231" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="973" centery="231" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="881" centery="232" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="883" centery="232" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="905" centery="232" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="903" centery="233" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="667" centery="234" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="882" centery="234" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="884" centery="234" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="507" centery="235" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="621" centery="235" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1778,32 +2263,134 @@
 	<spawn centerx="637" centery="235" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="980" centery="235" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="964" centery="236" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="548" centery="237" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="569" centery="237" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="996" centery="237" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="974" centery="238" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="990" centery="239" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="994" centery="239" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="489" centery="241" centerz="7" radius="1">
 		<monster name="Hippo" x="-1" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="888" centery="243" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="623" centery="244" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="983" centery="244" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="532" centery="245" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="487" centery="246" centerz="7" radius="1">
 		<monster name="Hippo" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="992" centery="247" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="639" centery="249" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="955" centery="249" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="984" centery="249" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="657" centery="251" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="980" centery="251" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="946" centery="252" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="952" centery="252" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="507" centery="253" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="634" centery="255" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="567" centery="256" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="1020" centery="256" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="989" centery="257" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="1012" centery="257" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="1027" centery="257" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="960" centery="258" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="578" centery="259" centerz="7" radius="1">
 		<npc name="Dona Fofinha" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="1018" centery="259" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="1" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="666" centery="260" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="1004" centery="260" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="529" centery="261" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="1007" centery="261" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="653" centery="262" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="1013" centery="262" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="514" centery="263" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="1002" centery="263" centerz="7" radius="1">
+		<monster name="White Scarab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="548" centery="265" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="665" centery="265" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="649" centery="273" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="639" centery="274" centerz="7" radius="1">
 		<monster name="Jaguar" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1811,23 +2398,17 @@
 	<spawn centerx="541" centery="291" centerz="7" radius="1">
 		<npc name="Rafinha" x="-1" y="1" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="739" centery="295" centerz="7" radius="1">
-		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="615" centery="294" centerz="7" radius="1">
+		<monster name="Sheep" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="733" centery="296" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
-	<spawn centerx="731" centery="298" centerz="7" radius="1">
-		<monster name="Chicken" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="97" centery="299" centerz="7" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="92" centery="301" centerz="7" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
-	<spawn centerx="733" centery="301" centerz="7" radius="1">
-		<npc name="civilian" x="1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="751" centery="301" centerz="7" radius="1">
 		<monster name="Chicken" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1844,12 +2425,6 @@
 	<spawn centerx="715" centery="304" centerz="7" radius="1">
 		<monster name="Chicken" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="746" centery="305" centerz="7" radius="1">
-		<npc name="civilian" x="1" y="0" z="7" spawntime="60" />
-	</spawn>
-	<spawn centerx="737" centery="308" centerz="7" radius="1">
-		<npc name="civilian" x="0" y="-1" z="7" spawntime="60" direction="1" />
-	</spawn>
 	<spawn centerx="717" centery="309" centerz="7" radius="1">
 		<monster name="Chicken" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -1859,11 +2434,8 @@
 	<spawn centerx="441" centery="312" centerz="7" radius="1">
 		<monster name="Mud Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="739" centery="312" centerz="7" radius="1">
-		<npc name="civilian" x="1" y="0" z="7" spawntime="60" direction="1" />
-	</spawn>
-	<spawn centerx="742" centery="312" centerz="7" radius="1">
-		<npc name="civilian" x="-1" y="0" z="7" spawntime="60" direction="3" />
+	<spawn centerx="740" centery="312" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="446" centery="313" centerz="7" radius="1">
 		<monster name="Mud Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1886,9 +2458,6 @@
 	<spawn centerx="449" centery="317" centerz="7" radius="1">
 		<monster name="Mud Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="748" centery="317" centerz="7" radius="1">
-		<npc name="civilian" x="1" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
 	<spawn centerx="319" centery="318" centerz="7" radius="1">
 		<monster name="Rock-Eating Cockroach" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -1897,9 +2466,6 @@
 	</spawn>
 	<spawn centerx="452" centery="318" centerz="7" radius="1">
 		<monster name="Mud Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
-	<spawn centerx="731" centery="318" centerz="7" radius="1">
-		<npc name="civilian" x="0" y="0" z="7" spawntime="60" direction="3" />
 	</spawn>
 	<spawn centerx="763" centery="318" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1914,15 +2480,7 @@
 		<monster name="Mud Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="520" centery="321" centerz="7" radius="8">
-		<monster name="Swan" x="3" y="-2" z="7" spawntime="60" direction="2" />
-		<monster name="Swan" x="-2" y="-1" z="7" spawntime="60" direction="2" />
-		<monster name="Swan" x="3" y="1" z="7" spawntime="60" direction="2" />
-		<monster name="Swan" x="-5" y="2" z="7" spawntime="60" direction="2" />
-		<monster name="Swan" x="-1" y="2" z="7" spawntime="60" direction="2" />
 		<monster name="Frog" x="0" y="5" z="7" spawntime="60" direction="2" />
-	</spawn>
-	<spawn centerx="744" centery="321" centerz="7" radius="1">
-		<npc name="civilian" x="0" y="1" z="7" spawntime="60" direction="1" />
 	</spawn>
 	<spawn centerx="287" centery="322" centerz="7" radius="1">
 		<monster name="Rock-Eating Cockroach" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1945,23 +2503,20 @@
 	<spawn centerx="124" centery="326" centerz="7" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="705" centery="327" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="752" centery="327" centerz="7" radius="1">
 		<monster name="Chicken" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="97" centery="328" centerz="7" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="744" centery="328" centerz="7" radius="1">
-		<npc name="civilian" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
 	<spawn centerx="539" centery="329" centerz="7" radius="1">
 		<npc name="Eliot" x="0" y="-1" z="7" spawntime="40" />
 	</spawn>
 	<spawn centerx="119" centery="330" centerz="7" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
-	<spawn centerx="743" centery="330" centerz="7" radius="1">
-		<npc name="civilian" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="101" centery="331" centerz="7" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -1975,8 +2530,17 @@
 	<spawn centerx="116" centery="336" centerz="7" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="707" centery="338" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="717" centery="338" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="441" centery="340" centerz="7" radius="1">
 		<npc name="Katata" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="687" centery="340" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="730" centery="340" centerz="7" radius="1">
 		<monster name="Chicken" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2011,9 +2575,7 @@
 	<spawn centerx="438" centery="346" centerz="7" radius="1">
 		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="567" centery="346" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="567" centery="346" centerz="7" radius="1" />
 	<spawn centerx="524" centery="348" centerz="7" radius="1">
 		<npc name="tadeu" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2023,13 +2585,7 @@
 	<spawn centerx="84" centery="350" centerz="7" radius="1">
 		<monster name="Giant Snail" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="446" centery="351" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
 	<spawn centerx="486" centery="352" centerz="7" radius="30">
-		<monster name="Swan" x="-16" y="-24" z="7" spawntime="60" direction="2" />
-		<monster name="Swan" x="-28" y="-19" z="7" spawntime="60" direction="2" />
-		<monster name="Swan" x="-22" y="-19" z="7" spawntime="60" direction="2" />
 		<monster name="Frog" x="-25" y="-16" z="7" spawntime="60" direction="2" />
 		<npc name="Carla" x="19" y="-12" z="7" spawntime="60" direction="2" />
 		<monster name="Chicken" x="27" y="1" z="7" spawntime="60" direction="2" />
@@ -2037,23 +2593,23 @@
 		<monster name="Frog" x="25" y="27" z="7" spawntime="60" direction="2" />
 		<monster name="Frog" x="26" y="27" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="566" centery="354" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="566" centery="354" centerz="7" radius="1" />
+	<spawn centerx="727" centery="354" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="535" centery="356" centerz="7" radius="1">
 		<npc name="Hugo" x="1" y="0" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="445" centery="362" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="445" centery="362" centerz="7" radius="1" />
 	<spawn centerx="586" centery="363" centerz="7" radius="1">
 		<monster name="Frog" x="0" y="-1" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="744" centery="364" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="596" centery="365" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="596" centery="365" centerz="7" radius="1" />
+	<spawn centerx="713" centery="368" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="738" centery="368" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2064,9 +2620,7 @@
 	<spawn centerx="556" centery="369" centerz="7" radius="1">
 		<npc name="Maria" x="1" y="-1" z="7" spawntime="40" direction="1" />
 	</spawn>
-	<spawn centerx="434" centery="371" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="434" centery="371" centerz="7" radius="1" />
 	<spawn centerx="594" centery="371" centerz="7" radius="1">
 		<monster name="Sheep" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2077,14 +2631,15 @@
 	<spawn centerx="594" centery="373" centerz="7" radius="1">
 		<monster name="Sheep" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="602" centery="374" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="602" centery="374" centerz="7" radius="1" />
 	<spawn centerx="728" centery="374" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="623" centery="375" centerz="7" radius="1">
 		<monster name="Ba Sing Se Lion" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="825" centery="380" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="444" centery="381" centerz="7" radius="1">
 		<monster name="Earth Ladybug" x="-1" y="-1" z="7" spawntime="60" direction="2" />
@@ -2102,8 +2657,14 @@
 	<spawn centerx="514" centery="384" centerz="7" radius="1">
 		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="815" centery="384" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="429" centery="385" centerz="7" radius="1">
 		<monster name="Earth Ladybug" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="794" centery="385" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="502" centery="386" centerz="7" radius="1">
 		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2129,13 +2690,14 @@
 	<spawn centerx="801" centery="388" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="835" centery="388" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="440" centery="389" centerz="7" radius="1">
 		<monster name="Earth Ladybug" x="0" y="0" z="7" spawntime="60" direction="2" />
 		<monster name="Earth Ladybug" x="-1" y="1" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="450" centery="389" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="450" centery="389" centerz="7" radius="1" />
 	<spawn centerx="806" centery="389" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2157,12 +2719,11 @@
 	<spawn centerx="827" centery="392" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="448" centery="393" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="848" centery="392" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="453" centery="393" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="448" centery="393" centerz="7" radius="1" />
+	<spawn centerx="453" centery="393" centerz="7" radius="1" />
 	<spawn centerx="540" centery="393" centerz="7" radius="1">
 		<npc name="Senhor dos repolhos" x="1" y="1" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2178,9 +2739,10 @@
 	<spawn centerx="505" centery="394" centerz="7" radius="1">
 		<monster name="Chicken" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="595" centery="394" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="554" centery="394" centerz="7" radius="1">
+		<monster name="Sheep" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="595" centery="394" centerz="7" radius="1" />
 	<spawn centerx="796" centery="394" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2199,9 +2761,7 @@
 	<spawn centerx="434" centery="396" centerz="7" radius="1">
 		<monster name="Earth Ladybug" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="456" centery="396" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="456" centery="396" centerz="7" radius="1" />
 	<spawn centerx="504" centery="396" centerz="7" radius="1">
 		<monster name="Chicken" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2243,6 +2803,9 @@
 	<spawn centerx="545" centery="401" centerz="7" radius="1">
 		<monster name="Wild Wolf" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="770" centery="401" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="790" centery="401" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2266,6 +2829,9 @@
 	<spawn centerx="805" centery="404" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="842" centery="404" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="486" centery="405" centerz="7" radius="2">
 		<npc name="Alcion" x="1" y="-1" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2277,6 +2843,9 @@
 	</spawn>
 	<spawn centerx="609" centery="406" centerz="7" radius="1">
 		<monster name="Ba Sing Se Lion" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="802" centery="407" centerz="7" radius="1">
+		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="829" centery="408" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2309,9 +2878,7 @@
 	<spawn centerx="497" centery="415" centerz="7" radius="1">
 		<monster name="Stone Tarantula" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="613" centery="415" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="613" centery="415" centerz="7" radius="1" />
 	<spawn centerx="519" centery="416" centerz="7" radius="1">
 		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2324,9 +2891,7 @@
 	<spawn centerx="585" centery="417" centerz="7" radius="1">
 		<monster name="Stone-Spitting Spider" x="1" y="1" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="557" centery="418" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="557" centery="418" centerz="7" radius="1" />
 	<spawn centerx="605" centery="418" centerz="7" radius="1">
 		<monster name="Stone-Spitting Spider" x="-1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2341,6 +2906,9 @@
 	</spawn>
 	<spawn centerx="582" centery="420" centerz="7" radius="1">
 		<monster name="Stone-Spitting Spider" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="782" centery="420" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="792" centery="420" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2384,15 +2952,11 @@
 	<spawn centerx="558" centery="429" centerz="7" radius="1">
 		<monster name="Cemetery Worm" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="588" centery="429" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="588" centery="429" centerz="7" radius="1" />
 	<spawn centerx="575" centery="430" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="511" centery="431" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="511" centery="431" centerz="7" radius="1" />
 	<spawn centerx="412" centery="432" centerz="7" radius="1">
 		<monster name="Earth Ladybug" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2426,9 +2990,7 @@
 	<spawn centerx="413" centery="435" centerz="7" radius="1">
 		<monster name="Earth Ladybug" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="424" centery="435" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="424" centery="435" centerz="7" radius="1" />
 	<spawn centerx="605" centery="435" centerz="7" radius="1">
 		<monster name="Earth Woodpecker" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2444,8 +3006,9 @@
 	<spawn centerx="521" centery="436" centerz="7" radius="1">
 		<monster name="Gleaming Beetle" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="573" centery="436" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="573" centery="436" centerz="7" radius="1" />
+	<spawn centerx="810" centery="436" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="819" centery="436" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2467,6 +3030,9 @@
 	</spawn>
 	<spawn centerx="826" centery="439" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="913" centery="439" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="411" centery="440" centerz="7" radius="1">
 		<monster name="Earth Ladybug" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2508,6 +3074,9 @@
 		<monster name="Earth Woodpecker" x="1" y="-2" z="7" spawntime="60" direction="2" />
 		<npc name="John" x="0" y="1" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="675" centery="449" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="652" centery="450" centerz="7" radius="1">
 		<monster name="Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2520,9 +3089,7 @@
 	<spawn centerx="799" centery="451" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="441" centery="452" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="441" centery="452" centerz="7" radius="1" />
 	<spawn centerx="604" centery="453" centerz="7" radius="1">
 		<monster name="Earth Woodpecker" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2537,6 +3104,9 @@
 	</spawn>
 	<spawn centerx="555" centery="456" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="953" centery="456" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="430" centery="457" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2555,15 +3125,14 @@
 		<npc name="banker" x="-2" y="0" z="7" spawntime="40" />
 		<npc name="Benjamin" x="3" y="0" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="556" centery="459" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="556" centery="459" centerz="7" radius="1" />
+	<spawn centerx="644" centery="459" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="482" centery="460" centerz="7" radius="1">
 		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="494" centery="460" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="494" centery="460" centerz="7" radius="1" />
 	<spawn centerx="801" centery="460" centerz="7" radius="1">
 		<monster name="Warm Cape Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2585,9 +3154,7 @@
 	<spawn centerx="205" centery="463" centerz="7" radius="2">
 		<npc name="astor" x="1" y="0" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="409" centery="464" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="409" centery="464" centerz="7" radius="1" />
 	<spawn centerx="509" centery="464" centerz="7" radius="1">
 		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2600,14 +3167,15 @@
 	<spawn centerx="436" centery="466" centerz="7" radius="1">
 		<monster name="Mud Man" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="454" centery="466" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="454" centery="466" centerz="7" radius="1" />
 	<spawn centerx="448" centery="467" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="582" centery="467" centerz="7" radius="1">
 		<monster name="Earth Woodpecker" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="924" centery="467" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="418" centery="468" centerz="7" radius="1">
 		<monster name="Mud Man" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2645,9 +3213,7 @@
 	<spawn centerx="267" centery="473" centerz="7" radius="2">
 		<npc name="Maria" x="-1" y="-1" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="495" centery="473" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="495" centery="473" centerz="7" radius="1" />
 	<spawn centerx="595" centery="474" centerz="7" radius="1">
 		<monster name="Earth Woodpecker" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2660,9 +3226,7 @@
 	<spawn centerx="255" centery="477" centerz="7" radius="1">
 		<npc name="dink" x="0" y="0" z="7" spawntime="40" />
 	</spawn>
-	<spawn centerx="484" centery="477" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="484" centery="477" centerz="7" radius="1" />
 	<spawn centerx="564" centery="477" centerz="7" radius="1">
 		<monster name="Gleaming Beetle" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2675,11 +3239,12 @@
 	<spawn centerx="615" centery="478" centerz="7" radius="1">
 		<monster name="Earth Woodpecker" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="461" centery="479" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="461" centery="479" centerz="7" radius="1" />
 	<spawn centerx="596" centery="479" centerz="7" radius="1">
 		<monster name="Earth Woodpecker" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="640" centery="480" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="409" centery="481" centerz="7" radius="1">
 		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2708,9 +3273,7 @@
 	<spawn centerx="477" centery="484" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="406" centery="485" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="406" centery="485" centerz="7" radius="1" />
 	<spawn centerx="634" centery="485" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2725,6 +3288,9 @@
 	</spawn>
 	<spawn centerx="461" centery="486" centerz="7" radius="1">
 		<monster name="Mud Man" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="679" centery="487" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="436" centery="488" centerz="7" radius="1">
 		<monster name="Mud Man" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2741,9 +3307,10 @@
 	<spawn centerx="599" centery="490" centerz="7" radius="1">
 		<monster name="Earth Woodpecker" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="411" centery="491" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="660" centery="490" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="411" centery="491" centerz="7" radius="1" />
 	<spawn centerx="626" centery="491" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2771,9 +3338,7 @@
 	<spawn centerx="445" centery="494" centerz="7" radius="1">
 		<monster name="Mud Man" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="405" centery="495" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="405" centery="495" centerz="7" radius="1" />
 	<spawn centerx="462" centery="495" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 		<monster name="Vulture Bee" x="1" y="0" z="7" spawntime="60" direction="2" />
@@ -2824,15 +3389,16 @@
 	<spawn centerx="591" centery="505" centerz="7" radius="1">
 		<monster name="Chicken" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="427" centery="506" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="427" centery="506" centerz="7" radius="1" />
 	<spawn centerx="457" centery="506" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="479" centery="506" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="-1" z="7" spawntime="60" direction="2" />
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="749" centery="506" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="415" centery="507" centerz="7" radius="1">
 		<monster name="Mud Man" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2865,16 +3431,20 @@
 	<spawn centerx="619" centery="508" centerz="7" radius="1">
 		<monster name="Chicken" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="698" centery="509" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="414" centery="510" centerz="7" radius="1">
 		<monster name="Mud Man" x="1" y="-1" z="7" spawntime="60" direction="2" />
 		<monster name="Mud Man" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="702" centery="510" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="677" centery="511" centerz="7" radius="1">
 		<monster name="Giant Cricket" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
-	<spawn centerx="420" centery="512" centerz="7" radius="1">
-		<monster name="Swan" x="0" y="0" z="7" spawntime="60" direction="2" />
-	</spawn>
+	<spawn centerx="420" centery="512" centerz="7" radius="1" />
 	<spawn centerx="499" centery="512" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2899,6 +3469,12 @@
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 		<monster name="Vulture Bee" x="1" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="624" centery="516" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="646" centery="516" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="425" centery="518" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2907,6 +3483,12 @@
 	</spawn>
 	<spawn centerx="641" centery="519" centerz="7" radius="1">
 		<monster name="Chicken" x="-1" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="690" centery="519" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="735" centery="519" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="454" centery="520" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -2941,6 +3523,9 @@
 	<spawn centerx="515" centery="525" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="703" centery="525" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="530" centery="526" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -2955,6 +3540,12 @@
 	</spawn>
 	<spawn centerx="495" centery="530" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="754" centery="532" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="783" centery="532" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="539" centery="533" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -3031,6 +3622,9 @@
 	<spawn centerx="449" centery="545" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="703" centery="545" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="437" centery="546" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
@@ -3076,6 +3670,9 @@
 	</spawn>
 	<spawn centerx="528" centery="550" centerz="7" radius="1">
 		<monster name="Vulture Bee" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="638" centery="550" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="1455" centery="550" centerz="7" radius="1">
 		<npc name="hilde" x="0" y="0" z="7" spawntime="40" />
@@ -3127,6 +3724,9 @@
 	</spawn>
 	<spawn centerx="481" centery="558" centerz="7" radius="1">
 		<monster name="Crab" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="683" centery="559" centerz="7" radius="1">
+		<monster name="Rabbit" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="1130" centery="559" centerz="7" radius="1">
 		<npc name="toph beifong" x="0" y="0" z="7" spawntime="40" />
@@ -3190,6 +3790,86 @@
 	</spawn>
 	<spawn centerx="1110" centery="576" centerz="7" radius="1">
 		<npc name="sigrid" x="0" y="0" z="7" spawntime="40" />
+	</spawn>
+	<spawn centerx="585" centery="578" centerz="7" radius="1">
+		<monster name="Frog" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="261" centery="590" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="269" centery="591" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="262" centery="592" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="271" centery="592" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="253" centery="597" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="249" centery="598" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="268" centery="600" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="240" centery="601" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="252" centery="601" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="-1" z="7" spawntime="60" direction="2" />
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="265" centery="601" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="243" centery="603" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="289" centery="605" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="287" centery="607" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="273" centery="611" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+		<monster name="Trenix" x="1" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="296" centery="613" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="304" centery="614" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="296" centery="617" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="280" centery="620" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="287" centery="620" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="283" centery="622" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="306" centery="623" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="308" centery="623" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="288" centery="629" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="285" centery="631" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="289" centery="631" centerz="7" radius="1">
+		<monster name="Trenix" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="1224" centery="673" centerz="7" radius="1">
 		<npc name="Appa" x="0" y="0" z="7" spawntime="40" />
@@ -5677,6 +6357,10 @@
 	<spawn centerx="512" centery="565" centerz="8" radius="1">
 		<monster name="Hermit Crab" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="552" centery="565" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="1" y="1" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="588" centery="565" centerz="8" radius="1">
 		<monster name="Traitor" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
@@ -5695,6 +6379,10 @@
 	</spawn>
 	<spawn centerx="696" centery="566" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="562" centery="567" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="-1" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="634" centery="567" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -5716,6 +6404,9 @@
 	<spawn centerx="646" centery="572" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="547" centery="573" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="643" centery="573" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
@@ -5723,12 +6414,23 @@
 		<monster name="Sea Iguana" x="0" y="-1" z="8" spawntime="60" direction="2" />
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="565" centery="574" centerz="8" radius="1">
+		<monster name="Hopper" x="1" y="-1" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="667" centery="574" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 		<monster name="Sea Iguana" x="0" y="1" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="697" centery="574" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="548" centery="575" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="579" centery="575" centerz="8" radius="1">
+		<monster name="Hopper" x="-1" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="699" centery="575" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -5742,6 +6444,10 @@
 	<spawn centerx="713" centery="576" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 		<monster name="Sea Iguana" x="1" y="1" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="536" centery="578" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="-1" y="1" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="704" centery="578" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -5760,8 +6466,34 @@
 	<spawn centerx="644" centery="581" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="525" centery="584" centerz="8" radius="1">
+		<monster name="Hopper" x="1" y="-1" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="565" centery="584" centerz="8" radius="1">
+		<monster name="Hopper" x="1" y="-1" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="514" centery="585" centerz="8" radius="1">
+		<monster name="Hopper" x="-1" y="-1" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="575" centery="585" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="641" centery="585" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="538" centery="586" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="1" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="550" centery="586" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="1" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="573" centery="586" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="689" centery="586" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -5781,8 +6513,22 @@
 	<spawn centerx="668" centery="588" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="256" centery="589" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="527" centery="590" centerz="8" radius="1">
+		<monster name="Hopper" x="-1" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="543" centery="591" centerz="8" radius="1">
+		<monster name="Hopper" x="1" y="-1" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="629" centery="591" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="251" centery="592" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="632" centery="592" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -5790,22 +6536,60 @@
 	<spawn centerx="692" centery="592" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="249" centery="593" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="515" centery="594" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="1" y="1" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="657" centery="594" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="1" y="-1" z="8" spawntime="60" direction="2" />
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="220" centery="595" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="231" centery="595" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="549" centery="595" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="550" centery="597" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="670" centery="597" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="217" centery="598" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="649" centery="598" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 		<monster name="Sea Iguana" x="0" y="1" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="237" centery="599" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="527" centery="599" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="633" centery="599" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="260" centery="601" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="526" centery="601" centerz="8" radius="1">
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="630" centery="601" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="543" centery="602" centerz="8" radius="1">
+		<monster name="Hopper" x="-1" y="-1" z="8" spawntime="60" direction="2" />
+		<monster name="Hopper" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="669" centery="602" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -5815,6 +6599,15 @@
 	</spawn>
 	<spawn centerx="683" centery="603" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="218" centery="604" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="245" centery="604" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="257" centery="604" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="687" centery="604" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -5831,12 +6624,18 @@
 	<spawn centerx="664" centery="608" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="221" centery="609" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="634" centery="610" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="680" centery="610" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
 		<monster name="Sea Iguana" x="-1" y="1" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="260" centery="611" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="636" centery="611" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -5849,6 +6648,9 @@
 	</spawn>
 	<spawn centerx="641" centery="613" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="219" centery="615" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="674" centery="617" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -5873,6 +6675,36 @@
 	</spawn>
 	<spawn centerx="669" centery="620" centerz="8" radius="1">
 		<monster name="Sea Iguana" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="229" centery="621" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="264" centery="621" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="221" centery="623" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="260" centery="623" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="220" centery="626" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="228" centery="631" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="242" centery="634" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="257" centery="634" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="231" centery="636" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="262" centery="640" centerz="8" radius="1">
+		<monster name="Trenix" x="0" y="0" z="8" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="766" centery="744" centerz="8" radius="1">
 		<monster name="Desert Crocodile" x="0" y="0" z="8" spawntime="60" direction="2" />
@@ -7224,11 +8056,27 @@
 	<spawn centerx="583" centery="578" centerz="9" radius="1">
 		<monster name="Traitor" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="549" centery="581" centerz="9" radius="1">
+		<monster name="Hopper" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="587" centery="581" centerz="9" radius="1">
 		<monster name="Traitor" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
+	<spawn centerx="547" centery="582" centerz="9" radius="1">
+		<monster name="Hopper" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="552" centery="583" centerz="9" radius="1">
+		<monster name="Hopper" x="0" y="0" z="9" spawntime="60" direction="2" />
+		<monster name="Hopper" x="-1" y="1" z="9" spawntime="60" direction="2" />
+	</spawn>
 	<spawn centerx="589" centery="583" centerz="9" radius="1">
 		<monster name="Traitor" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="557" centery="584" centerz="9" radius="1">
+		<monster name="Hopper" x="0" y="0" z="9" spawntime="60" direction="2" />
+	</spawn>
+	<spawn centerx="550" centery="585" centerz="9" radius="1">
+		<monster name="Hopper" x="0" y="0" z="9" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="671" centery="592" centerz="9" radius="1">
 		<monster name="Sea Iguana" x="-1" y="0" z="9" spawntime="60" direction="2" />

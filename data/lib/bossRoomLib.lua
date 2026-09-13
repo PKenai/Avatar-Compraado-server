@@ -4,7 +4,7 @@ ROOM_CENTER    = ROOM_CENTER    or {x = 149, y = 1946, z = 7}
 ROOM_RANGEX    = ROOM_RANGEX    or 30
 ROOM_RANGEY    = ROOM_RANGEY    or 23
 
-TENTACLE_NAME     = TENTACLE_NAME     or "Tentaculos do pantano"
+TENTACLE_NAME     = TENTACLE_NAME     or "Swamp Tentacles"
 TENTACLE_MIN_DIST = TENTACLE_MIN_DIST or 3
 
 LEVER_ON  = LEVER_ON  or 1946
@@ -42,7 +42,7 @@ bossRoomState = bossRoomState or {
     active = false,
     bosses = {
         head = {
-            name = "Cabeca do Homem do pantano",
+            name = "Swamp Man Head",
             pos = {x = 145, y = 1939, z = 7},
             cid = nil,
             isDead = false,
@@ -50,7 +50,7 @@ bossRoomState = bossRoomState or {
             label = "A cabeça",
         },
         leftArm = {
-            name = "Braco do Homem do pantano",
+            name = "Swamp Man Arm",
             pos = {x = 143, y = 1941, z = 7},
             cid = nil,
             isDead = false,
@@ -58,7 +58,7 @@ bossRoomState = bossRoomState or {
             label = "O braço esquerdo",
         },
         rightArm = {
-            name = "Braco do Homem do pantano",
+            name = "Swamp Man Arm",
             pos = {x = 148, y = 1941, z = 7},
             cid = nil,
             isDead = false,
@@ -113,23 +113,38 @@ function bossRoomRemoveAllMonsters()
     end
 end
 
-function bossRoomStopTimers()
+--[[
+  NUNCA chamar stopEvent() no evento que esta' rodando agora.
+
+  No C++ o LuaInterface::executeTimer guarda o iterador do evento, chama o
+  callback e SO' DEPOIS le' esse iterador pra liberar as referencias
+  (luascript.cpp, no fim de executeTimer). O stopEvent() apaga a entrada do
+  m_timerEvents (luaStopEvent -> erase), entao parar a si mesmo deixa o iterador
+  apontando pra um no' ja' liberado: a leitura seguinte estoura um access
+  violation e o server cai na hora (sem mensagem nenhuma no console).
+
+  Por isso quem roda como timer zera o proprio *TimerId na PRIMEIRA linha do
+  callback (ele nao esta' mais "pendente" - esta' executando). Assim este
+  bossRoomStopTimers nao acha mais o id e nao chama stopEvent nele.
+  runningEventId (opcional) e' o cinto de seguranca pra quem preferir passar.
+]]
+function bossRoomStopTimers(runningEventId)
     bossRoomState.active = false
-    if bossRoomState.healTimerId then
+    if bossRoomState.healTimerId and bossRoomState.healTimerId ~= runningEventId then
         stopEvent(bossRoomState.healTimerId)
         bossRoomState.healTimerId = nil
     end
-    if bossRoomState.tentacleTimerId then
+    if bossRoomState.tentacleTimerId and bossRoomState.tentacleTimerId ~= runningEventId then
         stopEvent(bossRoomState.tentacleTimerId)
         bossRoomState.tentacleTimerId = nil
     end
-    if bossRoomState.exitTimerId then
+    if bossRoomState.exitTimerId and bossRoomState.exitTimerId ~= runningEventId then
         stopEvent(bossRoomState.exitTimerId)
         bossRoomState.exitTimerId = nil
     end
 
     for key, boss in pairs(bossRoomState.bosses) do
-        if boss.respawnTimer then
+        if boss.respawnTimer and boss.respawnTimer ~= runningEventId then
             stopEvent(boss.respawnTimer)
             boss.respawnTimer = nil
         end
@@ -138,8 +153,9 @@ function bossRoomStopTimers()
     end
 end
 
-function bossRoomResetAll()
-    bossRoomStopTimers()
+-- runningEventId = o id do timer que esta' chamando isso (se for um timer)
+function bossRoomResetAll(runningEventId)
+    bossRoomStopTimers(runningEventId)
     bossRoomRemoveAllMonsters()
     bossRoomRemoveChest()
 end

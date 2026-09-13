@@ -20,6 +20,7 @@
 	<attacks>
 		<attack name="melee" interval="2000" skill="65" attack="65"/>
 		<attack name="poison" interval="2000" chance="20" range="7" min="-60" max="-120"/>
+		<attack name="Mud Swarm" interval="3000" chance="20" range="6" min="-40" max="-80"/>
 	</attacks>
 	<defenses armor="0" defense="0"/>
 	<loot>

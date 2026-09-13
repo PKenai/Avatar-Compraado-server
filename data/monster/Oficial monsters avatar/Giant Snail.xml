@@ -20,6 +20,7 @@
 	<attacks>
 		<attack name="melee" interval="2000" skill="50" attack="40"/>
 		<attack name="poison" interval="2000" chance="30" range="3" min="-10" max="-20"/>
+		<attack name="Slime Trail" interval="3000" chance="20" range="4" min="-8" max="-16"/>
 	</attacks>
 	<defenses armor="15" defense="15"/>
 	<loot>

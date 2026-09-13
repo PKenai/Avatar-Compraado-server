@@ -2,7 +2,7 @@
 <spells>
 
 
-    <instant name="Fire Whip" words="fire whip" lvl="1" mana="2" direction="1" aggressive="1" exhaustion="800" event="script" value="fire/whip.lua">
+    <instant name="Fire Wave" words="fire wave" lvl="1" mana="2" direction="1" aggressive="1" exhaustion="800" event="script" value="fire/wave.lua">
 		<vocation id="1"/>
 	</instant>
 	
@@ -16,10 +16,6 @@
 	
 	<instant name="Fire Kick" words="fire Kick" lvl="8" mana="8" aggressive="1" needtarget="1" exhaustion="800" needlearn="0" event="script" value="fire/kick.lua">
 		<vocation id="1"/>
-	</instant>
-	
-	<instant name="Fire Wave" words="fire wave" lvl="8" mana="8" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="fire/wave.lua">
-		<vocation id="6"/>
 	</instant>
 	
 	<instant name="Fire Skyfall" words="fire skyfall" lvl="12" mana="12" aggressive="1" selftarget="1" exhaustion="800" needlearn="0" event="script" value="fire/skyfall.lua">
@@ -42,11 +38,11 @@
 		<vocation id="1"/>
 	</instant>
 
-	<instant name="Fire Res" words="fire res" lvl="30" mana="30" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="fire/res.lua">
+	<instant name="Fire Cinder" words="fire cinder" lvl="30" mana="30" aggressive="1" needtarget="1" exhaustion="800" range="5" needlearn="0" event="script" value="fire/res.lua">
 		<vocation id="1"/>
 	</instant>
 
-	<instant name="Fire Star" words="fire star" lvl="36" mana="35" aggressive="1" exhaustion="800" needlearn="0" event="script" value="fire/star.lua">
+	<instant name="Fire Star" words="fire star" lvl="36" mana="35" aggressive="1" needtarget="1" range="6" exhaustion="800" needlearn="0" event="script" value="fire/star.lua">
 		<vocation id="1"/>
 	</instant>
 
@@ -94,7 +90,7 @@
 		<vocation id="1"/>
 	</instant>
 
-	<instant name="Fire Voltage" words="fire voltage" lvl="130" mana="95" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="fire/voltage.lua">
+	<instant name="Fire Voltage" words="fire voltage" lvl="130" mana="95" aggressive="1" selftarget="1" exhaustion="800" needlearn="0" event="script" value="fire/voltage.lua">
 		<vocation id="1"/>
 	</instant>
 
@@ -447,6 +443,7 @@
 	<instant name="Inferno_monsters" words="Inferno_monsters" event="script" value="monster/inferno.lua">
 		<vocation id="6"/>
 	</instant>
+
 	<instant name="Water IceBeam Man" words="water iceBeam Man" lvl="30" mana="10" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="water/iceBeam man.lua">
 		<vocation id="6"/>
 	</instant>
@@ -457,6 +454,139 @@
 		<vocation id="6"/>
 	</instant>
 	<instant name="checkSand" words="checkSand" event="script" value="monster/checkSand.lua">
+		<vocation id="6"/>
+	</instant>
+
+	<!-- ============================================================
+	     Spells proprias dos monstros (motor: monster/monsterSpell.lua)
+	     Geradas por tools/gen_monster_spells.py
+	     O dano de cada uma vem do <attack min max> no XML do monstro.
+	     enabled="0" = nenhum player casta por palavras, so' o monstro.
+	     ============================================================ -->
+	<instant name="Little Fury" words="monster little fury" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Carapace Scuttle" words="monster carapace scuttle" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Beetle Tremor" words="monster beetle tremor" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Grave Burrow" words="monster grave burrow" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Slime Trail" words="monster slime trail" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Ladybug Quake" words="monster ladybug quake" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Scalding Tide" words="monster scalding tide" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Stone Peck" words="monster stone peck" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Bear Maul" words="monster bear maul" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="River Crush" words="monster river crush" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Mud Swarm" words="monster mud swarm" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Mud Grasp" words="monster mud grasp" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Venom Web" words="monster venom web" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Chirp Screech" words="monster chirp screech" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Gleam Flash" words="monster gleam flash" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Steel Coil" words="monster steel coil" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Stone Spit" words="monster stone spit" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Tusk Stampede" words="monster tusk stampede" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Mordecai's Landslide" words="monster mordecai s landslide" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Carrion Sting" words="monster carrion sting" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Shell Smash" words="monster shell smash" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Jaguar Maul" words="monster jaguar maul" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Tidal Snap" words="monster tidal snap" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Tentacle Drag" words="monster tentacle drag" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Ba Sing Se Roar" words="monster ba sing se roar" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Backstab Dust" words="monster backstab dust" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Rock Crunch" words="monster rock crunch" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Sandwater Ambush" words="monster sandwater ambush" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Whispered Madness" words="monster whispered madness" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Guardian's Tremor" words="monster guardian s tremor" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Sacred Sandstorm" words="monster sacred sandstorm" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Swamp Slam" words="monster swamp slam" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Forbidden Chapter" words="monster forbidden chapter" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Swamp Miasma" words="monster swamp miasma" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Swamp Devour" words="monster swamp devour" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Blue Hydra Storm" words="monster blue hydra storm" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Green Hydra Spores" words="monster green hydra spores" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Hopper Cyclone" words="monster hopper cyclone" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Panther Pounce" words="monster panther pounce" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Mountain Slam" words="monster mountain slam" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Trenix Inferno" words="monster trenix inferno" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
+		<vocation id="6"/>
+	</instant>
+	<instant name="Charging Horns" words="monster charging horns" aggressive="1" needlearn="1" enabled="0" event="script" value="monster/monsterSpell.lua">
 		<vocation id="6"/>
 	</instant>
 </spells>

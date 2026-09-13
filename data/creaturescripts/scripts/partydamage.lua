@@ -6,6 +6,15 @@ g_partyDamage = g_partyDamage or {}
 
 local OPCODE = 115
 
+-- Chave dos dados: GUID do lider da party, nunca o cid. O cid e' reciclado pelo
+-- servidor, entao um player novo podia herdar o medidor de quem usou aquele cid.
+local function leaderKey(leaderCid)
+    if not leaderCid or not isPlayer(leaderCid) then
+        return nil
+    end
+    return getPlayerGUID(leaderCid)
+end
+
 local function getPartyLeader(cid)
     -- getPlayerParty returns the leader's cid or nil
     return getPlayerParty(cid)
@@ -16,8 +25,8 @@ local function getPartyMembersCids(leaderCid)
     return getPartyMembers(leaderCid)
 end
 
-local function buildDamageString(leaderCid)
-    local data = g_partyDamage[leaderCid]
+local function buildDamageString(key)
+    local data = g_partyDamage[key]
     if not data then return "" end
     local buf = ""
     for name, damage in pairs(data) do
@@ -28,7 +37,10 @@ local function buildDamageString(leaderCid)
 end
 
 local function broadcastPartyDamage(leaderCid)
-    local buf = buildDamageString(leaderCid)
+    local key = leaderKey(leaderCid)
+    if not key then return end
+
+    local buf = buildDamageString(key)
     if buf == "" then return end
     local members = getPartyMembersCids(leaderCid)
     if not members then return end
@@ -41,9 +53,13 @@ local function addDamage(cid, amount)
     if amount <= 0 then return end
     local leaderCid = getPartyLeader(cid)
     if not leaderCid then return end
-    if not g_partyDamage[leaderCid] then g_partyDamage[leaderCid] = {} end
+
+    local key = leaderKey(leaderCid)
+    if not key then return end
+
+    if not g_partyDamage[key] then g_partyDamage[key] = {} end
     local name = getCreatureName(cid)
-    g_partyDamage[leaderCid][name] = (g_partyDamage[leaderCid][name] or 0) + amount
+    g_partyDamage[key][name] = (g_partyDamage[key][name] or 0) + amount
     broadcastPartyDamage(leaderCid)
 end
 
@@ -81,8 +97,11 @@ end
 function partyDamageCleanup(cid)
     local leaderCid = getPartyLeader(cid)
     -- Only the leader owns the data; a regular member logging out must not wipe the party's meter
-    if leaderCid == cid and g_partyDamage[leaderCid] then
-        g_partyDamage[leaderCid] = nil
+    if leaderCid == cid then
+        local key = leaderKey(cid)
+        if key then
+            g_partyDamage[key] = nil
+        end
     end
 end
 
@@ -91,7 +110,10 @@ function partyDamageOnOpcode(cid, buffer)
     if buffer == "reset" then
         local leaderCid = getPartyLeader(cid)
         if leaderCid then
-            g_partyDamage[leaderCid] = {}
+            local key = leaderKey(leaderCid)
+            if key then
+                g_partyDamage[key] = {}
+            end
             local members = getPartyMembersCids(leaderCid)
             if members then
                 for _, member in ipairs(members) do
@@ -104,11 +126,12 @@ function partyDamageOnOpcode(cid, buffer)
 
     -- "request" -> send current data to this player
     local leaderCid = getPartyLeader(cid)
-    if not leaderCid then
+    local key = leaderCid and leaderKey(leaderCid)
+    if not key then
         doSendPlayerExtendedOpcode(cid, OPCODE, "reset")
         return true
     end
-    local buf = buildDamageString(leaderCid)
+    local buf = buildDamageString(key)
     if buf == "" then buf = "reset" end
     doSendPlayerExtendedOpcode(cid, OPCODE, buf)
     return true

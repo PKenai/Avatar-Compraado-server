@@ -88,7 +88,7 @@ void Scheduler::schedulerThread()
 
 uint32_t Scheduler::addEvent(SchedulerTask* task)
 {
-	bool signal = false;
+	bool signal = false, enqueued = false;
 	m_eventLock.lock();
 	if(Scheduler::m_threadState == Scheduler::STATE_RUNNING)
 	{
@@ -107,6 +107,7 @@ uint32_t Scheduler::addEvent(SchedulerTask* task)
 		m_eventIds.insert(task->getEventId());
 		// add the event to the queue
 		m_eventList.push(task);
+		enqueued = true;
 
 		// if the list was empty or this event is the top in the list
 		// we have to signal it
@@ -120,6 +121,16 @@ uint32_t Scheduler::addEvent(SchedulerTask* task)
 	m_eventLock.unlock();
 	if(signal)
 		m_eventSignal.notify_one();
+
+	if(!enqueued)
+	{
+		// O scheduler esta' parando/concluido: o evento nao entrou na fila e
+		// nunca seria executado. Antes ele ficava largado (vazamento de uma
+		// SchedulerTask por chamada); agora e' liberado e devolvemos id 0,
+		// que o stopEvent() ja' ignora.
+		delete task;
+		return 0;
+	}
 
 	return task->getEventId();
 }

@@ -6,6 +6,9 @@ MyLocal.fireId = 13025
 MyLocal.totalTime = cf.segundos
 MyLocal.players = {}
 
+-- Avatar: a magia inteira solta UM unico efeito, este (visual novo).
+local SUFFOCATION_EFFECT = 392
+
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 
@@ -38,10 +41,9 @@ end
 
 local function sendDistanceEffect(cid, finish, target)
     if isCreature(cid) and isCreature(target) and not isInPz(cid) and not isInPz(target) then
-        local playerPos = getCreaturePosition(target)
-        local inPos = {x=playerPos.x+math.random(-1, 1),y=playerPos.y+math.random(-1, 1),z=playerPos.z}
-        doSendDistanceShoot(playerPos, inPos, 41)
-		local mypos = getCreaturePosition(cid)
+        -- Avatar: o visual antigo (distance shoot 41 a cada tick + 211 no final)
+        -- saiu; agora so' existe o efeito 392 mandado uma vez, no cast.
+        local mypos = getCreaturePosition(cid)
 		doSlow(cid, target, 10, 750)
 		doCombat(cid, combat, numberToVariant(target))
         
@@ -58,7 +60,6 @@ local function sendDistanceEffect(cid, finish, target)
 					exhaustion.set(target, "stopDashs", 2) 
 				end 
                 --sendFiresAround(target)
-                doSendMagicEffect(posTarget, 211)
             else
                 doPlayerSendCancelEf(cid, "The target is gone, the fold was failed.")
                 return true
@@ -131,6 +132,12 @@ function onCastSpell(cid, var)
         addEvent(sendStopFloatToTarget, totalDuration + 200, target)
 
         MyLocal.players[cid] = true
+
+        -- Avatar: unico efeito da magia (392), no alvo
+        if isCreature(target) then
+            doSendMagicEffect(getCreaturePosition(target), SUFFOCATION_EFFECT)
+        end
+
         for x = 1, 18 do
             addEvent(sendDistanceEffect, 150*x, cid, x == 18, target)
         end

@@ -4,8 +4,8 @@ local cf = {atk = spellsInfo[spellName].atk}
 local MyLocal = {}
 
 local cf = {
-effect = 132,
-effectExplo = 137,
+effect = 369,
+effectExplo = 369,
 extraDano = 80
 }
 local combatNorth = createCombatObject()

@@ -215,10 +215,16 @@ Raid::Raid(const std::string& _name, uint32_t _interval, uint64_t _margin,
 
 	loaded = false;
 	refCount = eventCount = nextEvent = 0;
+	m_alive = boost::shared_ptr<bool>(new bool(true));
 }
 
 Raid::~Raid()
 {
+	// primeiro invalida o guarda: qualquer tarefa deste raid que ainda esteja
+	// na fila do Dispatcher vai rodar (no maximo) e sair sem tocar em nada
+	if(m_alive)
+		*m_alive = false;
+
 	stopEvents();
 	for(RaidEventVector::iterator it = raidEvents.begin(); it != raidEvents.end(); ++it)
 		delete *it;
@@ -293,9 +299,19 @@ bool Raid::startRaid()
 		return false;
 
 	nextEvent = Scheduler::getInstance().addEvent(createSchedulerTask(
-		raidEvent->getDelay(), boost::bind(&Raid::executeRaidEvent, this, raidEvent)));
+		raidEvent->getDelay(), boost::bind(&Raid::executeRaidEventSafe, this, raidEvent, m_alive)));
 	Raids::getInstance()->setRunning(this);
 	return true;
+}
+
+bool Raid::executeRaidEventSafe(RaidEvent* raidEvent, boost::shared_ptr<bool> alive)
+{
+	// O raid (e o raidEvent) podem ter sido destruidos depois que o Scheduler
+	// entregou esta tarefa ao Dispatcher - nesse caso ela nao pode seguir.
+	if(!alive || !*alive || !raidEvent)
+		return false;
+
+	return executeRaidEvent(raidEvent);
 }
 
 bool Raid::executeRaidEvent(RaidEvent* raidEvent)
@@ -309,7 +325,7 @@ bool Raid::executeRaidEvent(RaidEvent* raidEvent)
 
 	nextEvent = Scheduler::getInstance().addEvent(createSchedulerTask(
 		std::max(RAID_MINTICKS, (int32_t)(newRaidEvent->getDelay() - raidEvent->getDelay())),
-		boost::bind(&Raid::executeRaidEvent, this, newRaidEvent)));
+		boost::bind(&Raid::executeRaidEventSafe, this, newRaidEvent, m_alive)));
 	return true;
 }
 

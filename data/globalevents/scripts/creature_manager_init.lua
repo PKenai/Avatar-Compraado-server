@@ -25,6 +25,5 @@ function onStartup()
     if not hasColumn then
         db.query("ALTER TABLE `player_creature_manager` ADD COLUMN `watered_stage` INT NOT NULL DEFAULT 0")
     end
-    print("[FarmSystem] Tabela player_creature_manager verificada/criada com sucesso.")
     return true
 end

@@ -26,6 +26,7 @@ set "CLASSE="
 set "CLASSE_VAL="
 set "VALOR="
 set "CATEG="
+set "SKIP_CATEG="
 set "DESC="
 set "LINHA="
 echo ==================================================
@@ -96,6 +97,9 @@ if errorlevel 1 (
 )
 set "TIPO_LINE=outfit"
 set "EXTRA_LINE=outfitMale = %OIDM%, outfitFemale = %OIDF%, addons = %ADDONS%"
+rem -- outfit novo NAO pergunta categoria: vai direto pra aba Outfits
+set "CATEG=Outfits"
+set "SKIP_CATEG=1"
 goto comum
 
 :comum
@@ -120,8 +124,17 @@ if errorlevel 1 (
   pause
   goto inicio
 )
+rem -- IMPORTANTE: sem bloco ( ... ) aqui. Dentro de um bloco o cmd expande
+rem    %CATEG% na hora de ler o bloco, entao o "if" abaixo testaria o valor
+rem    antigo e sobrescreveria o que o usuario digitou.
+if defined SKIP_CATEG goto categ_pronta
 set /p "CATEG=> Categoria (se digitar uma nova, ela sera criada): "
 if "%CATEG%"=="" set "CATEG=Geral"
+goto categ_pronta_fim
+:categ_pronta
+echo.
+echo Categoria  : %CATEG%   (automatica - outfit novo entra direto na aba Outfits)
+:categ_pronta_fim
 set /p "DESC=> Descricao (Enter = padrao): "
 if "%DESC%"=="" set "DESC=Oferta da loja: %NOME%"
 

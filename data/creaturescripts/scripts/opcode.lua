@@ -161,6 +161,14 @@ function onExtendedOpcode(cid, opcode, buffer)
 			if type(CookingSystem) == "table" and type(CookingSystem.onOpcode) == "function" then
 				CookingSystem.onOpcode(cid, buffer)
 			end
+		elseif opcode == 100 then
+			-- Smart Ping (client: modules/game_ping) - marcacao de posicao para a party
+			if type(SmartPing) ~= "table" then
+				dofile(getDataDir().."lib/smartPing.lua")
+			end
+			if type(SmartPing) == "table" and type(SmartPing.onOpcode) == "function" then
+				SmartPing.onOpcode(cid, buffer)
+			end
 		elseif opcode == 188 then
 			-- Weapon Proficiency System (Extended Opcode 188)
 			if type(WeaponProficiency) ~= "table" then

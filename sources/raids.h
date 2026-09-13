@@ -27,6 +27,8 @@
 #include "position.h"
 #include "tools.h"
 
+#include <boost/shared_ptr.hpp>
+
 enum RefType_t
 {
 	REF_NONE = 0,
@@ -108,6 +110,12 @@ class Raid
 		bool resetRaid(bool checkExecution);
 
 		bool executeRaidEvent(RaidEvent* raidEvent);
+		// Mesma coisa, mas com um guarda de vida: o Scheduler pode entregar a
+		// tarefa ao Dispatcher e o Raid ser destruido antes dela rodar (reload
+		// de raids / shutdown). O shared_ptr mantem o flag vivo mesmo depois do
+		// Raid, entao a tarefa orfa vira um no-op em vez de escrever memoria
+		// liberada.
+		bool executeRaidEventSafe(RaidEvent* raidEvent, boost::shared_ptr<bool> alive);
 		void stopEvents();
 
 		RaidEvent* getNextRaidEvent();
@@ -123,7 +131,17 @@ class Raid
 		bool hasRef() const {return refCount > 0;}
 
 		void addRef() {++refCount;}
-		void unRef() {--refCount; if(refCount <= 0) resetRaid(true);}
+		void unRef()
+		{
+			// refCount e' unsigned: um unRef sem o addRef par nao pode estourar
+			// para 0xFFFFFFFF, senao o raid fica com hasRef() == true pra sempre
+			// e sai da rotacao ate' reiniciar o servidor.
+			if(refCount == 0)
+				return;
+
+			if(--refCount <= 0)
+				resetRaid(true);
+		}
 
 	private:
 		std::string name;
@@ -135,6 +153,7 @@ class Raid
 		bool loaded;
 		uint32_t refCount, eventCount, nextEvent;
 		RaidEventVector raidEvents;
+		boost::shared_ptr<bool> m_alive;
 };
 
 class RaidEvent

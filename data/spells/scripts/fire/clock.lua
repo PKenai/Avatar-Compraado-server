@@ -7,7 +7,7 @@ MyLocal.players = {}
 
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
-setCombatParam(combat, COMBAT_PARAM_EFFECT, CONST_ME_HITBYFIRE)
+setCombatParam(combat, COMBAT_PARAM_EFFECT, 324)
 
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = ((level+(magLevel/2)*4.3)+math.random(15, 20))*0.8
@@ -130,7 +130,7 @@ local function sendSpell(cid, pos, focus, isEnd, centerPos, xis)
     end
     if getTileInfo(pos).protection then return false end
 	if xis % 3 == 0 then
-		doSendMagicEffect(centerPos, 91)
+		doSendMagicEffect(centerPos, 160)
 	end
     if focus then
         doCombat(cid, combatFocus, {type=2, pos=pos})

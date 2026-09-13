@@ -7,6 +7,10 @@ function onLogout(cid, forceLogout)
 	if type(magicMeterCleanup) == "function" then
 		magicMeterCleanup(cid)
 	end
+	-- Clean up fly/surf per-cid cache
+	if type(flySystemCleanup) == "function" then
+		flySystemCleanup(cid)
+	end
 	if not getTileInfo(getCreaturePosition(cid)).protection and exhaustion.check(cid, "npodedeslogar") and getPlayerGroupId(cid) <= 4 then 
 		doPlayerSendCancel(cid, "You cant logout now.")
 		return false 

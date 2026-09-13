@@ -41,19 +41,19 @@ end
 
 local combat1 = createCombatObject()
 setCombatParam(combat1, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
-setCombatParam(combat1, COMBAT_PARAM_EFFECT, 34)
+setCombatParam(combat1, COMBAT_PARAM_EFFECT, 269)
 
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
-setCombatParam(combat2, COMBAT_PARAM_EFFECT, 34)
+setCombatParam(combat2, COMBAT_PARAM_EFFECT, 269)
 
 local combat3 = createCombatObject()
 setCombatParam(combat3, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
-setCombatParam(combat3, COMBAT_PARAM_EFFECT, 34)
+setCombatParam(combat3, COMBAT_PARAM_EFFECT, 269)
 
 local combat4 = createCombatObject()
 setCombatParam(combat4, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
-setCombatParam(combat4, COMBAT_PARAM_EFFECT, 34)
+setCombatParam(combat4, COMBAT_PARAM_EFFECT, 269)
 
 local combats = {combat1, combat2, combat3, combat4}
 
@@ -67,7 +67,7 @@ function onTargetCreature1(cid, target)
 		end
 	end
 	  doSlow(cid, target, 15, 2000)   
-	doTargetCombatHealth(cid, target, COMBAT_EARTHDAMAGE, -getMin(cid), -getMax(cid), 34)
+	doTargetCombatHealth(cid, target, COMBAT_EARTHDAMAGE, -getMin(cid), -getMax(cid), 269)
 end
 
 setCombatCallback(combat1, CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature1")

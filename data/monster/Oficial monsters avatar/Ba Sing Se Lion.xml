@@ -20,6 +20,7 @@
 	<attacks>
 		<attack name="melee" interval="2000" skill="80" attack="90"/>
 		<attack name="fire" interval="2000" chance="25" range="7" min="-100" max="-200"/>
+		<attack name="Ba Sing Se Roar" interval="4000" chance="20" range="3" min="-60" max="-120"/>
 	</attacks>
 	<defenses armor="0" defense="0"/>
 	<loot>

@@ -94,4 +94,20 @@
   <monster name="Swamp Man Arm" file="Oficial monsters avatar/Swamp Man Arm.xml"/>
   <monster name="Swamp Tentacles" file="Oficial monsters avatar/Swamp Tentacles.xml"/>
 
+  <!-- Hydra Boss Room -->
+  <monster name="Green Hydra Head" file="Oficial monsters avatar/Green Hydra Head.xml"/>
+  <monster name="Blue Hydra Head" file="Oficial monsters avatar/Blue Hydra Head.xml"/>
+
+  <!-- Scarabs -->
+  <monster name="White scarab" file="Oficial monsters avatar/White scarab.xml"/>
+
+  <!-- Coelhos -->
+  <monster name="Hopper" file="Oficial monsters avatar/Hopper.xml"/>
+
+  <!-- Trenix -->
+  <monster name="Trenix" file="Oficial monsters avatar/Trenix.xml"/>
+
+  <!-- Treino / utilitarios -->
+  <monster name="Dummy" file="Oficial monsters avatar/Dummy.xml"/>
+
 </monsters>

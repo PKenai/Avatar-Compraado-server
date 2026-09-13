@@ -24,6 +24,7 @@
 		<attack name="melee" interval="2000" skill="55" attack="45"/>
 		<attack name="physical" interval="2500" chance="25" range="1" min="-40" max="-80"/>
 		<attack name="poison" interval="3000" chance="15" range="4" min="-20" max="-40"/>
+		<attack name="Chirp Screech" interval="3000" chance="20" range="3" min="-30" max="-60"/>
 	</attacks>
 	<defenses armor="15" defense="20"/>
 	<elements>

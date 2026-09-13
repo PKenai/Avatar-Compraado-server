@@ -15,6 +15,9 @@ COMO USAR
      Valor    -> preco em premium_points (pontos da conta)
      Categoria-> se digitar uma categoria nova, ela sera criada na loja
      Descricao-> opcional (Enter usa o padrao)
+
+     OUTFIT: a categoria NAO e' perguntada. Outfit novo entra direto na
+     aba "Outfits" da loja (e' o unico lugar onde outfit aparece).
 4. Remover:
      O BAT lista as ofertas numeradas (1, 2, 3...).
      Digite os numeros das ofertas que quer remover:

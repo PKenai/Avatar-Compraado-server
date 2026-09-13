@@ -41,6 +41,8 @@
 #include "iomap.h"
 #include "iomapserialize.h"
 
+#include "rewardtrees.h"
+
 #include "monsters.h"
 #include "movement.h"
 #include "spells.h"
@@ -927,11 +929,19 @@ bool LuaInterface::closeState()
 
 	m_timerEvents.clear();
 	lua_close(m_luaState);
+	//Avatar: zera o ponteiro. Se algum timer escapar daqui (um evento pendente no
+	//scheduler, um reload no meio do caminho), o executeTimer acha o estado NULL e
+	//sai em vez de usar um lua_State ja' liberado.
+	m_luaState = NULL;
 	return true;
 }
 
 void LuaInterface::executeTimer(uint32_t eventIndex)
 {
+	//Avatar: estado fechado (reload/shutdown) - nao ha' o que executar.
+	if(!m_luaState)
+		return;
+
 	LuaTimerEvents::iterator it = m_timerEvents.find(eventIndex);
 	if(it == m_timerEvents.end())
 		return;
@@ -958,6 +968,16 @@ void LuaInterface::executeTimer(uint32_t eventIndex)
 		std::clog << "[Error - LuaInterface::executeTimer] Call stack overflow." << std::endl;
 
 	//free resources
+	//Avatar: o callback que acabou de rodar PODE ter chamado stopEvent() no
+	//proprio evento (um timer que se desliga sozinho). O luaStopEvent apaga a
+	//entrada do m_timerEvents, entao o 'it' guardado la' em cima pode estar
+	//apontando pra um no' ja' liberado - ler it->second.parameters dali era um
+	//access violation. Reler o mapa resolve: se o evento se apagou, as
+	//referencias ja' foram liberadas pelo stopEvent e nao ha' mais nada a fazer.
+	it = m_timerEvents.find(eventIndex);
+	if(it == m_timerEvents.end())
+		return;
+
 	for(std::list<int32_t>::iterator lt = it->second.parameters.begin(); lt != it->second.parameters.end(); ++lt)
 		luaL_unref(m_luaState, LUA_REGISTRYINDEX, *lt);
 
@@ -2704,6 +2724,9 @@ void LuaInterface::registerFunctions()
 
 	//doCreatureSendProgressbar(cid, duration, ltr)
 	lua_register(m_luaState, "doCreatureSendProgressbar", LuaInterface::luaCreatureSendProgressbar);
+
+	//getRewardTreeCandidates() - arvores de recompensa achadas no mapa
+	lua_register(m_luaState, "getRewardTreeCandidates", LuaInterface::luaGetRewardTreeCandidates);
 }
 
 const luaL_Reg LuaInterface::luaSystemTable[] =
@@ -5449,6 +5472,28 @@ int32_t LuaInterface::luaGetTileItemById(lua_State* L)
 	}
 
 	pushThing(L, item, env->addThing(item));
+	return 1;
+}
+
+int32_t LuaInterface::luaGetRewardTreeCandidates(lua_State* L)
+{
+	//getRewardTreeCandidates() -> {{x = , y = , z = , id = }, ...}
+	std::vector<RewardTreeCandidate>& candidates = rewardTreeCandidates();
+
+	lua_newtable(L);
+	for(size_t i = 0; i < candidates.size(); ++i)
+	{
+		const RewardTreeCandidate& candidate = candidates[i];
+
+		lua_pushnumber(L, (int32_t)(i + 1));
+		lua_newtable(L);
+		setField(L, "x", candidate.x);
+		setField(L, "y", candidate.y);
+		setField(L, "z", candidate.z);
+		setField(L, "id", candidate.id);
+		pushTable(L);
+	}
+
 	return 1;
 }
 

@@ -786,7 +786,7 @@ void Combat::combatTileEffects(const SpectatorVec& list, Creature* caster, Tile*
 
 	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
-		g_game.addMagicEffect(list, tile->getPosition(), params.effects.impact);
+		g_game.addMagicEffect(list, tile->getPosition(), params.effects.impact, false, caster ? caster->getID() : 0);
 }
 
 void Combat::postCombatEffects(Creature* caster, const Position& pos, const CombatParams& params)

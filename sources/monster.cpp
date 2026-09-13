@@ -33,6 +33,13 @@ extern ConfigManager g_config;
 extern Monsters g_monsters;
 extern CreatureEvents* g_creatureEvents;
 
+//Avatar: regeneracao de quem largou o alvo por causa do outfit elementar do
+//player (Player::isUntargetableOutfit). Quem diz de quem e' a vez e o proprio
+//monstro: ele guarda o ID do player que o fez perder o alvo e enche a vida
+//enquanto esse player continuar com o outfit.
+#define UNTARGETABLE_OUTFIT_HEAL_INTERVAL 500 // ms
+#define UNTARGETABLE_OUTFIT_HEAL_PERCENT 0.05 // 5% da vida maxima por intervalo
+
 AutoList<Monster>Monster::autoList;
 #ifdef __ENABLE_SERVER_DIAGNOSTIC__
 uint32_t Monster::monsterCount = 0;
@@ -98,6 +105,8 @@ Monster::Monster(MonsterType* _mType):
 	defenseTicks = 0;
 	yellTicks = 0;
 	extraMeleeAttack = false;
+	untargetableOutfitTargetId = 0;
+	untargetableOutfitHealTicks = 0;
 	m_spiritual = false;
 	m_spiritualName = "";
 
@@ -133,14 +142,8 @@ const std::string& Monster::getName() const
 
 void Monster::setSpiritual(bool v)
 {
-	m_spiritual = v;
-	if(v)
-	{
-		m_spiritualName = "Spiritual " + mType->name;
-		health = (int32_t)(health * 1.5);
-		healthMax = (int32_t)(healthMax * 1.5);
-		baseSpeed = (int32_t)(baseSpeed * 1.5);
-	}
+	// Spiritual monster system disabled temporarily
+	m_spiritual = false;
 }
 
 int32_t Monster::getArmor() const
@@ -362,8 +365,18 @@ bool Monster::isFriend(const Creature* creature)
 
 bool Monster::isOpponent(const Creature* creature)
 {
-	return (isSummon() && master->getPlayer() && creature != master) || ((creature->getPlayer()
-		&& !creature->getPlayer()->hasFlag(PlayerFlag_IgnoredByMonsters)) || creature->getPlayerMaster());
+	//Avatar: bicho de ambiente (hostile=0) nao enxerga ninguem como alvo. Antes
+	//qualquer player entrava no targetList dele - como selectTarget so' chama
+	//setAttackedCreature quando isHostile() || isSummon(), ele nao atacava, mas
+	//ficava andando atras do player. Agora ele so' e' alvo de quem e' hostil.
+	if(isSummon() && master->getPlayer() && creature != master)
+		return true;
+
+	if(!isHostile())
+		return false;
+
+	return (creature->getPlayer() && !creature->getPlayer()->hasFlag(PlayerFlag_IgnoredByMonsters))
+		|| creature->getPlayerMaster();
 }
 
 bool Monster::doTeleportToMaster()
@@ -548,6 +561,12 @@ BlockType_t Monster::blockHit(Creature* attacker, CombatType_t combatType, int32
 
 bool Monster::isTarget(Creature* creature)
 {
+	//Avatar: monsters ignore players wearing an untargetable outfit, so they are never
+	//picked (nor picked again) as a target while the outfit lasts
+	const Player* player = creature->getPlayer();
+	if(player && player->isUntargetableOutfit())
+		return false;
+
 	return (!creature->isRemoved() && creature->isAttackable() && creature->getZone() != ZONE_PROTECTION
 		&& canSeeCreature(creature) && creature->getPosition().z == getPosition().z);
 }
@@ -604,7 +623,16 @@ void Monster::updateIdleStatus()
 			if((!isMasterInRange && !teleportToMaster) || (master->getMonster() && master->getMonster()->getIdleStatus()))
 				idle = true;
 		}
-		else if(targetList.empty())
+		//Avatar: bicho de ambiente (hostile=0) nunca dorme. Como ele tambem nao
+		//entra mais no targetList de ninguem, o teste abaixo o deixaria idle pra
+		//sempre e ele ficaria plantado no lugar; acordado, o getNextStep dele
+		//sorteia passos aleatorios (nao existe followCreature), ou seja, passeia.
+		//Quem tem speed 0 (o Dummy) nao anda mesmo - fica dormindo, senao o
+		//getStepDuration 0 viraria um passo a cada SCHEDULER_MINTICKS.
+		//Avatar: quem esta' regenerando por causa do outfit elementar fica
+		//acordado mesmo sem alvo - bicho idle sai da lista de check do jogo
+		//(removeCreatureCheck) e nunca mais pensaria, ou seja, nunca regeneraria.
+		else if(targetList.empty() && untargetableOutfitTargetId == 0 && (isHostile() || getSpeed() < 1))
 			idle = true;
 	}
 
@@ -627,6 +655,48 @@ void Monster::onEndCondition(ConditionType_t type)
 	updateIdleStatus();
 }
 
+//Avatar: regenera o monstro que largou o alvo por causa do outfit elementar do
+//player. Chamado no comeco do Monster::onThink, ANTES do return de isIdle: ao
+//largar o alvo o monstro fica idle e nao passaria daquele return.
+//Para de regenerar quando o player perde o outfit, morre, desloga ou sai de
+//vista - ou quando o monstro arranjou outro alvo (voltou ao combate).
+void Monster::updateUntargetableOutfitHeal(uint32_t interval)
+{
+	if(untargetableOutfitTargetId == 0)
+	{
+		untargetableOutfitHealTicks = 0;
+		return;
+	}
+
+	Creature* pacified = g_game.getCreatureByID(untargetableOutfitTargetId);
+	const Player* pacifiedPlayer = pacified ? pacified->getPlayer() : NULL;
+
+	if(attackedCreature || isSummon() || !pacifiedPlayer || pacifiedPlayer->isRemoved()
+		|| pacifiedPlayer->getHealth() <= 0 || !pacifiedPlayer->isUntargetableOutfit()
+		|| !canSee(pacifiedPlayer->getPosition()))
+	{
+		untargetableOutfitTargetId = 0;
+		untargetableOutfitHealTicks = 0;
+		return;
+	}
+
+	untargetableOutfitHealTicks += interval;
+	while(untargetableOutfitHealTicks >= UNTARGETABLE_OUTFIT_HEAL_INTERVAL)
+	{
+		untargetableOutfitHealTicks -= UNTARGETABLE_OUTFIT_HEAL_INTERVAL;
+
+		int32_t missing = getMaxHealth() - getHealth();
+		if(missing > 0)
+		{
+			int32_t heal = (int32_t)std::ceil(getMaxHealth() * UNTARGETABLE_OUTFIT_HEAL_PERCENT);
+			if(heal > missing)
+				heal = missing;
+
+			changeHealth(heal);
+		}
+	}
+}
+
 void Monster::onThink(uint32_t interval)
 {
 	Creature::onThink(interval);
@@ -637,9 +707,34 @@ void Monster::onThink(uint32_t interval)
 		return;
 	}
 
+	//Avatar: a regeneracao pos-outfit vem ANTES do return de isIdle de proposito
+	//(quem largou o alvo vira idle na hora seguinte e nao pensaria mais)
+	updateUntargetableOutfitHeal(interval);
+
 	updateIdleStatus();
 	if(isIdle)
 		return;
+
+	//Avatar: if the current target just put on an untargetable outfit, drop him at
+	//once - isTarget() above keeps him from being chosen again. O ID fica guardado
+	//porque o monstro passa a regenerar enquanto o player mantiver o outfit.
+	Creature* outfitTarget = attackedCreature ? attackedCreature : followCreature;
+	if(outfitTarget && outfitTarget != master && outfitTarget != this)
+	{
+		const Player* target = outfitTarget->getPlayer();
+		if(target && target->isUntargetableOutfit())
+		{
+			untargetableOutfitTargetId = target->getID();
+			untargetableOutfitHealTicks = 0;
+
+			if(attackedCreature == outfitTarget)
+				setAttackedCreature(NULL);
+			if(followCreature == outfitTarget)
+				setFollowCreature(NULL);
+
+			attackTicks = 0;
+		}
+	}
 
 	if(teleportToMaster && doTeleportToMaster())
 		teleportToMaster = false;
@@ -1025,6 +1120,10 @@ void Monster::pushCreatures(Tile* tile)
 
 bool Monster::getNextStep(Direction& dir, uint32_t& flags)
 {
+	//Avatar: quem esta' regenerando por causa do outfit elementar NAO fica mais
+	//parado - ele continua andando normalmente (passeio aleatorio, ja que ficou
+	//sem followCreature). A regeneracao e' por tempo, no onThink, entao andar
+	//nao atrapalha nada.
 	if(isIdle || getHealth() <= 0)
 	{
 		//we dont have anyone watching might aswell stop walking
