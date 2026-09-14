@@ -109,6 +109,7 @@ Monster::Monster(MonsterType* _mType):
 	untargetableOutfitHealTicks = 0;
 	m_spiritual = false;
 	m_spiritualName = "";
+	m_pet = false;
 
 	// register creature events
 	for(StringVec::iterator it = mType->scriptList.begin(); it != mType->scriptList.end(); ++it)
@@ -130,6 +131,17 @@ Monster::~Monster()
 	{
 		raid->unRef();
 		raid = NULL;
+	}
+}
+
+void Monster::setPet(bool v)
+{
+	m_pet = v;
+	if(v)
+	{
+		hideName = true;
+		hideHealth = true;
+		setIdle(true);
 	}
 }
 
@@ -561,6 +573,10 @@ BlockType_t Monster::blockHit(Creature* attacker, CombatType_t combatType, int32
 
 bool Monster::isTarget(Creature* creature)
 {
+	//Pet fantasma nunca e alvo de ninguem (nem procura alvo, nem pode ser alvo).
+	if(m_pet || creature->isPet())
+		return false;
+
 	//Avatar: monsters ignore players wearing an untargetable outfit, so they are never
 	//picked (nor picked again) as a target while the outfit lasts
 	const Player* player = creature->getPlayer();
@@ -699,6 +715,13 @@ void Monster::updateUntargetableOutfitHeal(uint32_t interval)
 
 void Monster::onThink(uint32_t interval)
 {
+	//Pet fantasma: nenhuma IA. Quem controla o corpo/posicao e o Player dono.
+	if(m_pet)
+	{
+		Creature::onThink(interval);
+		return;
+	}
+
 	Creature::onThink(interval);
 	if(despawn())
 	{
@@ -1314,7 +1337,11 @@ bool Monster::canWalkTo(Position pos, Direction dir)
 	if(!followCreature && !attackedCreature && (field = tile->getFieldItem()) && !isImmune(field->getCombatType()))
 		return false;
 
-	return !tile->getTopVisibleCreature(this) && tile->__queryAdd(
+	//Pet fantasma e transparente para pathfinding - monstros ignoram ele ao caminhar.
+	Creature* topCreature = tile->getTopVisibleCreature(this);
+	if(topCreature && !canWalkthrough(topCreature))
+		return false;
+	return tile->__queryAdd(
 		0, this, 1, FLAG_PATHFINDING) == RET_NOERROR;
 }
 
@@ -1407,6 +1434,9 @@ bool Monster::inDespawnRange(const Position& pos)
 
 bool Monster::despawn()
 {
+	if(m_pet)
+		return false;
+
 	return inDespawnRange(getPosition());
 }
 
@@ -1520,6 +1550,9 @@ void Monster::dropLoot(Container* corpse)
 
 bool Monster::isAttackable() const
 {
+	if(m_pet)
+		return false;
+
 	std::string value;
 	if(!getStorage("attackable", value))
 		return mType->isAttackable;
@@ -1538,6 +1571,9 @@ bool Monster::isHostile() const
 
 bool Monster::isPushable() const
 {
+	if(m_pet)
+		return false;
+
 	if(baseSpeed < 1)
 		return false;
 
@@ -1583,6 +1619,10 @@ void Monster::resetLight()
 
 void Monster::drainHealth(Creature* attacker, CombatType_t combatType, int32_t damage)
 {
+	//Pet fantasma nao perde vida por nada.
+	if(m_pet)
+		return;
+
 	Creature::drainHealth(attacker, combatType, damage);
 	if(isInvisible())
 		removeCondition(CONDITION_INVISIBLE);
@@ -1590,6 +1630,13 @@ void Monster::drainHealth(Creature* attacker, CombatType_t combatType, int32_t d
 
 void Monster::changeHealth(int32_t healthChange)
 {
+	//Pet fantasma: qualquer alteracao de vida e ignorada (fica sempre cheio).
+	if(m_pet)
+	{
+		health = healthMax;
+		return;
+	}
+
 	//In case a player with ignore flag set attacks the monster
 	setIdle(false);
 	if(!hasRecentBattle())

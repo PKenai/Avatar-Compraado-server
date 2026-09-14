@@ -511,7 +511,10 @@ ReturnValue Tile::__queryAdd(int32_t, const Thing* thing, uint32_t,
 
 		if(const Monster* monster = creature->getMonster())
 		{
-			if(hasFlag(TILESTATE_PROTECTIONZONE))
+			//Avatar custom: o pet fantasma e so render - nao existe como monstro de
+			//verdade, entao ignora protection zone (acompanha o dono na cidade).
+			//Parede/objeto solido (BLOCKSOLID) continua parando ele.
+			if(!monster->isPet() && hasFlag(TILESTATE_PROTECTIONZONE))
 				return RET_NOTPOSSIBLE;
 
 			if(floorChange() || positionChange())

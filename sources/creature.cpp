@@ -154,6 +154,16 @@ bool Creature::canWalkthrough(const Creature* creature) const
 	if(creature == this)
 		return true;
 
+	//Pet fantasma: do ponto de vista dele nada bloqueia - a unica coisa que o
+	//para e parede (tratado em Tile::__queryAdd).
+	if(isPet())
+		return true;
+
+	// Pet fantasma: existe so para ser renderizado. Ninguem (nem player, nem
+	// monstro) fica bloqueado por ele.
+	if(creature->isPet())
+		return true;
+
 	if(const Creature* _master = creature->getMaster())
 	{
 		if(_master != this && canWalkthrough(_master))
@@ -1513,6 +1523,14 @@ bool Creature::addCondition(Condition* condition)
 {
 	if(!condition)
 		return false;
+
+	//Avatar custom: pet fantasma nao recebe nenhuma condicao (veneno, fogo,
+	//paralise...). Nada interfere nele; ele apenas acompanha o dono.
+	if(isPet())
+	{
+		delete condition;
+		return false;
+	}
 
 	bool hadCondition = hasCondition(condition->getType(), -1, false);
 	if(Condition* previous = getCondition(condition->getType(), condition->getId(), condition->getSubId()))

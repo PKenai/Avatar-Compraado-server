@@ -13,6 +13,7 @@ local reloadInfo = {
   {RELOAD_AURAS, "auras", "aura"},
   {RELOAD_WINGS, "wings", "wing"},
   {RELOAD_SHADERS, "shaders", "shader"},
+  {RELOAD_PETS, "pets", "pet"},
   {RELOAD_MOVEEVENTS, "moveevents", "move events", "movements", "move", "movement"},
   {RELOAD_NPCS, "npcs", "npc"},
   {RELOAD_OUTFITS, "outfits", "outfit"},

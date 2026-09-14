@@ -32,6 +32,7 @@
 #include "auras.h"
 #include "wings.h"
 #include "shaders.h"
+#include "pets.h"
 
 #include "spectators.h"
 #include "ioguild.h"
@@ -647,7 +648,33 @@ class Player : public Creature, public Cylinder
 
 		bool hasShader(const Shader* shader) const;
 
+		//pets (criatura fantasma: existe no mapa so para ser vista, nunca interage)
+		//ownsPet = posse de verdade (comprada na loja). hasPet = pode usar o pet
+		//(GMs usam qualquer um, so para testar).
+		bool ownsPet(const Pet* pet) const;
+		bool hasPet(const Pet* pet) const;
+		bool addPet(uint8_t petId);
+		bool removePetOwnership(uint8_t petId);
+		uint8_t getCurrentPetID() const;
+		uint16_t getCurrentPetClientID() const;
+		void setCurrentPet(uint8_t petId);
+		Creature* getPetCreature() const {return petCreature;}
+		void sendPetWindow() const {if(client) client->sendPetWindow();}
+
+		bool createPet();
+		void removePet();
+		void ensurePet();
+		void updatePetPosition(const Position& fromPos);
+		Position getPetFollowPosition(const Position& reference) const;
+
+		//Pet fantasma: se o dono fica parado muito tempo, o pet "ganha vida" e
+		//passeia sozinho (devagar, poucas casas em volta do dono).
+		bool isPetWandering() const;
+		void updatePetIdle(uint32_t interval);
+		void wanderPet(uint32_t interval);
+
 		//event methods
+		virtual void onRemovedCreature();
 		virtual void onUpdateTileItem(const Tile* tile, const Position& pos, const Item* oldItem,
 			const ItemType& oldType, const Item* newItem, const ItemType& newType);
 		virtual void onRemoveTileItem(const Tile* tile, const Position& pos,
@@ -1016,6 +1043,11 @@ class Player : public Creature, public Cylinder
 
 		typedef std::set<uint32_t> AttackedSet;
 		AttackedSet attackedSet;
+		Creature* petCreature;
+		int64_t petIdleTime;
+		int64_t petWanderTime;
+		int32_t petWanderDelay;
+		Position petLastOwnerPos;
 		ShopInfoList shopOffer;
 		PartyList invitePartyList;
 		OutfitMap outfits;

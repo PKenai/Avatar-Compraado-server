@@ -753,6 +753,12 @@ class LuaInterface
 		static int32_t luaDoPlayerAddMount(lua_State* L);
 		static int32_t luaDoPlayerRemoveMount(lua_State* L);
 		static int32_t luaCanPlayerRideMount(lua_State* L);
+
+		static int32_t luaDoPlayerAddPet(lua_State* L);
+		static int32_t luaDoPlayerRemovePet(lua_State* L);
+		static int32_t luaDoPlayerHasPet(lua_State* L);
+		static int32_t luaDoPlayerSetCurrentPet(lua_State* L);
+		static int32_t luaGetPetInfo(lua_State* L);
 		static int32_t luaDoPlayerSetMounted(lua_State* L);
 		static int32_t luaGetMountInfo(lua_State* L);
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PETS (criaturas fantasmas)
+
+    Campos:
+      id       = id do pet (1..255). Usado no shop (petId) e nas funcoes Lua.
+      clientid = looktype do client (mesmo numero usado no outfit/UICreature).
+      name     = nome exibido na janela de escolha do pet e na loja.
+      premium  = 1 exige premium account para usar (opcional, padrao 0).
+
+    O pet e apenas uma criatura renderizada que segue o dono. Ele nao existe de
+    verdade no mundo: nao toma dano, nao ataca, nao pode ser atacado, empurrado
+    ou clicado, nao bloqueia passagem e nao entra na battle list de ninguem.
+    A unica coisa que o limita e parede (ele contorna os obstaculos).
+    Ele aparece para o dono e para os outros players (cada client recebe a
+    criatura normalmente, apenas marcada como pet).
+
+    Os pets sao vendidos pelo shop do game: veja data/lib/shop_offers.lua
+    (type = "pet", petId = <id aqui>).
+
+    O pet NAO e nenhum monstro do jogo: o servidor cria um tipo de criatura
+    proprio (nome, vida, IA, flags) a partir deste XML. O clientid abaixo e
+    apenas o sprite usado para desenhar.
+
+    IMPORTANTE sobre o clientid: use um looktype que o client realmente tenha
+    no .dat/.spr. Um numero que nao existe faz a criatura ser criada no
+    servidor mas nao desenhar nada no client. Confirmados: 1092, 1220-1361
+    (mesmos usados pelos monstros) e 1215 (configurado em
+    data/things/860/Tibia.otml e nao usado por nenhum monstro).
+
+    Recarregar sem reiniciar: /reload pets
+
+    Observacao: comentario XML nao pode conter dois hifens seguidos.
+-->
+<pets>
+    <pet id="1" clientid="1227" name="Air nomad hamster" />
+    <!-- <pet id="2" clientid="1215" name="Pets nome" /> -->
+    <!-- <pet id="3" clientid="1271" name="Frog" premium="1" /> -->
+    <pet id="4" clientid="1204" name="Minimooth" />
+    <pet id="5" clientid="1186" name="Dogo" />
+    <pet id="6" clientid="1187" name="Pingolino" />
+    <pet id="7" clientid="1188" name="Catito" />
+    <pet id="8" clientid="1189" name="Persa" />
+    <pet id="9" clientid="1190" name="Estella" />
+    <pet id="10" clientid="1191" name="Owlly" />
+    <pet id="11" clientid="1193" name="Ursolino" />
+    <pet id="12" clientid="1194" name="Vampi" />
+    <pet id="13" clientid="1196" name="Hedge" />
+    <pet id="14" clientid="1197" name="Foxya" />
+    <pet id="15" clientid="1198" name="Fennekis" />
+    <pet id="16" clientid="1199" name="Baby phoenix" />
+    <pet id="17" clientid="1200" name="Black Foxya" />
+    <pet id="18" clientid="1201" name="Blue Vagaleta" />
+    <pet id="19" clientid="1202" name="Green Vagaleta" />
+    <pet id="20" clientid="1203" name="Cakky" />
+    <pet id="21" clientid="1205" name="Purple Dragokin" />
+    <pet id="22" clientid="1206" name="Blue Dragokin" />
+    <pet id="23" clientid="1207" name="Griffy" />
+    <pet id="24" clientid="1208" name="Red Griffy" />
+    <pet id="25" clientid="1210" name="Rabibi" />
+</pets>

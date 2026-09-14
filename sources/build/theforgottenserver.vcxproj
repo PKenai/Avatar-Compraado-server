@@ -435,6 +435,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\auras.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\wings.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\shaders.cpp" />
+    <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\pets.cpp" />
     <ClCompile Include="C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\buff.cpp" />
     <Natvis Include="C:\vcpkg\installed\x86-windows\share\boost-1.90.0\assert\boost_assert.natvis">
     </Natvis>

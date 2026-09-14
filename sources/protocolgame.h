@@ -108,6 +108,8 @@ class ProtocolGame : public Protocol
 		void parseCancelMove(NetworkMessage& msg);
 
 		void parseRequestOutfit(NetworkMessage& msg);
+		void parseRequestPet(NetworkMessage& msg);
+		void parseChangePet(NetworkMessage& msg);
 		void parseSetOutfit(NetworkMessage& msg);
 		void parseMountStatus(NetworkMessage& msg);
 		void parseSay(NetworkMessage& msg);
@@ -221,6 +223,7 @@ class ProtocolGame : public Protocol
 		void sendHouseWindow(uint32_t windowTextId, House* house, uint32_t listId, const std::string& text);
 
 		void sendOutfitWindow();
+		void sendPetWindow();
 		void sendQuests();
 		void sendQuestInfo(Quest* quest);
 

@@ -34,6 +34,7 @@
 #include "auras.h"
 #include "wings.h"
 #include "shaders.h"
+#include "pets.h"
 #include "buff.h"
 
 class Creature;
@@ -112,7 +113,8 @@ enum ReloadInfo_t
 	RELOAD_SHADERS = 25,
 	RELOAD_MODS = 26,
 	RELOAD_ALL = 27,
-	RELOAD_LAST = RELOAD_ALL
+	RELOAD_PETS = 28,
+	RELOAD_LAST = RELOAD_PETS
 };
 
 enum SaveFlag_t
@@ -516,6 +518,8 @@ class Game
 		bool playerRequestRemoveVip(uint32_t playerId, uint32_t guid);
 		bool playerTurn(uint32_t playerId, Direction dir);
 		bool playerRequestOutfit(uint32_t playerId);
+		bool playerRequestPet(uint32_t playerId);
+		bool playerChangePet(uint32_t playerId, uint16_t clientId);
 		bool playerSay(uint32_t playerId, uint16_t channelId, MessageClasses type,
 			const std::string& receiver, const std::string& text);
 		bool playerChangeOutfit(uint32_t playerId, Outfit_t outfit);
@@ -625,6 +629,7 @@ class Game
 		Auras auras;
 		Wings wings;
 		Shaders shaders;
+		Pets pets;
 
 		void addStatsMessage(const SpectatorVec& list, MessageClasses mClass, const std::string& message,
 			const Position& pos, MessageDetails* details = NULL);

@@ -36,6 +36,7 @@ echo.
 echo O que deseja fazer?
 echo   [I] Adicionar Item
 echo   [O] Adicionar Outfit
+echo   [P] Adicionar Pet
 echo   [R] Remover ofertas
 echo   [S] Sair
 echo.
@@ -43,8 +44,9 @@ set /p "TIPO=> "
 if /i "%TIPO%"=="S" goto fim
 if /i "%TIPO%"=="I" goto item
 if /i "%TIPO%"=="O" goto outfit
+if /i "%TIPO%"=="P" goto pet
 if /i "%TIPO%"=="R" goto remover
-echo Opcao invalida. Use I, O, R ou S.
+echo Opcao invalida. Use I, O, P, R ou S.
 pause
 goto inicio
 
@@ -102,6 +104,159 @@ set "CATEG=Outfits"
 set "SKIP_CATEG=1"
 goto comum
 
+:pet
+cls
+echo ==================================================
+echo   ADICIONAR PET  (data\XML\pets.xml)
+echo ==================================================
+echo.
+
+set "PETSXML=data\XML\pets.xml"
+if not exist "%PETSXML%" (
+  echo Arquivo %PETSXML% nao encontrado.
+  echo Crie o arquivo com os seus pets antes de usar esta opcao.
+  pause
+  goto inicio
+)
+
+rem -- lista os pets do XML (o pet_util.ps1 ignora os que estao comentados)
+set "PSTMP=%TEMP%\market_pets_%RANDOM%.txt"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0pet_util.ps1" -Action list > "%PSTMP%" 2>nul
+
+set "PTOTAL=0"
+if exist "%PSTMP%" for /f "usebackq tokens=1 delims=|" %%a in ("%PSTMP%") do set /a PTOTAL+=1
+if %PTOTAL% EQU 0 goto pet_manual
+
+echo Pets disponiveis:
+echo.
+for /f "usebackq tokens=1,2,3,* delims=|" %%a in ("%PSTMP%") do echo   [%%a] petId=%%b  clientid=%%c  - %%d
+echo.
+
+set "PSEL="
+set "PETID="
+set "PETNOME="
+set /p "PSEL=> Numero do pet, ou N para cadastrar um novo (Enter = voltar): "
+if "%PSEL%"=="" (
+  del "%PSTMP%" >nul 2>nul
+  goto inicio
+)
+if /i "%PSEL%"=="N" (
+  del "%PSTMP%" >nul 2>nul
+  goto pet_novo
+)
+call :isnum PSEL
+if errorlevel 1 (
+  echo Numero invalido. Digite apenas numeros.
+  del "%PSTMP%" >nul 2>nul
+  pause
+  goto inicio
+)
+
+for /f "usebackq tokens=1,2,3,* delims=|" %%a in ("%PSTMP%") do (
+  if "%%a"=="%PSEL%" (
+    set "PETID=%%b"
+    set "PETNOME=%%d"
+  )
+)
+del "%PSTMP%" >nul 2>nul
+
+if "%PETID%"=="" (
+  echo Pet nao encontrado. Use um dos numeros da lista.
+  pause
+  goto inicio
+)
+
+echo.
+echo Pet selecionado: %PETNOME%   (petId = %PETID%)
+set /p "NOME=> Titulo na loja (Enter = %PETNOME%): "
+if "%NOME%"=="" set "NOME=%PETNOME%"
+set "TIPO_LINE=pet"
+set "EXTRA_LINE=petId = %PETID%"
+rem -- pet novo NAO pergunta categoria: vai direto pra aba Pets
+set "CATEG=Pets"
+set "SKIP_CATEG=1"
+goto comum
+
+:pet_novo
+rem -- cadastra um pet novo no pets.xml e depois vende ele na loja
+echo.
+echo ==================================================
+echo   CADASTRAR PET NOVO  (data\XML\pets.xml)
+echo ==================================================
+echo.
+echo O clientid e' o sprite usado para desenhar o pet no client - o mesmo
+echo numero usado em outfit / UICreature.
+echo Exemplos que existem neste client: 1227, 1220, 1271, 1092.
+echo.
+set /p "PCLIENT=> clientid (sprite) do pet: "
+call :isnum PCLIENT
+if errorlevel 1 (
+  echo clientid invalido. Digite apenas numeros.
+  pause
+  goto inicio
+)
+set /p "PNOME=> Nome do pet (ex: Air nomad hamster): "
+if "%PNOME%"=="" (
+  echo O nome e obrigatorio.
+  pause
+  goto inicio
+)
+set /p "PPREM=> Exige premium account? [S]im / [N]ao (Enter = Nao): "
+set "PPREMV=0"
+if /i "%PPREM%"=="S" set "PPREMV=1"
+
+rem -- remove caracteres que quebrariam o XML / o Lua
+call :clean PNOME
+
+set "PETID="
+for /f "delims=" %%a in ('powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0pet_util.ps1" -Action add -ClientId %PCLIENT% -PetName "%PNOME%" -Premium %PPREMV%') do set "PETID=%%a"
+
+if "%PETID%"=="" (
+  echo.
+  echo Nao foi possivel registrar o pet. Veja a mensagem de erro acima.
+  pause
+  goto inicio
+)
+
+echo.
+echo Pet registrado no pets.xml:  id=%PETID%  clientid=%PCLIENT%  nome=%PNOME%
+echo Use /reload pets no jogo, ou reinicie o servidor, para ele existir.
+echo.
+set /p "NOME=> Titulo na loja (Enter = %PNOME%): "
+if "%NOME%"=="" set "NOME=%PNOME%"
+set "PETNOME=%PNOME%"
+set "TIPO_LINE=pet"
+set "EXTRA_LINE=petId = %PETID%"
+rem -- pet novo NAO pergunta categoria: vai direto pra aba Pets
+set "CATEG=Pets"
+set "SKIP_CATEG=1"
+goto comum
+
+:pet_manual
+rem -- fallback: sem PowerShell, mostra o XML e deixa o usuario digitar o petId
+del "%PSTMP%" >nul 2>nul
+echo.
+echo Nao foi possivel listar os pets automaticamente.
+echo Pets encontrados no XML:
+echo.
+findstr /c:"<pet id=" "%PETSXML%"
+echo.
+echo Digite o petId do pet desejado.
+set /p "PETID=> petId: "
+call :isnum PETID
+if errorlevel 1 (
+  echo petId invalido. Digite apenas numeros.
+  pause
+  goto inicio
+)
+set /p "NOME=> Titulo na loja (Enter = Pet %PETID%): "
+if "%NOME%"=="" set "NOME=Pet %PETID%"
+set "TIPO_LINE=pet"
+set "EXTRA_LINE=petId = %PETID%"
+set "CATEG=Pets"
+set "SKIP_CATEG=1"
+goto comum
+
 :comum
 echo.
 echo Agora as informacoes gerais da oferta:
@@ -133,7 +288,7 @@ if "%CATEG%"=="" set "CATEG=Geral"
 goto categ_pronta_fim
 :categ_pronta
 echo.
-echo Categoria  : %CATEG%   (automatica - outfit novo entra direto na aba Outfits)
+echo Categoria  : %CATEG%   (automatica para outfit e pet)
 :categ_pronta_fim
 set /p "DESC=> Descricao (Enter = padrao): "
 if "%DESC%"=="" set "DESC=Oferta da loja: %NOME%"
@@ -283,6 +438,7 @@ exit /b %errorlevel%
 setlocal DisableDelayedExpansion
 call set "V=%%%1%%"
 set "V=%V:!=%"
+set "V=%V:'=%"
 set "V=%V:&=+%"
 set "V=%V:|=%"
 set "V=%V:<=%"

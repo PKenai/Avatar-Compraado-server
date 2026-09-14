@@ -96,6 +96,10 @@ Player::Player(const std::string& _name, ProtocolGame* p):
 	group = NULL;
 	editHouse = NULL;
 	shopOwner = NULL;
+	petCreature = NULL;
+	petIdleTime = 0;
+	petWanderTime = 0;
+	petWanderDelay = 0;
 	tradeItem = NULL;
 	tradePartner = NULL;
 	walkTask = NULL;
@@ -902,7 +906,7 @@ void Player::dropLoot(Container* corpse)
 bool Player::setStorage(const std::string& key, const std::string& value)
 {
 	uint32_t numericKey = atol(key.c_str());
-	if(!IS_IN_KEYRANGE(numericKey, RESERVED_RANGE) || IS_IN_KEYRANGE(numericKey, MOUNTS_RANGE) || IS_IN_KEYRANGE(numericKey, WINGS_RANGE) || IS_IN_KEYRANGE(numericKey, AURAS_RANGE) || IS_IN_KEYRANGE(numericKey, SHADERS_RANGE))
+	if(!IS_IN_KEYRANGE(numericKey, RESERVED_RANGE) || IS_IN_KEYRANGE(numericKey, MOUNTS_RANGE) || IS_IN_KEYRANGE(numericKey, WINGS_RANGE) || IS_IN_KEYRANGE(numericKey, AURAS_RANGE) || IS_IN_KEYRANGE(numericKey, SHADERS_RANGE) || IS_IN_KEYRANGE(numericKey, PETS_RANGE))
 	{
 		if(!Creature::setStorage(key, value))
 			return false;
@@ -969,6 +973,11 @@ bool Player::canSeeCreature(const Creature* creature) const
 
 bool Player::canWalkthrough(const Creature* creature) const
 {
+	//Avatar custom: pet fantasma nunca bloqueia ninguem (nem aparece como
+	//obstaculo para os outros players).
+	if(creature && creature->isPet())
+		return true;
+
 	if(creature == this || hasFlag(PlayerFlag_CanPassThroughAllCreatures) || creature->isWalkable() ||
 		std::find(forceWalkthrough.begin(), forceWalkthrough.end(), creature->getID()) != forceWalkthrough.end()
 		|| (creature->getMaster() && creature->getMaster() != this && canWalkthrough(creature->getMaster())))
@@ -1705,6 +1714,10 @@ void Player::onCreatureDisappear(const Creature* creature, bool isLogout)
 	if(creature != this)
 		return;
 
+	//Avatar custom: o pet fantasma nunca sobrevive ao dono (logout, kick,
+	//desconexao). Sem isso ele ficaria solto no mapa como criatura orfa.
+	removePet();
+
 	client->clear(true);
 	if(isLogout)
 		loginPosition = getPosition();
@@ -2047,6 +2060,17 @@ void Player::sendPing()
 void Player::onThink(uint32_t interval)
 {
 	Creature::onThink(interval);
+
+	//Pet fantasma: se o dono esta parado ha muito tempo, o pet "ganha vida" e
+	//comeca a passear sozinho em volta dele (pouco e devagar).
+	updatePetIdle(interval);
+
+	//Pet fantasma: cria/reposiciona conforme necessario. E a garantia de que o
+	//pet esta sempre colado no dono (login, teleport, escada, respawn...).
+	ensurePet();
+
+	if(isPetWandering())
+		wanderPet(interval);
 
 	int64_t timeNow = OTSYS_TIME();
 	//const Player* usuario = this->getPlayer();
@@ -4367,6 +4391,8 @@ void Player::onPlacedCreature()
 	//scripting event - onLogin
 	if(!g_creatureEvents->playerLogin(this))
 		kick(true, true);
+
+	ensurePet();
 }
 
 void Player::onTargetDrain(Creature* target, int32_t points)
@@ -6082,6 +6108,439 @@ uint8_t Player::getCurrentAura() const
 void Player::setCurrentAura(uint8_t auraId)
 {
 	setStorage(asString(PSTRG_AURAS_CURRENTAURA), asString(auraId));
+}
+
+bool Player::ownsPet(const Pet* pet) const
+{
+	if(!pet)
+		return false;
+
+	const uint8_t tmpPetId = pet->id - 1;
+
+	int32_t key = PSTRG_PETS_RANGE_START + (tmpPetId / 31), value = 0;
+	std::string tmp;
+	if(!getStorage(asString(key), tmp))
+		return false;
+
+	value = atoi(tmp.c_str());
+	return ((1 << (tmpPetId % 31)) & value) != 0;
+}
+
+bool Player::hasPet(const Pet* pet) const
+{
+	if(!pet)
+		return false;
+
+	//GM usa qualquer pet (para testar); a posse de verdade continua sendo
+	//ownsPet(), usada pela loja para saber se ja foi comprado.
+	if(hasCustomFlag(PlayerCustomFlag_GamemasterPrivileges))
+		return true;
+
+	if(pet->premium && !isPremium())
+		return false;
+
+	return ownsPet(pet);
+}
+
+bool Player::addPet(uint8_t petId)
+{
+	Pet* pet = g_game.pets.getPetByID(petId);
+	if(!pet || ownsPet(pet))
+		return false;
+
+	const uint8_t tmpPetId = pet->id - 1;
+	int32_t key = PSTRG_PETS_RANGE_START + (tmpPetId / 31), value = 0;
+	std::string tmp;
+	if(getStorage(asString(key), tmp))
+		value = atoi(tmp.c_str());
+
+	value |= (1 << (tmpPetId % 31));
+	//Se a storage nao for gravada (chave reservada invalida) a posse nao e dada,
+	//para a loja nao cobrar os pontos sem entregar o pet.
+	return setStorage(asString(key), asString(value));
+}
+
+bool Player::removePetOwnership(uint8_t petId)
+{
+	Pet* pet = g_game.pets.getPetByID(petId);
+	if(!pet || !ownsPet(pet))
+		return false;
+
+	const uint8_t tmpPetId = pet->id - 1;
+	int32_t key = PSTRG_PETS_RANGE_START + (tmpPetId / 31), value = 0;
+	std::string tmp;
+	if(getStorage(asString(key), tmp))
+		value = atoi(tmp.c_str());
+
+	value &= ~(1 << (tmpPetId % 31));
+	setStorage(asString(key), asString(value));
+
+	if(getCurrentPetID() == pet->id)
+		setCurrentPet(0);
+
+	return true;
+}
+
+uint8_t Player::getCurrentPetID() const
+{
+	int32_t value = 0;
+	std::string tmp;
+	if(getStorage(asString(PSTRG_PETS_CURRENTPET), tmp))
+		value = atoi(tmp.c_str());
+
+	return value;
+}
+
+uint16_t Player::getCurrentPetClientID() const
+{
+	const Pet* pet = g_game.pets.getPetByID(getCurrentPetID());
+	if(!pet || !hasPet(pet))
+		return 0;
+
+	return pet->clientId;
+}
+
+void Player::setCurrentPet(uint8_t petId)
+{
+	//(int32_t) importa: asString(object) usa operator<<, e uint8_t e unsigned char,
+	//entao gravaria o caractere em vez do numero (o atoi da leitura devolveria 0).
+	setStorage(asString(PSTRG_PETS_CURRENTPET), asString((int32_t)petId));
+	removePet();
+	ensurePet();
+}
+
+//Avatar custom: offset de cada Direction (mesma ordem usada por Direction/Otc).
+static const int32_t PetDirectionOffset[8][2] =
+{
+	{0, -1}, {1, 0}, {0, 1}, {-1, 0},
+	{-1, 1}, {1, 1}, {-1, -1}, {1, -1}
+};
+
+//Distancia maxima (em casas) que o pet procura caminho para achar o dono.
+static const int32_t PET_FOLLOW_MAX_DIST = 12;
+
+//Tempo (ms) que o dono precisa ficar parado para o pet "ganhar vida".
+static const int64_t PET_IDLE_TIME_MS = 2 * 60 * 1000;
+//Distancia maxima (em casas) que o pet pode se afastar do dono passeando.
+static const int32_t PET_WANDER_MAX_DIST = 5;
+//Ritmo do passeio: um passo a cada intervalo sorteado nessa faixa (ms).
+//E o que deixa a caminhada "lenta" - nao a velocidade da criatura.
+static const int32_t PET_WANDER_STEP_MIN_MS = 1400;
+static const int32_t PET_WANDER_STEP_MAX_MS = 2800;
+
+Position Player::getPetFollowPosition(const Position& reference) const
+{
+	//Uma casa atras do player (oposta a direcao que ele esta olhando/andando).
+	//Usado so quando nao existem "pegadas" validas (login, teleporte, escada).
+	int32_t index = (int32_t)getDirection();
+	if(index < 0 || index > 7)
+		index = 2; //south
+
+	Position pos = reference;
+	pos.x = (uint16_t)std::max<int32_t>(0, (int32_t)pos.x - PetDirectionOffset[index][0]);
+	pos.y = (uint16_t)std::max<int32_t>(0, (int32_t)pos.y - PetDirectionOffset[index][1]);
+	return pos;
+}
+
+bool Player::createPet()
+{
+	if(petCreature && !petCreature->isRemoved())
+		return true;
+
+	petCreature = NULL;
+	if(!getTile())
+		return false;
+
+	const uint8_t petId = getCurrentPetID();
+	if(petId == 0)
+	{
+		return false;
+	}
+
+	Pet* pet = g_game.pets.getPetByID(petId);
+	if(!pet || !hasPet(pet))
+	{
+		return false;
+	}
+
+	MonsterType* mType = g_game.pets.getMonsterType(petId);
+	if(!mType)
+	{
+		return false;
+	}
+
+	Monster* monster = Monster::createMonster(mType);
+	if(!monster)
+	{
+		return false;
+	}
+
+	monster->setPet(true);
+	//O pet nao tem velocidade propria: ele usa o mesmo ritmo de passo do dono para
+	//a caminhada ficar fluida no client (ele so acompanha o player).
+	monster->setBaseSpeed((uint32_t)std::max<int32_t>(1, getStepSpeed()));
+
+	//Passeio: comeca zerado - o pet so anda sozinho depois do dono ficar parado.
+	petIdleTime = 0;
+	petWanderTime = 0;
+	petWanderDelay = random_range(PET_WANDER_STEP_MIN_MS, PET_WANDER_STEP_MAX_MS);
+	petLastOwnerPos = getPosition();
+	monster->setCurrentOutfit(mType->outfit);
+
+	Position pos = getPetFollowPosition(getPosition());
+	if(!g_game.placeCreature(monster, pos, false, true))
+	{
+		//fallback: em cima do proprio dono
+		if(!g_game.placeCreature(monster, getPosition(), false, true))
+		{
+			delete monster;
+			return false;
+		}
+	}
+
+	petCreature = monster;
+	return true;
+}
+
+void Player::removePet()
+{
+	if(!petCreature)
+		return;
+
+	Creature* pet = petCreature;
+	petCreature = NULL;
+
+	//O id precisa ser lido antes: removeCreature pode liberar (delete) o pet.
+	const uint32_t petId = pet->getID();
+
+	bool removed = pet->isRemoved();
+	if(!removed)
+		removed = g_game.removeCreature(pet, true);
+
+}
+
+void Player::ensurePet()
+{
+	if(!getTile())
+		return;
+
+	//Sem client (fechou o client no X, caiu a conexao): o pet fantasma nao existe.
+	//O Player continua no mundo ate reconectar, mas o pet nao pode ficar solto
+	//seguindo um dono que nao esta vendo nada - ele volta no proximo login.
+	if(!hasClient())
+	{
+		removePet();
+		return;
+	}
+
+	const uint8_t petId = getCurrentPetID();
+	Pet* pet = petId != 0 ? g_game.pets.getPetByID(petId) : NULL;
+	if(!pet || !hasPet(pet))
+	{
+		removePet();
+		return;
+	}
+
+	if(!petCreature || petCreature->isRemoved())
+	{
+		petCreature = NULL;
+		createPet();
+		return;
+	}
+
+	const Position& petPos = petCreature->getPosition();
+	const Position& myPos = getPosition();
+
+	//Andar diferente (escada/teleporte entre andares): nao existe caminho entre
+	//andares, entao o pet e recriado colado no dono (senao ficaria perdido).
+	if(petPos.z != myPos.z)
+	{
+		removePet();
+		createPet();
+		return;
+	}
+
+	//Ficou longe (teleporte/login no mesmo andar): caminha ate o dono. Durante o
+	//passeio (dono parado) o pet pode se afastar ate PET_WANDER_MAX_DIST; so
+	//volta a ser puxado se passar disso.
+	const int32_t distX = std::abs((int32_t)petPos.x - (int32_t)myPos.x);
+	const int32_t distY = std::abs((int32_t)petPos.y - (int32_t)myPos.y);
+	if(distX > 1 || distY > 1)
+	{
+		if(!isPetWandering() || std::max(distX, distY) > PET_WANDER_MAX_DIST)
+			updatePetPosition(myPos);
+	}
+}
+
+void Player::updatePetPosition(const Position& fromPos)
+{
+	if(!petCreature || petCreature->isRemoved() || !petCreature->getTile() || !getTile())
+		return;
+
+	const Position& myPos = getPosition();
+	const Position& petPos = petCreature->getPosition();
+
+	//Troca de andar: quem resolve e o ensurePet (recria o pet no andar do dono).
+	if(petPos.z != myPos.z)
+		return;
+
+	//Alvos, em ordem de preferencia:
+	//1) a casa que o dono acabou de deixar - o pet anda nas pegadas dele;
+	//2) a casa atras do dono (login, teleporte no mesmo andar);
+	//3) o proprio dono (o pet para uma casa antes).
+	Position targets[3];
+	int32_t targetCount = 0;
+
+	if(fromPos.z == myPos.z
+		&& std::abs((int32_t)fromPos.x - (int32_t)myPos.x) <= 1
+		&& std::abs((int32_t)fromPos.y - (int32_t)myPos.y) <= 1
+		&& fromPos != myPos)
+	{
+		targets[targetCount++] = fromPos;
+	}
+
+	targets[targetCount++] = getPetFollowPosition(myPos);
+	targets[targetCount++] = myPos;
+
+	for(int32_t i = 0; i < targetCount; ++i)
+	{
+		const Position& target = targets[i];
+		if(petPos == target)
+			return;
+
+		//Caminho respeitando parede. Sem caminho o pet apenas espera: ele nunca
+		//atravessa parede e nunca da teleporte (so anda, uma casa por vez).
+		std::list<Direction> dirList;
+		if(!g_game.getPathTo(petCreature, target, dirList, PET_FOLLOW_MAX_DIST) || dirList.empty())
+			continue;
+
+		//Alvo e o proprio dono: para uma casa antes, nunca pisa nele.
+		if(target == myPos && dirList.size() < 2)
+			continue;
+
+		const int32_t dir = (int32_t)dirList.front();
+		if(dir < 0 || dir > 7)
+			continue;
+
+		const Position stepPos(
+			(uint16_t)std::max<int32_t>(0, (int32_t)petPos.x + PetDirectionOffset[dir][0]),
+			(uint16_t)std::max<int32_t>(0, (int32_t)petPos.y + PetDirectionOffset[dir][1]),
+			petPos.z);
+
+		Tile* toTile = g_game.getMap()->getTile(stepPos);
+		if(!toTile)
+			continue;
+
+		//flags 0: parede/objeto solido bloqueia; outras criaturas e protection
+		//zone nao (ver Creature::canWalkthrough e Tile::__queryAdd).
+		g_game.internalMoveCreature(NULL, petCreature, petCreature->getTile(), toTile, 0, false, false);
+		return;
+	}
+}
+
+//Avatar custom: o dono parou? Acumula o tempo. Qualquer mudanca de posicao
+//(andar, teleporte, escada, respawn) zera o contador e o pet volta a seguir.
+void Player::updatePetIdle(uint32_t interval)
+{
+	const Position& myPos = getPosition();
+	if(myPos != petLastOwnerPos)
+	{
+		petLastOwnerPos = myPos;
+		petIdleTime = 0;
+		petWanderTime = 0;
+		return;
+	}
+
+	if(petIdleTime < PET_IDLE_TIME_MS)
+	{
+		petIdleTime += interval;
+		if(petIdleTime > PET_IDLE_TIME_MS)
+			petIdleTime = PET_IDLE_TIME_MS;
+	}
+}
+
+bool Player::isPetWandering() const
+{
+	return petIdleTime >= PET_IDLE_TIME_MS;
+}
+
+//Avatar custom: passeio do pet. Continua sendo so render: anda uma casa por vez,
+//devagar, nunca atravessa parede e nunca passa de PET_WANDER_MAX_DIST do dono.
+void Player::wanderPet(uint32_t interval)
+{
+	if(!petCreature || petCreature->isRemoved() || !petCreature->getTile() || !getTile())
+		return;
+
+	const Position& petPos = petCreature->getPosition();
+	const Position& myPos = getPosition();
+
+	//Troca de andar: quem resolve e o ensurePet.
+	if(petPos.z != myPos.z)
+		return;
+
+	petWanderTime += interval;
+	if(petWanderTime < petWanderDelay)
+		return;
+
+	petWanderTime = 0;
+	petWanderDelay = random_range(PET_WANDER_STEP_MIN_MS, PET_WANDER_STEP_MAX_MS);
+
+	//8 direcoes em ordem aleatoria (Fisher-Yates).
+	int32_t order[8] = {0, 1, 2, 3, 4, 5, 6, 7};
+	for(int32_t i = 7; i > 0; --i)
+	{
+		int32_t j = random_range(0, i);
+		int32_t tmp = order[i];
+		order[i] = order[j];
+		order[j] = tmp;
+	}
+
+	const int32_t distX = std::abs((int32_t)petPos.x - (int32_t)myPos.x);
+	const int32_t distY = std::abs((int32_t)petPos.y - (int32_t)myPos.y);
+	const int32_t dist = std::max(distX, distY);
+
+	for(int32_t i = 0; i < 8; ++i)
+	{
+		const int32_t dir = order[i];
+
+		const Position target(
+			(uint16_t)std::max<int32_t>(0, (int32_t)petPos.x + PetDirectionOffset[dir][0]),
+			(uint16_t)std::max<int32_t>(0, (int32_t)petPos.y + PetDirectionOffset[dir][1]),
+			petPos.z);
+
+		//Nunca pisa na casa do dono.
+		if(target == myPos)
+			continue;
+
+		const int32_t newDist = std::max(
+			std::abs((int32_t)target.x - (int32_t)myPos.x),
+			std::abs((int32_t)target.y - (int32_t)myPos.y));
+
+		//Nao sai do raio permitido e, se ja estiver no limite, nao se afasta mais.
+		if(newDist > PET_WANDER_MAX_DIST)
+			continue;
+
+		if(dist >= PET_WANDER_MAX_DIST - 1 && newDist > dist)
+			continue;
+
+		Tile* toTile = g_game.getMap()->getTile(target);
+		if(!toTile)
+			continue;
+
+		//flags 0: parede/objeto solido bloqueia o passo (o pet nunca atravessa).
+		if(g_game.internalMoveCreature(NULL, petCreature, petCreature->getTile(), toTile, 0, false, false) == RET_NOERROR)
+			return;
+	}
+
+	//Sem casa livre (cercado por paredes): pelo menos vira o rosto, pra parecer vivo.
+	if(petCreature && !petCreature->isRemoved())
+		g_game.internalCreatureTurn(petCreature, (Direction)order[0]);
+}
+
+void Player::onRemovedCreature()
+{
+	removePet();
+	Creature::onRemovedCreature();
 }
 
 bool Player::hasShader(const Shader* shader) const

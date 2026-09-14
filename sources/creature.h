@@ -274,6 +274,7 @@ class Creature : public AutoId, virtual public Thing
 
 		bool isInvisible() const {return hasCondition(CONDITION_INVISIBLE, -1, false);}
 		virtual bool isGhost() const {return false;}
+		virtual bool isPet() const {return false;}
 		virtual bool isWalkable() const {return false;}
 
 		ZoneType_t getZone() const {return getTile()->getZone();}

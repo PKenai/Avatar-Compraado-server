@@ -83,7 +83,14 @@ void ProtocolGame::releaseProtocol()
 		if(!m_spectator)
 		{
 			if(player->client->getOwner() == this)
+			{
+				//Avatar custom: a conexao caiu (client fechado no X, timeout, kick,
+				//queda de rede). O pet fantasma nao pode ficar solto no mapa seguindo
+				//um dono que nao esta mais no jogo - ele e removido junto.
+				player->removePet();
+
 				player->client->setOwner(NULL);
+			}
 		}
 		else if(player->client->isBroadcasting())
 			player->client->removeSpectator(this);
@@ -940,6 +947,14 @@ void ProtocolGame::parsePacket(NetworkMessage &msg)
 					parseMountStatus(msg);
 				break;
 
+			case 0xD8: // request pet window
+				parseRequestPet(msg);
+				break;
+
+			case 0xD9: // change pet
+				parseChangePet(msg);
+				break;
+
 			case 0xDC:
 				parseAddVip(msg);
 				break;
@@ -1298,6 +1313,18 @@ void ProtocolGame::parseTurn(NetworkMessage&, Direction dir)
 void ProtocolGame::parseRequestOutfit(NetworkMessage&)
 {
 	addGameTask(&Game::playerRequestOutfit, player->getID());
+}
+
+void ProtocolGame::parseRequestPet(NetworkMessage&)
+{
+	addGameTask(&Game::playerRequestPet, player->getID());
+}
+
+void ProtocolGame::parseChangePet(NetworkMessage& msg)
+{
+	//clientid do pet escolhido (0 = nenhum)
+	uint16_t clientId = msg.get<uint16_t>();
+	addGameTask(&Game::playerChangePet, player->getID(), clientId);
 }
 
 void ProtocolGame::parseSetOutfit(NetworkMessage& msg)
@@ -2651,6 +2678,31 @@ void ProtocolGame::sendHouseWindow(uint32_t windowTextId, House*,
 	msg->putString(text);
 }
 
+void ProtocolGame::sendPetWindow()
+{
+	NetworkMessage_ptr msg = getOutputBuffer();
+	if(!msg)
+		return;
+
+	TRACK_MESSAGE(msg);
+	msg->put<char>(0x49); // GameServerChoosePet
+
+	std::vector<const Pet*> petList;
+	for(const Pet& pet : g_game.pets.getPets())
+	{
+		if(player->hasPet(&pet))
+			petList.push_back(&pet);
+	}
+
+	msg->put<uint16_t>(player->getCurrentPetClientID());
+	msg->put<char>((char)petList.size());
+	for(const Pet* pet : petList)
+	{
+		msg->put<uint16_t>(pet->clientId);
+		msg->putString(pet->name);
+	}
+}
+
 void ProtocolGame::sendOutfitWindow()
 {
 	NetworkMessage_ptr msg = getOutputBuffer();
@@ -3106,6 +3158,11 @@ void ProtocolGame::AddCreature(NetworkMessage_ptr msg, const Creature* creature,
 		msg->put<char>(player->getGuildEmblem(creature));
 
 	msg->put<char>(!player->canWalkthrough(creature));
+
+	//Avatar custom: 1 = criatura fantasma (pet). O client usa isso para nao
+	//desenhar nome/vida, nao listar na battle list e ignorar cliques.
+	const Monster* monster = creature->getMonster();
+	msg->put<char>((monster && monster->isPet()) ? 0x01 : 0x00);
 }
 
 void ProtocolGame::AddPlayerStats(NetworkMessage_ptr msg)

@@ -2468,6 +2468,21 @@ void LuaInterface::registerFunctions()
 	//getMountInfo([mountId])
 	lua_register(m_luaState, "getMountInfo", LuaInterface::luaGetMountInfo);
 
+	//doPlayerAddPet(cid, petId)
+	lua_register(m_luaState, "doPlayerAddPet", LuaInterface::luaDoPlayerAddPet);
+
+	//doPlayerRemovePet(cid, petId)
+	lua_register(m_luaState, "doPlayerRemovePet", LuaInterface::luaDoPlayerRemovePet);
+
+	//doPlayerHasPet(cid, petId)
+	lua_register(m_luaState, "doPlayerHasPet", LuaInterface::luaDoPlayerHasPet);
+
+	//doPlayerSetCurrentPet(cid, petId)  -- 0 = nenhum
+	lua_register(m_luaState, "doPlayerSetCurrentPet", LuaInterface::luaDoPlayerSetCurrentPet);
+
+	//getPetInfo(petId)
+	lua_register(m_luaState, "getPetInfo", LuaInterface::luaGetPetInfo);
+
 	//getPartyMembers(lid)
 	lua_register(m_luaState, "getPartyMembers", LuaInterface::luaGetPartyMembers);
 
@@ -10714,6 +10729,111 @@ int32_t LuaInterface::luaDoPlayerRemoveMount(lua_State* L)
 	else
 		lua_pushboolean(L, player->untameMount(mountId));
 
+	return 1;
+}
+
+int32_t LuaInterface::luaDoPlayerAddPet(lua_State* L)
+{
+	//doPlayerAddPet(cid, petId)
+	uint8_t petId = (uint8_t)popNumber(L);
+	ScriptEnviroment* env = getEnv();
+
+	Player* player = env->getPlayerByUID(popNumber(L));
+	if(!player)
+	{
+		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+	}
+	else
+		lua_pushboolean(L, player->addPet(petId));
+
+	return 1;
+}
+
+int32_t LuaInterface::luaDoPlayerRemovePet(lua_State* L)
+{
+	//doPlayerRemovePet(cid, petId)
+	uint8_t petId = (uint8_t)popNumber(L);
+	ScriptEnviroment* env = getEnv();
+
+	Player* player = env->getPlayerByUID(popNumber(L));
+	if(!player)
+	{
+		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+	}
+	else
+		lua_pushboolean(L, player->removePetOwnership(petId));
+
+	return 1;
+}
+
+int32_t LuaInterface::luaDoPlayerHasPet(lua_State* L)
+{
+	//doPlayerHasPet(cid, petId)
+	uint8_t petId = (uint8_t)popNumber(L);
+	ScriptEnviroment* env = getEnv();
+
+	Player* player = env->getPlayerByUID(popNumber(L));
+	if(!player)
+	{
+		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	//Posse de verdade (comprada na loja). O bypass de GM fica so no uso do pet
+	//(janela/equipar), senao a loja esconderia a oferta de compra para GMs.
+	Pet* pet = g_game.pets.getPetByID(petId);
+	lua_pushboolean(L, pet && player->ownsPet(pet));
+	return 1;
+}
+
+int32_t LuaInterface::luaDoPlayerSetCurrentPet(lua_State* L)
+{
+	//doPlayerSetCurrentPet(cid, petId)
+	uint8_t petId = (uint8_t)popNumber(L);
+	ScriptEnviroment* env = getEnv();
+
+	Player* player = env->getPlayerByUID(popNumber(L));
+	if(!player)
+	{
+		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	if(petId != 0)
+	{
+		Pet* pet = g_game.pets.getPetByID(petId);
+		if(!pet || !player->hasPet(pet))
+		{
+			lua_pushboolean(L, false);
+			return 1;
+		}
+	}
+
+	player->setCurrentPet(petId);
+	lua_pushboolean(L, true);
+	return 1;
+}
+
+int32_t LuaInterface::luaGetPetInfo(lua_State* L)
+{
+	//getPetInfo(petId)
+	uint8_t petId = (uint8_t)popNumber(L);
+	Pet* pet = g_game.pets.getPetByID(petId);
+	if(!pet)
+	{
+		lua_pushnil(L);
+		return 1;
+	}
+
+	lua_newtable(L);
+	setField(L, "id", (int32_t)pet->id);
+	setField(L, "clientid", (int32_t)pet->clientId);
+	setField(L, "name", pet->name);
+	setFieldBool(L, "premium", pet->premium);
 	return 1;
 }
 

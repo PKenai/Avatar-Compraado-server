@@ -48,3 +48,36 @@ table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Momo'
 table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Air nomad Pacifist", outfitMale = 1067, outfitFemale = 1062, addons = 0, cost = 15, class = "air", description = "Oferta da loja: Air nomad Pacifist" })
 table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Ancient nomad", outfitMale = 1068, outfitFemale = 1063, addons = 0, cost = 15, class = "air", description = "Oferta da loja: Ancient nomad" })
 table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Classic air nomad", outfitMale = 1069, outfitFemale = 1064, addons = 0, cost = 15, class = "air", description = "Oferta da loja: Classic air nomad" })
+
+-- ============================================================================
+-- Categoria: Pets
+-- ----------------------------------------------------------------------------
+-- Pet = criatura fantasma definida em data/XML/pets.xml (id + clientid + nome).
+-- O campo petId e o "id" do pets.xml. Ao comprar, o player passa a possuir o
+-- pet (storage), ele some da loja e aparece na janela do menu Pet
+-- (botao direito em voce mesmo -> Pet) para ser escolhido/equipado.
+-- ============================================================================
+table.insert(ShopOffers, { category = "Pets", type = "pet", petId = 1, title = "Air nomad hamster", cost = 15, class = "all", description = "Um pet que segue voce para todo lado. Apenas visual: nao ataca, nao toma dano e nao bloqueia passagem." })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Minimooth", petId = 4, cost = 15, class = "all", description = "Oferta da loja: Minimooth" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Dogo", petId = 5, cost = 15, class = "all", description = "Oferta da loja: Dogo" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Pingolino", petId = 6, cost = 15, class = "all", description = "Oferta da loja: Pingolino" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Catito", petId = 7, cost = 15, class = "all", description = "Oferta da loja: Catito" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Persa", petId = 8, cost = 15, class = "all", description = "Oferta da loja: Persa" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Estella", petId = 9, cost = 15, class = "all", description = "Oferta da loja: Estella" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Owlly", petId = 10, cost = 15, class = "all", description = "Oferta da loja: Owlly" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Ursolino", petId = 11, cost = 15, class = "all", description = "Oferta da loja: Ursolino" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Vampi", petId = 12, cost = 15, class = "all", description = "Oferta da loja: Vampi" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Hedge", petId = 13, cost = 15, class = "all", description = "Oferta da loja: Hedge" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Foxya", petId = 14, cost = 20, class = "all", description = "Oferta da loja: Foxya" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Fennekis", petId = 15, cost = 20, class = "all", description = "Oferta da loja: Fennekis" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Baby phoenix", petId = 16, cost = 20, class = "all", description = "Oferta da loja: Baby phoenix" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Black Foxya", petId = 17, cost = 20, class = "all", description = "Oferta da loja: Black Foxya" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Blue Vagaleta", petId = 18, cost = 20, class = "all", description = "Oferta da loja: Blue Vagaleta" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Green Vagaleta", petId = 19, cost = 20, class = "all", description = "Oferta da loja: Green Vagaleta" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Cakky", petId = 20, cost = 20, class = "all", description = "Oferta da loja: Cakky" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Purple Dragokin", petId = 21, cost = 30, class = "all", description = "Oferta da loja: Purple Dragokin" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Blue Dragokin", petId = 22, cost = 30, class = "all", description = "Oferta da loja: Blue Dragokin" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Griffy", petId = 23, cost = 25, class = "all", description = "Oferta da loja: Griffy" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Red Griffy", petId = 24, cost = 25, class = "all", description = "Oferta da loja: Red Griffy" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Rabibi", petId = 25, cost = 25, class = "all", description = "Oferta da loja: Rabibi" })
+table.insert(ShopOffers, { category = "Pets", type = "pet", title = "Mister Hamster", petId = 26, cost = 20, class = "all", description = "Oferta da loja: Mister Hamster" })

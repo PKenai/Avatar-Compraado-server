@@ -226,6 +226,7 @@ void Game::setGameState(GameState_t newState)
 				auras.loadFromXml();
 				wings.loadFromXml();
 				shaders.loadFromXml();
+				pets.loadFromXml();
 
 				g_globalEvents->startup();
 				if(g_config.getBool(ConfigManager::INIT_PREMIUM_UPDATE))
@@ -1331,8 +1332,12 @@ ReturnValue Game::internalMoveCreature(Creature* creature, Direction direction, 
 }
 
 ReturnValue Game::internalMoveCreature(Creature* actor, Creature* creature, Cylinder* fromCylinder,
-	Cylinder* toCylinder, uint32_t flags/* = 0*/, bool forceTeleport/* = false*/, bool force /* = true*/)
+	Cylinder* toCylinder, uint32_t flags/* = 0*/, bool forceTeleport/* = false*/, bool force/* = true*/)
 {
+	//Avatar custom: posicao de origem do player, usada para levar o pet fantasma
+	//junto (ele fica exatamente na casa que o dono acabou de deixar).
+	const Position petOldPos = creature->getPosition();
+
 	//check if we can move the creature to the destination
 	ReturnValue ret = toCylinder->__queryAdd(0, creature, 1, flags, actor);
 	if(ret != RET_NOERROR)
@@ -1360,7 +1365,12 @@ ReturnValue Game::internalMoveCreature(Creature* actor, Creature* creature, Cyli
 	
 	fromCylinder->getTile()->moveCreature(actor, creature, toCylinder, forceTeleport);
 	if(creature->getParent() != toCylinder)
+	{
+		if(player)
+			player->updatePetPosition(petOldPos);
+
 		return RET_NOERROR;
+	}
 
 	Item* toItem = NULL;
 	Cylinder* subCylinder = NULL;
@@ -1378,6 +1388,9 @@ ReturnValue Game::internalMoveCreature(Creature* actor, Creature* creature, Cyli
 		if(++n >= MAP_MAX_LAYERS) //to prevent infinite loop
 			break;
 	}
+
+	if(player)
+		player->updatePetPosition(petOldPos);
 
 	return RET_NOERROR;
 }
@@ -4318,6 +4331,39 @@ bool Game::playerRequestOutfit(uint32_t playerId)
 	return true;
 }
 
+bool Game::playerRequestPet(uint32_t playerId)
+{
+	Player* player = getPlayerByID(playerId);
+	if(!player || player->isRemoved())
+		return false;
+
+	player->sendPetWindow();
+	return true;
+}
+
+bool Game::playerChangePet(uint32_t playerId, uint16_t clientId)
+{
+	Player* player = getPlayerByID(playerId);
+	if(!player || player->isRemoved())
+		return false;
+
+	if(clientId == 0)
+	{
+		player->setCurrentPet(0);
+		return true;
+	}
+
+	Pet* pet = pets.getPetByClientID(clientId);
+	if(!pet || !player->hasPet(pet))
+	{
+		player->sendPetWindow();
+		return false;
+	}
+
+	player->setCurrentPet(pet->id);
+	return true;
+}
+
 bool Game::playerChangeOutfit(uint32_t playerId, Outfit_t outfit)
 {
 	Player* player = getPlayerByID(playerId);
@@ -6669,6 +6715,24 @@ bool Game::reloadInfo(ReloadInfo_t reload, uint32_t playerId/* = 0*/, bool compl
 				done = true;
 			else
 				std::clog << "[Error - Game::reloadInfo] Failed to reload shaders." << std::endl;
+
+			break;
+		}
+
+		case RELOAD_PETS:
+		{
+			//Os MonsterType dos pets sao liberados no reload, entao tira antes os
+			//pets vivos do mapa (senao as criaturas ficariam penduradas).
+			for(AutoList<Player>::iterator it = Player::autoList.begin(); it != Player::autoList.end(); ++it)
+			{
+				if(it->second && it->second->getPetCreature())
+					it->second->removePet();
+			}
+
+			if(pets.reload())
+				done = true;
+			else
+				std::clog << "[Error - Game::reloadInfo] Failed to reload pets." << std::endl;
 
 			break;
 		}

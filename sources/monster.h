@@ -77,6 +77,11 @@ class Monster : public Creature
 		void setSpiritual(bool v);
 		bool isSpiritual() const {return m_spiritual;}
 
+		//Pet fantasma: criatura puramente visual que segue o dono. Nao toma dano,
+		//nao ataca, nao e atacada, nao e empurrada, nao bloqueia tile e nao roda IA.
+		void setPet(bool v);
+		virtual bool isPet() const {return m_pet;}
+
 		bool canPushItems() const {return mType->canPushItems;}
 		bool canPushCreatures() const {return mType->canPushCreatures;}
 		bool isHostile() const;
@@ -149,6 +154,7 @@ class Monster : public Creature
 		bool isIdle;
 		bool extraMeleeAttack;
 		bool lootPercent;
+		bool m_pet;
 
 		//Avatar: quando o player veste um dos outfits elementares (1344-1347) o
 		//monstro larga o alvo e passa a regenerar 5% da vida maxima a cada 0.5s,

@@ -36,6 +36,7 @@ function initShop(player)
             -- ofertas com hideIfOwned (ex: Momo Pouch) somem para quem ja tem o item
             local hide = (offer.type == "outfit" and playerOwnsOfferOutfit(player, offer, pSex))
                 or (offer.type == "item" and offer.hideIfOwned and playerOwnsMomo(player))
+                or (offer.type == "pet" and doPlayerHasPet(player, offer.petId) == true)
             if not hide then
                 local catIndex = categoriesByName[offer.category]
                 if not catIndex then
@@ -61,7 +62,25 @@ end
 
 -- Converte uma oferta do shop_offers.lua no formato enviado ao client.
 function addOffer(category, callbacks, offer, pSex)
-    if offer.type == "outfit" then
+    if offer.type == "pet" then
+        -- Pet fantasma: a oferta mostra o preview da criatura (clientid do
+        -- pets.xml) e a compra apenas da a posse do pet ao player.
+        local petInfo = getPetInfo(offer.petId)
+        if not petInfo then
+            return
+        end
+        local pet = {
+            type = petInfo.clientid,
+            addons = 0,
+            head = 0,
+            body = 0,
+            legs = 0,
+            feet = 0,
+            mount = 0
+        }
+        table.insert(category.offers, {cost = offer.cost, type = "pet", pet = pet, petId = offer.petId, title = offer.title, description = offer.description or ""})
+        table.insert(callbacks, defaultPetBuyAction)
+    elseif offer.type == "outfit" then
         local outfitType = (pSex == PLAYERSEX_FEMALE and offer.outfitFemale) or offer.outfitMale
         local outfit = {
             type = outfitType or 0,
@@ -241,6 +260,23 @@ function defaultItemBuyAction(cid, offer)
         return true
     end
     return "Your inventory is full."
+end
+
+function defaultPetBuyAction(cid, offer)
+    if not offer.petId then
+        return "Invalid pet offer."
+    end
+
+    if doPlayerHasPet(cid, offer.petId) == true then
+        return "You already own this pet."
+    end
+
+    if not doPlayerAddPet(cid, offer.petId) then
+        return "Could not add the pet to your character. Please contact a staff member."
+    end
+
+    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Voce comprou o pet: (" .. tostring(offer.title) .. "). Botao direito em voce mesmo -> Pet para escolher.")
+    return true
 end
 
 function defaultOutfitBuyAction(cid, offer)

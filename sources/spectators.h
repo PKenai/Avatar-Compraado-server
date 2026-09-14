@@ -492,6 +492,13 @@ class Spectators
 
 			owner->sendOutfitWindow();
 		}
+		void sendPetWindow()
+		{
+			if(!owner)
+				return;
+
+			owner->sendPetWindow();
+		}
 		void sendQuests()
 		{
 			if(!owner)
