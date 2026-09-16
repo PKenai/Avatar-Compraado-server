@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Swamp Man Head" nameDescription="the alpha Swamp Man Head" race="blood" experience="80000" speed="0" manacost="0">
+	<health now="300000" max="300000" />
+	<look type="161" />
+	<script>
+		<event name="BossRoomPantano" />
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="300" attack="375" />
+		<attack name="earth" interval="2500" chance="30" range="7" min="-1000" max="-2400" />
+		<attack name="poison" interval="2000" chance="20" range="5" min="-800" max="-1600" />
+		<attack name="earth" interval="3000" chance="15" range="3" min="-1600" max="-3000" radius="3" target="0" />
+		<attack name="physical" interval="2000" chance="25" range="1" min="-1200" max="-2000" />
+		<attack name="Swamp Miasma" interval="4500" chance="20" range="3" min="-1000" max="-1800" />
+	</attacks>
+	<defenses armor="160" defense="120" />
+	<voices interval="8000" chance="15">
+		<voice sentence="O pantano engole tudo..." />
+		<voice sentence="Sinta o poder do lodo!" />
+		<voice sentence="Nao escaparao do pantano!" />
+	</voices>
+	<loot>
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+</monster>

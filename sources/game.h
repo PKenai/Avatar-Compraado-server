@@ -340,6 +340,7 @@ class Game
 
 		uint32_t getPlayersRecord() const {return playersRecord;}
 		void getWorldLightInfo(LightInfo& lightInfo);
+		void setWorldLightLevel(int32_t level);
 
 		void getSpectators(SpectatorVec& list, const Position& centerPos, bool checkforduplicate = false, bool multifloor = false,
 			int32_t minRangeX = 0, int32_t maxRangeX = 0,
@@ -462,12 +463,14 @@ class Game
 		bool playerReportBug(uint32_t playerId, std::string comment);
 		bool playerReportViolation(uint32_t playerId, ReportType_t type, uint8_t reason, const std::string& name,
 			const std::string& comment, const std::string& translation, uint32_t statementId);
+		// Avatar: o count era uint8_t aqui, entao qualquer movimento de stack maior que
+		// 255 era truncado (o protocolo ja le u16). Ver ProtocolGame::parseThrow.
 		bool playerMoveThing(uint32_t playerId, const Position& fromPos, uint16_t spriteId,
-			int16_t fromStackpos, const Position& toPos, uint8_t count);
+			int16_t fromStackpos, const Position& toPos, uint16_t count);
 		bool playerMoveCreature(uint32_t playerId, uint32_t movingCreatureId,
 			const Position& movingCreatureOrigPos, const Position& toPos, bool delay);
 		bool playerMoveItem(uint32_t playerId, const Position& fromPos,
-			uint16_t spriteId, int16_t fromStackpos, const Position& toPos, uint8_t count);
+			uint16_t spriteId, int16_t fromStackpos, const Position& toPos, uint16_t count);
 		bool playerMove(uint32_t playerId, Direction dir);
 		bool playerCreatePrivateChannel(uint32_t playerId);
 		bool playerChannelInvite(uint32_t playerId, const std::string& name);
@@ -697,6 +700,9 @@ class Game
 		static const int32_t SUNSET = 1305;
 		static const int32_t SUNRISE = 430;
 		int32_t lightLevel, lightHour, lightHourDelta;
+		// config.lua: worldLightLevel/worldLightColor (ver Game::start)
+		int32_t lightColor;
+		bool fixedWorldLight;
 		LightState_t lightState;
 
 		GameState_t gameState;

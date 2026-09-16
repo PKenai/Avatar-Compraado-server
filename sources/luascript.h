@@ -632,6 +632,7 @@ class LuaInterface
 		static int32_t luaSetWorldType(lua_State* L);
 		static int32_t luaGetWorldTime(lua_State* L);
 		static int32_t luaGetWorldLight(lua_State* L);
+		static int32_t luaSetWorldLight(lua_State* L);
 		static int32_t luaGetWorldCreatures(lua_State* L);
 		static int32_t luaGetWorldUpTime(lua_State* L);
 		static int32_t luaGetGuildId(lua_State* L);
@@ -648,6 +649,7 @@ class LuaInterface
 		static int32_t luaCreateCombatObject(lua_State* L);
 		static int32_t luaCreateCombatArea(lua_State* L);
 		static int32_t luaSetCombatArea(lua_State* L);
+		static int32_t luaSetCombatStageScaling(lua_State* L);
 		static int32_t luaSetCombatCondition(lua_State* L);
 		static int32_t luaSetCombatParam(lua_State* L);
 		static int32_t luaCreateConditionObject(lua_State* L);

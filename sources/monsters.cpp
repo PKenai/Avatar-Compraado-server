@@ -107,8 +107,11 @@ ItemList MonsterType::createLoot(const LootBlock& lootBlock)
 	while(count > 0)
 	{
 		uint16_t n = 0;
-		if(Item::items[item].stackable)
-			n = std::min(count, (uint16_t)100);
+		// Force-stack gold (2148), platinum (2152) and crystal (2160) coins
+		// even if the .otb doesn't have the stackable flag set.
+		bool forceStackable = (item == 2148 || item == 2152 || item == 2160);
+		if(Item::items[item].stackable || forceStackable)
+			n = std::min(count, (uint16_t)MAX_STACK_SIZE);
 
 		if(!(tmpItem = Item::CreateItem(item, n)))
 			break;

@@ -28,6 +28,12 @@
 #include "items.h"
 #include "raids.h"
 
+// Avatar: tamanho maximo de um stack (moedas, runas, etc).
+// Era 100 espalhado em C++ (game.cpp, container.cpp, player.cpp) e fazia o merge
+// parar em 100 mesmo com o protocolo/Lua ja em 1000. O Item guarda a contagem em
+// uint16_t e o cliente recebe em u16, entao 1000 e o teto pratico.
+static constexpr uint32_t MAX_STACK_SIZE = 1000;
+
 class Creature;
 class Player;
 
@@ -117,6 +123,10 @@ enum AttrTypes_t
 	ATTR_ELEMENTALRUNETYPE = 45,
 	ATTR_ELEMENTALRUNELEVEL = 46,
 	ATTR_ELEMENTALRUNECHARGES = 47,
+	// Avatar: ATTR_COUNT e gravado como 1 byte (compatibilidade com os blobs ja
+	// salvos), o que truncava stacks acima de 255 na gravacao/recarga. Quando a
+	// contagem passa de 255 gravamos este atributo com 2 bytes em vez dele.
+	ATTR_COUNT_U16 = 48,
 	ATTR_ATTRIBUTE_MAP = 128
 };
 
@@ -363,7 +373,11 @@ class Item : virtual public Thing, public ItemAttributes
 
 	protected:
 		uint16_t id;
-		uint8_t count;
+		// Avatar: era uint8_t. Todo o resto do servidor (getItemCount/setItemCount,
+		// setSubType, MAX_STACK_SIZE, o protocolo u16) ja trabalhava com 16 bits,
+		// mas o item so guardava 8 -> qualquer stack passava por cima em 255 e
+		// "voltava" (250 + 6 = 0). Era o verdadeiro teto que faltava subir.
+		uint16_t count;
 
 		Raid* raid;
 		bool loadedFromMap;

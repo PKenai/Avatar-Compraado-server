@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Giant Snail" nameDescription="the alpha Giant Snail" race="blood" experience="44000" speed="308" manacost="0">
+	<health now="4200" max="4200" />
+	<look type="1315" corpse="18160" />
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="75" attack="60" />
+		<attack name="poison" interval="2000" chance="30" range="3" min="-20" max="-40" />
+		<attack name="Slime Trail" interval="3000" chance="20" range="4" min="-16" max="-32" />
+	</attacks>
+	<defenses armor="30" defense="30" />
+	<loot>
+		<item id="2148" countmax="75" chance="100000" />
+		<!-- gold coins -->
+		<item id="9633" countmax="1" chance="15000" />
+		<!-- Snail Shell -->
+		<item id="19125" countmax="1" chance="15000" />
+		<!-- Frasco com liquido de caracol -->
+		<item id="19124" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<script>
+		<event name="mobsKill" />
+	</script>
+</monster>

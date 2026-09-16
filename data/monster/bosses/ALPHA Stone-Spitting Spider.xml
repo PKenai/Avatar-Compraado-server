@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Stone-Spitting Spider" nameDescription="the alpha Stone-Spitting Spider" race="undead" experience="24000" speed="440" manacost="0">
+	<health now="9000" max="9000" />
+	<look type="1288" corpse="18160" />
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="150" attack="150" />
+		<attack name="earth" interval="2500" chance="40" range="7" min="-240" max="-440">
+			<attribute key="shootEffect" value="largerock" />
+		</attack>
+		<attack name="Stone Spit" interval="3000" chance="25" range="7" target="1" min="-160" max="-300" />
+	</attacks>
+	<defenses armor="20" defense="16" />
+	<loot>
+		<item id="2148" countmax="150" chance="100000" />
+		<!-- gold coins -->
+		<item id="19111" countmax="1" chance="25000" />
+		<!-- Teia forte -->
+		<item id="19110" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<script>
+		<event name="mobsKill" />
+	</script>
+</monster>

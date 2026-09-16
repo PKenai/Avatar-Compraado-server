@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Guardian Beetle" nameDescription="the alpha Guardian Beetle" race="undead" experience="0" speed="308" manacost="0">
+	<health now="99000" max="99000" />
+	<look type="1293" corpse="18160" />
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="80" defense="20" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="207" attack="225" />
+		<attack name="earth pull" interval="3000" chance="70" min="-500" max="-900" />
+		<attack name="earth petrify" interval="4000" chance="50" min="-400" max="-700" />
+		<attack name="earth fury" interval="3500" chance="60" min="-600" max="-1000" />
+		<attack name="Guardian's Tremor" interval="4000" chance="20" range="3" min="-300" max="-500" />
+	</attacks>
+	<defenses armor="80" defense="60" />
+	<elements>
+		<element earthPercent="100" />
+		<element energyPercent="10" />
+		<element firePercent="-20" />
+	</elements>
+	<loot>
+		<item id="2148" countmax="240" chance="100000" />
+		<!-- gold coins -->
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="BZZZZZZZ!" yell="0" />
+		<voice sentence="GRONK!" yell="1" />
+	</voices>
+</monster>

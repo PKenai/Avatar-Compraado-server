@@ -28,6 +28,14 @@
 		<attack name="poison" interval="2500" chance="15" length="5" spread="3" min="-500" max="-680">
 			<attribute key="areaEffect" value="poison"/>
 		</attack>
+		<!-- Earth Pull: mesma dobra do Guardian Beetle - puxa o alvo para perto
+		     e prende ele no chao (o dano vem deste min/max).
+		     Ritmo: Monster::doAttacking so rola a chance de uma spell nas janelas do
+		     proprio interval dela, dentro de um "ciclo" que dura o maior interval
+		     do monstro. Com 5000 esta spell passa a definir o ciclo (5s) e cai em
+		     uma unica janela: 10% a cada 5 segundos, ~1 conjuracao a cada 50s.
+		     O visual dela e' a pedra que voa do scarab ate o alvo (pull.lua). -->
+		<attack name="earth pull" interval="5000" chance="10" range="6" min="-350" max="-500"/>
 		<attack name="Sacred Sandstorm" interval="4000" chance="20" range="6" min="-250" max="-400"/>
 	</attacks>
 	<defenses armor="120" defense="88"/>

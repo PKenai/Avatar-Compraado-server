@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Fierce Bear" nameDescription="the alpha Fierce Bear" race="undead" experience="12800" speed="352" manacost="0">
+	<health now="3600" max="3600" />
+	<look type="1287" corpse="18160" />
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="105" attack="105" />
+		<attack name="physical" interval="2500" chance="30" range="1" min="-120" max="-240" />
+		<attack name="Bear Maul" interval="3000" chance="25" range="3" min="-80" max="-160" />
+	</attacks>
+	<defenses armor="10" defense="10" />
+	<loot>
+		<item id="2671" countmax="3" chance="75000" />
+		<!-- HAM: 0 a 3 -->
+		<item id="2666" countmax="3" chance="75000" />
+		<!-- MEAT: 0 a 3 -->
+		<item id="19109" countmax="1" chance="25000" />
+		<!-- Pelo de urso -->
+		<item id="19108" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="Grrrrrr" />
+		<voice sentence="GROARRR!" yell="1" />
+	</voices>
+	<script>
+		<event name="mobsKill" />
+	</script>
+</monster>

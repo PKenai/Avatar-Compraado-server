@@ -8,6 +8,14 @@
 	<movevent type="StepIn" pos="24,11,6" script="appaCloudShader.lua"/>
 	<movevent type="StepOut" pos="24,11,6" script="appaCloudShader.lua"/>
 
+	<!-- ============ SISTEMA ALPHA: tile de invocacao de boss ============
+	     Pise no tile (itemID 19333 ou 19334) tendo uma task diaria concluida e o
+	     boss ALPHA da criatura que estiver por perto aparece ao seu lado.
+	     Tambem funciona com actionID 50030 em QUALQUER item do mapa. -->
+	<movevent type="StepIn" itemid="19333" script="bossPortal.lua"/>
+	<movevent type="StepIn" itemid="19334" script="bossPortal.lua"/>
+	<movevent type="StepIn" actionid="50030" script="bossPortal.lua"/>
+
 <!-- Helmet  -->
 <movevent type="Equip" itemid="13401" level="150" slot="head" event="function" value="onEquipItem" />
 <movevent type="DeEquip" itemid="13401" level="150" slot="head" event="function" value="onDeEquipItem" />

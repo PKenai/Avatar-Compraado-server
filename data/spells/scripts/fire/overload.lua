@@ -54,6 +54,7 @@ local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, 148)
 setCombatArea(combat, createCombatArea(AREA_SQUARE1X1))
+setCombatStageScaling(combat)
 
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = (level+(magLevel/2)*7.5)+math.random(40, 50)

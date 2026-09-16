@@ -46,9 +46,17 @@ function onCastSpell(cid, var)
                 return false
             end
         end
+		-- Estagios: mini (<50) e' o golpe seco, sem enfeite;
+		-- padrao (50-99) ganha o impacto de vento;
+		-- elite (100+) vira Vendaval: o golpe volta 450ms depois e o alvo trava.
+		local stage = getSpellStage(cid)
+		if stage ~= SPELL_STAGE_MINI and isCreature(target) then
+			doSendMagicEffect(getThingPos(target), 76)
+		end
 		if dif == 1 then 
 			addEvent(function() if isCreature(cid) and isCreature(variantToNumber(var)) and not isInPz(cid) and not isInPz(variantToNumber(var)) then doCombat(cid, combat, var) end end, 250)
 		end
+		spellStageElite(cid, "air", var, combat, target, 450)
         return doCombat(cid, combat, var)
     end
 

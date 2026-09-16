@@ -22,6 +22,7 @@ local arr = {
 }
 
 setCombatArea(combat, createCombatArea(arr))
+setCombatStageScaling(combat)
 
 local function getDrewMap(map)
   local points = 0

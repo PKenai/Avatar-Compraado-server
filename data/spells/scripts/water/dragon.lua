@@ -7,6 +7,7 @@ MyLocal.chanceFrozzen = cf.chanceFrozzen
 
 local combat = createCombatObject()
 setCombatArea(combat, createCombatArea(AREA_CIRCLE3X3))
+setCombatStageScaling(combat)
 
 local combat1 = createCombatObject()
 setCombatParam(combat1, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)

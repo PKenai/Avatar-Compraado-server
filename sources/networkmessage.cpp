@@ -201,28 +201,33 @@ void NetworkMessage::putPosition(const Position& pos)
 	put<char>(pos.z);
 }
 
-void NetworkMessage::putItem(uint16_t id, uint8_t count)
+// Avatar: o campo que segue o id tem largura FIXA de 2 bytes (u16) para TODOS os
+// itens. O cliente (ProtocolGame::getItem) sempre le 2 bytes, entao a largura nao
+// pode depender de stackable/fluid: o items.otb daqui e o .dat do cliente divergem
+// em alguns ids (ex.: 268) e 1 byte de erro desalinhava o mapa inteiro.
+void NetworkMessage::putItem(uint16_t id, uint16_t count)
 {
 	const ItemType &it = Item::items[id];
 	put<uint16_t>(it.clientId);
 	if(it.stackable)
-		put<char>(count);
+		put<uint16_t>(count);
 	else if(it.isSplash() || it.isFluidContainer())
-		put<char>(fluidMap[count % 8]);
+		put<uint16_t>(fluidMap[count % 8]);
 	else
-		put<char>(0);
+		put<uint16_t>(0);
 }
 
 void NetworkMessage::putItem(const Item* item)
 {
 	const ItemType& it = Item::items[item->getID()];
 	put<uint16_t>(it.clientId);
+	// Avatar: largura fixa de 2 bytes, igual ao putItem(id, count).
 	if(it.stackable)
-		put<char>(item->getSubType());
+		put<uint16_t>(item->getSubType());
 	else if(it.isSplash() || it.isFluidContainer())
-		put<char>(fluidMap[item->getSubType() % 8]);
+		put<uint16_t>(fluidMap[item->getSubType() % 8]);
 	else
-		put<char>((char)std::min((int32_t)10, std::max((int32_t)0, item->getTier())));
+		put<uint16_t>((uint16_t)std::min((int32_t)10, std::max((int32_t)0, item->getTier())));
 }
 
 void NetworkMessage::putItemId(const Item* item)

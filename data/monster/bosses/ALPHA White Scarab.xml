@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA White Scarab" nameDescription="the alpha White Scarab" race="undead" experience="224000" speed="352" manacost="0">
+	<health now="210000" max="210000" />
+	<look type="1360" corpse="18160" />
+	<script>
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="3000" chance="20" />
+	<strategy attack="100" defense="10" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="300" attack="360" />
+		<attack name="physical" interval="2300" chance="30" range="1" min="-900" max="-1240" />
+		<attack name="earth" interval="2500" chance="25" range="7" min="-1100" max="-1520" />
+		<!-- Poison wave (estilo exevo flam hur), dano do poison ja definido -->
+		<attack name="poison" interval="2500" chance="15" length="5" spread="3" min="-1000" max="-1360">
+			<attribute key="areaEffect" value="poison" />
+		</attack>
+		<attack name="Sacred Sandstorm" interval="4000" chance="20" range="6" min="-500" max="-800" />
+		<!-- Earth Pull: mesma dobra do Guardian Beetle - puxa o alvo para perto.
+		     O ciclo do motor de ataque aqui e' de 9000 (por causa da earth quake), e
+		     um interval de 4500 cai em 2 janelas por ciclo: 10% + 10% a cada 9s,
+		     que da' ~10% a cada 5 segundos (o pedido).
+		     O visual dela e' a pedra que voa do boss ate o alvo (pull.lua). -->
+		<attack name="earth pull" interval="4500" chance="10" range="6" min="-700" max="-1000" />
+		<!-- Earth Quake: tremores em volta do boss. O dano de cada sqm sai deste
+		     min/max (earth/quake.lua le exatamente esta linha do XML) -->
+		<attack name="earth quake" interval="9000" chance="25" range="7" min="-900" max="-1300" />
+	</attacks>
+	<defenses armor="240" defense="176" />
+	<elements>
+		<element earthPercent="20" />
+		<element physicalPercent="15" />
+		<element firePercent="-20" />
+		<element icePercent="-10" />
+	</elements>
+	<loot>
+		<item id="2148" countmax="5100" chance="100000" />
+		<!-- gold coins -->
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="FSSSSHHHH!" yell="1" />
+		<voice sentence="CRACKLE CRACKLE!" yell="0" />
+	</voices>
+</monster>

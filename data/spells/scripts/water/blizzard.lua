@@ -12,6 +12,7 @@ local arr = {{0, 1, 1, 1, 0},
 
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_ICEDAMAGE)
 setCombatArea(combat, createCombatArea(arr))
+setCombatStageScaling(combat)
 function onGetPlayerMinMaxValues(cid, level, magLevel)
 		local min = (level+(magLevel/4)*0.3)*4.5
 		local max = (level+(magLevel/4)*0.7)*5

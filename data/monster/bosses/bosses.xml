@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monsters>
+	<monster name="ALPHA Ba Sing Se Lion" file="ALPHA Ba Sing Se Lion.xml"/>
+	<monster name="ALPHA Black Panther" file="ALPHA Black Panther.xml"/>
+	<monster name="ALPHA Blue Hydra Head" file="ALPHA Blue Hydra Head.xml"/>
+	<monster name="ALPHA Cemetery Worm" file="ALPHA Cemetery Worm.xml"/>
+	<monster name="ALPHA Cockroach" file="ALPHA Cockroach.xml"/>
+	<monster name="ALPHA Desert Crocodile" file="ALPHA Desert Crocodile.xml"/>
+	<monster name="ALPHA Earth Beetle" file="ALPHA Earth Beetle.xml"/>
+	<monster name="ALPHA Earth Ladybug" file="ALPHA Earth Ladybug.xml"/>
+	<monster name="ALPHA Earth Mordecai" file="ALPHA Earth Mordecai.xml"/>
+	<monster name="ALPHA Earth Woodpecker" file="ALPHA Earth Woodpecker.xml"/>
+	<monster name="ALPHA Elephant" file="ALPHA Elephant.xml"/>
+	<monster name="ALPHA Fierce Bear" file="ALPHA Fierce Bear.xml"/>
+	<monster name="ALPHA Forbidden Folds Book" file="ALPHA Forbidden Folds Book.xml"/>
+	<monster name="ALPHA Giant Cricket" file="ALPHA Giant Cricket.xml"/>
+	<monster name="ALPHA Giant Snail" file="ALPHA Giant Snail.xml"/>
+	<monster name="ALPHA Gleaming Beetle" file="ALPHA Gleaming Beetle.xml"/>
+	<monster name="ALPHA Green Hydra Head" file="ALPHA Green Hydra Head.xml"/>
+	<monster name="ALPHA Guardian Beetle" file="ALPHA Guardian Beetle.xml"/>
+	<monster name="ALPHA Hermit Crab" file="ALPHA Hermit Crab.xml"/>
+	<monster name="ALPHA Hippo" file="ALPHA Hippo.xml"/>
+	<monster name="ALPHA Hopper" file="ALPHA Hopper.xml"/>
+	<monster name="ALPHA Jaguar" file="ALPHA Jaguar.xml"/>
+	<monster name="ALPHA Mountain Defender" file="ALPHA Mountain Defender.xml"/>
+	<monster name="ALPHA Mud Bee" file="ALPHA Mud Bee.xml"/>
+	<monster name="ALPHA Mud Man" file="ALPHA Mud Man.xml"/>
+	<monster name="ALPHA Rock-Eating Cockroach" file="ALPHA Rock-Eating Cockroach.xml"/>
+	<monster name="ALPHA Sea Iguana" file="ALPHA Sea Iguana.xml"/>
+	<monster name="ALPHA Steel Shell Centipede" file="ALPHA Steel Shell Centipede.xml"/>
+	<monster name="ALPHA Stone Tarantula" file="ALPHA Stone Tarantula.xml"/>
+	<monster name="ALPHA Stone-Spitting Spider" file="ALPHA Stone-Spitting Spider.xml"/>
+	<monster name="ALPHA Swamp Man Arm" file="ALPHA Swamp Man Arm.xml"/>
+	<monster name="ALPHA Swamp Man Head" file="ALPHA Swamp Man Head.xml"/>
+	<monster name="ALPHA Swamp Monster" file="ALPHA Swamp Monster.xml"/>
+	<monster name="ALPHA Swamp Tentacles" file="ALPHA Swamp Tentacles.xml"/>
+	<monster name="ALPHA Traitor" file="ALPHA Traitor.xml"/>
+	<monster name="ALPHA Trenix" file="ALPHA Trenix.xml"/>
+	<monster name="ALPHA Uncontrolled Knowledge" file="ALPHA Uncontrolled Knowledge.xml"/>
+	<monster name="ALPHA Vacaceronte" file="ALPHA Vacaceronte.xml"/>
+	<monster name="ALPHA Vulture Bee" file="ALPHA Vulture Bee.xml"/>
+	<monster name="ALPHA Warm Cape Crab" file="ALPHA Warm Cape Crab.xml"/>
+	<monster name="ALPHA White Scarab" file="ALPHA White Scarab.xml"/>
+</monsters>

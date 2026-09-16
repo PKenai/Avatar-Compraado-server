@@ -53,6 +53,7 @@ end
 
 local combat = createCombatObject()
 setCombatArea(combat, createCombatArea(AREA_CROSS6X6))
+setCombatStageScaling(combat)
 
 function onTargetTile(cid, pos)
     table.insert(MyLocal.players[cid].poses, pos)

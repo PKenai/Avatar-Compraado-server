@@ -199,6 +199,8 @@ class ConfigManager
 			SERVICE_THREADS,
 			FOLLOW_EXHAUST,
 			PACKETS_PER_SECOND,
+			WORLD_LIGHT_LEVEL,
+			WORLD_LIGHT_COLOR,
 			LAST_NUMBER_CONFIG /* this must be the last one */
 		};
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Traitor" nameDescription="the alpha Traitor" race="undead" experience="43200" speed="572" manacost="0">
+	<health now="25200" max="25200" />
+	<look type="1286" corpse="18160" />
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="180" attack="207" />
+		<attack name="earth" interval="2000" chance="25" range="7" min="-520" max="-600" />
+		<attack name="poison" interval="2000" chance="15" range="3" min="-240" max="-300" />
+		<attack name="Backstab Dust" interval="3000" chance="20" range="6" target="1" min="-300" max="-500" />
+	</attacks>
+	<defenses armor="40" defense="20" />
+	<loot>
+		<item id="2148" countmax="1314" chance="100000" />
+		<!-- moedas (25% a mais que a Mordecasca) -->
+		<item id="19137" countmax="1" chance="9000" />
+		<!-- Pano sombrio -->
+		<item id="19136" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<script>
+		<event name="TraidorDeath" />
+	</script>
+	<script>
+		<event name="mobsKill" />
+	</script>
+</monster>

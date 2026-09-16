@@ -206,6 +206,12 @@ class CombatArea
 
 		CombatArea(const CombatArea& rhs);
 
+		// Copia desta area com o anel externo removido (mode < 0: magia mini) ou
+		// estendido (mode > 0: magia elite). Quem chama e' dono do ponteiro.
+		// Usado pelo sistema de estagios das magias de player - ver
+		// data/spells/lib/spellStages.lua e Combat::getStageArea().
+		CombatArea* scaled(int32_t mode) const;
+
 		ReturnValue doCombat(Creature* attacker, const Position& pos, const Combat& combat) const;
 		bool getList(const Position& centerPos, const Position& targetPos, std::list<Tile*>& list) const;
 
@@ -322,6 +328,15 @@ class Combat
 		}
 		bool hasArea() const {return area != NULL;}
 
+		// Estagios das magias: quando ligado, o combat usa uma area reduzida para
+		// players abaixo de SPELL_MINI_LEVEL e uma area ampliada a partir de
+		// SPELL_ELITE_LEVEL. Monstros e summons continuam usando a area original.
+		void setStageScaling(bool value) {stageScaling = value;}
+		bool hasStageScaling() const {return stageScaling;}
+
+		static const int32_t STAGE_MINI_LEVEL = 50;
+		static const int32_t STAGE_ELITE_LEVEL = 100;
+
 		bool setParam(CombatParam_t param, uint32_t value);
 		void setCondition(const Condition* _condition) {params.conditionList.push_back(_condition);}
 		void setPlayerCombatValues(formulaType_t _type, double _mina, double _minb, double _maxa,
@@ -330,6 +345,10 @@ class Combat
 
 		void postCombatEffects(Creature* caster, const Position& pos) const
 			{Combat::postCombatEffects(caster, pos, params);}
+
+		// Area que este combat deve usar para o caster informado (mini, original ou
+		// elite). As copias escaladas sao criadas na primeira vez que fazem falta.
+		const CombatArea* getStageArea(Creature* caster) const;
 
 	protected:
 		static void doCombatDefault(Creature* caster, Creature* target, const CombatParams& params);
@@ -354,6 +373,8 @@ class Combat
 		int32_t minc, maxc;
 
 		CombatArea* area;
+		bool stageScaling;
+		mutable CombatArea* stageAreas[3];
 };
 
 class MagicField : public Item

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Blue Hydra Head" nameDescription="the alpha Blue Hydra Head" race="blood" experience="400000" speed="0" manacost="0">
+	<health now="1200000" max="1200000" />
+	<look typeex="19275" />
+	<script>
+		<event name="HydraRoomDeath" />
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="8000" chance="15" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<!-- Energy de longo alcance - dano principal -->
+		<attack name="energy" interval="2000" chance="35" range="7" min="-2800" max="-6000" />
+		<!-- Explosao de energy em area -->
+		<attack name="energy" interval="3500" chance="25" range="6" min="-2000" max="-4400" radius="2" target="1" />
+		<!-- Paralisia/atordoamento de energy -->
+		<attack name="energycondition" interval="5000" chance="20" range="6" target="1" />
+		<!-- Rajada de poison (susto) -->
+		<attack name="poison" interval="4500" chance="20" range="7" min="-1400" max="-3200" />
+		<!-- Energy em wave -->
+		<attack name="energy" interval="6000" chance="15" range="5" min="-2400" max="-5000" radius="3" target="0" />
+		<attack name="Blue Hydra Storm" interval="4000" chance="20" range="6" min="-1400" max="-2800" />
+	</attacks>
+	<defenses armor="190" defense="150" />
+	<voices interval="10000" chance="20">
+		<voice sentence="A energia da Hydra vai fritar seus ossos!" />
+		<voice sentence="Sinta o poder eletrico da Blue Hydra!" />
+		<voice sentence="Nenhuma armadura resiste ao raio da Hydra!" />
+		<voice sentence="A tempestade da Hydra chegou!" />
+	</voices>
+	<loot>
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+</monster>

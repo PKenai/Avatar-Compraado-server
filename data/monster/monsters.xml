@@ -109,5 +109,48 @@
 
   <!-- Treino / utilitarios -->
   <monster name="Dummy" file="Oficial monsters avatar/Dummy.xml"/>
-
+	<!-- ALPHA BOSSES (gerado por tools/generate_bosses.py) -->
+	<!-- Gerado por tools/generate_bosses.py. Nao edite a mao: rode o script. -->
+	<monster name="ALPHA Ba Sing Se Lion" file="bosses/ALPHA Ba Sing Se Lion.xml"/>
+	<monster name="ALPHA Black Panther" file="bosses/ALPHA Black Panther.xml"/>
+	<monster name="ALPHA Blue Hydra Head" file="bosses/ALPHA Blue Hydra Head.xml"/>
+	<monster name="ALPHA Cemetery Worm" file="bosses/ALPHA Cemetery Worm.xml"/>
+	<monster name="ALPHA Cockroach" file="bosses/ALPHA Cockroach.xml"/>
+	<monster name="ALPHA Desert Crocodile" file="bosses/ALPHA Desert Crocodile.xml"/>
+	<monster name="ALPHA Earth Beetle" file="bosses/ALPHA Earth Beetle.xml"/>
+	<monster name="ALPHA Earth Ladybug" file="bosses/ALPHA Earth Ladybug.xml"/>
+	<monster name="ALPHA Earth Mordecai" file="bosses/ALPHA Earth Mordecai.xml"/>
+	<monster name="ALPHA Earth Woodpecker" file="bosses/ALPHA Earth Woodpecker.xml"/>
+	<monster name="ALPHA Elephant" file="bosses/ALPHA Elephant.xml"/>
+	<monster name="ALPHA Fierce Bear" file="bosses/ALPHA Fierce Bear.xml"/>
+	<monster name="ALPHA Forbidden Folds Book" file="bosses/ALPHA Forbidden Folds Book.xml"/>
+	<monster name="ALPHA Giant Cricket" file="bosses/ALPHA Giant Cricket.xml"/>
+	<monster name="ALPHA Giant Snail" file="bosses/ALPHA Giant Snail.xml"/>
+	<monster name="ALPHA Gleaming Beetle" file="bosses/ALPHA Gleaming Beetle.xml"/>
+	<monster name="ALPHA Green Hydra Head" file="bosses/ALPHA Green Hydra Head.xml"/>
+	<monster name="ALPHA Guardian Beetle" file="bosses/ALPHA Guardian Beetle.xml"/>
+	<monster name="ALPHA Hermit Crab" file="bosses/ALPHA Hermit Crab.xml"/>
+	<monster name="ALPHA Hippo" file="bosses/ALPHA Hippo.xml"/>
+	<monster name="ALPHA Hopper" file="bosses/ALPHA Hopper.xml"/>
+	<monster name="ALPHA Jaguar" file="bosses/ALPHA Jaguar.xml"/>
+	<monster name="ALPHA Mountain Defender" file="bosses/ALPHA Mountain Defender.xml"/>
+	<monster name="ALPHA Mud Bee" file="bosses/ALPHA Mud Bee.xml"/>
+	<monster name="ALPHA Mud Man" file="bosses/ALPHA Mud Man.xml"/>
+	<monster name="ALPHA Rock-Eating Cockroach" file="bosses/ALPHA Rock-Eating Cockroach.xml"/>
+	<monster name="ALPHA Sea Iguana" file="bosses/ALPHA Sea Iguana.xml"/>
+	<monster name="ALPHA Steel Shell Centipede" file="bosses/ALPHA Steel Shell Centipede.xml"/>
+	<monster name="ALPHA Stone Tarantula" file="bosses/ALPHA Stone Tarantula.xml"/>
+	<monster name="ALPHA Stone-Spitting Spider" file="bosses/ALPHA Stone-Spitting Spider.xml"/>
+	<monster name="ALPHA Swamp Man Arm" file="bosses/ALPHA Swamp Man Arm.xml"/>
+	<monster name="ALPHA Swamp Man Head" file="bosses/ALPHA Swamp Man Head.xml"/>
+	<monster name="ALPHA Swamp Monster" file="bosses/ALPHA Swamp Monster.xml"/>
+	<monster name="ALPHA Swamp Tentacles" file="bosses/ALPHA Swamp Tentacles.xml"/>
+	<monster name="ALPHA Traitor" file="bosses/ALPHA Traitor.xml"/>
+	<monster name="ALPHA Trenix" file="bosses/ALPHA Trenix.xml"/>
+	<monster name="ALPHA Uncontrolled Knowledge" file="bosses/ALPHA Uncontrolled Knowledge.xml"/>
+	<monster name="ALPHA Vacaceronte" file="bosses/ALPHA Vacaceronte.xml"/>
+	<monster name="ALPHA Vulture Bee" file="bosses/ALPHA Vulture Bee.xml"/>
+	<monster name="ALPHA Warm Cape Crab" file="bosses/ALPHA Warm Cape Crab.xml"/>
+	<monster name="ALPHA White Scarab" file="bosses/ALPHA White Scarab.xml"/>
+	<!-- /ALPHA BOSSES -->
 </monsters>

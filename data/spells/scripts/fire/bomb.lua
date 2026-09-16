@@ -35,6 +35,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = ((level+(magLevel/2)*7.5)+math.random(40, 50))*1.5
@@ -53,6 +54,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combatFocus, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combatFocus)
 
 function onCastSpell(cid, var)
     if getSpellCancels(cid, "fire") == true then

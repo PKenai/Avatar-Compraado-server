@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Vacaceronte" nameDescription="the alpha Vacaceronte" race="blood" experience="96000" speed="550" manacost="0">
+	<health now="45000" max="45000" />
+	<look type="1314" corpse="18160" />
+	<script>
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="210" attack="232" />
+		<attack name="physical" interval="2000" chance="25" range="1" min="-400" max="-700" />
+		<attack name="earth" interval="2500" chance="15" range="7" min="-440" max="-680" />
+		<attack name="energy" interval="3000" chance="10" range="5" min="-360" max="-560" />
+		<attack name="Charging Horns" interval="3500" chance="20" range="5" min="-400" max="-700" />
+	</attacks>
+	<defenses armor="70" defense="60">
+		<defense name="healing" interval="5000" chance="8" min="150" max="300">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element earthPercent="15" />
+		<element physicalPercent="10" />
+		<element firePercent="-15" />
+		<element energyPercent="-10" />
+	</elements>
+	<loot>
+		<item id="2148" countmax="300" chance="100000" />
+		<!-- gold coins -->
+		<item id="2671" countmax="5" chance="80000" />
+		<!-- ham -->
+		<item id="9633" countmax="3" chance="20000" />
+		<!-- Snail Shell -->
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="MUUUUU!" yell="1" />
+		<voice sentence="VRRRRRRR!" yell="1" />
+		<voice sentence="GRRRRMMMM!" yell="1" />
+	</voices>
+</monster>

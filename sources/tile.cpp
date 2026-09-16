@@ -517,6 +517,12 @@ ReturnValue Tile::__queryAdd(int32_t, const Thing* thing, uint32_t,
 			if(!monster->isPet() && hasFlag(TILESTATE_PROTECTIONZONE))
 				return RET_NOTPOSSIBLE;
 
+			//Avatar custom: pet nao entra em agua (swimming pool).
+			//Evita stack overflow dos scripts de movimentacao que teleportam
+			//monstros de volta e tambem faz o pet sumir quando o dono esta na agua.
+			if(monster->isPet() && g_game.isSwimmingPool(NULL, this, false))
+				return RET_NOTPOSSIBLE;
+
 			if(floorChange() || positionChange())
 				return RET_NOTPOSSIBLE;
 
@@ -1308,7 +1314,9 @@ void Tile::__removeThing(Thing* thing, uint32_t count)
 		{
 			if(item->isStackable() && count != item->getItemCount())
 			{
-				uint8_t newCount = (uint8_t)std::max((int32_t)0, (int32_t)(item->getItemCount() - count));
+				// Avatar: era uint8_t, truncando (ex.: 1000 -> 232) ao remover de um
+				// stack no chao.
+				uint16_t newCount = (uint16_t)std::max((int32_t)0, (int32_t)(item->getItemCount() - count));
 				updateTileFlags(item, true);
 
 				item->setItemCount(newCount);

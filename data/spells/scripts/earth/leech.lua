@@ -17,6 +17,7 @@ setCombatArea(combat, createCombatArea(
           {0, 0, 1, 2, 1, 0, 0},
           {0, 0, 1, 1, 1, 0, 0}
       }))
+setCombatStageScaling(combat)
 
 
 local function getDamage(cid)
@@ -54,7 +55,7 @@ function onTargetCreature(cid, target)
     random = random/2
   end
   doTargetCombatHealth(0, cid, COMBAT_HEALING, random, random, -1)
-  --doSendMagicEffect({x=mypos.x+1, y=mypos.y+1, z=mypos.z}, 130)
+  --doSendMagicEffect({x=mypos.x+1, y=mypos.y+1, z=mypos.z}, 428)
   if isMonster(target) then 
     doChallengeCreature(cid, target)
   end 
@@ -64,7 +65,8 @@ end
 setCombatCallback(combat, CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
 
 function onTargetTile(cid, pos)
-    return doSendMagicEffect({x=pos.x+1, y=pos.y+1, z=pos.z}, 130)
+    -- efeito ancorado no tile do caster (sem offset), corrigindo o desalinhamento
+    return doSendMagicEffect({x=pos.x, y=pos.y, z=pos.z}, 428)
 end
     setCombatCallback(combat, CALLBACK_PARAM_TARGETTILE, "onTargetTile")
 

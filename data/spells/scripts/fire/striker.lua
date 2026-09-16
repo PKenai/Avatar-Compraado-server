@@ -57,7 +57,9 @@ local arr = {
 }
 
 setCombatArea(combat, createCombatArea(arr))
+setCombatStageScaling(combat)
 setCombatArea(combatFocus, createCombatArea(arr))
+setCombatStageScaling(combatFocus)
 
 local function sendDamage(cid, finish, focus)
     if getTileInfo(getCreaturePosition(cid)).protection then return false end

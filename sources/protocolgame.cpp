@@ -1433,7 +1433,7 @@ void ProtocolGame::parseThrow(NetworkMessage& msg)
 	uint16_t spriteId = msg.get<uint16_t>();
 	int16_t fromStackpos = msg.get<char>();
 	Position toPos = msg.getPosition();
-	uint8_t count = msg.get<char>();
+	uint16_t count = msg.get<uint16_t>();
 	if(toPos != fromPos)
 		addGameTaskTimed(DISPATCHER_TASK_EXPIRATION, &Game::playerMoveThing,
 			player->getID(), fromPos, spriteId, fromStackpos, toPos, count);
@@ -1551,7 +1551,7 @@ void ProtocolGame::parseHouseWindow(NetworkMessage &msg)
 void ProtocolGame::parseLookInShop(NetworkMessage &msg)
 {
 	uint16_t id = msg.get<uint16_t>();
-	uint8_t count = msg.get<char>();
+	uint16_t count = msg.get<uint16_t>();
 	addGameTaskTimed(DISPATCHER_TASK_EXPIRATION, &Game::playerLookInShop, player->getID(), id, count);
 }
 
@@ -3533,12 +3533,14 @@ void ProtocolGame::AddShopItem(NetworkMessage_ptr msg, const ShopInfo& item)
 {
 	const ItemType& it = Item::items[item.itemId];
 	msg->put<uint16_t>(it.clientId);
+	// Avatar: largura FIXA de 2 bytes, igual ao NetworkMessage::putItem. O cliente
+	// (parseNpcTrade) le sempre 2 bytes, entao a largura nao pode depender do tipo.
 	if(it.isSplash() || it.isFluidContainer())
-		msg->put<char>(fluidMap[item.subType % 8]);
+		msg->put<uint16_t>(fluidMap[item.subType % 8]);
 	else if(it.stackable || it.charges)
-		msg->put<char>(item.subType);
+		msg->put<uint16_t>(item.subType);
 	else
-		msg->put<char>(0x00);
+		msg->put<uint16_t>(0x00);
 
 	msg->putString(item.itemName);
 	msg->put<uint32_t>(uint32_t(it.weight * 100));

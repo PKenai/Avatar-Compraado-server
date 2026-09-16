@@ -70,6 +70,7 @@ arr[7] = {{1, 1, 1, 1, 1, 1, 1},
 
 for x = 1, 7 do
     setCombatArea(combats[x], createCombatArea(arr[x]))
+    setCombatStageScaling(combats[x])
     function onTargetTile(cid, pos)
         doCombat(cid, combat, {type=2, pos=pos})  
     end

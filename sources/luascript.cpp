@@ -2124,6 +2124,9 @@ void LuaInterface::registerFunctions()
 	//getWorldLight()
 	lua_register(m_luaState, "getWorldLight", LuaInterface::luaGetWorldLight);
 
+	//setWorldLight(level)
+	lua_register(m_luaState, "setWorldLight", LuaInterface::luaSetWorldLight);
+
 	//getWorldCreatures(type)
 	//0 players, 1 monsters, 2 npcs, 3 all
 	lua_register(m_luaState, "getWorldCreatures", LuaInterface::luaGetWorldCreatures);
@@ -2151,6 +2154,9 @@ void LuaInterface::registerFunctions()
 
 	//setCombatArea(combat, area)
 	lua_register(m_luaState, "setCombatArea", LuaInterface::luaSetCombatArea);
+
+	//setCombatStageScaling(combat)
+	lua_register(m_luaState, "setCombatStageScaling", LuaInterface::luaSetCombatStageScaling);
 
 	//setCombatCondition(combat, condition)
 	lua_register(m_luaState, "setCombatCondition", LuaInterface::luaSetCombatCondition);
@@ -3837,8 +3843,8 @@ int32_t LuaInterface::luaDoTransformItem(lua_State* L)
 	}
 
 	const ItemType& it = Item::items[newId];
-	if(it.stackable && count > 100)
-		count = 100;
+	if(it.stackable && count > 1000)
+		count = 1000;
 
 	Item* newItem = g_game.transformItem(item, newId, count);
 	if(newItem && newItem != item)
@@ -4324,9 +4330,8 @@ int32_t LuaInterface::luaDoPlayerAddItem(lua_State* L)
 	if(params > 4)
 		itemCount = std::max((uint32_t)1, count);
 	else if(it.hasSubType())
-	{
-		if(it.stackable)
-			itemCount = (int32_t)std::ceil((float)count / 100);
+	{				if(it.stackable)
+					itemCount = (int32_t)std::ceil((float)count / 1000);
 
 		subType = count;
 	}
@@ -4335,7 +4340,7 @@ int32_t LuaInterface::luaDoPlayerAddItem(lua_State* L)
 	Item* newItem = NULL;
 	while(itemCount > 0)
 	{
-		int32_t stackCount = std::min(100, subType);
+		int32_t stackCount = std::min(1000, subType);
 		if(!(newItem = Item::CreateItem(itemId, stackCount)))
 		{
 			errorEx(getError(LUA_ERROR_ITEM_NOT_FOUND));
@@ -4464,7 +4469,7 @@ int32_t LuaInterface::luaDoPlayerAddItemToDepot(lua_State* L)
 	{
 		// itens com subtipo (empilhaveis OU carregaveis ex: runas):
 		// divide em stacks/charges de ate 100 e decrementa o subtipo sempre
-		itemCount = (int32_t)std::ceil((float)count / 100);
+		itemCount = (int32_t)std::ceil((float)count / 1000);
 		subType = count;
 	}
 	else
@@ -4473,7 +4478,7 @@ int32_t LuaInterface::luaDoPlayerAddItemToDepot(lua_State* L)
 	uint32_t added = 0;
 	while(itemCount > 0)
 	{
-		int32_t stackCount = std::min(100, subType);
+		int32_t stackCount = std::min(1000, subType);
 		Item* newItem = Item::CreateItem(itemId, stackCount);
 		if(!newItem)
 		{
@@ -4542,7 +4547,7 @@ int32_t LuaInterface::luaDoPlayerAddItemToRewardBox(lua_State* L)
 	{
 		// itens com subtipo (empilhaveis OU carregaveis ex: runas):
 		// divide em stacks/charges de ate 100 e decrementa o subtipo sempre
-		itemCount = (int32_t)std::ceil((float)count / 100);
+		itemCount = (int32_t)std::ceil((float)count / 1000);
 		subType = count;
 	}
 	else
@@ -4551,7 +4556,7 @@ int32_t LuaInterface::luaDoPlayerAddItemToRewardBox(lua_State* L)
 	uint32_t added = 0;
 	while(itemCount > 0)
 	{
-		int32_t stackCount = std::min(100, subType);
+		int32_t stackCount = std::min(1000, subType);
 		Item* newItem = Item::CreateItem(itemId, stackCount);
 		if(!newItem)
 		{
@@ -5707,7 +5712,7 @@ int32_t LuaInterface::luaDoCreateItem(lua_State* L)
 	if(it.hasSubType())
 	{
 		if(it.stackable)
-			itemCount = (int32_t)std::ceil(count / 100.);
+			itemCount = (int32_t)std::ceil(count / 1000.);
 
 		subType = count;
 	}
@@ -5718,7 +5723,7 @@ int32_t LuaInterface::luaDoCreateItem(lua_State* L)
 	Item* newItem = NULL;
 	while(itemCount > 0)
 	{
-		int32_t stackCount = std::min(100, subType);
+		int32_t stackCount = std::min(1000, subType);
 		if(!(newItem = Item::CreateItem(it.id, stackCount)))
 		{
 			errorEx(getError(LUA_ERROR_ITEM_NOT_FOUND));
@@ -5765,8 +5770,8 @@ int32_t LuaInterface::luaDoCreateItemEx(lua_State* L)
 
 	ScriptEnviroment* env = getEnv();
 	const ItemType& it = Item::items[(uint32_t)popNumber(L)];
-	if(it.stackable && count > 100)
-		count = 100;
+	if(it.stackable && count > 1000)
+		count = 1000;
 
 	Item* newItem = Item::CreateItem(it.id, count);
 	if(!newItem)
@@ -6635,6 +6640,14 @@ int32_t LuaInterface::luaGetWorldLight(lua_State* L)
 	return 2;
 }
 
+int32_t LuaInterface::luaSetWorldLight(lua_State* L)
+{
+	//setWorldLight(level)
+	int32_t level = (int32_t)luaL_checknumber(L, 1);
+	g_game.setWorldLightLevel(level);
+	return 0;
+}
+
 int32_t LuaInterface::luaGetWorldCreatures(lua_State* L)
 {
 	//getWorldCreatures(type)
@@ -7221,6 +7234,27 @@ int32_t LuaInterface::luaSetCombatArea(lua_State* L)
 	}
 
 	combat->setArea(new CombatArea(*area));
+	lua_pushboolean(L, true);
+	return 1;
+}
+
+int32_t LuaInterface::luaSetCombatStageScaling(lua_State* L)
+{
+	//setCombatStageScaling(combat)
+	// Liga os estagios (mini <50 / padrao / elite 100+) nesta magia. A area de
+	// cada estagio e' derivada da area original pelo motor, entao o script nao
+	// precisa declarar nada alem desta linha - e o dano nunca e' tocado.
+	ScriptEnviroment* env = getEnv();
+
+	Combat* combat = env->getCombatObject(popNumber(L));
+	if(!combat)
+	{
+		errorEx(getError(LUA_ERROR_COMBAT_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	combat->setStageScaling(true);
 	lua_pushboolean(L, true);
 	return 1;
 }
@@ -9445,9 +9479,8 @@ int32_t LuaInterface::luaDoAddContainerItem(lua_State* L)
 	const ItemType& it = Item::items[itemId];
 	int32_t itemCount = 1, subType = 1;
 	if(it.hasSubType())
-	{
-		if(it.stackable)
-			itemCount = (int32_t)std::ceil((float)count / 100);
+	{				if(it.stackable)
+					itemCount = (int32_t)std::ceil((float)count / 1000);
 
 		subType = count;
 	}
@@ -9458,7 +9491,7 @@ int32_t LuaInterface::luaDoAddContainerItem(lua_State* L)
 	Item* newItem = NULL;
 	while(itemCount > 0)
 	{
-		int32_t stackCount = std::min(100, subType);
+		int32_t stackCount = std::min(1000, subType);
 		if(!(newItem = Item::CreateItem(itemId, stackCount)))
 		{
 			errorEx(getError(LUA_ERROR_ITEM_NOT_FOUND));

@@ -4,6 +4,8 @@
 	<!-- <globalevent name="onThink" interval="4000" event="script" value="checkLag.lua"/> -->
 
 	<globalevent name="Store" interval="30000" event="script" value="store.lua"/>
+	<!-- Sistema ALPHA (bosses): limpeza/despawn dos bosses invocados -->
+	<globalevent name="BossSystem" interval="15000" event="script" value="bossSystem.lua"/>
 	<globalevent name="Donate" interval="30000" event="script" value="donate.lua"/>
 	<globalevent name="onStart" type="start" event="script" value="onStart.lua"/>
 	<globalevent name="LinkedTasksInit" type="start" event="script" value="linkedTasksInit.lua"/>

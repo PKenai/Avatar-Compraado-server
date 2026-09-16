@@ -18,6 +18,7 @@ setCombatArea(combat, createCombatArea(
           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combat)
       
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)

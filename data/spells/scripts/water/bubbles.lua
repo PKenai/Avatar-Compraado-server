@@ -24,6 +24,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = (level+(magLevel/2)*2.7)+5
     local max = (level+(magLevel/2)*3.0)+5
@@ -40,6 +41,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat2)
 
 
 local function doDrown(cid, combat, var, times)

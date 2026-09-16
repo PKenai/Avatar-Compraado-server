@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Steel Shell Centipede" nameDescription="the alpha Steel Shell Centipede" race="undead" experience="22400" speed="440" manacost="0">
+	<health now="13800" max="13800" />
+	<look type="1302" corpse="18160" />
+	<script>
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="123" attack="128" />
+		<attack name="physical" interval="2500" chance="25" range="1" min="-160" max="-300" />
+		<attack name="earth" interval="2000" chance="20" range="7" min="-200" max="-360" />
+		<attack name="Steel Coil" interval="3000" chance="20" range="4" min="-120" max="-240" />
+	</attacks>
+	<defenses armor="30" defense="20" />
+	<elements>
+		<element earthPercent="15" />
+		<element physicalPercent="10" />
+		<element firePercent="-15" />
+	</elements>
+	<loot>
+		<item id="2148" countmax="270" chance="100000" />
+		<!-- gold coins -->
+		<item id="19123" countmax="1" chance="16000" />
+		<!-- Pecado metalico -->
+		<item id="19122" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="CLACK CLACK CLACK!" yell="0" />
+		<voice sentence="SKRRRRR!" yell="1" />
+	</voices>
+</monster>

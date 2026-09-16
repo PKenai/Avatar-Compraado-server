@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Uncontrolled Knowledge" nameDescription="the alpha Uncontrolled Knowledge" race="undead" experience="88000" speed="649" manacost="0">
+	<health now="48000" max="48000" />
+	<look type="1299" corpse="18160" />
+	<script>
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="225" attack="248" />
+		<attack name="physical" interval="2000" chance="30" range="1" min="-560" max="-900" />
+		<attack name="earth" interval="2000" chance="20" range="7" min="-600" max="-840" />
+		<attack name="poison" interval="2500" chance="15" range="3" min="-360" max="-560" />
+		<attack name="Whispered Madness" interval="4000" chance="20" range="3" min="-360" max="-600" />
+	</attacks>
+	<defenses armor="70" defense="50" />
+	<elements>
+		<element earthPercent="15" />
+		<element physicalPercent="10" />
+		<element firePercent="-15" />
+		<element energyPercent="-10" />
+	</elements>
+	<loot>
+		<item id="2148" countmax="1950" chance="100000" />
+		<!-- gold coins -->
+		<item id="19145" countmax="1" chance="5000" />
+		<!-- Paginas estranhas -->
+		<item id="19144" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="WRRRRRRR!" yell="1" />
+		<voice sentence="KZZZZZZZ!" yell="1" />
+	</voices>
+</monster>

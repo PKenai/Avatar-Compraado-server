@@ -3289,19 +3289,19 @@ ReturnValue Player::__queryMaxCount(int32_t index, const Thing* thing, uint32_t 
 						}
 					}
 				}
-				else if(inventoryItem->isStackable() && item->getID() == inventoryItem->getID() && inventoryItem->getItemCount() < 100)
+				else if(inventoryItem->isStackable() && item->getID() == inventoryItem->getID() && inventoryItem->getItemCount() < MAX_STACK_SIZE)
 				{
-					uint32_t remainder = (100 - inventoryItem->getItemCount());
+					uint32_t remainder = (MAX_STACK_SIZE - inventoryItem->getItemCount());
 					if(__queryAdd(i, item, remainder, flags) == RET_NOERROR)
 						n += remainder;
 				}
 			}
 			else if(__queryAdd(i, item, item->getItemCount(), flags) == RET_NOERROR)
 			{
-				if(item->isStackable())
-					n += 100;
-				else
-					n += 1;
+			if(item->isStackable())
+				n += MAX_STACK_SIZE;
+			else
+				n += 1;
 			}
 		}
 
@@ -3316,15 +3316,15 @@ ReturnValue Player::__queryMaxCount(int32_t index, const Thing* thing, uint32_t 
 
 		if(destItem)
 		{
-			if(destItem->isStackable() && item->getID() == destItem->getID() && destItem->getItemCount() < 100)
-				maxQueryCount = 100 - destItem->getItemCount();
+			if(destItem->isStackable() && item->getID() == destItem->getID() && destItem->getItemCount() < MAX_STACK_SIZE)
+				maxQueryCount = MAX_STACK_SIZE - destItem->getItemCount();
 			else
 				maxQueryCount = 0;
 		}
 		else if(__queryAdd(index, item, count, flags) == RET_NOERROR)
 		{
 			if(item->isStackable())
-				maxQueryCount = 100;
+				maxQueryCount = MAX_STACK_SIZE;
 			else
 				maxQueryCount = 1;
 
@@ -3391,7 +3391,7 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 					continue;
 
 				if(autoStack && item->isStackable() && __queryAdd(i, item, item->getItemCount(), 0)
-					== RET_NOERROR && invItem->getID() == item->getID() && invItem->getItemCount() < 100)
+					== RET_NOERROR && invItem->getID() == item->getID() && invItem->getItemCount() < MAX_STACK_SIZE)
 				{
 					*destItem = invItem;
 					index = i;
@@ -3441,7 +3441,7 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 						continue;
 
 					if(autoStack && item->isStackable() && tmpContainer->__queryAdd(n, item, item->getItemCount(),
-						0) == RET_NOERROR && tmpItem->getID() == item->getID() && tmpItem->getItemCount() < 100)
+						0) == RET_NOERROR && tmpItem->getID() == item->getID() && tmpItem->getItemCount() < MAX_STACK_SIZE)
 					{
 						index = n;
 						*destItem = tmpItem;
@@ -6333,6 +6333,15 @@ void Player::ensurePet()
 		return;
 	}
 
+	//Avatar custom: dono esta em agua - pet some. Quando voltar pra terra,
+	//ensurePet sera chamado novamente e recriara o pet.
+	Tile* myTile = getTile();
+	if(myTile && g_game.isSwimmingPool(NULL, myTile, false))
+	{
+		removePet();
+		return;
+	}
+
 	const uint8_t petId = getCurrentPetID();
 	Pet* pet = petId != 0 ? g_game.pets.getPetByID(petId) : NULL;
 	if(!pet || !hasPet(pet))
@@ -6431,6 +6440,10 @@ void Player::updatePetPosition(const Position& fromPos)
 		if(!toTile)
 			continue;
 
+		//Avatar custom: pet nao entra em agua.
+		if(g_game.isSwimmingPool(NULL, toTile, false))
+			continue;
+
 		//flags 0: parede/objeto solido bloqueia; outras criaturas e protection
 		//zone nao (ver Creature::canWalkthrough e Tile::__queryAdd).
 		g_game.internalMoveCreature(NULL, petCreature, petCreature->getTile(), toTile, 0, false, false);
@@ -6525,6 +6538,10 @@ void Player::wanderPet(uint32_t interval)
 
 		Tile* toTile = g_game.getMap()->getTile(target);
 		if(!toTile)
+			continue;
+
+		//Avatar custom: pet nao entra em agua.
+		if(g_game.isSwimmingPool(NULL, toTile, false))
 			continue;
 
 		//flags 0: parede/objeto solido bloqueia o passo (o pet nunca atravessa).

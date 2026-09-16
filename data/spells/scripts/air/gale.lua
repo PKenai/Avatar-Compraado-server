@@ -49,6 +49,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -min, -max
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
 local function getAnotherDirs(dir)
 if dir == 0 or dir == 2 then 

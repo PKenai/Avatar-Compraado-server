@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Mud Man" nameDescription="the alpha Mud Man" race="undead" experience="15200" speed="385" manacost="0">
+	<health now="5100" max="5100" />
+	<look type="1249" corpse="18160" />
+	<script>
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="117" attack="117" />
+		<attack name="earth" interval="2000" chance="20" range="7" min="-120" max="-240" />
+		<attack name="Mud Grasp" interval="4000" chance="20" range="5" target="1" min="-100" max="-200" />
+	</attacks>
+	<defenses armor="10" defense="10" />
+	<loot>
+		<item id="2148" countmax="180" chance="100000" />
+		<!-- gold coins -->
+		<item id="19117" countmax="1" chance="22000" />
+		<!-- Frasco com barro -->
+		<item id="19116" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+</monster>

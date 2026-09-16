@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Swamp Man Arm" nameDescription="the alpha Swamp Man Arm" race="blood" experience="48000" speed="0" manacost="0">
+	<health now="210000" max="210000" />
+	<look type="161" />
+	<script>
+		<event name="BossRoomPantano" />
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="270" attack="300" />
+		<attack name="earth" interval="2500" chance="25" range="5" min="-600" max="-1600" />
+		<attack name="poison" interval="2000" chance="20" range="4" min="-500" max="-1200" />
+		<attack name="physical" interval="2000" chance="20" range="1" min="-800" max="-1600" />
+		<attack name="Swamp Slam" interval="3500" chance="20" range="3" min="-700" max="-1200" />
+	</attacks>
+	<defenses armor="120" defense="100" />
+	<voices interval="8000" chance="15">
+		<voice sentence="O lodo aperta seus ossos..." />
+		<voice sentence="Esmagarei todos voces!" />
+	</voices>
+	<loot>
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+</monster>

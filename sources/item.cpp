@@ -361,6 +361,17 @@ Attr_ReadValue Item::readAttr(AttrTypes_t attr, PropStream& propStream)
 			break;
 		}
 
+		case ATTR_COUNT_U16:
+		{
+			// Avatar: stacks acima de 255 (ex.: 1000 moedas). Ver serializeAttr.
+			uint16_t _count;
+			if(!propStream.getShort(_count))
+				return ATTR_READ_ERROR;
+
+			setSubType(_count);
+			break;
+		}
+
 		case ATTR_ACTION_ID:
 		{
 			uint16_t aid;
@@ -731,8 +742,21 @@ bool Item::serializeAttr(PropWriteStream& propWriteStream) const
 {
 	if(isStackable() || isFluidContainer() || isSplash())
 	{
-		propWriteStream.addByte(ATTR_COUNT);
-		propWriteStream.addByte((uint8_t)getSubType());
+		// Avatar: ATTR_COUNT e 1 byte, entao um stack de 1000 era gravado como
+		// 1000 & 0xFF = 232 e voltava errado depois de relogar/salvar o mapa.
+		// Acima de 255 usamos ATTR_COUNT_U16 (2 bytes); ate 255 nada muda, entao
+		// os blobs ja salvos continuam sendo lidos igual.
+		const uint16_t subType = getSubType();
+		if(subType > 255)
+		{
+			propWriteStream.addByte(ATTR_COUNT_U16);
+			propWriteStream.addShort(subType);
+		}
+		else
+		{
+			propWriteStream.addByte(ATTR_COUNT);
+			propWriteStream.addByte((uint8_t)subType);
+		}
 	}
 
 	if(attributes && !attributes->empty())

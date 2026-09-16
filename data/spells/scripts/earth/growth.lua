@@ -24,6 +24,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -min, -max
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
 
 function onTargetCreature(cid, target)

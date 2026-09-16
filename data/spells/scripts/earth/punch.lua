@@ -25,6 +25,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
 local function earthPunchs(cid, times)
 if times == 0 or not isCreature(cid) or isInPz(cid) then return false end 

@@ -74,6 +74,7 @@ local combats = {combat1, combat2, combat3, combat4, combat5, combat6, combat7}
 
 for x = 1, #MyLocal.areas do
   setCombatArea(combats[x], createCombatArea(MyLocal.areas[x]))
+  setCombatStageScaling(combats[x])
 end
 
 for x = 1, #combats do

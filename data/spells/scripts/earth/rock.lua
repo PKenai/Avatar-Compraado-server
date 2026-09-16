@@ -36,6 +36,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat1, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat1)
 
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = (level+(magLevel/5)*3.9)+8
@@ -54,6 +55,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat2)
 
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = (level+(magLevel/5)*4.0)+12
@@ -72,6 +74,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat3, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat3)
 
 local combats = {combat1, combat1, combat1, combat2, combat2, combat3}
 

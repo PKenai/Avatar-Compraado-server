@@ -34,9 +34,28 @@ function onCastSpell(cid, var)
 		else
 			doPlayerAddExaust(cid, "air", "trap", airExausted.trap) 
 		end
-        local trap = doCreateItem(trapId, posTrap)
-        addEvent(removeTileItemById, time*1000, getThingPos(trap), trapId)
-        doSetItemActionId(trap, cid)
+        -- Estagios: mini (<50) arma so' o tile da frente, padrao mantem como
+        -- sempre foi e elite (100+) fecha a cruz inteira em volta do alvo.
+        -- A armadilha do elite tambem dura mais.
+        local positions = {posTrap}
+        if isSpellElite(cid) then
+            positions = {posTrap,
+                {x=posTrap.x+1, y=posTrap.y, z=posTrap.z},
+                {x=posTrap.x-1, y=posTrap.y, z=posTrap.z},
+                {x=posTrap.x, y=posTrap.y+1, z=posTrap.z},
+                {x=posTrap.x, y=posTrap.y-1, z=posTrap.z}}
+        end
+
+        local trapTime = spellStageSeconds(cid, time)
+        for _, pos in ipairs(positions) do
+            if getPlayerCanWalk({player = cid, position = pos, checkPZ = true, checkHouse = true, checkWater = true}) then
+                local trap = doCreateItem(trapId, pos)
+                if trap then
+                    addEvent(removeTileItemById, trapTime*1000, getThingPos(trap), trapId)
+                    doSetItemActionId(trap, cid)
+                end
+            end
+        end
         return true
     else
         doPlayerSendCancelEf(cid, "It isn't possible use this fold here.")

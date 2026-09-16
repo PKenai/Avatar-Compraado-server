@@ -114,6 +114,7 @@ end
 
 for x = 1, 2 do
     setCombatArea(combats[x], createCombatArea(arr[x]))
+    setCombatStageScaling(combats[x])
     function onTargetTile(cid, pos)
 		addProtections(cid, pos)
         doCombat(cid, combat, {type=2, pos=pos})

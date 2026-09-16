@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Hopper" nameDescription="the alpha Hopper" race="undead" experience="274400" speed="446" manacost="0">
+	<health now="69600" max="69600" />
+	<look type="1361" corpse="18160" />
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<script>
+		<event name="mobsKill" />
+	</script>
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="195" attack="272" />
+		<attack name="Hopper Cyclone" interval="4000" chance="20" range="3" min="-360" max="-600" />
+	</attacks>
+	<defenses armor="76" defense="80">
+		<defense name="healing" interval="5000" chance="12" min="300" max="500">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element earthPercent="-20" />
+		<element icePercent="15" />
+		<element firePercent="10" />
+		<element physicalPercent="-10" />
+	</elements>
+	<voices interval="5000" chance="8">
+		<voice sentence="Pfiu Pfiu!" yell="0" />
+		<voice sentence="Fiofiofio!" yell="0" />
+	</voices>
+	<loot>
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+</monster>

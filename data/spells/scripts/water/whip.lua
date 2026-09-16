@@ -43,6 +43,7 @@ MyLocal.areas[8] = {{0, 2, 0},{0, 0, 0},{1, 1, 1}}
 for x = 1, #MyLocal.areas do
     local combats = {combat1, combat2, combat3, combat4, combat5, combat6, combat7, combat8}
   setCombatArea(combats[x], createCombatArea(MyLocal.areas[x]))
+  setCombatStageScaling(combats[x])
 
     function onGetPlayerMinMaxValues(cid, level, magLevel)
         local min = (level*2)+(magLevel/3)*2

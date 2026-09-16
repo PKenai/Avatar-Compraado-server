@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Stone Tarantula" nameDescription="the alpha Stone Tarantula" race="undead" experience="16600" speed="418" manacost="0">
+	<health now="4500" max="4500" />
+	<look type="1248" corpse="18160" />
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="120" attack="120" />
+		<attack name="poison" interval="2000" chance="20" range="7" min="-180" max="-340" />
+		<attack name="Venom Web" interval="4000" chance="20" range="3" min="-120" max="-240" />
+	</attacks>
+	<defenses armor="0" defense="0" />
+	<loot>
+		<item id="2148" countmax="150" chance="100000" />
+		<!-- moedas -->
+		<item id="19115" countmax="1" chance="20000" />
+		<!-- Teia velha -->
+		<item id="19114" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<script>
+		<event name="mobsKill" />
+	</script>
+</monster>

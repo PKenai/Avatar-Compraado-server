@@ -26,6 +26,7 @@ setCombatArea(combat3, createCombatArea(
           {0, 0, 1, 2, 1, 0, 0},
           {0, 0, 0, 1, 0, 0, 0}
       }))
+setCombatStageScaling(combat3)
 
       
 function onGetPlayerMinMaxValues(cid, level, magLevel)

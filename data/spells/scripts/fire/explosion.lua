@@ -71,6 +71,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -minAndMax[1], -minAndMax[2]
 end
 setCombatCallback(combatSelf, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combatSelf)
 
 function onTargetCreatureNorth(cid, target)
     if isNpc(target) then

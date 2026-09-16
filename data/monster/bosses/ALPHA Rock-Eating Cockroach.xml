@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Rock-Eating Cockroach" nameDescription="the alpha Rock-Eating Cockroach" race="undead" experience="160000" speed="748" manacost="0">
+	<health now="90000" max="90000" />
+	<look type="1301" corpse="18160" />
+	<script>
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="270" attack="300" />
+		<attack name="physical" interval="2000" chance="30" range="1" min="-800" max="-1200" />
+		<attack name="earth" interval="2000" chance="20" range="7" min="-800" max="-1100" />
+		<attack name="poison" interval="2500" chance="15" range="3" min="-500" max="-800" />
+		<attack name="Rock Crunch" interval="3500" chance="20" range="5" target="1" min="-500" max="-760" />
+	</attacks>
+	<defenses armor="100" defense="80" />
+	<elements>
+		<element earthPercent="20" />
+		<element physicalPercent="15" />
+		<element firePercent="-20" />
+		<element icePercent="-10" />
+	</elements>
+	<loot>
+		<item id="2148" countmax="3000" chance="100000" />
+		<!-- gold coins -->
+		<item id="19151" countmax="1" chance="3000" />
+		<!-- Mineral esquisito -->
+		<item id="19150" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="SKREEEEEEE!" yell="1" />
+		<voice sentence="CRUNCH CRUNCH CRUNCH" yell="0" />
+	</voices>
+</monster>

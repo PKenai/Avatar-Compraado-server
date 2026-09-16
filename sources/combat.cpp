@@ -38,6 +38,10 @@ Combat::Combat()
 	params.targetCallback = NULL;
 	area = NULL;
 
+	stageScaling = false;
+	for(int32_t i = 0; i < 3; ++i)
+		stageAreas[i] = NULL;
+
 	formulaType = FORMULA_UNDEFINED;
 	mina = minb = maxa = maxb = minl = maxl = minm = maxm = minc = maxc = 0;
 }
@@ -49,6 +53,9 @@ Combat::~Combat()
 
 	params.conditionList.clear();
 	delete area;
+
+	for(int32_t i = 0; i < 3; ++i)
+		delete stageAreas[i];
 
 	delete params.valueCallback;
 	delete params.tileCallback;
@@ -900,6 +907,170 @@ void Combat::CombatFunc(Creature* caster, const Position& pos, const CombatArea*
 	postCombatEffects(caster, pos, params);
 }
 
+// ---------------------------------------------------------------------------
+// Estagios das magias de player (mini / padrao / elite)
+//
+// A area de uma magia nao muda mais so' de tamanho: cada estagio mantem o
+// FORMATO original. Um beam continua beam (so' aumenta o comprimento), um cone
+// continua cone. O anel mais externo da area e' o que entra ou sai.
+//
+// Isto e' ligado por magia com setCombatStageScaling(combat) no script, e a
+// escolha do estagio e' feita em Combat::getStageArea() na hora do cast.
+// ---------------------------------------------------------------------------
+static MatrixArea* scaleMatrixArea(const MatrixArea& source, int32_t mode)
+{
+	uint16_t centerY = 0, centerX = 0;
+	source.getCenter(centerY, centerX);
+
+	const uint32_t rows = source.getRows();
+	const uint32_t cols = source.getCols();
+
+	uint32_t maxRadius = 0;
+	bool hasCells = false;
+	for(uint32_t r = 0; r < rows; ++r)
+	{
+		for(uint32_t c = 0; c < cols; ++c)
+		{
+			if(!source.getValue(r, c))
+				continue;
+
+			hasCells = true;
+			const int32_t dy = (r > centerY) ? (int32_t)(r - centerY) : (int32_t)(centerY - r);
+			const int32_t dx = (c > centerX) ? (int32_t)(c - centerX) : (int32_t)(centerX - c);
+			const uint32_t radius = (dy > dx) ? (uint32_t)dy : (uint32_t)dx;
+			if(radius > maxRadius)
+				maxRadius = radius;
+		}
+	}
+
+	// celulas em coordenadas relativas ao centro da magia, para poder crescer
+	// tambem para cima e para a esquerda (a matriz original nao comporta isso)
+	std::vector<int32_t> relY, relX;
+
+	if(hasCells)
+	{
+		for(uint32_t r = 0; r < rows; ++r)
+		{
+			for(uint32_t c = 0; c < cols; ++c)
+			{
+				if(!source.getValue(r, c))
+					continue;
+
+				const int32_t dy = (int32_t)r - (int32_t)centerY;
+				const int32_t dx = (int32_t)c - (int32_t)centerX;
+				const int32_t absY = (dy < 0) ? -dy : dy;
+				const int32_t absX = (dx < 0) ? -dx : dx;
+				const uint32_t radius = (uint32_t)((absY > absX) ? absY : absX);
+
+				// mini: perde o anel mais externo
+				if(mode < 0 && maxRadius > 0 && radius >= maxRadius)
+					continue;
+
+				relY.push_back(dy);
+				relX.push_back(dx);
+			}
+		}
+	}
+
+	// area de um anel so': o mini vira a cruz em volta do conjurador
+	if(relY.empty())
+	{
+		relY.push_back(0); relX.push_back(0);
+		relY.push_back(-1); relX.push_back(0);
+		relY.push_back(1); relX.push_back(0);
+		relY.push_back(0); relX.push_back(-1);
+		relY.push_back(0); relX.push_back(1);
+	}
+
+	// elite: cada celula da borda ganha um vizinho "para fora"
+	if(mode > 0)
+	{
+		const size_t count = relY.size();
+		for(size_t i = 0; i < count; ++i)
+		{
+			const int32_t dy = relY[i], dx = relX[i];
+			const int32_t absY = (dy < 0) ? -dy : dy;
+			const int32_t absX = (dx < 0) ? -dx : dx;
+			if((uint32_t)((absY > absX) ? absY : absX) != maxRadius)
+				continue;
+
+			const int32_t stepY = (dy > 0) ? 1 : (dy < 0 ? -1 : 0);
+			const int32_t stepX = (dx > 0) ? 1 : (dx < 0 ? -1 : 0);
+			const int32_t newY = dy + stepY, newX = dx + stepX;
+
+			bool exists = false;
+			for(size_t j = 0; j < relY.size() && !exists; ++j)
+				exists = (relY[j] == newY && relX[j] == newX);
+
+			if(!exists)
+			{
+				relY.push_back(newY);
+				relX.push_back(newX);
+			}
+		}
+	}
+
+	int32_t minY = relY[0], maxY = relY[0], minX = relX[0], maxX = relX[0];
+	for(size_t i = 1; i < relY.size(); ++i)
+	{
+		if(relY[i] < minY) minY = relY[i];
+		if(relY[i] > maxY) maxY = relY[i];
+		if(relX[i] < minX) minX = relX[i];
+		if(relX[i] > maxX) maxX = relX[i];
+	}
+
+	MatrixArea* result = new MatrixArea((uint32_t)(maxY - minY + 1), (uint32_t)(maxX - minX + 1));
+	for(size_t i = 0; i < relY.size(); ++i)
+		result->setValue((uint32_t)(relY[i] - minY), (uint32_t)(relX[i] - minX), true);
+
+	result->setCenter((uint16_t)(-minY), (uint16_t)(-minX));
+	return result;
+}
+
+CombatArea* CombatArea::scaled(int32_t mode) const
+{
+	CombatArea* result = new CombatArea();
+	result->hasExtArea = hasExtArea;
+
+	for(CombatAreas::const_iterator it = areas.begin(); it != areas.end(); ++it)
+	{
+		const MatrixArea* source = it->second;
+		if(!source)
+			continue;
+
+		result->areas[it->first] = scaleMatrixArea(*source, mode);
+	}
+
+	return result;
+}
+
+const CombatArea* Combat::getStageArea(Creature* caster) const
+{
+	if(!stageScaling || !area || !caster)
+		return area;
+
+	// monstros, summons e NPCs castam exatamente como sempre castaram
+	Player* player = caster->getPlayer();
+	if(!player)
+		return area;
+
+	if(player->getLevel() >= STAGE_ELITE_LEVEL)
+	{
+		if(!stageAreas[2])
+			stageAreas[2] = area->scaled(1);
+
+		return stageAreas[2] ? stageAreas[2] : area;
+	}
+
+	if(player->getLevel() >= STAGE_MINI_LEVEL)
+		return area;
+
+	if(!stageAreas[0])
+		stageAreas[0] = area->scaled(-1);
+
+	return stageAreas[0] ? stageAreas[0] : area;
+}
+
 void Combat::doCombat(Creature* caster, Creature* target) const
 {
 	//target combat callback function
@@ -930,13 +1101,17 @@ void Combat::doCombat(Creature* caster, const Position& pos) const
 		CombatParams _params = params;
 
 		getMinMaxValues(caster, NULL, _params, minChange, maxChange);
+
+		// a area do estagio (mini/elite) e' resolvida aqui, onde ja sabemos quem
+		// esta castando - ver Combat::getStageArea()
+		const CombatArea* stageArea = getStageArea(caster);
 		if(params.combatType != COMBAT_MANADRAIN)
-			doCombatHealth(caster, pos, area, minChange, maxChange, _params);
+			doCombatHealth(caster, pos, stageArea, minChange, maxChange, _params);
 		else
-			doCombatMana(caster, pos, area, minChange, maxChange, _params);
+			doCombatMana(caster, pos, stageArea, minChange, maxChange, _params);
 	}
 	else
-		CombatFunc(caster, pos, area, params, CombatNullFunc, NULL);
+		CombatFunc(caster, pos, getStageArea(caster), params, CombatNullFunc, NULL);
 }
 
 void Combat::doCombatHealth(Creature* caster, Creature* target, int32_t minChange, int32_t maxChange, const CombatParams& params, bool check/* = true*/)
@@ -954,7 +1129,7 @@ void Combat::doCombatHealth(Creature* caster, Creature* target, int32_t minChang
 
 	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
-		g_game.addMagicEffect(target->getPosition(), params.effects.impact);
+		g_game.addMagicEffect(target->getPosition(), params.effects.impact, false, caster ? caster->getID() : 0);
 
 	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
 		addDistanceEffect(caster, caster->getPosition(), target->getPosition(), params.effects.distance);
@@ -984,7 +1159,7 @@ void Combat::doCombatMana(Creature* caster, Creature* target, int32_t minChange,
 
 	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
-		g_game.addMagicEffect(target->getPosition(), params.effects.impact);
+		g_game.addMagicEffect(target->getPosition(), params.effects.impact, false, caster ? caster->getID() : 0);
 
 	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
 		addDistanceEffect(caster, caster->getPosition(), target->getPosition(), params.effects.distance);
@@ -1016,7 +1191,7 @@ void Combat::doCombatCondition(Creature* caster, Creature* target, const CombatP
 
 	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
-		g_game.addMagicEffect(target->getPosition(), params.effects.impact);
+		g_game.addMagicEffect(target->getPosition(), params.effects.impact, false, caster ? caster->getID() : 0);
 
 	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
 		addDistanceEffect(caster, caster->getPosition(), target->getPosition(), params.effects.distance);
@@ -1039,7 +1214,7 @@ void Combat::doCombatDispel(Creature* caster, Creature* target, const CombatPara
 
 	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
-		g_game.addMagicEffect(target->getPosition(), params.effects.impact);
+		g_game.addMagicEffect(target->getPosition(), params.effects.impact, false, caster ? caster->getID() : 0);
 
 	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
 		addDistanceEffect(caster, caster->getPosition(), target->getPosition(), params.effects.distance);
@@ -1059,7 +1234,7 @@ void Combat::doCombatDefault(Creature* caster, Creature* target, const CombatPar
 
 	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
-		g_game.addMagicEffect(target->getPosition(), params.effects.impact);
+		g_game.addMagicEffect(target->getPosition(), params.effects.impact, false, caster ? caster->getID() : 0);
 
 	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
 		addDistanceEffect(caster, caster->getPosition(), target->getPosition(), params.effects.distance);

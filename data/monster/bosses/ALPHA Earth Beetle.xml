@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Earth Beetle" nameDescription="the alpha Earth Beetle" race="undead" experience="7840" speed="148" manacost="0">
+	<health now="900" max="900" />
+	<look type="1245" corpse="18160" />
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="45" attack="15" />
+		<attack name="earth" interval="2000" chance="15" range="7" min="-10" max="-24" />
+		<attack name="Beetle Tremor" interval="3000" chance="20" range="2" min="-8" max="-18" />
+	</attacks>
+	<defenses armor="0" defense="0" />
+	<loot>
+		<item id="2148" countmax="45" chance="100000" />
+		<!-- moedas -->
+		<item id="19101" countmax="1" chance="27000" />
+		<!-- Casca de besouro da terra -->
+		<item id="19100" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<script>
+		<event name="mobsKill" />
+	</script>
+</monster>

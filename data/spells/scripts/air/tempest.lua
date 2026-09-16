@@ -29,6 +29,7 @@ local arr ={{1, 1, 1},
            {1, 1, 1}}
 
  setCombatArea(combat, createCombatArea(arr))
+ setCombatStageScaling(combat)
 
 
 function onTargetCreature(cid, target)

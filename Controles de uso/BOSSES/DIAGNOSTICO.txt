@@ -1,0 +1,194 @@
+========================================
+  DIAGNOSTICO DO SISTEMA ALPHA (bosses + task diaria) - Avatar Server
+========================================
+
+Este arquivo e' a ANALISE MANUAL do sistema. A parte automatica esta' no menu
+[10] Diagnostico do  bosses.bat  (confere arquivos, registro, xml, storages,
+chances e dessincronizacao com o gerador).
+
+CONFIGURACAO ATUAL (para referencia)
+------------------------------------
+Task diaria .... 5 criaturas por dia, 3 trocadas por re-roll (1x/dia)
+Premios ......... 2 concluidas = 10% do level atual em XP
+                  5 concluidas = 50% do level atual em XP
+Sorteio ......... 33 criaturas no sorteio, 8 excluidas (evento/quest/dummy)
+Metas ........... 170 a 1000 kills (cai com a forca da criatura)
+Bosses ......... 41 (um por monstro ofensivo), nome "ALPHA <Criatura>"
+Loot do boss ... luva = material - 1 (chance=5000 => 4,00% real) + 2160 (10k)
+Portal .......... itemID 19333/19334  OU  actionID 50030 em qualquer item
+Raio de busca ... 12 casas | cooldown 3s | 1 boss ativo por jogador
+Vida do boss .... 30 minutos, depois desaparece sozinho
+
+
+PARTE 1 - O QUE JA' E' SERVER-SIDE (nao da' pra burlar pelo client)
+------------------------------------------------------------------
+1. Contagem de kills, conclusao da task, premio e liberacao do boss acontecem
+   inteiramente no servidor (data/lib/dailyHunt.lua e data/lib/bossSystem.lua).
+   O client (opcode 166) so' desenha e so' pede. Editar qualquer arquivo do
+   client NAO da' vantagem: no maximo mostra numero errado na tela.
+
+2. Re-roll: 1x por dia por jogador, garantido pelo storage
+   "DailyHunt_Reroll_Day" = getDayID(). O client nao informa o dia - quem
+   compara com o dia atual e' o servidor. So' troca slots que ainda NAO foram
+   concluidos (nao pune quem ja' cumpriu) e nunca repete a mesma criatura duas
+   vezes na mesma lista.
+
+3. Premio de marco (claim) e' idempotente: storages "DailyHunt_Claimed_2" e
+   "DailyHunt_Claimed_5". Mandar "claim" 1000 vezes com pacote forjado nao
+   duplica experiencia.
+
+4. Acesso ao boss: storage "Boss_<Criatura>" guarda o DIA. hasAccess compara
+   com getDayID(), ou seja, o acesso morre sozinho na virada do dia - nao existe
+   limpeza manual para esquecer.
+
+5. O acesso e' consumido no mesmo instante do spawn (revokeAccess) e o spawn
+   falha se o jogador nao tiver o acesso. Pisar 50x no tile nao invoca 50 bosses.
+
+6. Anti-spam de tile: "Boss_Cooldown" (3s) e' gravado ANTES de qualquer
+   processamento e usa o relogio do servidor, nunca o do client.
+
+7. Um boss ALPHA ativo por jogador (MAX_ACTIVE_PER_PLAYER = 1), com expurgo de
+   uid morto/reciclado no globalevent.
+
+8. Boss nao nasce em protection zone nem dentro de casa: o spawn checa
+   getTileInfo(pos).protection e .house (os dois campos existem neste server -
+   conferido em sources/luascript.cpp).
+
+9. Nao da' para invocar boss de criatura que o jogador nunca matou: a busca
+   pelos espectadores (raio 12) so' aceita nomes da lista de acessos do dia.
+   O caso "nao ha criatura por perto" tambem exige que o jogador tenha liberacao.
+
+10. Boss invocado e' removido se o dono deslogar/morrer e desaparece depois de
+   30 minutos (LIFETIME). Isso evita encher o mapa de bosses (lag/servidor cheio).
+
+11. ensureLoaded() valida no boot: cada boss ALPHA existe no monsters.xml, cada
+    luva existe no items.xml e cada chave de storage cabe em 32 caracteres
+    (player_storage.key e' VARCHAR(32) - estourar aqui faria duas criaturas
+    dividirem a mesma chave). Tudo e' impresso no console, com ERRO/AVISO.
+
+12. Os 41 bosses tem  summonable=0, convinceable=0, illusionable=0, pushable=0,
+    hostile=1, attackable=1. Ninguem convence, invoca ("utevo res") ou empurra
+    um boss. Conferido nos 41 xml.
+
+13. Opcode 166 tinha um furo de spam (client modificado mandando "request"
+    centenas de vezes por segundo faria o servidor montar e enviar o pacote
+    inteiro a cada vez). Corrigido: no maximo 1 "request" por segundo por
+    jogador (storage "DailyHunt_Req").
+
+14. Nome de item e' lido com pcall (safeItemName): um id invalido nao derruba o
+    servidor ao montar a mensagem do opcode.
+
+
+PARTE 2 - FUROS E LIMITACOES CONHECIDAS (leia com atencao)
+---------------------------------------------------------
+1. O LOOT NAO TEM DONO. O boss e' um monstro normal no mundo: quem estiver
+   matando leva o corpse. Um jogador pode levar o dono para um canto, matar o
+   boss e ficar com a luva. Se o design for "so' quem invocou pode pegar", isso
+   precisa de um creaturescript de morte que pague a luva direto para o dono
+   (e nesse caso a luva sai da loot table do boss). Hoje NAO existe.
+
+2. FALLBACK_SINGLE = true: se o jogador tem exatamente 1 boss liberado e nao ha
+   nenhuma criatura dele no raio de 12, o boss nasce de qualquer jeito. Foi o que
+   voce pediu (posicionar o item onde quiser), mas isso permite invocar o boss
+   longe da area natural da criatura. Se preferir travar por area, mude para
+   false no data/lib/bossSystem.lua.
+
+3. O aceito e' consumido no SPAWN, nao na vitoria. Se o servidor cair no meio da
+   luta, o jogador perde o acesso e o boss ao mesmo tempo (o boss some junto com
+   o restart, porque monstro criado por script so' existe na memoria). Trocar
+   para "consumir so' quando o boss morrer" e' possivel, mas abre espaco para o
+   jogador invocar, sair andando e voltar depois. Decisao sua.
+
+4. itemID 19333 NAO esta' no items.xml. Se ele tambem nao existir no items.otb
+   (o que o RME le'), o item nao pode ser colocado no mapa e o portal por itemID
+   nao funciona. Nesse caso use o ACTIONID 50030 em um item que ja' exista - o
+   registro StepIn por actionid ja' esta' no movements.xml e o [10] confere isso.
+   (Confirme no RME: Item -> 19333.)
+
+5. MAX_ACTIVE_PER_PLAYER conta pelo NOME do jogador. Um rename durante o dia
+   escapa do contador por uma invocacao extra. Impacto baixo.
+
+6. A chance de loot e' QUANTIZADA. O servidor (sources/monsters.cpp) corta a
+   chance pela metade (chance 2..9999 -> ceil(chance/2)) e depois o sorteio e'
+   convertido para 16 bits (depende do rateLoot do config.lua). Com rateLoot=0.1:
+       chance <  10000 -> efetiva <= ~8%
+       chance >= 10000 -> efetiva >= ~15%
+   Ou seja, a faixa efetiva 5001..9999 e' INALCANCAVEL: nao existe
+   chance= "10%" nem "12%". O editor sempre mostra a % REAL ao lado do chance= e
+   avisa quando o degrau mais proximo passa do que voce pediu.
+   Cuidado: mexer no rateLoot do config.lua muda TODAS as chances do servidor
+   (nao so' os bosses). O editor recalcula na hora, mas o resto do servidor
+   tambem muda - decida sabendo disso.
+
+7. XML de monstro invalido = servidor NAO sobe (o parser de monstros falha no
+   boot). Antes de reiniciar rode o [10] Diagnostico, e lembre que todo arquivo
+   mexido pelo editor tem .bak do lado. O [9] Regerar copia a pasta inteira dos
+   bosses para data/monster/bosses.bak_<data_hora>.
+
+8. Se voce editar um boss na mao (modo [3] ou [4]), o proximo [9] Regerar
+   sobrescreve. A tabela de metas ([6]) tambem e' recalculada pelo [9]. Para
+   mudancas em massa o caminho certo e' o [5] Tuning.
+
+
+PARTE 3 - O QUE O JOGADOR PODE EDITAR NO PC DELE (e o efeito real)
+------------------------------------------------------------------
+Tudo que esta' no client e' do jogador. O que ele consegue, no maximo, e' mudar
+o que ELE ve - o servidor nao confia em nada disso.
+
+  modules/game_outfit_scales/scales.lua
+      -> tamanho do outfit na tela dele (o ALPHA e' +20%)
+      risco: nenhum. Se apagar a regra, ele ve o boss do tamanho normal.
+
+  modules/game_shaders/shaders.lua + data/shaders/novos/outfit_outlinered_*.frag
+      -> o contorno vermelho pulsante
+      risco: nenhum. So' visual. (O shader usa u_Time, que o cliente ja'
+      atualiza por frame - nao precisa de timer em Lua nem de source nova.)
+
+  modules/game_dailyhunt/dailyhunt.lua / .otui
+      -> a janela da task: numeros, barra, botoes
+      risco: nenhum. Ele pode desenhar "1000/1000" na tela; o servidor continua
+      controlando kills, premio, re-roll e a liberacao do boss. Os botoes so'
+      mandam "claim"/"reroll"/"request" e o servidor valida cada um.
+
+  modules/corelib/**, things.otml, src do client
+      -> aparencia, mapas, nomes de item
+      risco: nenhum no sistema ALPHA (o servidor nao recebe nada disso).
+
+Conclusao: nao vale a pena tentar checar do lado do servidor se o client foi
+modificado. As decisoes (quanto dropa, quem pode invocar, quantas kills faltam)
+estao todas no servidor.
+
+No SERVIDOR (data/, sources/) o jogador nao tem acesso - e se tivesse, o risco
+nao seria "farmar luva", seria comprometer o servidor inteiro. Mantenha backup
+de data/ e nunca deixe o servidor com credenciais de escrita compartilhadas.
+
+
+PARTE 4 - CHECKLIST DE IMPLANTACAO
+----------------------------------
+[ ] Copiar o client novo (modules/game_dailyhunt, modules/game_outfit_scales e
+    modules/game_shaders/shaders.lua) para o client que os jogadores usam.
+[ ] Decidir o portal: itemID 19333 (se existir no otb/RME) ou actionID 50030.
+[ ] Colocar os tiles no mapa (modo [8] do editor mostra/escolhe o id).
+[ ] Subir o servidor e conferir no console as linhas "[BossSystem] ...".
+[ ] Pelo menos uma criatura de cada faixa (fraca/media/forte) com o boss
+    funcionando: invocar, matar, ver 4% da luva, ver o acesso sumir.
+[ ] Rodar o [10] Diagnostico depois de qualquer mexida em massa.
+
+
+PARTE 5 - TESTE RAPIDO (roteiro de ~10 minutos)
+-----------------------------------------------
+1. No editor: [10] Diagnostico -> tudo verde.
+2. No jogo: mate criaturas de UMA criatura do sorteio ate' fechar a meta (a
+   janela Daily Hunt mostra X / N).
+3. Verifique o aviso de boss liberado e que a janela passou a mostrar
+   "BOSS LIBERADO".
+4. Pise no tile do portal perto daquela criatura: o boss ALPHA aparece ao lado,
+   com contorno vermelho pulsante e 20% maior.
+5. Pisar de novo no tile nao deve invocar outro boss (acesso consumido).
+6. Mate o boss: confira a mensagem de morte e o corpse (luva em ~4% das vezes).
+7. Saia do tile e tente invocar outro boss sem acesso: mensagem de recusa.
+8. Abra a janela e use o Re-roll: 3 criaturas trocam. Tente de novo no mesmo
+   dia: recusa.
+9. Complete 2 criaturas e resgate o premio (10% do level). Resgate de novo:
+   recusa.
+10. Relogue e confira que o estado do dia continua o mesmo (storages).

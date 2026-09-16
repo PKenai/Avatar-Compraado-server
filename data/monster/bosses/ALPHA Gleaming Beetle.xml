@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Gleaming Beetle" nameDescription="the alpha Gleaming Beetle" race="undead" experience="17600" speed="407" manacost="0">
+	<health now="4800" max="4800" />
+	<look type="1283" corpse="18160" />
+	<script>
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="117" attack="120" />
+		<attack name="energy" interval="2000" chance="25" range="7" min="-140" max="-260" />
+		<attack name="physical" interval="2500" chance="15" range="1" min="-100" max="-180" />
+		<attack name="Gleam Flash" interval="3000" chance="20" range="3" min="-80" max="-160" />
+	</attacks>
+	<defenses armor="16" defense="12" />
+	<elements>
+		<element energyPercent="15" />
+		<element earthPercent="10" />
+		<element firePercent="-15" />
+	</elements>
+	<loot>
+		<item id="2148" countmax="210" chance="100000" />
+		<!-- gold coins -->
+		<item id="19119" countmax="1" chance="20000" />
+		<!-- Frasco de luz -->
+		<item id="19118" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="BZZZZZZZ!" yell="0" />
+		<voice sentence="FLASH!" yell="1" />
+	</voices>
+</monster>

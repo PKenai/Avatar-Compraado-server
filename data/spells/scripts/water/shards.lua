@@ -7,6 +7,7 @@ MyLocal.players = {}
 local combat1 = createCombatObject()
 setCombatParam(combat1, COMBAT_PARAM_TYPE, COMBAT_ICEDAMAGE)
 setCombatArea(combat1, createCombatArea(AREA_SQUARE1X1))
+setCombatStageScaling(combat1)
 
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_ICEDAMAGE)

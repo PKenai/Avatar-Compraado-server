@@ -1,3 +1,24 @@
+-- ============================================================================
+-- LUZ DO MUNDO (o client nao tem mais valor chumbado na source)
+--
+--   worldLightLevel:
+--     0   = usa o ciclo dia/noite normal do servidor (default antigo)
+--     40  = noite fechada (minimo aceito)
+--     96  = penumbra: tudo visivel, sempre escuro  <-- usado no client novo
+--     250 = dia claro (maximo aceito)
+--
+--   Qualquer valor acima de 0 CONGELA a luz: o ciclo dia/noite para de mexer
+--   nela e o mundo fica sempre nesse nivel. O talkaction /worldlight <nivel>
+--   continua funcionando pra testar ao vivo (dura ate' o proximo restart).
+--
+--   worldLightColor: cor da luz (215 = branco levemente quente).
+--
+--   Atencao: o client so' obedece isso se ele nao tiver a penumbra chumbada -
+--   nesta versao o Item::draw nao ilumina mais e as magias iluminam.
+-- ============================================================================
+worldLightLevel = 200
+worldLightColor = 215
+
 enableLiveCasting = true
 unmountPlayerInPz = true
 
@@ -73,7 +94,7 @@ optionalWarAttackableAlly = false
 
 worldId = 0
 ip = "127.0.0.1"
-bindOnlyGlobalAddress = true
+bindOnlyGlobalAddress = false
 fullMapOnLogin = false
 -- Envia o effect id dos magic effects com 2 bytes (0-65535) no lugar de 1 byte
 -- (0-255). Use SOMENTE se o seu client tiver a feature OTC 'GameMagicEffectU16'

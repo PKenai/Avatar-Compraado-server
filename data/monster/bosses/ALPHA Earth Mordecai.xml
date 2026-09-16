@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Earth Mordecai" nameDescription="the alpha Earth Mordecai" race="undead" experience="36000" speed="550" manacost="0">
+	<health now="20880" max="20880" />
+	<look type="1270" corpse="18160" />
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="150" attack="172" />
+		<attack name="earth" interval="2000" chance="25" range="7" min="-440" max="-500" />
+		<attack name="Mordecai's Landslide" interval="4000" chance="20" range="5" min="-280" max="-400" />
+	</attacks>
+	<defenses armor="0" defense="0" />
+	<loot>
+		<item id="2148" countmax="1050" chance="100000" />
+		<!-- moedas -->
+		<item id="19135" countmax="1" chance="11000" />
+		<!-- Pedriscos de mordecasca -->
+		<item id="19134" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<!-- A Foto (18877) NAO fica no loot: ela e adicionada no corpo pelo evento
+	     RogerioLoot (data/creaturescripts/scripts/rogerioLoot.lua) apenas quando
+	     o matador esta na quest "As Fotos de Rogerio" (storage 49200 = 1). -->
+	<script>
+		<event name="RogerioLoot" />
+	</script>
+	<script>
+		<event name="mobsKill" />
+	</script>
+</monster>

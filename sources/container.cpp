@@ -333,9 +333,9 @@ ReturnValue Container::__queryMaxCount(int32_t index, const Thing* thing, uint32
 			uint32_t slotIndex = 0;
 			for(ItemList::const_iterator cit = itemlist.begin(); cit != itemlist.end(); ++cit, ++slotIndex)
 			{
-				if((*cit) != item && (*cit)->getID() == item->getID() && (*cit)->getItemCount() < 100)
+				if((*cit) != item && (*cit)->getID() == item->getID() && (*cit)->getItemCount() < MAX_STACK_SIZE)
 				{
-					uint32_t remainder = (100 - (*cit)->getItemCount());
+					uint32_t remainder = (MAX_STACK_SIZE - (*cit)->getItemCount());
 					if(__queryAdd(slotIndex, item, remainder, flags) == RET_NOERROR)
 						n += remainder;
 				}
@@ -348,15 +348,15 @@ ReturnValue Container::__queryMaxCount(int32_t index, const Thing* thing, uint32
 			if(destThing)
 				destItem = destThing->getItem();
 
-			if(destItem && destItem->getID() == item->getID() && destItem->getItemCount() < 100)
+			if(destItem && destItem->getID() == item->getID() && destItem->getItemCount() < MAX_STACK_SIZE)
 			{
-				uint32_t remainder = 100 - destItem->getItemCount();
+				uint32_t remainder = MAX_STACK_SIZE - destItem->getItemCount();
 				if(__queryAdd(index, item, remainder, flags) == RET_NOERROR)
 					n = remainder;
 			}
 		}
 
-		maxQueryCount = freeSlots * 100 + n;
+		maxQueryCount = freeSlots * MAX_STACK_SIZE + n;
 		if(maxQueryCount < count)
 			return RET_CONTAINERNOTENOUGHROOM;
 	}
@@ -434,7 +434,7 @@ Cylinder* Container::__queryDestination(int32_t& index, const Thing* thing, Item
 		uint32_t n = itemlist.size();
 		for(ItemList::reverse_iterator cit = itemlist.rbegin(); cit != itemlist.rend(); ++cit, --n)
 		{
-			if((*cit)->getID() == item->getID() && (*cit)->getItemCount() < 100)
+			if((*cit)->getID() == item->getID() && (*cit)->getItemCount() < MAX_STACK_SIZE)
 			{
 				*destItem = (*cit);
 				index = n;

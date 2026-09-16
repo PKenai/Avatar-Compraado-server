@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Hermit Crab" nameDescription="the alpha Hermit Crab" race="undead" experience="38400" speed="561" manacost="0">
+	<health now="22800" max="22800" />
+	<look type="1282" corpse="18160" />
+	<script>
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="165" attack="188" />
+		<attack name="physical" interval="2000" chance="30" range="1" min="-300" max="-500" />
+		<attack name="earth" interval="2000" chance="20" range="7" min="-360" max="-560" />
+		<attack name="Shell Smash" interval="3500" chance="20" range="4" target="1" min="-180" max="-360" />
+	</attacks>
+	<defenses armor="40" defense="30" />
+	<elements>
+		<element earthPercent="15" />
+		<element physicalPercent="10" />
+		<element icePercent="-15" />
+		<element firePercent="-10" />
+	</elements>
+	<loot>
+		<item id="2148" countmax="600" chance="100000" />
+		<!-- gold coins -->
+		<item id="19143" countmax="1" chance="6000" />
+		<!-- Concha de hermitao -->
+		<item id="19142" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="CLICK CLICK CLICK!" yell="0" />
+		<voice sentence="SKRRRRR!" yell="1" />
+	</voices>
+</monster>

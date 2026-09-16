@@ -84,6 +84,8 @@ Game::Game()
 	lightHour = SUNRISE + (SUNSET - SUNRISE) / 2;
 	lightLevel = LIGHT_LEVEL_DAY;
 	lightState = LIGHT_STATE_DAY;
+	lightColor = 215;
+	fixedWorldLight = false;
 
 	lastBucket = checkCreatureLastIndex = checkLightEvent = checkCreatureEvent = checkDecayEvent = saveEvent = 0;
 	checkWarsEvent = 0;
@@ -107,6 +109,29 @@ void Game::start(ServiceManager* servicer)
 		boost::bind(&Game::checkLight, this)));
 	checkWarsEvent = Scheduler::getInstance().addEvent(createSchedulerTask(EVENT_WARSINTERVAL,
 		boost::bind(&Game::checkWars, this)));
+
+	// -----------------------------------------------------------------------
+	// config.lua: penumbra fixa do mundo
+	//
+	//   worldLightLevel > 0 -> a luz fica travada nesse nivel (o ciclo dia/noite
+	//                         do servidor nao mexe mais nela);
+	//   0 (default)        -> comportamento de sempre, com ciclo;
+	//   worldLightColor    -> cor da luz (215 = branco levemente quente).
+	//
+	// Mesmo travado, o admin ainda pode mudar a luz em tempo real com o
+	// talkaction /worldlight <nivel> - a luz nova fica ate' o proximo restart.
+	// -----------------------------------------------------------------------
+	int32_t fixedLightLevel = (int32_t)g_config.getNumber(ConfigManager::WORLD_LIGHT_LEVEL);
+	if(fixedLightLevel > 0)
+	{
+		fixedWorldLight = true;
+		lightLevel = std::max<int32_t>(LIGHT_LEVEL_NIGHT, std::min<int32_t>(LIGHT_LEVEL_DAY, fixedLightLevel));
+		lightState = (lightLevel <= LIGHT_LEVEL_NIGHT) ? LIGHT_STATE_NIGHT : LIGHT_STATE_DAY;
+
+		int32_t fixedLightColor = (int32_t)g_config.getNumber(ConfigManager::WORLD_LIGHT_COLOR);
+		if(fixedLightColor > 0 && fixedLightColor <= 255)
+			lightColor = fixedLightColor;
+	}
 
 	services = servicer;
 	if(!g_config.getBool(ConfigManager::GLOBALSAVE_ENABLED))
@@ -1073,7 +1098,7 @@ bool Game::removeCreature(Creature* creature, bool isLogout /*= true*/)
 }
 
 bool Game::playerMoveThing(uint32_t playerId, const Position& fromPos,
-	uint16_t spriteId, int16_t fromStackpos, const Position& toPos, uint8_t count)
+	uint16_t spriteId, int16_t fromStackpos, const Position& toPos, uint16_t count)
 {
 	Player* player = getPlayerByID(playerId);
 	if(!player || player->isRemoved())
@@ -1594,7 +1619,7 @@ ReturnValue Game::internalMoveCreature(Creature* actor, Creature* creature, Cyli
 } Original TFS */
 
 bool Game::playerMoveItem(uint32_t playerId, const Position& fromPos,
-	uint16_t spriteId, int16_t fromStackpos, const Position& toPos, uint8_t count)
+	uint16_t spriteId, int16_t fromStackpos, const Position& toPos, uint16_t count)
 {
 	Player* player = getPlayerByID(playerId);
 	//Doggynub: custom move
@@ -2001,10 +2026,10 @@ ReturnValue Game::internalMoveItem(Creature* actor, Cylinder* fromCylinder, Cyli
 	Item* updateItem = NULL;
 	if(item->isStackable())
 	{
-		uint8_t n = 0;
+		uint32_t n = 0;
 		if(toItem && toItem->getID() == item->getID())
 		{
-			n = std::min((uint32_t)100 - toItem->getItemCount(), m);
+			n = std::min((uint32_t)MAX_STACK_SIZE - toItem->getItemCount(), m);
 			toCylinder->__updateThing(toItem, toItem->getID(), toItem->getItemCount() + n);
 			updateItem = toItem;
 		}
@@ -2097,7 +2122,7 @@ ReturnValue Game::internalAddItem(Creature* actor, Cylinder* toCylinder, Item* i
 		uint32_t m = std::min((uint32_t)item->getItemCount(), maxQueryCount), n = 0;
 		if(toItem->getID() == item->getID())
 		{
-			n = std::min((uint32_t)100 - toItem->getItemCount(), m);
+			n = std::min((uint32_t)MAX_STACK_SIZE - toItem->getItemCount(), m);
 			toCylinder->__updateThing(toItem, toItem->getID(), toItem->getItemCount() + n);
 		}
 
@@ -5728,7 +5753,8 @@ void Game::checkLight()
 
 	int32_t newLightLevel = lightLevel;
 	bool lightChange = false;
-	switch(lightState)
+	// Com a luz travada pela config o estado cai no default: o nivel nao e' mexido.
+	switch(fixedWorldLight ? LIGHT_STATE_DAY : lightState)
 	{
 		case LIGHT_STATE_SUNRISE:
 		{
@@ -5791,7 +5817,19 @@ void Game::checkWars()
 void Game::getWorldLightInfo(LightInfo& lightInfo)
 {
 	lightInfo.level = lightLevel;
-	lightInfo.color = 0xD7;
+	lightInfo.color = lightColor;
+}
+
+void Game::setWorldLightLevel(int32_t level)
+{
+	lightLevel = std::max<int32_t>(LIGHT_LEVEL_NIGHT, std::min<int32_t>(LIGHT_LEVEL_DAY, level));
+	LightInfo lightInfo;
+	getWorldLightInfo(lightInfo);
+	for(AutoList<Player>::iterator it = Player::autoList.begin(); it != Player::autoList.end(); ++it)
+	{
+		if(!it->second->hasCustomFlag(PlayerCustomFlag_HasFullLight))
+			it->second->sendWorldLight(lightInfo);
+	}
 }
 
 void Game::updateCreatureSkull(Creature* creature)

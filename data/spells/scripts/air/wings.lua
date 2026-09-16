@@ -164,6 +164,7 @@ end
 
 for x = 1, #combats do
     setCombatArea(combats[x], createCombatArea(arr[x]))
+    setCombatStageScaling(combats[x])
     function onTargetTile(cid, pos)
         if getTileInfo(getCreaturePosition(cid)).protection then return false end
         if x < 4 then

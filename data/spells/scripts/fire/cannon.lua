@@ -28,6 +28,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = ((level+(magLevel/2)*4.1)+math.random(3, 7))*1.5
@@ -46,6 +47,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combatFocus, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combatFocus)
 
 function onTargetCreature(cid, target)
     if isNpc(target) then

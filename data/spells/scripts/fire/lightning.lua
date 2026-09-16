@@ -19,6 +19,7 @@ setCombatArea(combat, createCombatArea(
           {0, 0, 0, 1, 0, 0, 0},
           {0, 0, 0, 3, 0, 0, 0}
       }))
+setCombatStageScaling(combat)
 
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
@@ -27,6 +28,7 @@ setCombatArea(combat2, createCombatArea(
           {0, 0, 0, 0, 0, 0, 0},
           {0, 0, 1, 2, 1, 0, 0}
       }))
+setCombatStageScaling(combat2)
 
 local combats = {combat, combat2}
 

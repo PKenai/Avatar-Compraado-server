@@ -27,6 +27,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat2)
 
 local function removeMark(cid) -- getCreatureNoMove(cid)
   MyLocal.players[cid] = nil  

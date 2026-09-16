@@ -38,6 +38,7 @@ setCombatArea(combat, createCombatArea(
           {0, 0, 0, 0, 0, 0, 0},
           {0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combat)
       
       
 local combat2 = createCombatObject()
@@ -64,6 +65,7 @@ setCombatArea(combats[i], createCombatArea(
           {0, 1, 1, 1, 1, 1, 0},
           {0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combats[i])
 elseif i == 3 then 
 setCombatArea(combats[i], createCombatArea(
       {
@@ -74,6 +76,7 @@ setCombatArea(combats[i], createCombatArea(
           {1, 1, 1, 1, 1, 1, 0},
       {0, 1, 1, 1, 1, 1, 0}
       }))
+setCombatStageScaling(combats[i])
 elseif i == 4 then 
 setCombatArea(combats[i], createCombatArea(
       {
@@ -84,6 +87,7 @@ setCombatArea(combats[i], createCombatArea(
           {0, 1, 0, 0, 0, 1, 1},
           {0, 1, 1, 1, 1, 1, 1}
       }))
+setCombatStageScaling(combats[i])
 elseif i == 1 then 
 setCombatArea(combats[i], createCombatArea(
       {
@@ -95,6 +99,7 @@ setCombatArea(combats[i], createCombatArea(
           {0, 0, 1, 1, 1, 1, 1, 0},
           {0, 0, 1, 1, 1, 1, 1, 0}
       }))
+setCombatStageScaling(combats[i])
 end 
 function onGetPlayerMinMaxValues(cid, level, magLevel)
         local min = (level+(magLevel/3)*4.16)+math.random(35, 45)
@@ -144,6 +149,7 @@ setCombatArea(combats2[i], createCombatArea(
           {0, 0, 0, 0, 0, 0, 0},
           {0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combats2[i])
       
 function onGetPlayerMinMaxValues(cid, level, magLevel)
         local min = (level+(magLevel/3)*5.2)+math.random(35, 45)

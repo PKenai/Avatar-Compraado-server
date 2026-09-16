@@ -13,6 +13,7 @@ setCombatArea(combat2, createCombatArea(
           {0, 0, 1, 3, 1, 0, 0},
           {0, 0, 1, 1, 1, 0, 0}
       }))
+setCombatStageScaling(combat2)
 
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = (level+(magLevel/3)*2.16)+10

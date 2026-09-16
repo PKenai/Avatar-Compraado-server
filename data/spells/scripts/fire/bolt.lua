@@ -8,6 +8,7 @@ local MyLocal = {}
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
 setCombatArea(combat, createCombatArea(AREA_CROSS1X1))
+setCombatStageScaling(combat)
 
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
@@ -21,6 +22,7 @@ setCombatParam(combatFocus2, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
 local combatFocus = createCombatObject()
 setCombatParam(combatFocus, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
 setCombatArea(combatFocus, createCombatArea(AREA_CROSS1X1))
+setCombatStageScaling(combatFocus)
 --setAttackFormula(combatFocus, COMBAT_FORMULA_LEVELMAGIC, 5, 5, 4, 7)
 
 local combats = {combat, combat2}

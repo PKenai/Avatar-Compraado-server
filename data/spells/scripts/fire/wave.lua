@@ -23,6 +23,10 @@ local AREA_WAVE = {
 -- Level 50 em diante: AREA_WAVE4 do lib, 1 tile na frente, 3, 3 e 5 na ponta.
 local AREA_WAVE_BIG = AREA_WAVE4
 
+-- Level 100 em diante (ELITE): o cone abre num leque de 5 fileiras.
+-- Areas de estagio vindas do lib/spellStages.lua
+local AREA_WAVE_ELITE = AREA_STAGE_ELITE_CONE
+
 -- O callback de dano e' resolvido pelo NOME: o motor le o global homonimo no
 -- momento do bind e o consome, entao a funcao precisa ser redefinida antes de
 -- cada setCombatCallback.
@@ -56,17 +60,26 @@ end
 
 local areaWave = createCombatArea(AREA_WAVE)
 local areaWaveBig = createCombatArea(AREA_WAVE_BIG)
+local areaWaveElite = createCombatArea(AREA_WAVE_ELITE)
 
+-- Estagio 1 (mini, <50)   : o cone curto, o Fire Whip de sempre
+-- Estagio 2 (50-99)       : AREA_WAVE4, o cone grande
+-- Estagio 3 (elite, 100+) : o leque de 5 fileiras
 local combatWave = createWaveCombat(areaWave, 1)
 local combatWaveFocus = createWaveCombat(areaWave, 2)
 local combatWaveBig = createWaveCombat(areaWaveBig, 1)
 local combatWaveBigFocus = createWaveCombat(areaWaveBig, 2)
+local combatWaveElite = createWaveCombat(areaWaveElite, 1)
+local combatWaveEliteFocus = createWaveCombat(areaWaveElite, 2)
 
 local function getWaveCombats(cid)
-    if getPlayerLevel(cid) >= WAVE_LEVEL then
-        return combatWaveBigFocus, combatWaveBig
+    local stage = getSpellStage(cid)
+    if stage == SPELL_STAGE_ELITE then
+        return combatWaveEliteFocus, combatWaveElite
+    elseif stage == SPELL_STAGE_MINI then
+        return combatWaveFocus, combatWave
     end
-    return combatWaveFocus, combatWave
+    return combatWaveBigFocus, combatWaveBig
 end
 
 function onCastSpell(cid, var)
@@ -81,6 +94,12 @@ function onCastSpell(cid, var)
     if getPlayerHasStun(cid) then
         workAllCdAndAndPrevCd(cid, "fire", "whip", nil, 1)
         return true
+    end
+
+    -- Estagio 3 (100+): as chamas sobem no conjurador antes do cone abrir
+    local eliteFlourish = isSpellElite(cid)
+    if eliteFlourish then
+        doSendMagicEffect(getThingPos(cid), 5)
     end
 
     if getPlayerOverPower(cid, "fire", true, true) then

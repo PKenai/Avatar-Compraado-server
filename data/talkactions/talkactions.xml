@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talkactions>
 	<talkaction log="no" words="!dominantguildcastle" event="script" value="castle.lua"/>
+	<talkaction log="yes" words="/worldlight" access="5" event="script" value="light.lua"/>
 	<talkaction log="no" words="!battleroyale" access="3" event="script" value="battleRoyale.lua"/>
 	<talkaction log="no" words="!loot;/loot" event="script" value="loot.lua"/>
 	<talkaction log="no" words="!crit;!critico;/crit" event="script" value="checkCrit.lua"/>
 	<talkaction log="no" words="!inspect" event="script" value="inspect.lua"/>
 	<talkaction log="no" words="!dailyhunt" event="script" value="dailyhunt.lua"/>
+	<talkaction log="no" words="!outfit" case-sensitive="no" event="script" value="outfitLook.lua"/>
 <talkaction log="no" words="/testknockout" event="script" value="knockout.lua"/>
 	
 	<!--<talkaction words="/recipelist" event="script" value="recipelist.lua"/>-->

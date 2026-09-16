@@ -171,6 +171,9 @@ bool ConfigManager::load()
 	m_confNumber[SPAWNPOS_Z] = getGlobalNumber("newPlayerSpawnPosZ", 7);
 	m_confNumber[SPAWNTOWN_ID] = getGlobalNumber("newPlayerTownId", 1);
 	m_confString[WORLD_TYPE] = getGlobalString("worldType", "open");
+	// Luz do mundo: worldLightLevel > 0 trava a luz nesse nivel (sem ciclo dia/noite), 0 = ciclo normal
+	m_confNumber[WORLD_LIGHT_LEVEL] = getGlobalNumber("worldLightLevel", 0);
+	m_confNumber[WORLD_LIGHT_COLOR] = getGlobalNumber("worldLightColor", 215);
 	m_confBool[ACCOUNT_MANAGER] = getGlobalBool("accountManager", true);
 	m_confBool[NAMELOCK_MANAGER] = getGlobalBool("namelockManager", false);
 	m_confNumber[START_LEVEL] = getGlobalNumber("newPlayerLevel", 1);

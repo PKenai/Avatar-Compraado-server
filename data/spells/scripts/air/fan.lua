@@ -85,6 +85,7 @@ for x = 1, #combats do
     setCombatParam(combats[x], COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
     setCombatParam(combats[x], COMBAT_PARAM_EFFECT, 76)
     setCombatArea(combats[x], createCombatArea(arrs[x]))
+    setCombatStageScaling(combats[x])
  
     function onGetPlayerMinMaxValues(cid, level, magLevel)
         local min = (level+(magLevel/4.1)*0.8)

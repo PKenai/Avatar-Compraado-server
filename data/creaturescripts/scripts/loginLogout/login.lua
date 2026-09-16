@@ -527,9 +527,12 @@ function onLogin(cid)
 			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, getLangString(cid, "There are 100 players online and all players received +10% exp bonus to celebrate!", "A meta de 100 jogadores online foi atingida e agora os jogadores est�o com +10% de experi�ncia b�nus!"))
 		end
 	end
-    -- Send Daily Hunt data shortly after login
+    -- Sistema ALPHA / Daily Hunt: valida a config e manda a lista do dia
     addEvent(function(cid)
         if isCreature(cid) then
+            if BossSystem and BossSystem.ensureLoaded then
+                pcall(BossSystem.ensureLoaded)
+            end
             DailyHunt.sendDataToClient(cid)
         end
     end, 1000, cid)

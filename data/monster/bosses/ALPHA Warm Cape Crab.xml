@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Warm Cape Crab" nameDescription="the alpha Warm Cape Crab" race="undead" experience="28000" speed="198" manacost="0">
+	<health now="2400" max="2400" />
+	<look type="1326" corpse="18160" />
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="52" attack="45" />
+		<attack name="earth" interval="2500" chance="20" range="5" min="-30" max="-60">
+			<attribute key="shootEffect" value="poison" />
+		</attack>
+		<attack name="Scalding Tide" interval="3000" chance="20" range="3" min="-20" max="-40" />
+	</attacks>
+	<defenses armor="24" defense="20" />
+	<elements>
+		<element earthPercent="-10" />
+		<element icePercent="10" />
+	</elements>
+	<loot>
+		<item id="2148" countmax="90" chance="100000" />
+		<!-- gold coins -->
+		<item id="9633" countmax="1" chance="20000" />
+		<!-- Snail Shell -->
+		<item id="19105" countmax="1" chance="18000" />
+		<!-- Pinca de carangueijo -->
+		<item id="19104" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<script>
+		<event name="mobsKill" />
+	</script>
+</monster>

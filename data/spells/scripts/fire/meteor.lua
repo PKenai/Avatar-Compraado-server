@@ -64,6 +64,7 @@ local arr = {
 {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
 }
 setCombatArea(combat, createCombatArea(arr))
+setCombatStageScaling(combat)
 
 function onTargetTile(cid, pos)
     table.insert(MyLocal.players[cid].poses, pos)

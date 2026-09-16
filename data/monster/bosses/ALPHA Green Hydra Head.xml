@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Green Hydra Head" nameDescription="the alpha Green Hydra Head" race="blood" experience="400000" speed="0" manacost="0">
+	<health now="1080000" max="1080000" />
+	<look typeex="19269" />
+	<script>
+		<event name="HydraRoomDeath" />
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="8000" chance="15" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<!-- Veneno de longo alcance - dano principal -->
+		<attack name="poison" interval="2000" chance="35" range="7" min="-2400" max="-5600" />
+		<!-- Explosao de veneno em area ao redor do alvo -->
+		<attack name="earth" interval="3500" chance="25" range="6" min="-1800" max="-4000" radius="2" target="1" />
+		<!-- Nuvem de poison persistente -->
+		<attack name="poisoncondition" interval="4000" chance="20" range="6" target="0" />
+		<!-- Rajada de energy (elemento contrario para surpresa) -->
+		<attack name="energy" interval="5000" chance="20" range="7" min="-1200" max="-2800" />
+		<attack name="Green Hydra Spores" interval="4500" chance="20" range="3" min="-1400" max="-2800" />
+	</attacks>
+	<defenses armor="180" defense="140" />
+	<voices interval="10000" chance="20">
+		<voice sentence="O veneno das trevas vai te consumir!" />
+		<voice sentence="Nenhum mortal sobrevive ao acido da Hydra!" />
+		<voice sentence="Sua carne sera dissolvida!" />
+		<voice sentence="A Green Hydra vai engolir sua alma!" />
+	</voices>
+	<loot>
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+</monster>

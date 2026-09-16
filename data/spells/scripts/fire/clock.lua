@@ -26,6 +26,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
 local combatFocus = createCombatObject()
 setCombatParam(combatFocus, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
@@ -48,6 +49,7 @@ function onGetPlayerMinMaxValuesFocus(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combatFocus, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValuesFocus")
+registerSpellStageEcho(combatFocus)
 
 
 

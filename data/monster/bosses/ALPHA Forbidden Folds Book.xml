@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="ALPHA Forbidden Folds Book" nameDescription="the alpha Forbidden Folds Book" race="undead" experience="192000" speed="792" manacost="0">
+	<health now="108000" max="108000" />
+	<look type="1303" corpse="18160" />
+	<script>
+		<event name="mobsKill" />
+	</script>
+	<targetchange interval="5000" chance="10" />
+	<strategy attack="100" defense="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="300" attack="330" />
+		<attack name="physical" interval="2000" chance="30" range="1" min="-1000" max="-1440" />
+		<attack name="earth" interval="2000" chance="20" range="7" min="-960" max="-1320" />
+		<attack name="poison" interval="2500" chance="15" range="3" min="-600" max="-960" />
+		<attack name="Forbidden Chapter" interval="4000" chance="20" range="6" min="-560" max="-900" />
+	</attacks>
+	<defenses armor="120" defense="96" />
+	<elements>
+		<element earthPercent="20" />
+		<element physicalPercent="15" />
+		<element firePercent="-20" />
+		<element icePercent="-10" />
+	</elements>
+	<loot>
+		<item id="2148" countmax="3600" chance="100000" />
+		<!-- gold coins -->
+		<item id="19153" countmax="1" chance="3000" />
+		<!-- Paginas gigantes -->
+		<item id="19152" countmax="1" chance="5000" />
+		<item id="2160" countmax="3" chance="100000" />
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="FSSSSHHHH!" yell="1" />
+		<voice sentence="CRACKLE CRACKLE!" yell="0" />
+	</voices>
+</monster>

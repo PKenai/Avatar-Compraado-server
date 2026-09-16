@@ -35,6 +35,7 @@ local arr ={{1, 1, 1},
           {1, 3, 1},
           {1, 1, 1}}
     setCombatArea(combat3, createCombatArea(arr))
+    setCombatStageScaling(combat3)
 	
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = (level+(magLevel/3)*4.5)+5

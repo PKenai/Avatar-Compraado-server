@@ -88,6 +88,7 @@ end
 setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
 setCombatArea(combat, createCombatArea(arr))
+setCombatStageScaling(combat)
 function onTargetTile(cid, pos)
 	addEvent(doSendMagicEffect, getDistanceBetween(pos, centerPoses[cid]) * 100, pos, 138)
 	doCombat(cid, combat3, {type=2, pos=pos})
