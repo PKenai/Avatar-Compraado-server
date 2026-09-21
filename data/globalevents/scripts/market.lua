@@ -21,10 +21,17 @@ function onStartup()
                 `date` int DEFAULT NULL,
                 `expired` smallint DEFAULT NULL,
                 `world_id` tinyint UNSIGNED NOT NULL DEFAULT '0',
+                `tier` smallint NOT NULL DEFAULT '0',
                 PRIMARY KEY (`id`)
             ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
         ]])
     end)
+
+    -- Tier of the item: databases created before the market showed item tiers do
+    -- not have this column, and every market query reads it.
+    if type(Market) == "table" and type(Market.ensureSchema) == "function" then
+        Market.ensureSchema()
+    end
 
     -- Column used to pay sellers (claimed by idle.lua marketCheck).
     -- Only ALTER if the column is missing, so we don't spam the log with

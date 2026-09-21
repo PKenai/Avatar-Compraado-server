@@ -33,11 +33,11 @@ local KILLS_STORAGE = "felipinhoKills"
 local QUEST_SYSTEM_STORAGE = 49210
 
 local SET_PIECES = {
-    { id = 13636, article = "o", name = "elmo",        palavras = {"elmo", "capacete", "cap"} },
-    { id = 13637, article = "a", name = "armadura",    palavras = {"armadura"} },
-    { id = 13638, article = "a", name = "calça",       palavras = {"calça", "calcas"} },
-    { id = 13639, article = "a", name = "bota",        palavras = {"bota", "botas"} },
-    { id = 13640, article = "o", name = "escudo",      palavras = {"escudo"} },
+    { id = 13636, article = "the", name = "Traitor's helmet", palavras = {"helmet", "elmo", "capacete", "cap"} },
+    { id = 13637, article = "the", name = "Traitor's armor",  palavras = {"armor", "armadura"} },
+    { id = 13638, article = "the", name = "Traitor's pants",  palavras = {"pants", "calça", "calca", "calcas"} },
+    { id = 13639, article = "the", name = "Traitor's boots",  palavras = {"boots", "boot", "bota", "botas"} },
+    { id = 13640, article = "the", name = "Traitor's shield", palavras = {"shield", "escudo"} },
 }
 
 local function questCompleted(cid)
@@ -193,7 +193,7 @@ function creatureSayCallback(cid, type, msg)
                 doPlayerAddItem(cid, chosen.id, 1)
                 setPlayerStorageValue(cid, QUEST_STORAGE, 2)
                 setPlayerStorageValue(cid, QUEST_SYSTEM_STORAGE, 2)
-                selfSay("Here it is, " .. name .. "! " .. chosen.article .. " " .. chosen.name .. " of a Traitor. Use it well... and thank you for recovering my money!", cid)
+                selfSay("Here it is, " .. name .. "! " .. chosen.article .. " " .. chosen.name .. ". Use it well... and thank you for recovering my money!", cid)
                 talkState[talkUser] = 1
             else
                 selfSay("Calm down, " .. name .. "! First massacre the " .. MAX_KILLS .. " Traitors and bring my money: 100k gold.", cid)

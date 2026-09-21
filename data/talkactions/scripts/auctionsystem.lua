@@ -45,12 +45,22 @@ local function isArmor(itemId)
 end
 
 local function isItemToOffer(itemId)
+    -- A regra de "que item pode ser vendido" mora em market_lib.lua
+    -- (Market.isSellableItem), a mesma que o crosshair usa pra avisar o jogador
+    -- na hora do clique. Aqui so' chamamos ela; o bloco abaixo e' o fallback
+    -- caso a lib nao esteja carregada.
+    if type(Market) == "table" and type(Market.isSellableItem) == "function" then
+        return Market.isSellableItem(itemId)
+    end
+
     local item = getItemInfo(itemId)
     if type(item) ~= "table" then
         return false
     end
     if isInArray(config.accepted_items, itemId) then
         return true
+    elseif (tonumber(item.maxItems) or 0) > 0 then
+        return false -- container (mochila/baú): iria com o conteúdo dentro
     elseif isItemStackable(itemId) then
         return false
     elseif item.wieldPosition == 1 or item.wieldPosition == 2 or item.wieldPosition == 4 or item.wieldPosition == 7 or item.wieldPosition == 8 or item.wieldPosition == 9 then -- capacete, armadura, bota, calça, anel, amuleto
@@ -59,6 +69,96 @@ local function isItemToOffer(itemId)
         return true
     end
     return false
+end
+
+-- ----------------------------------------------------------------------------
+--  Helpers: tier, depósito e mensagens
+-- ----------------------------------------------------------------------------
+local function marketMsg(cid, text)
+    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, text)
+end
+
+local function marketFail(cid, text)
+    marketMsg(cid, text)
+    doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
+end
+
+-- Quantos itens do tipo `itemid` o jogador tem dentro dos depósitos (todos os
+-- lockers + reward mailbox, containers aninhados incluidos).
+local function depotCountOf(cid, itemid)
+    if type(Market) == "table" and type(Market.depotItemCount) == "function" then
+        local ok, count = pcall(Market.depotItemCount, cid, itemid)
+        if ok then
+            return tonumber(count) or 0
+        end
+    end
+    return 0
+end
+
+-- Itens que saíram do depósito para serem vendidos voltam pro depósito quando
+-- alguma verificação posterior falha (nunca ficam presos nem duplicados).
+local function giveBackToDepot(cid, itemid, count)
+    count = tonumber(count) or 0
+    if count <= 0 then
+        return true
+    end
+
+    if type(doPlayerAddItemToDepot) == "function" then
+        for depotid = 1, 10 do
+            if doPlayerAddItemToDepot(cid, depotid, itemid, count) then
+                return true
+            end
+        end
+    end
+
+    -- último recurso: mochila (o item continuava sendo do jogador)
+    return doPlayerAddItem(cid, itemid, count) ~= nil
+end
+
+-- Entrega um item do market pro jogador com o tier certo. O atributo precisa
+-- estar setado ANTES do item chegar ao client, senão o sprite vai sem o shader
+-- do tier (por isso criar -> setar -> adicionar, e não o contrário).
+local function giveMarketItem(cid, itemid, count, tier)
+    count = tonumber(count) or 1
+    tier = tonumber(tier) or 0
+    if tier < 0 or tier > 10 then
+        tier = 0
+    end
+
+    if type(doCreateItemEx) ~= "function" or type(doPlayerAddItemEx) ~= "function" then
+        return doPlayerAddItem(cid, itemid, count)
+    end
+
+    local uid = doCreateItemEx(itemid, count)
+    if not uid or uid == 0 or uid == false then
+        return doPlayerAddItem(cid, itemid, count)
+    end
+
+    if tier > 0 and type(doItemSetAttribute) == "function" then
+        pcall(doItemSetAttribute, uid, "tier", tier)
+    end
+
+    -- doPlayerAddItemEx devolve o ReturnValue (RET_NOERROR = 0 neste server).
+    -- Em caso de falha o item desanexado é liberado no fim do script, então
+    -- aqui basta dizer ao chamador que não deu.
+    local ret = doPlayerAddItemEx(cid, uid, false)
+    if ret == true or (type(ret) == "number" and ret == 0) then
+        return uid
+    end
+
+    return nil
+end
+
+-- Tier do item que está sendo anunciado (0 = item sem tier).
+local function itemTierOf(uid)
+    if not uid or uid <= 0 then
+        return 0
+    end
+    local tier = tonumber(getItemAttribute(uid, "tier")) or 0
+    if tier < 0 or tier > 10 then
+        tier = 0
+    end
+    return tier
 end
 
 function onSay(cid, words, param, channel)
@@ -137,55 +237,126 @@ function onSay(cid, words, param, channel)
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Este tipo de item só pode ser anunciado com a quantidade limitada a 1.")
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
-        elseif getPlayerItemCount(cid, itemId) < itemCount then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, você não tem este item ou a quantia deste item.")
-            doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
+        end
+
+        -- ====================================================================
+        --  VERIFICAÇÃO DE POSSE
+        --  O cliente só manda nome/quantidade: quem decide se o item é mesmo do
+        --  jogador é o servidor, e a checagem é repetida antes e depois de cada
+        --  remoção. Item do chão, de baú no chão, de container aberto de outro
+        --  jogador ou de um amigo NÃO passa daqui, e nada é removido antes de
+        --  todas as checagens passarem (nada de item duplicado).
+        -- ====================================================================
+        if type(Market) == "table" and type(Market.ensureSchema) == "function" then
+            Market.ensureSchema()
+        end
+
+        local invCount = getPlayerItemCount(cid, itemId)
+        local depotCount = depotCountOf(cid, itemId)
+        local missing = itemCount - invCount
+
+        -- 1ª checagem: tem que ter na mochila e/ou no depósito
+        if (invCount + depotCount) < itemCount then
+            marketFail(cid, "[MARKET] Desculpe, você não tem este item ou a quantia deste item.")
             return true
         end
 
-        local theDesc = ""
-        if idsDoDesc[itemId] then
-            theDesc = idsDoDesc[itemId]
-        else
-            local theItem = getPlayerItemById(cid, true, itemId)
-            if not theItem or not theItem.uid then
-                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, você não tem este item.")
-                doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
+        -- 2ª checagem: o que está só no depósito é trazido pra mochila com o
+        -- mesmo helper da busca do depósito...
+        local depotTaken = 0
+        if missing > 0 then
+            depotTaken = tonumber(takePlayerDepotItem(cid, itemId, missing)) or 0
+            if depotTaken < missing then
+                giveBackToDepot(cid, itemId, depotTaken)
+                marketFail(cid, "[MARKET] Desculpe, você não tem este item ou a quantia deste item.")
                 return true
             end
-
-            local elementalRuneType = getItemAttribute(theItem.uid, 'elementalrunetype')
-            local elementalRuneCharges = getItemAttribute(theItem.uid, 'elementalrunecharges')
-            if elementalRuneType then
-                if elementalRuneType >= 1 and (isArmor(theItem.itemid) or (elementalRuneCharges and elementalRuneCharges > 0)) then
-                    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você não pode colocar um item encantado no market.")
-                    doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
-                    return true
-                end
-            end
-
-            if theItem.type == 0 then
-                doItemSetAttribute(theItem.uid, "description", getItemDescriptionsById(itemId).description)
-                theDesc = "You see " .. getItemDescr(theItem.uid)
-            end
         end
 
-        if not doPlayerRemoveItem(cid, itemId, itemCount) then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Desculpe, você não tem este item ou a quantidade deste item.")
-            doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
+        -- ...e a posse é conferida de novo, agora com o item na mochila
+        if getPlayerItemCount(cid, itemId) < itemCount then
+            giveBackToDepot(cid, itemId, depotTaken)
+            marketFail(cid, "[MARKET] Desculpe, você não tem este item ou a quantia deste item.")
             return true
-        else
-            local itemName = string.lower(getItemNameById(itemId))
-            itemValue = math.floor(itemValue)
-            local q = db.escapeString
-            -- NOTE: db.escapeString ALREADY wraps the value in single quotes
-            -- (see DatabaseMySQL::escapeString) - do NOT add quotes here.
-            db.executeQuery(
-                "INSERT INTO `auction_system` (`player`, `item_name`, `item_id`, `count`, `desc`, `cost`, `date`, `expired`, `world_id`) VALUES (" ..
-                getPlayerGUID(cid) .. ", " .. q(itemName) .. ", " .. itemId .. ", " .. itemCount .. ", " .. q(theDesc) .. ", " .. string.format("%.0f", itemValue) .. ", " .. os.time() .. ", 0, " .. getConfigValue('worldId') .. ");"
-            )
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você adicionou " .. itemCount .. " " .. itemName .. " por " .. string.format("%.0f", itemValue) .. " gold coins nas ofertas de venda do market.")
         end
+
+        local theItem = getPlayerItemById(cid, true, itemId)
+        if not theItem or not theItem.uid or theItem.uid <= 0 then
+            giveBackToDepot(cid, itemId, depotTaken)
+            marketFail(cid, "[MARKET] Desculpe, você não tem este item.")
+            return true
+        end
+
+        local elementalRuneType = getItemAttribute(theItem.uid, 'elementalrunetype')
+        local elementalRuneCharges = getItemAttribute(theItem.uid, 'elementalrunecharges')
+        if elementalRuneType and elementalRuneType >= 1 and (isArmor(theItem.itemid) or (elementalRuneCharges and elementalRuneCharges > 0)) then
+            giveBackToDepot(cid, itemId, depotTaken)
+            marketFail(cid, "[MARKET] Você não pode colocar um item encantado no market.")
+            return true
+        end
+
+        -- 3ª checagem: o item achado tem mesmo que ser do jogador (se o
+        -- getPlayerItemById trouxe algo de outro lugar, o uid some e o
+        -- getThing falha aqui).
+        if not getThing(theItem.uid) then
+            giveBackToDepot(cid, itemId, depotTaken)
+            marketFail(cid, "[MARKET] Desculpe, você não tem este item.")
+            return true
+        end
+
+        -- tier do item (0 = sem tier): precisa ser lido AGORA, antes da remoção
+        local tier = itemTierOf(theItem.uid)
+
+        local theDesc = idsDoDesc[itemId] or ""
+        if theDesc == "" and theItem.type == 0 then
+            doItemSetAttribute(theItem.uid, "description", getItemDescriptionsById(itemId).description)
+            theDesc = "You see " .. getItemDescr(theItem.uid)
+        end
+
+        -- 4ª checagem: remove e confere o que sobrou na mochila
+        local beforeCount = getPlayerItemCount(cid, itemId)
+        local removed
+        if itemCount == 1 then
+            removed = doRemoveItem(theItem.uid, 1)
+        else
+            removed = doPlayerRemoveItem(cid, itemId, itemCount)
+        end
+
+        if not removed or getPlayerItemCount(cid, itemId) > (beforeCount - itemCount) then
+            giveBackToDepot(cid, itemId, depotTaken)
+            marketFail(cid, "[MARKET] Desculpe, você não tem este item ou a quantia deste item.")
+            return true
+        end
+
+        local itemName = string.lower(getItemNameById(itemId))
+        itemValue = math.floor(itemValue)
+        local q = db.escapeString
+        -- NOTE: db.escapeString ALREADY wraps the value in single quotes
+        -- (see DatabaseMySQL::escapeString) - do NOT add quotes here.
+        local inserted = db.executeQuery(
+            "INSERT INTO `auction_system` (`player`, `item_name`, `item_id`, `count`, `desc`, `cost`, `date`, `expired`, `world_id`, `tier`) VALUES (" ..
+            getPlayerGUID(cid) .. ", " .. q(itemName) .. ", " .. itemId .. ", " .. itemCount .. ", " .. q(theDesc) .. ", " .. string.format("%.0f", itemValue) .. ", " .. os.time() .. ", 0, " .. getConfigValue('worldId') .. ", " .. tier .. ");"
+        )
+
+        -- Última checagem: se o INSERT falhou, o item NÃO fica perdido - mas só
+        -- devolve depois de confirmar que a oferta realmente não entrou (um
+        -- retorno falso com a linha gravada duplicaria o item).
+        if not inserted then
+            local check = db.getResult("SELECT `id` FROM `auction_system` WHERE `player` = " .. getPlayerGUID(cid) .. " AND `item_id` = " .. itemId .. " AND `cost` = " .. string.format("%.0f", itemValue) .. " AND `world_id` = " .. getConfigValue('worldId') .. " ORDER BY `id` DESC LIMIT 1;")
+            local rowExists = check and check:getID() ~= -1
+            if check and rowExists then
+                check:free()
+            end
+
+            if not rowExists then
+                giveMarketItem(cid, itemId, itemCount, tier)
+                marketFail(cid, "[MARKET] Falha ao registrar a oferta. O item voltou pra sua mochila.")
+                return true
+            end
+        end
+
+        local tierText = tier > 0 and (" [Tier " .. tier .. "]") or ""
+        marketMsg(cid, "[MARKET] Você adicionou " .. itemCount .. " " .. itemName .. tierText .. " por " .. string.format("%.0f", itemValue) .. " gold coins nas ofertas de venda do market.")
 
         return true
 
@@ -219,6 +390,7 @@ function onSay(cid, words, param, channel)
         local itemId = resultId:getDataInt("item_id")
         local itemCount = resultId:getDataInt("count")
         local itemName = resultId:getDataString("item_name")
+        local itemTier = tonumber(resultId:getDataInt("tier")) or 0
         resultId:free()
 
         if expired == 1 then
@@ -242,13 +414,32 @@ function onSay(cid, words, param, channel)
             doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             return true
         else
+            -- o item volta com o tier que foi anunciado (giveMarketItem seta o
+            -- atributo antes de o client receber o item, senão o sprite ficaria
+            -- sem o shader do tier)
+            local delivered = 0
             if isItemStackable(itemId) then
-                doPlayerAddItem(cid, itemId, itemCount)
+                if giveMarketItem(cid, itemId, itemCount, itemTier) then
+                    delivered = itemCount
+                end
             else
+                -- itens não-stackáveis só podem ser anunciados com quantidade 1
                 for i = 1, itemCount do
-                    doPlayerAddItem(cid, itemId, 1)
+                    if giveMarketItem(cid, itemId, 1, itemTier) then
+                        delivered = delivered + 1
+                    else
+                        break
+                    end
                 end
             end
+
+            if delivered == 0 then
+                -- nada foi entregue: devolve o dinheiro e a oferta continua no ar
+                doPlayerAddMoney(cid, itemValue)
+                marketFail(cid, "[MARKET] Você não tem espaço na mochila. A compra foi cancelada e o dinheiro devolvido.")
+                return true
+            end
+
             db.executeQuery("DELETE FROM `auction_system` WHERE `id` = " .. id .. " AND `world_id` = " .. getConfigValue('worldId') .. ";")
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você comprou " .. itemCount .. " " .. itemName .. " por " .. string.format("%.0f", itemValue) .. " gps!")
             db.executeQuery("UPDATE `players` SET `auction_balance` = `auction_balance` + " .. string.format("%.0f", itemValue) .. " WHERE `id` = " .. playerId .. ";")
@@ -282,6 +473,7 @@ function onSay(cid, words, param, channel)
         local itemId = resultId:getDataInt("item_id")
         local itemCount = resultId:getDataInt("count")
         local itemName = resultId:getDataString("item_name")
+        local itemTier = tonumber(resultId:getDataInt("tier")) or 0
         resultId:free()
 
         if getPlayerGUID(cid) == playerId then
@@ -289,14 +481,28 @@ function onSay(cid, words, param, channel)
                 doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Você está tentando retirar o item " .. itemName .. " de " .. getItemWeightById(itemId, itemCount) .. " de capacidade e você tem " .. getPlayerFreeCap(cid) .. " de capacidade disponível. Coloque alguns itens em seu depot ou em sua house, e tente remover a oferta.")
                 doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
             else
-                db.executeQuery("DELETE FROM `auction_system` WHERE `id` = " .. id .. " AND `world_id` = " .. getConfigValue('worldId') .. ";")
+                -- entrega antes de apagar a oferta: se não houver espaço, a oferta
+                -- continua no ar (o item nunca é perdido nem duplicado)
+                local delivered = 1
                 if isItemStackable(itemId) then
-                    doPlayerAddItem(cid, itemId, itemCount)
+                    if not giveMarketItem(cid, itemId, itemCount, itemTier) then
+                        delivered = 0
+                    end
                 else
                     for i = 1, itemCount do
-                        doPlayerAddItem(cid, itemId, 1)
+                        if not giveMarketItem(cid, itemId, 1, itemTier) then
+                            delivered = 0
+                            break
+                        end
                     end
                 end
+
+                if delivered == 0 then
+                    marketFail(cid, "[MARKET] Você não tem espaço na mochila para receber o item. A oferta continua no market.")
+                    return true
+                end
+
+                db.executeQuery("DELETE FROM `auction_system` WHERE `id` = " .. id .. " AND `world_id` = " .. getConfigValue('worldId') .. ";")
                 doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Sua oferta foi removida do market.")
             end
         else

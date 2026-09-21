@@ -101,8 +101,10 @@
 	<action actionid="31654" event="script" value="rotworm door.lua"/>
 	<action itemid="1740;13625;13083" event="script" value="reward system.lua" />
 	<action itemid="9969" event="script" value="remove skull.lua" />
-	<action itemid="9693" event="script" value="mount doll.lua" />
-	<action itemid="15009" event="script" value="mountmaster.lua" />
+	<!-- MONTARIA DESATIVADA: o mount changer (9693) abria a janela de montarias
+	     e o mount master (15009) dava todas as montarias. Ficam sem acao. -->
+	<!--<action itemid="9693" event="script" value="mount doll.lua" />-->
+	<!--<action itemid="15009" event="script" value="mountmaster.lua" />-->
 		
 	<!-- Scripts Tunico -->
 
@@ -123,6 +125,11 @@
 		<action uniqueid="2012" event="script" value="inqchests.lua" />
 		<action uniqueid="2013" event="script" value="inqchests.lua" />
 		<action actionid="27337" event="script" value="inquistatue.lua"/>
+		<!-- Statue Donation: estatua das nacoes (client: modules/statue_donation).
+		     Abre pelo ITEMID 19335 (a estatua do mapa). O ACTIONID 50030 tambem
+		     continua valendo, caso queira usar outro item como estatua. -->
+		<action itemid="19335" event="script" value="statueDonation.lua"/>
+		<action actionid="50030" event="script" value="statueDonation.lua"/>
 		<action uniqueid="45100" event="script" value="quests/New/alavancas_fire.lua"/>
 		<action uniqueid="45101" event="script" value="quests/New/alavanca_water.lua"/>
 		<action uniqueid="48235" event="script" value="quests/New/guzzlemaw.lua"/>
@@ -247,6 +254,9 @@
 	<action itemid="12542" event="script" value="foods/pot_of_blackjack.lua"/>
 	<action itemid="12543" event="script" value="foods/demonic_candy_ball.lua"/>
 	<action itemid="12544" event="script" value="foods/sweet_mangonaise_elixir.lua"/>
+
+	<!-- Peixes do sistema de pesca/cozinha: crus (19398-19415) e assados (19417-19434) -->
+	<action itemid="19398-19415;19417-19434" event="script" value="foods/fish.lua"/>
 
 	<!-- Spellbooks -->
 	<action itemid="2175;6120;8900-8904;8918;12647;16112;18401" event="script" value="other/spellbook.lua"/>

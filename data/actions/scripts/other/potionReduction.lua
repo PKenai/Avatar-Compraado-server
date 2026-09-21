@@ -13,7 +13,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
     return true
   end
 
-  if getPlayerStorageValue(cid, config.storageInEffect) > os.time() then
+  if (tonumber(getPlayerStorageValue(cid, config.storageInEffect)) or -1) > os.time() then
     doPlayerSendCancel(cid, getLangString(cid, "You already in this item effect.", "Você já está sobre o efeito desse item."))
     return true
   end

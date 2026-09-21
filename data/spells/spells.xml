@@ -106,7 +106,7 @@
 		<vocation id="1"/>
 	</instant>
 	
-	<instant name="Water Whip" words="water whip" lvl="1" mana="2" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="water/whip.lua">
+	<instant name="Water Wave" words="water wave" lvl="1" mana="2" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="water/whip.lua">
 		<vocation id="2"/>
 	</instant>
 
@@ -132,10 +132,6 @@
 
 	<instant name="Water Jump" words="water jump" lvl="16" mana="16" aggressive="1" selftarget="1" exhaustion="800" needlearn="0" event="script" value="water/jump.lua">
 		<vocation id="2"/>
-	</instant>
-
-	<instant name="Water Wave" words="water wave" lvl="16" mana="16" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="water/wave.lua">
-		<vocation id="6"/>
 	</instant>
 
 	<instant name="Water IceSpikes" words="water iceSpikes" lvl="20" mana="20" direction="1" exhaustion="800" needlearn="0" event="script" value="water/iceSpikes.lua">

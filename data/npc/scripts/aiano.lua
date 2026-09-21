@@ -31,11 +31,11 @@ local CHEST_STORAGE = "aianoChest"
 local QUEST_SYSTEM_STORAGE = 49220
 
 local SET_PIECES = {
-    { id = 13401, article = "o",     name = "capacete", palavras = {"capacete", "elmo", "cap"} },
-    { id = 13402, article = "a",     name = "armadura", palavras = {"armadura"} },
-    { id = 13403, article = "a",     name = "calça",    palavras = {"calça", "calcas"} },
-    { id = 13404, article = "a",     name = "bota",     palavras = {"bota", "botas"} },
-    { id = 13405, article = "o",     name = "escudo",   palavras = {"escudo"} },
+    { id = 13401, article = "the", name = "mountain helmet", palavras = {"helmet", "elmo", "capacete", "cap"} },
+    { id = 13402, article = "the", name = "mountain armor",  palavras = {"armor", "armadura"} },
+    { id = 13403, article = "the", name = "mountain pants",  palavras = {"pants", "calça", "calca", "calcas"} },
+    { id = 13404, article = "the", name = "mountain boots",  palavras = {"boots", "boot", "bota", "botas"} },
+    { id = 13405, article = "the", name = "mountain shield", palavras = {"shield", "escudo"} },
 }
 
 local function questCompleted(cid)
@@ -164,7 +164,7 @@ function creatureSayCallback(cid, type, msg)
                 doPlayerAddItem(cid, chosen.id, 1)
                 setPlayerStorageValue(cid, QUEST_STORAGE, 2)
                 setPlayerStorageValue(cid, QUEST_SYSTEM_STORAGE, 2)
-                selfSay("Here it is, " .. name .. "! " .. chosen.article .. " " .. chosen.name .. " of the mountain. May it protect you as it protected the guardian!", cid)
+                selfSay("Here it is, " .. name .. "! " .. chosen.article .. " " .. chosen.name .. ". May it protect you as it protected the guardian!", cid)
                 talkState[talkUser] = 1
             else
                 selfSay("Calm down, " .. name .. "! You still haven't brought the Mountain Defender's treasure. Defeat it and take the chest first!", cid)

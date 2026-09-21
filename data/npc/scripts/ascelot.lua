@@ -36,7 +36,7 @@ function creatureSayCallback(cid, type, msg)
 		local finalExp = getExperienceForLevel(221) - getExperienceForLevel(220)
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Congratulations! You completed a The Source of Power Quest. Como recompensa, você recebeu "..finalExp.." pontos de experiência, 1x Power Source Ring e 300000 gold coins.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Congratulations! You completed The Source of Power Quest. As a reward you received "..finalExp.." experience points, 1x Power Source Ring and 300000 gold coins.")
 		return true
 	elseif getPlayerStorageValue(cid, "demonAccess") == 1 then
 		selfSay("What are you waiting for? You need to defeat the demon quickly!", cid)

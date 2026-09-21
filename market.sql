@@ -17,8 +17,12 @@ CREATE TABLE IF NOT EXISTS `auction_system` (
   `date` int DEFAULT NULL,
   `expired` smallint DEFAULT NULL,
   `world_id` tinyint UNSIGNED NOT NULL DEFAULT '0',
+  `tier` smallint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- Tier do item da oferta (0 = item sem tier). Bancos antigos: o servidor adiciona
+-- a coluna sozinho no startup (data/globalevents/scripts/market.lua).
 
 -- ------------------------------------------------------------
 --  Column used to pay sellers (balance is claimed via

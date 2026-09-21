@@ -22,8 +22,8 @@ local COLMEIA_ITEM = 18869
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 20
 local REWARD_EXP = 40000
-local QUEST_NAME = "O Mel de Katata"
-local MISSION_NAME = "Recuperar a Colmeia de barro"
+local QUEST_NAME = "Katata's Honey"
+local MISSION_NAME = "Recover the clay beehive"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -101,7 +101,7 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already me devolveu a colmeia. Thank you, agora posso voltar a comer mel!", cid)
+                selfSay("You already brought my hive back. Thank you, now I can go back to eating honey!", cid)
             elseif hasColmeia(cid) then
                 deliverQuest(cid)
                 selfSay("You brought my hive back! Here is your reward: 20 platinum coins and 40,000 experience!", cid)
@@ -111,7 +111,7 @@ function creatureSayCallback(cid, type, msg)
                 selfSay("Great! Go to the mud bees' den and recover my hive!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "colmeia") or msgcontains(msg, "mel") or msgcontains(msg, "abelha") or msgcontains(msg, "hunger") or msgcontains(msg, "help") then
+        elseif msgcontains(msg, "hive") or msgcontains(msg, "honey") or msgcontains(msg, "bee") or msgcontains(msg, "hunger") or msgcontains(msg, "help") then
             if hasColmeia(cid) then
                 selfSay("You recovered my hive! Say you want to return it to receive your reward.", cid)
             elseif started then

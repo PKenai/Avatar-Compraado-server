@@ -1,6 +1,6 @@
 
 function onSay(cid, words, param, channel)
-  if getPlayerStorageValue(cid, "ativoBot") ~= 1 or os.time() > getPlayerStorageValue(cid, "horarioBot") then
+  if getPlayerStorageValue(cid, "ativoBot") ~= 1 or os.time() > (tonumber(getPlayerStorageValue(cid, "horarioBot")) or -1) then
     sendBlueMessage(cid, getLangString(cid, "You don't have any Anti-Bot verification right now.", "Você não tem nenhuma verificação Anti-Bot pendente."))
     return true
   end

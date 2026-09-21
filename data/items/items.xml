@@ -15630,7 +15630,7 @@
 		<attribute key="sendcharges" value="1"/>
 		<attribute key="weight" value="1200"/>
 	</item>
-	<item id="18340" article="a" name="Moeda Avatar" plural="Moedas Avatar">
+	<item id="18340" article="an" name="Avatar Coin" plural="Avatar Coins">
 		<attribute key="weight" value="10"/>
 		<attribute key="description" value="Uma moeda especial usada para comprar itens de treino."/>
 	</item>
@@ -16108,118 +16108,118 @@
 	<attribute key="description" value="[+20% Bend Damage]"/>
 </item>
 
-<!-- === MATERIAIS DE MONSTROS === -->
-<item id="19099" article="a" name="Linho">
+<!-- === MONSTER MATERIALS === -->
+<item id="19099" article="a" name="Linen">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19101" article="a" name="Earth Beetle Shell">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19103" article="a" name="Worm Head">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19105" article="a" name="Crab Pincer">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19107" article="a" name="Ladybug Antenna">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19109" article="a" name="Bear Fur">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19111" article="a" name="Strong Web">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19113" article="a" name="Mud Bee Wings">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19115" article="a" name="Old Web">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19117" article="a" name="Flask of Mud">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19119" article="a" name="Flask of Light">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19121" article="a" name="Lion Mane">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19123" article="a" name="Metallic Sin">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19125" article="a" name="Snail Liquid Flask">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19127" article="a" name="Elephant Leather">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19129" article="a" name="Woodpecker Beak">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19131" article="a" name="Cricket Leg">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19133" article="a" name="Vulture Bee Stinger">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19135" article="a" name="Mordecasca Pebbles">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19137" article="a" name="Sombre Cloth">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19139" article="a" name="Marine Scales">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19141" article="a" name="Jaguar Skin">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19143" article="a" name="Hermit's Shell">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19145" article="a" name="Strange Pages">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19147" article="a" name="Black Paw">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19149" article="a" name="Desert Stones">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19151" article="a" name="Odd Mineral">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 <item id="19153" article="a" name="Giant Pages">
 	<attribute key="weight" value="50"/>
-	<attribute key="description" value="Material para forjar luvas."/>
+	<attribute key="description" value="Material used to forge gloves."/>
 </item>
 
 <!-- === CAPAS (Tadeu) === -->
@@ -16631,5 +16631,159 @@
 	</item>
 	<item id="19248" article="a" name="prismatic reward trunk">
 		<attribute key="description" value="A rare trunk of shifting lights. Use it to collect a crystal coin." />
+	</item>
+	<item id="19335" article="a" name="statue of the nations">
+		<attribute key="description" value="An ancient monument honouring the four nations. Use it to offer gold and bless your nation." />
+	</item>
+
+	<!-- ====================================================================
+	     PEIXES (sistema de pesca/cozinha)
+	     crus: 19398-19415  /  assados: 19417-19434
+	     Dados, bonus e dificuldade ficam em data/lib/fishSystem.lua
+	     ==================================================================== -->
+	<item id="19398" name="Sardine">
+		<attribute key="weight" value="300" />
+		<attribute key="description" value="A common little fish. Roast it to make it better." />
+	</item>
+	<item id="19399" name="Anchovy">
+		<attribute key="weight" value="350" />
+		<attribute key="description" value="Small and salty. Roast it to make it better." />
+	</item>
+	<item id="19400" name="Minnow">
+		<attribute key="weight" value="400" />
+		<attribute key="description" value="A small river fish. Roast it to make it better." />
+	</item>
+	<item id="19401" name="Tilapia">
+		<attribute key="weight" value="450" />
+		<attribute key="description" value="Light white meat. Roast it to make it better." />
+	</item>
+	<item id="19402" name="Croaker">
+		<attribute key="weight" value="600" />
+		<attribute key="description" value="A saltwater fish, rarer than most. Roast it to make it better." />
+	</item>
+	<item id="19403" name="Porgy">
+		<attribute key="weight" value="650" />
+		<attribute key="description" value="Red and tasty. Roast it to make it better." />
+	</item>
+	<item id="19404" name="Sea Bass">
+		<attribute key="weight" value="700" />
+		<attribute key="description" value="Fast and hard to catch. Roast it to make it better." />
+	</item>
+	<item id="19405" name="Dorado">
+		<attribute key="weight" value="900" />
+		<attribute key="description" value="It shines like gold in the water. Roast it to make it better." />
+	</item>
+	<item id="19406" name="Arapaima">
+		<attribute key="weight" value="950" />
+		<attribute key="description" value="The giant of the river. Roast it to make it better." />
+	</item>
+	<item id="19407" name="Peacock Bass">
+		<attribute key="weight" value="1000" />
+		<attribute key="description" value="Predator of the waters. Roast it to make it better." />
+	</item>
+	<item id="19408" name="Tambaqui">
+		<attribute key="weight" value="1200" />
+		<attribute key="description" value="Fat and nutritious. Roast it to make it better." />
+	</item>
+	<item id="19409" name="Spotted Catfish">
+		<attribute key="weight" value="1250" />
+		<attribute key="description" value="Dark spots, tough hide. Roast it to make it better." />
+	</item>
+	<item id="19410" name="Sturgeon">
+		<attribute key="weight" value="1300" />
+		<attribute key="description" value="As old as the world. Roast it to make it better." />
+	</item>
+	<item id="19411" name="Electric Eel">
+		<attribute key="weight" value="1350" />
+		<attribute key="description" value="Electric to the touch. Roast it to make it better." />
+	</item>
+	<item id="19412" name="Firebender Fish">
+		<attribute key="weight" value="1500" />
+		<attribute key="description" value="It burns with energy. Firebenders feel its power. Roast it to make it better." />
+	</item>
+	<item id="19413" name="Waterbender Fish">
+		<attribute key="weight" value="1500" />
+		<attribute key="description" value="Alive as the tide. Waterbenders feel its power. Roast it to make it better." />
+	</item>
+	<item id="19414" name="Airbender Fish">
+		<attribute key="weight" value="1500" />
+		<attribute key="description" value="Light as the wind. Airbenders feel its power. Roast it to make it better." />
+	</item>
+	<item id="19415" name="Earthbender Fish">
+		<attribute key="weight" value="1500" />
+		<attribute key="description" value="Stubborn as rock. Earthbenders feel its power. Roast it to make it better." />
+	</item>
+
+	<item id="19417" name="Roasted Sardine">
+		<attribute key="weight" value="280" />
+		<attribute key="description" value="Roasted just right. Heals more than the raw one." />
+	</item>
+	<item id="19418" name="Roasted Anchovy">
+		<attribute key="weight" value="330" />
+		<attribute key="description" value="Roasted just right. Heals more than the raw one." />
+	</item>
+	<item id="19419" name="Roasted Minnow">
+		<attribute key="weight" value="380" />
+		<attribute key="description" value="Roasted just right. Heals more than the raw one." />
+	</item>
+	<item id="19420" name="Roasted Tilapia">
+		<attribute key="weight" value="430" />
+		<attribute key="description" value="Roasted just right. Heals more than the raw one." />
+	</item>
+	<item id="19421" name="Roasted Croaker">
+		<attribute key="weight" value="580" />
+		<attribute key="description" value="Roasted just right. Heals more than the raw one." />
+	</item>
+	<item id="19422" name="Roasted Porgy">
+		<attribute key="weight" value="630" />
+		<attribute key="description" value="Roasted just right. Heals more than the raw one." />
+	</item>
+	<item id="19423" name="Roasted Sea Bass">
+		<attribute key="weight" value="680" />
+		<attribute key="description" value="Roasted just right. Heals more than the raw one." />
+	</item>
+	<item id="19424" name="Roasted Dorado">
+		<attribute key="weight" value="880" />
+		<attribute key="description" value="Roasted over the coals. Heals more than the raw one." />
+	</item>
+	<item id="19425" name="Roasted Arapaima">
+		<attribute key="weight" value="930" />
+		<attribute key="description" value="Roasted just right. Heals more than the raw one." />
+	</item>
+	<item id="19426" name="Roasted Peacock Bass">
+		<attribute key="weight" value="980" />
+		<attribute key="description" value="Roasted just right. Heals more than the raw one." />
+	</item>
+	<item id="19427" name="Roasted Tambaqui">
+		<attribute key="weight" value="1180" />
+		<attribute key="description" value="Roasted just right. A true feast." />
+	</item>
+	<item id="19428" name="Roasted Spotted Catfish">
+		<attribute key="weight" value="1230" />
+		<attribute key="description" value="Roasted just right. A true feast." />
+	</item>
+	<item id="19429" name="Roasted Sturgeon">
+		<attribute key="weight" value="1280" />
+		<attribute key="description" value="Roasted just right. A true feast." />
+	</item>
+	<item id="19430" name="Roasted Electric Eel">
+		<attribute key="weight" value="1330" />
+		<attribute key="description" value="Roasted just right. A true feast." />
+	</item>
+	<item id="19431" name="Roasted Firebender Fish">
+		<attribute key="weight" value="1480" />
+		<attribute key="description" value="A legendary meal. It burns from within." />
+	</item>
+	<item id="19432" name="Roasted Waterbender Fish">
+		<attribute key="weight" value="1480" />
+		<attribute key="description" value="A legendary meal. It renews the body." />
+	</item>
+	<item id="19433" name="Roasted Airbender Fish">
+		<attribute key="weight" value="1480" />
+		<attribute key="description" value="A legendary meal. It makes your steps light." />
+	</item>
+	<item id="19434" name="Roasted Earthbender Fish">
+		<attribute key="weight" value="1480" />
+		<attribute key="description" value="A legendary meal. It turns your skin to stone." />
 	</item>
 </items>

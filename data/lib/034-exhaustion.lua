@@ -5,7 +5,7 @@ exhaustion =
       return false
     end
 
-    return getPlayerStorageValue(cid, storage) >= os.time()
+    return (tonumber(getPlayerStorageValue(cid, storage)) or -1) >= os.time()
   end,
 
   get = function (cid, storage)
@@ -13,7 +13,7 @@ exhaustion =
       return false
     end
 
-    local exhaust = getPlayerStorageValue(cid, storage)
+    local exhaust = tonumber(getPlayerStorageValue(cid, storage)) or -1
     if(exhaust > 0) then
       local left = exhaust - os.time()
       if(left >= 0) then

@@ -12,40 +12,40 @@ local GLOVES = {
 }
 
 local GLOVE_NAMES = {
-    [19098] = "Luva simples",
-    [19100] = "Luva pegajosa",
-    [19102] = "Luva funebre",
-    [19104] = "Luva pinca vermelha",
-    [19106] = "Luva de joaninha",
-    [19108] = "Luvas da fera",
-    [19110] = "Luvas tecidas",
-    [19112] = "Luvas da rainha",
-    [19114] = "Luvas de teia",
-    [19116] = "Luvas de barro",
-    [19118] = "Luvas reluzentes",
-    [19120] = "Luvas reais",
-    [19122] = "Luvas metalicas",
-    [19124] = "Luvas gosmentas",
-    [19126] = "Luvas de couro cinza",
-    [19128] = "Luvas da terra",
-    [19130] = "Luvas da natureza",
-    [19132] = "Luvas carniceiras",
-    [19134] = "Luvas cascudas",
-    [19136] = "Luvas da rebeliao",
-    [19140] = "Luvas da coragem",
-    [19138] = "Luvas marinhas",
-    [19142] = "Luvas do hermitao",
-    [19144] = "Luvas do conhecimento",
-    [19146] = "Luvas da dobra obscura",
-    [19148] = "Luvas deserticas",
-    [19150] = "Luvas de pedregulho",
-    [19152] = "Luvas do conhecimento perdido",
+    [19098] = "Simple Glove",
+    [19100] = "Sticky Glove",
+    [19102] = "Funeral Glove",
+    [19104] = "Red Pincer Glove",
+    [19106] = "Ladybug Glove",
+    [19108] = "Beast Gloves",
+    [19110] = "Woven Gloves",
+    [19112] = "Queen's Gloves",
+    [19114] = "Web Gloves",
+    [19116] = "Mud Gloves",
+    [19118] = "Gleaming Gloves",
+    [19120] = "Royal Gloves",
+    [19122] = "Metallic Gloves",
+    [19124] = "Slimy Gloves",
+    [19126] = "Grey Leather Gloves",
+    [19128] = "Earth Gloves",
+    [19130] = "Nature Gloves",
+    [19132] = "Butcher Gloves",
+    [19134] = "Tough Gloves",
+    [19136] = "Rebellion Gloves",
+    [19140] = "Courage Gloves",
+    [19138] = "Marine Gloves",
+    [19142] = "Hermit's Gloves",
+    [19144] = "Knowledge Gloves",
+    [19146] = "Dark Fold Gloves",
+    [19148] = "Desert Gloves",
+    [19150] = "Boulder Gloves",
+    [19152] = "Lost Knowledge Gloves",
 }
 
 function onSay(cid, words, param, channel)
     -- Escolhe luva aleatoria
     local gloveId = GLOVES[math.random(#GLOVES)]
-    local gloveName = GLOVE_NAMES[gloveId] or "Luva"
+    local gloveName = GLOVE_NAMES[gloveId] or "Glove"
 
     -- Escolhe tier
     local tier = 0
@@ -60,7 +60,7 @@ function onSay(cid, words, param, channel)
     -- Cria o item (retorna UID)
     local uid = doCreateItemEx(gloveId, 1)
     if not uid then
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Erro ao criar item.")
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Failed to create item.")
         return true
     end
 
@@ -83,7 +83,7 @@ function onSay(cid, words, param, channel)
     -- Da pro player PRIMEIRO (item ja existe no inventario)
     local ret = doPlayerAddItemEx(cid, uid, true)
     if ret ~= RETURNVALUE_NOERROR then
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Inventario cheio.")
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Inventory full.")
         return true
     end
 
@@ -92,7 +92,7 @@ function onSay(cid, words, param, channel)
     doSendPlayerExtendedOpcode(cid, 111, "set," .. clientId .. "," .. tier)
 
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_WARNING,
-        "[TIER] Voce recebeu " .. gloveName .. " com Tier " .. tier .. "!"
+        "[TIER] You received " .. gloveName .. " with Tier " .. tier .. "!"
     )
     doSendMagicEffect(getCreaturePosition(cid), CONST_ME_MAGIC_BLUE)
 

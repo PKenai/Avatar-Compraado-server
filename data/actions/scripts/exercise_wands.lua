@@ -7,8 +7,8 @@
   Local: data/actions/scripts/exercise_wands.lua
 
   COMO FUNCIONA
-  - O jogador usa a varinha em um Exercise Dummy (item 18334/18335 ou criatura
-    chamada "Exercise Dummy").
+  - O jogador usa a varinha em um Exercise Dummy (itens 18334/18335/19336, ou
+    criatura chamada "Exercise Dummy").
   - A cada 2s ele "acerta" o dummy: consome 1 carga e ganha progresso de
     magic level (padrão do Tibia Global para varinhas).
   - Quando as cargas acabam, a varinha desintegra.
@@ -20,6 +20,9 @@
   - Andar, deslogar, sair da protection zone ou perder a varinha interrompe
     o treino automaticamente.
   - Treinar num dummy DENTRO de casa dá +10% de eficiência (dummy de casa).
+  - A antiga bênção de SKILL da estátua (que acelerava o ML do treino) nao
+    existe mais: a aba virou Potions (+15% de cura). O ganho do treino e' a
+    formula deste arquivo, e so' ele.
 
   INSTALAÇÃO
   1) data/actions/actions.xml:
@@ -61,7 +64,7 @@ local CONFIG = {
     },
     requirePZ     = true,                  -- exige protection zone para treinar
     houseBonus    = 1.1,                   -- dummy dentro de casa: +10% (1.0 = desliga)
-    dummyIds      = {18334, 18335},        -- ids de ITEM (moveis) do dummy
+    dummyIds      = {18334, 18335, 19336}, -- ids de ITEM do dummy (19336 = dummy do OTB novo)
     dummyNames    = {"exercise dummy", "dummy"},  -- nomes de CRIATURA do dummy (minusculas)
 }
 
@@ -218,7 +221,7 @@ function exerciseWandsHit(cid, t)
         amount = math.floor(t.value * t.bonus)
         doPlayerAddSkillTry(cid, st.id, amount)
     else
-        -- IMPORTANTE: config.lua tem rateMagic = 0.0 (sistema custom de magia).
+        -- IMPORTANTE: aqui a formula JA' calcula o mana exato que o nivel pede,
         -- Passamos useMultiplier=false pro addManaSpent NAO multiplicar o mana
         -- por (rates * RATE_MAGIC) — senao o mana vira 0 e o magic level nao sobe.
         -- Magic: o ganho por acerto e CALCULADO p/ cada nivel levar o tempo

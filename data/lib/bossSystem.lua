@@ -53,6 +53,10 @@ BossSystem = {
 	-- player_storage.key e' VARCHAR(32)
 	MAX_STORAGE_KEY = 32,
 
+	-- true volta a imprimir o resumo de carga no console ("[BossSystem] pronto: ...");
+	-- ERROS e AVISOS continuam aparecendo independente disto.
+	VERBOSE = false,
+
 	loaded = false,
 	active = {},   -- [uid] = { player = nome, monster = "X", boss = "ALPHA X", time = os.time() }
 }
@@ -100,8 +104,10 @@ function BossSystem.ensureLoaded()
 	end
 
 	BossSystem.loaded = true
-	print("[BossSystem] pronto: " .. tostring(#BossSystem.getDailyPool()) ..
-		" criaturas na task diaria, " .. tostring(BossSystem.countMonsters()) .. " bosses ALPHA.")
+	if BossSystem.VERBOSE then
+		print("[BossSystem] pronto: " .. tostring(#BossSystem.getDailyPool()) ..
+			" criaturas na task diaria, " .. tostring(BossSystem.countMonsters()) .. " bosses ALPHA.")
+	end
 	return true
 end
 

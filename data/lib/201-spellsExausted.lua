@@ -105,8 +105,8 @@ spellsInfo =
 ["water shards"] = {atk = 30},
 ["water surf"] = {segundos = 30},
 ["water tsunami"] = {atk = 165},
-["water wave"] = {atk = 115},
-["water whip"] = {atk = 123}
+["water wave"] = {atk = 115}, -- atk da magia antiga "Water Wave" (water/wave.lua, removida do spells.xml)
+["water whip"] = {atk = 123} -- dobra que hoje aparece como "Water Wave" na spellbar (water/whip.lua)
 }
 
 
@@ -181,7 +181,7 @@ fireExausted = {
   recover = 2,
   explosion = 2,
   heal = 3,
-  iceSpikes = 15,
+  iceSpikes = 4, -- corrente de gelo: 4s no servidor e na spellbar (dobras lvl 5: -3)
   clock = 45,
   blizzard = 60,
   bloodBending = 90,
@@ -244,7 +244,7 @@ function blockPlayerUseMagic(cid, time)
 end
 
 function getPlayerBlockMagic(cid)
-  return getPlayerStorageValue(cid, "playerBlockMagic") > os.time()
+  return (tonumber(getPlayerStorageValue(cid, "playerBlockMagic")) or -1) > os.time()
 end
 
 --[[function getPlayerExaust(cid, element, spellName)
@@ -284,7 +284,7 @@ function doPlayerAddExaust(cid, element, spellName, time)
     time = time*2
   end]]
 
-  if getPlayerStorageValue(cid, "timeInEffectCdReduction") > os.time() then
+  if (tonumber(getPlayerStorageValue(cid, "timeInEffectCdReduction")) or -1) > os.time() then
     if time >= 5 then
       time = math.ceil(time-(time*0.3))
     end
@@ -457,7 +457,7 @@ function setPlayerStuned(cid, time)
 end
 
 function getPlayerHasStun(cid)
-  if getPlayerStorageValue(cid, "playerHasStun") >= os.time() then
+  if (tonumber(getPlayerStorageValue(cid, "playerHasStun")) or -1) >= os.time() then
     if math.random(1, 6) ~= 6 then
       doSendAnimatedText(getThingPos(cid), "Miss!", COLOR_WHITE)
       return true

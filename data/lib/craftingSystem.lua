@@ -28,10 +28,10 @@ local PROFESSIONS = {
 
 -- Receitas: TUDO definido no server
 local RECIPES = {
-  -- ==================== BLACKSMITH - LUVAS (profId = 1) ====================
+  -- ==================== BLACKSMITH - GLOVES (profId = 1) ====================
   {
     profId = 1,
-    name = "Luva simples",
+    name = "Simple Glove",
     tier = 1,
     resultItemId = 19098,
     resultCount = 1,
@@ -39,12 +39,12 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 3},  -- Linho x3
+      {itemId = 19099, count = 3},  -- Linen x3
     },
   },
   {
     profId = 1,
-    name = "Luva pegajosa",
+    name = "Sticky Glove",
     tier = 1,
     resultItemId = 19100,
     resultCount = 1,
@@ -52,13 +52,13 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 5},  -- Linho x5
-      {itemId = 19101, count = 3},  -- Casca de besouro x3
+      {itemId = 19099, count = 5},  -- Linen x5
+      {itemId = 19101, count = 3},  -- Earth Beetle Shell x3
     },
   },
   {
     profId = 1,
-    name = "Luva funebre",
+    name = "Funeral Glove",
     tier = 1,
     resultItemId = 19102,
     resultCount = 1,
@@ -66,14 +66,14 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 8},  -- Linho x8
-      {itemId = 19103, count = 5},  -- Cabeca de verme x5
-      {itemId = 19101, count = 3},  -- Casca de besouro x3
+      {itemId = 19099, count = 8},  -- Linen x8
+      {itemId = 19103, count = 5},  -- Worm Head x5
+      {itemId = 19101, count = 3},  -- Earth Beetle Shell x3
     },
   },
   {
     profId = 1,
-    name = "Luva pinca vermelha",
+    name = "Red Pincer Glove",
     tier = 1,
     resultItemId = 19104,
     resultCount = 1,
@@ -81,14 +81,14 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 10}, -- Linho x10
-      {itemId = 19105, count = 6},  -- Pinca de carangueijo x6
-      {itemId = 19101, count = 4},  -- Casca de besouro x4
+      {itemId = 19099, count = 10}, -- Linen x10
+      {itemId = 19105, count = 6},  -- Crab Pincer x6
+      {itemId = 19101, count = 4},  -- Earth Beetle Shell x4
     },
   },
   {
     profId = 1,
-    name = "Luva de joaninha",
+    name = "Ladybug Glove",
     tier = 1,
     resultItemId = 19106,
     resultCount = 1,
@@ -96,14 +96,14 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 12}, -- Linho x12
-      {itemId = 19107, count = 8},  -- Antena de joaninha x8
-      {itemId = 19101, count = 5},  -- Casca de besouro x5
+      {itemId = 19099, count = 12}, -- Linen x12
+      {itemId = 19107, count = 8},  -- Ladybug Antenna x8
+      {itemId = 19101, count = 5},  -- Earth Beetle Shell x5
     },
   },
   {
     profId = 1,
-    name = "Luvas da fera",
+    name = "Beast Gloves",
     tier = 1,
     resultItemId = 19108,
     resultCount = 1,
@@ -111,14 +111,14 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 10}, -- Linho x10
-      {itemId = 19109, count = 6},  -- Pelo de urso x6
-      {itemId = 19111, count = 4},  -- Teia forte x4
+      {itemId = 19099, count = 10}, -- Linen x10
+      {itemId = 19109, count = 6},  -- Bear Fur x6
+      {itemId = 19111, count = 4},  -- Strong Web x4
     },
   },
   {
     profId = 1,
-    name = "Luvas tecidas",
+    name = "Woven Gloves",
     tier = 1,
     resultItemId = 19110,
     resultCount = 1,
@@ -126,14 +126,14 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 10}, -- Linho x10
-      {itemId = 19111, count = 6},  -- Teia forte x6
-      {itemId = 19109, count = 4},  -- Pelo de urso x4
+      {itemId = 19099, count = 10}, -- Linen x10
+      {itemId = 19111, count = 6},  -- Strong Web x6
+      {itemId = 19109, count = 4},  -- Bear Fur x4
     },
   },
   {
     profId = 1,
-    name = "Luvas da rainha",
+    name = "Queen's Gloves",
     tier = 1,
     resultItemId = 19112,
     resultCount = 1,
@@ -141,15 +141,15 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 15}, -- Linho x15
-      {itemId = 19113, count = 8},  -- Asas de abelha x8
-      {itemId = 19111, count = 6},  -- Teia forte x6
-      {itemId = 19109, count = 4},  -- Pelo de urso x4
+      {itemId = 19099, count = 15}, -- Linen x15
+      {itemId = 19113, count = 8},  -- Mud Bee Wings x8
+      {itemId = 19111, count = 6},  -- Strong Web x6
+      {itemId = 19109, count = 4},  -- Bear Fur x4
     },
   },
   {
     profId = 1,
-    name = "Luvas de teia",
+    name = "Web Gloves",
     tier = 2,
     resultItemId = 19114,
     resultCount = 1,
@@ -157,15 +157,15 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 25}, -- Linho x25
-      {itemId = 19115, count = 15}, -- Teia velha x15
-      {itemId = 19111, count = 10}, -- Teia forte x10
-      {itemId = 19109, count = 8},  -- Pelo de urso x8
+      {itemId = 19099, count = 25}, -- Linen x25
+      {itemId = 19115, count = 15}, -- Old Web x15
+      {itemId = 19111, count = 10}, -- Strong Web x10
+      {itemId = 19109, count = 8},  -- Bear Fur x8
     },
   },
   {
     profId = 1,
-    name = "Luvas de barro",
+    name = "Mud Gloves",
     tier = 2,
     resultItemId = 19116,
     resultCount = 1,
@@ -173,15 +173,15 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 20}, -- Linho x20
-      {itemId = 19117, count = 12}, -- Frasco com barro x12
-      {itemId = 19111, count = 8},  -- Teia forte x8
-      {itemId = 19101, count = 6},  -- Casca de besouro x6
+      {itemId = 19099, count = 20}, -- Linen x20
+      {itemId = 19117, count = 12}, -- Flask of Mud x12
+      {itemId = 19111, count = 8},  -- Strong Web x8
+      {itemId = 19101, count = 6},  -- Earth Beetle Shell x6
     },
   },
   {
     profId = 1,
-    name = "Luvas reluzentes",
+    name = "Gleaming Gloves",
     tier = 2,
     resultItemId = 19118,
     resultCount = 1,
@@ -189,15 +189,15 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 25}, -- Linho x25
-      {itemId = 19119, count = 15}, -- Frasco de luz x15
-      {itemId = 19107, count = 10}, -- Antena de joaninha x10
-      {itemId = 19111, count = 8},  -- Teia forte x8
+      {itemId = 19099, count = 25}, -- Linen x25
+      {itemId = 19119, count = 15}, -- Flask of Light x15
+      {itemId = 19107, count = 10}, -- Ladybug Antenna x10
+      {itemId = 19111, count = 8},  -- Strong Web x8
     },
   },
   {
     profId = 1,
-    name = "Luvas reais",
+    name = "Royal Gloves",
     tier = 2,
     resultItemId = 19120,
     resultCount = 1,
@@ -205,16 +205,16 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 30}, -- Linho x30
-      {itemId = 19121, count = 18}, -- Juba de leao x18
-      {itemId = 19109, count = 12}, -- Pelo de urso x12
-      {itemId = 19111, count = 10}, -- Teia forte x10
-      {itemId = 19107, count = 6},  -- Antena de joaninha x6
+      {itemId = 19099, count = 30}, -- Linen x30
+      {itemId = 19121, count = 18}, -- Lion Mane x18
+      {itemId = 19109, count = 12}, -- Bear Fur x12
+      {itemId = 19111, count = 10}, -- Strong Web x10
+      {itemId = 19107, count = 6},  -- Ladybug Antenna x6
     },
   },
   {
     profId = 1,
-    name = "Luvas metalicas",
+    name = "Metallic Gloves",
     tier = 3,
     resultItemId = 19122,
     resultCount = 1,
@@ -222,16 +222,16 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 35}, -- Linho x35
-      {itemId = 19123, count = 20}, -- Peca metalica x20
-      {itemId = 19111, count = 15}, -- Teia forte x15
-      {itemId = 19117, count = 10}, -- Frasco com barro x10
-      {itemId = 19101, count = 8},  -- Casca de besouro x8
+      {itemId = 19099, count = 35}, -- Linen x35
+      {itemId = 19123, count = 20}, -- Metallic Sin x20
+      {itemId = 19111, count = 15}, -- Strong Web x15
+      {itemId = 19117, count = 10}, -- Flask of Mud x10
+      {itemId = 19101, count = 8},  -- Earth Beetle Shell x8
     },
   },
   {
     profId = 1,
-    name = "Luvas gosmentas",
+    name = "Slimy Gloves",
     tier = 3,
     resultItemId = 19124,
     resultCount = 1,
@@ -239,16 +239,16 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 40}, -- Linho x40
-      {itemId = 19125, count = 22}, -- Frasco de caracol x22
-      {itemId = 19111, count = 15}, -- Teia forte x15
-      {itemId = 19107, count = 10}, -- Antena de joaninha x10
-      {itemId = 19109, count = 8},  -- Pelo de urso x8
+      {itemId = 19099, count = 40}, -- Linen x40
+      {itemId = 19125, count = 22}, -- Snail Liquid Flask x22
+      {itemId = 19111, count = 15}, -- Strong Web x15
+      {itemId = 19107, count = 10}, -- Ladybug Antenna x10
+      {itemId = 19109, count = 8},  -- Bear Fur x8
     },
   },
   {
     profId = 1,
-    name = "Luvas de couro cinza",
+    name = "Grey Leather Gloves",
     tier = 3,
     resultItemId = 19126,
     resultCount = 1,
@@ -256,16 +256,16 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 40}, -- Linho x40
-      {itemId = 19127, count = 22}, -- Couro de elefante x22
-      {itemId = 19109, count = 15}, -- Pelo de urso x15
-      {itemId = 19111, count = 12}, -- Teia forte x12
-      {itemId = 19113, count = 8},  -- Asas de abelha x8
+      {itemId = 19099, count = 40}, -- Linen x40
+      {itemId = 19127, count = 22}, -- Elephant Leather x22
+      {itemId = 19109, count = 15}, -- Bear Fur x15
+      {itemId = 19111, count = 12}, -- Strong Web x12
+      {itemId = 19113, count = 8},  -- Mud Bee Wings x8
     },
   },
   {
     profId = 1,
-    name = "Luvas da terra",
+    name = "Earth Gloves",
     tier = 3,
     resultItemId = 19128,
     resultCount = 1,
@@ -273,16 +273,16 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 40}, -- Linho x40
-      {itemId = 19129, count = 22}, -- Bico de pica-pau x22
-      {itemId = 19111, count = 15}, -- Teia forte x15
-      {itemId = 19101, count = 10}, -- Casca de besouro x10
-      {itemId = 19117, count = 8},  -- Frasco com barro x8
+      {itemId = 19099, count = 40}, -- Linen x40
+      {itemId = 19129, count = 22}, -- Woodpecker Beak x22
+      {itemId = 19111, count = 15}, -- Strong Web x15
+      {itemId = 19101, count = 10}, -- Earth Beetle Shell x10
+      {itemId = 19117, count = 8},  -- Flask of Mud x8
     },
   },
   {
     profId = 1,
-    name = "Luvas da natureza",
+    name = "Nature Gloves",
     tier = 3,
     resultItemId = 19130,
     resultCount = 1,
@@ -290,16 +290,16 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 45}, -- Linho x45
-      {itemId = 19131, count = 25}, -- Perna de grilo x25
-      {itemId = 19111, count = 18}, -- Teia forte x18
-      {itemId = 19109, count = 12}, -- Pelo de urso x12
-      {itemId = 19113, count = 10}, -- Asas de abelha x10
+      {itemId = 19099, count = 45}, -- Linen x45
+      {itemId = 19131, count = 25}, -- Cricket Leg x25
+      {itemId = 19111, count = 18}, -- Strong Web x18
+      {itemId = 19109, count = 12}, -- Bear Fur x12
+      {itemId = 19113, count = 10}, -- Mud Bee Wings x10
     },
   },
   {
     profId = 1,
-    name = "Luvas carniceiras",
+    name = "Butcher Gloves",
     tier = 3,
     resultItemId = 19132,
     resultCount = 1,
@@ -307,16 +307,16 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 50}, -- Linho x50
-      {itemId = 19133, count = 28}, -- Ferrao de abelha urubu x28
-      {itemId = 19111, count = 20}, -- Teia forte x20
-      {itemId = 19109, count = 15}, -- Pelo de urso x15
-      {itemId = 19119, count = 10}, -- Frasco de luz x10
+      {itemId = 19099, count = 50}, -- Linen x50
+      {itemId = 19133, count = 28}, -- Vulture Bee Stinger x28
+      {itemId = 19111, count = 20}, -- Strong Web x20
+      {itemId = 19109, count = 15}, -- Bear Fur x15
+      {itemId = 19119, count = 10}, -- Flask of Light x10
     },
   },
   {
     profId = 1,
-    name = "Luvas cascudas",
+    name = "Tough Gloves",
     tier = 4,
     resultItemId = 19134,
     resultCount = 1,
@@ -324,16 +324,16 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 55}, -- Linho x55
-      {itemId = 19135, count = 30}, -- Pedriscos de mordecasca x30
-      {itemId = 19111, count = 22}, -- Teia forte x22
-      {itemId = 19101, count = 15}, -- Casca de besouro x15
-      {itemId = 19109, count = 12}, -- Pelo de urso x12
+      {itemId = 19099, count = 55}, -- Linen x55
+      {itemId = 19135, count = 30}, -- Mordecasca Pebbles x30
+      {itemId = 19111, count = 22}, -- Strong Web x22
+      {itemId = 19101, count = 15}, -- Earth Beetle Shell x15
+      {itemId = 19109, count = 12}, -- Bear Fur x12
     },
   },
   {
     profId = 1,
-    name = "Luvas da rebeliao",
+    name = "Rebellion Gloves",
     tier = 4,
     resultItemId = 19136,
     resultCount = 1,
@@ -341,17 +341,17 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 65}, -- Linho x65
-      {itemId = 19137, count = 35}, -- Pano sombrio x35
-      {itemId = 19111, count = 25}, -- Teia forte x25
-      {itemId = 19109, count = 18}, -- Pelo de urso x18
-      {itemId = 19113, count = 12}, -- Asas de abelha x12
-      {itemId = 19117, count = 8},  -- Frasco com barro x8
+      {itemId = 19099, count = 65}, -- Linen x65
+      {itemId = 19137, count = 35}, -- Sombre Cloth x35
+      {itemId = 19111, count = 25}, -- Strong Web x25
+      {itemId = 19109, count = 18}, -- Bear Fur x18
+      {itemId = 19113, count = 12}, -- Mud Bee Wings x12
+      {itemId = 19117, count = 8},  -- Flask of Mud x8
     },
   },
   {
     profId = 1,
-    name = "Luvas da coragem",
+    name = "Courage Gloves",
     tier = 4,
     resultItemId = 19140,
     resultCount = 1,
@@ -359,17 +359,17 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 80}, -- Linho x80
-      {itemId = 19141, count = 42}, -- Pele de onca x42
-      {itemId = 19111, count = 30}, -- Teia forte x30
-      {itemId = 19101, count = 20}, -- Casca de besouro x20
-      {itemId = 19107, count = 15}, -- Antena de joaninha x15
-      {itemId = 19109, count = 10}, -- Pelo de urso x10
+      {itemId = 19099, count = 80}, -- Linen x80
+      {itemId = 19141, count = 42}, -- Jaguar Skin x42
+      {itemId = 19111, count = 30}, -- Strong Web x30
+      {itemId = 19101, count = 20}, -- Earth Beetle Shell x20
+      {itemId = 19107, count = 15}, -- Ladybug Antenna x15
+      {itemId = 19109, count = 10}, -- Bear Fur x10
     },
   },
   {
     profId = 1,
-    name = "Luvas marinhas",
+    name = "Marine Gloves",
     tier = 4,
     resultItemId = 19138,
     resultCount = 1,
@@ -377,17 +377,17 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 80}, -- Linho x80
-      {itemId = 19139, count = 42}, -- Escamas marinhas x42
-      {itemId = 19111, count = 30}, -- Teia forte x30
-      {itemId = 19109, count = 20}, -- Pelo de urso x20
-      {itemId = 19119, count = 15}, -- Frasco de luz x15
-      {itemId = 19121, count = 10}, -- Juba de leao x10
+      {itemId = 19099, count = 80}, -- Linen x80
+      {itemId = 19139, count = 42}, -- Marine Scales x42
+      {itemId = 19111, count = 30}, -- Strong Web x30
+      {itemId = 19109, count = 20}, -- Bear Fur x20
+      {itemId = 19119, count = 15}, -- Flask of Light x15
+      {itemId = 19121, count = 10}, -- Lion Mane x10
     },
   },
   {
     profId = 1,
-    name = "Luvas do hermitao",
+    name = "Hermit's Gloves",
     tier = 4,
     resultItemId = 19142,
     resultCount = 1,
@@ -395,17 +395,17 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 90}, -- Linho x90
-      {itemId = 19143, count = 48}, -- Concha de hermitao x48
-      {itemId = 19111, count = 35}, -- Teia forte x35
-      {itemId = 19109, count = 22}, -- Pelo de urso x22
-      {itemId = 19113, count = 18}, -- Asas de abelha x18
-      {itemId = 19117, count = 12}, -- Frasco com barro x12
+      {itemId = 19099, count = 90}, -- Linen x90
+      {itemId = 19143, count = 48}, -- Hermit's Shell x48
+      {itemId = 19111, count = 35}, -- Strong Web x35
+      {itemId = 19109, count = 22}, -- Bear Fur x22
+      {itemId = 19113, count = 18}, -- Mud Bee Wings x18
+      {itemId = 19117, count = 12}, -- Flask of Mud x12
     },
   },
   {
     profId = 1,
-    name = "Luvas do conhecimento",
+    name = "Knowledge Gloves",
     tier = 4,
     resultItemId = 19144,
     resultCount = 1,
@@ -413,17 +413,17 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 90}, -- Linho x90
-      {itemId = 19145, count = 48}, -- Paginas estranhas x48
-      {itemId = 19111, count = 35}, -- Teia forte x35
-      {itemId = 19101, count = 22}, -- Casca de besouro x22
-      {itemId = 19109, count = 18}, -- Pelo de urso x18
-      {itemId = 19119, count = 12}, -- Frasco de luz x12
+      {itemId = 19099, count = 90}, -- Linen x90
+      {itemId = 19145, count = 48}, -- Strange Pages x48
+      {itemId = 19111, count = 35}, -- Strong Web x35
+      {itemId = 19101, count = 22}, -- Earth Beetle Shell x22
+      {itemId = 19109, count = 18}, -- Bear Fur x18
+      {itemId = 19119, count = 12}, -- Flask of Light x12
     },
   },
   {
     profId = 1,
-    name = "Luvas da dobra obscura",
+    name = "Dark Fold Gloves",
     tier = 5,
     resultItemId = 19146,
     resultCount = 1,
@@ -431,17 +431,17 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 100}, -- Linho x100
-      {itemId = 19147, count = 55},  -- Pata negra x55
-      {itemId = 19111, count = 40},  -- Teia forte x40
-      {itemId = 19109, count = 25},  -- Pelo de urso x25
-      {itemId = 19117, count = 20},  -- Frasco com barro x20
-      {itemId = 19121, count = 15},  -- Juba de leao x15
+      {itemId = 19099, count = 100}, -- Linen x100
+      {itemId = 19147, count = 55},  -- Black Paw x55
+      {itemId = 19111, count = 40},  -- Strong Web x40
+      {itemId = 19109, count = 25},  -- Bear Fur x25
+      {itemId = 19117, count = 20},  -- Flask of Mud x20
+      {itemId = 19121, count = 15},  -- Lion Mane x15
     },
   },
   {
     profId = 1,
-    name = "Luvas deserticas",
+    name = "Desert Gloves",
     tier = 5,
     resultItemId = 19148,
     resultCount = 1,
@@ -449,18 +449,18 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 120}, -- Linho x120
-      {itemId = 19149, count = 65},  -- Pedras do deserto x65
-      {itemId = 19111, count = 50},  -- Teia forte x50
-      {itemId = 19109, count = 30},  -- Pelo de urso x30
-      {itemId = 19119, count = 22},  -- Frasco de luz x22
-      {itemId = 19127, count = 18},  -- Couro de elefante x18
-      {itemId = 19129, count = 12},  -- Bico de pica-pau x12
+      {itemId = 19099, count = 120}, -- Linen x120
+      {itemId = 19149, count = 65},  -- Desert Stones x65
+      {itemId = 19111, count = 50},  -- Strong Web x50
+      {itemId = 19109, count = 30},  -- Bear Fur x30
+      {itemId = 19119, count = 22},  -- Flask of Light x22
+      {itemId = 19127, count = 18},  -- Elephant Leather x18
+      {itemId = 19129, count = 12},  -- Woodpecker Beak x12
     },
   },
   {
     profId = 1,
-    name = "Luvas de pedregulho",
+    name = "Boulder Gloves",
     tier = 5,
     resultItemId = 19150,
     resultCount = 1,
@@ -468,18 +468,18 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 120}, -- Linho x120
-      {itemId = 19151, count = 65},  -- Mineral esquisito x65
-      {itemId = 19111, count = 50},  -- Teia forte x50
-      {itemId = 19109, count = 30},  -- Pelo de urso x30
-      {itemId = 19107, count = 22},  -- Antena de joaninha x22
-      {itemId = 19113, count = 18},  -- Asas de abelha x18
-      {itemId = 19117, count = 12},  -- Frasco com barro x12
+      {itemId = 19099, count = 120}, -- Linen x120
+      {itemId = 19151, count = 65},  -- Odd Mineral x65
+      {itemId = 19111, count = 50},  -- Strong Web x50
+      {itemId = 19109, count = 30},  -- Bear Fur x30
+      {itemId = 19107, count = 22},  -- Ladybug Antenna x22
+      {itemId = 19113, count = 18},  -- Mud Bee Wings x18
+      {itemId = 19117, count = 12},  -- Flask of Mud x12
     },
   },
   {
     profId = 1,
-    name = "Luvas do conhecimento perdido",
+    name = "Lost Knowledge Gloves",
     tier = 5,
     resultItemId = 19152,
     resultCount = 1,
@@ -487,14 +487,14 @@ local RECIPES = {
     requiredSkill = 1,
     storageRequirement = 0,
     ingredients = {
-      {itemId = 19099, count = 130}, -- Linho x130
-      {itemId = 19153, count = 70},  -- Paginas gigantes x70
-      {itemId = 19111, count = 55},  -- Teia forte x55
-      {itemId = 19101, count = 35},  -- Casca de besouro x35
-      {itemId = 19109, count = 25},  -- Pelo de urso x25
-      {itemId = 19119, count = 20},  -- Frasco de luz x20
-      {itemId = 19121, count = 15},  -- Juba de leao x15
-      {itemId = 19123, count = 10},  -- Peca metalica x10
+      {itemId = 19099, count = 130}, -- Linen x130
+      {itemId = 19153, count = 70},  -- Giant Pages x70
+      {itemId = 19111, count = 55},  -- Strong Web x55
+      {itemId = 19101, count = 35},  -- Earth Beetle Shell x35
+      {itemId = 19109, count = 25},  -- Bear Fur x25
+      {itemId = 19119, count = 20},  -- Flask of Light x20
+      {itemId = 19121, count = 15},  -- Lion Mane x15
+      {itemId = 19123, count = 10},  -- Metallic Sin x10
     },
   },
 }
@@ -567,21 +567,21 @@ end
 function CraftingSystem.craft(cid, recipeId, amount)
   local recipe = RECIPES[recipeId]
   if not recipe then
-    return {success = false, message = "Receita invalida."}
+    return {success = false, message = "Invalid recipe."}
   end
 
   amount = tonumber(amount) or 1
   if amount < 1 or amount > 100 then
-    return {success = false, message = "Quantidade invalida."}
+    return {success = false, message = "Invalid amount."}
   end
 
   if not isRecipeUnlocked(cid, recipe) then
-    return {success = false, message = "Receita nao desbloqueada."}
+    return {success = false, message = "Recipe not unlocked."}
   end
 
   local maxCraft = getMaxCraftAmount(cid, recipe)
   if maxCraft <= 0 then
-    return {success = false, message = "Materiais insuficientes."}
+    return {success = false, message = "Insufficient materials."}
   end
 
   if amount > maxCraft then
@@ -590,14 +590,14 @@ function CraftingSystem.craft(cid, recipeId, amount)
 
   local totalCost = recipe.cost * amount
   if getPlayerMoney(cid) < totalCost then
-    return {success = false, message = "Gold insuficiente. Necessario: " .. totalCost}
+    return {success = false, message = "Not enough gold. Required: " .. totalCost}
   end
 
   -- REMOVER materiais
   for _, ingr in ipairs(recipe.ingredients) do
     local totalNeeded = ingr.count * amount
     if not doPlayerRemoveItem(cid, ingr.itemId, totalNeeded) then
-      return {success = false, message = "Erro ao remover material: " .. ingr.itemId}
+      return {success = false, message = "Failed to remove material: " .. ingr.itemId}
     end
   end
 
@@ -606,7 +606,7 @@ function CraftingSystem.craft(cid, recipeId, amount)
     for _, ingr in ipairs(recipe.ingredients) do
       doPlayerAddItem(cid, ingr.itemId, ingr.count * amount)
     end
-    return {success = false, message = "Erro ao cobrar gold."}
+    return {success = false, message = "Failed to charge gold."}
   end
 
   -- CRIAR item resultado
@@ -617,12 +617,12 @@ function CraftingSystem.craft(cid, recipeId, amount)
     for _, ingr in ipairs(recipe.ingredients) do
       doPlayerAddItem(cid, ingr.itemId, ingr.count * amount)
     end
-    return {success = false, message = "Inventario cheio. Itens devolvidos."}
+    return {success = false, message = "Inventory full. Items returned."}
   end
 
   return {
     success = true,
-    message = "Voce criou " .. totalResult .. "x " .. recipe.name .. "!",
+    message = "You created " .. totalResult .. "x " .. recipe.name .. "!",
   }
 end
 
@@ -725,7 +725,7 @@ function CraftingSystem.sendWindow(cid, profId)
     return
   end
 
-  print("[CraftingSystem] Enviando JSON para cid=" .. cid .. " tamanho=" .. #json_data .. " recipes=" .. #recipes)
+  print("[CraftingSystem] Sending JSON to cid=" .. cid .. " size=" .. #json_data .. " recipes=" .. #recipes)
 
   local send_ok, send_err = pcall(doSendPlayerExtendedOpcode, cid, CRAFTING_OPCODE, json_data)
   if not send_ok then
@@ -751,7 +751,7 @@ function CraftingSystem.onOpcode(cid, buffer)
     local amount = tonumber(json_data.amount) or 1
 
     if not recipeId then
-      doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Pedido de craft invalido.")
+      doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Invalid craft request.")
       return true
     end
 

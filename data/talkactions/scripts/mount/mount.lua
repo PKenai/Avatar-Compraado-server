@@ -64,11 +64,16 @@ function mountPlayer(cid, mountID)
 			end 
 		end 
         if bonusAtual < vddSpeed then
-			-- Bônus relativo ao speed atual: se o bônus anterior ficou stale
-			-- (morte/crash montado, login reaproveitando storage), o delta
-			-- absoluto antigo aplicaria a speed errada (ex: montar sem ganhar
-			-- nada e depois perder a diferença ao desmontar).
-			doChangeSpeed(cid, vddSpeed - (getCreatureSpeed(cid) - getCreatureBaseSpeed(cid)))
+			-- A montaria e' uma FONTE de velocidade (PlayerSpeed): aplica SO' o
+			-- proprio valor. O jeito antigo forcava a velocidade TOTAL para
+			-- vddSpeed, apagando o que os talentos/agilidade ja' tinham posto -
+			-- e ao desmontar o personagem ficava mais lento que a base (sem
+			-- andar, porque o servidor cancela a walk).
+			if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+				PlayerSpeed.setSource(cid, "mount", vddSpeed)
+			else
+				doChangeSpeed(cid, vddSpeed - (getCreatureSpeed(cid) - getCreatureBaseSpeed(cid)))
+			end
 			doCreatureSetStorage(cid, "bonusMount", vddSpeed)
         end
     end

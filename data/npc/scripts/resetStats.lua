@@ -10,8 +10,13 @@ local function onAddAtributo(cid, atributo, quantia)
 		if oldDodge < 1 then 
 			oldDodge = 0
 		end 
-		setPlayerStorageValue(cid, "getPointsInDodge", oldDodge+quantia)
-		doChangeSpeed(cid, 6*quantia)
+		local novoDodge = oldDodge+quantia
+		setPlayerStorageValue(cid, "getPointsInDodge", novoDodge)
+		if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+			PlayerSpeed.setSource(cid, "agi", novoDodge * 6)
+		else
+			doChangeSpeed(cid, 6*quantia)
+		end
 	elseif atributo == "speed" then 
 		--doChangeSpeed(cid, 2*quantia)
 	end 
@@ -28,7 +33,11 @@ return getPlayerStorageValue(cid, "speedvalue")
 end 
 function resetAtributos(cid)
 	if not isCreature(cid) then return false end
-	if getAgility(cid) > 0 then 
+	-- Agilidade e' uma fonte de velocidade: zerar a fonte devolve exatamente o
+	-- que ela tinha posto (nao depende de ler o storage antes de limpa-lo).
+	if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+		PlayerSpeed.setSource(cid, "agi", 0)
+	elseif getAgility(cid) > 0 then
 		doChangeSpeed(cid, -(6*(getAgility(cid))))
 	end
 	if getVitality(cid) > 1 then 
@@ -112,7 +121,7 @@ function creatureSayCallback(cid, type, msg)
 		return false
 	end
 	if getPlayerStorageValue(cid, "ativoBot") == 1 then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você precisa responder ao Anti-Bot primeiro.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You need to answer the Anti-Bot first.")
 		return false
 	end
     if talkState[talkUser] == 1 then            

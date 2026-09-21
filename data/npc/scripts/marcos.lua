@@ -16,8 +16,8 @@ local NEEDED = 150
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 50
 local REWARD_EXP = 100000
-local QUEST_NAME = "O Rio dos Hipos"
-local MISSION_NAME = "Conter os Hipos"
+local QUEST_NAME = "The Hippo River"
+local MISSION_NAME = "Contain the Hippos"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -71,7 +71,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Ei, voce parece ser um cara que sabe lidar com animais grandes. Preciso de ajuda com uns {hipos} que estao vagueando pelo rio.", cid)
+    selfSay("Hey, you look like someone who knows how to handle big animals. I need help with some {hippos} wandering around the river.", cid)
     return true
 end
 
@@ -92,33 +92,33 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already controlou os hipos! O rio esta seguro novamente!", cid)
+                selfSay("You already got the hippos under control! The river is safe again!", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Voce derrotou os 150 hipos! O rio esta limpo! Quer sua recompensa?", cid)
+                    selfSay("You defeated all 150 hippos! The river is clear! Do you want your reward?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Still need " .. (NEEDED - progress) .. " hipos. Eles estao espalhados pelo rio, cuidado!", cid)
+                    selfSay("You still need " .. (NEEDED - progress) .. " hippos. They are spread along the river, be careful!", cid)
                 end
             else
-                selfSay("Esses hipos estao espalhados pelo rio e atacam quem tenta atravessar. Mate 150 deles pra mim!", cid)
+                selfSay("Those hippos are spread along the river and attack anyone who tries to cross. Kill 150 of them for me!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "hipo") or msgcontains(msg, "rio") or msgcontains(msg, "help") or msgcontains(msg, "animal") then
+        elseif msgcontains(msg, "hippo") or msgcontains(msg, "river") or msgcontains(msg, "help") or msgcontains(msg, "animal") then
             if started and not completed then
                 selfSay("Still need " .. (NEEDED - progress) .. " hipos. Eles estao espalhados pelo rio, cuidado!", cid)
             else
-                selfSay("Eu sou o {Marcos}! Cuido do rio da vila, mas uns hipos invadiram e estao atacando todos que tentam passar. Voce pode me ajudar?", cid)
+                selfSay("I am {Marcos}! I take care of the village river, but some hippos invaded it and are attacking everyone who tries to cross. Can you help me?", cid)
             end
         else
-            selfSay("I didn't understand. Voce quer me {ajudar} com os hipos do rio?", cid)
+            selfSay("I didn't understand. Do you want to {help} me with the hippos in the river?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Here are your 50 platinum coins e 100 mil experience! Voce agora e o Domador de Hipos!", cid)
+            selfSay("Here are your 50 platinum coins and 100,000 experience! You are now the Hippo Tamer!", cid)
             talkState[talkUser] = 1
         else
             selfSay("Alright, come back when you want to receive your reward.", cid)

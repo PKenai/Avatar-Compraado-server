@@ -21,7 +21,7 @@ if not tabela or not tabela.itens then return "" end
 		string = i ~= #tabela.itens and opaStr or string
 	end 
 	if tabela.goldReq and tabela.goldReq ~= 0 then 
-		string = string .. " e " .. tabela.goldReq .. " gold coins"
+		string = string .. " and " .. tabela.goldReq .. " gold coins"
 	end 
 	return string
 end 
@@ -82,7 +82,7 @@ function rewardPlayer(cid, tabela) -- finaliza a missao dando os itens exp stora
 		for i = 1, #tabela.itensReward do 
 			doPlayerAddItem(cid, tabela.itensReward[i][1], tabela.itensReward[i][2])
 			if i == 1 then 
-				premios = "Você recebeu: "
+				premios = "You received: "
 				premios = premios .. tabela.itensReward[i][2] .. "x " .. getItemNameById(tabela.itensReward[i][1])
 			elseif i == #tabela.itensReward then
 				premios = premios .. ", " .. tabela.itensReward[i][2] .. "x " .. getItemNameById(tabela.itensReward[i][1])
@@ -98,17 +98,17 @@ function rewardPlayer(cid, tabela) -- finaliza a missao dando os itens exp stora
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
 		if tabela.itensReward then 
-			premios = premios .. ", " .. finalExp .. " pontos de experiência"
+			premios = premios .. ", " .. finalExp .. " experience points"
 		else 
-			premios = "Você recebeu: " .. finalExp .. " pontos de experiência"
+			premios = "You received: " .. finalExp .. " experience points"
 		end
 	end 
 	if tabela.goldReward and tabela.goldReward ~= 0 then 
 		doPlayerAddMoney(cid, tabela.goldReward)
 		if tabela.itensReward or (tabela.exp and tabela.exp[1] ~= 0) then 
-			premios = premios .. " e " .. tabela.goldReward .. " gold coins"
+			premios = premios .. " and " .. tabela.goldReward .. " gold coins"
 		else 
-			premios = "Você recebeu: " .. tabela.goldReward .. " gold coins"
+			premios = "You received: " .. tabela.goldReward .. " gold coins"
 		end
 	end 
 
@@ -123,9 +123,8 @@ function rewardPlayer(cid, tabela) -- finaliza a missao dando os itens exp stora
 end
 
 function getMsgByMission(tabela) -- Mensagem informando os itens necessários e perguntando se tem
-	local strbr = "On this mission you need to bring to me: " .. getRequiredItems(tabela) .. ". Do you have all of this?"
-	local stren = "Nesta missão você precisa me trazer: " .. getRequiredItems(tabela) .. ". Você possui todos estes itens?"
-return stren
+	local message = "On this mission you need to bring me: " .. getRequiredItems(tabela) .. ". Do you have all of these items?"
+return message
 end 
 
 function canDoMission(cid, tabela)
@@ -155,7 +154,7 @@ function creatureSayCallback(cid, type, msg)
 	end
 
         if talkState[talkUser] == 1 then
-            if msgcontains(msg, "mission") or msgcontains(msg, "missão") or msgcontains(msg, "missões") or msgcontains(msg, "missões") or msgcontains(msg, "missão") then
+            if msgcontains(msg, "mission") or msgcontains(msg, "missions") or msgcontains(msg, "task") or msgcontains(msg, "tasks") then
 				local missions = getMissionItemString(cid)
 				if missions then
 					local misStr = getMissionItemString(cid)

@@ -21,11 +21,16 @@ local config = {
 local function heal(cid, amount)
   if not isCreature(cid) then
     return true
-  end
-	if getPlayerSlotItem(cid, 2).itemid == 10219 then 
+  end	if getPlayerSlotItem(cid, 2).itemid == 10219 then 
 		amount = amount*1.2
 	end 
-  local health = getCreatureHealth(cid)
+	-- Statue Donation - aba Potions (+15% de cura por 8h pra todo o servidor).
+	-- Aplicado aqui (e nao num hook de doCreatureAddHealth) pra valer SO' em
+	-- potion - spell/regen/food nao entram.
+	if type(StatueDonation) == "table" and type(StatueDonation.getPotionHealMultiplier) == "function" then
+		amount = math.floor(amount * StatueDonation.getPotionHealMultiplier())
+	end
+	local health = getCreatureHealth(cid)
   addEvent(function() config.cidUsing[cid] = nil end, 1000)
 
   if exhaustion.check(cid, "isInCombat") then

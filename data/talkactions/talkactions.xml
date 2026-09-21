@@ -113,7 +113,7 @@
 	<talkaction words="air ball" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/air ball.lua"/>
 	<talkaction words="earth crush" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/earth crush.lua"/>
 	<talkaction words="fire wave" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/fire whip.lua"/>
-	<talkaction words="water whip" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/water whip.lua"/>
+	<talkaction words="water wave" case-sensitive="no" filter="word-spaced" event="script" value="tutorial/water whip.lua"/>
 
 	<talkaction words="water heal" case-sensitive="no" filter="word-spaced" event="script" value="water heal.lua"/>
 
@@ -144,6 +144,13 @@
 
 	<!-- Admin/debug -->
 	<talkaction words="!hungry" event="script" value="hungry.lua"/>
+
+	<!-- Pix (doacao / Buy Coins): confirmar e listar pedidos -->
+	<talkaction log="yes" words="!pixconfirm" access="5" separator=" " event="script" value="pixAdmin.lua"/>
+	<talkaction log="yes" words="!pixpending" access="5" event="script" value="pixAdmin.lua"/>
+
+	<!-- Statue Donation: zera pool / encerra bencao da estatua (staff, access 5) -->
+	<talkaction log="yes" words="!resetstatue" access="5" separator=" " event="script" value="resetstatue.lua"/>
 
 	<!-- Weapon Proficiency -->
 	<talkaction words="/weaponprof" separator=" " script="weaponProficiencyTalk.lua"/>

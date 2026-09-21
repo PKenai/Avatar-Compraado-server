@@ -27,7 +27,7 @@ end
 -- sobrescrever o combo que o checkExpRates calcula (premium/stamina/etc).
 -- ---------------------------------------------------------------------------
 function useExpScroll(cid, item)
-    if getPlayerStorageValue(cid, "hasExpScroll") > os.time() then
+    if (tonumber(getPlayerStorageValue(cid, "hasExpScroll")) or 0) > os.time() then
         doPlayerSendCancel(cid, getLangString(cid, "You already have an experience scroll active.", "Você já está sob o efeito de um pergaminho de experiência."))
         return false
     end

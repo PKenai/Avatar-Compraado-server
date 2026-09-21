@@ -193,6 +193,7 @@ bool ConfigManager::load()
 	m_confBool[REMOVE_WEAPON_AMMO] = getGlobalBool("removeWeaponAmmunition", true);
 	m_confBool[REMOVE_WEAPON_CHARGES] = getGlobalBool("removeWeaponCharges", true);
 	m_confBool[REMOVE_RUNE_CHARGES]	= getGlobalBool("removeRuneCharges", true);
+	m_confBool[PLAYER_BASIC_ATTACK] = getGlobalBool("playerBasicAttack", false);
 	m_confDouble[RATE_PVP_EXPERIENCE] = getGlobalDouble("rateExperienceFromPlayers", 0);
 	m_confDouble[EFP_MIN_THRESHOLD]	= getGlobalDouble("minLevelThresholdForKilledPlayer", 0.9f);
 	m_confDouble[EFP_MAX_THRESHOLD]	= getGlobalDouble("maxLevelThresholdForKilledPlayer", 1.1f);
@@ -267,6 +268,8 @@ bool ConfigManager::load()
 	m_confNumber[STAMINA_LIMIT_TOP] = getGlobalNumber("staminaRatingLimitTop", 2460);
 	m_confNumber[STAMINA_LIMIT_BOTTOM] = getGlobalNumber("staminaRatingLimitBottom", 840);
 	m_confBool[DISPLAY_LOGGING]	= getGlobalBool("displayPlayersLogging", true);
+	// Avatar custom: rastreio de quem aplica CONDITION_PARALYZE no player (ver Creature::addCondition).
+	m_confBool[CONDITION_TRACE]	= getGlobalBool("conditionTrace", false);
 	m_confBool[STAMINA_BONUS_PREMIUM] = getGlobalBool("staminaThresholdOnlyPremium", true);
 	m_confNumber[ALLOWED_MAX_PACKETS] = getGlobalNumber("allowedMaxSizePackets", 3);
 	m_confNumber[BLESS_REDUCTION_BASE] = getGlobalNumber("blessingReductionBase", 30);

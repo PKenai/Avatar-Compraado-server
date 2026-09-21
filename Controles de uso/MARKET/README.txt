@@ -1,5 +1,5 @@
 ========================================
-  MARKET - gerenciar ofertas na loja (game_shop)
+  MARKET - gerenciar ofertas da loja (game_store) e doacoes via Pix
 ========================================
 
 COMO USAR
@@ -73,3 +73,44 @@ OBS
 - O remover funciona linha a linha: cada oferta deve estar em UMA unica linha
   (formato gerado pelo BAT). Ofertas escritas a mao em varias linhas nao sao
   reconhecidas pela listagem.
+
+================================================================================
+PIX (botao "Buy Coins" da loja)
+================================================================================
+Arquivos desta pasta:
+  pix_orders.sql        -> tabela de pedidos do Pix (rode uma vez no banco)
+  pix_mercadopago.php   -> ponte OPCIONAL com o Mercado Pago (hospede no site;
+                           e' onde entra o access token, no marcador
+                           "COLOQUE A API DO MERCADO PAGO AQUI")
+
+Configuracao minima (sem gateway, ja funciona):
+  1. data/creaturescripts/scripts/game_pix.lua -> PIX_KEY (sua chave Pix),
+     PIX_RECEIVER_NAME e PIX_CITY (nome e cidade do recebedor, sem acento).
+  2. Rode o pix_orders.sql no banco do servidor.
+  3. Reinicie o servidor: a janela do Pix aparece no botao "Doar via Pix"
+     (menu da direita) e no botao "Buy Coins" da loja.
+
+Com gateway (credito automatico):
+  1. Hospede o pix_mercadopago.php junto do seu site e preencha o banco e o
+     access token do Mercado Pago no proprio arquivo (marcador explicito).
+  2. Aponte PIX_GATEWAY_URL no game_pix.lua para esse arquivo.
+  3. No jogo, a janela do Pix passa a mostrar o botao que abre a pagina de
+     pagamento; o pagamento confirmado entra sozinho na conta.
+
+Comandos da staff (access 5):
+  !pixpending                     lista os pedidos pendentes (txid, valor, minutos)
+  !pixconfirm <txid> <valor>      credita o pedido - o valor digitado tem que
+                                  bater com o valor do pedido (protecao contra
+                                  comprovante repetido/valor menor)
+
+Notas de seguranca:
+  - Nenhuma mensagem do client marca um pedido como pago: quem credita sempre
+    parte de um pedido com status 'paid' no banco (webhook, !pixconfirm ou SQL).
+  - Cada conta so' tem UM Pix aberto por vez e so' gera outro a cada 10s
+    (anti-spam). O client tambem so' consulta o proprio txid, 1x a cada 3s.
+  - Sem gateway (modo local) o QR e' um Pix estatico e o banco nao amarra o
+    txid ao pagamento: por isso o !pixconfirm exige o valor conferido no
+    extrato. Com o pix_mercadopago.php configurado isso vira automatico.
+
+Onde os coins saem dos itens comprados: accounts.premium_points (o mesmo saldo
+usado pela loja e pelo site).

@@ -38,7 +38,7 @@ function onSay(cid, words, param, channel)
       setPlayerStorageValue(pid, "getPlayerHasBanned", 0)
       sendBlueMessage(cid, param[1].." has to desbanned to talk in public channels successfully.")
     else
-      local timeBanned = getPlayerStorageValue(pid, "getPlayerHasBanned")
+      local timeBanned = (tonumber(getPlayerStorageValue(pid, "getPlayerHasBanned")) or 0)
 
       if timeBanned > os.time() then
         sendBlueMessage(cid, "This player is already banned to talk in public channels.")

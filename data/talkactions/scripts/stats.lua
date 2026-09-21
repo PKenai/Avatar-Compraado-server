@@ -5,7 +5,7 @@ local InfoOpcode = 165
 
 local function getColdownPassive(cid)
 
-  local time = getPlayerStorageValue(cid, "hasPassiveDeathActive")
+  local time = (tonumber(getPlayerStorageValue(cid, "hasPassiveDeathActive")) or 0)
   if time > os.time() then
     local stringTime = getSecsString(time-os.time())
     return getLangString(cid, "\nPassive Resurrection: "..stringTime..".", "\nPassiva de Ressurreição: "..stringTime..".")
@@ -15,7 +15,7 @@ local function getColdownPassive(cid)
 end
 
 local function getPotionExpString(cid)
-  local time = getPlayerStorageValue(cid, "hasInPotionExp")
+  local time = (tonumber(getPlayerStorageValue(cid, "hasInPotionExp")) or 0)
 
   if time > os.time() then
     local stringTime = getSecsString(time-os.time())
@@ -27,7 +27,7 @@ local function getPotionExpString(cid)
 end
 
 local function getPotionRedString(cid)
-  local time = getPlayerStorageValue(cid, "timeInEffectCdReduction")
+  local time = (tonumber(getPlayerStorageValue(cid, "timeInEffectCdReduction")) or 0)
 
   if time > os.time() then
     local stringTime = getSecsString(time-os.time())
@@ -119,7 +119,7 @@ function onSay(cid, words, param, channel)
     elseif ((upgradeStones == 23) and playerLevel == 1) then
         lastDobra = "Fire Conflagration"
     elseif ((upgradeStones == 1) and playerLevel == 2) then
-        lastDobra = "Water Whip"
+        lastDobra = "Water Wave"
     elseif ((upgradeStones == 2) and playerLevel == 2) then
         lastDobra = "Water Explosion"
     elseif ((upgradeStones == 3) and playerLevel == 2) then

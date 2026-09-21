@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Living sand blob" nameDescription="a Living sand blob" race="undead" experience="29500" speed="385" manacost="0">
+	<health now="10200" max="10200"/>
+	<look type="1365" corpse="18160"/>
+	<targetchange interval="5000" chance="10"/>
+	<strategy attack="100" defense="0"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="85"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="127" attack="171"/>
+		<attack name="earth" interval="3000" chance="25" range="7" target="1" min="-230" max="-356">
+			<attribute key="shootEffect" value="poison"/>
+			<attribute key="areaEffect" value="greenspark"/>
+		</attack>
+		<attack name="poisoncondition" interval="2000" chance="18" range="7" target="1" min="-178" max="-297">
+			<attribute key="shootEffect" value="poison"/>
+			<attribute key="areaEffect" value="redspark"/>
+		</attack>
+		<attack name="physical" interval="2000" chance="22" range="1" radius="1" target="1" min="-297" max="-519">
+			<attribute key="areaEffect" value="firearea"/>
+		</attack>
+		<attack name="Sandwater Ambush" interval="3500" chance="20" range="5" min="-180" max="-300"/>
+	</attacks>
+	<defenses armor="38" defense="40">
+		<defense name="healing" interval="3000" chance="20" min="350" max="600">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<elements>
+		<element earthPercent="-20"/>
+		<element icePercent="15"/>
+		<element firePercent="10"/>
+		<element physicalPercent="-10"/>
+	</elements>
+	<voices interval="5000" chance="8">
+		<voice sentence="Shhhhh!" yell="1"/>
+	</voices>
+	
+</monster>

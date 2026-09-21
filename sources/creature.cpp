@@ -38,6 +38,70 @@ boost::recursive_mutex AutoId::lock;
 uint32_t AutoId::count = 1000;
 AutoId::List AutoId::list;
 
+// ============================================================================
+// Avatar custom: [COND-TRACE] - de onde vem a paralisia do player
+// ----------------------------------------------------------------------------
+// Ligue em config.lua com  conditionTrace = true  e reinicie o servidor.
+// Cada CONDITION_PARALYZE que chega num player imprime no console:
+//   * o player e o que a condition faz (ticks, speedDelta, formula - ver
+//     Condition::describe);
+//   * a velocidade do momento (speed/base);
+//   * a ORIGEM: "lista salva no banco" quando quem esta' aplicando e' o
+//     Game::placeCreature (conditions persistidas em players.conditions que
+//     voltam junto no login - iologindata), ou "em jogo" no resto;
+//   * o stack trace nativo, com nome de funcao: mostra o produtor exato
+//     (LuaInterface::luaDoAddCondition, Combat::, Spells::, Weapons::...).
+// Precisa do .pdb ao lado do .exe para resolver os nomes.
+// ============================================================================
+#ifdef WINDOWS
+#include <dbghelp.h>
+
+void Creature::traceConditionOrigin(const Condition* condition)
+{
+	Player* player = getPlayer();
+	// A lista so' fica preenchida dentro do laco de Game::placeCreature.
+	const bool fromSavedConditions = player && !player->storedConditionList.empty();
+
+	HANDLE proc = GetCurrentProcess();
+	static bool symbolsReady = false;
+	if(!symbolsReady)
+	{
+		symbolsReady = SymInitialize(proc, NULL, TRUE) != 0;
+	}
+
+	std::clog << "[COND-TRACE] " << getName() << " recebeu " << condition->describe()
+		<< " | speed=" << getSpeed() << " base=" << getBaseSpeed()
+		<< " | origem=" << (fromSavedConditions ? "LISTA SALVA NO BANCO (reaplicada no login)" : "em jogo")
+		<< std::endl;
+
+	void* frames[24];
+	USHORT count = CaptureStackBackTrace(0, 24, frames, NULL);
+	char symBuf[sizeof(SYMBOL_INFO) + 256];
+	SYMBOL_INFO* sym = (SYMBOL_INFO*)symBuf;
+	sym->SizeOfStruct = sizeof(SYMBOL_INFO);
+	sym->MaxNameLen = 255;
+	for(USHORT i = 0; i < count; ++i)
+	{
+		DWORD64 disp = 0;
+		if(SymFromAddr(proc, (DWORD64)frames[i], &disp, sym))
+			std::clog << "        #" << i << " " << sym->Name << " +0x" << std::hex << disp << std::dec << std::endl;
+		else
+			std::clog << "        #" << i << " 0x" << std::hex << (DWORD64)frames[i] << std::dec << std::endl;
+	}
+}
+#else
+void Creature::traceConditionOrigin(const Condition* condition)
+{
+	Player* player = getPlayer();
+	const bool fromSavedConditions = player && !player->storedConditionList.empty();
+
+	std::clog << "[COND-TRACE] " << getName() << " recebeu " << condition->describe()
+		<< " | speed=" << getSpeed() << " base=" << getBaseSpeed()
+		<< " | origem=" << (fromSavedConditions ? "LISTA SALVA NO BANCO (reaplicada no login)" : "em jogo")
+		<< std::endl;
+}
+#endif
+
 extern Game g_game;
 extern ConfigManager g_config;
 extern CreatureEvents* g_creatureEvents;
@@ -1523,6 +1587,11 @@ bool Creature::addCondition(Condition* condition)
 {
 	if(!condition)
 		return false;
+
+	//Avatar custom: [COND-TRACE] rastreia toda paralisia (CONDITION_PARALYZE) que
+	//chega num player. Liga/desliga em config.lua (conditionTrace).
+	if(g_config.getBool(ConfigManager::CONDITION_TRACE) && condition->getType() == CONDITION_PARALYZE && getPlayer())
+		traceConditionOrigin(condition);
 
 	//Avatar custom: pet fantasma nao recebe nenhuma condicao (veneno, fogo,
 	//paralise...). Nada interfere nele; ele apenas acompanha o dono.

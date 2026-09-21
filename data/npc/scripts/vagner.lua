@@ -27,11 +27,11 @@ end
 
 -- Metais disponiveis pra forjar a solha
 local METALS = {
-    [1] = {name = "Ferro",      desc = "Ferro comum, barato mas frágil"},
-    [2] = {name = "Bronze",     desc = "Bronze resistente, boa durabilidade"},
-    [3] = {name = "Aco",        desc = "Aco temperado, forte e flexivel"},
-    [4] = {name = "Titanio",    desc = "Titanio leve mas extremamente resistente"},
-    [5] = {name = "Adamantio",  desc = "Adamantio lendario, indestrutivel"},
+    [1] = {name = "Iron",       desc = "Common iron, cheap but brittle"},
+    [2] = {name = "Bronze",     desc = "Resistant bronze, good durability"},
+    [3] = {name = "Steel",      desc = "Tempered steel, strong and flexible"},
+    [4] = {name = "Titanium",   desc = "Lightweight titanium, extremely durable"},
+    [5] = {name = "Adamantium", desc = "Legendary adamantium, indestructible"},
 }
 
 -- Chance base de sucesso por tier
@@ -73,16 +73,16 @@ local FIXED_COSTS = {
 
 -- Botas aceitas
 local BOOTS = {
-    {itemId = 19191, name = "bota de viajante",  craftCost = 3000},
-    {itemId = 19192, name = "bota reforcada",   craftCost = 9000},
-    {itemId = 19193, name = "bota resistente",  craftCost = 22000},
-    {itemId = 19194, name = "bota aprimorada",  craftCost = 45000},
-    {itemId = 19195, name = "bota nobre",       craftCost = 85000},
-    {itemId = 19196, name = "bota de protecao", craftCost = 150000},
-    {itemId = 19197, name = "bota majestosa",   craftCost = 250000},
-    {itemId = 19198, name = "bota gloriosa",    craftCost = 425000},
-    {itemId = 19199, name = "bota soberana",    craftCost = 680000},
-    {itemId = 19200, name = "bota das nacoes",  craftCost = 1000000},
+    {itemId = 19191, name = "Traveler's Boots", alt = "bota de viajante",  craftCost = 3000},
+    {itemId = 19192, name = "Reinforced Boots", alt = "bota reforcada",   craftCost = 9000},
+    {itemId = 19193, name = "Tough Boots",      alt = "bota resistente",  craftCost = 22000},
+    {itemId = 19194, name = "Improved Boots",   alt = "bota aprimorada",  craftCost = 45000},
+    {itemId = 19195, name = "Noble Boots",      alt = "bota nobre",       craftCost = 85000},
+    {itemId = 19196, name = "Protective Boots", alt = "bota de protecao", craftCost = 150000},
+    {itemId = 19197, name = "Majestic Boots",   alt = "bota majestosa",   craftCost = 250000},
+    {itemId = 19198, name = "Glorious Boots",   alt = "bota gloriosa",    craftCost = 425000},
+    {itemId = 19199, name = "Sovereign Boots",  alt = "bota soberana",    craftCost = 680000},
+    {itemId = 19200, name = "Nations Boots",    alt = "bota das nacoes",  craftCost = 1000000},
 }
 
 -- Convesation storage
@@ -155,7 +155,9 @@ local function findBootByName(name)
     local cleanName = sanitizeText(name)
     for i, boot in ipairs(BOOTS) do
         local cleanBoot = sanitizeText(boot.name)
-        if cleanName == cleanBoot or cleanName:find(cleanBoot, 1, true) or cleanBoot:find(cleanName, 1, true) then
+        local cleanAlt = sanitizeText(boot.alt or "")
+        if cleanName == cleanBoot or cleanName:find(cleanBoot, 1, true) or cleanBoot:find(cleanName, 1, true)
+           or (cleanAlt ~= "" and (cleanName == cleanAlt or cleanName:find(cleanAlt, 1, true) or cleanAlt:find(cleanName, 1, true))) then
             return i, boot
         end
     end
@@ -178,7 +180,7 @@ function onGreet(cid)
     for i = 0, 4 do
         setPlayerStorageValue(cid, CONVO_BASE + i, 0)
     end
-    selfSay("Hmph! Outro aventureiro querendo que eu forje suas botas? Eu sou Vagner, o melhor ferreiro de solhas deste continente! Mas nao e qualquer um que eu ajudo. Quer que eu tente {reforcar} sua bota? Primeiro preciso ver se voce entende de metais!", cid)
+    selfSay("Hmph! Another adventurer wanting me to forge their boots? I am Vagner, the best solesmith on this continent! But I do not help just anyone. Want me to try to {forge} your boots? First I must see if you know your metals!", cid)
     return true
 end
 
@@ -195,8 +197,8 @@ function creatureSayCallback(cid, type, msg)
     -- ESTADO 1: Apresentacao
     if talkState[talkUser] == 1 then
 
-        if msgcontains(msg, "reforcar") or msgcontains(msg, "melhorar") or msgcontains(msg, "apostar") then
-            local lista = "Botas que aceito forjar:\n\n"
+        if msgcontains(msg, "forge") or msgcontains(msg, "reinforce") or msgcontains(msg, "boots") or msgcontains(msg, "reforcar") or msgcontains(msg, "melhorar") then
+            local lista = "Boots accepted for forging:\n\n"
             for i, boot in ipairs(BOOTS) do
                 local count = getPlayerItemCount(cid, boot.itemId)
                 local tierText = ""
@@ -212,16 +214,16 @@ function creatureSayCallback(cid, type, msg)
                 local cost = getGambleCost(boot.craftCost, 0)
                 lista = lista .. i .. ") " .. boot.name .. tierText .. " - " .. doNumberFormat(cost) .. " gold\n"
             end
-            lista = lista .. "\nRegra: so forjo 1 bota por vez. Escolha pelo nome."
+            lista = lista .. "\nRule: only 1 pair of boots at a time. Choose by name."
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, lista)
-            selfSay("Pra forjar a solha, voce precisa escolher o metal certo! Se acertar, a bota fica mais forte. Se errar... bem, o metal derrete e voce perde a bota. Qual bota voce quer que eu tente forjar?", cid)
+            selfSay("To forge the sole, you must choose the right metal! If you guess right, the boots grow stronger. If you fail... well, the metal melts and you lose the boots. Which boots do you want me to forge?", cid)
             talkState[talkUser] = 2
 
-        elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") or msgcontains(msg, "ola") then
-            selfSay("Ja te disse, sou Vagner! Diz {reforcar} se quiser testar suas botas.", cid)
+        elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") or msgcontains(msg, "ola") or msgcontains(msg, "hello") then
+            selfSay("I already told you, I am Vagner! Say {forge} if you want to test your boots.", cid)
 
-        elseif msgcontains(msg, "tchau") or msgcontains(msg, "bye") then
-            selfSay("Vai embora! E nao volta sem botas de verdade!", cid)
+        elseif msgcontains(msg, "tchau") or msgcontains(msg, "bye") or msgcontains(msg, "farewell") then
+            selfSay("Get lost! And do not come back without real boots!", cid)
             talkState[talkUser] = 0
             npcHandler:releaseFocus(cid)
         end
@@ -232,26 +234,26 @@ function creatureSayCallback(cid, type, msg)
         local idx, boot = findBootByName(msg)
 
         if not boot then
-            selfSay("Nao conheco essa bota. Digite o nome certo.", cid)
+            selfSay("I do not recognize those boots. Please type the correct name.", cid)
             return true
         end
 
         local count = getPlayerItemCount(cid, boot.itemId)
         if count <= 0 then
-            selfSay("Voce nao tem " .. boot.name .. " no inventario.", cid)
+            selfSay("You do not have " .. boot.name .. " in your inventory.", cid)
             talkState[talkUser] = 1
             return true
         end
 
         if count > 1 then
-            selfSay("Voce tem " .. count .. " " .. boot.name .. ". So forjo uma por vez.", cid)
+            selfSay("You have " .. count .. " " .. boot.name .. ". I only forge one at a time.", cid)
             talkState[talkUser] = 1
             return true
         end
 
         local bootItem = getPlayerItemById(cid, true, boot.itemId)
         if not bootItem or not bootItem.uid then
-            selfSay("Erro ao encontrar a bota.", cid)
+            selfSay("Error finding the boots.", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -259,7 +261,7 @@ function creatureSayCallback(cid, type, msg)
         local currentTier = getItemTier(bootItem.uid)
 
         if currentTier >= MAX_TIER then
-            selfSay("Essa bota ja esta no tier maximo! Nao tem como forjar mais.", cid)
+            selfSay("These boots are already at the maximum tier! Cannot forge them any further.", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -273,10 +275,10 @@ function creatureSayCallback(cid, type, msg)
         setPlayerStorageValue(cid, CONVO_BASE + 3, cost)
         setPlayerStorageValue(cid, CONVO_BASE + 4, idx)
 
-        selfSay(boot.name .. " (Tier " .. currentTier .. " -> " .. nextTier .. ") custara " .. doNumberFormat(cost) .. " gold.", cid)
+        selfSay(boot.name .. " (Tier " .. currentTier .. " -> " .. nextTier .. ") will cost " .. doNumberFormat(cost) .. " gold.", cid)
         addEvent(function()
             if isPlayer(cid) then
-                selfSay("Agora escolha o metal pra solha! {1} Ferro, {2} Bronze, {3} Aco, {4} Titanio ou {5} Adamantio?", cid)
+                selfSay("Now choose the metal for the sole! {1} Iron, {2} Bronze, {3} Steel, {4} Titanium or {5} Adamantium?", cid)
             end
         end, 1500)
         talkState[talkUser] = 3
@@ -285,15 +287,24 @@ function creatureSayCallback(cid, type, msg)
     elseif talkState[talkUser] == 3 then
 
         local chosenMetal = tonumber(msg)
+        if not chosenMetal then
+            local m = msg:lower()
+            if m:find("iron") or m:find("ferro") then chosenMetal = 1
+            elseif m:find("bronze") then chosenMetal = 2
+            elseif m:find("steel") or m:find("aco") then chosenMetal = 3
+            elseif m:find("titan") then chosenMetal = 4
+            elseif m:find("adamant") then chosenMetal = 5
+            end
+        end
         if not chosenMetal or chosenMetal < 1 or chosenMetal > 5 then
-            selfSay("Escolha um metal de 1 a 5: {Ferro}, {Bronze}, {Aco}, {Titanio} ou {Adamantio}?", cid)
+            selfSay("Choose a metal from 1 to 5: {Iron}, {Bronze}, {Steel}, {Titanium} or {Adamantium}?", cid)
             return true
         end
 
         local metalName = METALS[chosenMetal].name
         setPlayerStorageValue(cid, CONVO_BASE + 5, chosenMetal)
 
-        selfSay("Voce escolheu " .. metalName .. "! Se esse metal nao combinar com a bota, ela derrete. Confirma? {sim} ou {nao}", cid)
+        selfSay("You chose " .. metalName .. "! If this metal does not bond with the boots, they will melt. Confirm? {yes} or {no}", cid)
         talkState[talkUser] = 4
 
     -- ESTADO 4: Confirmacao
@@ -307,7 +318,7 @@ function creatureSayCallback(cid, type, msg)
             local boot = BOOTS[idx]
 
             if getPlayerMoney(cid) < cost then
-                selfSay("Voce precisa de " .. doNumberFormat(cost) .. " gold pra eu forjar!", cid)
+                selfSay("You need " .. doNumberFormat(cost) .. " gold for me to forge!", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -315,13 +326,13 @@ function creatureSayCallback(cid, type, msg)
 
             local count = getPlayerItemCount(cid, itemId)
             if count <= 0 then
-                selfSay("Voce nao tem mais a bota!", cid)
+                selfSay("You no longer have the boots!", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
             end
             if count > 1 then
-                selfSay("Voce tem mais de uma bota. Guarde as outras.", cid)
+                selfSay("You have more than one pair of boots. Store the others.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -329,7 +340,7 @@ function creatureSayCallback(cid, type, msg)
 
             local bootItem = getPlayerItemById(cid, true, itemId)
             if not bootItem or not bootItem.uid then
-                selfSay("Erro ao encontrar a bota.", cid)
+                selfSay("Error finding the boots.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -352,7 +363,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
                 doSendMagicEffect(getCreaturePosition(cid), 200)
-                selfSay("O " .. metalName .. " assentou perfeitamente na solha! Sua " .. boot.name .. " is now Tier " .. newTier .. "! Hmph, ate que voce sabe escolher.", cid)
+                selfSay("The " .. metalName .. " bonded flawlessly to the sole! Your " .. boot.name .. " is now Tier " .. newTier .. "! Hmph, you actually know how to choose.", cid)
             else
                 -- FALHA
                 doRemoveItem(bootItem.uid, 1)
@@ -361,7 +372,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "clear," .. clientId)
 
                 doSendMagicEffect(getCreaturePosition(cid), 201)
-                selfSay("Droga! O " .. metalName .. " nao aguentou o calor da forja e a solha derreteu! Sua " .. boot.name .. " foi prospace. Devia ter escolhido outro metal...", cid)
+                selfSay("Blast it! The " .. metalName .. " could not endure the forge heat and the sole melted! Your " .. boot.name .. " is ruined. You should have picked another metal...", cid)
             end
 
             talkState[talkUser] = 1
@@ -370,7 +381,7 @@ function creatureSayCallback(cid, type, msg)
             end
 
         elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
-            selfSay("Covarde! Volte quando tiver coragem de arriscar.", cid)
+            selfSay("Coward! Come back when you have the courage to take a risk.", cid)
             talkState[talkUser] = 1
             setPlayerStorageValue(cid, CONVO_BASE, 0)
         end

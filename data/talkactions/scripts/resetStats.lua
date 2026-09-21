@@ -8,7 +8,11 @@ local function getManality(cid)
 return getPlayerStorageValue(cid, "speedvalue")
 end 
 function resetAtributos(cid)
-	if getAgility(cid) > 0 then 
+	-- Agilidade e' uma fonte de velocidade: zerar a fonte devolve exatamente o
+	-- que ela tinha posto.
+	if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+		PlayerSpeed.setSource(cid, "agi", 0)
+	elseif getAgility(cid) > 0 then
 		doChangeSpeed(cid, -(6*(getAgility(cid))))
 	end
 	if getVitality(cid) > 1 then 

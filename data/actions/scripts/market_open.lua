@@ -6,6 +6,8 @@
 -- ============================================================================
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
-    Market.sendOfferOtclient(cid, 1, "", "all")
+    -- sendOpenOtclient manda o prefixo "open>", que e' o que faz o cliente
+    -- abrir a janela (uma resposta normal de lista nao abre mais nada).
+    Market.sendOpenOtclient(cid)
     return true
 end

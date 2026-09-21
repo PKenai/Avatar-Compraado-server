@@ -28,7 +28,8 @@ end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
 -- ===== Estagios: mesmo dano, area diferente (mini <50 / elite 100+) =====
--- Mini: estoura apenas no alvo. Elite: 7x7 em volta, a agua se espalha.
+-- Mini: estoura apenas no alvo. Elite: 5x5 em volta do alvo (a agua se espalha),
+-- que sao os mesmos 25 SQM da Fire Skyfall.
 local combatMini = createCombatObject()
 setCombatParam(combatMini, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
 setCombatParam(combatMini, COMBAT_PARAM_EFFECT, 53)
@@ -52,11 +53,22 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combatMini, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
+-- Area do estagio final (elite, 100+): 5x5 centrado no alvo = 25 SQM (o mesmo
+-- tamanho da area da Fire Skyfall). A antiga AREA_STAGE_ELITE_SELF (7x7, 37
+-- tiles) continua intocada no lib porque o Fire Blast usa ela.
+local AREA_EXPLOSION_ELITE = {
+    {1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1},
+    {1, 1, 3, 1, 1},
+    {1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1}
+}
+
 local combatElite = createCombatObject()
 setCombatParam(combatElite, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
 setCombatParam(combatElite, COMBAT_PARAM_EFFECT, 53)
 setCombatParam(combatElite, COMBAT_PARAM_DISTANCEEFFECT, 46)
-setCombatArea(combatElite, createCombatArea(AREA_STAGE_ELITE_SELF))
+setCombatArea(combatElite, createCombatArea(AREA_EXPLOSION_ELITE))
 
 function onGetPlayerMinMaxValues(cid, level, magLevel)
     local min = (level+(magLevel/4)*3.2)+(math.random(20, 25)/2)

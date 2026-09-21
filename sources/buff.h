@@ -20,6 +20,24 @@ enum BuffId_t : uint8_t {
 	BUFF_UTANI_TEMPO_HUR = 10,
 	BUFF_EXP_SCROLL = 11,
 	BUFF_DEBUFF_SLOW = 12,
+	// Statue Donation (data/lib/statueDonation.lua).
+	// O limite de ids registraveis por Lua e' (id < BUFF_LAST), entao estes
+	// ids so' funcionam DEPOIS de recompilar (sources/build/build.bat). Sem
+	// recompilar a lib cai no envio direto do opcode 100 e tudo continua
+	// funcionando (mesmo icone/timer), so' sem o buff "oficial" no engine.
+	BUFF_STATUE_FIRE = 13,
+	BUFF_STATUE_WATER = 14,
+	BUFF_STATUE_AIR = 15,
+	BUFF_STATUE_EARTH = 16,
+	BUFF_STATUE_EXP = 17,
+	BUFF_STATUE_SKILL = 18,
+	// Fish Feast (data/lib/fishSystem.lua).
+	// Icone do peixe que o jogador acabou de comer (icone
+	// data/images/buffs/Fish buffs.png) na barra de buffs. Como o limite e'
+	// (id < BUFF_LAST), este id so' existe depois de recompilar; sem o
+	// binario novo a lib manda o mesmo icone pelo opcode 100 e funciona
+	// igual (icone + timer), so' sem o buff "oficial" no engine.
+	BUFF_FISH_FEAST = 19,
 	BUFF_LAST
 };
 

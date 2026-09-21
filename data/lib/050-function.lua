@@ -68,15 +68,21 @@ function dismountPlayer(cid)
         doCreatureSetStorage(cid, "inMount", -1)
         doRemoveCondition(cid, CONDITION_OUTFIT)
 
-        -- Guarda: bonusMount pode estar stale (morte/crash montado apos um doSlow,
-        -- relogin etc). Remover mais do que o speed atual TEM viraria speed <= 0
-        -- (servidor cancela a walk = "paralyze" ate o relogin).
-        local speedAdded = getPlayerStorageValue(cid, "bonusMount")
-        if type(speedAdded) ~= "number" or speedAdded < 0 then speedAdded = 0 end
-        local atual = getCreatureSpeed(cid) - getCreatureBaseSpeed(cid)
-        if speedAdded > atual then speedAdded = atual end
-        if speedAdded > 0 then
-            doChangeSpeed(cid, -speedAdded)
+        -- A montaria e' uma FONTE de velocidade (PlayerSpeed): zerar a fonte
+        -- devolve EXATAMENTE o que ela adicionou - nem mais (o que viraria
+        -- speed <= 0 e cancelaria a walk) nem menos (o que deixaria speed
+        -- sobrando pra sempre). O storage pode estar stale por morte/crash/
+        -- relog; a fonte trabalha com o valor que ela mesma aplicou.
+        if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+            PlayerSpeed.setSource(cid, "mount", 0)
+        else
+            local speedAdded = getPlayerStorageValue(cid, "bonusMount")
+            if type(speedAdded) ~= "number" or speedAdded < 0 then speedAdded = 0 end
+            local atual = getCreatureSpeed(cid) - getCreatureBaseSpeed(cid)
+            if speedAdded > atual then speedAdded = atual end
+            if speedAdded > 0 then
+                doChangeSpeed(cid, -speedAdded)
+            end
         end
         doCreatureSetStorage(cid, "bonusMount", 0)
         return true
@@ -1557,9 +1563,8 @@ function setPlayerHasImune(cid, time)
   return setPlayerStorageValue(cid, "playerHasTotalAbsorve", os.time()+time)
 end
 
-local paralyzeCondition = createConditionObject(CONDITION_PARALYZE)
-setConditionParam(paralyzeCondition, CONDITION_PARAM_TICKS, 3000)
-setConditionFormula(paralyzeCondition, -0.9, 0, -0.9, 0)
+-- paralyzeCondition removida: o doAddCondition dela em doFrozzenCreature esta comentado (usa setCreatureNoMoveTime)
+-- e ela ocupava o UID 1 de carga no m_conditionMap.
 
 function doFrozzenCreature(cid, time)
 	if isNpc(cid) then
@@ -2150,7 +2155,7 @@ end
 
 function checkafkBot(cid)
 	if isCreature(cid) then
-		if getPlayerStorageValue(cid, "ativoBot") == 1 and os.time() > getPlayerStorageValue(cid, "horarioBot") then
+		if getPlayerStorageValue(cid, "ativoBot") == 1 and os.time() > (tonumber(getPlayerStorageValue(cid, "horarioBot")) or -1) then
 			local theName = getCreatureName(cid)
 			banimentoBot(cid)
 			print("[Anti-Bot] Jogador "..theName.." banido.")
@@ -2162,7 +2167,7 @@ end
 function keepShowQuestion(cid, valorUm, operador, valorDois)
 if not isCreature(cid) then return false end 
 
- if getPlayerStorageValue(cid, "ativoBot") == 1 and os.time() < getPlayerStorageValue(cid, "horarioBot") then
+ if getPlayerStorageValue(cid, "ativoBot") == 1 and os.time() < (tonumber(getPlayerStorageValue(cid, "horarioBot")) or -1) then
 	local playerPos = getCreaturePosition(cid)
     addEvent(function(cid) if isCreature(cid) then doSendAnimatedText({x=playerPos.x-1, y=playerPos.y, z=playerPos.z}, valorUm, 215, cid) end end, math.random(50, 75), cid)
     doSendAnimatedText(getCreaturePosition(cid), operador, 215, cid)

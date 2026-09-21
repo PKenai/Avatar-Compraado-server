@@ -58,13 +58,17 @@ function onExtendedOpcode(cid, opcode, buffer)
 			local action = parts[1]
 
 			if ( action == "refresh" ) then
-				Market.sendOfferOtclient(cid, 1, nil, parts[2] or "all")
+				Market.sendOfferOtclient(cid, 1, nil, parts[2] or "all", tonumber(parts[3]) or 0)
 			elseif ( action == "getOffer" ) then
-				Market.sendOfferOtclient(cid, tonumber(parts[2]) or 1, nil, parts[3] or "all")
+				Market.sendOfferOtclient(cid, tonumber(parts[2]) or 1, nil, parts[3] or "all", tonumber(parts[4]) or 0)
 			elseif ( action == "search" ) then
 				local term = parts[2] or ""
 				local pag  = tonumber(parts[3]) or 1
-				Market.sendSearchOtclient(cid, term, pag, parts[4] or "all")
+				Market.sendSearchOtclient(cid, term, pag, parts[4] or "all", tonumber(parts[5]) or 0)
+			elseif ( action == "pick" ) then
+				-- Crosshair do "Adicionar Oferta": o cliente manda o endereco do
+				-- item clicado e o servidor confirma nome/quantidade/tier.
+				Market.sendPickResult(cid, parts[2] or "")
 			elseif ( action == "details" ) then
 				doSendPlayerExtendedOpcode(cid, Market.opcodes, "details>"..Market.getOfferDescription(tonumber(parts[2])))
 			end

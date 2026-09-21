@@ -38,10 +38,10 @@ local onlineCount = #getPlayersOnline()
 	if getPlayerPremiumDays(cid) > 0 then -- Se tem premium account 15% mais xp
 		expF = expF+0.15
 	end
-	if getPlayerStorageValue(cid, "hasInPotionExp") > os.time() then -- Se tem pot exp 20% mais xp
+	if (tonumber(getPlayerStorageValue(cid, "hasInPotionExp")) or 0) > os.time() then -- Se tem pot exp 20% mais xp
 		expF = expF+0.2
 	end
-	if getPlayerStorageValue(cid, "hasExpScroll") > os.time() then -- Pergaminho da experiencia: +50% xp por 45 min
+	if (tonumber(getPlayerStorageValue(cid, "hasExpScroll")) or 0) > os.time() then -- Pergaminho da experiencia: +50% xp por 45 min
 		expF = expF+0.5
 	end
 	if getPlayerStamina(cid) >= 2400 then  -- Se tem stamina 40+ 20% mais xp
@@ -49,6 +49,12 @@ local onlineCount = #getPlayersOnline()
 	end 
 	if getPlayerGuildName(cid) == getStorage(391893) then -- se é da guild dominante +15% xp
 		expF = expF+0.15
+	end
+	-- Statue Donation: aba EXP global (+5% enquanto o bonus do servidor estiver
+	-- ativo). Fica AQUI porque este think reescreve a rate de exp do player:
+	-- aplicar em outro lugar seria sobrescrito no segundo seguinte.
+	if type(StatueDonation) == "table" then
+		expF = expF + StatueDonation.getExpBonus()
 	end
 	if (getCreatureSkullType(cid) == SKULL_RED) then
 		expF = expF/2
@@ -107,15 +113,15 @@ end
   local idleTime = getPlayerIdleTime(cid) + interval
   doPlayerSetIdleTime(cid, idleTime)
   if(config.idleKick > 0 and idleTime > config.idleKick) then
-	if isCreature(getCreatureTarget(cid)) and getCreatureName(getCreatureTarget(cid)) == "Target" and os.time() - 28800 < getPlayerStorageValue(cid, "entrouTrainers") then
+	if isCreature(getCreatureTarget(cid)) and getCreatureName(getCreatureTarget(cid)) == "Target" and os.time() - 28800 < (tonumber(getPlayerStorageValue(cid, "entrouTrainers")) or 0) then
 		doPlayerResetIdleTime(cid)
-	elseif getPlayerStorageValue(cid, "ativoBot") == 1 then
+	elseif (tonumber(getPlayerStorageValue(cid, "ativoBot")) or 0) == 1 then
 		doPlayerResetIdleTime(cid)
 	else 
 		doRemoveCreature(cid)
 	end 
   elseif(config.idleWarning > 0 and idleTime == config.idleWarning) then
-  	if isCreature(getCreatureTarget(cid)) and getCreatureName(getCreatureTarget(cid)) == "Target" and os.time() - 28800 < getPlayerStorageValue(cid, "entrouTrainers") then
+  	if isCreature(getCreatureTarget(cid)) and getCreatureName(getCreatureTarget(cid)) == "Target" and os.time() - 28800 < (tonumber(getPlayerStorageValue(cid, "entrouTrainers")) or 0) then
 		doPlayerResetIdleTime(cid)
 		return true
 	end

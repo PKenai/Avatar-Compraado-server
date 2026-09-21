@@ -9,6 +9,8 @@ local PERSISTENT_BUFFS = {
     {"hasExpScroll", 11, "Experience Scroll"},
 }
 
+-- global de proposito: o relogin (loginLogout/onReLogin.lua) tambem reenvia
+-- os buffs persistentes, porque o client recarrega a barra de buffs vazia.
 function restorePersistentBuffs(cid)
     local now = os.time()
     for _, entry in ipairs(PERSISTENT_BUFFS) do
@@ -18,6 +20,28 @@ function restorePersistentBuffs(cid)
             local remainingMs = (endTime - now) * 1000
             doCreatureAddBuffWithTime(cid, buffId, remainingMs)
         end
+    end
+
+    -- Buff do peixe (data/lib/fishSystem.lua): se o bonus do que o jogador comeu
+    -- ainda estiver correndo, o icone volta pra barra de cima. Vai por
+    -- FishSystem.restoreBuff (e nao pelo doCreatureAddBuffWithTime daqui de
+    -- cima) porque ela manda o MESMO pacote do opcode 100 - assim o icone
+    -- aparece mesmo com o servidor sem recompilar.
+    if type(FishSystem) ~= "table" then
+        pcall(dofile, getDataDir().."lib/fishSystem.lua")
+    end
+    if type(FishSystem) == "table" and type(FishSystem.restoreBuff) == "function" then
+        pcall(FishSystem.restoreBuff, cid)
+
+        -- Redundancia: no relogin este pacote sai na hora, e o client pode
+        -- ainda nao ter registrado o opcode 100 (sem handler o pacote e'
+        -- descartado). Reenvia 2s depois - o client destroi e recria o MESMO
+        -- icone, entao nao duplica nada.
+        addEvent(function(cid)
+            if isCreature(cid) then
+                pcall(FishSystem.restoreBuff, cid)
+            end
+        end, 2000, cid)
     end
 end
 
@@ -236,7 +260,196 @@ local function runeRegen(cid, sequenceCount, lastRegenCount)
 	addEvent(runeRegen, 1000, cid, sequenceCount, newRegenCount)
 end
 
+-- ============================================================================
+-- ESTADO NO LOGIN: limpeza defensiva + diagnostico
+-- ----------------------------------------------------------------------------
+-- Veneno, fogo, energia, sangramento, paralisia, freezing, dazzled, cursed,
+-- drunk e drown sao estado de SESSAO.  Se algum sobrar (client fechado no meio
+-- do efeito, efeito que ninguem removeu, restauracao por addEvent que se
+-- perdeu) o jogador entra no jogo "envenenado/paralisado" em QUALQUER lugar,
+-- inclusive numa protection zone - onde nada pode ter aplicado aquilo.
+-- O flag de "nao pode andar" (setNoMove) e' a mesma coisa: e' um campo do
+-- objeto do player, nao um timer, entao atravessa fechar/abrir o client.
+-- ============================================================================
+
+-- global de proposito: onReLogin.lua (relogin) tambem consulta esta flag
+LOGIN_STATE_DEBUG = false -- true liga o relatorio [LOGIN-STATE] no console
+
+-- As constantes CONDITION_* vem de data/lib e podem nao existir no instante
+-- em que este arquivo e' lido, entao a lista guarda so os NOMES e o valor e'
+-- resolvido na hora do login.
+local LOGIN_DEBUFFS = {
+	"CONDITION_POISON", "CONDITION_FIRE", "CONDITION_ENERGY",
+	"CONDITION_BLEEDING", "CONDITION_PARALYZE", "CONDITION_FREEZING",
+	"CONDITION_DAZZLED", "CONDITION_CURSED", "CONDITION_DRUNK",
+	"CONDITION_DROWN",
+}
+
+local function conditionValue(name)
+	local value = rawget(_G, name)
+	if type(value) == "number" then
+		return value
+	end
+	return nil
+end
+
+-- Tira do personagem os estados de combate da sessao anterior e destrava o
+-- movimento. Retorna a lista do que foi encontrado.
+function clearLoginSessionStates(cid)
+	if not isPlayer(cid) then return {} end
+
+	local cleared = {}
+	for _, name in ipairs(LOGIN_DEBUFFS) do
+		local conditionType = conditionValue(name)
+		if conditionType and getCreatureCondition(cid, conditionType) then
+			doRemoveCondition(cid, conditionType)
+			cleared[#cleared + 1] = string.lower(string.gsub(name, "CONDITION_", ""))
+		end
+	end
+
+	if getCreatureNoMove(cid) then
+		doCreatureSetNoMove(cid, false)
+		cleared[#cleared + 1] = "noMove"
+	end
+
+	if #cleared > 0 and LOGIN_STATE_DEBUG then
+		print("[LOGIN-STATE] limpou estado pendurado de " .. getCreatureName(cid) .. ": " .. table.concat(cleared, ", "))
+	end
+	return cleared
+end
+
+-- Diagnostico: mostra o bitfield de icones que o servidor esta mandando pro
+-- client (mesma conta de Player::sendIcons) e cada condicao ativa.
+local CLIENT_ICON_NAMES = {
+	{1,     "poisoned"},
+	{2,     "burning"},
+	{4,     "electrified"},
+	{8,     "drunk"},
+	{16,    "magic shield"},
+	{32,    "PARALYSED"},
+	{64,    "hasted"},
+	{128,   "logout block"},
+	{256,   "drowning"},
+	{512,   "freezing"},
+	{1024,  "dazzled"},
+	{2048,  "cursed"},
+	{4096,  "strengthened/buff"},
+	{8192,  "pz block"},
+	{16384, "inside a protection zone"},
+	{32768, "bleeding"},
+}
+
+local DIAG_CONDITIONS = {
+	{"poison",     "CONDITION_POISON"},
+	{"fire",       "CONDITION_FIRE"},
+	{"energy",     "CONDITION_ENERGY"},
+	{"bleeding",   "CONDITION_BLEEDING"},
+	{"haste",      "CONDITION_HASTE"},
+	{"paralyze",   "CONDITION_PARALYZE"},
+	{"outfit",     "CONDITION_OUTFIT"},
+	{"invisible",  "CONDITION_INVISIBLE"},
+	{"light",      "CONDITION_LIGHT"},
+	{"manashield", "CONDITION_MANASHIELD"},
+	{"infight",    "CONDITION_INFIGHT"},
+	{"drunk",      "CONDITION_DRUNK"},
+	{"exhaust",    "CONDITION_EXHAUST"},
+	{"food/regen", "CONDITION_FOOD"},
+	{"soul",       "CONDITION_SOUL"},
+	{"drown",      "CONDITION_DROWN"},
+	{"attributes", "CONDITION_ATTRIBUTES"},
+	{"freezing",   "CONDITION_FREEZING"},
+	{"dazzled",    "CONDITION_DAZZLED"},
+	{"cursed",     "CONDITION_CURSED"},
+}
+
+function loginStateReport(cid, tag)
+	if not LOGIN_STATE_DEBUG or not isPlayer(cid) then return end
+
+	local active, bits = {}, {}
+	for _, entry in ipairs(DIAG_CONDITIONS) do
+		local conditionType = conditionValue(entry[2])
+		local info = conditionType and getCreatureConditionInfo(cid, conditionType) or nil
+		if info then
+			local text = entry[1] .. "(ticks=" .. tostring(info.ticks) .. ")"
+			local iconValue = tonumber(info.icons) or 0
+			if iconValue > 0 then
+				text = text .. "[icon=" .. iconValue .. "]"
+				for _, icon in ipairs(CLIENT_ICON_NAMES) do
+					if math.floor(iconValue / icon[1]) % 2 == 1 then
+						bits[icon[1]] = true
+					end
+				end
+			end
+			active[#active + 1] = text
+		end
+	end
+
+	local tileInfo = getTileInfo(getThingPos(cid))
+	if tileInfo and tileInfo.protection then
+		bits[16384] = true
+	end
+
+	local iconList, iconSum = {}, 0
+	for _, icon in ipairs(CLIENT_ICON_NAMES) do
+		if bits[icon[1]] then
+			iconSum = iconSum + icon[1]
+			iconList[#iconList + 1] = icon[2]
+		end
+	end
+
+	local msg = string.format(
+		"[LOGIN-STATE %s] noMove=%s moveImmune=%s speed=%s/base=%s food=%s | conds: %s | icons=%d (%s)",
+		tag,
+		tostring(getCreatureNoMove(cid)),
+		tostring(getCreatureMoveImmuneTime(cid)),
+		tostring(getCreatureSpeed(cid)),
+		tostring(getCreatureBaseSpeed(cid)),
+		tostring(getPlayerFood(cid)),
+		(#active > 0 and table.concat(active, ", ") or "nenhuma"),
+		iconSum,
+		(#iconList > 0 and table.concat(iconList, " + ") or "nenhum")
+	)
+
+	if type(PlayerSpeed) == "table" and PlayerSpeed.report then
+		local speedInfo = PlayerSpeed.report(cid)
+		if speedInfo then
+			msg = msg .. " | " .. speedInfo
+		end
+	end
+
+	print(msg)
+	doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, msg)
+end
+
 function onLogin(cid)
+	-- Estado de combate da sessao anterior nao atravessa login nenhum.
+	clearLoginSessionStates(cid)
+
+	-- Objeto NOVO de player: o varSpeed nasce zerado, entao a contabilidade de
+	-- velocidade da sessao anterior (PlayerSpeed) nao vale mais. O RELOGIN nao
+	-- passa por aqui de proposito (o objeto e' o mesmo e o varSpeed tambem).
+	if type(PlayerSpeed) == "table" and PlayerSpeed.resetTracking then
+		PlayerSpeed.resetTracking(cid)
+	end
+
+	-- MONTARIA DESATIVADA (data/creaturescripts/scripts/onMount.lua): ninguem
+	-- entra no jogo montado. O estado "mounted" + lookMount fica salvo no banco
+	-- (iologindata), entao quem montou antes disso precisa sair do modo montado
+	-- aqui - senao continuaria com o outfit de montaria e o speed dela.
+	if type(dismountPlayer) == "function" and getPlayerStorageValue(cid, "inMount") == 1 then
+		pcall(dismountPlayer, cid)         -- montaria do Lua (bonusMount + speed)
+	end
+	pcall(doPlayerSetMounted, cid, false)  -- montaria do engine (mounted/outfit/speed)
+
+	-- Diagnostico: no login, 1.5s e 5s depois (efeitos aplicados por onThink,
+	-- talentos e buffs aparecem depois do login). Desligado por padrao em
+	-- LOGIN_STATE_DEBUG - quando falso nem agenda os eventos.
+	if LOGIN_STATE_DEBUG then
+		loginStateReport(cid, "+0s")
+		addEvent(function(cid) loginStateReport(cid, "+1.5s") end, 1500, cid)
+		addEvent(function(cid) loginStateReport(cid, "+5s") end, 5000, cid)
+	end
+
 	-- Never keep Appa item look after death/logout/crash mid-flight
 	if restoreAppaOutfit then
 		local wasFlying = getPlayerStorageValue(cid, "appaFlying") == 1
@@ -252,13 +465,13 @@ function onLogin(cid)
 	end
 
 	if getPlayerVocation(cid) == 0 or getPlayerVocation(cid) > 4 then
-		if getPlayerStorageValue(cid, "exaustedfirewhip") > 1000 then
+		if (tonumber(getPlayerStorageValue(cid, "exaustedfirewhip")) or 0) > 1000 then
 			doPlayerSetVocation(cid, 1)
-		elseif getPlayerStorageValue(cid, "exaustedwaterwhip") > 1000 then
+		elseif (tonumber(getPlayerStorageValue(cid, "exaustedwaterwhip")) or 0) > 1000 then
 			doPlayerSetVocation(cid, 2)
-		elseif getPlayerStorageValue(cid, "exaustedairball") > 1000 then
+		elseif (tonumber(getPlayerStorageValue(cid, "exaustedairball")) or 0) > 1000 then
 			doPlayerSetVocation(cid, 3)
-		elseif getPlayerStorageValue(cid, "exaustedearthcrush") > 1000 then
+		elseif (tonumber(getPlayerStorageValue(cid, "exaustedearthcrush")) or 0) > 1000 then
 			doPlayerSetVocation(cid, 4)
 		end
 	end
@@ -370,9 +583,16 @@ function onLogin(cid)
 		if getAtributosString then
 			doSendPlayerExtendedOpcode(cid, 40, getAtributosString(cid))
 		end
-		local agi = getPlayerStorageValue(cid, "getPointsInDodge")
-		agi = agi ~= -1 and agi or 0
-		doChangeSpeed(cid, agi*6)
+		-- Agilidade e montaria sao FONTES de velocidade (cada uma com seu valor
+		-- em PlayerSpeed). O jeito antigo somava agi*6 direto no acumulador: o
+		-- rebuild de velocidade somava de novo e a montaria apagava o valor.
+		if type(PlayerSpeed) == "table" and PlayerSpeed.refreshFromStorages then
+			PlayerSpeed.refreshFromStorages(cid)
+		else
+			local agi = tonumber(getPlayerStorageValue(cid, "getPointsInDodge")) or 0
+			if agi < 0 then agi = 0 end
+			doChangeSpeed(cid, agi*6)
+		end
        
     if getPlayerAccess(cid) >= 5 then
 		vocId = vocId +1
@@ -476,6 +696,11 @@ function onLogin(cid)
     registerCreatureEvent(cid, "BombermanDeath")
     registerCreatureEvent(cid, "BombermanOpcode")
     registerCreatureEvent(cid, "Store")
+    registerCreatureEvent(cid, "GameStoreExtended") -- loja nova (opcode 102)
+    registerCreatureEvent(cid, "HighscoreExtended") -- janela de highscores (opcode 73)
+    registerCreatureEvent(cid, "GamePixExtended") -- doacao via Pix (opcode 103)
+    registerCreatureEvent(cid, "StatueDonationOpcode") -- estatua das nacoes (opcode 121)
+    registerCreatureEvent(cid, "StatueDonationCombat") -- +5% de dano da nacao (PvE)
     registerCreatureEvent(cid, "QuestKill")
     registerCreatureEvent(cid, "QuestsOpcode")
     registerCreatureEvent(cid, "AchievementsKill")
@@ -558,6 +783,14 @@ function onLogin(cid)
             restorePersistentBuffs(cid)
         end
     end, 2000, cid)
+
+    -- Statue Donation: se a nacao do player (ou as abas globais) estiver com o
+    -- bonus ativo, ele entra no jogo JA' com o icone do buff na barra de cima.
+    addEvent(function(cid)
+        if isCreature(cid) and type(StatueDonation) == "table" then
+            StatueDonation.onLogin(cid)
+        end
+    end, 2500, cid)
 
     -- Sincroniza os tiers de todos os itens do player no inventario/backpack
     addEvent(function(cid)

@@ -33,11 +33,11 @@ end
 
 -- Tecnicas de ponto para costura
 local STITCH_TECHNIQUES = {
-    [1] = "Ponto Reto",
-    [2] = "Ponto Cruz",
-    [3] = "Ponto Invisivel",
-    [4] = "Ponto Zig-Zag",
-    [5] = "Ponto Frances",
+    [1] = "Straight Stitch",
+    [2] = "Cross Stitch",
+    [3] = "Invisible Stitch",
+    [4] = "Zig-Zag Stitch",
+    [5] = "French Knot",
 }
 
 -- Fator de dificuldade por capa (da mais simples a mais valiosa)
@@ -107,16 +107,16 @@ local CONVO_BASE = 49310
 
 -- Capas vendidas pelo Tadeu (com custo em gold e quantidade de linho)
 local CAPES = {
-    {itemId = 19158, name = "capa de viajante",  craftCost = 5000,    linho = 10},
-    {itemId = 19159, name = "capa reforcada",   craftCost = 15000,   linho = 20},
-    {itemId = 19160, name = "capa resistente",  craftCost = 35000,   linho = 35},
-    {itemId = 19161, name = "capa aprimorada",  craftCost = 70000,   linho = 55},
-    {itemId = 19162, name = "capa nobre",       craftCost = 130000,  linho = 80},
-    {itemId = 19163, name = "capa de protecao", craftCost = 220000,  linho = 110},
-    {itemId = 19164, name = "capa majestosa",   craftCost = 380000,  linho = 140},
-    {itemId = 19165, name = "capa gloriosa",    craftCost = 650000,  linho = 170},
-    {itemId = 19166, name = "capa soberana",    craftCost = 1000000, linho = 200},
-    {itemId = 19167, name = "capa das nacoes",   craftCost = 1500000, linho = 250},
+    {itemId = 19158, name = "Traveler's Cape", alt = "capa de viajante", craftCost = 5000,    linho = 10},
+    {itemId = 19159, name = "Reinforced Cape", alt = "capa reforcada",  craftCost = 15000,   linho = 20},
+    {itemId = 19160, name = "Tough Cape",      alt = "capa resistente", craftCost = 35000,   linho = 35},
+    {itemId = 19161, name = "Improved Cape",   alt = "capa aprimorada", craftCost = 70000,   linho = 55},
+    {itemId = 19162, name = "Noble Cape",      alt = "capa nobre",      craftCost = 130000,  linho = 80},
+    {itemId = 19163, name = "Protective Cape", alt = "capa de protecao", craftCost = 220000, linho = 110},
+    {itemId = 19164, name = "Majestic Cape",   alt = "capa majestosa",  craftCost = 380000,  linho = 140},
+    {itemId = 19165, name = "Glorious Cape",   alt = "capa gloriosa",   craftCost = 650000,  linho = 170},
+    {itemId = 19166, name = "Sovereign Cape",  alt = "capa soberana",   craftCost = 1000000, linho = 200},
+    {itemId = 19167, name = "Nations Cape",    alt = "capa das nacoes", craftCost = 1500000, linho = 250},
 }
 
 -- ============================================================
@@ -176,7 +176,9 @@ local function findCapeByName(name)
     local cleanName = sanitizeText(name)
     for i, cape in ipairs(CAPES) do
         local cleanCape = sanitizeText(cape.name)
-        if cleanName == cleanCape or cleanName:find(cleanCape, 1, true) or cleanCape:find(cleanName, 1, true) then
+        local cleanAlt = sanitizeText(cape.alt or "")
+        if cleanName == cleanCape or cleanName:find(cleanCape, 1, true) or cleanCape:find(cleanName, 1, true)
+           or (cleanAlt ~= "" and (cleanName == cleanAlt or cleanName:find(cleanAlt, 1, true) or cleanAlt:find(cleanName, 1, true))) then
             return i, cape
         end
     end
@@ -189,11 +191,11 @@ local function parseStitchChoice(msg)
         return num
     end
     local m = msg:lower()
-    if m:find("reto") then return 1 end
-    if m:find("cruz") then return 2 end
+    if m:find("straight") or m:find("reto") then return 1 end
+    if m:find("cross") or m:find("cruz") then return 2 end
     if m:find("invis") then return 3 end
     if m:find("zig") or m:find("zag") then return 4 end
-    if m:find("franc") then return 5 end
+    if m:find("french") or m:find("franc") or m:find("knot") then return 5 end
     return nil
 end
 
@@ -213,7 +215,7 @@ function onGreet(cid)
     for i = 0, 6 do
         setPlayerStorageValue(cid, CONVO_BASE + i, 0)
     end
-    selfSay("Hello, " .. getCreatureName(cid) .. "! Sua roupa precisa de umas melhorias, esta muito fora da moda. Quer que eu faca uma {costura} na sua capa?", cid)
+    selfSay("Hello, " .. getCreatureName(cid) .. "! Your clothes could use some improvements, they are quite out of style. Want me to {sew} your cape?", cid)
     return true
 end
 
@@ -232,8 +234,8 @@ function creatureSayCallback(cid, type, msg)
     -- ============================================================
     if talkState[talkUser] == 1 then
 
-        if msgcontains(msg, "costura") or msgcontains(msg, "costurar") or msgcontains(msg, "melhorar") or msgcontains(msg, "apostar") or msgcontains(msg, "moda") then
-            local lista = "Capas aceitas para costura (Custo em Gold e Linho):\n\n"
+        if msgcontains(msg, "sew") or msgcontains(msg, "tailor") or msgcontains(msg, "costura") or msgcontains(msg, "costurar") or msgcontains(msg, "improve") or msgcontains(msg, "melhorar") or msgcontains(msg, "fashion") or msgcontains(msg, "moda") then
+            local lista = "Capes accepted for tailoring (Cost in Gold and Linen):\n\n"
             for i, cape in ipairs(CAPES) do
                 local count = getPlayerItemCount(cid, cape.itemId)
                 local tierText = ""
@@ -247,18 +249,18 @@ function creatureSayCallback(cid, type, msg)
                     end
                 end
                 local cost = getGambleCost(cape.craftCost, 0)
-                lista = lista .. i .. ") " .. cape.name .. tierText .. " - " .. doNumberFormat(cost) .. " gold + " .. cape.linho .. "x linho\n"
+                lista = lista .. i .. ") " .. cape.name .. tierText .. " - " .. doNumberFormat(cost) .. " gold + " .. cape.linho .. "x linen\n"
             end
-            lista = lista .. "\nRegra: so aceito 1 capa de cada vez. Digite o nome da capa."
+            lista = lista .. "\nRule: only 1 cape at a time. Type the name of the cape."
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, lista)
-            selfSay("Olha, eu sou uma costureira iniciante... Posso tentar costurar e aprimorar o tier da sua capa com {linho}, mas como ainda estou aprendendo, se a costura der errado posso acabar rasgando sua capa e voce perde ela! Qual capa voce quer que eu tente costurar?", cid)
+            selfSay("Look, I'm a beginner tailor... I can try to stitch and upgrade the tier of your cape with {linen}, but since I'm still learning, if the stitching fails I might end up tearing your cape and you'll lose it! Which cape do you want me to sew?", cid)
             talkState[talkUser] = 2
 
-        elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") or msgcontains(msg, "ola") then
-            selfSay("Sua roupa precisa de umas melhorias, esta muito fora da moda! Diga {costura} se quiser aprimorar sua capa.", cid)
+        elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") or msgcontains(msg, "ola") or msgcontains(msg, "hello") then
+            selfSay("Your outfit could use some improvements, it's quite out of style! Say {sew} if you want to enhance your cape.", cid)
 
-        elseif msgcontains(msg, "tchau") or msgcontains(msg, "bye") then
-            selfSay("Tchauzinho! Volte quando quiser andar na moda.", cid)
+        elseif msgcontains(msg, "tchau") or msgcontains(msg, "bye") or msgcontains(msg, "farewell") then
+            selfSay("Bye-bye! Come back when you want to look stylish.", cid)
             talkState[talkUser] = 0
             npcHandler:releaseFocus(cid)
         end
@@ -271,21 +273,21 @@ function creatureSayCallback(cid, type, msg)
         local idx, cape = findCapeByName(msg)
 
         if not cape then
-            selfSay("Nao conheco essa capa. Digite o nome correto.", cid)
+            selfSay("I do not recognize that cape. Please type the correct name.", cid)
             return true
         end
 
         -- Verifica se tem a capa
         local count = getPlayerItemCount(cid, cape.itemId)
         if count <= 0 then
-            selfSay("Voce nao tem " .. cape.name .. " no inventario.", cid)
+            selfSay("You do not have " .. cape.name .. " in your inventory.", cid)
             talkState[talkUser] = 1
             return true
         end
 
         -- Verifica se tem mais de 1
         if count > 1 then
-            selfSay("Voce tem " .. count .. " " .. cape.name .. ". So aceito uma de cada vez para nao me confundir.", cid)
+            selfSay("You have " .. count .. " " .. cape.name .. ". I only accept one at a time so I do not get confused.", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -293,7 +295,7 @@ function creatureSayCallback(cid, type, msg)
         -- Pega o tier DIRETO DO ITEM
         local capeItem = getPlayerItemById(cid, true, cape.itemId)
         if not capeItem or not capeItem.uid then
-            selfSay("Erro ao encontrar a capa.", cid)
+            selfSay("Error finding the cape.", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -301,7 +303,7 @@ function creatureSayCallback(cid, type, msg)
         local currentTier = getItemTier(capeItem.uid)
 
         if currentTier >= MAX_TIER then
-            selfSay("Essa capa ja esta no tier maximo de elegancia!", cid)
+            selfSay("This cape is already at the maximum tier of elegance!", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -318,10 +320,10 @@ function creatureSayCallback(cid, type, msg)
         setPlayerStorageValue(cid, CONVO_BASE + 4, idx)
         setPlayerStorageValue(cid, CONVO_BASE + 6, linhoReq)
 
-        selfSay(cape.name .. " (Tier " .. currentTier .. " -> " .. nextTier .. ") precisa de " .. doNumberFormat(cost) .. " gold e " .. linhoReq .. "x linhos.", cid)
+        selfSay(cape.name .. " (Tier " .. currentTier .. " -> " .. nextTier .. ") requires " .. doNumberFormat(cost) .. " gold and " .. linhoReq .. "x linen.", cid)
         addEvent(function()
             if isPlayer(cid) then
-                selfSay("Qual tecnica de ponto devo usar? {1} - Ponto Reto, {2} - Ponto Cruz, {3} - Ponto Invisivel, {4} - Ponto Zig-Zag ou {5} - Ponto Frances?", cid)
+                selfSay("Which stitch technique should I use? {1} - Straight Stitch, {2} - Cross Stitch, {3} - Invisible Stitch, {4} - Zig-Zag Stitch or {5} - French Knot?", cid)
             end
         end, 1500)
         talkState[talkUser] = 3
@@ -333,7 +335,7 @@ function creatureSayCallback(cid, type, msg)
 
         local chosenChoice = parseStitchChoice(msg)
         if not chosenChoice then
-            selfSay("Escolha um ponto de 1 a 5: {Ponto Reto}, {Ponto Cruz}, {Ponto Invisivel}, {Ponto Zig-Zag} ou {Ponto Frances}.", cid)
+            selfSay("Choose a stitch from 1 to 5: {Straight Stitch}, {Cross Stitch}, {Invisible Stitch}, {Zig-Zag Stitch} or {French Knot}.", cid)
             return true
         end
 
@@ -343,7 +345,7 @@ function creatureSayCallback(cid, type, msg)
         local linhoReq = getPlayerStorageValue(cid, CONVO_BASE + 6)
         local cost = getPlayerStorageValue(cid, CONVO_BASE + 3)
 
-        selfSay("Voce escolheu usar o {" .. stitchName .. "}. O servico custara " .. doNumberFormat(cost) .. " gold e " .. linhoReq .. "x linhos. Lembra que se o ponto falhar a capa rasga! Confirma? {sim} ou {nao}", cid)
+        selfSay("You chose to use the {" .. stitchName .. "}. The service will cost " .. doNumberFormat(cost) .. " gold and " .. linhoReq .. "x linen. Remember that if the stitch fails, the cape will tear! Confirm? {yes} or {no}", cid)
         talkState[talkUser] = 4
 
     -- ============================================================
@@ -361,7 +363,7 @@ function creatureSayCallback(cid, type, msg)
 
             -- Verifica gold
             if getPlayerMoney(cid) < cost then
-                selfSay("Voce precisa de " .. doNumberFormat(cost) .. " gold para a costura.", cid)
+                selfSay("You need " .. doNumberFormat(cost) .. " gold for the tailoring.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -370,7 +372,7 @@ function creatureSayCallback(cid, type, msg)
             -- Verifica Linho
             local playerLinho = getPlayerItemCount(cid, LINHO_ITEM_ID)
             if playerLinho < linhoReq then
-                selfSay("Voce precisa de " .. linhoReq .. "x linhos para essa capa (voce tem apenas " .. playerLinho .. ").", cid)
+                selfSay("You need " .. linhoReq .. "x linen for this cape (you only have " .. playerLinho .. ").", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -379,13 +381,13 @@ function creatureSayCallback(cid, type, msg)
             -- Verifica se ainda tem a capa (1 unica)
             local count = getPlayerItemCount(cid, itemId)
             if count <= 0 then
-                selfSay("Voce nao tem mais a capa no inventario!", cid)
+                selfSay("You no longer have the cape in your inventory!", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
             end
             if count > 1 then
-                selfSay("Voce tem mais de uma capa. Guarde as outras e fique apenas com uma.", cid)
+                selfSay("You have more than one cape. Store the others and keep only one.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -394,7 +396,7 @@ function creatureSayCallback(cid, type, msg)
             -- Pega o item e le o tier DIRETO DELE
             local capeItem = getPlayerItemById(cid, true, itemId)
             if not capeItem or not capeItem.uid then
-                selfSay("Erro ao encontrar a capa.", cid)
+                selfSay("Error finding the cape.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -437,7 +439,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
                 doSendMagicEffect(getCreaturePosition(cid), 200)
-                selfSay("Perfeito! O " .. STITCH_TECHNIQUES[chosenNumber] .. " assentou perfeitamente no tecido! Sua " .. cape.name .. " is now Tier " .. newTier .. "!", cid)
+                selfSay("Perfect! The " .. STITCH_TECHNIQUES[chosenNumber] .. " settled into the fabric flawlessly! Your " .. cape.name .. " is now Tier " .. newTier .. "!", cid)
             else
                 -- ERROU - rasgou a capa (remove item)
                 doRemoveItem(capeItem.uid, 1)
@@ -447,7 +449,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "clear," .. clientId)
 
                 doSendMagicEffect(getCreaturePosition(cid), 201)
-                selfSay("Ai nao! O ponto correto para esse tecido era o " .. STITCH_TECHNIQUES[secretNumber] .. ", e o " .. STITCH_TECHNIQUES[chosenNumber] .. " acabou rasgando sua " .. cape.name .. "... Desculpe pelo prejuizo!", cid)
+                selfSay("Oh no! The correct stitch for this fabric was the " .. STITCH_TECHNIQUES[secretNumber] .. ", and the " .. STITCH_TECHNIQUES[chosenNumber] .. " ended up tearing your " .. cape.name .. "... Sorry for the loss!", cid)
             end
 
             -- Limpa conversa
@@ -457,7 +459,7 @@ function creatureSayCallback(cid, type, msg)
             end
 
         elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
-            selfSay("Mudou de ideia? Alright, melhor guardar seus linhos se nao tiver coragem de arriscar.", cid)
+            selfSay("Changed your mind? Alright, better keep your linen if you do not feel like risking it.", cid)
             talkState[talkUser] = 1
             setPlayerStorageValue(cid, CONVO_BASE, 0)
         end

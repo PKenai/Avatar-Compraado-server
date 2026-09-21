@@ -30,7 +30,7 @@ function creatureSayCallback(cid, type, msg)
 		end
 		setPlayerStorageValue(cid, "jadissesim", 1)
 		selfSay("Show me what you can do.", cid) 		
-		doPlayerSendTextMessage(cid, 22, "Show to Eska the bend Water Whip. You can use it by clicking on the bending list, or by saying the word 'Water Whip', that can be automatically sent with a shortcut using the hotkey system (CTRL+K).")
+		doPlayerSendTextMessage(cid, 22, "Show to Eska the bend Water Wave. You can use it by clicking on the bending list, or by saying the words 'Water Wave', that can be automatically sent with a shortcut using the hotkey system (CTRL+K).")
 	else
 		selfSay("What are you waiting for?! Go back and talk with Hilde, she'll travel with you to the North Water Tribe.", cid)
 		--selfSay("I see that you already know how to bend the water. We'll prepare you and teach how to control it with the bests benders, be welcome to the tribe! Go back and talk with Hilde, she'll travel with you to North Water Tribe. Good luck, "..getCreatureName(cid).."!", cid)	

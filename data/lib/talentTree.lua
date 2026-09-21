@@ -28,6 +28,13 @@ local STORAGE_POINTS     = 50000  -- pontos disponiveis
 local STORAGE_LEARNED    = 50001  -- JSON dos talentos aprendidos
 local STORAGE_LAST_LEVEL = 50002  -- ultimo level em que ganhou pontos
 
+-- subId do ConditionAttributes usado pelos bonus de atributo (hp/mana/magic
+-- level/shielding). TEM que ser diferente de 0: com subId 0 esse condition se
+-- mistura com o de qualquer outro sistema que use CONDITION_ATTRIBUTES (pocoes,
+-- comidas, ingrain...) e, como ConditionAttributes::addCondition() SUBSTITUI os
+-- stats do condition existente (endCondition + memcpy), um apagava o outro.
+local ATTR_SUBID         = 4242
+
 local FIRST_POINT_LEVEL  = 50     -- primeiro ponto no level 50
 local LEVEL_STEP         = 25     -- 1 ponto a cada 25 leveis adicionais
 
@@ -98,7 +105,9 @@ TalentTree.Talents = {
         row    = 4, col = 1,
         req    = {3},
         cost   = 1,
-        effect = { type = "grandarcane", value = 5 }
+        -- mana vai no proprio efeito: antes era 200 fixo dentro do
+        -- applySingleEffect, o que ignorava o valor do talento
+        effect = { type = "grandarcane", value = 5, mana = 200 }
     },
     [5] = {
         name   = "Pyromancer's Dominance",
@@ -201,7 +210,7 @@ TalentTree.Talents = {
         row    = 5, col = 3,
         req    = {14},
         cost   = 1,
-        effect = { type = "maxhp", value = 220 }
+        effect = { { type = "maxhp", value = 220 }, { type = "armor", value = 5 } }
     },
 
     -- ========================================================
@@ -230,7 +239,7 @@ TalentTree.Talents = {
         req    = {21},
         cost   = 1,
         excludes = {31, 32, 33, 34, 35},
-        effect = { type = "grandarcane", value = 3 }
+        effect = { type = "grandarcane", value = 3, mana = 150 }
     },
     [23] = {
         name   = "Healing Waters II",
@@ -349,7 +358,7 @@ TalentTree.Talents = {
         req    = {33},
         cost   = 1,
         excludes = {21, 22, 23, 24, 25},
-        effect = { type = "grandarcane", value = 5 }
+        effect = { type = "grandarcane", value = 5, mana = 200 }
     },
     [35] = {
         name   = "Abyssal Dominance",
@@ -359,7 +368,7 @@ TalentTree.Talents = {
         req    = {34},
         cost   = 1,
         excludes = {21, 22, 23, 24, 25},
-        effect = { type = "benddmg", value = 10 }
+        effect = { { type = "benddmg", value = 10 }, { type = "maxhp", value = 150 } }
     },
 
     -- ========================================================
@@ -413,7 +422,7 @@ TalentTree.Talents = {
         row    = 5, col = 1,
         req    = {44},
         cost   = 1,
-        effect = { type = "speed", value = 35 }
+        effect = { { type = "speed", value = 35 }, { type = "armor", value = 5 } }
     },
 
     -- Col 2: CDR (Air)
@@ -498,7 +507,7 @@ TalentTree.Talents = {
         row    = 4, col = 3,
         req    = {53},
         cost   = 1,
-        effect = { type = "grandarcane", value = 5 }
+        effect = { type = "grandarcane", value = 5, mana = 150 }
     },
     [55] = {
         name   = "Storm Unleashed",
@@ -556,7 +565,7 @@ TalentTree.Talents = {
         req    = {63},
         cost   = 1,
         excludes = {71, 72, 73, 74, 75},
-        effect = { type = "maxhp", value = 180 }
+        effect = { { type = "maxhp", value = 180 }, { type = "shielding", value = 4 } }
     },
     [65] = {
         name   = "Mountain's Heart",
@@ -566,7 +575,7 @@ TalentTree.Talents = {
         req    = {64},
         cost   = 1,
         excludes = {71, 72, 73, 74, 75},
-        effect = { type = "armor", value = 8 }
+        effect = { { type = "armor", value = 8 }, { type = "shielding", value = 8 } }
     },
 
     -- Col 2: CDR (Earth)
@@ -625,7 +634,7 @@ TalentTree.Talents = {
         req    = {},
         cost   = 1,
         excludes = {61, 62, 63, 64, 65},
-        effect = { type = "benddmg", value = 6 }
+        effect = { { type = "benddmg", value = 6 }, { type = "magiclevel", value = 3 } }
     },
     [72] = {
         name   = "Tectonic Strike",
@@ -655,7 +664,7 @@ TalentTree.Talents = {
         req    = {73},
         cost   = 1,
         excludes = {61, 62, 63, 64, 65},
-        effect = { type = "grandarcane", value = 6 }
+        effect = { type = "grandarcane", value = 6, mana = 200 }
     },
     [75] = {
         name   = "Titan's Wrath",
@@ -727,17 +736,27 @@ end
 -- ============================================================
 
 -- ============================================================
--- RECONSTRUIR VELOCIDADE (stateless)
--- doChangeSpeed deste fork e ADITIVO (varSpeed += delta). Remover speed
--- "as cegas" (ex: -35 num reset) corrompe a velocidade permanentemente
--- ate o relogin quando o bonus aplicado nao bate com o removido.
--- Aqui a velocidade e sempre recalculada do estado conhecido:
--- baseSpeed + talentos de speed + pontos de agilidade + bonus de mount.
+-- VELOCIDADE: so' o pedaco dos TALENTOS (fonte "talents")
+-- ------------------------------------------------------------
+-- doChangeSpeed deste fork e ADITIVO (varSpeed += delta) e o varSpeed e' um
+-- acumulador COMPARTILHADO: conditions de haste/paralise e slows temporarios
+-- de spell escrevem nele tambem.
+--
+-- O rebuild antigo montava a velocidade total e chamava
+-- doChangeSpeed(desired - cur) - ou seja, APAGAVA o pedaco das conditions.
+-- A partir dai' era so' perder a corrida: quando o condition terminasse, o
+-- engine subtraia o delta dele de novo e o personagem ficava abaixo da base
+-- (servidor cancela a walk = "paralisado") ate' o proximo rebuild.
+--
+-- Agora os talentos sao uma fonte em PlayerSpeed (data/lib/248-playerSpeed.lua):
+-- so' a diferenca do proprio valor de talento e' aplicada, montaria/agilidade
+-- tem as fontes delas e o que e' temporario (haste, slow, bomberman) fica
+-- intocado no acumulador.
 -- ============================================================
 function TalentTree.rebuildSpeed(cid)
     if not isPlayer(cid) then return end
-    local desired = getCreatureBaseSpeed(cid)
 
+    local bonus = 0
     for _, id in ipairs(TalentTree.getLearnedTalents(cid)) do
         local talent = TalentTree.Talents[id]
         if talent and type(talent.effect) == "table" then
@@ -745,68 +764,123 @@ function TalentTree.rebuildSpeed(cid)
             if type(list.type) == "string" then list = { list } end
             for _, eff in ipairs(list) do
                 if eff.type == "speed" and type(eff.value) == "number" then
-                    desired = desired + eff.value
+                    bonus = bonus + eff.value
                 end
             end
         end
     end
 
-    local agi = getPlayerStorageValue(cid, "getPointsInDodge")
-    if type(agi) == "number" and agi > 0 then
-        desired = desired + agi * 6
-    end
-
-    if getPlayerStorageValue(cid, "inMount") == 1 then
-        local bonusMount = getPlayerStorageValue(cid, "bonusMount")
-        if type(bonusMount) == "number" and bonusMount > 0 then
-            desired = desired + bonusMount
-        end
-    end
-
-    local cur = getCreatureSpeed(cid)
-    if cur ~= desired then
-        doChangeSpeed(cid, desired - cur)
+    -- Agilidade e montaria continuam vindo de PlayerSpeed.refreshFromStorages
+    -- (chamada no login/relogin), cada uma como sua propria fonte.
+    if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+        PlayerSpeed.setSource(cid, "talents", bonus)
+    else
+        -- Sem a lib, NAO cai pro comportamento antigo (que apagava o delta dos
+        -- outros): avisa e para. Barulhento de proposito.
+        print("[TalentTree] PlayerSpeed nao carregou; bonus de velocidade dos talentos nao aplicado.")
     end
 end
 
--- Aplica/remove UM efeito simples (speed e tratado a parte, via rebuildSpeed)
+-- ----------------------------------------------------------------------------
+-- BONUS DE ATRIBUTO: um unico ConditionAttributes para TODOS os talentos
+-- ----------------------------------------------------------------------------
+-- Antes cada talento de hp/mana/magic level/shielding criava o seu proprio
+-- ConditionAttributes. Todos usam CONDITIONID_COMBAT + subId 0, entao o segundo
+-- talento caia no merge de ConditionAttributes::addCondition(), que chama
+-- endCondition() (tirando os stats do condition anterior) e depois copia os
+-- novos por cima: com mais de um talento do mesmo tipo, so' o ultimo valia
+-- (ex: +70 e +130 de HP davam +130 em vez de +200). Pior: o merge tambem
+-- acontecia com conditions de OUTROS sistemas (pocao/mastermind, carrot cake,
+-- ingrain, demonic candy ball...), que usam o mesmo condition id/subId -
+-- qualquer um dos dois lados apagava os stats do outro.
+--
+-- Agora os valores sao somados e aplicados num unico condition com subId
+-- proprio: aplicar de novo SUBSTITUI o anterior (nunca acumula) e o que os
+-- outros sistemas fazem nao mexe mais nos talentos (nem o contrario).
+local TALENT_ATTR_EFFECTS = {
+    maxhp      = "hp",
+    maxmana    = "mana",
+    magiclevel = "ml",
+    shielding  = "shield",
+}
+
+local function eachEffect(talent, fn)
+    local list = talent and talent.effect
+    if type(list) ~= "table" then return end
+    if type(list.type) == "string" then list = { list } end
+    for _, eff in ipairs(list) do
+        if type(eff) == "table" and type(eff.type) == "string" then
+            fn(eff)
+        end
+    end
+end
+
+local function firstEffectType(talent)
+    local found = ""
+    eachEffect(talent, function(eff)
+        if found == "" then found = eff.type end
+    end)
+    return found
+end
+
+-- Tira o condition de atributos dos talentos (idempotente)
+function TalentTree.clearAttributes(cid)
+    if not isPlayer(cid) then return end
+    doRemoveCondition(cid, CONDITION_ATTRIBUTES, ATTR_SUBID)
+end
+
+-- Reconstroi o condition unico a partir dos talentos aprendidos. Roda no login,
+-- no learn e no reset: e' sempre "tira o antigo e poe o total de agora", entao
+-- nunca acumula nem deixa valor pendurado de uma sessao anterior (relog sem
+-- deslogar reaproveita o MESMO objeto de Player: os conditions antigos
+-- continuam la' quando o script roda de novo).
+function TalentTree.applyAttributes(cid)
+    if not isPlayer(cid) then return end
+
+    TalentTree.clearAttributes(cid)
+
+    local acc = { hp = 0, mana = 0, ml = 0, shield = 0 }
+    for _, id in ipairs(TalentTree.getLearnedTalents(cid)) do
+        local talent = TalentTree.Talents[id]
+        eachEffect(talent, function(eff)
+            local key = TALENT_ATTR_EFFECTS[eff.type]
+            if key then
+                acc[key] = acc[key] + (tonumber(eff.value) or 0)
+            elseif eff.type == "grandarcane" then
+                acc.ml   = acc.ml + (tonumber(eff.value) or 0)
+                acc.mana = acc.mana + (tonumber(eff.mana) or 200)
+            end
+        end)
+    end
+
+    if (acc.hp + acc.mana + acc.ml + acc.shield) <= 0 then return end
+
+    -- ATENCAO ao 4o/3o argumento = false abaixo: esta condition nasce AQUI, em
+    -- tempo de jogo, e vai pro m_tempConditionMap. Sem o false, o
+    -- setConditionParam/doAddCondition procuram no mapa de CARGA
+    -- (getConditionObject(id, loaded=true)) e o uid colide: nos dois mapas o
+    -- contador comeca do zero, entao o uid 1 daqui e' o uid 1 da carga - que e'
+    -- a paralyzeCondition de data/lib/050-function.lua:1566. Resultado: o
+    -- talento nao dava os atributos e ainda aplicava uma PARALISE de -0.9 da
+    -- base com ticks=-1 (infinita, so' saia com relogin).
+    local cond = createConditionObject(CONDITION_ATTRIBUTES, -1, false, ATTR_SUBID)
+    if not cond then return end
+    setConditionParam(cond, CONDITION_PARAM_TICKS, -1, false)
+    if acc.hp     > 0 then setConditionParam(cond, CONDITION_PARAM_STAT_MAXHEALTH, acc.hp, false) end
+    if acc.mana   > 0 then setConditionParam(cond, CONDITION_PARAM_STAT_MAXMANA, acc.mana, false) end
+    if acc.ml     > 0 then setConditionParam(cond, CONDITION_PARAM_STAT_MAGICLEVEL, acc.ml, false) end
+    if acc.shield > 0 then setConditionParam(cond, CONDITION_PARAM_SKILL_SHIELD, acc.shield, false) end
+    doAddCondition(cid, cond, false)
+end
+
+-- Aplica/remove UM efeito simples. Speed e' tratada a parte (rebuildSpeed) e os
+-- bonus de atributo tambem (TalentTree.applyAttributes) - os que sobram aqui sao
+-- storages e passivas.
 local function applySingleEffect(cid, effect, remove)
     local mult = remove and -1 or 1
     local t = effect.type
 
-    if t == "maxhp" then
-        local cond = createConditionObject(CONDITION_ATTRIBUTES, -1, 0, false)
-        if not remove then
-            setConditionParam(cond, CONDITION_PARAM_STAT_MAXHEALTH, effect.value)
-            setConditionParam(cond, CONDITION_PARAM_TICKS, -1)
-            doAddCondition(cid, cond)
-        end
-
-    elseif t == "maxmana" then
-        local cond = createConditionObject(CONDITION_ATTRIBUTES, -1, 0, false)
-        if not remove then
-            setConditionParam(cond, CONDITION_PARAM_STAT_MAXMANA, effect.value)
-            setConditionParam(cond, CONDITION_PARAM_TICKS, -1)
-            doAddCondition(cid, cond)
-        end
-
-    elseif t == "magiclevel" then
-        local cond = createConditionObject(CONDITION_ATTRIBUTES, -1, 0, false)
-        if not remove then
-            setConditionParam(cond, CONDITION_PARAM_STAT_MAGICLEVEL, effect.value)
-            setConditionParam(cond, CONDITION_PARAM_TICKS, -1)
-            doAddCondition(cid, cond)
-        end
-
-    elseif t == "shielding" then
-        local cond = createConditionObject(CONDITION_ATTRIBUTES, -1, 0, false)
-        if not remove then
-            setConditionParam(cond, CONDITION_PARAM_SKILL_SHIELD, effect.value)
-            setConditionParam(cond, CONDITION_PARAM_TICKS, -1)
-            doAddCondition(cid, cond)
-        end
-
-    elseif t == "armor" then
+    if t == "armor" then
         local cur = getPlayerStorageValue(cid, "talentArmorBonus")
         if type(cur) ~= "number" or cur < 0 then cur = 0 end
         setPlayerStorageValue(cid, "talentArmorBonus", cur + (effect.value * mult))
@@ -815,15 +889,6 @@ local function applySingleEffect(cid, effect, remove)
         local cur = getPlayerStorageValue(cid, "talentBendDmgBonus")
         if type(cur) ~= "number" or cur < 0 then cur = 0 end
         setPlayerStorageValue(cid, "talentBendDmgBonus", cur + (effect.value * mult))
-
-    elseif t == "grandarcane" then
-        local cond = createConditionObject(CONDITION_ATTRIBUTES, -1, 0, false)
-        if not remove then
-            setConditionParam(cond, CONDITION_PARAM_STAT_MAGICLEVEL, effect.value)
-            setConditionParam(cond, CONDITION_PARAM_STAT_MAXMANA, 200)
-            setConditionParam(cond, CONDITION_PARAM_TICKS, -1)
-            doAddCondition(cid, cond)
-        end
 
     elseif t == "cooldownreduction" or t == "dodge" or t == "burnrank" or t == "healcrit" then
         TalentPassives.applyEffect(cid, t, effect.value, remove)
@@ -849,7 +914,10 @@ local function applyTalentEffect(cid, talent, remove)
     end
 
     for _, eff in ipairs(effectList) do
-        if eff and eff.type ~= "speed" then
+        -- atributos (maxhp/maxmana/magiclevel/shielding/grandarcane) NAO passam
+        -- por aqui: eles sao somados e aplicados de uma vez por applyAttributes
+        if eff and eff.type ~= "speed" and not TALENT_ATTR_EFFECTS[eff.type]
+           and eff.type ~= "grandarcane" then
             applySingleEffect(cid, eff, remove)
         end
     end
@@ -870,6 +938,8 @@ function TalentTree.reapplyAll(cid)
             applyTalentEffect(cid, talent, false)
         end
     end
+    -- um unico condition com o TOTAL de hp/mana/magic level/shielding
+    TalentTree.applyAttributes(cid)
     -- Auto-recuperacao: corrige qualquer speed corrompida na sessao anterior
     TalentTree.rebuildSpeed(cid)
 end
@@ -922,6 +992,7 @@ function TalentTree.syncPoints(cid)
         setPlayerStorageValue(cid, "talentBendDmgBonus", 0)
         setPlayerStorageValue(cid, "talentArmorBonus", 0)
         TalentPassives.resetAll(cid)
+        TalentTree.clearAttributes(cid)
         TalentTree.rebuildSpeed(cid)
         -- Recalcula com zero gastos
         totalSpent = 0
@@ -993,7 +1064,7 @@ function TalentTree.sendData(cid)
                 cost       = talent.cost,
                 excludes   = talent.excludes or {},
                 minLevel   = talent.minLevel or (TalentTree.RowLevelReq[talent.row] or 1),
-                effectType = (talent.effect and talent.effect.type) or "",
+                effectType = firstEffectType(talent),
             }
         end
     end
@@ -1097,6 +1168,8 @@ function TalentTree.learnTalent(cid, talentId)
     TalentTree.saveLearnedTalents(cid, learned)
     TalentTree.setAvailablePoints(cid, pts - talent.cost)
     applyTalentEffect(cid, talent, false)
+    -- o talento novo entra no condition unico de atributos
+    TalentTree.applyAttributes(cid)
 
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE,
         string.format("[Talent Tree] You learned \"%s\"!", talent.name))
@@ -1132,11 +1205,13 @@ function TalentTree.resetTalents(cid)
         doPlayerRemoveMoney(cid, resetCost)
     end
 
-    -- Limpa tudo
+    -- Limpa tudo (incluindo o condition de atributos: sem isso o +hp/+ml dos
+    -- talentos continuava valendo depois do reset ate' dar relog)
     setPlayerStorageValue(cid, STORAGE_LEARNED, "")
     setPlayerStorageValue(cid, "talentBendDmgBonus", 0)
     setPlayerStorageValue(cid, "talentArmorBonus", 0)
     TalentPassives.resetAll(cid)
+    TalentTree.clearAttributes(cid)
 
     -- Reconstroi a velocidade sem os bonus de talento (nunca remover delta as cegas)
     TalentTree.rebuildSpeed(cid)

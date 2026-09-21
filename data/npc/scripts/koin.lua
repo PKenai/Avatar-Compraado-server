@@ -6,8 +6,8 @@ local npcHandler = NpcHandler:new(keywordHandler)
 npcHandler.talkRadius = 4
 NpcSystem.parseParameters(npcHandler)
 
-local COIN_AVATAR = 18340   -- Moeda Avatar
-local COST = 5              -- Moedas Avatar por varinha
+local COIN_AVATAR = 18340   -- Avatar Coin
+local COST = 5              -- Avatar Coins per wand
 local WAND_CHARGES = 3500   -- cargas de cada varinha
 
 function onCreatureAppear(cid)          npcHandler:onCreatureAppear(cid)        end
@@ -35,7 +35,7 @@ function onBuy(cid, itemid, subType, amount, ignoreCap, inBackpacks)
   local totalCost = COST * amount
 
   if getPlayerItemCount(cid, COIN_AVATAR) < totalCost then
-    doPlayerSendCancel(cid, "You need "..totalCost.." Moedas Avatar to buy that.")
+    doPlayerSendCancel(cid, "You need "..totalCost.." Avatar Coins to buy that.")
     return false
   end
 
@@ -47,7 +47,7 @@ function onBuy(cid, itemid, subType, amount, ignoreCap, inBackpacks)
   end
 
   doPlayerRemoveItem(cid, COIN_AVATAR, totalCost)
-  doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You bought "..amount.." "..getItemNameById(itemid).." for "..totalCost.." Moedas Avatar.")
+  doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You bought "..amount.." "..getItemNameById(itemid).." for "..totalCost.." Avatar Coins.")
   return false
 end
 npcHandler:setCallback(CALLBACK_ONBUY, onBuy)
@@ -65,7 +65,7 @@ function creatureSayCallback(cid, type, msg)
   end
   msg = msg:lower()
 
-  if msgcontains(msg, "wand") or msgcontains(msg, "varinha") or msgcontains(msg, "moeda") or msgcontains(msg, "coin") then
+  if msgcontains(msg, "wand") or msgcontains(msg, "coin") then
     selfSay("Say {trade} to see my training wands!", cid)
     return true
   end
@@ -74,7 +74,7 @@ function creatureSayCallback(cid, type, msg)
 end
 
 function onGreet(cid)
-  selfSay("Hello "..getCreatureName(cid).."! I sell {training wands} for 5 {Moeda Avatar} each. Say {trade} to see my offers!", cid)
+  selfSay("Hello "..getCreatureName(cid).."! I sell {training wands} for 5 {Avatar Coins} each. Say {trade} to see my offers!", cid)
   return true
 end
 

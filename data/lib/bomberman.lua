@@ -642,12 +642,20 @@ function Bomberman.resetPlayer(cid, teleport)
 		return
 	end
 
-	-- restaura a velocidade que o player tinha antes da partida
-	local savedSpeed = pget(cid, st("savedSpeed"))
-	if type(savedSpeed) ~= "number" or savedSpeed < 0 then
-		savedSpeed = 0
+	-- O bomberman e' uma FONTE de velocidade (PlayerSpeed): a velocidade natural
+	-- do player nunca sai do acumulador, entao sair da partida e' so' zerar a
+	-- fonte. O jeito antigo devolvia o valor salvo POR CIMA do acumulador, o
+	-- que inflava a velocidade a cada partida (savedSpeed + bonus somados de
+	-- novo).
+	if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+		PlayerSpeed.setSource(cid, "bomberman", 0)
+	else
+		local savedSpeed = pget(cid, st("savedSpeed"))
+		if type(savedSpeed) ~= "number" or savedSpeed < 0 then
+			savedSpeed = 0
+		end
+		doChangeSpeed(cid, savedSpeed)
 	end
-	doChangeSpeed(cid, savedSpeed)
 
 	pset(cid, st("inMatch"), -1)
 	pset(cid, st("arena"), -1)
@@ -1064,16 +1072,21 @@ function Bomberman.resetPowerUps(cid)
 	Bomberman.applySpeed(cid)
 end
 
--- Aplica a velocidade do bomberman respeitando a velocidade que o player
--- tinha antes da partida (doChangeSpeed deste fork define o delta absoluto
--- da velocidade base: nova = atual - base + valor).
+-- Velocidade do bomberman = a velocidade natural do player (que ja' esta' no
+-- acumulador, intocada) + o bonus dos power-ups da partida. Fonte "bomberman".
 function Bomberman.applySpeed(cid)
-	local savedSpeed = pget(cid, st("savedSpeed"))
-	if type(savedSpeed) ~= "number" or savedSpeed < 0 then
-		savedSpeed = 0
-	end
 	local cur = pget(cid, st("speed")) or 1
-	doChangeSpeed(cid, savedSpeed + (cur - 1) * cfg("SPEED_PER_POINT"))
+	local bonus = (cur - 1) * cfg("SPEED_PER_POINT")
+
+	if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+		PlayerSpeed.setSource(cid, "bomberman", bonus)
+	else
+		local savedSpeed = pget(cid, st("savedSpeed"))
+		if type(savedSpeed) ~= "number" or savedSpeed < 0 then
+			savedSpeed = 0
+		end
+		doChangeSpeed(cid, savedSpeed + bonus)
+	end
 end
 
 -- ============================================================================

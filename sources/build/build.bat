@@ -9,5 +9,8 @@ if %errorlevel% neq 0 (
 echo.
 echo OK! Copiando para a raiz do servidor...
 copy /y "%~dp0Release\theforgottenserver.exe" "%~dp0..\..\"
+rem o .pdb precisa ficar do lado do .exe: e' ele que da' nome as funcoes no
+rem stack trace do [COND-TRACE] e do server_crash.txt
+copy /y "%~dp0Release\theforgottenserver.pdb" "%~dp0..\..\"
 echo Feito!
 dir "%~dp0..\..\theforgottenserver.exe"

@@ -19,8 +19,8 @@ local PROGRESS_STORAGE = 49161
 local BEETLES_NEEDED = 150
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 10
-local QUEST_NAME = "Infestação no Bueiro"
-local MISSION_NAME = "Exterminar Terra beetles"
+local QUEST_NAME = "Sewer Infestation"
+local MISSION_NAME = "Exterminate Terra Beetles"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1

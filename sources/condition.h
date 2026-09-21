@@ -108,6 +108,10 @@ struct IntervalInfo
 	int32_t timeLeft, value, interval;
 };
 
+// Avatar custom: nomes legiveis para o diagnostico de conditions.
+std::string conditionTypeName(ConditionType_t type);
+std::string conditionIdName(ConditionId_t id);
+
 class Condition
 {
 	public:
@@ -122,6 +126,10 @@ class Condition
 		virtual Icons_t getIcons() const;
 		ConditionId_t getId() const {return id;}
 		uint32_t getSubId() const {return subId;}
+
+		// Avatar custom: descricao legivel (tipo, id, ticks, forca) usada pelo
+		// rastreio [COND-TRACE] que aponta quem aplicou uma paralisia/slow.
+		virtual std::string describe() const;
 
 		virtual Condition* clone() const {return NULL;}
 
@@ -330,6 +338,8 @@ class ConditionSpeed: public ConditionOutfit
 		virtual ConditionSpeed* clone() const {return new ConditionSpeed(*this);}
 
 		virtual bool setParam(ConditionParam_t param, int32_t value);
+
+		virtual std::string describe() const;
 
 		void setFormulaVars(float _mina, float _minb, float _maxa, float _maxb);
 

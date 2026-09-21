@@ -1,7 +1,7 @@
 function onSay(cid, words, param, channel)
   if channel > 1 and channel < 15 then
-    if getPlayerStorageValue(cid, "getPlayerHasBanned") > os.time() then
-      local timeString = getSecsString(getPlayerStorageValue(cid, "getPlayerHasBanned")-os.time())
+    if (tonumber(getPlayerStorageValue(cid, "getPlayerHasBanned")) or 0) > os.time() then
+      local timeString = getSecsString((tonumber(getPlayerStorageValue(cid, "getPlayerHasBanned")) or 0)-os.time())
       doPlayerSendCancel(cid, getLangString(cid, "You have been banned from speaking in public chats, please wait "..timeString.." to speak again.", "Você foi banido de falar em chats públicos, por favor aguarde "..timeString.." para falar novamente."))
       return true
     end

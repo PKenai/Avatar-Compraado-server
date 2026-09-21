@@ -689,6 +689,14 @@ void Player::addSkillAdvance(skills_t skill, uint64_t count, bool useMultiplier/
 	if(!count)
 		return;
 
+	// Avatar: sem hit basico, as skills de combate (fist/club/sword/axe/dist)
+	// nunca sobem pro jogador - nem por arma, nem por script. O painel tambem
+	// esconde essas linhas (client: game_skills). Monstros nao passam por aqui.
+	if(!g_config.getBool(ConfigManager::PLAYER_BASIC_ATTACK) &&
+		(skill == SKILL_FIST || skill == SKILL_CLUB || skill == SKILL_SWORD ||
+		 skill == SKILL_AXE || skill == SKILL_DIST))
+		return;
+
 	//player has reached max skill
 	uint64_t currReqTries = vocation->getReqSkillTries(skill, skills[skill][SKILL_LEVEL]),
 		nextReqTries = vocation->getReqSkillTries(skill, skills[skill][SKILL_LEVEL] + 1);
@@ -3969,6 +3977,15 @@ void Player::getPathSearchParams(const Creature* creature, FindPathParams& fpp) 
 
 void Player::doAttacking(uint32_t)
 {
+	// Avatar: jogadores NAO tem mais hit basico (arma ou punho) - todo dano de
+	// jogador vem de spells (bending). Monstros usam Monster::doAttacking e
+	// continuam atacando normalmente. Ligue em config.lua -> playerBasicAttack.
+	if(!g_config.getBool(ConfigManager::PLAYER_BASIC_ATTACK))
+	{
+		lastAttack = OTSYS_TIME();
+		return;
+	}
+
 	uint32_t attackSpeed = getAttackSpeed();
 	if(attackSpeed == 0 || (hasCondition(CONDITION_PACIFIED) && !hasCustomFlag(PlayerCustomFlag_IgnorePacification)))
 	{

@@ -1,17 +1,15 @@
 exhaustion =
 {
 	check = function (cid, storage)
-		
-		if not tonumber(getPlayerStorageValue(cid, storage)) then 
-			setPlayerStorageValue(cid, storage, -1)
-		end 
-		return getPlayerStorageValue(cid, storage) >= os.time()
+		-- O valor pode voltar como string (storages com chave string no engine);
+		-- comparar string com os.time() estourava "attempt to compare number
+		-- with string" a cada onThink. Sempre converte antes de comparar.
+		local value = tonumber(getPlayerStorageValue(cid, storage)) or -1
+		return value >= os.time()
 	end,
 
 	get = function (cid, storage)
-		
-
-		local exhaust = getPlayerStorageValue(cid, storage)+1
+		local exhaust = (tonumber(getPlayerStorageValue(cid, storage)) or -1)+1
 		if(exhaust > 0) then
 			local left = exhaust - os.time()
 			if(left >= 0) then
@@ -64,16 +62,31 @@ function doSlow(cid, target, value, time, effect)
   return true
  end
  local perdida = speed - newspeed
- doChangeSpeed(target, -perdida)     
- if effect then 
-  local targpos = getThingPos(target)
-  doSendMagicEffect({x=targpos.x+1, y=targpos.y+1, z=targpos.z}, effect)
- end 
- addEvent(function()
+
+ -- PlayerSpeed.tempSlow guarda o valor, GARANTE a devolucao (addEvent +
+ -- varredura no onThink) e nunca deixa a velocidade chegar a 0 (speed <= 0
+ -- cancela a walk no servidor). O addEvent sozinho era o furo: se o restore
+ -- se perdia, o personagem ficava abaixo da base pra sempre - "paralisado"
+ -- ate' o relogin.
+ if type(time) ~= "number" or time <= 0 then
+  time = 3000 -- sem tempo valido o addEvent antigo estourava: usa o padrao
+ end
+
+ if type(PlayerSpeed) == "table" and PlayerSpeed.tempSlow then
+  PlayerSpeed.tempSlow(target, math.floor(perdida), time)
+ else
+  doChangeSpeed(target, -perdida)
+  addEvent(function()
                 if isCreature(target) then
                     doChangeSpeed(target, perdida)
                 end
             end, time)
+ end
+
+ if effect then 
+  local targpos = getThingPos(target)
+  doSendMagicEffect({x=targpos.x+1, y=targpos.y+1, z=targpos.z}, effect)
+ end 
 return true
 end
 
@@ -92,9 +105,13 @@ local string = pendentes.. ", 0"
 	for i = 1, #atributosList do
 		local storageAtributo = atributosList[i] .. "value"
 		local valor = getPlayerStorageValue(cid, storageAtributo)
-		valor = valor ~= -1 and valor or 0
+		valor = tonumber(valor) or 0 -- storage string-keyed volta como string apos relog
+		if valor < 0 then valor = 0 end -- storage nunca setado volta -1
 		string = string.. ", "..valor..""
-		string = string.. ", "..getCostByValue(valor, atributosList[i])..""
+		-- getCostByValue pode devolver nil em borda (ex: dodge -1); sem o "or"
+		-- a concatenacao estourava "attempt to concatenate a nil value" no login.
+		local custo = getCostByValue(valor, atributosList[i]) or 99
+		string = string.. ", "..custo..""
 	end
 	return string
 end
@@ -133,9 +150,12 @@ function getCostByValue(value, att)
 			return 15
 		end
 	elseif att == "dodge" then 
-		value = value+1
+		-- +1 para pegar o custo do PROXIMO ponto. Valor -1 (storage ausente)
+		-- virava indice 0 em dodgeValues, ou seja nil: quem concatenasse isso
+		-- quebrava. Indice fora de 1..#dodgeValues agora cai no 99 explicito.
+		value = math.floor(tonumber(value) or 0)+1
 		local dodgeValues = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 10}
-		if value >= 0 and value <= 15 then
+		if value >= 1 and value <= 15 then
 			return dodgeValues[value]
 		else
 			return 99
@@ -196,7 +216,7 @@ end
 function getRealMaxHp(cid)
 local base = 110
 local fromLevel = getPlayerLevel(cid)*30
-local vitality = getPlayerStorageValue(cid, "healthvalue")
+local vitality = tonumber(getPlayerStorageValue(cid, "healthvalue")) or 0
 if vitality <= 0 then vitality = 0 end
 local fromVit = vitality*50
 local fromCrystal = getPlayerStorageValue(cid, "pointsUsedInLifeCrystal")
@@ -210,7 +230,7 @@ end
 function getRealMaxMana(cid)
 local base = 95
 local fromLevel = getPlayerLevel(cid)*5
-local vitality = getPlayerStorageValue(cid, "speedvalue")
+local vitality = tonumber(getPlayerStorageValue(cid, "speedvalue")) or 0
 if vitality <= 0 then vitality = 0 end
 local fromVit = vitality*20
 

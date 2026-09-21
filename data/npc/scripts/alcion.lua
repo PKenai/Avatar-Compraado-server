@@ -19,8 +19,8 @@ local PROGRESS_STORAGE = 49151
 local TARANTULAS_NEEDED = 250
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 30
-local QUEST_NAME = "Caçada de Alcion"
-local MISSION_NAME = "Eliminar Tarântulas"
+local QUEST_NAME = "Alcion's Hunt"
+local MISSION_NAME = "Eliminate the Tarantulas"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1

@@ -22,7 +22,7 @@ function onSay(cid, words, param, channel)
 		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "You can only change your pvp mode when you reach level 50.", "Você só poderá mudar o seu modo de PvP quando atingir o nível 50 ou mais."))
 		return true 
 	end
-	local delay = getPlayerStorageValue(cid, "delayPvpMode")
+	local delay = (tonumber(getPlayerStorageValue(cid, "delayPvpMode")) or 0)
 	if delay >= os.time() then
 		doPlayerSendCancel(cid, getLangString(cid, "You need wait "..getSecsString(delay-os.time()).." to change your PvP mode again.", "Você precisa esperar "..getSecsString(delay-os.time()).." para trocar seu modo de PvP novamente."))
 		return true
@@ -39,7 +39,7 @@ function onSay(cid, words, param, channel)
 			doCreatureSetGuildEmblem(cid, 1)		
 			doSendPlayerExtendedOpcode(cid, 91, "inativo")
 			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "Now you're protected and will not receive or deal any damage on another player.", "Você agora está protegido e não poderá mais receber ou causar dano em outros jogadores."))
-			if getPlayerStorageValue(cid, "hasInPotionExp") > os.time() then
+			if (tonumber(getPlayerStorageValue(cid, "hasInPotionExp")) or 0) > os.time() then
 				doPlayerSetExperienceRate(cid, 1.2)
 			else 
 				doPlayerSetExperienceRate(cid, 1)
@@ -51,7 +51,7 @@ function onSay(cid, words, param, channel)
 			doPlayerSetSpecialDescription(cid, "")	
 			doSendPlayerExtendedOpcode(cid, 91, "ativo")			
 			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "Now you can attack and be attacked by another player. You'll receive 40% exp bonus from monsters for of your courage!", "Agora você pode atacar e ser atacado por outros jogadores. Você agora receberá 40% de experiência bônus derrotando monstros devido a sua coragem!"))end 
-		    if getPlayerStorageValue(cid, "hasInPotionExp") > os.time() then
+		    if (tonumber(getPlayerStorageValue(cid, "hasInPotionExp")) or 0) > os.time() then
 				doPlayerSetExperienceRate(cid, 1.5)
 			else 
 				doPlayerSetExperienceRate(cid, 1.3)

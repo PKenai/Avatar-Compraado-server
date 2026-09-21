@@ -77,34 +77,34 @@ local CONVO_BASE = 49300
 
 -- Luvas da forja do Vincente
 local GLOVES = {
-    {itemId = 19098, name = "luva simples",            craftCost = 100},
-    {itemId = 19100, name = "luva pegajosa",           craftCost = 150},
-    {itemId = 19102, name = "luva funebre",            craftCost = 200},
-    {itemId = 19104, name = "luva pinca vermelha",     craftCost = 300},
-    {itemId = 19106, name = "luva de joaninha",        craftCost = 400},
-    {itemId = 19108, name = "luvas da fera",           craftCost = 550},
-    {itemId = 19110, name = "luvas tecidas",           craftCost = 750},
-    {itemId = 19112, name = "luvas da rainha",         craftCost = 1000},
-    {itemId = 19114, name = "luvas de teia",           craftCost = 1500},
-    {itemId = 19116, name = "luvas de barro",          craftCost = 2000},
-    {itemId = 19118, name = "luvas reluzentes",        craftCost = 3000},
-    {itemId = 19120, name = "luvas reais",             craftCost = 4500},
-    {itemId = 19122, name = "luvas metalicas",         craftCost = 6000},
-    {itemId = 19124, name = "luvas gosmentas",         craftCost = 8500},
-    {itemId = 19126, name = "luvas de couro cinza",    craftCost = 12000},
-    {itemId = 19128, name = "luvas da terra",          craftCost = 17000},
-    {itemId = 19130, name = "luvas da natureza",       craftCost = 24000},
-    {itemId = 19132, name = "luvas carniceiras",       craftCost = 33000},
-    {itemId = 19134, name = "luvas cascudas",          craftCost = 47000},
-    {itemId = 19136, name = "luvas da rebeliao",       craftCost = 66000},
-    {itemId = 19140, name = "luvas da coragem",        craftCost = 93000},
-    {itemId = 19138, name = "luvas marinhas",          craftCost = 130000},
-    {itemId = 19142, name = "luvas do hermitao",       craftCost = 184000},
-    {itemId = 19144, name = "luvas do conhecimento",   craftCost = 258000},
-    {itemId = 19146, name = "luvas da dobra obscura",  craftCost = 363000},
-    {itemId = 19148, name = "luvas deserticas",        craftCost = 511000},
-    {itemId = 19150, name = "luvas de pedregulho",     craftCost = 718000},
-    {itemId = 19152, name = "luvas do conhecimento perdido", craftCost = 1000000},
+    {itemId = 19098, name = "Simple Gloves",           alt = "luva simples",            craftCost = 100},
+    {itemId = 19100, name = "Sticky Gloves",           alt = "luva pegajosa",           craftCost = 150},
+    {itemId = 19102, name = "Funeral Gloves",          alt = "luva funebre",            craftCost = 200},
+    {itemId = 19104, name = "Red Claw Gloves",         alt = "luva pinca vermelha",     craftCost = 300},
+    {itemId = 19106, name = "Ladybug Gloves",          alt = "luva de joaninha",        craftCost = 400},
+    {itemId = 19108, name = "Beast Gloves",            alt = "luvas da fera",           craftCost = 550},
+    {itemId = 19110, name = "Woven Gloves",            alt = "luvas tecidas",           craftCost = 750},
+    {itemId = 19112, name = "Queen's Gloves",          alt = "luvas da rainha",         craftCost = 1000},
+    {itemId = 19114, name = "Web Gloves",              alt = "luvas de teia",           craftCost = 1500},
+    {itemId = 19116, name = "Mud Gloves",              alt = "luvas de barro",          craftCost = 2000},
+    {itemId = 19118, name = "Shining Gloves",          alt = "luvas reluzentes",        craftCost = 3000},
+    {itemId = 19120, name = "Royal Gloves",            alt = "luvas reais",             craftCost = 4500},
+    {itemId = 19122, name = "Metallic Gloves",         alt = "luvas metalicas",         craftCost = 6000},
+    {itemId = 19124, name = "Slimy Gloves",            alt = "luvas gosmentas",         craftCost = 8500},
+    {itemId = 19126, name = "Gray Leather Gloves",     alt = "luvas de couro cinza",    craftCost = 12000},
+    {itemId = 19128, name = "Earth Gloves",            alt = "luvas da terra",          craftCost = 17000},
+    {itemId = 19130, name = "Nature Gloves",           alt = "luvas da natureza",       craftCost = 24000},
+    {itemId = 19132, name = "Butcher Gloves",          alt = "luvas carniceiras",       craftCost = 33000},
+    {itemId = 19134, name = "Crusty Gloves",           alt = "luvas cascudas",          craftCost = 47000},
+    {itemId = 19136, name = "Rebellion Gloves",        alt = "luvas da rebeliao",       craftCost = 66000},
+    {itemId = 19140, name = "Courage Gloves",          alt = "luvas da coragem",        craftCost = 93000},
+    {itemId = 19138, name = "Marine Gloves",           alt = "luvas marinhas",          craftCost = 130000},
+    {itemId = 19142, name = "Hermit's Gloves",         alt = "luvas do hermitao",       craftCost = 184000},
+    {itemId = 19144, name = "Knowledge Gloves",        alt = "luvas do conhecimento",   craftCost = 258000},
+    {itemId = 19146, name = "Dark Bending Gloves",     alt = "luvas da dobra obscura",  craftCost = 363000},
+    {itemId = 19148, name = "Desert Gloves",           alt = "luvas deserticas",        craftCost = 511000},
+    {itemId = 19150, name = "Pebble Gloves",           alt = "luvas de pedregulho",     craftCost = 718000},
+    {itemId = 19152, name = "Lost Knowledge Gloves",   alt = "luvas do conhecimento perdido", craftCost = 1000000},
 }
 
 -- ============================================================
@@ -155,7 +155,10 @@ end
 local function findGloveByName(name)
     local name = name:lower()
     for i, glove in ipairs(GLOVES) do
-        if name == glove.name or name:find(glove.name) or glove.name:find(name) then
+        local gname = glove.name:lower()
+        local galt = (glove.alt or ""):lower()
+        if name == gname or name:find(gname, 1, true) or gname:find(name, 1, true)
+           or (galt ~= "" and (name == galt or name:find(galt, 1, true) or galt:find(name, 1, true))) then
             return i, glove
         end
     end
@@ -178,7 +181,7 @@ function onGreet(cid)
     for i = 0, 5 do
         setPlayerStorageValue(cid, CONVO_BASE + i, 0)
     end
-    selfSay("Hello, " .. getCreatureName(cid) .. "! Meu nome e Gan Bler, o apostador.", cid)
+    selfSay("Hello, " .. getCreatureName(cid) .. "! My name is Gan Bler, the gambler.", cid)
     return true
 end
 
@@ -197,10 +200,9 @@ function creatureSayCallback(cid, type, msg)
     -- ============================================================
     if talkState[talkUser] == 1 then
 
-        if msgcontains(msg, "melhorar") or msgcontains(msg, "apostar") or msgcontains(msg, "bet") then
-            local lista = "Essas sao as luvas que aceito. Escolha pelo nome:\n\n"
+        if msgcontains(msg, "gamble") or msgcontains(msg, "bet") or msgcontains(msg, "upgrade") or msgcontains(msg, "improve") or msgcontains(msg, "gloves") or msgcontains(msg, "melhorar") or msgcontains(msg, "apostar") then
+            local lista = "These are the gloves I accept. Choose by name:\n\n"
             for i, glove in ipairs(GLOVES) do
-                -- Le tier direto do item (se tiver no inventario)
                 local count = getPlayerItemCount(cid, glove.itemId)
                 local tierText = ""
                 if count > 0 then
@@ -215,16 +217,16 @@ function creatureSayCallback(cid, type, msg)
                 local cost = getGambleCost(glove.craftCost, 0)
                 lista = lista .. i .. ") " .. glove.name .. tierText .. " - " .. doNumberFormat(cost) .. " gold\n"
             end
-            lista = lista .. "\nRegra: so aceito 1 luva de cada tipo. Digite o nome da luva."
+            lista = lista .. "\nRule: only 1 pair of gloves at a time. Type the name of the gloves."
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, lista)
-            selfSay("Qual luva voce quer apostar?", cid)
+            selfSay("Which gloves do you want to gamble on?", cid)
             talkState[talkUser] = 2
 
-        elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") or msgcontains(msg, "ola") then
-            selfSay("Ja te disse, sou Gan Bler! Diz {melhorar} se quiser apostar.", cid)
+        elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") or msgcontains(msg, "ola") or msgcontains(msg, "hello") then
+            selfSay("I already told you, I am Gan Bler! Say {gamble} if you want to test your luck.", cid)
 
-        elseif msgcontains(msg, "tchau") or msgcontains(msg, "bye") then
-            selfSay("Vai embora! Volte quando tiver coragem.", cid)
+        elseif msgcontains(msg, "tchau") or msgcontains(msg, "bye") or msgcontains(msg, "farewell") then
+            selfSay("Get lost! Come back when you find some courage.", cid)
             talkState[talkUser] = 0
             npcHandler:releaseFocus(cid)
         end
@@ -237,21 +239,21 @@ function creatureSayCallback(cid, type, msg)
         local idx, glove = findGloveByName(msg)
 
         if not glove then
-            selfSay("Nao conheco essa luva. Digite o nome certo.", cid)
+            selfSay("I do not recognize those gloves. Please type the correct name.", cid)
             return true
         end
 
         -- Verifica se tem a luva
         local count = getPlayerItemCount(cid, glove.itemId)
         if count <= 0 then
-            selfSay("Voce nao tem " .. glove.name .. " no inventario.", cid)
+            selfSay("You do not have " .. glove.name .. " in your inventory.", cid)
             talkState[talkUser] = 1
             return true
         end
 
         -- Verifica se tem mais de 1
         if count > 1 then
-            selfSay("Voce tem " .. count .. " " .. glove.name .. ". So aceito 1 pra apostar.", cid)
+            selfSay("You have " .. count .. " " .. glove.name .. ". I only take one at a time to gamble.", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -259,7 +261,7 @@ function creatureSayCallback(cid, type, msg)
         -- Pega o tier DIRETO DO ITEM
         local gloveItem = getPlayerItemById(cid, true, glove.itemId)
         if not gloveItem or not gloveItem.uid then
-            selfSay("Erro ao encontrar a luva.", cid)
+            selfSay("Error locating the gloves.", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -267,7 +269,7 @@ function creatureSayCallback(cid, type, msg)
         local currentTier = getItemTier(gloveItem.uid)
 
         if currentTier >= MAX_TIER then
-            selfSay("Essa luva ja esta no tier maximo!", cid)
+            selfSay("These gloves are already at the maximum tier!", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -282,10 +284,10 @@ function creatureSayCallback(cid, type, msg)
         setPlayerStorageValue(cid, CONVO_BASE + 3, cost)
         setPlayerStorageValue(cid, CONVO_BASE + 4, idx)
 
-        selfSay(glove.name .. " (Tier " .. currentTier .. " -> " .. nextTier .. ") custa " .. doNumberFormat(cost) .. " gold.", cid)
+        selfSay(glove.name .. " (Tier " .. currentTier .. " -> " .. nextTier .. ") costs " .. doNumberFormat(cost) .. " gold.", cid)
         addEvent(function()
             if isPlayer(cid) then
-                selfSay("Escolha um numero de 1 a 5.", cid)
+                selfSay("Choose a number from 1 to 5.", cid)
             end
         end, 1500)
         talkState[talkUser] = 3
@@ -297,13 +299,13 @@ function creatureSayCallback(cid, type, msg)
 
         local chosenNumber = tonumber(msg)
         if not chosenNumber or chosenNumber < 1 or chosenNumber > 5 then
-            selfSay("Escolha um numero de 1 a 5.", cid)
+            selfSay("Choose a number from 1 to 5.", cid)
             return true
         end
 
         setPlayerStorageValue(cid, CONVO_BASE + 5, chosenNumber)
 
-        selfSay("Voce escolheu " .. chosenNumber .. ". Confirm? {yes} or {no}", cid)
+        selfSay("You chose " .. chosenNumber .. ". Confirm? {yes} or {no}", cid)
         talkState[talkUser] = 4
 
     -- ============================================================
@@ -320,7 +322,7 @@ function creatureSayCallback(cid, type, msg)
 
             -- Verifica gold
             if getPlayerMoney(cid) < cost then
-                selfSay("Voce precisa de " .. doNumberFormat(cost) .. " gold.", cid)
+                selfSay("You need " .. doNumberFormat(cost) .. " gold.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -329,13 +331,13 @@ function creatureSayCallback(cid, type, msg)
             -- Verifica se ainda tem a luva (1 unica)
             local count = getPlayerItemCount(cid, itemId)
             if count <= 0 then
-                selfSay("Voce nao tem mais a luva!", cid)
+                selfSay("You no longer have the gloves!", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
             end
             if count > 1 then
-                selfSay("Voce tem mais de uma luva. So aceito uma de cada vez.", cid)
+                selfSay("You have more than one pair of gloves. I only take one at a time.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -344,7 +346,7 @@ function creatureSayCallback(cid, type, msg)
             -- Pega o item e le o tier DIRETO DELE
             local gloveItem = getPlayerItemById(cid, true, itemId)
             if not gloveItem or not gloveItem.uid then
-                selfSay("Erro ao encontrar a luva.", cid)
+                selfSay("Error locating the gloves.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -386,7 +388,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
                 doSendMagicEffect(getCreaturePosition(cid), 200)
-                selfSay("Voce acertou! " .. glove.name .. " is now Tier " .. newTier .. "!", cid)
+                selfSay("You won! " .. glove.name .. " is now Tier " .. newTier .. "!", cid)
             else
                 -- ERROU - remove luva
                 doRemoveItem(gloveItem.uid, 1)
@@ -396,7 +398,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "clear," .. clientId)
 
                 doSendMagicEffect(getCreaturePosition(cid), 201)
-                selfSay("Errou! O numero era " .. secretNumber .. ". Fiquei com sua " .. glove.name .. " e seu gold.", cid)
+                selfSay("You lost! The number was " .. secretNumber .. ". I keep your " .. glove.name .. " and your gold.", cid)
             end
 
             -- Limpa conversa
@@ -406,7 +408,7 @@ function creatureSayCallback(cid, type, msg)
             end
 
         elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
-            selfSay("Mudou de ideia? Sem problemas.", cid)
+            selfSay("Changed your mind? No problem.", cid)
             talkState[talkUser] = 1
             setPlayerStorageValue(cid, CONVO_BASE, 0)
         end

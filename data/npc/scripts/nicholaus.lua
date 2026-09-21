@@ -36,7 +36,7 @@ function creatureSayCallback(cid, type, msg)
 		local finalExp = getExperienceForLevel(181) - getExperienceForLevel(180)
 		doPlayerAddExperience(cid, finalExp)
 		doSendAnimatedText(getCreaturePosition(cid), finalExp, 215)
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Congratulations! You completed a Outlaw's Secret Weapon Quest. Como recompensa, você recebeu "..finalExp.." pontos de experiência, 1x Southern Ring e 200000 gold coins.")
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Congratulations! You completed the Outlaw's Secret Weapon Quest. As a reward you received "..finalExp.." experience points, 1x Southern Ring and 200000 gold coins.")
 		return true
 	elseif getPlayerStorageValue(cid, "outlawAccess") == 1 then
 		selfSay("What are you waiting for? You need to defeat this beast quickly!", cid)

@@ -29,7 +29,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
         doTransformItem(item.uid, emptyBlood)
         doSendMagicEffect(fromPosition, 0)
       else
-        if getPlayerStorageValue(cid, "playerDelayInBloodRoom") > os.time() then
+        if (tonumber(getPlayerStorageValue(cid, "playerDelayInBloodRoom")) or -1) > os.time() then
           local timeToDo = (getPlayerStorageValue(cid, "playerDelayInBloodRoom")-os.time())
           doPlayerSendCancel(cid, getLangString(cid, "Sorry, you need wait "..timeToDo.." seconds to do it again.", "Desculpe, você precisa esperar "..timeToDo.." segundos para fazer isso novamente."))
           return true

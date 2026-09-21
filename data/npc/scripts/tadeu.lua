@@ -31,127 +31,127 @@ npcHandler:setCallback(CALLBACK_GREET, onGreet)
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())
 
--- === CAPAS (19158 a 19167) ===
-shopModule:addBuyableItem('capa de viajante', 5000, 19158, '')
-shopModule:addSellableItem('capa de viajante', 2500, 19158, '')
+-- === CAPES (19158 to 19167) ===
+shopModule:addBuyableItem("Traveler's Cape", 5000, 19158, '')
+shopModule:addSellableItem("Traveler's Cape", 2500, 19158, '')
 
-shopModule:addBuyableItem('capa reforcada', 15000, 19159, '')
-shopModule:addSellableItem('capa reforcada', 7500, 19159, '')
+shopModule:addBuyableItem("Reinforced Cape", 15000, 19159, '')
+shopModule:addSellableItem("Reinforced Cape", 7500, 19159, '')
 
-shopModule:addBuyableItem('capa resistente', 35000, 19160, '')
-shopModule:addSellableItem('capa resistente', 17500, 19160, '')
+shopModule:addBuyableItem("Tough Cape", 35000, 19160, '')
+shopModule:addSellableItem("Tough Cape", 17500, 19160, '')
 
-shopModule:addBuyableItem('capa aprimorada', 70000, 19161, '')
-shopModule:addSellableItem('capa aprimorada', 35000, 19161, '')
+shopModule:addBuyableItem("Improved Cape", 70000, 19161, '')
+shopModule:addSellableItem("Improved Cape", 35000, 19161, '')
 
-shopModule:addBuyableItem('capa nobre', 130000, 19162, '')
-shopModule:addSellableItem('capa nobre', 65000, 19162, '')
+shopModule:addBuyableItem("Noble Cape", 130000, 19162, '')
+shopModule:addSellableItem("Noble Cape", 65000, 19162, '')
 
-shopModule:addBuyableItem('capa de protecao', 220000, 19163, '')
-shopModule:addSellableItem('capa de protecao', 110000, 19163, '')
+shopModule:addBuyableItem("Protective Cape", 220000, 19163, '')
+shopModule:addSellableItem("Protective Cape", 110000, 19163, '')
 
-shopModule:addBuyableItem('capa majestosa', 380000, 19164, '')
-shopModule:addSellableItem('capa majestosa', 190000, 19164, '')
+shopModule:addBuyableItem("Majestic Cape", 380000, 19164, '')
+shopModule:addSellableItem("Majestic Cape", 190000, 19164, '')
 
-shopModule:addBuyableItem('capa gloriosa', 650000, 19165, '')
-shopModule:addSellableItem('capa gloriosa', 325000, 19165, '')
+shopModule:addBuyableItem("Glorious Cape", 650000, 19165, '')
+shopModule:addSellableItem("Glorious Cape", 325000, 19165, '')
 
-shopModule:addBuyableItem('capa soberana', 1000000, 19166, '')
-shopModule:addSellableItem('capa soberana', 500000, 19166, '')
+shopModule:addBuyableItem("Sovereign Cape", 1000000, 19166, '')
+shopModule:addSellableItem("Sovereign Cape", 500000, 19166, '')
 
-shopModule:addBuyableItem('capa das nacoes', 1500000, 19167, '')
-shopModule:addSellableItem('capa das nacoes', 750000, 19167, '')
+shopModule:addBuyableItem("Nations Cape", 1500000, 19167, '')
+shopModule:addSellableItem("Nations Cape", 750000, 19167, '')
 
--- === CALCAS (19169 a 19178) ===
-shopModule:addBuyableItem('calca de viajante', 4000, 19169, '')
-shopModule:addSellableItem('calca de viajante', 2000, 19169, '')
+-- === PANTS (19169 to 19178) ===
+shopModule:addBuyableItem("Traveler's Pants", 4000, 19169, '')
+shopModule:addSellableItem("Traveler's Pants", 2000, 19169, '')
 
-shopModule:addBuyableItem('calca reforcada', 12000, 19170, '')
-shopModule:addSellableItem('calca reforcada', 6000, 19170, '')
+shopModule:addBuyableItem("Reinforced Pants", 12000, 19170, '')
+shopModule:addSellableItem("Reinforced Pants", 6000, 19170, '')
 
-shopModule:addBuyableItem('calca resistente', 28000, 19171, '')
-shopModule:addSellableItem('calca resistente', 14000, 19171, '')
+shopModule:addBuyableItem("Tough Pants", 28000, 19171, '')
+shopModule:addSellableItem("Tough Pants", 14000, 19171, '')
 
-shopModule:addBuyableItem('calca aprimorada', 55000, 19172, '')
-shopModule:addSellableItem('calca aprimorada', 27500, 19172, '')
+shopModule:addBuyableItem("Improved Pants", 55000, 19172, '')
+shopModule:addSellableItem("Improved Pants", 27500, 19172, '')
 
-shopModule:addBuyableItem('calca nobre', 100000, 19173, '')
-shopModule:addSellableItem('calca nobre', 50000, 19173, '')
+shopModule:addBuyableItem("Noble Pants", 100000, 19173, '')
+shopModule:addSellableItem("Noble Pants", 50000, 19173, '')
 
-shopModule:addBuyableItem('calca de protecao', 175000, 19174, '')
-shopModule:addSellableItem('calca de protecao', 87500, 19174, '')
+shopModule:addBuyableItem("Protective Pants", 175000, 19174, '')
+shopModule:addSellableItem("Protective Pants", 87500, 19174, '')
 
-shopModule:addBuyableItem('calca majestosa', 300000, 19175, '')
-shopModule:addSellableItem('calca majestosa', 150000, 19175, '')
+shopModule:addBuyableItem("Majestic Pants", 300000, 19175, '')
+shopModule:addSellableItem("Majestic Pants", 150000, 19175, '')
 
-shopModule:addBuyableItem('calca gloriosa', 500000, 19176, '')
-shopModule:addSellableItem('calca gloriosa', 250000, 19176, '')
+shopModule:addBuyableItem("Glorious Pants", 500000, 19176, '')
+shopModule:addSellableItem("Glorious Pants", 250000, 19176, '')
 
-shopModule:addBuyableItem('calca soberana', 800000, 19177, '')
-shopModule:addSellableItem('calca soberana', 400000, 19177, '')
+shopModule:addBuyableItem("Sovereign Pants", 800000, 19177, '')
+shopModule:addSellableItem("Sovereign Pants", 400000, 19177, '')
 
-shopModule:addBuyableItem('calca das nacoes', 1200000, 19178, '')
-shopModule:addSellableItem('calca das nacoes', 600000, 19178, '')
+shopModule:addBuyableItem("Nations Pants", 1200000, 19178, '')
+shopModule:addSellableItem("Nations Pants", 600000, 19178, '')
 
--- === CAPACETES (19180 a 19189) ===
-shopModule:addBuyableItem('capacete de viajante', 3500, 19180, '')
-shopModule:addSellableItem('capacete de viajante', 1750, 19180, '')
+-- === HELMETS (19180 to 19189) ===
+shopModule:addBuyableItem("Traveler's Helmet", 3500, 19180, '')
+shopModule:addSellableItem("Traveler's Helmet", 1750, 19180, '')
 
-shopModule:addBuyableItem('capacete reforcado', 10000, 19181, '')
-shopModule:addSellableItem('capacete reforcado', 5000, 19181, '')
+shopModule:addBuyableItem("Reinforced Helmet", 10000, 19181, '')
+shopModule:addSellableItem("Reinforced Helmet", 5000, 19181, '')
 
-shopModule:addBuyableItem('capacete resistente', 25000, 19182, '')
-shopModule:addSellableItem('capacete resistente', 12500, 19182, '')
+shopModule:addBuyableItem("Tough Helmet", 25000, 19182, '')
+shopModule:addSellableItem("Tough Helmet", 12500, 19182, '')
 
-shopModule:addBuyableItem('capacete aprimorado', 50000, 19183, '')
-shopModule:addSellableItem('capacete aprimorado', 25000, 19183, '')
+shopModule:addBuyableItem("Improved Helmet", 50000, 19183, '')
+shopModule:addSellableItem("Improved Helmet", 25000, 19183, '')
 
-shopModule:addBuyableItem('capacete nobre', 95000, 19184, '')
-shopModule:addSellableItem('capacete nobre', 47500, 19184, '')
+shopModule:addBuyableItem("Noble Helmet", 95000, 19184, '')
+shopModule:addSellableItem("Noble Helmet", 47500, 19184, '')
 
-shopModule:addBuyableItem('capacete de protecao', 165000, 19185, '')
-shopModule:addSellableItem('capacete de protecao', 82500, 19185, '')
+shopModule:addBuyableItem("Protective Helmet", 165000, 19185, '')
+shopModule:addSellableItem("Protective Helmet", 82500, 19185, '')
 
-shopModule:addBuyableItem('capacete majestoso', 280000, 19186, '')
-shopModule:addSellableItem('capacete majestoso', 140000, 19186, '')
+shopModule:addBuyableItem("Majestic Helmet", 280000, 19186, '')
+shopModule:addSellableItem("Majestic Helmet", 140000, 19186, '')
 
-shopModule:addBuyableItem('capacete glorioso', 475000, 19187, '')
-shopModule:addSellableItem('capacete glorioso', 237500, 19187, '')
+shopModule:addBuyableItem("Glorious Helmet", 475000, 19187, '')
+shopModule:addSellableItem("Glorious Helmet", 237500, 19187, '')
 
-shopModule:addBuyableItem('capacete soberano', 750000, 19188, '')
-shopModule:addSellableItem('capacete soberano', 375000, 19188, '')
+shopModule:addBuyableItem("Sovereign Helmet", 750000, 19188, '')
+shopModule:addSellableItem("Sovereign Helmet", 375000, 19188, '')
 
-shopModule:addBuyableItem('capacete das nacoes', 1100000, 19189, '')
-shopModule:addSellableItem('capacete das nacoes', 550000, 19189, '')
+shopModule:addBuyableItem("Nations Helmet", 1100000, 19189, '')
+shopModule:addSellableItem("Nations Helmet", 550000, 19189, '')
 
--- === BOTAS (19191 a 19200) ===
-shopModule:addBuyableItem('bota de viajante', 3000, 19191, '')
-shopModule:addSellableItem('bota de viajante', 1500, 19191, '')
+-- === BOOTS (19191 to 19200) ===
+shopModule:addBuyableItem("Traveler's Boots", 3000, 19191, '')
+shopModule:addSellableItem("Traveler's Boots", 1500, 19191, '')
 
-shopModule:addBuyableItem('bota reforcada', 9000, 19192, '')
-shopModule:addSellableItem('bota reforcada', 4500, 19192, '')
+shopModule:addBuyableItem("Reinforced Boots", 9000, 19192, '')
+shopModule:addSellableItem("Reinforced Boots", 4500, 19192, '')
 
-shopModule:addBuyableItem('bota resistente', 22000, 19193, '')
-shopModule:addSellableItem('bota resistente', 11000, 19193, '')
+shopModule:addBuyableItem("Tough Boots", 22000, 19193, '')
+shopModule:addSellableItem("Tough Boots", 11000, 19193, '')
 
-shopModule:addBuyableItem('bota aprimorada', 45000, 19194, '')
-shopModule:addSellableItem('bota aprimorada', 22500, 19194, '')
+shopModule:addBuyableItem("Improved Boots", 45000, 19194, '')
+shopModule:addSellableItem("Improved Boots", 22500, 19194, '')
 
-shopModule:addBuyableItem('bota nobre', 85000, 19195, '')
-shopModule:addSellableItem('bota nobre', 42500, 19195, '')
+shopModule:addBuyableItem("Noble Boots", 85000, 19195, '')
+shopModule:addSellableItem("Noble Boots", 42500, 19195, '')
 
-shopModule:addBuyableItem('bota de protecao', 150000, 19196, '')
-shopModule:addSellableItem('bota de protecao', 75000, 19196, '')
+shopModule:addBuyableItem("Protective Boots", 150000, 19196, '')
+shopModule:addSellableItem("Protective Boots", 75000, 19196, '')
 
-shopModule:addBuyableItem('bota majestosa', 250000, 19197, '')
-shopModule:addSellableItem('bota majestosa', 125000, 19197, '')
+shopModule:addBuyableItem("Majestic Boots", 250000, 19197, '')
+shopModule:addSellableItem("Majestic Boots", 125000, 19197, '')
 
-shopModule:addBuyableItem('bota gloriosa', 425000, 19198, '')
-shopModule:addSellableItem('bota gloriosa', 212500, 19198, '')
+shopModule:addBuyableItem("Glorious Boots", 425000, 19198, '')
+shopModule:addSellableItem("Glorious Boots", 212500, 19198, '')
 
-shopModule:addBuyableItem('bota soberana', 680000, 19199, '')
-shopModule:addSellableItem('bota soberana', 340000, 19199, '')
+shopModule:addBuyableItem("Sovereign Boots", 680000, 19199, '')
+shopModule:addSellableItem("Sovereign Boots", 340000, 19199, '')
 
-shopModule:addBuyableItem('bota das nacoes', 1000000, 19200, '')
-shopModule:addSellableItem('bota das nacoes', 500000, 19200, '')
+shopModule:addBuyableItem("Nations Boots", 1000000, 19200, '')
+shopModule:addSellableItem("Nations Boots", 500000, 19200, '')
 

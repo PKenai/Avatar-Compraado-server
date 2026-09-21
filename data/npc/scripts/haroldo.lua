@@ -15,8 +15,8 @@ local PROGRESS_STORAGE = 49281
 local NEEDED = 2500
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 25
-local QUEST_NAME = "O Erro de Haroldo"
-local MISSION_NAME = "Destruir Livros Proibidos"
+local QUEST_NAME = "Haroldo's Mistake"
+local MISSION_NAME = "Destroy the Forbidden Books"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -70,7 +70,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Parece que... voce pode me ver? Nao se assuste, eu sou apenas um {professor} que cometeu um grande erro.", cid)
+    selfSay("It seems... you can see me? Don't be afraid, I am just a {professor} who made a huge mistake.", cid)
     return true
 end
 
@@ -91,32 +91,32 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already derrotou os livros. Meu erro foi corrigido. Thank you.", cid)
+                selfSay("You already defeated the books. My mistake has been corrected. Thank you.", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Os livros foram todos destruidos! Quer sua recompensa?", cid)
+                    selfSay("The books were all destroyed! Do you want your reward?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Ainda restam " .. (NEEDED - progress) .. " livros. Cuidado, eles sao perigosos!", cid)
+                    selfSay("There are still " .. (NEEDED - progress) .. " books left. Be careful, they are dangerous!", cid)
                 end
             else
-                selfSay("Esses livros ganharam vida propria e estao causando caos. Mate 2500 deles pra mim!", cid)
+                selfSay("Those books came to life on their own and are causing chaos. Kill 2500 of them for me!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "livro") or msgcontains(msg, "erro") or msgcontains(msg, "proibido") or msgcontains(msg, "help") then
+        elseif msgcontains(msg, "book") or msgcontains(msg, "mistake") or msgcontains(msg, "forbidden") or msgcontains(msg, "help") then
             if started and not completed then
                 selfSay("Ainda restam " .. (NEEDED - progress) .. " livros. Cuidado, eles sao perigosos!", cid)
             else
-                selfSay("Eu era um {professor} e estudei textos proibidos. Sem querer, eles ganharam vida. Preciso de ajuda para desfazer meu erro.", cid)
+                selfSay("I was a {professor} and I studied forbidden texts. Without meaning to, they came to life. I need help to undo my mistake.", cid)
             end
         else
-            selfSay("I didn't understand. Voce quer saber sobre meu {erro}?", cid)
+            selfSay("I didn't understand. Do you want to know about my {mistake}?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             completeQuest(cid)
-            selfSay("Here are your 25 crystal coins. Voce salvou muita gente do meu erro. Voce agora e um Vigia dos Segredos!", cid)
+            selfSay("Here are your 25 crystal coins. You saved many people from my mistake. You are now a Keeper of Secrets!", cid)
             talkState[talkUser] = 1
         else
             selfSay("Alright, come back when you want to receive your reward.", cid)

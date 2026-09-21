@@ -1,7 +1,7 @@
--- NPC Vincente - Forjador
--- Ao dizer "hi", pergunta se quer usar a forja.
--- Ao dizer "yes", envia dados de crafting e abre o modulo no client.
--- Quando o player anda, o modulo fecha (tratado no client).
+-- NPC Vincente - Blacksmith
+-- On saying "hi", asks if the player wants to use the forge.
+-- On saying "yes", sends crafting data and opens the module on the client.
+-- When the player walks, the module closes (handled on the client).
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -12,27 +12,27 @@ local talkState = {}
 
 local CRAFTING_OPCODE = 106
 
--- Envia a janela de crafting para o client usando json
+-- Sends the crafting window to the client using json
 local function sendCraftingWindow(cid, profId)
-  -- Carrega craftingSystem se necessario
+  -- Loads craftingSystem if necessary
   if type(CraftingSystem) ~= "table" then
     local ok, err = pcall(dofile, getDataDir().."lib/craftingSystem.lua")
     if not ok then
-      print("[Vincente] ERRO ao carregar craftingSystem: " .. tostring(err))
+      print("[Vincente] ERROR loading craftingSystem: " .. tostring(err))
       return
     end
   end
   if type(CraftingSystem) == "table" and type(CraftingSystem.sendWindow) == "function" then
     local ok, err = pcall(CraftingSystem.sendWindow, cid, profId or 1)
     if not ok then
-      print("[Vincente] ERRO ao enviar janela: " .. tostring(err))
+      print("[Vincente] ERROR sending window: " .. tostring(err))
     end
   else
-    print("[Vincente] CraftingSystem nao disponivel")
+    print("[Vincente] CraftingSystem not available")
   end
 end
 
--- Callbacks do NPC system
+-- NPC system callbacks
 function onCreatureAppear(cid)              npcHandler:onCreatureAppear(cid)            end
 function onCreatureDisappear(cid)           npcHandler:onCreatureDisappear(cid)         end
 function onCreatureSay(cid, type, msg)      npcHandler:onCreatureSay(cid, type, msg)    end
@@ -42,7 +42,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Hello, " .. getCreatureName(cid) .. "! Sou Vincente, o forjador. Deseja usar minha forja?", cid)
+    selfSay("Hello, " .. getCreatureName(cid) .. "! I am Vincente, the blacksmith. Would you like to use my forge?", cid)
     return true
 end
 
@@ -58,32 +58,32 @@ function creatureSayCallback(cid, type, msg)
         talkState[talkUser] = 1
     end
 
-    -- Stage 1: Pergunta se quer usar a forja
+    -- Stage 1: Asks if the player wants to use the forge
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "forja") then
-            selfSay("Great! Abrindo a forja agora...", cid)
+        if msgcontains(msg, "yes") or msgcontains(msg, "forge") then
+            selfSay("Great! Opening the forge now...", cid)
             talkState[talkUser] = 2
-            -- Envia a janela de crafting para o client
+            -- Sends the crafting window to the client
             sendCraftingWindow(cid, 1)
-        elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
-            selfSay("Sem problemas! Volte quando precisar.", cid)
+        elseif msgcontains(msg, "no") then
+            selfSay("No problem! Come back whenever you need.", cid)
             talkState[talkUser] = 0
             npcHandler:releaseFocus(cid)
         else
-            selfSay("Deseja usar minha forja? Responda 'sim' ou 'nao'.", cid)
+            selfSay("Would you like to use my forge? Answer 'yes' or 'no'.", cid)
         end
 
-    -- Stage 2: Forja aberta
+    -- Stage 2: Forge open
     elseif talkState[talkUser] == 2 then
-        if msgcontains(msg, "bye") or msgcontains(msg, "tchau") then
-            selfSay("Ate logo, " .. getCreatureName(cid) .. "! Volte quando precisar forjar algo.", cid)
+        if msgcontains(msg, "bye") then
+            selfSay("See you soon, " .. getCreatureName(cid) .. "! Come back whenever you need to forge something.", cid)
             doSendPlayerExtendedOpcode(cid, CRAFTING_OPCODE, "close")
             talkState[talkUser] = 0
             npcHandler:releaseFocus(cid)
-        elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") then
-            selfSay("A forja ja esta aberta! Use-a para criar seus itens.", cid)
+        elseif msgcontains(msg, "hi") then
+            selfSay("The forge is already open! Use it to create your items.", cid)
         else
-            -- Ignora outras mensagens, mantem a conversa
+            -- Ignores other messages, keeps the conversation going
         end
     end
 

@@ -16,8 +16,8 @@ local NEEDED = 150
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 70
 local REWARD_EXP = 120000
-local QUEST_NAME = "A Horta da Dona Fofinha"
-local MISSION_NAME = "Proteger a Hortela"
+local QUEST_NAME = "Dona Fofinha's Garden"
+local MISSION_NAME = "Protect the Garden"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -71,7 +71,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Ai, meu Deus! Voce parece ser forte! Preciso de ajuda com uns {elefantes} que estao acabando com minha horta!", cid)
+    selfSay("Oh my goodness! You look strong! I need help with some {elephants} that are ruining my garden!", cid)
     return true
 end
 
@@ -92,36 +92,36 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already salvou minha horta! Thank you, querido!", cid)
+                selfSay("You already saved my garden! Thank you, dear!", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Wow! Voce eliminou os 150 elefantes! Minha horta esta salva! Quer sua recompensa?", cid)
+                    selfSay("Wow! You wiped out all 150 elephants! My garden is safe! Do you want your reward?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Still need " .. (NEEDED - progress) .. " elefantes. Eles estao destruindo tudo, apressa!", cid)
+                    selfSay("You still need " .. (NEEDED - progress) .. " elephants. They are trampling everything, hurry up!", cid)
                 end
             else
-                selfSay("Plantei uma horta enorme e esses elefantes estao passando por cima de tudo! Voce pode me {ajudar} a proteger minha horta?", cid)
+                selfSay("I planted a huge garden and those elephants are trampling everything I grow! Can you {help} me protect my garden?", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "elefante") or msgcontains(msg, "horta") or msgcontains(msg, "destrui") or msgcontains(msg, "help") then
+        elseif msgcontains(msg, "elephant") or msgcontains(msg, "garden") or msgcontains(msg, "destroy") or msgcontains(msg, "help") then
             if started and not completed then
                 selfSay("Still need " .. (NEEDED - progress) .. " elefantes. Eles estao destruindo tudo, apressa!", cid)
             else
-                selfSay("Ai, minha {horta}! Esses elefantes grandes estao passando por cima de tudo que eu plantei! Me ajuda a espantar esses bichos?", cid)
+                selfSay("Oh, my {garden}! Those big elephants are trampling everything I planted! Will you help me scare those beasts away?", cid)
             end
         else
-            selfSay("I didn't understand. Voce quer me {ajudar} com os elefantes da horta?", cid)
+            selfSay("I didn't understand. Do you want to {help} me with the elephants in my garden?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Here are your 70 platinum coins e 120 mil experience! Voce agora e o Protetor da Hortela!", cid)
+            selfSay("Here are your 70 platinum coins and 120,000 experience! You are now the Protector of the Garden!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Alright, volte quando quiser receber sua recompensa, querido!", cid)
+            selfSay("Alright, come back whenever you want to receive your reward, dear!", cid)
             talkState[talkUser] = 1
         end
     end

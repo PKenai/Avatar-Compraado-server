@@ -5,15 +5,24 @@
 --   1. jogador usa a vara na agua     -> actions/scripts/fishing_rod.lua
 --   2. servidor manda {action="open"} -> cliente abre a barra e a mira
 --   3. jogador aperta espaco na hora  -> cliente manda {action="fish"}
---   4. este arquivo entrega (ou nao) o peixe -> {action="result"}
+--   4. este arquivo sorteia o peixe   -> {action="result"}
 --   5. cliente fecha a janela         -> cliente manda {action="cancel"}
+--
+-- O QUE SAI NO ANZOL vem de FishSystem.rollFish (data/lib/fishSystem.lua):
+-- quanto maior o ID do peixe, mais dificil. Skill de fishing baixa nem ve
+-- os peixes grandes - por isso pescar e' a "carreira" da pessoa.
 --
 -- O handler do opcode 103 fica no dispatcher central
 -- (creaturescripts/scripts/opcode.lua) - NUNCA registre um segundo
--- CreatureEvent chamado "ExtendedOpCode", ele seria ignorado.
+-- CreatureEvent chamado "ExtendedOpcode", ele seria ignorado.
+-- ============================================================================
 
 if type(json) ~= "table" then
   dofile(getDataDir() .. "lib/json.lua")
+end
+
+if type(FishSystem) ~= "table" then
+  dofile(getDataDir() .. "lib/fishSystem.lua")
 end
 
 local FISHING_OPCODE = 103
@@ -26,15 +35,21 @@ local STORAGE_WATER_Y = 47016
 local STORAGE_WATER_Z = 47017
 
 local WORM_ID = 3976    -- worm (isca, gasta 1 por tentativa)
-local FISH_ID = 2667    -- fish (o unico peixe desta versao)
-
--- Quanto peixe sai por fisgada certeira.
-local FISH_MIN = 1
-local FISH_MAX = 1
 
 -- Efeitos do acerto.
 local EFFECT_CATCH_WATER  = 152   -- na agua
 local EFFECT_CATCH_PLAYER = 204   -- no jogador
+
+-- Quantos "skill tries" cada peixe vale. Peixe maior = mais XP de fishing,
+-- mas ainda devagar de proposito (a pessoa joga o dia todo pra subir).
+local function fishingTries(fish)
+  local t = 1
+  if fish.tier >= 2 then t = 2 end
+  if fish.tier >= 3 then t = 3 end
+  if fish.tier >= 4 then t = 4 end
+  if fish.tier >= 5 then t = 6 end
+  return t
+end
 
 FishingSystem = {}
 
@@ -50,6 +65,9 @@ local function responder(cid, dados)
 	-- A HUD mostra quantos worms sobraram, entao o numero viaja em toda
 	-- resposta -- e o que mantem o medalhao certo sem o cliente adivinhar.
 	dados.worms = getPlayerItemCount(cid, WORM_ID)
+	-- Mandar a skill junto deixa a HUD/barra mostrar o progresso sem precisar
+	-- de outro opcode.
+	dados.fishing = FishSystem.getFishingLevel(cid)
 	doSendPlayerExtendedOpcode(cid, FISHING_OPCODE, json.encode(dados))
 end
 
@@ -76,12 +94,13 @@ local function pescar(cid, acertou)
 		return
 	end
 
-	local quantidade = math.random(FISH_MIN, FISH_MAX)
-	local adicionou = doPlayerAddItem(cid, FISH_ID, quantidade)
+	-- Acertou: sorteia o peixe conforme a skill de fishing.
+	local fish = FishSystem.rollFish(cid)
+	local adicionou = doPlayerAddItem(cid, fish.id, 1)
 
 	-- Mochila cheia: devolve a isca em vez de cobrar por um peixe que o
 	-- jogador nao recebeu.
-	if adicionou < quantidade then
+	if adicionou < 1 then
 		doPlayerAddItem(cid, WORM_ID, 1)
 		responder(cid, {success = false,
 		               message = "You have no room for the fish."})
@@ -89,7 +108,7 @@ local function pescar(cid, acertou)
 	end
 
 	-- Skill de pesca so sobe em fisgada boa.
-	doPlayerAddSkillTry(cid, SKILL_FISHING, 1)
+	doPlayerAddSkillTry(cid, SKILL_FISHING, fishingTries(fish))
 
 	local x = tonumber(getPlayerStorageValue(cid, STORAGE_WATER_X)) or -1
 	local y = tonumber(getPlayerStorageValue(cid, STORAGE_WATER_Y)) or -1
@@ -99,8 +118,13 @@ local function pescar(cid, acertou)
 	end
 	doSendMagicEffect(getCreaturePosition(cid), EFFECT_CATCH_PLAYER)
 
-	responder(cid, {success = true,
-	                message = "You caught a " .. getItemInfo(FISH_ID).name .. "."})
+	-- Peixe lendario: avisa todo mundo (sensacao de conquista).
+	if fish.tier >= 5 then
+		doBroadcastMessage(getPlayerName(cid) .. " pescou um " .. fish.name .. "!", MESSAGE_STATUS_WARNING)
+	end
+
+	responder(cid, {success = true, tier = fish.tier, itemId = fish.id,
+	                message = "You caught a " .. fish.name .. "!"})
 end
 
 -- Cliente mandou {action="fish", success=true/false} a cada tentativa.

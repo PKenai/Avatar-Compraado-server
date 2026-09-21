@@ -332,7 +332,7 @@ setConditionParam(speedPromote, CONDITION_PARAM_TICKS, 3000)
 setConditionFormula(speedPromote, 0.5, 0, 0.5, 0)
 
 local function executePassive(cid, attacker)
-  if getPlayerStorageValue(cid, "hasPassiveDeathActive") < os.time() and not getTileInfo(getCreaturePosition(cid)).hardcore and not getTileInfo(getCreaturePosition(cid)).optional then
+  if (tonumber(getPlayerStorageValue(cid, "hasPassiveDeathActive")) or -1) < os.time() and not getTileInfo(getCreaturePosition(cid)).hardcore and not getTileInfo(getCreaturePosition(cid)).optional then
     local element = getPlayerElement(cid)
 	local passiveCd = config.passiveWater.delay
 	local hpRec = config.passiveWater.healthGain
@@ -518,7 +518,7 @@ function onStatsChange(cid, attacker, type, combat, value)
 	if isPlayer(cid) and type == STATSCHANGE_HEALTHLOSS then
 		setPlayerStorageValue(cid, "lastHit", attacker)
 	end
-    if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and getPlayerStorageValue(cid, "belzeAtivo") > os.time() and isCreature(attacker) and not isPlayer(attacker) then 
+    if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and (tonumber(getPlayerStorageValue(cid, "belzeAtivo")) or -1) > os.time() and isCreature(attacker) and not isPlayer(attacker) then 
 	if value < 0 then 
 		value = 1
 	end
@@ -551,7 +551,7 @@ function onStatsChange(cid, attacker, type, combat, value)
 
 
     if isPlayer(cid) and type == STATSCHANGE_HEALTHLOSS then
-      if getPlayerStorageValue(cid, "playerHasTotalAbsorve") > os.time() then
+      if (tonumber(getPlayerStorageValue(cid, "playerHasTotalAbsorve")) or -1) > os.time() then
         doSendMagicEffect(getThingPos(cid), CONST_ME_POFF)
         return false
       end

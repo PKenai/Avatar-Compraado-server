@@ -325,6 +325,9 @@ class Creature : public AutoId, virtual public Thing
 
 		bool addCondition(Condition* condition);
 		bool addCombatCondition(Condition* condition);
+		// Avatar custom: imprime [COND-TRACE] com a origem de uma paralisia (ver
+		// config.lua / conditionTrace). Definida em creature.cpp.
+		void traceConditionOrigin(const Condition* condition);
 		void removeCondition(ConditionType_t type);
 		void removeCondition(ConditionType_t type, ConditionId_t id);
 		void removeCondition(Condition* condition);
@@ -461,6 +464,15 @@ class Creature : public AutoId, virtual public Thing
 		virtual void setLossSkill(bool _skillLoss) {skillLoss = _skillLoss;}
 
 		bool getLossSkill() const {return skillLoss;}
+		// Existem DUAS travas de movimento: cannotMove (booleana, so' sai com um
+		// setNoMove(false) explicito) e noMoveEndTime (temporal). getNoMove()
+		// bloqueia enquanto QUALQUER uma delas estiver ativa.
+		//
+		// Furo antigo: setNoMove(false) sem tempo zerava so' cannotMove, entao
+		// noMoveEndTime continuava bloqueando e o "destrava" nao destravava nada
+		// (login, relogin, teleport, portal, fim do voo do Appa...). Qualquer
+		// trava perdida virava paralisia permanente: o personagem nao dava um
+		// passo e so' saia no relogin. Soltar movimento agora zera as duas.
 		void setNoMove(bool _cannotMove, uint32_t tempo = 0)
 		{
 			if (tempo > 0)
@@ -471,7 +483,11 @@ class Creature : public AutoId, virtual public Thing
 					cannotMove = true;
 			}
 			else
+			{
 				cannotMove = _cannotMove;
+				if (!_cannotMove)
+					noMoveEndTime = 0;
+			}
 
 			cancelNextWalk = true;
 		}

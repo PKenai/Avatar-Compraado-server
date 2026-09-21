@@ -1,13 +1,13 @@
 local npcGen = newNpc("npcLootSeller")
 
-npcGen:setHiMsg("Hello my dear friend, you want DRINK something?", "Olá meu amigo, você deseja BEBER algo?")
+npcGen:setHiMsg("Hello my dear friend, you want DRINK something?", "Hello my dear friend, you want DRINK something?")
 npcGen:addSellableItens("drink")
 
 
-npcGen:addOptionInNpc("job", {"I work with sale of various types of drinks.", "Eu trabalho com a venda de bebidas fermentadas para adultos!"})
-npcGen:addOptionInNpc("drink", {"Sorry, but all my stock is finished, come back later.", "Me desculpe, todo meu estoque de bebidas está esgotado... Volte mais tarde."})
-npcGen:addOptionInNpc("beber", {"Sorry, but all my stock is finished, come back later.", "Me desculpe, todo meu estoque de bebidas está esgotado... Volte mais tarde."})
-npcGen:addOptionInNpc("help", {"I need a new stock of drink, you know someone who sells?", "Estou precisando de um novo estoque de bebidas, você conheçe alguém que venda?"})
+npcGen:addOptionInNpc("job", {"I work with sale of various types of drinks.", "I work with sale of various types of drinks."})
+npcGen:addOptionInNpc("drink", {"Sorry, but all my stock is finished, come back later.", "Sorry, but all my stock is finished, come back later."})
+npcGen:addOptionInNpc("beber", {"Sorry, but all my stock is finished, come back later.", "Sorry, but all my stock is finished, come back later."})
+npcGen:addOptionInNpc("help", {"I need a new stock of drink, you know someone who sells?", "I need a new stock of drink, you know someone who sells?"})
 
 function onCreatureSay(cid, type, msg)
     local msg = msg:lower()

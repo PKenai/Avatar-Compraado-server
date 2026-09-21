@@ -31,7 +31,7 @@ table.insert(ShopOffers, { category = "Use", type = "item", title = "Pergaminho 
 -- Categoria: Outfits
 table.insert(ShopOffers, { category = "Others", type = "item", title = "Camera", itemId = 18432, count = 1, cost = 25, class = "all", description = "Use it to turn on or off your channel." })
 table.insert(ShopOffers, { category = "Others", type = "item", title = "Momo Pouch", itemId = 18435, count = 1, cost = 25, class = "all", hideIfOwned = true, description = "A special pouch that can only be equipped in its own slot." })
-table.insert(ShopOffers, { category = "Outfit", type = "outfit", title = "Water avatar state", outfitMale = 1222, outfitFemale = 1222, addons = 0, cost = 10, class = "water", description = "Feel the avatar state" })
+table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Water avatar state", outfitMale = 1222, outfitFemale = 1222, addons = 0, cost = 10, class = "water", description = "Feel the avatar state" })
 table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Earth avatar state", outfitMale = 1223, outfitFemale = 1223, addons = 0, cost = 10, class = "earth", description = "Feel the earth avatar state" })
 table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Fire avatar state", outfitMale = 1225, outfitFemale = 1225, addons = 0, cost = 10, class = "fire", description = "Feel the fire avatar state" })
 table.insert(ShopOffers, { category = "Outfits", type = "outfit", title = "Air avatar state", outfitMale = 1226, outfitFemale = 1226, addons = 0, cost = 10, class = "air", description = "Feel the air avatar state" })

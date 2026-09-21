@@ -3,7 +3,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		if getPlayerStorageValue(cid, "playerWithSupremeBless") == 1 then 
 			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, getLangString(cid, "You already are supreme blessed.", "Você já está com a supreme bless ativada."))
 			return false
-		elseif getPlayerStorageValue(cid, "delayBlessPotion") > os.time() then 
+		elseif (tonumber(getPlayerStorageValue(cid, "delayBlessPotion")) or -1) > os.time() then 
 			local delay = getPlayerStorageValue(cid, "delayBlessPotion")
 			doPlayerSendCancel(cid, getLangString(cid, "You need wait "..getSecsString(delay-os.time()).." to use this again.", "Você precisa esperar "..getSecsString(delay-os.time()).." para usar isso novamente."))
 		else

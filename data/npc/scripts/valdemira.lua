@@ -29,8 +29,8 @@ local REQUIRED_HAM    = 150
 local REWARD_EXP      = 2400000 -- 200 * 12000 (exp do Vacaceronte)
 local MIN_LEVEL       = 200
 
-local QUEST_NAME   = "A Fornecadora"
-local MISSION_NAME = "Entregar 150 Ham para Valdemira"
+local QUEST_NAME   = "The Provider"
+local MISSION_NAME = "Deliver 150 hams to Valdemira"
 
 -- ============================================================
 -- Funcoes auxiliares
@@ -86,7 +86,7 @@ local function deliverQuest(cid)
     sendNotification(cid, QUEST_NAME, "Mission completed: " .. MISSION_NAME .. "!", "#00FF00", "end")
     pcall(function()
         doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE,
-            "Mission completed: " .. QUEST_NAME .. "! Voce recebeu " .. REWARD_EXP .. " experience!")
+            "Mission completed: " .. QUEST_NAME .. "! You received " .. REWARD_EXP .. " experience!")
     end)
 end
 
@@ -156,9 +156,9 @@ function creatureSayCallback(cid, type, msg)
             if completed then
                 selfSay("You already helped me with everything, " .. name .. "! All my animals are fed. Thank you!", cid)
             elseif started then
-                selfSay("You already comecou a me ajudar! Traga os hams e diga {entregar} quando tiver todos os 150!", cid)
+                selfSay("You already started helping me! Bring the hams and say {deliver} when you have all 150 of them!", cid)
             else
-                selfSay("Muito obrigada, " .. name .. "! Go hunt Vacacerontes and bring me 150 hams. When you have all of them, come back and say {deliver}!", cid)
+                selfSay("Thank you so much, " .. name .. "! Go hunt Vacacerontes and bring me 150 hams. When you have all of them, come back and say {deliver}!", cid)
                 startQuest(cid)
             end
 

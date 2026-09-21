@@ -67,7 +67,15 @@ return getPlayerStorageValue(cid, 93911) == 1
 end 
 
 
-function mountPlayer(cid, mountID) 
+-- MONTARIA DESATIVADA: esta era a segunda porta de montaria do servidor (o
+-- surf usava pra devolver a montaria de quem entrava surfando montado). Ficou
+-- inerte; o portao real e' o evento "mount" (creaturescripts/scripts/onMount.lua).
+-- O corpo original foi mantido abaixo, sem uso, so' como referencia.
+function mountPlayer(cid, mountID)
+	return false
+end
+
+function mountPlayerDesativado(cid, mountID)
 	if isCreature(cid) then 
 		return true
 	end
@@ -112,7 +120,13 @@ function mountPlayer(cid, mountID)
 			end 
 		end 
         if bonusAtual < vddSpeed then
-			doChangeSpeed(cid, vddSpeed-bonusAtual)
+			-- Fonte de velocidade (montaria): aplica so' o proprio valor, sem
+			-- sobrescrever o acumulador compartilhado (talentos/agilidade/haste).
+			if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+				PlayerSpeed.setSource(cid, "mount", vddSpeed)
+			else
+				doChangeSpeed(cid, vddSpeed-bonusAtual)
+			end
 			doCreatureSetStorage(cid, "bonusMount", vddSpeed)
         end
     end
@@ -128,13 +142,11 @@ function onStepOut(cid, item, position, fromPosition)
       doRemoveCondition(cid, CONDITION_HASTE)
    -- end
   end
-    if isPlayer(cid) and getPlayerStorageValue(cid, "entroumontado") == 1 and getPlayerStorageValue(cid, "inMount") ~= 1 then
-		local mountID = mountsByVoc[getPlayerVocation(cid)]
-		local activeMount = getPlayerStorageValue(cid, "activeMount") 
-		if activeMount ~= -1 then 
-			mountID = activeMount
-		end 
-        mountPlayer(cid, mountID)
-	end 
+    -- MONTARIA DESATIVADA: aqui o surf devolvia a montaria de quem entrou
+    -- surfando montado. Sem montaria, sair do surf nao remonta ninguem - quem
+    -- estava montado ja' foi desmontado no onStepIn (dismountPlayer) e no login.
+    if isPlayer(cid) and getPlayerStorageValue(cid, "entroumontado") == 1 then
+        setPlayerStorageValue(cid, "entroumontado", -1)
+    end
   return true
 end

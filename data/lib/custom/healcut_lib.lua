@@ -16,7 +16,7 @@ HEALCUT.OPCODE = 108
 -- Verifica se o player possui o debuff de Grievous Wounds ativo
 function HEALCUT.isActive(cid)
     if not isPlayer(cid) then return false end
-    return getPlayerStorageValue(cid, HEALCUT.STORAGE_KEY) >= os.time()
+    return (tonumber(getPlayerStorageValue(cid, HEALCUT.STORAGE_KEY)) or -1) >= os.time()
 end
 
 -- Retorna o multiplicador de cura (0.5 = cura pela metade)
@@ -46,7 +46,7 @@ function HEALCUT.apply(cid)
     HEALCUT.broadcastIcon(cid, true)
     addEvent(function(cid)
         if isCreature(cid) then
-            if getPlayerStorageValue(cid, HEALCUT.STORAGE_KEY) <= os.time() then
+            if (tonumber(getPlayerStorageValue(cid, HEALCUT.STORAGE_KEY)) or -1) <= os.time() then
                 HEALCUT.broadcastIcon(cid, false)
             end
         end

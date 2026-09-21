@@ -1,10 +1,10 @@
 local npcGen = newNpc("simpleBoatNpc")
 
-npcGen:setHiMsg("Hello %s. I can take you around the continent, do you want see my ROUTES?", "Olá %s. Eu posso lhe transportar ao redor do continente, você deseja ver minhas ROUTES?")
+npcGen:setHiMsg("Hello %s. I can take you around the continent, do you want see my ROUTES?", "Hello %s. I can take you around the continent, do you want see my ROUTES?")
 npcGen:needPremium(true)
 npcGen:setRoutes("simpleBoat")
 
-npcGen:addOptionInNpc("help", {"I don't need your help, thank you.", "Eu não preciso de sua ajuda, obrigado."})
+npcGen:addOptionInNpc("help", {"I don't need your help, thank you.", "I don't need your help, thank you."})
 
 function onCreatureSay(cid, type, msg)
     local msg = msg:lower()
@@ -13,7 +13,7 @@ function onCreatureSay(cid, type, msg)
         if stage == 1 then
             if msgcontains(msg, "routes") or msgcontains(msg, "offer") then
                 if npcGen:isPlayerStageFree() then
-                    npcGen:say("I can take you to: "..npcGen:getRoutesString()..".", "Eu posso levar você para: "..npcGen:getRoutesString()..".")
+                    npcGen:say("I can take you to: "..npcGen:getRoutesString()..".", "I can take you to: "..npcGen:getRoutesString()..".")
                     return true
                 end
             end

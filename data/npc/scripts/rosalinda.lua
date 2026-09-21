@@ -14,8 +14,8 @@ local STATUS_STORAGE = 49320
 local PROGRESS_STORAGE = 49321
 local NEEDED = 100
 local REWARD_EXP = 20000
-local QUEST_NAME = "O Cemiterio da Rosalinda"
-local MISSION_NAME = "Limpar o Cemiterio"
+local QUEST_NAME = "Rosalinda's Graveyard"
+local MISSION_NAME = "Clear the Graveyard"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -69,7 +69,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Oi! Voce parece ser corajoso. Eu sou a {Rosalinda} e preciso de ajuda com um problemazinho no cemiterio.", cid)
+    selfSay("Hi! You look brave. I am {Rosalinda} and I need help with a small problem in the graveyard.", cid)
     return true
 end
 
@@ -90,35 +90,35 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already limpou o cemiterio! O brinquedo da vovozinha esta salvo! Thank you!", cid)
+                selfSay("You already cleared the graveyard! Granny's toy is safe! Thank you!", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Voce eliminou os 100 vermes! O cemiterio esta limpo! Quer sua recompensa?", cid)
+                    selfSay("You wiped out all 100 worms! The graveyard is clean! Do you want your reward?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Still need " .. (NEEDED - progress) .. " vermes. Eles estao comendo tudo no cemiterio!", cid)
+                    selfSay("You still need " .. (NEEDED - progress) .. " worms. They are eating everything in the graveyard!", cid)
                 end
             else
-                selfSay("Meu brinquedo favorito da vovozinha caiu no cemiterio e tem vermes comendo tudo! Voce pode me {ajudar} a limpar o cemiterio?", cid)
+                selfSay("My favorite toy from granny fell into the graveyard and there are worms eating everything! Can you {help} me clean the graveyard?", cid)
                 startQuest(cid)
             end
         elseif msgcontains(msg, "cemiterio") or msgcontains(msg, "verme") or msgcontains(msg, "brinquedo") or msgcontains(msg, "help") then
             if started and not completed then
                 selfSay("Still need " .. (NEEDED - progress) .. " vermes. Eles estao comendo tudo no cemiterio!", cid)
             else
-                selfSay("Eu sou a {Rosalinda}! Perdi o brinquedo da vovozinha no cemiterio e tem vermes por toda parte! Voce consegue limpar pra mim?", cid)
+                selfSay("I am {Rosalinda}! I lost granny's toy in the graveyard and there are worms everywhere! Can you clean it up for me?", cid)
             end
         else
-            selfSay("I didn't understand. Voce quer me {ajudar} com os vermes do cemiterio?", cid)
+            selfSay("I didn't understand. Do you want to {help} me with the worms in the graveyard?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Aqui esta sua experiencia! Voce salvou o brinquedo da vovozinha! Voce agora e o Guardiao do Cemiterio!", cid)
+            selfSay("Here is your experience! You saved granny's toy! You are now the Guardian of the Graveyard!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Alright, volte quando quiser receber sua recompensa!", cid)
+            selfSay("Alright, come back whenever you want to receive your reward!", cid)
             talkState[talkUser] = 1
         end
     end

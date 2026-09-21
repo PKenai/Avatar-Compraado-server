@@ -16,8 +16,8 @@ local NEEDED = 300
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 80
 local REWARD_EXP = 160000
-local QUEST_NAME = "A Vinganca do Coronel"
-local MISSION_NAME = "Caçar Abelhas Urubu"
+local QUEST_NAME = "The Colonel's Revenge"
+local MISSION_NAME = "Hunt the Vulture Bees"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -71,7 +71,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Solte os cachorros! Quer dizer... voce parece ser um {soldado} de confianca. Tenho uma missao dificil pra voce.", cid)
+    selfSay("Release the hounds! I mean... you look like a trustworthy {soldier}. I have a hard mission for you.", cid)
     return true
 end
 
@@ -92,33 +92,33 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already cumpriu a missao. Parabens, soldado!", cid)
+                selfSay("You already completed the mission. Congratulations, soldier!", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Incredible! Voce eliminou as 300 abelhas urubu! Quer sua recompensa, soldado?", cid)
+                    selfSay("Incredible! You wiped out all 300 vulture bees! Do you want your reward, soldier?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Still need " .. (NEEDED - progress) .. " abelhas urubu. Nao fraqueje, soldado!", cid)
+                    selfSay("You still need " .. (NEEDED - progress) .. " vulture bees. Do not falter, soldier!", cid)
                 end
             else
-                selfSay("Essas abelhas urubu dizimaram meu batalhao no deserto. Mate 300 delas e eu te recompensarei como um verdadeiro {soldado}!", cid)
+                selfSay("Those vulture bees wiped out my battalion in the desert. Kill 300 of them and I will reward you like a true {soldier}!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "abelha") or msgcontains(msg, "urubu") or msgcontains(msg, "batalhao") or msgcontains(msg, "deserto") or msgcontains(msg, "missao") then
+        elseif msgcontains(msg, "bee") or msgcontains(msg, "vulture") or msgcontains(msg, "battalion") or msgcontains(msg, "desert") or msgcontains(msg, "mission") then
             if started and not completed then
-                selfSay("Still need " .. (NEEDED - progress) .. " abelhas urubu. Nao fraqueje, soldado!", cid)
+                selfSay("You still need " .. (NEEDED - progress) .. " vulture bees. Do not falter, soldier!", cid)
             else
-                selfSay("Eu era o lider de um batalhao no deserto. Um enxame de abelhas urubu destruiu tudo. Preciso de {vinganca}!", cid)
+                selfSay("I was the leader of a battalion in the desert. A swarm of vulture bees destroyed everything. I need {revenge}!", cid)
             end
         else
-            selfSay("I didn't understand. Voce quer aceitar a {missao}?", cid)
+            selfSay("I didn't understand. Do you want to accept the {mission}?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Here are your 80 platinum coins e 160 mil experience. Voce e um verdadeiro guerreiro do deserto!", cid)
+            selfSay("Here are your 80 platinum coins and 160,000 experience. You are a true desert warrior!", cid)
             talkState[talkUser] = 1
         else
             selfSay("Alright, come back when you want to receive your reward.", cid)

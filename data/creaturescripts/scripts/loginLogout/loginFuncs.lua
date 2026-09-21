@@ -39,8 +39,8 @@ function sendBonusExpIfNeed(cid)
     --    doPlayerSetExperienceRate(cid, 1.3)
    -- end
 
-    if getPlayerStorageValue(cid, "hasInPotionExp") > os.time() then
-        local time = getPlayerStorageValue(cid, "hasInPotionExp")-os.time()
+    if (tonumber(getPlayerStorageValue(cid, "hasInPotionExp")) or 0) > os.time() then
+        local time = (tonumber(getPlayerStorageValue(cid, "hasInPotionExp")) or 0)-os.time()
         if getPlayerStorageValue(cid, "Archangel") ~= 1 then
 			doPlayerSetExperienceRate(cid, 3.6)
 		else

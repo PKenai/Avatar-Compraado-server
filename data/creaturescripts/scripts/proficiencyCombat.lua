@@ -20,6 +20,9 @@ local FIRE_VOCATIONS = { [1] = true, [5] = true }
 -- Vocacoes de Air Bender (base + promoted)
 local AIR_VOCATIONS  = { [3] = true, [7] = true }
 
+-- Guarda de reentrada da reducao de dano (mesma ideia do "antiloop" do imuneable.lua)
+local REDUCTION_LOOP_KEY = "proficiencyDamageLoop"
+
 function onStatsChange(cid, attacker, statType, combat, value)
     if statType ~= STATSCHANGE_HEALTHLOSS or math.abs(value) <= 0 then
         return true
@@ -68,8 +71,20 @@ function onStatsChange(cid, attacker, statType, combat, value)
 
     -- -------------------------------------------------------
     -- DEFENSOR: Reducao de dano (WeaponProficiency + Talent Armor)
+    --
+    -- NAO use doCreatureAddHealth() para "reduzir" o dano: o binding
+    -- (luascript.cpp -> luaDoCreatureAddHealth) despacha valor positivo como
+    -- COMBAT_HEALING, ou seja, CURARIA o defensor. Era o que estava aqui: a cada
+    -- hit o jogador GANHAVA vida em vez de perder. Como o dano e' limitado a vida
+    -- atual (game.cpp: damage = std::min(target->getHealth(), damage)), com 1 de
+    -- vida o resultado era um empate eterno: o monstro tirava 1 e o script
+    -- devolvia 1, e mais nada conseguia matar o personagem.
+    --
+    -- A reducao de verdade e' feita do jeito que o resto do datapack faz
+    -- (imuneable.lua): cancela o dano original com return false e reenvia o valor
+    -- ja' reduzido via doTargetCombatHealth, com uma trava de reentrada.
     -- -------------------------------------------------------
-    if isPlayer(cid) then
+    if isPlayer(cid) and isCreature(attacker) then
         local totalReduction = 0
         if WeaponProficiency then
             local bonuses = WeaponProficiency.getActiveBonuses(cid)
@@ -81,9 +96,26 @@ function onStatsChange(cid, attacker, statType, combat, value)
             totalReduction = totalReduction + talentArmor
         end
 
+        if totalReduction >= 100 then
+            totalReduction = 99 -- nenhum hit real pode ser absorvido 100%
+        end
+
         if totalReduction > 0 then
-            local reduced = math.max(1, math.ceil(damage * totalReduction / 100))
-            doCreatureAddHealth(cid, reduced)
+            -- Reentrada: este e' o dano reduzido que nos mesmos reenviamos.
+            if getPlayerStorageValue(cid, REDUCTION_LOOP_KEY) == 1 then
+                setPlayerStorageValue(cid, REDUCTION_LOOP_KEY, -1)
+                return true
+            end
+
+            local absorbed = math.floor(damage * totalReduction / 100)
+            local reduced = damage - absorbed
+            if reduced < 1 then
+                reduced = 1
+            end
+
+            setPlayerStorageValue(cid, REDUCTION_LOOP_KEY, 1)
+            doTargetCombatHealth(attacker, cid, combat, -reduced, -reduced, -1)
+            return false
         end
     end
 

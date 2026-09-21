@@ -33,7 +33,7 @@
 	<event type="login" name="PlayerLogin" event="script" value="loginLogout/login.lua"/>
 	<event type="login" name="FirstLogin" event="script" value="loginLogout/firstlogin.lua"/>
 	<event type="logout" name="playerLogout" event="script" value="loginLogout/logout.lua"/>
-	<!--<event type="relogin" name="playerReLogin" event="script" value="loginLogout/onReLogin.lua"/>-->
+	<event type="relogin" name="playerReLogin" event="script" value="loginLogout/onReLogin.lua"/>
 
 	<event type="channelrequest" name="Ban_Type" event="script" value="ban/type.lua"/>
 	<event type="channelrequest" name="Ban_Action" event="script" value="ban/action.lua"/>
@@ -94,6 +94,12 @@
 	<event type="extendedopcode" name="ExtendedOpcode" event="script" value="opcode.lua"/>
 	<event type="extendedopcode" name="code_redeem" event="script" value="code.lua"/>
 	<event type="extendedopcode" name="Store" event="script" value="store.lua"/>
+	<event type="extendedopcode" name="GameStoreExtended" event="script" value="game_store.lua"/>
+	<event type="extendedopcode" name="HighscoreExtended" event="script" value="highscores.lua"/>
+	<event type="extendedopcode" name="GamePixExtended" event="script" value="game_pix.lua"/>
+	<!-- Statue Donation: janela da estatua (opcode 121) + +5% de dano contra monstros -->
+	<event type="extendedopcode" name="StatueDonationOpcode" event="script" value="statueDonation.lua"/>
+	<event type="statschange" name="StatueDonationCombat" event="script" value="statueBonus.lua"/>
 	<event type="statschange" name="PartyDamageMeter" event="script" value="partydamage.lua"/>
 	<event type="spawnall" name="PartyDamageSpawn" event="script" value="partydamage.lua"/>
 	<event type="castspell" name="castSpell" event="script" value="onUseSpell.lua"/>

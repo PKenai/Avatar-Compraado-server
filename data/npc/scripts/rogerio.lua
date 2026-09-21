@@ -31,8 +31,8 @@ local REWARD_ITEM = 2152   -- platinum coin
 local REWARD_COUNT = 100
 local REWARD_EXP = 1000000
 
-local QUEST_NAME = "As Fotos de Rogerio"
-local MISSION_NAME = "Recuperar as fotos roubadas"
+local QUEST_NAME = "Rogerio's Photos"
+local MISSION_NAME = "Recover the stolen photos"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -110,11 +110,11 @@ function onGreet(cid)
     syncProgress(cid)
 
     if questCompleted(cid) then
-        selfSay("Hello, " .. getCreatureName(cid) .. "! Thank you por ter recuperado minhas fotos. Agora consigo registrar as paisagens novamente em paz!", cid)
+        selfSay("Hello, " .. getCreatureName(cid) .. "! Thank you for recovering my photos. Now I can go back to shooting the landscapes in peace!", cid)
     elseif hasEnoughPhotos(cid) then
         selfSay("Hello, " .. getCreatureName(cid) .. "! I see you recovered my photos! Say you want to return them to receive your reward.", cid)
     elseif questStarted(cid) then
-        selfSay("Hello, " .. getCreatureName(cid) .. "! Ainda estou sem minhas fotos... As Mordecascas da terra levaram tudo o que eu tinha registrado. Recupere-as pra mim!", cid)
+        selfSay("Hello, " .. getCreatureName(cid) .. "! I still don't have my photos... The Earth Mordecais took everything I had captured. Get them back for me!", cid)
     else
         selfSay("Hello, " .. getCreatureName(cid) .. "! I'm Rogerio, a landscape photographer. I was taking photos of the region when an Earth Mordecai appeared and stole all my photos! Can you help me recover them?", cid)
     end
@@ -141,23 +141,23 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already me devolveu as fotos, " .. getCreatureName(cid) .. "! Thank you de novo, agora posso voltar a fotografar as paisagens!", cid)
+                selfSay("You already returned my photos, " .. getCreatureName(cid) .. "! Thank you again, now I can go back to photographing the landscapes!", cid)
             elseif hasEnoughPhotos(cid) then
                 deliverQuest(cid)
                 selfSay("My photos! What a joy to see them back! Here is your reward: " .. REWARD_COUNT .. " platinum coins and " .. REWARD_EXP .. " experience. Thank you, " .. getCreatureName(cid) .. "!", cid)
             elseif started then
                 selfSay("I still don't have my photos! Still need " .. (PHOTOS_NEEDED - photosCount(cid)) .. " to complete the album. Go after the Earth Mordecai and recover them!", cid)
             else
-                selfSay("Great! As Mordecascas da terra roubaram minhas fotos quando eu fotografava as paisagens. Cace-as e recupere as " .. PHOTOS_NEEDED .. " fotos que elas levaram!", cid)
+                selfSay("Great! The Earth Mordecais stole my photos while I was shooting the landscapes. Hunt them down and recover the " .. PHOTOS_NEEDED .. " photos they took!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "foto") or msgcontains(msg, "fotos") or msgcontains(msg, "mordecasca") or msgcontains(msg, "paisagem") or msgcontains(msg, "roub") or msgcontains(msg, "recuperar") or msgcontains(msg, "help") or msgcontains(msg, "album") then
+        elseif msgcontains(msg, "photo") or msgcontains(msg, "photos") or msgcontains(msg, "mordecai") or msgcontains(msg, "landscape") or msgcontains(msg, "stolen") or msgcontains(msg, "recover") or msgcontains(msg, "help") or msgcontains(msg, "album") then
             if hasEnoughPhotos(cid) then
                 selfSay("You recovered my photos! Say you want to return them to receive your reward.", cid)
             elseif started then
-                selfSay("Eu estava tirando fotos das paisagens quando um Mordecasca da terra apareceu e roubou tudo! Still need " .. (PHOTOS_NEEDED - photosCount(cid)) .. " fotos pra mim. Cace as Mordecascas da terra!", cid)
+                selfSay("I was taking photos of the landscapes when an Earth Mordecai showed up and stole everything! You still need " .. (PHOTOS_NEEDED - photosCount(cid)) .. " photos for me. Hunt the Earth Mordecais!", cid)
             else
-                selfSay("Eu estava tirando fotos das paisagens quando um Mordecasca da terra surgiu e roubou todas as minhas fotos! Quer me ajudar a recupera-las?", cid)
+                selfSay("I was taking photos of the landscapes when an Earth Mordecai showed up and stole all my photos! Will you help me get them back?", cid)
             end
         else
             selfSay("I didn't understand. Are you talking about my {photos} that the Earth Mordecai stole?", cid)

@@ -107,6 +107,13 @@
   <!-- Trenix -->
   <monster name="Trenix" file="Oficial monsters avatar/Trenix.xml"/>
 
+  <!-- Nomads -->
+  <monster name="Sand nomad" file="Oficial monsters avatar/Sand nomad.xml"/>
+
+  <!-- Elementals -->
+  <monster name="Living sand blob" file="Oficial monsters avatar/Living sand blob.xml"/>
+
+
   <!-- Treino / utilitarios -->
   <monster name="Dummy" file="Oficial monsters avatar/Dummy.xml"/>
 	<!-- ALPHA BOSSES (gerado por tools/generate_bosses.py) -->

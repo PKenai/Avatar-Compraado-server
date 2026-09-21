@@ -23,8 +23,8 @@ local STATUS_STORAGE = 49250
 local PROGRESS_STORAGE = 49251
 local FISHING_ROD = 2580
 local REWARD_EXP = 100000
-local QUEST_NAME = "O Anel do Rafinha"
-local MISSION_NAME = "Pegar o anel no lago"
+local QUEST_NAME = "Rafinha's Ring"
+local MISSION_NAME = "Fish the ring out of the lake"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) == 1
@@ -76,9 +76,8 @@ local function deliverQuest(cid)
         Achievements.check(cid, 22)
     end)
     if not ok then
-        setPlayerStorageValue(cid, "achUnlocked_22", 1)
-        pcall(function()
-            doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Conquista desbloqueada: Pescou o anel do Rafinha! Titulo: Pescador nato (abra Conquistas na topbar para equipar).")
+        setPlayerStorageValue(cid, "achUnlocked_22", 1)            pcall(function()
+                doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Achievement unlocked: You fished Rafinha's ring! Title: Born Fisher (open Achievements in the topbar to equip it).")
         end)
     end
 
@@ -138,24 +137,24 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already me ajudou, " .. name .. "! Thank you por tudo!", cid)
+                selfSay("You already helped me, " .. name .. "! Thank you for everything!", cid)
             elseif caught then
                 deliverQuest(cid)
                 selfSay("Wow, this ring was mine a long time ago, it's not my dad's, but thank you anyway. I'll tell my dad what happened, but you can keep my shark ring, it used to be my favorite. Thank you for the help!", cid)
             elseif questStarted(cid) then
-                selfSay("You already aceitou! Use a vara of pescar no lago e tente achar o anel. Eu fico te esperando aqui!", cid)
+                selfSay("You already accepted! Use the fishing rod in the lake and try to find the ring. I will be waiting for you here!", cid)
             else
-                selfSay("Muito obrigado, " .. name .. "! Use esta vara de pescar no lago e tente achar o anel! Eu fico te esperando aqui!", cid)
+                selfSay("Thank you so much, " .. name .. "! Use this fishing rod in the lake and try to find the ring! I will be waiting for you here!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "anel") or msgcontains(msg, "lago") or msgcontains(msg, "pai")
-            or msgcontains(msg, "pescar") or msgcontains(msg, "help") or msgcontains(msg, "vara") then
+        elseif msgcontains(msg, "ring") or msgcontains(msg, "lake") or msgcontains(msg, "dad")
+            or msgcontains(msg, "fish") or msgcontains(msg, "help") or msgcontains(msg, "rod") then
             if completed then
-                selfSay("Thank you por ter recuperado o anel, " .. name .. "! Foi uma grande aventura!", cid)
+                selfSay("Thank you for recovering the ring, " .. name .. "! It was a great adventure!", cid)
             elseif caught then
                 selfSay("You caught the ring! Come back here to give it to me!", cid)
             elseif questStarted(cid) then
-                selfSay("Use a vara de pescar no lago e tente achar o anel do meu pai antes que ele volte!", cid)
+                selfSay("Use the fishing rod in the lake and try to find my dad's ring before he comes back!", cid)
             else
                 selfSay("My dad and I used to fish in the lake nearby, and I lost his ring in the water! Can you help me get the ring back before my dad returns?", cid)
             end

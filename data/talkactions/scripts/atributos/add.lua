@@ -12,8 +12,16 @@ local function onAddAtributo(cid, atributo, quantia)
 		if oldDodge < 1 then 
 			oldDodge = 0
 		end 
-		setPlayerStorageValue(cid, "getPointsInDodge", oldDodge+quantia)
-		doChangeSpeed(cid, 6*quantia)
+		local novoDodge = oldDodge+quantia
+		setPlayerStorageValue(cid, "getPointsInDodge", novoDodge)
+		-- Agilidade e' uma FONTE de velocidade (PlayerSpeed): manda o valor TOTAL
+		-- dela e o sistema aplica so' a diferenca - impossivel somar o mesmo
+		-- ponto duas vezes ou o acumulador ficar com sobra.
+		if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+			PlayerSpeed.setSource(cid, "agi", novoDodge * 6)
+		else
+			doChangeSpeed(cid, 6*quantia)
+		end
 	elseif atributo == "speed" then                   
 		setCreatureMaxMana(cid, getCreatureMaxMana(cid, true)+(20*quantia))
         doCreatureAddMana(cid, 1)
@@ -58,9 +66,11 @@ function getCostByValue(value, att)
 			return 15
 		end
 	elseif att == "dodge" then 
-		value = value+1
+		-- value -1 virava indice 0 em dodgeValues (nil) e o custo nil quebrava
+			-- as contas de pontos abaixo. Indice sempre dentro de 1..#dodgeValues.
+		value = math.floor(tonumber(value) or 0)+1
 		local dodgeValues = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 10}
-		if value >= 0 and value <= 15 then
+		if value >= 1 and value <= 15 then
 			return dodgeValues[value]
 		else
 			return 99
@@ -89,7 +99,7 @@ end
 
 local quantia = tonumber(param[2])
 local storageAtributo = atributo .. "value"
-local valor = getPlayerStorageValue(cid, storageAtributo)
+local valor = tonumber(getPlayerStorageValue(cid, storageAtributo)) or 0 -- storage string-keyed volta como string apos relog
 valor = valor > 0 and valor or 0
 	if atributo == "dodge" and valor >= 15 then 
 		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Este atributo já atingiu seu nível máximo.")
@@ -97,7 +107,7 @@ valor = valor > 0 and valor or 0
 	end 
 local custo = getCostByValue(valor, atributo)
 quantia = quantia > 1 and quantia or custo
-local pendentes = getPlayerStorageValue(cid, "pendentes")
+local pendentes = tonumber(getPlayerStorageValue(cid, "pendentes")) or 0 -- storage string-keyed volta como string apos relog
 pendentes = pendentes > 0 and pendentes or 0
 
 	if quantia > pendentes then 

@@ -123,7 +123,7 @@ function creatureSayCallback(cid, type, msg)
             selfSay("Here are your 50 platinum coins. You're a true steel forger!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Alright, volte quando quiser pegar sua recompensa.", cid)
+            selfSay("Alright, come back whenever you want to collect your reward.", cid)
             talkState[talkUser] = 1
         end
     end

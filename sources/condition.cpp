@@ -31,6 +31,85 @@ id(_id), subId(_subId), ticks(_ticks), endTime(0), conditionType(_type), buff(_b
 	//
 }
 
+// ============================================================================
+// Avatar custom: diagnostico legivel de conditions
+// ----------------------------------------------------------------------------
+// Usado pelo rastreio [COND-TRACE] (Creature::addCondition) para dizer, sem
+// debugger, que condition chegou, com que forca (speedDelta/formula) e por
+// quanto tempo - e daí quem a aplicou.
+// ============================================================================
+
+std::string conditionTypeName(ConditionType_t type)
+{
+	switch(type)
+	{
+		case CONDITION_POISON: return "poison";
+		case CONDITION_FIRE: return "fire";
+		case CONDITION_ENERGY: return "energy";
+		case CONDITION_BLEEDING: return "bleeding";
+		case CONDITION_HASTE: return "haste";
+		case CONDITION_PARALYZE: return "PARALYZE";
+		case CONDITION_OUTFIT: return "outfit";
+		case CONDITION_INVISIBLE: return "invisible";
+		case CONDITION_LIGHT: return "light";
+		case CONDITION_MANASHIELD: return "manashield";
+		case CONDITION_INFIGHT: return "infight";
+		case CONDITION_DRUNK: return "drunk";
+		case CONDITION_EXHAUST: return "exhaust";
+		case CONDITION_REGENERATION: return "regeneration";
+		case CONDITION_SOUL: return "soul";
+		case CONDITION_DROWN: return "drown";
+		case CONDITION_MUTED: return "muted";
+		case CONDITION_ATTRIBUTES: return "attributes";
+		case CONDITION_FREEZING: return "freezing";
+		case CONDITION_DAZZLED: return "dazzled";
+		case CONDITION_CURSED: return "cursed";
+		case CONDITION_PACIFIED: return "pacified";
+		case CONDITION_GAMEMASTER: return "gamemaster";
+		case CONDITION_HUNTING: return "hunting";
+		case CONDITION_SPELLCOOLDOWN: return "spellcooldown";
+		default: break;
+	}
+
+	std::ostringstream ss;
+	ss << "type(" << (int32_t)type << ")";
+	return ss.str();
+}
+
+std::string conditionIdName(ConditionId_t id)
+{
+	switch(id)
+	{
+		case CONDITIONID_DEFAULT: return "DEFAULT";
+		case CONDITIONID_COMBAT: return "COMBAT";
+		case CONDITIONID_HEAD: return "HEAD";
+		case CONDITIONID_NECKLACE: return "NECKLACE";
+		case CONDITIONID_BACKPACK: return "BACKPACK";
+		case CONDITIONID_ARMOR: return "ARMOR";
+		case CONDITIONID_RIGHT: return "RIGHT";
+		case CONDITIONID_LEFT: return "LEFT";
+		case CONDITIONID_LEGS: return "LEGS";
+		case CONDITIONID_FEET: return "FEET";
+		case CONDITIONID_RING: return "RING";
+		case CONDITIONID_AMMO: return "AMMO";
+		case CONDITIONID_OUTFIT: return "OUTFIT";
+		case CONDITIONID_MOUNT: return "MOUNT";
+		default: break;
+	}
+
+	std::ostringstream ss;
+	ss << "id(" << (int32_t)id << ")";
+	return ss.str();
+}
+
+std::string Condition::describe() const
+{
+	std::ostringstream ss;
+	ss << conditionTypeName(conditionType) << " id=" << conditionIdName(id)
+		<< " ticks=" << ticks << " subId=" << subId << " buff=" << (buff ? 1 : 0);
+	return ss.str();
+}
+
 bool Condition::setParam(ConditionParam_t param, int32_t value)
 {
 	switch(param)
@@ -1349,6 +1428,16 @@ bool ConditionSpeed::setParam(ConditionParam_t param, int32_t value)
 	}
 
 	return ret;
+}
+
+// Avatar custom: alem do basico, mostra o quanto de velocidade a condition tira
+// (speedDelta) e a formula, que e' o que explica a speed final do personagem.
+std::string ConditionSpeed::describe() const
+{
+	std::ostringstream ss;
+	ss << Condition::describe() << " speedDelta=" << speedDelta
+		<< " formula=[" << mina << ", " << minb << ", " << maxa << ", " << maxb << "]";
+	return ss.str();
 }
 
 bool ConditionSpeed::unserializeProp(ConditionAttr_t attr, PropStream& propStream)

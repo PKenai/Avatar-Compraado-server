@@ -10,8 +10,13 @@ local function onAddAtributo(cid, atributo, quantia)
 		if oldDodge < 1 then 
 			oldDodge = 0
 		end 
-		setPlayerStorageValue(cid, "getPointsInDodge", oldDodge+quantia)
-		doChangeSpeed(cid, 6*quantia)
+		local novoDodge = oldDodge+quantia
+		setPlayerStorageValue(cid, "getPointsInDodge", novoDodge)
+		if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+			PlayerSpeed.setSource(cid, "agi", novoDodge * 6)
+		else
+			doChangeSpeed(cid, 6*quantia)
+		end
 	elseif atributo == "speed" then 
 		--doChangeSpeed(cid, 2*quantia)
 	end 
@@ -31,7 +36,11 @@ function resetAtributos(cid)
 	local guid = getPlayerGUID(cid)
 	db.executeQuery("UPDATE pedra_elemental SET pontos = 0 WHERE player_id = " .. guid)
 
-	if getAgility(cid) > 0 then 
+	-- Agilidade e' uma fonte de velocidade: zerar a fonte devolve exatamente o
+	-- que ela tinha posto.
+	if type(PlayerSpeed) == "table" and PlayerSpeed.setSource then
+		PlayerSpeed.setSource(cid, "agi", 0)
+	elseif getAgility(cid) > 0 then
 		doChangeSpeed(cid, -(6*(getAgility(cid))))
 	end
 	if getVitality(cid) > 1 then 

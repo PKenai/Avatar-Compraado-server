@@ -23,11 +23,11 @@ local function getRandomPercent()
 end
 
 local MOON_NAMES = {
-    [1] = "Lua Nova",
-    [2] = "Lua Crescente",
-    [3] = "Lua Cheia",
-    [4] = "Lua Minguante",
-    [5] = "Lua Oculta",
+    [1] = "New Moon",
+    [2] = "Waxing Crescent",
+    [3] = "Full Moon",
+    [4] = "Waning Crescent",
+    [5] = "Hidden Moon",
 }
 
 local BASE_WIN_CHANCES = {
@@ -45,16 +45,16 @@ local FIXED_COSTS = {
 }
 
 local HELMETS = {
-    {itemId = 19180, name = "capacete de viajante",  craftCost = 3500},
-    {itemId = 19181, name = "capacete reforcado",   craftCost = 10000},
-    {itemId = 19182, name = "capacete resistente",  craftCost = 25000},
-    {itemId = 19183, name = "capacete aprimorado",  craftCost = 50000},
-    {itemId = 19184, name = "capacete nobre",       craftCost = 95000},
-    {itemId = 19185, name = "capacete de protecao", craftCost = 165000},
-    {itemId = 19186, name = "capacete majestoso",   craftCost = 280000},
-    {itemId = 19187, name = "capacete glorioso",    craftCost = 475000},
-    {itemId = 19188, name = "capacete soberano",    craftCost = 750000},
-    {itemId = 19189, name = "capacete das nacoes",  craftCost = 1100000},
+    {itemId = 19180, name = "Traveler's Helmet",    craftCost = 3500},
+    {itemId = 19181, name = "Reinforced Helmet",     craftCost = 10000},
+    {itemId = 19182, name = "Tough Helmet",          craftCost = 25000},
+    {itemId = 19183, name = "Improved Helmet",       craftCost = 50000},
+    {itemId = 19184, name = "Noble Helmet",          craftCost = 95000},
+    {itemId = 19185, name = "Protective Helmet",     craftCost = 165000},
+    {itemId = 19186, name = "Majestic Helmet",       craftCost = 280000},
+    {itemId = 19187, name = "Glorious Helmet",       craftCost = 475000},
+    {itemId = 19188, name = "Sovereign Helmet",      craftCost = 750000},
+    {itemId = 19189, name = "Nations Helmet",        craftCost = 1100000},
 }
 
 local CONVO_BASE = 49350
@@ -141,8 +141,8 @@ function creatureSayCallback(cid, type, msg)
     local msg = msg:lower()
 
     if talkState[talkUser] == 1 then
-        if msgcontains(msg, "encantar") or msgcontains(msg, "melhorar") then
-            local lista = "Capacetes que aceito encantar:\n\n"
+        if msgcontains(msg, "enchant") or msgcontains(msg, "improve") then
+            local lista = "Helmets I accept for enchanting:\n\n"
             for i, h in ipairs(HELMETS) do
                 local count = getPlayerItemCount(cid, h.itemId)
                 local tierText = ""
@@ -155,13 +155,13 @@ function creatureSayCallback(cid, type, msg)
                 end
                 lista = lista .. i .. ") " .. h.name .. tierText .. " - " .. doNumberFormat(getGambleCost(h.craftCost, 0)) .. " gold\n"
             end
-            lista = lista .. "\nSo encanto 1 por vez. Escolha pelo nome."
+            lista = lista .. "\nI only enchant one at a time. Choose by name."
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, lista)
             selfSay("Remember: if the energy is channeled during the wrong moon phase, the helmet may shatter. Which helmet do you want to enchant?", cid)
             talkState[talkUser] = 2
-        elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") or msgcontains(msg, "ola") then
+        elseif msgcontains(msg, "hi") or msgcontains(msg, "hello") then
             selfSay("Say {enchant} if you want to enchant your helmet.", cid)
-        elseif msgcontains(msg, "tchau") or msgcontains(msg, "bye") then
+        elseif msgcontains(msg, "bye") then
             selfSay("May the moon guide your steps.", cid)
             talkState[talkUser] = 0
             npcHandler:releaseFocus(cid)
@@ -171,7 +171,7 @@ function creatureSayCallback(cid, type, msg)
         local idx, helmet = findHelmetByName(msg)
         if not helmet then selfSay("I don't know that helmet.", cid); return true end
         local count = getPlayerItemCount(cid, helmet.itemId)
-        if count <= 0 then selfSay("Voce nao tem " .. helmet.name .. ".", cid); talkState[talkUser] = 1; return true end
+        if count <= 0 then selfSay("You don't have " .. helmet.name .. ".", cid); talkState[talkUser] = 1; return true end
         if count > 1 then selfSay("I only accept one at a time.", cid); talkState[talkUser] = 1; return true end
         local item = getPlayerItemById(cid, true, helmet.itemId)
         if not item or not item.uid then selfSay("Error.", cid); talkState[talkUser] = 1; return true end
@@ -183,10 +183,10 @@ function creatureSayCallback(cid, type, msg)
         setPlayerStorageValue(cid, CONVO_BASE + 2, tier)
         setPlayerStorageValue(cid, CONVO_BASE + 3, cost)
         setPlayerStorageValue(cid, CONVO_BASE + 4, idx)
-        selfSay(helmet.name .. " (Tier " .. tier .. " -> " .. (tier+1) .. ") custa " .. doNumberFormat(cost) .. " gold.", cid)
+        selfSay(helmet.name .. " (Tier " .. tier .. " -> " .. (tier+1) .. ") costs " .. doNumberFormat(cost) .. " gold.", cid)
         addEvent(function()
             if isPlayer(cid) then
-                selfSay("Qual lua aparecera hoje? {1} Lua Nova, {2} Crescente, {3} Cheia, {4} Minguante ou {5} Oculta?", cid)
+                selfSay("Which moon will rise today? {1} New Moon, {2} Waxing Crescent, {3} Full Moon, {4} Waning Crescent or {5} Hidden Moon?", cid)
             end
         end, 1500)
         talkState[talkUser] = 3
@@ -198,7 +198,7 @@ function creatureSayCallback(cid, type, msg)
             return true
         end
         setPlayerStorageValue(cid, CONVO_BASE + 5, choice)
-        selfSay("Voce escolheu " .. MOON_NAMES[choice] .. ". Confirm? {yes} or {no}", cid)
+        selfSay("You chose " .. MOON_NAMES[choice] .. ". Confirm? {yes} or {no}", cid)
         talkState[talkUser] = 4
 
     elseif talkState[talkUser] == 4 then
@@ -208,7 +208,7 @@ function creatureSayCallback(cid, type, msg)
             local idx = getPlayerStorageValue(cid, CONVO_BASE + 4)
             local choice = getPlayerStorageValue(cid, CONVO_BASE + 5)
             local helmet = HELMETS[idx]
-            if getPlayerMoney(cid) < cost then selfSay("Precisa de " .. doNumberFormat(cost) .. " gold.", cid); talkState[talkUser] = 1; setPlayerStorageValue(cid, CONVO_BASE, 0); return true end
+            if getPlayerMoney(cid) < cost then selfSay("You need " .. doNumberFormat(cost) .. " gold.", cid); talkState[talkUser] = 1; setPlayerStorageValue(cid, CONVO_BASE, 0); return true end
             local count = getPlayerItemCount(cid, itemId)
             if count <= 0 then selfSay("You no longer have the helmet!", cid); talkState[talkUser] = 1; setPlayerStorageValue(cid, CONVO_BASE, 0); return true end
             local item = getPlayerItemById(cid, true, itemId)
@@ -223,7 +223,7 @@ function creatureSayCallback(cid, type, msg)
                 local clientId = toClientId(item.itemid)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
                 doSendMagicEffect(getCreaturePosition(cid), 200)
-                selfSay("A lua " .. MOON_NAMES[choice] .. " shone! " .. helmet.name .. " is now Tier " .. newTier .. "!", cid)
+                selfSay("The " .. MOON_NAMES[choice] .. " shone! " .. helmet.name .. " is now Tier " .. newTier .. "!", cid)
             else
                 doRemoveItem(item.uid, 1)
                 local clientId = toClientId(item.itemid)

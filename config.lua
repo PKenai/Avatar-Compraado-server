@@ -69,6 +69,10 @@ criticalHitMultiplier = 1.15
 displayCriticalHitNotify = true
 removeWeaponAmmunition = true
 removeWeaponCharges = true
+-- HIT BASICO DO JOGADOR: false = jogador NAO bate com arma/punho (todo dano vem
+-- de spells/bending). Monstros continuam atacando normalmente. Tambem trava as
+-- skills fist/club/sword/axe/distance de subirem pro jogador.
+playerBasicAttack = false
 removeRuneCharges = true
 whiteSkullTime = 15 * 60 * 1000
 noDamageToSameLookfeet = false
@@ -228,7 +232,11 @@ tradeLimit = 100
 useCapacity = true
 playerFollowExhaust = 300
 
-useMounts = true
+-- MONTARIA DESATIVADA: com false o servidor nao manda a lista de montarias
+-- pro client (a janela/aba de montaria fica vazia) e o engine nao oferece
+-- montaria. O gate final continua sendo o evento "mount" em
+-- data/creaturescripts/scripts/onMount.lua (retorna false sempre).
+useMounts = false
 unmountPlayerInPz = true
 
 defaultDepotSizePremium = 2000
@@ -333,7 +341,17 @@ location = "Brazil"
 displayGamemastersWithOnlineCommand = false
 
 disableLuaErrors = false
-displayPlayersLogging = true
+-- Loga "<nome> has logged in/out." no console do servidor (player.cpp).
+-- false silencia esses avisos de entrada/saida.
+displayPlayersLogging = false
+
+-- DIAGNOSTICO DE PARALISIA (conditionTrace)
+-- Ligado: toda CONDITION_PARALYZE que chega num player imprime no console a
+-- linha [COND-TRACE] com o que a condition faz (ticks/speedDelta/formula), a
+-- velocidade do momento e o stack trace nativo de quem a aplicou - precisa do
+-- .pdb ao lado do .exe para sair com o nome das funcoes.
+-- DESLIGUE (false) quando terminar o diagnostico: e' log de debug.
+conditionTrace = true
 prefixChannelLogs = ""
 runFile = ""
 outputLog = ""

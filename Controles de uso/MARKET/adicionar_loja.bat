@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-title MARKET - Gerenciar ofertas da loja (game_shop)
+title MARKET - Ofertas da loja NOVA (game_store)
 cd /d "%~dp0..\.."
 
 set "FILE=data\lib\shop_offers.lua"
@@ -30,7 +30,7 @@ set "SKIP_CATEG="
 set "DESC="
 set "LINHA="
 echo ==================================================
-echo   GERENCIAR OFERTAS DA LOJA  (game_shop)
+echo   GERENCIAR OFERTAS DA LOJA NOVA  (game_store)
 echo ==================================================
 echo.
 echo O que deseja fazer?
@@ -299,6 +299,14 @@ call :clean CATEG
 call :clean DESC
 
 rem -- monta e grava a linha Lua
+rem -- linha de comentario com a categoria (so' organizacao: a loja ignora o
+rem    que nao for table.insert). Mantem o arquivo legivel por categoria.
+findstr /i /c:"category = %CATEG%" "%FILE%" >nul
+if errorlevel 1 (
+  >> "%FILE%" echo.
+  >> "%FILE%" echo -- Categoria: %CATEG%
+)
+
 set "LINHA=table.insert(ShopOffers, { category = "%CATEG%", type = "%TIPO_LINE%", title = "%NOME%", %EXTRA_LINE%, cost = %VALOR%, class = "%CLASSE_VAL%", description = "%DESC%" })"
 >> "%FILE%" echo %LINHA%
 
@@ -321,7 +329,7 @@ goto fim
 :remover
 cls
 echo ==================================================
-echo   REMOVER OFERTAS DA LOJA  (game_shop)
+echo   REMOVER OFERTAS DA LOJA NOVA  (game_store)
 echo ==================================================
 if not exist "%FILE%" (
   echo Nenhuma oferta encontrada. Arquivo %FILE% nao existe.
@@ -424,7 +432,9 @@ goto fim
 
 :fim
 echo.
-echo Pronto! Reinicie o servidor para aplicar as novas ofertas.
+echo Pronto! Reinicie o SERVIDOR para aplicar as novas ofertas (a loja nova,
+rem  game_store, le este arquivo la na inicializacao - o client nao precisa
+rem  ser reaberto).
 echo As ofertas ficam em: %FILE%
 pause
 exit /b

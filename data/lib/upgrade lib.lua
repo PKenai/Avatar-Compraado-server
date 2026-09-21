@@ -77,11 +77,11 @@ local fireStones = {
 }
 
 local waterStones = {
-[1]="Você aprimorou a dobra Water Whip! Sua área de acerto agora será sempre ao redor.",--d
+[1]="Você aprimorou a dobra Water Wave! Sua área de acerto agora será sempre ao redor.",--d
 [2]="Você aprimorou a dobra Water Explosion! Seu dano foi aumentado em 20%.",--d
 [3]="Você aprimorou a dobra Water Heal! Sua cura foi aumentada em 20%.",--d
 [4]="Você aprimorou a dobra Water Jump! Sua penalidade de dano foi alterada de -20% para -10% por 5s.",--d
-[5]="Você aprimorou a dobra Water IceSpikes! Seu cooldown foi reduzido de 15s para 12s.",--d
+[5]="Você aprimorou a dobra Water IceSpikes! Seu cooldown foi reduzido de 4s para 1s.",--d
 [6]="Você aprimorou a dobra Water Res! A vida de seu water elemental foi aumentada em 50%.",--d
 [7]="Você aprimorou a dobra Water Shards! Seu cooldown foi reduzido de 12s para 10s.",--d
 [8]="Você aprimorou a dobra Water Surf! Seu cooldown foi reduzido de 30s para 24.",--d

@@ -8,6 +8,11 @@ local spellInfos = {
 
     ["water"] = 
         {
+            -- Dobras de nome novo ja entram na lista ensinada pelos Mentores
+            -- (pago com gold ou 1 bender scroll). "Wave" e' a Water Wave da
+            -- spellbar (por dentro continua "whip", ver getFoldSlot) e
+            -- "IceSpikes" e' a Water IceSpikes.
+            {words = "Wave"}, {words = "IceSpikes"},
            {words = "BloodControl"},
             {words = "Punch"}, {words = "Dragon"}, {words = "Rain"}, {words = "Bubbles"}, {words = "Protect"},
             {words = "Icebolt"}, {words = "Flow"}, {words = "IceGolem"}, {words = "Tsunami"}, {words = "Clock"}, {words = "Blizzard"}, {words = "BloodBending"}
@@ -28,6 +33,59 @@ local spellInfos = {
         }
 }
 
+-- Nome exibido da dobra: o MESMO nome que a spellbar mostra, lido direto da
+-- spells.xml (ex: words "Icebolt" -> "Water IceBolt", "Wave" -> "Water Wave").
+-- Assim o tutor ensina a dobra pelo nome que o jogador ve em jogo e o texto
+-- acompanha qualquer rename futuro automaticamente.
+function getFoldDisplayName(element, words)
+    local info = getInstantSpellInfo(element.." "..words)
+    if type(info) == "table" and info.name then
+        return info.name
+    end
+
+    return element.." "..words
+end
+
+-- Ordem canonica da spellbar (a mesma dos arquivos 199-ServerToDll.lua).
+local foldSlotTables = {
+    fire = fireSpells,
+    water = waterSpells,
+    air = airSpells,
+    earth = earthSpells
+}
+
+-- Nome interno -> palavra usada na lista ensinada. A dobra de level 1 da agua
+-- aparece como "Water Wave" na spellbar, mas por dentro segue "whip" (chaves
+-- de exaustao, som e pasta continuam as antigas).
+local foldWordAliases = {
+    water = {wave = "whip"}
+}
+
+-- Slot da dobra na spellbar, achado pelo NOME (nao pela posicao na lista
+-- ensinada): assim a lista do NPC pode crescer/reordenar sem bagunçar os
+-- marcadores "NPC" que o client recebe via "#j#<slot>;".
+function getFoldSlot(element, words)
+    local list = foldSlotTables[element]
+    if type(list) ~= "table" then
+        return nil
+    end
+
+    local word = words:lower()
+    local alias = foldWordAliases[element] and foldWordAliases[element][word]
+    if alias then
+        word = alias
+    end
+
+    local target = (element..word):lower()
+    for x = 1, #list do
+        if list[x]:lower() == target then
+            return x
+        end
+    end
+
+    return nil
+end
+
 function getHasBuyAll(cid)
     local element = getPlayerElement(cid)
     local string = "#j#1;"
@@ -37,7 +95,10 @@ function getHasBuyAll(cid)
 
     for x = 1, #spellInfos[element] do
         if hasFoldIsBuy(cid, element.." "..spellInfos[element][x].words:lower()) then
-            string = string.."#j#"..11+x..";"
+            local slot = getFoldSlot(element, spellInfos[element][x].words)
+            if slot then
+                string = string.."#j#"..slot..";"
+            end
         end
     end
 
@@ -77,21 +138,23 @@ function getFoldPrice(cid, words)
     return false
 end
 
-function getListLearnFold(cid, organized)
+function getListLearnFold(cid, organized, displayName)
     local level, element, string = getPlayerLevel(cid), getPlayerElement(cid), ""
     local spells, names = spellInfos[element], {}
 
     for x = 1, #spells do
         if not hasFoldIsBuy(cid, element.." "..spells[x].words:lower()) then
             if level >= getInstantSpellInfo(element.." "..spells[x].words).level then
+                -- displayName = true: mostra "Water IceBolt" em vez de "Icebolt"
+                local word = displayName and getFoldDisplayName(element, spells[x].words) or spells[x].words
                 if not organized then
                     if string == "" then
-                        string = spells[x].words
+                        string = word
                     else
-                        string = string..", "..spells[x].words
+                        string = string..", "..word
                     end
                 else
-                    table.insert(names, spells[x].words)
+                    table.insert(names, word)
                 end
             end
         end
@@ -119,7 +182,8 @@ function canBuyUltimateFold(cid, words, sequencia)
             if not hasFoldIsBuy(cid, element.." "..words) then
                 if level >= info.level then
                     local reqStones = 2
-					if sequencia == 13 then
+					-- A ultima dobra da lista e' a "ultimate" (5 stones); as demais pedem 2.
+					if sequencia == #spells or spells[x].words:lower() == spells[#spells].words:lower() then
 						reqStones = 5
 					end
 					if (doPlayerRemoveItem(cid, theStones[getPlayerVocation(cid)], reqStones)) then
@@ -129,8 +193,8 @@ function canBuyUltimateFold(cid, words, sequencia)
                             setFoldBuy(cid, element.." "..spells[x].var:lower())
                         end
 
-                        local element = getPlayerElement(cid, true)
-                        sendBlueMessage(cid, getLangString(cid, "You've unlocked "..element.." "..spells[x].words.."!", "Voc� aprendeu a usar a dobra "..element.." "..spells[x].words.."!"))
+                        local foldName = getFoldDisplayName(element, spells[x].words)
+                        sendBlueMessage(cid, getLangString(cid, "You've unlocked "..foldName.."!", "Voc� aprendeu a usar a dobra "..foldName.."!"))
                         refreshBuySpells(cid)
                         return true
                     else
@@ -169,8 +233,8 @@ function canBuyFold(cid, words, tipo)
                             setFoldBuy(cid, element.." "..spells[x].var:lower())
                         end
 
-                        local element = getPlayerElement(cid, true)
-                        sendBlueMessage(cid, getLangString(cid, "You've unlocked "..element.." "..spells[x].words..".", "Voc� aprendeu a usar a dobra "..element.." "..spells[x].words.."."))
+                        local foldName = getFoldDisplayName(element, spells[x].words)
+                        sendBlueMessage(cid, getLangString(cid, "You've unlocked "..foldName..".", "Voc� aprendeu a usar a dobra "..foldName.."."))
                         refreshBuySpells(cid)
                         return true
                     else

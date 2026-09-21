@@ -230,7 +230,7 @@ TOOLS.SHOVEL = function(cid, item, fromPosition, itemEx, toPosition)
     elseif(rand >= 1 and rand <= 5) then
       doCreateItem(2159, 1, toPosition)
     elseif(rand > 85) then
-      if getPlayerStorageValue(cid, "canDoScarab") < os.time() then
+      if (tonumber(getPlayerStorageValue(cid, "canDoScarab")) or -1) < os.time() then
         doCreateMonster("Scarab", toPosition, false)
         setPlayerStorageValue(cid, "canDoScarab", os.time()+timeToDoScarab)
       end

@@ -27,8 +27,8 @@ local REWARD_ITEM = 18879      -- Filhote de coelho
 local REWARD_COINS = 2152      -- platinum coin
 local REWARD_COIN_COUNT = 20
 local REWARD_EXP = 50000
-local QUEST_NAME = "O Coelho da Margarida"
-local MISSION_NAME = "Resgatar o coelho"
+local QUEST_NAME = "Margarida's Rabbit"
+local MISSION_NAME = "Rescue the rabbit"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -85,7 +85,7 @@ local function deliverQuest(cid)
     if not ok then
         setPlayerStorageValue(cid, "achUnlocked_" .. ACHIEVEMENT_RABBIT, 1)
         pcall(function()
-            doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Conquista desbloqueada: Resgatou o Coelho da Margarida! Titulo: Amigo dos animais (abra Conquistas na topbar para equipar).")
+            doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Achievement unlocked: You rescued Margarida's Rabbit! Title: Friend of the Animals (open Achievements in the topbar to equip it).")
         end)
     end
 
@@ -134,18 +134,18 @@ function creatureSayCallback(cid, type, msg)
 
     if talkState[talkUser] == 1 then
         if completed then
-            selfSay("Thank you de novo, " .. getCreatureName(cid) .. "! Se quiser, pode vir visitar o coelho quando quiser!", cid)
-        elseif msgcontains(msg, "yes") or msgcontains(msg, "yes") or msgcontains(msg, "help") or msgcontains(msg, "help") or msgcontains(msg, "procurar") then
+            selfSay("Thank you again, " .. getCreatureName(cid) .. "! If you want, you can come visit the rabbit whenever you like!", cid)
+        elseif msgcontains(msg, "yes") or msgcontains(msg, "help") or msgcontains(msg, "search") then
             if rescued then
                 deliverQuest(cid)
                 selfSay("You rescued my rabbit! What a relief! Here is your Rabbit Pet and your reward: 20 platinum coins and 50,000 experience!", cid)
             elseif started then
                 selfSay("My rabbit is still in the stone-spitting spiders' den! Find him and say {rescue} to bring him back!", cid)
             else
-                selfSay("Muito obrigada, " .. getCreatureName(cid) .. "! Ele fugiu de medo e entrou na toca das aranhas cospe pedra. Quando o encontrar, diga {resgatar} pra ele e traga ele de volta pra mim!", cid)
+                selfSay("Thank you so much, " .. getCreatureName(cid) .. "! He ran away scared and went into the den of the stone-spitting spiders. When you find him, say {rescue} to him and bring him back to me!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "coelho") or msgcontains(msg, "toca") or msgcontains(msg, "aranha") or msgcontains(msg, "rescue") then
+        elseif msgcontains(msg, "rabbit") or msgcontains(msg, "den") or msgcontains(msg, "spider") or msgcontains(msg, "rescue") then
             if rescued then
                 selfSay("You rescued the rabbit! Come back here to receive your reward!", cid)
             elseif started then

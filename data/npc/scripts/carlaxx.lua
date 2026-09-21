@@ -17,8 +17,8 @@ local PROGRESS_STORAGE = 49391
 local NEEDED = 50
 local REWARD_ITEM = 2148
 local REWARD_COUNT = 200
-local QUEST_NAME = "A Praga das Baratas"
-local MISSION_NAME = "Exterminar baratas"
+local QUEST_NAME = "The Cockroach Plague"
+local MISSION_NAME = "Exterminate the cockroaches"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -78,7 +78,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Nossa, que nojo! O {templo} da cidade ta cheio de barata, eu to passando mal! Voce e forte, nao e? Me {ajuda} a limpar isso!", cid)
+    selfSay("Ugh, how disgusting! The city {temple} is full of cockroaches, I feel sick! You look strong, right? {Help} me clean this mess!", cid)
     return true
 end
 
@@ -99,35 +99,35 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already resolveu o problema das baratas, obrigada mesmo! Nao sei o que eu faria sem voce.", cid)
+                selfSay("You already solved the cockroach problem, thank you so much! I don't know what I would do without you.", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Eba! Voce matou todas as 50 baratas! Toma sua grana, voco merece!", cid)
+                    selfSay("Yay! You killed all 50 cockroaches! Here is your money, you deserve it!", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Faltam ainda " .. (NEEDED - progress) .. " baratas. Corre la no {templo} e mata essas praga!", cid)
+                    selfSay("You still need " .. (NEEDED - progress) .. " cockroaches. Run to the {temple} and kill those pests!", cid)
                 end
             else
-                selfSay("Demais! Mata 50 baratas la no {templo} e volta aqui que eu te dou 200 gold! Bora!", cid)
+                selfSay("Great! Kill 50 cockroaches in the {temple} and come back here, I'll give you 200 gold coins!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "barata") or msgcontains(msg, "templo") or msgcontains(msg, "help") or msgcontains(msg, "invasa") or msgcontains(msg, "praga") then
+        elseif msgcontains(msg, "cockroach") or msgcontains(msg, "temple") or msgcontains(msg, "help") or msgcontains(msg, "infestation") or msgcontains(msg, "plague") then
             if started and not completed then
                 selfSay("Faltam ainda " .. (NEEDED - progress) .. " baratas. Corre la no {templo} e mata essas praga!", cid)
             else
-                selfSay("O {templo} ta uma zona, cheio de barata por tudo! Mata 50 delas pra mim que eu te pago 200 gold. Topa?", cid)
+                selfSay("The {temple} is a mess, cockroaches everywhere! Kill 50 of them for me and I'll pay you 200 gold. Deal?", cid)
             end
         else
-            selfSay("To falando das {baratas} do {templo}! Ta cheio delas, quer me ajudar a limpar?", cid)
+            selfSay("I'm talking about the {cockroaches} in the {temple}! They are all over the place, will you help me clean it up?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             completeQuest(cid)
-            selfSay("Toma, 200 gold coins! Voce e um craque, valeu demais pela ajuda!", cid)
+            selfSay("Here, 200 gold coins! You are the best, thanks a lot for the help!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Tranquilo, quando quiser vir pegar sua grana eu to aqui.", cid)
+            selfSay("No problem, come back whenever you want to pick up your money.", cid)
             talkState[talkUser] = 1
         end
     end

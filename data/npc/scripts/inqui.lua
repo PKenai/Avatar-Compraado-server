@@ -54,8 +54,8 @@ function creatureSayCallback(cid, type, msg)
             end
         elseif talkState[talkUser] == 2 then
             if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
-                it = "Preciso que me traga 5 life crystal"
-                it = it .. ". You already coletou todos?"
+                it = "I need you to bring me 5 life crystals"
+                it = it .. ". Have you collected all of them?"
                 selfSay("I need you to bring me 5 life crystal. You've collected all?", cid)
                 talkState[talkUser] = 3         
             end

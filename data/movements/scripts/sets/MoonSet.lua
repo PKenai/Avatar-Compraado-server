@@ -81,7 +81,7 @@ function onEquip(cid, item, slot)
                
                 setPlayerStorageValue(cid, 13402, 10)
                 setPlayerStorageValue(cid, 13403, 1)
-                if getPlayerStorageValue(cid, "hasInPotionExp") >= os.time() then
+                if (tonumber(getPlayerStorageValue(cid, "hasInPotionExp")) or 0) >= os.time() then
                         doPlayerSetExperienceRate(cid, 1.6)
                 else
                         doPlayerSetExperienceRate(cid, 1.1)
@@ -111,7 +111,7 @@ function onDeEquip(cid, item, slot)
                 end
                 setPlayerStorageValue(cid, 13402, -1)
                 setPlayerStorageValue(cid, 13403, -1)
-                if getPlayerStorageValue(cid, "hasInPotionExp") >= os.time() then
+                if (tonumber(getPlayerStorageValue(cid, "hasInPotionExp")) or 0) >= os.time() then
                         doPlayerSetExperienceRate(cid, 1.5)
                 else
                         doPlayerSetExperienceRate(cid, 1)

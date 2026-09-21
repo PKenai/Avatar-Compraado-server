@@ -16,8 +16,8 @@ local NEEDED = 100
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 25
 local REWARD_EXP = 50000
-local QUEST_NAME = "A Caverna de Lumina"
-local MISSION_NAME = "Limpar a Caverna"
+local QUEST_NAME = "Lumina's Cave"
+local MISSION_NAME = "Clear the Cave"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -71,7 +71,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Ola! Voce tambem ve aquele brilho na caverna? Eu sou a {Lumina} e preciso de uma ajuda especial.", cid)
+    selfSay("Hello! Do you also see that glow in the cave? I am {Lumina} and I need special help.", cid)
     return true
 end
 
@@ -92,33 +92,33 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already limpou a caverna! Thank you, agora posso estudar os besouros em paz.", cid)
+                selfSay("You already cleared the cave! Thank you, now I can study the beetles in peace.", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Incredible! Voce eliminou os 100 besouros! Quer sua recompensa?", cid)
+                    selfSay("Incredible! You wiped out all 100 beetles! Do you want your reward?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Still need " .. (NEEDED - progress) .. " besouros luminosos. Cuidado, eles sao mais perigosos do que parecem!", cid)
+                    selfSay("You still need " .. (NEEDED - progress) .. " glowing beetles. Be careful, they are more dangerous than they look!", cid)
                 end
             else
-                selfSay("Encontrei uma caverna cheia de besouros brilhantes, mas eles estao bloqueando a entrada! Voce pode me {ajudar} a limpar o caminho?", cid)
+                selfSay("I found a cave full of glowing beetles, but they are blocking the entrance! Can you {help} me clear the way?", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "caverna") or msgcontains(msg, "besouro") or msgcontains(msg, "lumina") or msgcontains(msg, "help") then
+        elseif msgcontains(msg, "cave") or msgcontains(msg, "beetle") or msgcontains(msg, "lumina") or msgcontains(msg, "help") then
             if started and not completed then
                 selfSay("Still need " .. (NEEDED - progress) .. " besouros luminosos. Cuidado, eles sao mais perigosos do que parecem!", cid)
             else
-                selfSay("Eu sou a {Lumina}! Amo estudar insetos brilhantes, mas os besouros da caverna estao perigosos. Preciso que voce limpe a entrada pra mim!", cid)
+                selfSay("I am {Lumina}! I love studying glowing insects, but the beetles in the cave have become dangerous. I need you to clear the entrance for me!", cid)
             end
         else
-            selfSay("I didn't understand. Voce quer saber sobre a {caverna}?", cid)
+            selfSay("I didn't understand. Do you want to know about the {cave}?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Here are your 25 platinum coins e 50 mil experience. Voce agora e a Luz da Caverna!", cid)
+            selfSay("Here are your 25 platinum coins and 50,000 experience. You are now the Light of the Cave!", cid)
             talkState[talkUser] = 1
         else
             selfSay("Alright, come back when you want to receive your reward.", cid)

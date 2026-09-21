@@ -85,7 +85,7 @@ uint32_t ScriptEnviroment::m_lastCombatId = 0;
 ScriptEnviroment::ConditionMap ScriptEnviroment::m_conditionMap;
 uint32_t ScriptEnviroment::m_lastConditionId = 0;
 ScriptEnviroment::ConditionMap ScriptEnviroment::m_tempConditionMap;
-uint32_t ScriptEnviroment::m_lastTempConditionId = 0;
+uint32_t ScriptEnviroment::m_lastTempConditionId = 10000000;
 
 ScriptEnviroment::ThingMap ScriptEnviroment::m_globalMap;
 ScriptEnviroment::TempItemListMap ScriptEnviroment::m_tempItems;
@@ -407,6 +407,9 @@ uint32_t ScriptEnviroment::addConditionObject(Condition* condition)
 
 uint32_t ScriptEnviroment::addTempConditionObject(Condition* condition)
 {
+	if(m_lastTempConditionId < 10000000 || m_lastTempConditionId >= 0xFFFFFFF0)
+		m_lastTempConditionId = 10000000;
+
 	m_tempConditionMap[++m_lastTempConditionId] = condition;
 	return m_lastTempConditionId;
 }
@@ -414,18 +417,28 @@ uint32_t ScriptEnviroment::addTempConditionObject(Condition* condition)
 Condition* ScriptEnviroment::getConditionObject(uint32_t conditionId, bool loaded)
 {
 	ConditionMap::iterator it;
-	if(loaded)
-	{
-		it = m_conditionMap.find(conditionId);
-		if(it != m_conditionMap.end())
-			return it->second;
-	}
-	else
+	// IDs a partir de 10000000 sao condicoes temporarias criadas em runtime
+	if(conditionId >= 10000000)
 	{
 		it = m_tempConditionMap.find(conditionId);
 		if(it != m_tempConditionMap.end())
 			return it->second;
 	}
+	else
+	{
+		it = m_conditionMap.find(conditionId);
+		if(it != m_conditionMap.end())
+			return it->second;
+	}
+
+	// Fallback de seguranca caso o ID esteja no outro mapa
+	it = m_tempConditionMap.find(conditionId);
+	if(it != m_tempConditionMap.end())
+		return it->second;
+
+	it = m_conditionMap.find(conditionId);
+	if(it != m_conditionMap.end())
+		return it->second;
 
 	return NULL;
 }
@@ -11296,8 +11309,11 @@ int32_t LuaInterface::luaSetPlayerLevelOne(lua_State* L)
 int32_t LuaInterface::luaDoCreatureSetNoMove(lua_State* L)
 {
 	//doCreatureSetNoMove(cid, block[, tempo[, immuneTime]])
-	uint32_t tempo = 0;
-	uint32_t immuneTime = 0;
+	// int32 antes de virar uint32: um tempo negativo (script calculando
+	// os.time()-os.time() e mandando -X) virava ~4294967295 ms, ou seja ~49
+	// DIAS de movimento travado que nenhum destrava conseguia tirar.
+	int32_t tempo = 0;
+	int32_t immuneTime = 0;
 	if(lua_gettop(L) > 3)
 		immuneTime = popNumber(L);
 	if(lua_gettop(L) > 2)
@@ -11307,8 +11323,8 @@ int32_t LuaInterface::luaDoCreatureSetNoMove(lua_State* L)
 	ScriptEnviroment* env = getEnv();
 	if(Creature* creature = env->getCreatureByUID(popNumber(L)))
 	{
-		creature->setNoMove(block, tempo);
-		creature->setMoveImmuneTime(immuneTime);
+		creature->setNoMove(block, (tempo > 0 ? (uint32_t)tempo : 0));
+		creature->setMoveImmuneTime(immuneTime > 0 ? (uint32_t)immuneTime : 0);
 		creature->onWalkAborted();
 		lua_pushboolean(L, true);
 	}

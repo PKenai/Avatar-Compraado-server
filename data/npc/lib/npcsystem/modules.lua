@@ -1030,7 +1030,7 @@ if(Modules == nil) then
     module.npcHandler:say(msg, cid)
 
     if(getCreatureName(getNpcId()) == "Koin") then
-      doSendPlayerExtendedOpcode(cid, 101, "Moedas Avatar")
+      doSendPlayerExtendedOpcode(cid, 101, "Avatar Coins")
     end
     return true
   end

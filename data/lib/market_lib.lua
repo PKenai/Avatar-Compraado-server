@@ -57,6 +57,39 @@ Market = {
   limitPag = 15, -- must match the client (market.lua updateControlsPagination)
 }
 
+-- ----------------------------------------------------------------------------
+--  Schema: the `tier` column.
+--  Older databases were created before the market knew about item tiers, so the
+--  column may be missing. Every read/write of the market needs it, so we make
+--  sure it exists once per server run (same pattern used for the players'
+--  `auction_balance` column).
+-- ----------------------------------------------------------------------------
+local schemaChecked = false
+
+function Market.ensureSchema()
+  if schemaChecked then
+    return true
+  end
+  schemaChecked = true
+
+  pcall(function()
+    local colCheck = db.getResult("SELECT COUNT(*) AS c FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'auction_system' AND COLUMN_NAME = 'tier';")
+    if colCheck and colCheck:getID() ~= -1 then
+      local exists = colCheck:getDataInt("c")
+      colCheck:free()
+      if exists == 0 then
+        db.executeQuery("ALTER TABLE `auction_system` ADD COLUMN `tier` smallint NOT NULL DEFAULT 0;")
+      end
+    else
+      -- Can't inspect the schema: try the ALTER directly, the pcall swallows
+      -- the "duplicate column name" (1060) error when it already exists.
+      db.executeQuery("ALTER TABLE `auction_system` ADD COLUMN `tier` smallint NOT NULL DEFAULT 0;")
+    end
+  end)
+
+  return true
+end
+
 -- cache: serverItemId -> clientId (sprite id)
 local clientIdCache = {}
 
@@ -133,7 +166,7 @@ local function formatWeight(w)
   return string.format("%.2f", w):gsub(",", ".")
 end
 
-local function buildItemLook(serverItemId, storedDesc)
+local function buildItemLook(serverItemId, storedDesc, tier)
   local info = getItemInfo(serverItemId)
   if type(info) ~= "table" then
     return storedDesc or ""
@@ -141,6 +174,12 @@ local function buildItemLook(serverItemId, storedDesc)
 
   local lines = {}
   table.insert(lines, info.name or "")
+
+  -- tier do item, na linha de baixo do nome (a lista do market mostra em amarelo)
+  tier = tonumber(tier) or 0
+  if tier > 0 then
+    table.insert(lines, "Tier: " .. tier)
+  end
 
   local wt = tonumber(info.weaponType) or 0
   local wp = tonumber(info.wieldPosition) or 0
@@ -219,7 +258,7 @@ end
 -- Build the SELECT prefix shared by the paginated and filtered queries.
 local function selectColumns()
   return "SELECT id, item_id, item_name, player, " ..
-         "(SELECT name FROM players WHERE `id` = player) AS player_name, cost, count, `desc` " ..
+         "(SELECT name FROM players WHERE `id` = player) AS player_name, cost, count, `desc`, tier " ..
          "FROM auction_system"
 end
 
@@ -242,7 +281,8 @@ local function fetchPage(search, offset)
         playerName = rows:getDataString("player_name") or "",
         cost       = rows:getDataLong("cost"),
         count      = rows:getDataInt("count"),
-        desc       = rows:getDataString("desc") or ""
+        desc       = rows:getDataString("desc") or "",
+        tier       = tonumber(rows:getDataInt("tier")) or 0
       })
     until not rows:next()
     rows:free()
@@ -250,9 +290,9 @@ local function fetchPage(search, offset)
   return offers
 end
 
--- Fetch ALL matching rows and filter by category in Lua (slow path, only used
--- when a specific category filter is active).
-local function fetchAllFiltered(search, category)
+-- Fetch ALL matching rows and filter by category/tier in Lua (slow path, only
+-- used when a specific category or tier filter is active).
+local function fetchAllFiltered(search, category, tier)
   local rows = db.getResult(
     selectColumns() ..
     " WHERE " .. buildWhere(search) ..
@@ -263,7 +303,10 @@ local function fetchAllFiltered(search, category)
   if rows and rows:getID() ~= -1 then
     repeat
       local itemId = rows:getDataInt("item_id")
-      if getItemCategory(itemId) == category then
+      local rowTier = tonumber(rows:getDataInt("tier")) or 0
+      local categoryOk = (not category) or category == "all" or getItemCategory(itemId) == category
+      local tierOk = (not tier) or tier <= 0 or rowTier == tier
+      if categoryOk and tierOk then
         table.insert(offers, {
           id         = rows:getDataInt("id"),
           itemId     = itemId,
@@ -272,7 +315,8 @@ local function fetchAllFiltered(search, category)
           playerName = rows:getDataString("player_name") or "",
           cost       = rows:getDataLong("cost"),
           count      = rows:getDataInt("count"),
-          desc       = rows:getDataString("desc") or ""
+          desc       = rows:getDataString("desc") or "",
+          tier       = rowTier
         })
       end
     until not rows:next()
@@ -302,18 +346,26 @@ function Market.getOfferDescription(offerId)
 end
 
 -- Returns (offers, total). "all"/nil uses SQL COUNT + LIMIT/OFFSET; any other
--- category fetches all matching rows and filters in Lua (markets are small).
-function Market.getOffers(cid, pag, search, category)
+-- category (or an active tier filter) fetches all matching rows and filters in
+-- Lua (markets are small).
+function Market.getOffers(cid, pag, search, category, tier)
+  Market.ensureSchema()
+
+  tier = tonumber(tier) or 0
+  if tier < 1 or tier > 10 then
+    tier = 0
+  end
+
   local pageRows
   local total
 
-  if not category or category == "all" then
+  if (not category or category == "all") and tier == 0 then
     total = sqlCount(search)
     local numPag = math.max(1, math.ceil(total / Market.limitPag))
     pag = (not pag or pag <= 0 or pag > numPag) and 1 or pag
     pageRows = fetchPage(search, Market.limitPag * (pag - 1))
   else
-    local filtered = fetchAllFiltered(search, category)
+    local filtered = fetchAllFiltered(search, category, tier)
     total = #filtered
     local numPag = math.max(1, math.ceil(total / Market.limitPag))
     pag = (not pag or pag <= 0 or pag > numPag) and 1 or pag
@@ -335,19 +387,243 @@ function Market.getOffers(cid, pag, search, category)
       player   = row.playerName,
       price    = row.cost,
       count    = row.count,
-      look     = buildItemLook(row.itemId, row.desc)
+      tier     = tonumber(row.tier) or 0,
+      look     = buildItemLook(row.itemId, row.desc, row.tier)
     })
   end
 
   return offers, total
 end
 
-function Market.sendOfferOtclient(cid, pag, search, category)
-  local offers, total = Market.getOffers(cid, pag, search, category)
+-- open = true manda o payload com o prefixo "open>", que e' a UNICA coisa que
+-- faz o cliente abrir a janela do market. Sem o prefixo o payload e' so' dado
+-- de lista (o cliente atualiza o conteudo se a janela ja' estiver aberta e nao
+-- abre nada). Antes de existir essa distincao, QUALQUER resposta do servidor
+-- abria a janela - e como o cliente pedia a lista sozinho ao entrar no jogo, o
+-- market aparecia de graca no login (e no relog sem deslogar, caso em que o
+-- guard de 5s do opcode 230 nao pega, porque o "timeLogin" continua sendo o do
+-- login original).
+function Market.sendOfferOtclient(cid, pag, search, category, tier, open)
+  local offers, total = Market.getOffers(cid, pag, search, category, tier)
   local payload = "create>" .. total .. ">" .. table.tostring(offers)
+  if open then
+    payload = "open>" .. payload
+  end
   doSendPlayerExtendedOpcode(cid, Market.opcodes, payload)
 end
 
-function Market.sendSearchOtclient(cid, term, pag, category)
-  Market.sendOfferOtclient(cid, pag or 1, term or "", category or "all")
+function Market.sendSearchOtclient(cid, term, pag, category, tier)
+  Market.sendOfferOtclient(cid, pag or 1, term or "", category or "all", tier or 0)
+end
+
+-- Abre o market no cliente (usado pela action 50005 e por quem mais precisar
+-- dar "use" no balcao). Primeira pagina, sem filtro.
+function Market.sendOpenOtclient(cid)
+  if not isPlayer(cid) then return false end
+  Market.sendOfferOtclient(cid, 1, "", "all", 0, true)
+  return true
+end
+
+-- ----------------------------------------------------------------------------
+--  Item pick (the client's crosshair on the "Adicionar Oferta" window)
+--
+--  The client sends the address of the item the player clicked (the same
+--  encoding the tooltip module uses):
+--    pick>{"slot":N}                  -- equipment slot / inventory slot N
+--    pick>{"container":C,"slot":S}    -- open container C, slot S (backpack, depot,
+--                                      --   bag inside a backpack, ...)
+--    pick>{"pos":[x,y,z,stackpos]}     -- item on the map -> refused
+--
+--  The server answers with pickok>{...} (name, counts, tier) or pickerr>MESSAGE.
+--  Nothing is removed here: this only TELLS the client which item is being sold,
+--  and only when the item really belongs to the player (his inventory or one of
+--  his depots). The offer itself is validated again - and only then charged -
+--  by data/talkactions/scripts/auctionsystem.lua.
+-- ----------------------------------------------------------------------------
+
+-- ----------------------------------------------------------------------------
+--  Quais itens podem ser vendidos no market.
+--
+--  Mesma regra usada pelo talkaction !offer (data/talkactions/scripts/
+--  auctionsystem.lua) - que agora chama esta funcao -, so' que aqui ela roda no
+--  momento do clique do crosshair: assim o jogador e' avisado na hora que o item
+--  nao pode ser vendido, em vez de escolher preco/quantidade pra receber o erro.
+--  Containers (mochilas, baus...) nunca passam: o item iria com o conteudo.
+-- ----------------------------------------------------------------------------
+Market.blockedItems = {} -- itens que nunca podem ser vendidos
+Market.acceptedItems = {11259, 13041, 12686, 12687, 12688, 12689} -- moedas, scrolls e stones
+
+function Market.isSellableItem(itemid)
+  itemid = tonumber(itemid) or 0
+  local info = getItemInfo(itemid)
+  if type(info) ~= "table" then
+    return false
+  end
+
+  if isInArray(Market.blockedItems, itemid) then
+    return false
+  end
+  if isInArray(Market.acceptedItems, itemid) then
+    return true
+  end
+
+  -- mochila / bau / qualquer coisa que caiba item dentro: nao
+  if (tonumber(info.maxItems) or 0) > 0 then
+    return false
+  end
+  -- itens stackaveis so' passam pela lista de aceitos acima
+  if info.stackable then
+    return false
+  end
+
+  -- capacete, amuleto, armadura, calca, bota, anel
+  local wp = tonumber(info.wieldPosition) or 0
+  if wp == 1 or wp == 2 or wp == 4 or wp == 7 or wp == 8 or wp == 9 then
+    return true
+  end
+
+  return (tonumber(info.weaponType) or 0) > 0
+end
+
+-- How many of `itemid` the player has inside his depots (all lockers + reward
+-- mailbox, nested containers included).
+function Market.depotItemCount(cid, itemid)
+  if type(getPlayerDepotContent) ~= "function" then
+    return 0
+  end
+
+  local ok, content = pcall(getPlayerDepotContent, cid)
+  if not ok or type(content) ~= "table" then
+    return 0
+  end
+
+  for _, entry in ipairs(content) do
+    if tonumber(entry.itemid) == itemid then
+      return tonumber(entry.count) or 0
+    end
+  end
+  return 0
+end
+
+-- An item that is not on the map (no tile) is inside a player inventory or a
+-- player depot: Thing::getPosition() returns the tile position, and those
+-- containers have no tile at all, so the position comes back as 0,0,0.
+local function isOffMap(uid)
+  local pos = getThingPosition(uid)
+  if type(pos) ~= "table" then
+    return false
+  end
+  return pos.x == 0 and pos.y == 0 and pos.z == 0
+end
+
+local function pickError(message)
+  return { ok = false, error = message }
+end
+
+function Market.resolvePick(cid, payload)
+  local decodedOk, data = pcall(function() return json.decode(payload) end)
+  if not decodedOk or type(data) ~= "table" then
+    return pickError("Nao foi possivel identificar o item selecionado.")
+  end
+
+  local thing
+
+  if data.pos and type(data.pos) == "table" then
+    -- clicking the map is always refused: only backpack/depot items are sellable
+    return pickError("Voce so pode vender itens da sua mochila ou do seu deposito.")
+  elseif data.container ~= nil then
+    local containerIndex = tonumber(data.container)
+    local slot = tonumber(data.slot)
+    if not containerIndex or not slot then
+      return pickError("Nao foi possivel identificar o item selecionado.")
+    end
+
+    local ok, container = pcall(getPlayerContainer, cid, containerIndex)
+    if not ok or type(container) ~= "table" or not container.uid or container.uid <= 0 then
+      return pickError("Abra a mochila (ou o deposito) que tem o item e tente de novo.")
+    end
+
+    local itemOk, item = pcall(getContainerItem, container.uid, slot)
+    if not itemOk or type(item) ~= "table" then
+      return pickError("Nao foi possivel ler o item selecionado.")
+    end
+    thing = item
+  elseif data.slot ~= nil then
+    local slot = tonumber(data.slot)
+    if not slot then
+      return pickError("Nao foi possivel identificar o item selecionado.")
+    end
+
+    local ok, item = pcall(getPlayerSlotItem, cid, slot)
+    if not ok or type(item) ~= "table" then
+      return pickError("Nao foi possivel ler o item selecionado.")
+    end
+    thing = item
+  else
+    return pickError("Nao foi possivel identificar o item selecionado.")
+  end
+
+  if not thing or not thing.uid or thing.uid <= 0 or not thing.itemid or thing.itemid <= 0 then
+    return pickError("Nao ha nenhum item nesse lugar.")
+  end
+
+  local uid = thing.uid
+  local itemid = thing.itemid
+
+  -- 1st check: the item can not be on the map (ground, chest on the floor, ...)
+  if not isOffMap(uid) then
+    return pickError("Voce so pode vender itens da sua mochila ou do seu deposito.")
+  end
+
+  -- 2nd check: cross the item against the player's own inventory. Anything that
+  -- is not found there must exist inside one of his depots.
+  local source = "inventory"
+  local owned = getPlayerItemById(cid, true, itemid)
+  if not (owned and owned.uid == uid) then
+    source = "depot"
+    if Market.depotItemCount(cid, itemid) <= 0 then
+      return pickError("Voce so pode vender itens da sua mochila ou do seu deposito.")
+    end
+  end
+
+  local info = getItemInfo(itemid)
+
+  -- 3rd check: item que o market nao aceita nem chega a abrir a janela
+  if not Market.isSellableItem(itemid) then
+    return pickError("Este item nao pode ser vendido no market.")
+  end
+
+  local tier = tonumber(getItemAttribute(uid, "tier")) or 0
+  if tier < 0 or tier > 10 then
+    tier = 0
+  end
+
+  local count = thing.type
+  if type(count) ~= "number" or count <= 0 then
+    count = 1
+  end
+
+  return {
+    ok        = true,
+    uid       = uid,
+    itemId    = itemid,
+    itemName  = (type(info) == "table" and info.name) or getItemNameById(itemid),
+    count     = count,
+    tier      = tier,
+    source    = source,
+    clientId  = getClientId(itemid),
+    -- item unico (nao-stackavel) so' pode ser anunciado com quantidade 1: o
+    -- cliente usa isso pra travar o campo de quantidade
+    stackable = (type(info) == "table" and info.stackable == true) or false
+  }
+end
+
+function Market.sendPickResult(cid, payload)
+  local result = Market.resolvePick(cid, payload)
+  if result.ok then
+    result.ok = nil
+    doSendPlayerExtendedOpcode(cid, Market.opcodes, "pickok>" .. json.encode(result))
+  else
+    doSendPlayerExtendedOpcode(cid, Market.opcodes, "pickerr>" .. tostring(result.error or "Item invalido."))
+  end
 end

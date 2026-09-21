@@ -16,8 +16,8 @@ local NEEDED = 100
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 20
 local REWARD_EXP = 40000
-local QUEST_NAME = "A Experiencia do Dr. Ferreira"
-local MISSION_NAME = "Coletar Argila"
+local QUEST_NAME = "Dr. Ferreira's Experiment"
+local MISSION_NAME = "Collect the Clay"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -71,7 +71,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 
 function onGreet(cid)
     talkState[cid] = 1
-    selfSay("Ah, voce parece ser um assistente de laboratorio em potencial! Sou o {Dr. Ferreira} e preciso de um material muito especifico.", cid)
+    selfSay("Ah, you look like a promising laboratory assistant! I am {Dr. Ferreira} and I need a very specific material.", cid)
     return true
 end
 
@@ -92,33 +92,33 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already me trouxe toda a argila que eu precisava! Thank you, meu {assistente}!", cid)
+                selfSay("You already brought me all the clay I needed! Thank you, my {assistant}!", cid)
             elseif started then
                 if progress >= NEEDED then
-                    selfSay("Perfeito! Voce coletou a argila de 100 homens de barro! Quer sua recompensa?", cid)
+                    selfSay("Perfect! You collected the clay from 100 clay men! Do you want your reward?", cid)
                     talkState[talkUser] = 2
                 else
-                    selfSay("Still need " .. (NEEDED - progress) .. " homens de barro. Preciso de argila fresca pra minha experiencia!", cid)
+                    selfSay("You still need " .. (NEEDED - progress) .. " clay men. I need fresh clay for my experiment!", cid)
                 end
             else
-                selfSay("Estou fazendo uma experiencia muito importante no laboratorio e preciso de argila dos {homens de barro}. Voce pode me ajudar a coletar?", cid)
+                selfSay("I am running a very important experiment in the laboratory and I need clay from the {clay men}. Can you help me collect it?", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "argila") or msgcontains(msg, "homem") or msgcontains(msg, "barro") or msgcontains(msg, "experiencia") or msgcontains(msg, "help") then
+        elseif msgcontains(msg, "clay") or msgcontains(msg, "man") or msgcontains(msg, "mud") or msgcontains(msg, "experiment") or msgcontains(msg, "help") then
             if started and not completed then
-                selfSay("Still need " .. (NEEDED - progress) .. " homens de barro. Preciso de argila fresca pra minha experiencia!", cid)
+                selfSay("You still need " .. (NEEDED - progress) .. " clay men. I need fresh clay for my experiment!", cid)
             else
-                selfSay("Eu sou o {Dr. Ferreira}! Estou fazendo uma experiencia no laboratorio da vila e preciso de argila especial dos homens de barro. Quer ser meu assistente?", cid)
+                selfSay("I am {Dr. Ferreira}! I am running an experiment in the village laboratory and I need special clay from the clay men. Do you want to be my assistant?", cid)
             end
         else
-            selfSay("I didn't understand. Voce quer ser meu {assistente}?", cid)
+            selfSay("I didn't understand. Do you want to be my {assistant}?", cid)
         end
     elseif talkState[talkUser] == 2 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             doPlayerAddItem(cid, REWARD_ITEM, REWARD_COUNT)
             doPlayerAddExperience(cid, REWARD_EXP)
             completeQuest(cid)
-            selfSay("Here are your 20 platinum coins e 40 mil experience. Voce e um otimo assistente de laboratorio!", cid)
+            selfSay("Here are your 20 platinum coins and 40,000 experience. You are a great laboratory assistant!", cid)
             talkState[talkUser] = 1
         else
             selfSay("Alright, come back when you want to receive your reward.", cid)

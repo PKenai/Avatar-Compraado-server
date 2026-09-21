@@ -55,9 +55,9 @@ function creatureSayCallback(cid, type, msg)
 			end
 		elseif talkState[talkUser] == 2 then
 			if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
-				it = "A igreja confiou a enorme e responsável tarefa de combater a heresia e a magia negra à profanação. Se você desejar se alistar, como membro, é seu dever lutar contra o mal e sempre se manter em alerta, pois a maldade pode se apresentar nos mais diversos disfarces. Caso queira se alistar, eu preciso que você colete algumas coisas para mim: 25 demonic essence, 3 metal bracelets, 5 legionnaire's flags, 20 broken elmo e 2 spiked iron balls"
-				it = it .. ". You already coletou tudo?"
-				selfSay("The church entrusted the huge and responsible task of combating heresy and black magic to the profaned. If you wish to enroll as a member, it is your duty to fight against evil and always keep on alert because evil can appear in the most diverse disguises. If you want to enlist, I need you to gather some things for me: 25 demonic essence, 3 metal bracelets, 5 legionnaire's flags, 20 broken elmo e 2 spiked iron balls. You have collected all?", cid)
+				it = "The church entrusted the huge and responsible task of fighting heresy and black magic to the profaned. If you wish to enlist as a member, it is your duty to fight evil and always stay alert, because evil can appear in the most diverse disguises. If you want to enlist, I need you to gather some things for me: 25 demonic essence, 3 metal bracelets, 5 legionnaire's flags, 20 broken elmo and 2 spiked iron balls"
+				it = it .. ". Have you collected all of them?"
+				selfSay("The church entrusted the huge and responsible task of combating heresy and black magic to the profaned. If you wish to enroll as a member, it is your duty to fight against evil and always keep on alert because evil can appear in the most diverse disguises. If you want to enlist, I need you to gather some things for me: 25 demonic essence, 3 metal bracelets, 5 legionnaire's flags, 20 broken elmo and 2 spiked iron balls. Have you collected all of them?", cid)
 				talkState[talkUser] = 3			
 			end
 			

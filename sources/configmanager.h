@@ -288,6 +288,7 @@ class ConfigManager
 			TRACER_BOX,
 			STORE_DIRECTION,
 			DISPLAY_LOGGING,
+			CONDITION_TRACE,
 			STAMINA_BONUS_PREMIUM,
 			ALLOW_CHANGEADDONS,
 			GHOST_INVISIBLE_EFFECT,
@@ -336,6 +337,7 @@ class ConfigManager
 			FULL_MAP_ON_LOGIN,
 			MAGIC_EFFECT_U16, // client uses 16-bit magic effect ids (OTC GameMagicEffectU16)
 			MAGIC_EFFECT_SOURCE, // envia quem causou o efeito junto do effect (opcode 72)
+			PLAYER_BASIC_ATTACK, // false = jogador nao tem hit basico de arma/punho (monstros seguem)
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

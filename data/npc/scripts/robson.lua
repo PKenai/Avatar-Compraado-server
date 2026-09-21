@@ -89,16 +89,16 @@ local CONVO_BASE = 49320
 
 -- Calças aceitas pelo Robson (vendidas pelo Tadeu)
 local PANTS = {
-    {itemId = 19169, name = "calca de viajante",  craftCost = 4000},
-    {itemId = 19170, name = "calca reforcada",   craftCost = 12000},
-    {itemId = 19171, name = "calca resistente",  craftCost = 28000},
-    {itemId = 19172, name = "calca aprimorada",  craftCost = 55000},
-    {itemId = 19173, name = "calca nobre",       craftCost = 100000},
-    {itemId = 19174, name = "calca de protecao", craftCost = 175000},
-    {itemId = 19175, name = "calca majestosa",   craftCost = 300000},
-    {itemId = 19176, name = "calca gloriosa",    craftCost = 500000},
-    {itemId = 19177, name = "calca soberana",    craftCost = 800000},
-    {itemId = 19178, name = "calca das nacoes",  craftCost = 1200000},
+    {itemId = 19169, name = "Traveler's Pants", alt = "calca de viajante",  craftCost = 4000},
+    {itemId = 19170, name = "Reinforced Pants", alt = "calca reforcada",   craftCost = 12000},
+    {itemId = 19171, name = "Tough Pants",      alt = "calca resistente",  craftCost = 28000},
+    {itemId = 19172, name = "Improved Pants",   alt = "calca aprimorada",  craftCost = 55000},
+    {itemId = 19173, name = "Noble Pants",      alt = "calca nobre",       craftCost = 100000},
+    {itemId = 19174, name = "Protective Pants", alt = "calca de protecao", craftCost = 175000},
+    {itemId = 19175, name = "Majestic Pants",   alt = "calca majestosa",   craftCost = 300000},
+    {itemId = 19176, name = "Glorious Pants",   alt = "calca gloriosa",    craftCost = 500000},
+    {itemId = 19177, name = "Sovereign Pants",  alt = "calca soberana",    craftCost = 800000},
+    {itemId = 19178, name = "Nations Pants",    alt = "calca das nacoes",  craftCost = 1200000},
 }
 
 -- ============================================================
@@ -158,7 +158,9 @@ local function findPantsByName(name)
     local cleanName = sanitizeText(name)
     for i, p in ipairs(PANTS) do
         local cleanPant = sanitizeText(p.name)
-        if cleanName == cleanPant or cleanName:find(cleanPant, 1, true) or cleanPant:find(cleanName, 1, true) then
+        local cleanAlt = sanitizeText(p.alt or "")
+        if cleanName == cleanPant or cleanName:find(cleanPant, 1, true) or cleanPant:find(cleanName, 1, true)
+           or (cleanAlt ~= "" and (cleanName == cleanAlt or cleanName:find(cleanAlt, 1, true) or cleanAlt:find(cleanName, 1, true))) then
             return i, p
         end
     end
@@ -181,7 +183,7 @@ function onGreet(cid)
     for i = 0, 4 do
         setPlayerStorageValue(cid, CONVO_BASE + i, 0)
     end
-    selfSay("Hello, " .. getCreatureName(cid) .. "! Sou Robson, mestre armeiro e curtidor. Posso fazer um {reforco} na sua calca para elevar o Tier dela! Deseja aprimorar sua armadura?", cid)
+    selfSay("Hello, " .. getCreatureName(cid) .. "! I am Robson, master armorer and tanner. I can {reinforce} your pants to upgrade their Tier! Would you like to improve your armor?", cid)
     return true
 end
 
@@ -200,8 +202,8 @@ function creatureSayCallback(cid, type, msg)
     -- ============================================================
     if talkState[talkUser] == 1 then
 
-        if msgcontains(msg, "reforco") or msgcontains(msg, "reforcar") or msgcontains(msg, "melhorar") or msgcontains(msg, "aprimorar") or msgcontains(msg, "calca") or msgcontains(msg, "apostar") then
-            local lista = "Calcas aceitas para reforco de Tier:\n\n"
+        if msgcontains(msg, "reinforce") or msgcontains(msg, "upgrade") or msgcontains(msg, "improve") or msgcontains(msg, "pants") or msgcontains(msg, "reforco") or msgcontains(msg, "reforcar") or msgcontains(msg, "melhorar") or msgcontains(msg, "aprimorar") or msgcontains(msg, "calca") then
+            local lista = "Pants accepted for Tier reinforcement:\n\n"
             for i, p in ipairs(PANTS) do
                 local count = getPlayerItemCount(cid, p.itemId)
                 local tierText = ""
@@ -217,16 +219,16 @@ function creatureSayCallback(cid, type, msg)
                 local cost = getGambleCost(p.craftCost, 0)
                 lista = lista .. i .. ") " .. p.name .. tierText .. " - " .. doNumberFormat(cost) .. " gold\n"
             end
-            lista = lista .. "\nRegra: so aceito 1 calca de cada vez. Digite o nome da calca."
+            lista = lista .. "\nRule: only 1 pair of pants at a time. Type the name of the pants."
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, lista)
-            selfSay("Eu utilizo placas temperadas para reforcar a resistencia da sua peca. Porem, a pressao do forjamento e extrema: se der errado, a calca se rompe e sera destruida! Qual calca voce quer que eu tente reforcar?", cid)
+            selfSay("I use tempered plates to reinforce the resistance of your piece. However, the forging pressure is extreme: if it fails, the pants will tear and be destroyed! Which pants do you want me to try to reinforce?", cid)
             talkState[talkUser] = 2
 
-        elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") or msgcontains(msg, "ola") then
-            selfSay("Ola! Diga {reforco} para vermos quais calcas podemos aprimorar.", cid)
+        elseif msgcontains(msg, "hi") or msgcontains(msg, "oi") or msgcontains(msg, "ola") or msgcontains(msg, "hello") then
+            selfSay("Hello! Say {reinforce} to see which pants we can enhance.", cid)
 
-        elseif msgcontains(msg, "tchau") or msgcontains(msg, "bye") then
-            selfSay("Ate mais! Volte quando precisar de armaduras mais resistentes.", cid)
+        elseif msgcontains(msg, "tchau") or msgcontains(msg, "bye") or msgcontains(msg, "farewell") then
+            selfSay("Farewell! Come back whenever you need sturdier armor.", cid)
             talkState[talkUser] = 0
             npcHandler:releaseFocus(cid)
         end
@@ -239,21 +241,21 @@ function creatureSayCallback(cid, type, msg)
         local idx, pant = findPantsByName(msg)
 
         if not pant then
-            selfSay("Nao reconheco essa calca. Digite o nome correto da peca.", cid)
+            selfSay("I do not recognize those pants. Please type the correct name of the piece.", cid)
             return true
         end
 
         -- Verifica se tem a calça
         local count = getPlayerItemCount(cid, pant.itemId)
         if count <= 0 then
-            selfSay("Voce nao possui " .. pant.name .. " no inventario.", cid)
+            selfSay("You do not have " .. pant.name .. " in your inventory.", cid)
             talkState[talkUser] = 1
             return true
         end
 
         -- Verifica se tem mais de 1
         if count > 1 then
-            selfSay("Voce tem " .. count .. " " .. pant.name .. ". Guarde as outras, so aceito uma por vez.", cid)
+            selfSay("You have " .. count .. " " .. pant.name .. ". Store the others, I only take one at a time.", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -261,7 +263,7 @@ function creatureSayCallback(cid, type, msg)
         -- Pega o item e le o tier direto dele
         local pantItem = getPlayerItemById(cid, true, pant.itemId)
         if not pantItem or not pantItem.uid then
-            selfSay("Erro ao localizar a calca.", cid)
+            selfSay("Error locating the pants.", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -269,7 +271,7 @@ function creatureSayCallback(cid, type, msg)
         local currentTier = getItemTier(pantItem.uid)
 
         if currentTier >= MAX_TIER then
-            selfSay("Essa calca ja atingiu o Tier maximo possivel!", cid)
+            selfSay("These pants have already reached the maximum possible Tier!", cid)
             talkState[talkUser] = 1
             return true
         end
@@ -284,7 +286,7 @@ function creatureSayCallback(cid, type, msg)
         setPlayerStorageValue(cid, CONVO_BASE + 3, cost)
         setPlayerStorageValue(cid, CONVO_BASE + 4, idx)
 
-        selfSay("Reforcar sua " .. pant.name .. " (Tier " .. currentTier .. " -> " .. nextTier .. ") custara " .. doNumberFormat(cost) .. " gold. Se falhar, ela se rompera e sera perdida. Confirma o processo? {sim} ou {nao}", cid)
+        selfSay("Reinforcing your " .. pant.name .. " (Tier " .. currentTier .. " -> " .. nextTier .. ") will cost " .. doNumberFormat(cost) .. " gold. If it fails, they will rupture and be lost. Confirm the process? {yes} or {no}", cid)
         talkState[talkUser] = 3
 
     -- ============================================================
@@ -300,7 +302,7 @@ function creatureSayCallback(cid, type, msg)
 
             -- Verifica gold
             if getPlayerMoney(cid) < cost then
-                selfSay("Voce precisa de " .. doNumberFormat(cost) .. " gold para realizar o reforco.", cid)
+                selfSay("You need " .. doNumberFormat(cost) .. " gold to perform the reinforcement.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -309,13 +311,13 @@ function creatureSayCallback(cid, type, msg)
             -- Verifica se ainda tem a calça (1 única)
             local count = getPlayerItemCount(cid, itemId)
             if count <= 0 then
-                selfSay("Voce nao tem mais a calca no inventario!", cid)
+                selfSay("You no longer have the pants in your inventory!", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
             end
             if count > 1 then
-                selfSay("Voce tem mais de uma calca. Fique apenas com uma.", cid)
+                selfSay("You have more than one pair of pants. Keep only one.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -324,7 +326,7 @@ function creatureSayCallback(cid, type, msg)
             -- Pega o item e le o tier real
             local pantItem = getPlayerItemById(cid, true, itemId)
             if not pantItem or not pantItem.uid then
-                selfSay("Erro ao localizar o item.", cid)
+                selfSay("Error locating the item.", cid)
                 talkState[talkUser] = 1
                 setPlayerStorageValue(cid, CONVO_BASE, 0)
                 return true
@@ -351,7 +353,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "set," .. clientId .. "," .. newTier)
 
                 doSendMagicEffect(getCreaturePosition(cid), 200)
-                selfSay("Excelente trabalho! A solda e o reforco das placas aguentaram perfeitamente! Sua " .. pant.name .. " is now Tier " .. newTier .. "!", cid)
+                selfSay("Excellent work! The welding and plate reinforcement held up flawlessly! Your " .. pant.name .. " is now Tier " .. newTier .. "!", cid)
             else
                 -- FALHA - destroi a calça
                 doRemoveItem(pantItem.uid, 1)
@@ -361,7 +363,7 @@ function creatureSayCallback(cid, type, msg)
                 doSendPlayerExtendedOpcode(cid, TIER_OPCODE, "clear," .. clientId)
 
                 doSendMagicEffect(getCreaturePosition(cid), 201)
-                selfSay("Droga! A estrutura nao aguentou a pressao do forjamento e o tecido se despedacou... Sua " .. pant.name .. " foi destruida no processo. Sinto muito!", cid)
+                selfSay("Damn it! The structure could not withstand the forging pressure and the fabric shattered... Your " .. pant.name .. " was destroyed in the process. I am truly sorry!", cid)
             end
 
             -- Limpa conversa
@@ -371,7 +373,7 @@ function creatureSayCallback(cid, type, msg)
             end
 
         elseif msgcontains(msg, "no") or msgcontains(msg, "no") then
-            selfSay("Understood. Prudencia e sempre uma boa escolha quando se trata de itens de valor.", cid)
+            selfSay("Understood. Prudence is always a wise choice when dealing with valuable items.", cid)
             talkState[talkUser] = 1
             setPlayerStorageValue(cid, CONVO_BASE, 0)
         end

@@ -80,10 +80,10 @@ if(NpcHandler == nil) then
     shopItems = nil, -- They must be here since ShopModule uses "static" functions
     messages = {
       -- These are the default replies of all npcs. They can/should be changed individually for each npc.
-      [MESSAGE_GREET]   = 'Bem-vindo, |PLAYERNAME|! Eu estava esperando por voc�. Deseja ver minhas {ofertas}?',
-      [MESSAGE_FAREWELL]   = 'Adeus, |PLAYERNAME|!',
+      [MESSAGE_GREET]   = 'Welcome, |PLAYERNAME|! I have been expecting you. Do you want to see my {offers}?',
+      [MESSAGE_FAREWELL]   = 'Farewell, |PLAYERNAME|!',
       [MESSAGE_BUY]     = 'Do you want to buy |ITEMCOUNT| |ITEMNAME| for |TOTALCOST| gold coins?',
-      [MESSAGE_ONBUY]   = 'Foi um prazer negociar com voc�.',
+      [MESSAGE_ONBUY]   = 'It was a pleasure doing business with you.',
       [MESSAGE_BOUGHT]   = 'Bought |ITEMCOUNT|x |ITEMNAME| for |TOTALCOST| gold.',
       [MESSAGE_SELL]     = 'Do you want to sell |ITEMCOUNT| |ITEMNAME| for |TOTALCOST| gold coins?',
       [MESSAGE_ONSELL]   = 'Thank you for this |ITEMNAME|, |PLAYERNAME|.',
@@ -94,13 +94,13 @@ if(NpcHandler == nil) then
       [MESSAGE_NEEDITEM]  = 'You do not have this object.',
       [MESSAGE_NEEDSPACE]  = 'You do not have enough capacity.',
       [MESSAGE_NEEDMORESPACE]  = 'You do not have enough capacity for all items.',
-      [MESSAGE_IDLETIMEOUT]   = 'Pr�ximo, por favor!',
-      [MESSAGE_WALKAWAY]   = 'Que rude!',
+      [MESSAGE_IDLETIMEOUT]   = 'Next, please!',
+      [MESSAGE_WALKAWAY]   = 'How rude!',
       [MESSAGE_DECLINE]  = 'Not good enough, is it... ?',
-      [MESSAGE_SENDTRADE]  = 'Aqui est� minha oferta, |PLAYERNAME|. Gosta do que v�?',
+      [MESSAGE_SENDTRADE]  = 'Here is my offer, |PLAYERNAME|. Do you like what you see?',
       [MESSAGE_NOSHOP]  = 'Sorry, I\'m not offering anything.',
-      [MESSAGE_ONCLOSESHOP]  = 'Obrigado, volte quando estiver interessado em mais.',
-      [MESSAGE_ALREADYFOCUSED]= '|PLAYERNAME|! Eu j� estou falando com voc�...',
+      [MESSAGE_ONCLOSESHOP]  = 'Thank you, come back when you are interested in more.',
+      [MESSAGE_ALREADYFOCUSED]= '|PLAYERNAME|! I am already talking to you...',
       [MESSAGE_PLACEDINQUEUE] = '|PLAYERNAME|, please wait for your turn. There are |QUEUESIZE| customers before you.'
     }
   }
@@ -238,7 +238,7 @@ if(NpcHandler == nil) then
   end
 
   -- Calls the callback function represented by id for all modules added to this npchandler with the given arguments.
-  -- ATENCAO: o `arg` implicito (Lua 5.1) NAO existe no LuaJIT — sem esta linha, o
+  -- ATENCAO: o `arg` implicito (Lua 5.1) NAO existe no LuaJIT â sem esta linha, o
   -- unpack(arg) abaixo crashava toda compra/venda de NPC no server (LuaJIT).
   function NpcHandler:processModuleCallback(id, ...)
     local arg = {...}

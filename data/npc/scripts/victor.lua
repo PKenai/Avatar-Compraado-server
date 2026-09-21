@@ -16,8 +16,8 @@ local NEEDED = 1000
 local REWARD_ITEM = 2152
 local REWARD_COUNT = 100
 local REWARD_EXP = 500000
-local QUEST_NAME = "A Selva das Oncas"
-local MISSION_NAME = "Caçar as Onças"
+local QUEST_NAME = "The Jungle of Jaguars"
+local MISSION_NAME = "Hunt the Jaguars"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1

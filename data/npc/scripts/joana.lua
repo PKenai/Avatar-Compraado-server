@@ -24,8 +24,8 @@ local PROGRESS_STORAGE = 49241
 local URSOS_NEEDED = 150
 local REWARD_ITEM = 12901
 local REWARD_COUNT = 1
-local QUEST_NAME = "Invasão dos Ursos"
-local MISSION_NAME = "Eliminar ursos ferozes"
+local QUEST_NAME = "Invasion of the Bears"
+local MISSION_NAME = "Eliminate the fierce bears"
 
 local function questStarted(cid)
     return getPlayerStorageValue(cid, STATUS_STORAGE) >= 1
@@ -108,7 +108,7 @@ function creatureSayCallback(cid, type, msg)
     if talkState[talkUser] == 1 then
         if msgcontains(msg, "yes") or msgcontains(msg, "yes") then
             if completed then
-                selfSay("You already salvou a minha casa dos ursos. Thank you pela ajuda!", cid)
+                selfSay("You already saved my house from the bears. Thank you for the help!", cid)
             elseif started then
                 if progress >= URSOS_NEEDED then
                     selfSay("You hunted the 150 fierce bears! Want to receive your gift?", cid)
@@ -120,7 +120,7 @@ function creatureSayCallback(cid, type, msg)
                 selfSay("Great! Go there, hunt 150 fierce bears and then come back here to receive your gift!", cid)
                 startQuest(cid)
             end
-        elseif msgcontains(msg, "urso") or msgcontains(msg, "invadir") or msgcontains(msg, "invasa") or msgcontains(msg, "home") or msgcontains(msg, "help") or msgcontains(msg, "caca") then
+        elseif msgcontains(msg, "bear") or msgcontains(msg, "invade") or msgcontains(msg, "invasion") or msgcontains(msg, "home") or msgcontains(msg, "help") or msgcontains(msg, "hunt") then
             if started and not completed then
                 selfSay("It's not over yet! Still need " .. (URSOS_NEEDED - progress) .. " fierce bears to end this invasion.", cid)
             else
@@ -136,7 +136,7 @@ function creatureSayCallback(cid, type, msg)
             selfSay("Here is your gift! With 150 fierce bears defeated, you are now officially a {Bear Hugger}! Thank you for saving my house!", cid)
             talkState[talkUser] = 1
         else
-            selfSay("Alright, volte quando quiser receber seu presente.", cid)
+            selfSay("Alright, come back whenever you want to get your gift.", cid)
             talkState[talkUser] = 1
         end
     end

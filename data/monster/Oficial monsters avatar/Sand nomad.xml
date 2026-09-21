@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Sand nomad" nameDescription="a Sand nomad" race="undead" experience="32000" speed="400" manacost="0">
+	<health now="45000" max="45000"/>
+	<look type="1372" corpse="18160"/>
+	<script>
+<event name="mobsKill"/>
+</script>
+	<targetchange interval="3000" chance="20"/>
+	<strategy attack="100" defense="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="1"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="200" attack="240"/>
+		<attack name="physical" interval="2300" chance="30" range="1" min="-450" max="-620"/>
+		<attack name="earth" interval="2500" chance="25" range="7" min="-550" max="-760"/>
+		<!-- Earth Pull: mesma dobra do Guardian Beetle - puxa o alvo para perto
+		     e prende ele no chao (o dano vem deste min/max).
+		     Ritmo: Monster::doAttacking so rola a chance de uma spell nas janelas do
+		     proprio interval dela, dentro de um "ciclo" que dura o maior interval
+		     do monstro. Com 5000 esta spell passa a definir o ciclo (5s) e cai em
+		     uma unica janela: 10% a cada 5 segundos, ~1 conjuracao a cada 50s.
+		     O visual dela e' a pedra que voa do scarab ate o alvo (pull.lua). -->
+		<attack name="earth pull" interval="3000" chance="20" range="6" min="-390" max="-540"/>
+		<attack name="Sacred Sandstorm" interval="4000" chance="20" range="6" min="-250" max="-400"/>
+	</attacks>
+	<defenses armor="130" defense="95"/>
+	<elements>
+		<element earthPercent="20"/>
+		<element physicalPercent="15"/>
+		<element firePercent="-20"/>
+		<element icePercent="-10"/>
+	</elements>
+	<loot>
+		<item id="2148" countmax="2300" chance="100000"/><!-- gold coins -->
+	</loot>
+	<voices interval="5000" chance="10">
+		<voice sentence="We need treasures!" yell="0"/>
+	</voices>
+</monster>
