@@ -14,6 +14,9 @@ Segunda etapa. Este documento existe para provar (ou derrubar) a fórmula propos
 > `core` de formato alvo: fogo 278 · ar 252 · terra 239 · água 226). Onde este
 > documento fala em "paridade" (§2.1, §5 e §10.1), leia "hierarquia por papel"; a
 > matriz de PvP do §5 precisa ser refeita.
+>
+> **v3:** a contagem de aplicações por cast (§3) estava incompleta — as magias de
+> vários golpes fora da tabela do §3 over-deliveravam (ver §15 da auditoria).
 
 Ferramentas usadas (fora do servidor, em `/tmp`): `spellmod.pl` (carrega as 74 magias de dano + cooldowns reais + `echo`), `valida2.pl` (simulador de rotação), `monatk.pl` (extrai ataque/resistências das 96 criaturas), `tabela_magias.md` (tabela completa).
 
@@ -184,6 +187,13 @@ Fora essas, **todas** as magias caem 44–85% — é a correção de escala prev
 ## 3. MULTI-HIT E ZONA
 
 **Regra validada:** o cast inteiro (soma de todas as aplicações que caem no mesmo alvo) = orçamento da classe.
+
+> **Correção v3 (ver `AUDITORIA_BALANCEAMENTO.md` §15):** esta tabela cobre só as
+> magias **contadas aqui**. As que não estão nela rodaram com `apps = 1` e
+> entregaram N× o orçamento — `air fan` (15 aplicações) dava ~6.600 num cast no
+> L100, com o alvo marcado em 440. A contagem por magia agora vive em
+> `%APPLICATIONS` (`tools/spell_balance_report.pl`), que é a fonte única do
+> número de golpes por cast usada pelo emissor de `atk`.
 
 | magia | voc | lvl | CD | classe | aplic. | total atual | total proposto | var | por aplic. | DPS proposto |
 |---|---|---|---|---|---|---|---|---|---|---|

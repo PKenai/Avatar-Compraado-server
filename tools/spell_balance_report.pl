@@ -120,19 +120,44 @@ sub class_name {
 }
 
 # Aplicacoes que caem no MESMO alvo em um cast (zonas/DoT/multi-hit). Conferido
-# em VALIDACAO_BALANCEAMENTO.md secao 3; fora desta lista = 1 aplicacao.
+# em VALIDACAO_BALANCEAMENTO.md secao 3 e, no v3, recontado linha a linha nos
+# scripts (ver AUDITORIA secao 15); fora desta lista = 1 aplicacao.
+#
+# E' ESTE numero que impede a magia de varios golpes de apagar o alvo: o alvo do
+# modelo (CLASSE x AREA) e' o total do CAST, entao cada aplicacao vale alvo/N.
+# Contagem = pior caso de um alvo parado dentro da area (limite superior dos
+# loops do script). Se subestimar, a magia fica forte demais.
 # air gale / earth growth: a onda passa por cada tile uma vez, entao um alvo
 # parado toma UM golpe (as "3 trilhas x 4 passos" sao tiles, nao hits no alvo).
+# PENDENTE de contagem (nunca contados linha a linha): air stormcall, air doom,
+# air bomb, earth quake, earth cataclysm, earth fists, earth lavaball,
+# earth leech, fire conflagration, fire thunderbolt, fire meteor, fire striker,
+# fire cannon, fire explosion, water clock, water bloodbending, water shards,
+# water dragon, water tsunami, air suffocation, air trap. Enquanto nao entram
+# aqui (ou enquanto o numero estiver subestimado) o total do cast passa do
+# orcamento da classe -- foi o caso de air fan/air wings, que rodavam com 1.
 my %APPLICATIONS = (
     'air vortex'        => 32,
+    'air fan'           => 15,  # sequencia = 15 pulsos de area (fan.lua:97)
+    'air deflection'    => 15,  # for i = 0, 14 (deflection.lua:101)
+    'air tempest'       => 11,  # for x = 0, 10 (tempest.lua:110)
+    'air wings'         => 10,  # combats = {1..10} (wings.lua:179)
     'water blizzard'    => 10,
-    'earth crush'       => 3,
+    'air windstorm'     => 9,   # for i = 0, 8 (windstorm.lua:87)
+    'water flow'        => 9,   # for i = 0, 8 (flow.lua:135)
+    'fire discharge'    => 12,
+    'air hurricane'     => 6,   # for x = 0, 5 (hurricane.lua:132)
+    'water punch'       => 6,   # doCombat + for i = 1, 5 (punch.lua:52)
+    'fire thunderstorm' => 6,
+    'earth aura'        => 6,   # 26 pulsos, dano a cada 4 -> 6 ticks (aura.lua:169)
+    'fire star'         => 8,
+    'air gust'          => 4,   # for x = 0, 3 (gust.lua:116)
+    'air tornado'       => 4,   # tornadoWork(3) -> times 3,2,1,0 (tornado.lua:60)
     'fire cinder'       => 4,
     'water rain'        => 4,
-    'earth aura'        => 7,
-    'fire discharge'    => 12,
-    'fire thunderstorm' => 6,
-    'fire star'         => 8,
+    'earth crush'       => 3,
+    'air burst'         => 2,   # for x = 0, 1 (burst.lua:98)
+    'air ball'          => 2,   # doCombat imediato + addEvent 250ms (ball.lua:57)
     'air gale'          => 1,
     'earth growth'      => 1,
 );
@@ -992,6 +1017,16 @@ sub main {
     }
 
     if (opt('emit')) {
+        # O emissor v1 (--emit sem --model) e' por APLICACAO, nao por CAST: ele
+        # calibra para UMA aplicacao valer o alvo, entao magia de N golpes sai N
+        # vezes o orcamento -- foi assim que air fan (15x) e air wings (10x)
+        # viraram one-shot, ver AUDITORIA secao 15. Fica desligado para nao
+        # reabrir a ferida; a calibracao oficial e' o --model.
+        if (!opt('model') && !opt('bar')) {
+            die "--emit sem --model esta' desligado (calibrava por aplicacao, nao\n"
+              . "por cast: magia de varios golpes saia N x o orcamento).\n"
+              . "Use: perl tools/spell_balance_report.pl --model --emit --level 100 --mag 48 --apply\n";
+        }
         return opt('model') ? emit_model(\@rows) : emit_atk(\@rows);
     }
 

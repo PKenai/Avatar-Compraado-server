@@ -777,3 +777,87 @@ exatamente como a validação aprovou.
 5. P1 (mana do char novo), P11 (drown/air sem resistência em criatura), P12 (teto de CDR), P16 (atks congelados de passivas), P17 (`increasemagicpercent` sem teto).
 6. `water whip` — chave de `atk` **compartilhada** por dois scripts (`water/whip.lua`, a dobra da spellbar, e `water/whip man.lua`); ficou em 118 e está marcada em `%MODEL_SKIP` no emissor até o atalho ser desmembrado.
 7. Spells com `atk` que não passa pela tabela (`water/whip.lua` não multiplica por `cf.atk` no callback) ficam fora do alcance do emissor — precisam de ajuste no próprio script.
+8. **Contagem de aplicações das magias de vários golpes** (v3, correção da §15): as que ainda não foram contadas linha a linha podem entregar mais de um orçamento por cast. Lista em `%APPLICATIONS` (`tools/spell_balance_report.pl`).
+
+---
+
+## 15. Correção v3 — magias de vários golpes (aplicações por cast)
+
+**Sintoma (relato em jogo):** `air fan`, `air wings` e outras magias de golpe
+múltiplo **matam rápido demais**, com números por golpe baixos (30/35/29 no log).
+
+**Causa:** o modelo v2 calibra o `atk` para o **total do cast** — o alvo da classe
+e' dividido pelo numero de aplicacoes que caem no mesmo alvo (`emit_model`:
+`$measured = $r->{dmg} * $apps`, `$apps = $r->{hits} // 1`, e `hits` vem de
+`%APPLICATIONS`). Só que a tabela `%APPLICATIONS` só tinha as magias contadas na
+validação (§3 dela). **`air fan` e `air wings` não estavam lá: rodaram com
+`apps = 1`.** Resultado medido pelo próprio emissor:
+
+| magia | cd | aplicações reais | aplicações usadas | total do cast (alvo bruto) |
+|---|---|---|---|---|
+| `air fan` | 30 s | **15** | 1 | **4.326** contra alvo **288** (15×) |
+| `air wings` | 14 s | **10** | 1 | **1.647** contra alvo **165** (10×) |
+| `air deflection` | 90 s | **15** | 1 | **5.372** contra alvo **358** |
+| `air tempest` | 25 s | **11** | 1 | **2.839** contra alvo **258** |
+| `air windstorm` | 45 s | **9** | 1 | **2.048** contra alvo **228** |
+| `water flow` | 30 s | **9** | 1 | **2.054** contra alvo **228** |
+| `water punch` | 10 s | **6** | 1 | **695** contra alvo **116** |
+
+E' por isso que os números do log são baixos e mesmo assim a barra de vida
+some: **o dano não está no tamanho do golpe, está na quantidade deles.** Com 15
+aplicações de 440 (L100, bend 48) o `air fan` entrega ~6.600 num único cast —
+que é exatamente o "quase 6k de vida" do relato (o alvo ainda reduz cada golpe
+individualmente, o que explica os 30–64 por linha).
+
+**Contagem (linha do script, pior caso de um alvo parado na área):**
+
+| magia | aplicações | evidência |
+|---|---|---|
+| `air vortex` | 32 | `for y = 0, 15` × 2 `sendCombat` (`vortex.lua:161`) |
+| `air fan` | 15 | `sequencia` tem 15 pulsos de área (`fan.lua:97`) |
+| `air deflection` | 15 | `for i = 0, 14` (`deflection.lua:101`) |
+| `air tempest` | 11 | `for x = 0, 10` (`tempest.lua:110`) |
+| `air wings` | 10 | `combats = {1..10}`, `for x = 0, #combats-1` (`wings.lua:179`) |
+| `air windstorm` | 9 | `for i = 0, 8` (`windstorm.lua:87`) |
+| `water flow` | 9 | `for i = 0, 8` (`flow.lua:135`) |
+| `air hurricane` | 6 | `for x = 0, 5` (`hurricane.lua:132`) |
+| `water punch` | 6 | `doCombat` imediato + `for i = 1, 5` (`punch.lua:52`) |
+| `earth aura` | 6 | 26 pulsos com `times % 4 == 0` → 6 ticks (`aura.lua:169`) |
+| `air gust` | 4 | `for x = 0, 3` (`gust.lua:116`) |
+| `air tornado` | 4 | `tornadoWork(…,3)` → `times` 3,2,1,0 (`tornado.lua:60`) |
+| `air ball` | 2 | `doCombat` imediato + `addEvent` 250 ms (`ball.lua:57`) |
+| `air burst` | 2 | `for x = 0, 1` (`burst.lua:98`) |
+
+**O que foi feito:** os números entraram em `%APPLICATIONS`
+(`tools/spell_balance_report.pl`) e o `atk` das 13 magias afetadas foi reemitido
+(`--model --emit --level 100 --mag 48 --apply`). Exemplos: `air fan` 259 → **17**,
+`air deflection` 358 → **24**, `air tempest` 242 → **22**, `air windstorm`
+159 → **18**, `water flow` 135 → **15**, `air wings` 111 → **11**, `water punch`
+154 → **26**, `earth aura` 13 → **15**. Depois da correção, **o total do cast**
+(L100 / bend 48) caiu na classe certa:
+
+| classe | antes | depois | alvo do modelo |
+|---|---|---|---|
+| `core` — `air wings` | 1.647 | **~251** | 250 |
+| `core` — `air hurricane` | 988 | **~253** | 250 |
+| `heavy` — `air fan` | 4.326 | **~434** | 440 (ar) |
+| `heavy` — `air tempest` | 2.839 | **~389** | 440 |
+| `ult` — `air deflection` | 5.372 | **~545** | 519 (`self`) |
+
+(valores da coluna "depois" são o `dano/cast` do relatório com `--level 100 --mag 48`;
+a fórmula sorteia o midpoint a cada execução, então varia ±1%.)
+
+Validação: `perl tools/_validate_spells_exausted.pl` → "nenhuma vírgula faltando,
+balanceamento íntegro"; `python tools/check_lua_syntax.py` → 0 problemas. O drift
+fora do ponto de referência continua sendo o da §14 (a correção é linear no `atk`).
+
+**Ainda sem contagem (mesmo risco, total do cast acima do orçamento):**
+`air stormcall`, `air bomb`, `air doom`, `air suffocation`, `air trap`,
+`earth quake`, `earth cataclysm`, `earth fists`, `earth lavaball`, `earth leech`,
+`fire conflagration`, `fire thunderbolt`, `fire meteor`, `fire striker`,
+`fire cannon`, `fire explosion`, `water clock`, `water bloodbending`,
+`water shards`, `water dragon`, `water tsunami`. Elas dependem de mecanica
+variavel (bomba com fuse, onda por distancia, worker que recursiona enquanto a
+tabela do cast existe), entao a contagem tem de vir do worker, nao do `for` do
+cast. Enquanto nao entram em `%APPLICATIONS`, cada uma leva o valor 1 e pode
+entregar N vezes o orcamento — e' o proximo item da fila.
