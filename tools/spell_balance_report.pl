@@ -80,6 +80,82 @@ my %SHAPE_FACTOR = (
     self   => 0.75,
 );
 
+# ----------------------------------------------------------------------------
+# MODELO v2 (--model)
+#
+# O alvo deixa de ser a curva teorica antiga (300 + 3*level) e passa a ser o
+# dano FINAL de UM cast em UM alvo:
+#
+#     alvo = (20 + 1.55*(level-1)) * CLASSE[cd] * AREA[shape] * bendFactor(bend)
+#
+# CLASSE sai do cooldown REAL (tabela *Exausted):
+#     filler cd<=3 = 0.40 | core 4-15 = 1.00 | heavy 16-45 = 1.75 | ult >=60 = 2.75
+# AREA = %SHAPE_FACTOR acima. O level da conta e' o do relatorio (--level),
+# porque o atk e' UMA constante por magia e a calibracao e' feita no ponto de
+# referencia (level 100 / bend 48) usado em toda a auditoria.
+#
+# Magia com eco no estagio ELITE tem o alvo multiplicado por 2/3: o eco
+# reaplica a magia valendo metade do golpe base, entao base = 2/3 e eco = 1/3
+# do orcamento da classe (o total do cast continua sendo o orcamento).
+# ----------------------------------------------------------------------------
+my $MODEL_BASE       = 20;
+my $MODEL_PER_LEVEL  = 1.55;
+
+sub model_class {
+    my ($cd) = @_;
+    return undef unless defined $cd && $cd > 0;
+    return 0.40 if $cd <= 3;
+    return 1.00 if $cd <= 15;
+    return 1.75 if $cd <= 45;
+    return 2.75;
+}
+
+sub class_name {
+    my ($cd) = @_;
+    return '?' unless defined $cd && $cd > 0;
+    return 'filler' if $cd <= 3;
+    return 'core'   if $cd <= 15;
+    return 'heavy'  if $cd <= 45;
+    return 'ult';
+}
+
+# Aplicacoes que caem no MESMO alvo em um cast (zonas/DoT/multi-hit). Conferido
+# em VALIDACAO_BALANCEAMENTO.md secao 3; fora desta lista = 1 aplicacao.
+# air gale / earth growth: a onda passa por cada tile uma vez, entao um alvo
+# parado toma UM golpe (as "3 trilhas x 4 passos" sao tiles, nao hits no alvo).
+my %APPLICATIONS = (
+    'air vortex'        => 32,
+    'water blizzard'    => 10,
+    'earth crush'       => 3,
+    'fire cinder'       => 4,
+    'water rain'        => 4,
+    'earth aura'        => 7,
+    'fire discharge'    => 12,
+    'fire thunderstorm' => 6,
+    'fire star'         => 8,
+    'air gale'          => 1,
+    'earth growth'      => 1,
+);
+
+# Magias de alvo unico com eco no estagio ELITE (registerSpellStageEcho no
+# script da magia). Nelas o atk fica 2/3 do orcamento da classe.
+# Chaves que o --model NAO recalibra. `water whip` e' um atalho compartilhado:
+# spellsInfo["water whip"] e' lido por DOIS scripts (water/whip.lua = a dobra
+# "Water Wave" da spellbar e water/whip man.lua) e a dobra da spellbar nao
+# multiplica por esse atk no callback dela -- mexer no numero acertaria uma
+# magia e erraria a outra. Fica como esta' ate' o atalho ser desmembrado
+# (cada script com a sua propria chave em 201-spellsExausted.lua).
+my %MODEL_SKIP = map { $_ => 1 } ('water whip');
+
+my %ECHO_SPELL = map { $_ => 1 } (
+    'air gale', 'air suffocation', 'air windblast',
+    'earth collapse', 'earth control', 'earth fury', 'earth growth',
+    'earth lavaball', 'earth metalwall', 'earth petrify', 'earth pull',
+    'earth punch', 'earth rock', 'earth smash',
+    'fire bomb', 'fire cannon', 'fire clock', 'fire explosion', 'fire skyfall',
+    'water bubbles', 'water cannon', 'water freeze', 'water icebolt', 'water punch',
+);
+
 # Magias que aplicam dano mais de uma vez por cast (DoT, pulsos, ondas,
 # hits divididos, bomba com fuse). Nelas o medidor conta SO' uma aplicacao,
 # entao o reajuste e' conservador: nunca sobe mais que 25%.
@@ -95,19 +171,12 @@ my %MULTI_APPLICATION = map { $_ => 1 } (
 # bonus de +1% por ponto de bend - carregado de data/lib/avatar lib.lua
 my $BEND_PER_POINT = 0.01;
 my %OPT = (level => 100, mag => 50, dobras => 10, only => undef, json => 0, debug => 0,
-           emit => 0, apply => 0, bar => 0);
+           emit => 0, apply => 0, bar => 0, model => 0);
 
 my @ELEMENTS = qw(fire water air earth);
 
 # Golpes por cast das magias multi-hit (o resto e' 1 aplicacao por cast).
-my %HITS_OVERRIDE = (
-    'fire thunderstorm' => 6,     # for j=1,2 x 3 areas
-    'fire star'         => 8,     # a magia divide o dano em 8 hits
-    'air vortex'        => 32,    # 16 pulsos x 2 areas
-    'earth crush'       => 3,     # 3 ondas (4 no elite)
-    'earth growth'      => 9,     # 3 trilhas x 3 sqm
-    'air gale'          => 12,    # 3 trilhas x 4 passos
-);
+my %HITS_OVERRIDE = %APPLICATIONS;   # ver %APPLICATIONS acima
 
 # Magias cujo dano nao passa por remakeValue/remakeAirEarth (portanto ficam de
 # fora do multiplicador por elemento da camada nova).
@@ -122,6 +191,12 @@ my %NO_ELEMENT_FACTOR = map { $_ => 1 } ();
 # vem colado ("firewhip") e aqui as chaves tem espaco ("fire whip"), entao o
 # casamento e' por normalizacao (so' letras e numeros, minusculas).
 # ----------------------------------------------------------------------------
+# Papel de cada vocacao: e' o SPELL_BALANCE do lib, aplicado no fim do dano.
+# Com o modelo v2 a calibracao e' em dano BRUTO, entao esta tabela volta a ser
+# o unico lugar que decide a hierarquia (fogo DPS, ar controle, terra tank,
+# agua healer).
+my %ELEMENT_ROLE;
+
 my %SPELLBAR_KEY;   # elemento -> { chave => 1 }
 my %SPELLBAR_NORM;  # elemento -> { nome-normalizado => chave }
 
@@ -216,11 +291,13 @@ sub load_balance {
             $table{$el} = $1 + 0 if $block =~ /\b$el\b\s*=\s*([\d.]+)/;
         }
     }
+    %ELEMENT_ROLE = %table;
     return \%table;
 }
 
-# O bend e' um multiplicador por ponto (SPELL_BALANCE_BEND_PER_POINT: hoje 4%,
-# ou seja x3.0 em bend 50), aplicado dentro de remakeValue/remakeAirEarth
+# O bend e' um multiplicador aplicado dentro de remakeValue/remakeAirEarth.
+# MODELO ANTIGO: linear, +4% por ponto (x3.00 em bend 50). Fica registrado
+# porque o relatorio antigo citava o numero.
 # (data/lib/avatar lib.lua). O valor e' lido do proprio arquivo para o relatorio
 # nao mentir se alguem mexer no numero.
 sub load_bend_per_point {
@@ -228,6 +305,22 @@ sub load_bend_per_point {
     my $txt = read_file($BALANCE_LIB);
     return $1 + 0 if $txt =~ /SPELL_BALANCE_BEND_PER_POINT\s*=\s*([\d.]+)/;
     return 0.01;
+}
+
+# MODELO v2: o bend virou retorno decrescente --  bendFactor(b) = 1 + g*b/(b+h)
+# (era 1 + 0.04*b, linear). Os dois numeros sao lidos do proprio lib.
+my ($BEND_GAIN, $BEND_HALF) = (1.2, 80);
+sub load_bend_model {
+    return unless -f $BALANCE_LIB;
+    my $txt = read_file($BALANCE_LIB);
+    $BEND_GAIN = $1 + 0 if $txt =~ /SPELL_BALANCE_BEND_GAIN\s*=\s*([\d.]+)/;
+    $BEND_HALF = $1 + 0 if $txt =~ /SPELL_BALANCE_BEND_HALF\s*=\s*([\d.]+)/;
+}
+
+sub bend_factor {
+    my ($b) = @_;
+    $b = 0 unless defined $b && $b > 0;
+    return 1 + ($BEND_GAIN * $b / ($b + $BEND_HALF));
 }
 
 # Correcao por level (SPELL_BALANCE_LEVEL_GROWTH): cada elemento tem
@@ -589,7 +682,13 @@ sub measure_script {
     }
     return undef unless @values;
     my ($max) = sort { $b <=> $a } @values;
-    my ($cd_key) = $lua =~ /\b(?:fire|water|air|earth)Exausted\.(\w+)/;
+    # cooldown: guarda TODOS os `*Exausted.X` do script (em ordem). O primeiro
+    # match do texto nem sempre e' o cooldown da magia (ex: `fireExausted.field`
+    # num helper interno), e o nome pode vir em camelCase (iceBeam, bloodBending)
+    # enquanto a tabela usa minusculas. Quem escolhe e' o main, testando cada um
+    # contra a tabela do elemento.
+    my @cd_keys = $lua =~ /\b(?:fire|water|air|earth)Exausted\.(\w+)/g;
+    my ($cd_key) = @cd_keys ? $cd_keys[0] : ();
     my $combats = () = $lua =~ /\b(?:doCombat|doTargetCombatHealth|doAreaCombatHealth)\s*\(/g;
     return {
         key     => $key,
@@ -599,6 +698,7 @@ sub measure_script {
         hits    => ($HITS_OVERRIDE{$key // ''} // 1),
         failed  => $failed,
         cd_key  => $cd_key,
+        cd_keys => [@cd_keys],
         combats => $combats,
         remake  => ($lua =~ /remakeValue|remakeAirEarth/) ? 1 : 0,
     };
@@ -619,6 +719,7 @@ sub parse_args {
         elsif ($arg eq '--json') { $OPT{json} = 1; }
         elsif ($arg eq '--debug') { $OPT{debug} = 2; }
         elsif ($arg eq '--bar') { $OPT{bar} = 1; }
+        elsif ($arg eq '--model') { $OPT{model} = 1; }
         elsif ($arg eq '--emit') { $OPT{emit} = 1; }
         elsif ($arg eq '--apply') { $OPT{apply} = 1; }
         else { die "opcao desconhecida: $arg\n"; }
@@ -737,6 +838,88 @@ sub emit_atk {
     return 0;
 }
 
+# ----------------------------------------------------------------------------
+# --model --emit --apply: recalibra o atk de TODAS as magias contra o alvo do
+# modelo v2 (CLASSE do cooldown x AREA do formato), no ponto de referencia
+# --level / --mag. Como o atk entra de forma linear no dano, uma passada basta.
+# ----------------------------------------------------------------------------
+sub emit_model {
+    my ($rows) = @_;
+    my $txt = read_file($SPELLS_INFO);
+    my @report;
+    my @changes;
+    my %done;
+    my $bendf = bend_factor(opt('mag'));
+
+    for my $r (sort { ($a->{element} cmp $b->{element}) || ($a->{level} <=> $b->{level}) } @$rows) {
+        my $key = $r->{key};
+        next unless defined $key && defined $r->{atk};
+        next if $done{$key}++;
+        if ($MODEL_SKIP{$key}) {
+            push @report, sprintf('  %-24s %-6s lvl %3d  atalho de atk compartilhado -> mantido em atk %d',
+                $key, $r->{element}, $r->{level}, $r->{atk});
+            next;
+        }
+        my $shape = $SHAPE_FACTOR{$r->{shape} // 'target'} // 0.8;
+        my $cls   = model_class($r->{cd});
+        my $apps  = $r->{hits} // 1;
+        $apps = 1 if $apps < 1;
+        my $echo  = $ECHO_SPELL{$key} ? 1 : 0;
+        if (!defined $cls) {
+            push @report, sprintf('  %-24s %-6s lvl %3d  SEM CD na tabela *Exausted -> ficou fora do modelo',
+                $key, $r->{element}, $r->{level});
+            next;
+        }
+        # Alvo em dano BRUTO (antes do fator de elemento, do bend e da curva).
+        # E' de proposito: quem decide a HIERARQUIA entre as vocacoes e' o
+        # SPELL_BALANCE do lib (fogo DPS, ar controle, terra tank, agua healer),
+        # e o emissor nao pode cancelar isso -- se o alvo fosse em dano FINAL,
+        # ele dividiria pelo fator de cada elemento e as quatro voltariam a
+        # bater igual (era o que acontecia antes).
+        my $target = ($MODEL_BASE + $MODEL_PER_LEVEL * (opt('level') - 1)) * $cls * $shape;
+        $target *= (2 / 3) if $echo;
+        my $measured = $r->{dmg} * $apps;
+        next unless $measured > 0;
+        my $new = int(($r->{atk} * $target / $measured) + 0.5);
+        $new = 1 if $new < 1;
+        push @report, sprintf(
+            '  %-24s %-6s lvl %3d  cd %4.0f %-6s area %-6s %2dx eco %d  atk %5d -> %5d   (alvo bruto %7.0f, medido bruto %7.0f)',
+            $key, $r->{element}, $r->{level}, $r->{cd}, class_name($r->{cd}),
+            ($r->{shape} // 'target'), $apps, $echo, $r->{atk}, $new, $target, $measured);
+        push @changes, { key => $key, old => $r->{atk}, new => $new };
+    }
+
+    print "atk proposto pelo MODELO v2 (alvo BRUTO = (20 + 1.55*(level-1)) * CLASSE * AREA, antes do fator de elemento):\n";
+    print "level de referencia ", opt('level'), ' | bend ', opt('mag'), sprintf(' (x%.2f no relatorio; o atk nao leva o bend)', $bendf), '\n';
+    printf "hierarquia por elemento (SPELL_BALANCE do lib, aplicada DEPOIS do atk): %s\n",
+        join('  ', map { sprintf('%s x%.2f', $_, $ELEMENT_ROLE{$_}) } @ELEMENTS);
+    print join("\n", @report), "\n\n";
+    printf "%d magias com atk recalibrado.\n", scalar(@changes);
+
+    if (!opt('apply')) {
+        print "\n(rode com --apply para gravar em data/lib/201-spellsExausted.lua)\n";
+        return 0;
+    }
+
+    my $applied = 0;
+    for my $ch (@changes) {
+        my $key = quotemeta($ch->{key});
+        my $re = qr/(\["$key"\]\s*=\s*\{[^}]*?\batk\s*=\s*)$ch->{old}\b/;
+        if ($txt =~ $re) {
+            $txt =~ s/$re/$1$ch->{new}/;
+            $applied++;
+        } else {
+            warn "nao achei a entrada de $ch->{key} (atk $ch->{old}) em 201-spellsExausted.lua\n";
+        }
+    }
+    my $fh;
+    open($fh, '>:encoding(UTF-8)', $SPELLS_INFO) or die "nao consegui gravar $SPELLS_INFO: $!";
+    print $fh $txt;
+    close($fh);
+    printf "%d entradas de atk gravadas em data/lib/201-spellsExausted.lua\n", $applied;
+    return 0;
+}
+
 sub main {
     parse_args(@ARGV);
 
@@ -745,6 +928,7 @@ sub main {
     my $growth   = load_level_growth();
     my ($growth_base, $growth_cap) = load_level_growth_window();
     $BEND_PER_POINT = load_bend_per_point();
+    load_bend_model();
     my $level_curve = load_level_curve();
     my $exausted = load_exausted();
     if (opt('bar')) {
@@ -774,9 +958,17 @@ sub main {
         next if opt('bar') && !in_spellbar($entry->{element}, $got->{key});
         my $factor = $NO_ELEMENT_FACTOR{$got->{key} // ''} ? 1 : $balance->{$entry->{element}};
         my %row = (%$entry, %$got);
-        # o cooldown de verdade e' o da tabela *Exausted (e' ele que vai pro client)
-        if (defined $got->{cd_key} && defined $exausted->{$entry->{element}}{$got->{cd_key}}) {
-            $row{cd} = $exausted->{$entry->{element}}{$got->{cd_key}};
+        # o cooldown de verdade e' o da tabela *Exausted (e' ele que vai pro client).
+        # Varre TODOS os `*Exausted.X` do script e fica com o primeiro que existe
+        # na tabela do elemento (minusculas: iceBeam -> icebeam).
+        my $el_cd = $exausted->{$entry->{element}} // {};
+        for my $ck (@{$got->{cd_keys} // []}) {
+            my $ckey = lc($ck);
+            if (defined $el_cd->{$ckey}) {
+                $row{cd} = $el_cd->{$ckey};
+                $row{cd_key} = $ckey;
+                last;
+            }
         }
         # Correcao por level do elemento: vale para qualquer magia do elemento
         # que passe por applySpellBalance (mesma conta do getElementLevelScaling).
@@ -784,7 +976,8 @@ sub main {
                                          $growth_base, $growth_cap);
         # So' leva o bonus de bend quem chama remakeValue/remakeAirEarth, que
         # e' o caso de toda magia de dano de player (ver measure_script).
-        my $bend = $got->{remake} ? 1 + ($BEND_PER_POINT * opt('mag')) : 1;
+        # MODELO v2: bend com retorno decrescente (era 1 + 0.01*bend)
+        my $bend = $got->{remake} ? bend_factor(opt('mag')) : 1;
         # Correcao da curva de level: e' ela que faz a MEDIA do servidor seguir
         # a meta por level (mesma conta do getSpellLevelCurve no lib).
         my $curve = $got->{remake} ? curve_factor($level_curve, opt('level')) : 1;
@@ -799,7 +992,7 @@ sub main {
     }
 
     if (opt('emit')) {
-        return emit_atk(\@rows);
+        return opt('model') ? emit_model(\@rows) : emit_atk(\@rows);
     }
 
     if (opt('json')) {
@@ -819,9 +1012,9 @@ sub main {
 
     my $factors = join('  ', map { sprintf('%s=%.3f', $_, $balance->{$_}) } @ELEMENTS);
     print '=' x 104, "\n";
-    printf "SPELL BALANCE REPORT | level %d | bend(mag) %d | dobras %d | fatores: %s | bend: +%.0f%%/ponto (x%.2f) | curva de level x%.3f\n",
+    printf "SPELL BALANCE REPORT | level %d | bend(mag) %d | dobras %d | fatores: %s | bend decrescente 1+%.1f*b/(b+%.0f) (x%.3f) | curva de level x%.3f\n",
         opt('level'), opt('mag'), opt('dobras'), $factors,
-        $BEND_PER_POINT * 100, 1 + ($BEND_PER_POINT * opt('mag')),
+        $BEND_GAIN, $BEND_HALF, bend_factor(opt('mag')),
         curve_factor($level_curve, opt('level'));
     if (%$growth) {
         print 'correcao por level (teto +-', int($growth_cap * 100), '%): ', join('  ', map {

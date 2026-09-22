@@ -203,7 +203,17 @@ function spellStageEcho(cid, var, combats, delay)
             end
         end
 
-        return doCombat(cid, combat, var)
+        -- MODELO v2: a reaplicacao do eco vale METADE da aplicacao base.
+        -- A flag fica ligada so' em volta deste golpe (a chamada e' sincrona),
+        -- entao o desconto nao vaza para nenhuma outra magia do jogador.
+        local prevEcho = SPELL_ECHO_ACTIVE
+        SPELL_ECHO_ACTIVE = cid
+        local ok, res = pcall(doCombat, cid, combat, var)
+        SPELL_ECHO_ACTIVE = prevEcho
+        if not ok then
+            return false
+        end
+        return res
     end, delay or 300)
 
     return true
@@ -382,7 +392,18 @@ function doCombat(cid, combat, var, ...)
             if not target or target <= 0 or not isCreature(target) or isInPz(target) then
                 return false
             end
-            return spellStageRawDoCombat(cid, combat, var)
+            -- MODELO v2: a reaplicacao do eco vale METADE da aplicacao base (o
+            -- cast inteiro fica em base 2/3 + eco 1/3 do orcamento da classe).
+            -- A flag cobre so' este golpe: a chamada abaixo e' sincrona e o
+            -- callback de dano da magia passa por applySpellBalance.
+            local prevEcho = SPELL_ECHO_ACTIVE
+            SPELL_ECHO_ACTIVE = cid
+            local ok, res = pcall(spellStageRawDoCombat, cid, combat, var)
+            SPELL_ECHO_ACTIVE = prevEcho
+            if not ok then
+                return false
+            end
+            return res
         end, 300)
     end
 

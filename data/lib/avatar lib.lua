@@ -1,9 +1,21 @@
 -- ============================================================================
 -- BALANCE DE DANO POR ELEMENTO E BEND LEVEL
 --
--- MODELO: quem escala o dano e' o LEVEL, multiplicado pela curva de level
--- (SPELL_BALANCE_LEVEL_CURVE, mais abaixo) e pelo BEND LEVEL, que multiplica
--- +4% por ponto (SPELL_BALANCE_BEND_PER_POINT) -- o mesmo para toda magia.
+-- MODELO v2 (implementado): o dano de UM cast em UM alvo e'
+--
+--     (20 + 1.55*(level-1)) * CLASSE[cd] * AREA[formato] * bendFactor(bend)
+--
+-- CLASSE (pelo cooldown REAL, tabelas *Exausted): filler cd<=3 = 0.40 |
+-- core cd 4-15 = 1.00 | heavy cd 16-45 = 1.75 | ultimate cd >=60 = 2.75.
+-- AREA (pelo spells.xml): needtarget = 1.00 | direction (cone) = 0.95 |
+-- area generica = 0.85 | selftarget = 0.75.
+-- bendFactor(b) = 1 + 1.2*b/(b+80) (retorno decrescente, ver abaixo).
+--
+-- CLASSE e AREA vivem no `atk` de cada magia (data/lib/201-spellsExausted.lua),
+-- calibrado por:
+--     perl tools/spell_balance_report.pl --model --emit --apply
+-- LEVEL e BEND continuam sendo aplicados aqui, de uma vez, para toda magia de
+-- player. O multiplicador de eco (estagio ELITE) tambem e' daqui.
 --
 -- Para isso as formulas das magias nao usam mais o parametro magLevel: ele
 -- virou magLevelUnused (segue na assinatura, sem uso) e o termo foi trocado
@@ -14,38 +26,30 @@
 -- (magia nova que use magLevel precisa passar por isso, senao o bend entra
 -- duas vezes: uma na formula e outra no bonus abaixo)
 --
--- O numero da tabela NAO e' o dano final: e' o fator aplicado em cima da
--- curva de dano. Como cada vocacao tem um mix diferente de magias de alvo
--- unico / cone / area (e a area vale um desconto, porque acerta varios alvos),
--- o fator precisa compensar esse mix. O que importa e' o resultado medido:
+-- O QUE O JOGADOR SENTE: dentro da MESMA vocacao, magia rapida bate pouco e
+-- magia lenta bate muito (filler x0.40, core x1.00, heavy x1.75, ultimate
+-- x2.75), e o formato desconta (alvo x1.00, cone x0.95, area x0.85, self
+-- x0.75). ENTRE vocacoes, quem decide e' o SPELL_BALANCE abaixo:
 --
--- O QUE O JOGADOR SENTE: as dobras da SPELLBAR das quatro vocacoes batem o
--- mesmo dano no mesmo level (level 1, 5, 8, ..., 250). Sao as quatro listas de
--- sempre (a ordem canonica esta' em 199-ServerToDll.lua, a mesma que o cliente
--- carrega em modules/game_folds/configs.lua), uma por elemento, nos MESMOS
--- leveis -- da' para comparar dobra por dobra:
+--     fogo 1.10 (DPS)   ar 1.00 (controle)   terra 0.95 (tank)   agua 0.90 (heal)
 --
---     perl tools/spell_balance_report.pl --bar     (tabela lado a lado)
+-- A spellbar continua comparavel dobra por dobra -- rode:
 --
--- Quem garante essa igualdade hoje e' o atk de cada dobra em
--- data/lib/201-spellsExausted.lua, recalculado para a MEDIA das vocacoes
--- daquele level:
+--     perl tools/spell_balance_report.pl --bar --level 100 --mag 48
 --
---     perl tools/spell_balance_report.pl --bar --emit --apply
+-- Quem garante a escada DENTRO de cada vocacao e' o atk de cada dobra em
+-- data/lib/201-spellsExausted.lua, calibrado em dano BRUTO (CLASSE do cooldown
+-- x AREA do formato, SEM o fator de elemento), por:
 --
--- O fator por elemento abaixo virou compensacao: ele entra no fim do dano e o
--- atk de cada dobra ja' o leva em conta. Por isso, MEXER NOS NUMEROS DA TABELA
--- DESALINHA A SPELLBAR -- se mexer, rode o --bar --emit de novo para a tabela
--- de atk voltar a casar.
+--     perl tools/spell_balance_report.pl --model --emit --apply
 --
--- O que diferencia as vocacoes passa a ser o KIT, nao o numero: agua cura e
--- controla, terra tanka, ar mexe no campo. Fora da spellbar (ataque de
--- promovido, passivo de set) a tabela continua valendo sozinha.
+-- Como a calibracao e' em dano bruto, mexer no SPELL_BALANCE NAO e' cancelado
+-- pelo emissor: e' ali que se muda o papel de uma vocacao (e depois basta rodar
+-- o --model --emit de novo se quiser refinar o resto).
 --
--- Se um dia quiser a hierarquia antiga de volta (fire > air > earth > water),
--- ela era fire 1.00 / air 1.06 / earth 0.81 / water 0.78 -- mas aí a igualdade
--- da spellbar se perde, porque o atk das dobras foi calibrado com os numeros
--- de hoje.
+-- O resto da identidade continua no KIT: agua cura e controla, terra tanka,
+-- ar mexe no campo. Fora da spellbar (ataque de promovido, passivo de set) a
+-- tabela continua valendo sozinha.
 --
 -- Para reajustar uma dobra especifica: mude o atk dela em
 -- 201-spellsExausted.lua e confira com o relatorio --bar.
@@ -57,11 +61,30 @@
 -- magia. So' vale para players: monstros, summons e dano de arma continuam
 -- exatamente como eram.
 -- ============================================================================
+-- PAPEL DE CADA VOCACAO (modelo v2). Este e' o multiplicador que entra no
+-- FIM do dano, so' para player, e e' o UNICO lugar que decide a hierarquia
+-- entre as quatro:
+--
+--     fogo  x1.10  -> DPS puro
+--     ar    x1.00  -> controle/suporte (slow, trap, dodge, mobilidade)
+--     terra x0.95  -> tank (armor/defense 1.4 na vocations.xml, controle)
+--     agua  x0.90  -> healer (heal + regen + revive passivo)
+--
+-- Ou seja: o fogo bate ~22% mais que a agua, e o resto da identidade fica no
+-- kit. A calibracao do `atk` e' feita em dano BRUTO (antes deste fator), entao
+-- MEXER AQUI e' o jeito certo de mudar o papel -- basta rodar
+--     perl tools/spell_balance_report.pl --model --emit --apply
+-- (se a calibracao fosse em dano final, o emissor dividiria por este numero e
+-- as quatro vocacoes voltariam a bater igual -- era o que acontecia antes).
+--
+-- Historico: 1.00 / air 1.06 / earth 0.81 / water 0.78 era a hierarquia antiga
+-- (ar acima do fogo); 0.9827 / 1.0847 / 1.1915 / 1.0453 era a compensacao de
+-- mix da spellbar, que forcava as quatro a baterem o MESMO dano.
 SPELL_BALANCE = {
-	fire  = 0.9827,
-	water = 1.0847,
-	air   = 1.1915,
-	earth = 1.0453
+	fire  = 1.10,
+	water = 0.90,
+	air   = 1.00,
+	earth = 0.95
 }
 
 -- Correcao por level, por elemento:
@@ -85,69 +108,58 @@ SPELL_BALANCE_LEVEL_GROWTH = {
 }
 SPELL_BALANCE_LEVEL_GROWTH_CAP = 0.25
 
--- Cada ponto de bend level aumenta o dano das dobras em 4%.
--- Em bend 50 o dano sai 3.0x; em bend 25 sai 2.0x; em bend 0 (personagem
--- novo) sai 1.0x.
+-- BEND: retorno decrescente (modelo v2).
+--
+--     bendFactor(b) = 1 + GAIN * b / (b + HALF)
+--
+--     bend   0 -> x1.00     bend  25 -> x1.29     bend 100 -> x1.67
+--     bend  10 -> x1.13     bend  48 -> x1.45
+--     bend  20 -> x1.24     bend  62 -> x1.52
+--
+-- O modelo antigo era linear (+4% por ponto: x3.00 em bend 50 e x5.00 em bend
+-- 100), o que fazia 25 pontos de bend valerem mais que 75 levels. O bend
+-- continua valendo (+67% no teto), mas nao engole mais o level -- que agora
+-- carrega a curva (1.55 por level) e a classe/area da magia.
+-- SPELL_BALANCE_BEND_PER_POINT e' o numero do modelo antigo, mantido so' para
+-- quem leia o valor por fora (o relatorio usa GAIN/HALF).
 SPELL_BALANCE_BEND_PER_POINT = 0.04
+SPELL_BALANCE_BEND_GAIN = 1.2
+SPELL_BALANCE_BEND_HALF = 80
 
 -- ============================================================================
--- CURVA DE LEVEL - MEDIA DE DANO GERAL DO SERVIDOR
+-- CURVA DE LEVEL - DESATIVADA NO MODELO v2
 --
--- Meta de media de dano por level (uma aplicacao de magia, SEM bend):
+-- No modelo v2 o alvo de dano por level e' a formula linear
 --
---     level   1 ...... 20 ~~ 30
---     level   5 ...... 30 ~~ 50
---     level  10 ...... 50 ~~ 80
---     level  50 ...... 100 ~~ 150
---     level 100 ...... 200 ~~ 250
---     level 150 ...... 300 ~~ 400
+--     base(level) = 20 + 1.55 * (level - 1)      (base = magia CLASSE core)
 --
--- A tabela abaixo e' a CORRECAO aplicada para a media medida bater essa meta.
--- E' medicao real, nao chute:
+-- e quem entrega essa reta e' o `atk` de cada magia em 201-spellsExausted.lua,
+-- calibrado contra ela. Nao existe mais correcao por level aqui: a tabela
+-- abaixo fica toda em 1.00 e o getSpellLevelCurve segue funcionando (devolve
+-- 1.0). O corte antigo (0.66 @25 ... 0.50 @100) foi o que invertia a curva:
+-- o trecho 1->25 rendia 5x e o 25->100 rendia 2.9x.
 --
---     correcao = meta do level / mediana medida naquele level
---
--- Meta  = a meta acima interpolada em linha reta entre as faixas (o valor da
---         faixa no proprio level, ex: level 100 = 225 = meio de 200 ~~ 250).
--- Hoje  = mediana medida das 71 magias de dano, SEM bend, no level:
---         perl tools/spell_balance_report.pl --level N --mag 0
---
---     level    meta hoje      hoje medido    correcao
---     ---------------------------------------------------
---         1      25     (20-30)      27.0       1.00  <- ja' batia
---         5      40     (30-50)      43.4       1.00  <- ja' batia
---        10      65     (50-80)      67.0       1.00  <- ja' batia
---        25      87.5                132.1       0.66
---        50     125    (100-150)     237.8       0.53
---        75     175                  342.0       0.51
---       100     225    (200-250)     452.1       0.50
---       150     350    (300-400)     655.4       0.53
---       200     475                  873.4       0.54
---       400     975                 1709.1       0.57
---
--- Ou seja: ate' o level 10 a curva de hoje JA' e' a meta (a formula da propria
--- magia entrega o valor, correcao 1.00); do 25 pra cima o servidor vinha
--- entregando ~2x a meta, e e' isso que a correcao corta. Os pontos do 25, 75,
--- 200 e 400 existem para a reta entre um ponto e outro nao fugir da meta (entre
--- o 10 e o 50 a meta andava 1.5 por level e a curva de hoje 4.2). Entre dois
--- pontos interpola em linha reta e depois do ultimo continua no passo do ultimo
--- trecho (hoje +0.0005 por level: o corte fica estavel no fim da jornada).
---
--- Se a meta mudar, remeca a mediana e refaca a conta: mexer aqui mexe na media
--- do servidor inteiro. Magia isolada continua se ajustando pelo atk em
--- 201-spellsExausted.lua.
+-- Se algum dia precisar de volta de um ajuste fino por level, mexa nos valores
+-- da tabela (o getSpellLevelCurve interpola em linha reta entre os pontos).
 -- ============================================================================
 SPELL_BALANCE_LEVEL_CURVE = {
+	-- MODELO v2: TODOS os pontos em 1.00 de proposito.
+	--
+	-- A inclinacao do dano por level agora esta' dentro do `atk` de cada magia
+	-- (CLASSE * AREA * 100), calibrado contra o alvo (20 + 1.55*(level-1)).
+	-- O corte de ~2x que existia daqui para cima (0.66 @25, 0.50 @100) foi
+	-- removido: era ele que fazia o trecho 25->100 render 2.9x enquanto o
+	-- trecho 1->25 rendia 5x. Sem o corte a curva de dano fica monotonica.
 	[1]   = 1.00,
 	[5]   = 1.00,
 	[10]  = 1.00,
-	[25]  = 0.66,
-	[50]  = 0.53,
-	[75]  = 0.51,
-	[100] = 0.50,
-	[150] = 0.53,
-	[200] = 0.54,
-	[400] = 0.57,
+	[25]  = 1.00,
+	[50]  = 1.00,
+	[75]  = 1.00,
+	[100] = 1.00,
+	[150] = 1.00,
+	[200] = 1.00,
+	[400] = 1.00,
 }
 
 -- Chaves da tabela em ordem: pairs() nao garante ordem em Lua, e a leitura
@@ -209,7 +221,8 @@ function getBendDamageBonus(cid)
 	if type(bend) ~= "number" or bend < 0 then
 		bend = 0
 	end
-	return 1 + (bend * SPELL_BALANCE_BEND_PER_POINT)
+	-- retorno decrescente (modelo v2): x1.45 em bend 48, x1.67 no teto
+	return 1 + (SPELL_BALANCE_BEND_GAIN * bend / (bend + SPELL_BALANCE_BEND_HALF))
 end
 
 function getElementLevelScaling(cid, element)
@@ -233,6 +246,16 @@ function getElementLevelScaling(cid, element)
 	return 1 + bonus
 end
 
+-- Estagio ELITE (nivel 100+): a magia de alvo unico e' reaplicada 300 ms
+-- depois do golpe base. Quem liga SPELL_ECHO_ACTIVE e' spellStages.lua, e SO'
+-- em volta do doCombat do eco (chamada sincrona). Com 0.5, a reaplicacao vale
+-- metade da aplicacao base -- ou seja, o cast inteiro fica em 1.5x a base e
+-- cabe no orcamento da classe (base = 2/3, eco = 1/3).
+-- E' isto que torna o eco NEUTRO entre vocacoes: quem tem eco na magia fica
+-- com `atk` calibrado 2/3 do de quem nao tem, entao o total do cast e' o mesmo.
+SPELL_ECHO_FACTOR = 0.5
+SPELL_ECHO_ACTIVE = nil
+
 function applySpellBalance(cid, value, element)
 	if not value or not element then
 		return value
@@ -248,6 +271,10 @@ function applySpellBalance(cid, value, element)
 	-- correcao da curva de level: e' ela que faz a MEDIA de dano do servidor
 	-- seguir a meta por level (SPELL_BALANCE_LEVEL_CURVE, no comeco do arquivo)
 	factor = factor * getSpellLevelCurve(getPlayerLevel(cid))
+	-- reaplicacao do eco do estagio ELITE (base 2/3 + eco 1/3 do orcamento)
+	if SPELL_ECHO_ACTIVE and SPELL_ECHO_ACTIVE == cid then
+		factor = factor * SPELL_ECHO_FACTOR
+	end
 	-- o bend multiplica depois do fator por elemento (multiplicacao, a ordem
 	-- nao muda o resultado), mas so' chega aqui quem e' player
 	return value * factor * getBendDamageBonus(cid)
