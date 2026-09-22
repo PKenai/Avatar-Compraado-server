@@ -66765,3 +66765,8 @@
 [21/9/2026 23:12:54] O
 [21/9/2026 23:12:55] O
 [21/9/2026 23:13:19]  is thrown to prevent "eternal" matches that take an indefinite period time to locate.
+[22/9/2026 12:28:9] n is thrown to prevent "eternal" matches that take an indefinite period time to locate.
+[22/9/2026 12:35:47] sz`, `conditions`, `cap`, `sex`, `lastlogin`, `lastip`, `skull`, `skulltime`, `save`, `rank_id`, `guildnick`, `lastlogout`, `blessings`, `online`) VALUES (NULL, 
+[22/9/2026 12:35:48] sz`, `conditions`, `cap`, `sex`, `lastlogin`, `lastip`, `skull`, `skulltime`, `save`, `rank_id`, `guildnick`, `lastlogout`, `blessings`, `online`) VALUES (NULL, 
+[22/9/2026 14:2:10] TAMP()) AND `status` = 3
+[22/9/2026 14:16:51] turn

@@ -44,6 +44,14 @@ function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
 
 	min = min*1.5
 	max = max*1.5
+	-- o atk da tabela e' o botao de calibragem desta dobra (padrao do earth
+	-- punch): sem isso o dano nao responde ao atk e a dobra fica fora do
+	-- balance da spellbar (tools/spell_balance_report.pl --bar)
+	local atk = cf.atk
+	if atk and type(atk) == "number" then
+		min = min * (atk/100)
+		max = max * (atk/100)
+	end
 	min = remakeAirEarth(cid, min)
 	max = remakeAirEarth(cid, max)
     return -min, -max

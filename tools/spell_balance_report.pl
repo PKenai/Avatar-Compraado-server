@@ -2,10 +2,10 @@
 # ============================================================================
 # tools/spell_balance_report.pl
 #
-# Mede o dano estimado de TODAS as magias de player (fire/water/air/earth) para
-# auditar a hierarquia de dano das vocacoes:
+# Mede o dano estimado de TODAS as magias de player (fire/water/air/earth).
 #
-#     fire  >  air (~10% menos)  >  earth  >  water (menos dano, mais suporte)
+# Modelo de hoje: as quatro vocacoes batem o MESMO dano nas dobras da spellbar
+# (ver --bar). O que diferencia as vocacoes e' o kit, nao o numero.
 #
 # Nada e' chutado: o numero sai da propria fonte do jogo.
 #
@@ -30,6 +30,16 @@
 #     perl tools/spell_balance_report.pl --level 50 --mag 25
 #     perl tools/spell_balance_report.pl --level 200 --only fire
 #     perl tools/spell_balance_report.pl --dobras 22 --json
+#     perl tools/spell_balance_report.pl --bar        (so' as da spellbar)
+#     perl tools/spell_balance_report.pl --bar --emit (recalibra so' elas)
+#
+# --bar: restringe medicao e --emit as 24 dobras que o jogador carrega na
+# spellbar de cada elemento (lista canonica em data/lib/199-ServerToDll.lua, a
+# mesma que o cliente carrega em modules/game_folds/configs.lua). Os quatro
+# elementos tem dobra nos MESMOS leveis, entao da' para comparar uma a uma,
+# dobra por dobra. No --emit com --bar o alvo NAO leva o desconto de formato
+# (area/cone/self valem o mesmo que alvo unico): ali o objetivo e' o numero
+# igual nas quatro vocacoes.
 # ============================================================================
 
 use strict;
@@ -78,13 +88,14 @@ my %MULTI_APPLICATION = map { $_ => 1 } (
     'water shards', 'water flow', 'water blizzard', 'water tsunami', 'water clock', 'water bloodbending',
     'air vortex', 'air suffocation', 'air bomb', 'air stormcall', 'air windstorm', 'air doom', 'air trap',
     'earth crush', 'earth quake', 'earth aura', 'earth lavaball', 'earth leech', 'earth cataclysm',
+    'earth growth', 'air gale',   # 3 trilhas andando pra frente, 3/4 passos cada
 );
 
 # level/mag(bend)/dobras de referencia usados na medicao
 # bonus de +1% por ponto de bend - carregado de data/lib/avatar lib.lua
 my $BEND_PER_POINT = 0.01;
 my %OPT = (level => 100, mag => 50, dobras => 10, only => undef, json => 0, debug => 0,
-           emit => 0, apply => 0);
+           emit => 0, apply => 0, bar => 0);
 
 my @ELEMENTS = qw(fire water air earth);
 
@@ -94,11 +105,61 @@ my %HITS_OVERRIDE = (
     'fire star'         => 8,     # a magia divide o dano em 8 hits
     'air vortex'        => 32,    # 16 pulsos x 2 areas
     'earth crush'       => 3,     # 3 ondas (4 no elite)
+    'earth growth'      => 9,     # 3 trilhas x 3 sqm
+    'air gale'          => 12,    # 3 trilhas x 4 passos
 );
 
 # Magias cujo dano nao passa por remakeValue/remakeAirEarth (portanto ficam de
 # fora do multiplicador por elemento da camada nova).
 my %NO_ELEMENT_FACTOR = map { $_ => 1 } ();
+
+# ----------------------------------------------------------------------------
+# SPELLBAR (--bar): as dobras que o jogador tem na barra
+#
+# A ordem canonica esta' em data/lib/199-ServerToDll.lua: as 24 primeiras de
+# cada elemento sao exatamente as dobras da spellbar; o que vem depois (as
+# "...searcher") sao magias de utilidade que nao entram na barra. La' o nome
+# vem colado ("firewhip") e aqui as chaves tem espaco ("fire whip"), entao o
+# casamento e' por normalizacao (so' letras e numeros, minusculas).
+# ----------------------------------------------------------------------------
+my %SPELLBAR_KEY;   # elemento -> { chave => 1 }
+my %SPELLBAR_NORM;  # elemento -> { nome-normalizado => chave }
+
+sub load_spellbar {
+    my ($info) = @_;
+    my $path = File::Spec->catfile($ROOT, 'data', 'lib', '199-ServerToDll.lua');
+    return unless -f $path;
+    my $txt = read_file($path);
+    my %norm;
+    for my $k (keys %$info) {
+        (my $n = lc $k) =~ s/[^a-z0-9]//g;
+        $norm{$n} //= $k;
+    }
+    for my $el (@ELEMENTS) {
+        next unless $txt =~ /${el}Spells\s*=\s*\{(.*?)\n\}/s;
+        my @names = $1 =~ /"(\w+)"/g;
+        splice(@names, 24) if @names > 24;
+        for my $n (@names) {
+            (my $key = lc $n) =~ s/[^a-z0-9]//g;
+            my $real = $norm{$key};
+            if (defined $real) {
+                $SPELLBAR_KEY{$el}{$real} = 1;
+                $SPELLBAR_NORM{$el}{$key} = $real;
+            } else {
+                warn "spellbar: $el/$n nao casou com nenhuma chave do spellsInfo\n";
+            }
+        }
+    }
+}
+
+sub in_spellbar {
+    my ($el, $key) = @_;
+    return 0 unless $el && defined $key;
+    return 1 if $SPELLBAR_KEY{$el} && $SPELLBAR_KEY{$el}{$key};
+    (my $n = lc $key) =~ s/[^a-z0-9]//g;
+    return 1 if $SPELLBAR_NORM{$el} && $SPELLBAR_NORM{$el}{$n};
+    return 0;
+}
 
 sub opt { my $k = shift; return $OPT{$k}; }
 
@@ -168,20 +229,42 @@ sub load_bend_per_point {
     return 0.01;
 }
 
-# Escalamento extra por level (SPELL_BALANCE_LEVEL_GROWTH): a partir do
-# SPELL_BALANCE_LEVEL_BASE o elemento cresce um pouco mais rapido, ate' o teto.
-# Lido do proprio lib para o relatorio nao mentir se alguem mexer nos numeros.
+# Correcao por level (SPELL_BALANCE_LEVEL_GROWTH): cada elemento tem
+#     correcao(L) = 1 + b*(L-BASE) + c*(L-BASE)^2
+# (com teto em +-CAP). E' o que faz as quatro vocacoes baterem igual em toda a
+# curva de level. Lido do proprio lib para o relatorio nao mentir.
+# Aceita o formato antigo (escalar), tratando o valor como `b`.
 sub load_level_growth {
     my %table;
     return \%table unless -f $BALANCE_LIB;
     my $txt = read_file($BALANCE_LIB);
-    if ($txt =~ /SPELL_BALANCE_LEVEL_GROWTH\s*=\s*\{(.*?)\}/s) {
+    if ($txt =~ /SPELL_BALANCE_LEVEL_GROWTH\s*=\s*\{(.*?)\n\}/s) {
         my $block = $1;
-        while ($block =~ /(\w+)\s*=\s*([\d.]+)/g) {
-            $table{lc($1)} = $2 + 0;
+        # fire = {b = 0.0005, c = -4.2e-07}
+        while ($block =~ /(\w+)\s*=\s*\{\s*b\s*=\s*([-\d.eE+]+)\s*,\s*c\s*=\s*([-\d.eE+]+)\s*\}/g) {
+            $table{lc($1)} = {b => $2 + 0, c => $3 + 0};
+        }
+        # formato antigo: water = 0.0005
+        while ($block =~ /^\s*(\w+)\s*=\s*([-\d.]+)\s*,?\s*$/mg) {
+            my $k = lc($1);
+            next if ref $table{$k};
+            $table{$k} = {b => $2 + 0, c => 0};
         }
     }
     return \%table;
+}
+
+# Aplica a correcao por level de um elemento e devolve o multiplicador.
+sub level_correction {
+    my ($g, $level, $base, $cap) = @_;
+    return 1 unless $g;
+    my $b = (ref $g eq 'HASH') ? ($g->{b} // 0) : $g + 0;
+    my $c = (ref $g eq 'HASH') ? ($g->{c} // 0) : 0;
+    my $x = $level - $base;
+    my $bonus = $b * $x + $c * $x * $x;
+    $bonus =  $cap if $bonus >  $cap;
+    $bonus = -$cap if $bonus < -$cap;
+    return 1 + $bonus;
 }
 
 sub load_level_growth_window {
@@ -494,6 +577,7 @@ sub parse_args {
         elsif ($arg eq '--only') { $OPT{only} = lc(shift(@argv)); }
         elsif ($arg eq '--json') { $OPT{json} = 1; }
         elsif ($arg eq '--debug') { $OPT{debug} = 2; }
+        elsif ($arg eq '--bar') { $OPT{bar} = 1; }
         elsif ($arg eq '--emit') { $OPT{emit} = 1; }
         elsif ($arg eq '--apply') { $OPT{apply} = 1; }
         else { die "opcao desconhecida: $arg\n"; }
@@ -502,6 +586,15 @@ sub parse_args {
 
 # ----------------------------------------------------------------------------
 # --emit / --apply: reajusta o atk de cada magia para o alvo da sua faixa
+#
+# Modo normal: alvo = (BASE + POR_LEVEL * level) * SHAPE{shape}, ou seja a
+# curva teorica do balance, com desconto por formato (area/cone/self).
+#
+# Modo --bar: o alvo de cada level e' a MEDIA das quatro vocacoes naquele
+# level. Isso deixa as quatro iguais sem mexer no poder da curva: quem esta'
+# acima da media desce, quem esta' abaixo sobe, e a media do level nao muda.
+# Aqui o formato nao leva desconto (o que se quer e' o numero igual nas
+# quatro) e o alvo e' a media medida, nao a curva teorica.
 # ----------------------------------------------------------------------------
 
 sub emit_atk {
@@ -510,19 +603,53 @@ sub emit_atk {
     my @changes;
     my @report;
 
+    # alvo por level no modo --bar (media das vocacoes presentes no level)
+    my %bar_target;
+    if (opt('bar')) {
+        my %acc;
+        for my $r (@$rows) {
+            next unless defined $r->{key} && defined $r->{atk};
+            next unless in_spellbar($r->{element}, $r->{key});
+            next unless $r->{dmg_final} > 0;
+            push @{$acc{$r->{level}}}, $r->{dmg_final};
+        }
+        for my $lvl (keys %acc) {
+            my @v = @{$acc{$lvl}};
+            my $sum = 0;
+            $sum += $_ for @v;
+            $bar_target{$lvl} = $sum / @v;
+        }
+    }
+
     for my $r (sort { $a->{level} <=> $b->{level} } @$rows) {
         my $key = $r->{key};
         next unless defined $key && defined $r->{atk};
+        # --bar: so' as dobras da spellbar
+        next if opt('bar') && !in_spellbar($r->{element}, $key);
         my $level  = $r->{level};
         my $shape  = $r->{shape} // 'target';
-        my $target = ($TARGET_BASE + $TARGET_PER_LEVEL * $level) * ($SHAPE_FACTOR{$shape} // 0.8);
+        my $target;
+        if (opt('bar')) {
+            $target = $bar_target{$level};
+            next unless $target && $target > 0;
+        } else {
+            $target = ($TARGET_BASE + $TARGET_PER_LEVEL * $level) * ($SHAPE_FACTOR{$shape} // 0.8);
+        }
         # A curva e' dano de UM golpe. Nas magias de varios golpes (DoT, pulsos,
         # ondas) o medidor conta so' uma aplicacao, entao e' ela que vai pra
         # curva: o numero de golpes e' a forca propria da magia.
         my $multi    = $MULTI_APPLICATION{$key};
-        my $measured = $multi ? $r->{dmg} : $r->{dmg} * $r->{hits};
-        next unless $measured > 0;
-        my ($lo, $hi) = (0.40, 2.50);
+        # --bar: a conta e' em dano FINAL (ja' com o fator do elemento e o bend
+        # dentro), porque o alvo e' a igualdade entre vocacoes e a media ja' vem
+        # com o fator de cada uma. Fora do --bar a conta segue em dano cru, que
+        # e' o que a curva teorica (TARGET_BASE...) mede.
+        my $measured = opt('bar') ? $r->{dmg_final}
+                                  : ($multi ? $r->{dmg} : $r->{dmg} * $r->{hits});
+        next unless $measured && $measured > 0;
+        # fora do --bar o ajuste e' conservador (os limites evitam exagero em
+        # magia de varios golpes); nas dobras da spellbar o alvo e' a
+        # igualdade, entao o limite e' largo.
+        my ($lo, $hi) = opt('bar') ? (0.10, 10.0) : (0.40, 2.50);
         my $mult = $target / $measured;
         $mult = $lo if $mult < $lo;
         $mult = $hi if $mult > $hi;
@@ -530,14 +657,18 @@ sub emit_atk {
         my $new = int($old * $mult + 0.5);
         $new = 1 if $new < 1;
         my $tag = $multi ? 'multi/hit' : 'single';
-        push @report, sprintf('  %-24s lvl %3d %-7s %-6s atk %5d -> %5d   (alvo %6.0f, medido %6.0f, x%.2f)',
+        push @report, sprintf('  %-24s lvl %3d %-7s %-9s atk %5d -> %5d   (alvo %7.0f, medido %7.0f, x%.2f)',
             $key, $level, $r->{element}, $tag, $old, $new, $target, $measured, $mult);
-        next if abs($mult - 1) < 0.10;
+        next if abs($mult - 1) < (opt('bar') ? 0.01 : 0.10);
         push @changes, { key => $key, old => $old, new => $new };
     }
 
-    print "atk proposto por magia (alvo = (", $TARGET_BASE, ' + ', $TARGET_PER_LEVEL,
-        " * level) * shape):\n";
+    if (opt('bar')) {
+        print "atk proposto por dobra da spellbar (alvo = media das vocacoes NO MESMO LEVEL):\n";
+    } else {
+        print "atk proposto por magia (alvo = (", $TARGET_BASE, ' + ', $TARGET_PER_LEVEL,
+            " * level) * shape):\n";
+    }
     print join("\n", @report), "\n\n";
     printf "%d magias mudariam de atk.\n", scalar(@changes);
 
@@ -574,6 +705,11 @@ sub main {
     my ($growth_base, $growth_cap) = load_level_growth_window();
     $BEND_PER_POINT = load_bend_per_point();
     my $exausted = load_exausted();
+    if (opt('bar')) {
+        load_spellbar($info);
+        die "--bar: nao achei as listas da spellbar em data/lib/199-ServerToDll.lua\n"
+            unless %SPELLBAR_KEY;
+    }
     my (@rows, @manual);
 
     for my $entry (load_spell_entries()) {
@@ -592,23 +728,18 @@ sub main {
             push @manual, [$entry, 'sem formula de dano (buff/heal/efeito)'];
             next;
         }
+        # --bar: daqui pra frente so' a dobra que esta' na barra
+        next if opt('bar') && !in_spellbar($entry->{element}, $got->{key});
         my $factor = $NO_ELEMENT_FACTOR{$got->{key} // ''} ? 1 : $balance->{$entry->{element}};
         my %row = (%$entry, %$got);
         # o cooldown de verdade e' o da tabela *Exausted (e' ele que vai pro client)
         if (defined $got->{cd_key} && defined $exausted->{$entry->{element}}{$got->{cd_key}}) {
             $row{cd} = $exausted->{$entry->{element}}{$got->{cd_key}};
         }
-        # Escalamento extra por level (hoje so' a agua tem): vale para qualquer
-        # magia do elemento que passe por applySpellBalance.
-        my $lvl_bonus = 1;
-        if (my $g = $growth->{$entry->{element}}) {
-            my $over = opt('level') - $growth_base;
-            if ($over > 0) {
-                my $b = $over * $g;
-                $b = $growth_cap if $b > $growth_cap;
-                $lvl_bonus = 1 + $b;
-            }
-        }
+        # Correcao por level do elemento: vale para qualquer magia do elemento
+        # que passe por applySpellBalance (mesma conta do getElementLevelScaling).
+        my $lvl_bonus = level_correction($growth->{$entry->{element}}, opt('level'),
+                                         $growth_base, $growth_cap);
         # So' leva o bonus de bend quem chama remakeValue/remakeAirEarth, que
         # e' o caso de toda magia de dano de player (ver measure_script).
         my $bend = $got->{remake} ? 1 + ($BEND_PER_POINT * opt('mag')) : 1;
@@ -646,11 +777,9 @@ sub main {
         opt('level'), opt('mag'), opt('dobras'), $factors,
         $BEND_PER_POINT * 100, 1 + ($BEND_PER_POINT * opt('mag'));
     if (%$growth) {
-        print 'escalamento por level: ', join('  ', map {
-            sprintf('%s +%.3f%%/level acima de %d (teto +%.0f%%) x%.3f',
-                $_, $growth->{$_} * 100, $growth_base, $growth_cap * 100,
-                1 + (($growth_cap > 0 && (opt('level') - $growth_base) * $growth->{$_} > $growth_cap)
-                        ? $growth_cap : (opt('level') > $growth_base ? (opt('level') - $growth_base) * $growth->{$_} : 0)))
+        print 'correcao por level (teto +-', int($growth_cap * 100), '%): ', join('  ', map {
+            my $g = $growth->{$_};
+            sprintf('%s %+.2f%%', $_, (level_correction($g, opt('level'), $growth_base, $growth_cap) - 1) * 100);
         } sort keys %$growth), "\n";
     }
     print '=' x 104, "\n";
@@ -706,9 +835,56 @@ sub main {
         }
     }
 
+    # ------------------------------------------------ spellbar, dobra por dobra
+    # Tabela lado a lado: em cada level, o que cada vocacao tem na barra. E' a
+    # comparacao que interessa no jogo (o que o jogador aperta), entao vale ler
+    # a coluna do MEIO (dano de um golpe) e o total do cast onde tem "Nx".
+    if (opt('bar')) {
+        my (%by_level, %levels);
+        for my $r (@rows) {
+            $by_level{$r->{element}}{$r->{level}} = $r;
+            $levels{$r->{level}} = 1;
+        }
+        print "\n", '=' x 104, "\n";
+        print "SPELLBAR: DANO DE UM GOLPE, DORBA POR DORBA (mesmo level nas quatro)\n";
+        print '=' x 104, "\n";
+        printf "  %-5s", 'level';
+        printf " %21s", $_ for @ELEMENTS;
+        print "\n";
+        my %ratio;
+        for my $lvl (sort { $a <=> $b } keys %levels) {
+            printf "  %-5d", $lvl;
+            for my $el (@ELEMENTS) {
+                my $r = $by_level{$el}{$lvl};
+                if (!$r) { printf " %21s", '-'; next; }
+                printf " %21s", sprintf('%-9.0f%s', $r->{dmg_final},
+                    $r->{hits} > 1 ? sprintf('%2dx=%6.0f', $r->{hits}, $r->{dmg_cast}) : '');
+            }
+            my $f = $by_level{fire}{$lvl} ? $by_level{fire}{$lvl}{dmg_final} : undef;
+            for my $el (@ELEMENTS) {
+                next unless defined $f && $f > 0 && $by_level{$el}{$lvl};
+                push @{$ratio{$el}}, $by_level{$el}{$lvl}{dmg_final} / $f;
+            }
+            print "\n";
+        }
+        print "\n";
+        for my $el (@ELEMENTS) {
+            my @r = sort { $a <=> $b } @{$ratio{$el} // []};
+            next unless @r;
+            printf "  %-6s dano de um golpe vs fire: min %.2fx  mediana %.2fx  max %.2fx  (%d leveis)\n",
+                uc($el), $r[0], $r[int(@r / 2)], $r[-1], scalar @r;
+        }
+    }
+
     if (@manual) {
-        print "\nMANUAL (nao interpretadas, conferir a mao):\n";
-        printf "  %-38s %s\n", $_->[0]{element} . '/' . $_->[0]{script}, $_->[1] for @manual;
+        my @list = @manual;
+        if (opt('bar')) {
+            @list = grep { in_spellbar($_->[0]{element}, $_->[0]{name}) } @list;
+        }
+        if (@list) {
+            print "\nMANUAL (nao interpretadas, conferir a mao):\n";
+            printf "  %-38s %s\n", $_->[0]{element} . '/' . $_->[0]{script}, $_->[1] for @list;
+        }
     }
     if (%UNKNOWN_COND) {
         print "\nCONDICOES DESCONHECIDAS (tratadas como FALSA):\n";

@@ -18,24 +18,36 @@
 -- unico / cone / area (e a area vale um desconto, porque acerta varios alvos),
 -- o fator precisa compensar esse mix. O que importa e' o resultado medido:
 --
---   mediana de dano por cast SEM o bend, level 100 (tools/spell_balance_report.pl)
---     fire  429 (1.00x)   -> a que mais bate
---     air   383 (0.89x)   -> quase o fire, ~10% a menos
---     earth 336 (0.78x)   -> tanka e bate: entre o air e o water
---     water 310 (0.72x)   -> o suporte: menos dano de todas, cura/controla bem
+-- O QUE O JOGADOR SENTE: as dobras da SPELLBAR das quatro vocacoes batem o
+-- mesmo dano no mesmo level (level 1, 5, 8, ..., 250). Sao as quatro listas de
+-- sempre (a ordem canonica esta' em 199-ServerToDll.lua, a mesma que o cliente
+-- carrega em modules/game_folds/configs.lua), uma por elemento, nos MESMOS
+-- leveis -- da' para comparar dobra por dobra:
 --
--- O fator tambem pode escalar com o LEVEL, por elemento (bloco
--- SPELL_BALANCE_LEVEL_GROWTH, logo abaixo da tabela). Hoje so' a agua usa:
--- em level 100 ela batia 0.62x do fire e ia perdendo terreno no fim da
--- jornada, entao subiu para 0.78 no fator (+16% em toda magia de agua) e
--- ganhou +0.05% por level acima de 100, ate' +8%. A hierarquia nao muda:
--- terra segue na frente da agua em level 50, 100, 200, 400 e 1000.
+--     perl tools/spell_balance_report.pl --bar     (tabela lado a lado)
 --
--- Para reajustar: mude o numero aqui e rode o relatorio; os atk por magia em
--- 201-spellsExausted.lua foram gerados com
---     perl tools/spell_balance_report.pl --emit
--- (uma passada so': rodar --emit de novo em cima do resultado anterior acumula
--- os limites de ajuste e distorce as magias de varios golpes).
+-- Quem garante essa igualdade hoje e' o atk de cada dobra em
+-- data/lib/201-spellsExausted.lua, recalculado para a MEDIA das vocacoes
+-- daquele level:
+--
+--     perl tools/spell_balance_report.pl --bar --emit --apply
+--
+-- O fator por elemento abaixo virou compensacao: ele entra no fim do dano e o
+-- atk de cada dobra ja' o leva em conta. Por isso, MEXER NOS NUMEROS DA TABELA
+-- DESALINHA A SPELLBAR -- se mexer, rode o --bar --emit de novo para a tabela
+-- de atk voltar a casar.
+--
+-- O que diferencia as vocacoes passa a ser o KIT, nao o numero: agua cura e
+-- controla, terra tanka, ar mexe no campo. Fora da spellbar (ataque de
+-- promovido, passivo de set) a tabela continua valendo sozinha.
+--
+-- Se um dia quiser a hierarquia antiga de volta (fire > air > earth > water),
+-- ela era fire 1.00 / air 1.06 / earth 0.81 / water 0.78 -- mas aí a igualdade
+-- da spellbar se perde, porque o atk das dobras foi calibrado com os numeros
+-- de hoje.
+--
+-- Para reajustar uma dobra especifica: mude o atk dela em
+-- 201-spellsExausted.lua e confira com o relatorio --bar.
 --
 -- O fator entra no FIM de remakeValue/remakeAirEarth, ou seja, depois de todo
 -- o resto do dano (atk da magia em data/lib/201-spellsExausted.lua, talentos,
@@ -45,28 +57,32 @@
 -- exatamente como eram.
 -- ============================================================================
 SPELL_BALANCE = {
-	fire  = 1.00,
-	water = 0.78,
-	air   = 1.06,
-	earth = 0.81
+	fire  = 0.9827,
+	water = 1.0847,
+	air   = 1.1915,
+	earth = 1.0453
 }
 
--- Escalamento por level, por elemento. O level da curva de dano ja' vem da
--- formula da propria magia; este termo faz o dano crescer um pouco mais rapido
--- a partir do SPELL_BALANCE_LEVEL_BASE. A agua subiu um degrau no fator (0.67 ->
--- 0.78) e ganhou +0,05% de dano por level acima do base, ate' o teto de +8%:
--- e' ela que estava ficando para tras no fim da jornada. Continua a mais fraca
--- das quatro (terra segue na frente em todas as faixas de level).
+-- Correcao por level, por elemento:
 --
--- Como mexer: crescimento e' por level, nao por bend (o bend ja' tem o seu
--- +1%/ponto). Elemento ausente da tabela = sem escalamento extra (1.0x).
--- O mesmo numero e' lido por tools/spell_balance_report.pl, entao o relatorio
--- acompanha a mudanca sozinho -- nao precisa editar o medidor.
+--   correcao(L) = 1 + b*(L-BASE) + c*(L-BASE)^2      (teto em +-CAP)
+--
+-- Esta' VAZIA de proposito. Ela existia quando o alvo era igualar a MEDIANA de
+-- dano das quatro vocacoes (um numero por vocacao). O alvo hoje e' outro: cada
+-- dobra da spellbar bater o mesmo que as outras tres daquele mesmo level, dobra
+-- por dobra -- e quem garante isso e' o atk de cada uma em 201-spellsExausted.lua
+-- (ver o cabecalho). Uma correcao POR VOCACAO em cima disso so' desalinharia de
+-- novo (em level diferente de 100), porque ela empurra a vocacao inteira.
+--
+-- Se algum dia voltar a querer mediana igual (e nao dobra igual), o caminho e'
+-- preencher a tabela: rode perl tools/spell_balance_report.pl em varios --level,
+-- veja a mediana por elemento e de' b/c NEGATIVO para quem esta' acima,
+-- POSITIVO para quem esta' abaixo. Elemento ausente = sem correcao (1.0x).
+-- O teto existe porque fora da faixa medida o quadratico diverge.
 SPELL_BALANCE_LEVEL_BASE = 100
 SPELL_BALANCE_LEVEL_GROWTH = {
-	water = 0.0005
 }
-SPELL_BALANCE_LEVEL_GROWTH_CAP = 0.08
+SPELL_BALANCE_LEVEL_GROWTH_CAP = 0.25
 
 -- Cada ponto de bend level aumenta o dano das dobras em 1%.
 -- Em bend 50 o dano sai 1.5x; em bend 0 (personagem novo) sai 1.0x.
@@ -105,17 +121,22 @@ function getBendDamageBonus(cid)
 end
 
 function getElementLevelScaling(cid, element)
-	local growth = SPELL_BALANCE_LEVEL_GROWTH[element]
-	if not growth then
+	local curve = SPELL_BALANCE_LEVEL_GROWTH[element]
+	if not curve then
 		return 1
 	end
 	local level = isPlayer(cid) and getPlayerLevel(cid)
-	if type(level) ~= "number" or level <= SPELL_BALANCE_LEVEL_BASE then
+	if type(level) ~= "number" then
 		return 1
 	end
-	local bonus = (level - SPELL_BALANCE_LEVEL_BASE) * growth
+	-- o descolamento entre as vocacoes cresce com o level (cada mix de magias
+	-- tem um coeficiente de level proprio), entao a correcao e' quadratica.
+	local x = level - SPELL_BALANCE_LEVEL_BASE
+	local bonus = ((curve.b or 0) * x) + ((curve.c or 0) * x * x)
 	if bonus > SPELL_BALANCE_LEVEL_GROWTH_CAP then
 		bonus = SPELL_BALANCE_LEVEL_GROWTH_CAP
+	elseif bonus < -SPELL_BALANCE_LEVEL_GROWTH_CAP then
+		bonus = -SPELL_BALANCE_LEVEL_GROWTH_CAP
 	end
 	return 1 + bonus
 end

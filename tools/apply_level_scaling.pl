@@ -23,8 +23,10 @@
 #   * curam/regeneracao (nao usam a variavel magLevel: usam getPlayerMagLevel
 #     direto e nao passam por remakeValue) - continuam escalando com o bend
 #   * data/spells/scripts/monster/* (monstro nao roda esse callback)
-#   * passivos de set de armadura (avatarAttack.lua / imuneable.lua), que nao
-#     passam por remakeValue/remakeAirEarth
+#   * passivos de set de armadura (avatarAttack.lua / imuneable.lua): eles
+#     NAO passam por remakeValue/remakeAirEarth, entao a conversao deles foi
+#     feita a parte (mesmo criterio: magLevel -> (level * 0.5)). Se voce rodar
+#     este script de novo, eles nao entram - ja' estao convertidos
 #   * comentarios (inclusive dentro de --[[ ]]) e qualquer coisa depois de --
 #
 # Uso:

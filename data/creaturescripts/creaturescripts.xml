@@ -138,4 +138,8 @@
 	<event type="think" name="avatarTracker" event="script" value="avatarTracker.lua"/>
 	<event type="logout" name="avatarTrackerLogout" event="script" value="avatarTracker.lua"/>
 
+	<!-- Regen de mana passiva: 5 de mana a cada 2s, sempre, para qualquer vocacao (data/lib/manaRegen.lua) -->
+	<event type="login" name="ManaRegenLogin" event="script" value="manaRegen.lua"/>
+	<event type="think" name="ManaRegenRefresh" event="script" value="manaRegen.lua"/>
+
 </creaturescripts>

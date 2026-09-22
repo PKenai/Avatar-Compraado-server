@@ -49,8 +49,8 @@ local function getHamCount(cid)
     return v
 end
 
-local function getPlayerLevel(cid)
-    local v = getCreatureLevel(cid)
+local function creatureLevel(cid)
+    local v = getPlayerLevel(cid)
     if type(v) ~= "number" then return 0 end
     return v
 end
@@ -103,7 +103,7 @@ function onPlayerCloseChannel(cid)          npcHandler:onPlayerCloseChannel(cid)
 function onGreet(cid)
     talkState[cid] = 1
     local name = getCreatureName(cid)
-    local level = getPlayerLevel(cid)
+    local level = creatureLevel(cid)
 
     -- Verificar level minimo
     if level < MIN_LEVEL then
@@ -139,7 +139,7 @@ function creatureSayCallback(cid, type, msg)
     end
 
     local name = getCreatureName(cid)
-    local level = getPlayerLevel(cid)
+    local level = creatureLevel(cid)
     local count = getHamCount(cid)
     local completed = questCompleted(cid)
     local started = questStarted(cid)
