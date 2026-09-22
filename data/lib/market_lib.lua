@@ -10,6 +10,12 @@
 --    getOffer>PAGE>CATEGORY
 --    search>TERM>PAGE>CATEGORY
 --    details>OFFER_ID
+--    resolve>ITEM NAME       -- janela "Adicionar Oferta" (nome digitado)
+--    pick>{endereco do item} -- cliente antigo, com mira/crosshair
+--
+--  A oferta em si NAO entra por aqui: o cliente manda a talkaction
+--  "!offer add, NOME, COUNT, PRICE" (data/talkactions/scripts/auctionsystem.lua),
+--  que revalida posse/tier/limites e so' entao cobra o item.
 -- ============================================================================
 
 -- ----------------------------------------------------------------------------
@@ -425,7 +431,11 @@ function Market.sendOpenOtclient(cid)
 end
 
 -- ----------------------------------------------------------------------------
---  Item pick (the client's crosshair on the "Adicionar Oferta" window)
+--  Item pick (crosshair da janela "Adicionar Oferta") - CLIENTE ANTIGO
+--
+--  O cliente atual do market nao usa mais isto: ele resolve por NOME
+--  (Market.resolveName, mais abaixo). O bloco ficou porque o servidor e' um so'
+--  para todo mundo e um cliente que ainda manda pick> continua funcionando.
 --
 --  The client sends the address of the item the player clicked (the same
 --  encoding the tooltip module uses):
@@ -625,5 +635,104 @@ function Market.sendPickResult(cid, payload)
     doSendPlayerExtendedOpcode(cid, Market.opcodes, "pickok>" .. json.encode(result))
   else
     doSendPlayerExtendedOpcode(cid, Market.opcodes, "pickerr>" .. tostring(result.error or "Item invalido."))
+  end
+end
+
+-- ----------------------------------------------------------------------------
+--  Resolve por NOME (janela "Adicionar Oferta" do cliente atual)
+--
+--  O cliente do market NAO tem tabela de nomes de item: o DAT/SPR dele carrega
+--  so' o binario (modules/game_things/things.lua) e o engine nao chama
+--  loadXml, entao "magic sword" nao existe do lado do cliente. Quem traduz o
+--  que o jogador digitou para item e' o servidor:
+--
+--    resolve>NOME DIGITADO
+--      -> itemok>{...}   itemName, clientId (sprite), count, stackable, source
+--      -> itemerr>MOTIVO
+--
+--  Mesma resposta do pick (inclusive o campo `requested`, que o cliente usa
+--  para descartar resposta de um nome que ele ja' trocou). O bloco do pick
+--  continua aqui de proposito: cliente antigo que ainda manda pick> segue
+--  funcionando.
+--
+--  Nada e' removido aqui - isto so' DIZ ao cliente qual item e' esse. A oferta
+--  e' validada (e o item cobrado) em
+--  data/talkactions/scripts/auctionsystem.lua, via "!offer add, NOME, COUNT, PRICE".
+-- ----------------------------------------------------------------------------
+
+-- getItemIdByName() do engine chama errorEx("Item not found") quando o nome nao
+-- existe, o que imprime um bloco [Error - ...] no console a cada erro de
+-- digitacao do jogador. O desvio e' o mesmo usado em
+-- data/talkactions/scripts/createitem.lua: desligar o report de erro so' durante
+-- a chamada e restaurar o valor anterior depois.
+-- Devolve (itemId, erro). Nome com espaco sobrando ("magic sword , 1, 2000") e'
+-- aparado aqui.
+function Market.getItemIdByName(name)
+  name = tostring(name or ""):gsub("^%s+", ""):gsub("%s+$", "")
+  if name == "" then
+    return nil, "Digite o nome do item."
+  end
+
+  local previous = errors(false)
+  local itemId = getItemIdByName(name)
+  errors(previous)
+
+  if not itemId or itemId <= 0 then
+    return nil, "Nao existe item com este nome."
+  end
+  return itemId
+end
+
+function Market.resolveName(cid, name)
+  if not isPlayer(cid) then
+    return { ok = false, error = "Personagem invalido." }
+  end
+
+  local itemId, err = Market.getItemIdByName(name)
+  if not itemId then
+    return { ok = false, error = err }
+  end
+
+  -- mesma regra do crosshair e do !offer: item que o market nao vende nem
+  -- chega a mostrar sprite
+  if not Market.isSellableItem(itemId) then
+    return { ok = false, error = "Este item nao pode ser vendido no market." }
+  end
+
+  local info = getItemInfo(itemId)
+
+  -- Quantidades separadas: a mochila e' getPlayerItemCount, o deposito e' o
+  -- mesmo helper do !offer (Market.depotItemCount). O jogador pode anunciar
+  -- somando as duas, porque o talkaction puxa o que falta do deposito.
+  local inBackpack = tonumber(getPlayerItemCount(cid, itemId)) or 0
+  local inDepot = Market.depotItemCount(cid, itemId)
+  if (inBackpack + inDepot) <= 0 then
+    return { ok = false, error = "Voce nao tem esse item na mochila nem no deposito." }
+  end
+
+  return {
+    ok         = true,
+    -- eco do texto digitado: o cliente descarta a resposta se o campo ja' mudou
+    requested  = tostring(name or ""):gsub("^%s+", ""):gsub("%s+$", ""),
+    itemId     = itemId,
+    itemName   = (type(info) == "table" and info.name) or getItemNameById(itemId),
+    clientId   = getClientId(itemId),
+    count      = inBackpack + inDepot,
+    inBackpack = inBackpack,
+    inDepot    = inDepot,
+    source     = inBackpack > 0 and "inventory" or "depot",
+    -- o tier e' do item (uid), nao do nome: quem le' e' o !offer, no item que
+    -- ele realmente for remover. Por isso nao vai tier aqui.
+    stackable  = (type(info) == "table" and info.stackable == true) or false
+  }
+end
+
+function Market.sendNameResult(cid, name)
+  local result = Market.resolveName(cid, name)
+  if result.ok then
+    result.ok = nil
+    doSendPlayerExtendedOpcode(cid, Market.opcodes, "itemok>" .. json.encode(result))
+  else
+    doSendPlayerExtendedOpcode(cid, Market.opcodes, "itemerr>" .. tostring(result.error or "Item invalido."))
   end
 end

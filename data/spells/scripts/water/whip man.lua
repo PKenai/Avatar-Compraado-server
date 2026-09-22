@@ -44,9 +44,9 @@ for x = 1, #MyLocal.areas do
     local combats = {combat1, combat2, combat3, combat4, combat5, combat6, combat7, combat8}
   setCombatArea(combats[x], createCombatArea(MyLocal.areas[x]))
 
-    function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = level+(magLevel/3)*1.0
-        local max = level+(magLevel/3)*1.5
+    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = level+((level * 0.5)/3)*1.0
+        local max = level+((level * 0.5)/3)*1.5
 
 	local dano = math.random(min, max) + math.random(4, 8)
 	local atk = cf.atk

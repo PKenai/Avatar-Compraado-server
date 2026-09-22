@@ -15,8 +15,8 @@ end
 
 local function getMin(cid)
   local level = getPlayerLevel(cid)
-  local magLevel = getPlayerMagLevel(cid)
-  local min = ((level+(magLevel/3)*2.5)+math.random(20, 30)) * 1,2
+  local magLevel = level * 0.5
+  local min = ((level+((level * 0.5)/3)*2.5)+math.random(20, 30)) * 1,2
       if exhaustion.check(cid, "isFocusThunderstorm") then 
         min = min*2
       end 
@@ -31,8 +31,8 @@ end
 
 local function getMax(cid)
   local level = getPlayerLevel(cid)
-  local magLevel = getPlayerMagLevel(cid)
- local max = ((level+(magLevel/3)*3.2)+math.random(30, 40))* 1,2
+  local magLevel = level * 0.5
+ local max = ((level+((level * 0.5)/3)*3.2)+math.random(30, 40))* 1,2
       if exhaustion.check(cid, "isFocusThunderstorm") then 
         max = max*2
       end 
@@ -50,7 +50,7 @@ setCombatParam(combat1, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
 
     return -getMin(cid)/2, -getMax(cid)/2
 end

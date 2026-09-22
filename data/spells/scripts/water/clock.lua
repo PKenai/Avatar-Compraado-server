@@ -6,8 +6,8 @@ local function doDrown(cid, target, times)
 		return false 
 	end 
 	local level = getPlayerLevel(cid)
-	local magLevel = getPlayerMagLevel(cid)
-	local min = (level+(magLevel/4)*2.2)+5
+	local magLevel = level * 0.5
+	local min = (level+((level * 0.5)/4)*2.2)+5
 	min = math.random(min*0.3, min*0.6)
 	min = remakeValue(2, min, cid)
 return isCreature(cid) and isCreature(target) and not isInPz(cid) and not isInPz(target) and doTargetCombatHealth(cid, target, COMBAT_DROWNDAMAGE, -min, -min, 0) and addEvent(doDrown, 300, cid, target, times-1)
@@ -41,9 +41,9 @@ local combatEast = createCombatObject()
 setCombatParam(combatEast, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
 setCombatParam(combatEast, COMBAT_PARAM_EFFECT, 138)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.2)+5
-    local max = (level+(magLevel/4)*3.8)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.2)+5
+    local max = (level+((level * 0.5)/4)*3.8)+15
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -55,9 +55,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combatNorthEast, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.2)+5
-    local max = (level+(magLevel/4)*3.8)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.2)+5
+    local max = (level+((level * 0.5)/4)*3.8)+15
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -69,9 +69,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combatNorthWest, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.2)+5
-    local max = (level+(magLevel/4)*3.8)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.2)+5
+    local max = (level+((level * 0.5)/4)*3.8)+15
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -83,9 +83,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combatSouthEast, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.2)+5
-    local max = (level+(magLevel/4)*3.8)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.2)+5
+    local max = (level+((level * 0.5)/4)*3.8)+15
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -97,9 +97,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combatSouthWest, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.2)+5
-    local max = (level+(magLevel/4)*3.8)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.2)+5
+    local max = (level+((level * 0.5)/4)*3.8)+15
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -111,9 +111,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combatWest, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.2)+5
-    local max = (level+(magLevel/4)*3.8)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.2)+5
+    local max = (level+((level * 0.5)/4)*3.8)+15
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 

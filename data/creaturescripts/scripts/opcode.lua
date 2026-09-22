@@ -65,9 +65,15 @@ function onExtendedOpcode(cid, opcode, buffer)
 				local term = parts[2] or ""
 				local pag  = tonumber(parts[3]) or 1
 				Market.sendSearchOtclient(cid, term, pag, parts[4] or "all", tonumber(parts[5]) or 0)
+			elseif ( action == "resolve" ) then
+				-- Janela "Adicionar Oferta" (fluxo atual): o jogador DIGITA o nome
+				-- do item e o servidor traduz para item (o cliente nao tem tabela
+				-- de nomes). Responde itemok>/itemerr> e nao remove nada.
+				Market.sendNameResult(cid, parts[2] or "")
 			elseif ( action == "pick" ) then
-				-- Crosshair do "Adicionar Oferta": o cliente manda o endereco do
-				-- item clicado e o servidor confirma nome/quantidade/tier.
+				-- Crosshair do "Adicionar Oferta" (cliente antigo): o jogador clica
+				-- no item e o servidor confirma nome/quantidade/tier. Mantido para
+				-- nao quebrar cliente que ainda usa a mira.
 				Market.sendPickResult(cid, parts[2] or "")
 			elseif ( action == "details" ) then
 				doSendPlayerExtendedOpcode(cid, Market.opcodes, "details>"..Market.getOfferDescription(tonumber(parts[2])))

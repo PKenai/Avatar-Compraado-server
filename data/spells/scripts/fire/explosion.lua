@@ -30,9 +30,9 @@ setCombatParam(combatSelf, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 local combats = {combatNorth, combatSouth, combatEast, combatWest, combatNorthWest, combatNorthEast, combatSouthWest, combatSouthEast}
 
 
-local function getMinAndMax(cid, level, magLevel)
-    local min = (level+(magLevel/2)*4.1)+math.random(3, 7)
-    local max = (level+(magLevel/2)*5.3)+math.random(7, 15)
+local function getMinAndMax(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*4.1)+math.random(3, 7)
+    local max = (level+((level * 0.5)/2)*5.3)+math.random(7, 15)
     if exhaustion.check(cid, "isFocusExplosion") then 
         min = min*1.5
         max = max*2.0
@@ -56,8 +56,8 @@ for x = 1, #combats do
         return doSendMagicEffect({x=pos.x+1, y=pos.y+1, z=pos.z}, cf.effectExplo)
     end
     setCombatCallback(combats[x], CALLBACK_PARAM_TARGETTILE, "onTargetTile")
-    function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local minAndMax = getMinAndMax(cid, level, magLevel)
+    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local minAndMax = getMinAndMax(cid, level, (level * 0.5))
         return -minAndMax[1], -minAndMax[2]
     end
     setCombatCallback(combats[x], CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
@@ -66,8 +66,8 @@ end
 
 
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local minAndMax = getMinAndMax(cid, level, magLevel)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local minAndMax = getMinAndMax(cid, level, (level * 0.5))
     return -minAndMax[1], -minAndMax[2]
 end
 setCombatCallback(combatSelf, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")

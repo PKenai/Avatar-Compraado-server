@@ -9,9 +9,9 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, 76)
 setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, -0.3, -30, -0.4, 0)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*3.7)+math.random(25, 35)
-    local max = (level+(magLevel/4)*4.0)+math.random(35, 40)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*3.7)+math.random(25, 35)
+    local max = (level+((level * 0.5)/4)*4.0)+math.random(35, 40)
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 

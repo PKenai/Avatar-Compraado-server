@@ -12,9 +12,9 @@ local SUFFOCATION_EFFECT = 392
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*3.3)+math.random(5, 10)
-    local max = (level+(magLevel/3)*3.7)+math.random(10, 15)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*3.3)+math.random(5, 10)
+    local max = (level+((level * 0.5)/3)*3.7)+math.random(10, 15)
 
 	local dano = math.random(min, max)
 	local atk = cf.atk

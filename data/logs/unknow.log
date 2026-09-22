@@ -66751,3 +66751,17 @@
 [21/9/2026 1:1:26] as `guild_name`, `e`.`name` as `enemy_name`, `guild_wars`.`status` as `status`, `g`.`id` as `guild_id`, `e`.`id` as `enemy_id`, `guild_wars`.*   FROM `guild_wars` LEFT JOIN `guilds` as `g` ON `guild_wars`.`guild_id` = `g`.`id` LEFT JOIN `guilds` as `e` ON `guild_wars`.`enemy_id` = `e`.`id` WHERE (`end` > 0 AND (`end` + 
 [21/9/2026 1:3:54] FROM `guild_ranks` WHERE `guild_id` = 
 [21/9/2026 2:15:3] player_viplist` (`player_id`, `vip_id`) VALUES 
+[21/9/2026 20:57:34] n is thrown to prevent "eternal" matches that take an indefinite period time to locate.
+[21/9/2026 21:1:55] ion to a war with 
+[21/9/2026 21:8:9]  is thrown to prevent "eternal" matches that take an indefinite period time to locate.
+[21/9/2026 21:8:10] turn
+[21/9/2026 21:13:4] turn
+[21/9/2026 21:13:4] turn
+[21/9/2026 21:13:8] as `guild_name`, `e`.`name` as `enemy_name`, `guild_wars`.`status` as `status`, `g`.`id` as `guild_id`, `e`.`id` as `enemy_id`, `guild_wars`.*   FROM `guild_wars` LEFT JOIN `guilds` as `g` ON `guild_wars`.`guild_id` = `g`.`id` LEFT JOIN `guilds` as `e` ON `guild_wars`.`enemy_id` = `e`.`id` WHERE (`end` > 0 AND (`end` + 
+[21/9/2026 21:13:25] turn
+[21/9/2026 21:21:19]  WHERE (`begin` > 0 AND (`begin` + 
+[21/9/2026 23:9:38] ion is thrown to prevent "eternal" matches that take an indefinite period time to locate.
+[21/9/2026 23:12:54] O
+[21/9/2026 23:12:54] O
+[21/9/2026 23:12:55] O
+[21/9/2026 23:13:19]  is thrown to prevent "eternal" matches that take an indefinite period time to locate.

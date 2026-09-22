@@ -4,7 +4,7 @@ local cf = {atk = spellsInfo[spellName].atk}
 --[[
   DANO QUANDO QUEM CONJURA E' MONSTRO
 
-  Monstro nao tem level/magLevel, entao o dano dele sempre vem do <attack> no
+  Monstro nao tem level/(level * 0.5), entao o dano dele sempre vem do <attack> no
   XML da criatura (mesma regra documentada em
   data/spells/scripts/monster/monsterSpell.lua). Como getMonsterInfo() nao diz
   o nome da spell de cada bloco de ataque, lemos o XML do proprio monstro e
@@ -71,8 +71,8 @@ local function getMin(cid)
 		return min
 	end
   local level = getPlayerLevel(cid)
-  local magLevel = getPlayerMagLevel(cid)
-  local min = ((level+(magLevel/6)*2.5)+math.random(20, 30)) * 2,6
+  local magLevel = level * 0.5
+  local min = ((level+((level * 0.5)/6)*2.5)+math.random(20, 30)) * 2,6
   	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.6
 	end
@@ -91,8 +91,8 @@ local function getMax(cid)
 		return max
 	end
   local level = getPlayerLevel(cid)
-  local magLevel = getPlayerMagLevel(cid)
- local max = ((level+(magLevel/6)*3.2)+math.random(30, 40))* 2,6
+  local magLevel = level * 0.5
+ local max = ((level+((level * 0.5)/6)*3.2)+math.random(30, 40))* 2,6
  	if getPlayerInWaterWithUnderwater(cid) then 
 		max = max*0.6
 	end

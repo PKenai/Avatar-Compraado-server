@@ -219,7 +219,19 @@ function onSay(cid, words, param, channel)
             end
         end
 
-        local itemId = getItemIdByName(word[2])
+        -- Nome -> id pelo helper do market: ele apara espaco sobrando (o
+        -- jogador escreve "magic sword , 1, 2000") e chama getItemIdByName()
+        -- com o report de erro desligado, senao um nome inexistente imprime um
+        -- bloco [Error - ...] no console a cada tentativa. O fallback mantem o
+        -- talkaction funcionando mesmo se a lib do market nao estiver carregada.
+        local itemId
+        if type(Market) == "table" and type(Market.getItemIdByName) == "function" then
+            itemId = Market.getItemIdByName(word[2])
+        else
+            errors(false)
+            itemId = getItemIdByName(word[2])
+            errors(true)
+        end
         itemCount = math.floor(itemCount)
         if not itemId then
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "[MARKET] Não existe item com este nome.")

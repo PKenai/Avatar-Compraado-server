@@ -183,9 +183,9 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
 local combatSplash = createCombatObject()
 setCombatParam(combatSplash, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*4.1)+math.random(3, 7)
-    local max = (level+(magLevel/2)*5.3)+math.random(7, 15)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*4.1)+math.random(3, 7)
+    local max = (level+((level * 0.5)/2)*5.3)+math.random(7, 15)
     local dano = math.random(min, max)
     local atk = cf.atk
     if atk and type(atk) == "number" then
@@ -197,9 +197,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetChainSplashMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*4.1)+math.random(3, 7)
-    local max = (level+(magLevel/2)*5.3)+math.random(7, 15)
+function onGetChainSplashMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*4.1)+math.random(3, 7)
+    local max = (level+((level * 0.5)/2)*5.3)+math.random(7, 15)
     local dano = math.random(min, max)
     local atk = cf.atk
     if atk and type(atk) == "number" then

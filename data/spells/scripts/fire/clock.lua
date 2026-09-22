@@ -9,9 +9,9 @@ local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, 324)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = ((level+(magLevel/2)*4.3)+math.random(15, 20))*0.8
-    local max = ((level+(magLevel/2)*5.1)+math.random(20, 21))*0.8
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = ((level+((level * 0.5)/2)*4.3)+math.random(15, 20))*0.8
+    local max = ((level+((level * 0.5)/2)*5.1)+math.random(20, 21))*0.8
     if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5
@@ -32,9 +32,9 @@ local combatFocus = createCombatObject()
 setCombatParam(combatFocus, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 setCombatParam(combatFocus, COMBAT_PARAM_EFFECT, CONST_ME_HITBYFIRE)
 
-function onGetPlayerMinMaxValuesFocus(cid, level, magLevel)
-    local min = (((level+(magLevel/2)*4.3)+math.random(15, 20))*1.5)*0.8
-    local max = (((level+(magLevel/2)*5.1)+math.random(20, 21))*2.0)*0.8
+function onGetPlayerMinMaxValuesFocus(cid, level, magLevelUnused)
+    local min = (((level+((level * 0.5)/2)*4.3)+math.random(15, 20))*1.5)*0.8
+    local max = (((level+((level * 0.5)/2)*5.1)+math.random(20, 21))*2.0)*0.8
     if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5

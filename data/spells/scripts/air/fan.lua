@@ -87,9 +87,9 @@ for x = 1, #combats do
     setCombatArea(combats[x], createCombatArea(arrs[x]))
     setCombatStageScaling(combats[x])
  
-    function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/4.1)*0.8)
-        local max = (level+(magLevel/4.1)*1.0)
+    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/4.1)*0.8)
+        local max = (level+((level * 0.5)/4.1)*1.0)
 		local dano = math.random(min, max)
 		local atk = cf.atk
 		if atk and type(atk) == "number" then 

@@ -138,7 +138,7 @@
 		<vocation id="2"/>
 	</instant>
 
-	<instant name="Water Res" words="water res" lvl="25" mana="25" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="water/res.lua">
+	<instant name="Water Freeze" words="water freeze" lvl="25" mana="25" aggressive="1" needtarget="1" range="4" exhaustion="800" needlearn="0" event="script" value="water/freeze.lua">
 		<vocation id="2"/>
 	</instant>
 

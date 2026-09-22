@@ -22,9 +22,9 @@ setCombatStageScaling(combat)
 
 local function getDamage(cid)
   local level = getPlayerLevel(cid)
-  local magLevel = getPlayerMagLevel(cid)
-  local min = (level/5 + (magLevel/4))
-	local max = (level/4 + (magLevel/4))
+  local magLevel = level * 0.5
+  local min = (level/5 + ((level * 0.5)/4))
+	local max = (level/4 + ((level * 0.5)/4))
     if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.6
 		max = max*0.6

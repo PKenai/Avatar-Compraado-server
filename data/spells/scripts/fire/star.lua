@@ -8,10 +8,10 @@ MyLocal.players = {}
 local function calcDano(cid, isFocus)
     if not isCreature(cid) then return 0 end
     local level = isPlayer(cid) and getPlayerLevel(cid) or 50
-    local magLevel = isPlayer(cid) and getPlayerMagLevel(cid) or 10
+    local magLevel = level * 0.5
 
-    local min = (level + (magLevel / 2) * 4.5) + math.random(30, 40)
-    local max = (level + (magLevel / 2) * 5.2) + math.random(40, 55)
+    local min = (level + ((level * 0.5) / 2) * 4.5) + math.random(30, 40)
+    local max = (level + ((level * 0.5) / 2) * 5.2) + math.random(40, 55)
 
     if getPlayerInWaterWithUnderwater(cid) then
         min = min * 0.5

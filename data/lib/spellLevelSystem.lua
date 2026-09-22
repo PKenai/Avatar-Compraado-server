@@ -628,13 +628,13 @@ spellsInfos =
                         [9] = {needLevel = 45, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [10] = {needLevel = 50, porcentageDamage = 0, effectSpell = false, needStorage = false}
                 },
-                ["res"] =
+                ["freeze"] =
                 {       ["Info"] =
-                        {storageLevel = "levelWaterres", storageExp = "expWaterres"},
+                        {storageLevel = "levelWaterfreeze", storageExp = "expWaterfreeze"},
                         [2] = {needLevel = 25, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [3] = {needLevel = 28, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [4] = {needLevel = 30, porcentageDamage = 0, effectSpell = false, needStorage = {
-                             ["WaterresLvL4"] = {value = 1, storageName="utilizado pergaminho de aprendizagem do Water res level 4", isSpell = false}}
+                             ["WaterfreezeLvL4"] = {value = 1, storageName="utilizado pergaminho de aprendizagem do Water Freeze level 4", isSpell = false}}
                         },
                         [5] = {needLevel = 35, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [6] = {needLevel = 40, porcentageDamage = 0, effectSpell = false, needStorage = false},
@@ -706,7 +706,7 @@ spellsInfos =
                         },
                         [5] = {needLevel = 65, porcentageDamage = 0, effectSpell = false, needStorage = false},
                         [6] = {needLevel = 75, porcentageDamage = 0, effectSpell = false, needStorage = {
-                                ["levelWaterres"] = {value = 5, storageName ="Water res", isSpell = true},
+                                ["levelWaterfreeze"] = {value = 5, storageName ="Water Freeze", isSpell = true},
                                 ["WatercannonLvL6"] = {value = 1, storageName ="conversar com Mentor Iroh", isSpell = false}}
                         },
                         [7] = {needLevel = 85, porcentageDamage = 0, effectSpell = false, needStorage = false},

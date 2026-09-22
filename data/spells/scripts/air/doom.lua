@@ -32,9 +32,9 @@ for x = 1, #combats do
                 end
         end
  
-        function onGetPlayerMinMaxValues(cid, level, magLevel)
-                local min = (level+(magLevel/3)*4.5)+math.random(30, 40)
-                local max = (level+(magLevel/3)*5.7)+math.random(40, 50)
+        function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+                local min = (level+((level * 0.5)/3)*4.5)+math.random(30, 40)
+                local max = (level+((level * 0.5)/3)*5.7)+math.random(40, 50)
 				local dano = math.random(min, max)
 				local atk = cf.atk
 				if atk and type(atk) == "number" then 

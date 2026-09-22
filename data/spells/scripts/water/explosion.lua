@@ -10,9 +10,9 @@ setCombatParam(combat, COMBAT_PARAM_EFFECT, 53)
 setCombatParam(combat, COMBAT_PARAM_DISTANCEEFFECT, 46)
 setCombatArea(combat, createCombatArea(AREA_CROSS1X1))
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*3.2)+(math.random(20, 25)/2)
-    local max = (level+(magLevel/4)*3.5)+(math.random(25, 35)/2)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*3.2)+(math.random(20, 25)/2)
+    local max = (level+((level * 0.5)/4)*3.5)+(math.random(25, 35)/2)
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -36,9 +36,9 @@ setCombatParam(combatMini, COMBAT_PARAM_EFFECT, 53)
 setCombatParam(combatMini, COMBAT_PARAM_DISTANCEEFFECT, 46)
 setCombatArea(combatMini, createCombatArea(AREA_STAGE_SOLO))
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*3.2)+(math.random(20, 25)/2)
-    local max = (level+(magLevel/4)*3.5)+(math.random(25, 35)/2)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*3.2)+(math.random(20, 25)/2)
+    local max = (level+((level * 0.5)/4)*3.5)+(math.random(25, 35)/2)
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -70,9 +70,9 @@ setCombatParam(combatElite, COMBAT_PARAM_EFFECT, 53)
 setCombatParam(combatElite, COMBAT_PARAM_DISTANCEEFFECT, 46)
 setCombatArea(combatElite, createCombatArea(AREA_EXPLOSION_ELITE))
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*3.2)+(math.random(20, 25)/2)
-    local max = (level+(magLevel/4)*3.5)+(math.random(25, 35)/2)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*3.2)+(math.random(20, 25)/2)
+    local max = (level+((level * 0.5)/4)*3.5)+(math.random(25, 35)/2)
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 

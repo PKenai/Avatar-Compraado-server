@@ -9,9 +9,9 @@ local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, 153)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*4.1)+math.random(3, 5)
-    local max = (level+(magLevel/3)*4.9)+math.random(5, 8)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*4.1)+math.random(3, 5)
+    local max = (level+((level * 0.5)/3)*4.9)+math.random(5, 8)
 
 	
 	local dano = math.random(min, max)

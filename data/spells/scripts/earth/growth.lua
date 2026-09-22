@@ -13,9 +13,9 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
 --setCombatParam(combat, COMBAT_PARAM_HITEFFECT, 34)
 --setCombatParam(combat, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = ((level+(magLevel/4)*2.6)+math.random(1, 2))*2.00
-    local max = ((level+(magLevel/4)*3.1)+math.random(2, 3))*2.00
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = ((level+((level * 0.5)/4)*2.6)+math.random(1, 2))*2.00
+    local max = ((level+((level * 0.5)/4)*3.1)+math.random(2, 3))*2.00
 	min = remakeAirEarth(cid, min)
 	max = remakeAirEarth(cid, max)
 	if getPlayerInWaterWithUnderwater(cid) then 

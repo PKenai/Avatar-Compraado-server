@@ -60,12 +60,12 @@ ipBanLength = 1 * 24 * 60 * 60
 allowedMaxSizePackets = 20
 
 worldType = "open"
-protectionLevel = 15
+protectionLevel = 5
 pvpTileIgnoreLevelAndVocationProtection = true
 pzLocked = 1 * 60 * 1000
 huntingDuration = 1 * 1000
 criticalHitChance = 1
-criticalHitMultiplier = 1.15
+criticalHitMultiplier = 1.30
 displayCriticalHitNotify = true
 removeWeaponAmmunition = true
 removeWeaponCharges = true
@@ -78,7 +78,7 @@ whiteSkullTime = 15 * 60 * 1000
 noDamageToSameLookfeet = false
 showHealthChange = true
 showManaChange = false
-showHealthChangeForMonsters = false
+showHealthChangeForMonsters = true
 showManaChangeForMonsters = false
 fieldOwnershipDuration = 5 * 1000
 stopAttackingAtExit = false
@@ -97,7 +97,11 @@ useFairfightReduction = false
 optionalWarAttackableAlly = false
 
 worldId = 0
-ip = "127.0.0.1"
+-- IP que o servidor anuncia no login (e no status XML). Nesta maquina o unico
+-- adaptador e' 89.213.41.202, entao e' esse que o client precisa usar.
+-- Com bindOnlyGlobalAddress = false o engine ainda binda loopback + IPs locais,
+-- ou seja 127.0.0.1 continua funcionando pra quem joga do proprio host.
+ip = "89.213.41.202"
 bindOnlyGlobalAddress = false
 fullMapOnLogin = false
 -- Envia o effect id dos magic effects com 2 bytes (0-65535) no lugar de 1 byte
@@ -121,7 +125,7 @@ motd = "Welcome to Avatar Eclipse!"
 displayOnOrOffAtCharlist = false
 onePlayerOnlinePerAccount = false
 allowClones = 0
-serverName = "Eclipse"
+serverName = "Avatar Eclipse"
 loginMessageEN = "Welcome to the amazing world of Avatar, enjoy!"
 loginMessagePT = "Seja bem-vindo ao fantastico mundo de Avatar!"
 statusTimeout = 1 * 5 * 1000
@@ -278,7 +282,7 @@ pvpBlessingThreshold = 40
 fairFightTimeRange = 60
 
 experienceStages = false
-rateExperience = 0.1
+rateExperience = 200
 rateExperienceFromPlayers = 0.3
 rateSkill = 1
 rateMagic = 1

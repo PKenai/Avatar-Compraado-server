@@ -33,9 +33,9 @@ setCombatStageScaling(combat2)
 local combats = {combat, combat2}
 
 for x = 1, #combats do
-    function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/3)*5.2)+math.random(35, 45)
-        local max = (level+(magLevel/3)*6.0)+math.random(45, 60)
+    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/3)*5.2)+math.random(35, 45)
+        local max = (level+((level * 0.5)/3)*6.0)+math.random(45, 60)
 	if getPlayerInWaterWithUnderwater(cid) then 
         min = min*1.3
         max = max*1.3

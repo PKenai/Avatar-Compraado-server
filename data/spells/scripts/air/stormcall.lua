@@ -101,9 +101,9 @@ setCombatArea(combats[i], createCombatArea(
       }))
 setCombatStageScaling(combats[i])
 end 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/3)*4.16)+math.random(35, 45)
-        local max = (level+(magLevel/3)*4.8)+math.random(45, 60)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/3)*4.16)+math.random(35, 45)
+        local max = (level+((level * 0.5)/3)*4.8)+math.random(45, 60)
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -151,9 +151,9 @@ setCombatArea(combats2[i], createCombatArea(
       }))
 setCombatStageScaling(combats2[i])
       
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/3)*5.2)+math.random(35, 45)
-        local max = (level+(magLevel/3)*6.0)+math.random(45, 60)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/3)*5.2)+math.random(35, 45)
+        local max = (level+((level * 0.5)/3)*6.0)+math.random(45, 60)
       if getPlayerInWaterWithUnderwater(cid) then 
         min = min*0.6 
         max = max*0.6

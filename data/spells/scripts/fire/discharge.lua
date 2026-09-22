@@ -27,9 +27,9 @@ setCombatArea(combatFocus, createCombatArea(
 setCombatStageScaling(combatFocus)
 
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*2.7)+5
-    local max = (level+(magLevel/3)*3.0)+5
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*2.7)+5
+    local max = (level+((level * 0.5)/3)*3.0)+5
 	if getPlayerInWaterWithUnderwater(cid) then 
         min = min*1.3
         max = max*1.3
@@ -48,9 +48,9 @@ end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*2.7)+5
-    local max = (level+(magLevel/3)*3.0)+5
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*2.7)+5
+    local max = (level+((level * 0.5)/3)*3.0)+5
 	if getPlayerInWaterWithUnderwater(cid) then 
         min = min*1.3
         max = max*1.3

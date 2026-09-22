@@ -13,9 +13,9 @@ local combatVaco = createCombatObject()
 setCombatParam(combatVaco, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 setCombatParam(combatVaco, COMBAT_PARAM_EFFECT, 76)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.2)+5
-    local max = (level+(magLevel/4)*3.8)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.2)+5
+    local max = (level+((level * 0.5)/4)*3.8)+15
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -27,9 +27,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combatWing, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.2)+5
-    local max = (level+(magLevel/4)*3.8)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.2)+5
+    local max = (level+((level * 0.5)/4)*3.8)+15
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 

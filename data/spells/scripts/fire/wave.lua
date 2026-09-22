@@ -37,9 +37,9 @@ local function createWaveCombat(area, multipler)
     setCombatArea(combat, area)
 
     --focus ready--
-    function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level*2)+(magLevel/3)*2
-        local max = (level*2.5)+(magLevel/3)*3
+    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level*2)+((level * 0.5)/3)*2
+        local max = (level*2.5)+((level * 0.5)/3)*3
         local m = multipler
         if getPlayerInWaterWithUnderwater(cid) then
             m = m*0.5

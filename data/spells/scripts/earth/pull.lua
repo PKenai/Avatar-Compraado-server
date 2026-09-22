@@ -10,9 +10,9 @@ local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
 setCombatParam(combat2, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/5)*4.0)+math.random(2, 3)
-    local max = (level+(magLevel/5)*4.3)+math.random(3, 4)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/5)*4.0)+math.random(2, 3)
+    local max = (level+((level * 0.5)/5)*4.3)+math.random(3, 4)
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min * 0.6
 		max = max * 0.6

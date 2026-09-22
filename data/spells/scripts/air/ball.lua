@@ -9,9 +9,9 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_DISTANCEEFFECT, 41)
 setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, -0.3, -30, -0.4, 0)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = level+(magLevel/2)*1.04
-    local max = level+(magLevel/2)*1.44
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = level+((level * 0.5)/2)*1.04
+    local max = level+((level * 0.5)/2)*1.44
 	
 	local dano = math.random(min, max) + math.random(6, 16)
 	local atk = cf.atk

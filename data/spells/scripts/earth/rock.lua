@@ -19,9 +19,9 @@ setCombatParam(combat3, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
 setCombatParam(combat3, COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_LARGEROCK)
 setCombatParam(combat3, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/5)*3.9)+5
-    local max = (level+(magLevel/5)*4.3)+5
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/5)*3.9)+5
+    local max = (level+((level * 0.5)/5)*4.3)+5
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.6
 		max = max*0.6
@@ -38,9 +38,9 @@ end
 setCombatCallback(combat1, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 registerSpellStageEcho(combat1)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/5)*3.9)+8
-    local max = (level+(magLevel/5)*4.5)+8
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/5)*3.9)+8
+    local max = (level+((level * 0.5)/5)*4.5)+8
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.6
 		max = max*0.6
@@ -57,9 +57,9 @@ end
 setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 registerSpellStageEcho(combat2)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/5)*4.0)+12
-    local max = (level+(magLevel/5)*4.6)+12
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/5)*4.0)+12
+    local max = (level+((level * 0.5)/5)*4.6)+12
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.6
 		max = max*0.6

@@ -100,6 +100,8 @@
 	<!-- Statue Donation: janela da estatua (opcode 121) + +5% de dano contra monstros -->
 	<event type="extendedopcode" name="StatueDonationOpcode" event="script" value="statueDonation.lua"/>
 	<event type="statschange" name="StatueDonationCombat" event="script" value="statueBonus.lua"/>
+	<!-- PvP: +50% de dano quando player acerta player (pvpDamageBonus.lua) -->
+	<event type="statschange" name="PvpDamageBonus" event="script" value="pvpDamageBonus.lua"/>
 	<event type="statschange" name="PartyDamageMeter" event="script" value="partydamage.lua"/>
 	<event type="spawnall" name="PartyDamageSpawn" event="script" value="partydamage.lua"/>
 	<event type="castspell" name="castSpell" event="script" value="onUseSpell.lua"/>

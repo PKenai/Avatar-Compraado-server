@@ -19,9 +19,9 @@ setCombatParam(combatFocus, COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_FIRE)
 setAttackFormula(combatFocus, COMBAT_FORMULA_LEVELMAGIC, 5, 5, 4, 7)
 setCombatArea(combatFocus, createCombatArea(AREA_CROSS1X1))
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*3.0)+math.random(20, 25)
-    local max = (level+(magLevel/2)*4.0)+math.random(25, 35)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*3.0)+math.random(20, 25)
+    local max = (level+((level * 0.5)/2)*4.0)+math.random(25, 35)
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5
@@ -36,9 +36,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = ((level+(magLevel/2)*3.0)+math.random(20, 25))*1.5
-    local max = ((level+(magLevel/2)*4.0)+math.random(25, 35))*2.0
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = ((level+((level * 0.5)/2)*3.0)+math.random(20, 25))*1.5
+    local max = ((level+((level * 0.5)/2)*4.0)+math.random(25, 35))*2.0
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5
@@ -66,9 +66,9 @@ local function createBlastStageCombat(area, minMult, maxMult)
     setAttackFormula(combat, COMBAT_FORMULA_LEVELMAGIC, 5, 5, 4, 7)
     setCombatArea(combat, createCombatArea(area))
 
-    function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/2)*3.0)+math.random(20, 25)
-        local max = (level+(magLevel/2)*4.0)+math.random(25, 35)
+    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/2)*3.0)+math.random(20, 25)
+        local max = (level+((level * 0.5)/2)*4.0)+math.random(25, 35)
         min = min*minMult
         max = max*maxMult
         if getPlayerInWaterWithUnderwater(cid) then 

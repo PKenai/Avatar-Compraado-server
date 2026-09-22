@@ -28,9 +28,9 @@ setCombatArea(combat1, area)
 setCombatArea(combat2, area)
 
 for x = 1, 2 do
-  function onGetPlayerMinMaxValues(cid, level, magLevel)
-      local min = (level+(magLevel/4)*1.7)*1.4
-      local max = (level+(magLevel/4)*2)*1.6
+  function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+      local min = (level+((level * 0.5)/4)*1.7)*1.4
+      local max = (level+((level * 0.5)/4)*2)*1.6
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.6
 		max = max*0.6
@@ -69,9 +69,9 @@ local function createCrushStageCombat(areaTable, withDrunk, fissure)
 
   setCombatArea(combat, createCombatArea(areaTable))
 
-  function onGetPlayerMinMaxValues(cid, level, magLevel)
-      local min = (level+(magLevel/4)*1.7)*1.4
-      local max = (level+(magLevel/4)*2)*1.6
+  function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+      local min = (level+((level * 0.5)/4)*1.7)*1.4
+      local max = (level+((level * 0.5)/4)*2)*1.6
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.6
 		max = max*0.6

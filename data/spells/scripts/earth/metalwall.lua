@@ -5,9 +5,9 @@ local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_PHYSICALDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, 9)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.56)+(math.random(30, 35))
-    local max = (level+(magLevel/4)*2.8)+(math.random(35, 45))
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.56)+(math.random(30, 35))
+    local max = (level+((level * 0.5)/4)*2.8)+(math.random(35, 45))
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 

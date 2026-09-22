@@ -21,9 +21,9 @@ for i = 1, RICOCHET_MAX_TARGETS - 1 do
     
     local damageMultiplier = 1 - (RICOCHET_DAMAGE_DECAY * i)
     
-    _G["onGetPlayerMinMaxValuesBounce" .. i] = function(cid, level, magLevel)
-        local min = ((level + (magLevel / 2) * 3.5) + math.random(20, 25)) * damageMultiplier
-        local max = ((level + (magLevel / 2) * 5.0) + math.random(25, 35)) * damageMultiplier
+    _G["onGetPlayerMinMaxValuesBounce" .. i] = function(cid, level, magLevelUnused)
+        local min = ((level + ((level * 0.5) / 2) * 3.5) + math.random(20, 25)) * damageMultiplier
+        local max = ((level + ((level * 0.5) / 2) * 5.0) + math.random(25, 35)) * damageMultiplier
         if getPlayerInWaterWithUnderwater(cid) then
             min = min * 0.5
             max = max * 0.5
@@ -45,9 +45,9 @@ for i = 1, RICOCHET_MAX_TARGETS - 1 do
     bounceCombats[i] = bounceCombat
 end
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level + (magLevel / 2) * 3.5) + math.random(20, 25)
-    local max = (level + (magLevel / 2) * 5.0) + math.random(25, 35)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level + ((level * 0.5) / 2) * 3.5) + math.random(20, 25)
+    local max = (level + ((level * 0.5) / 2) * 5.0) + math.random(25, 35)
     if getPlayerInWaterWithUnderwater(cid) then
         min = min * 0.5
         max = max * 0.5
@@ -66,9 +66,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = ((level + (magLevel / 2) * 3.5) + math.random(20, 25)) * 2.25
-    local max = ((level + (magLevel / 2) * 5.0) + math.random(25, 35)) * 2.25
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = ((level + ((level * 0.5) / 2) * 3.5) + math.random(20, 25)) * 2.25
+    local max = ((level + ((level * 0.5) / 2) * 5.0) + math.random(25, 35)) * 2.25
     if getPlayerInWaterWithUnderwater(cid) then
         min = min * 0.5
         max = max * 0.5

@@ -38,9 +38,9 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 --setCombatParam(combat, COMBAT_PARAM_HITEFFECT, 34)
 --setCombatParam(combat, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = ((level+(magLevel/3)*2.6)+math.random(1, 2))*1.68
-    local max = ((level+(magLevel/3)*3.1)+math.random(2, 3))*1.68
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = ((level+((level * 0.5)/3)*2.6)+math.random(1, 2))*1.68
+    local max = ((level+((level * 0.5)/3)*3.1)+math.random(2, 3))*1.68
 
 	min = min*1.5
 	max = max*1.5

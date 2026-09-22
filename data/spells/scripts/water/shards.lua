@@ -13,9 +13,9 @@ local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_ICEDAMAGE)
 setCombatParam(combat2, COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_ICE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*4.1)+math.random(5, 10)
-    local max = (level+(magLevel/2)*4.5)+math.random(10, 15)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*4.1)+math.random(5, 10)
+    local max = (level+((level * 0.5)/2)*4.5)+math.random(10, 15)
 
 	local dano = math.random(min, max)
 	local atk = cf.atk
@@ -28,9 +28,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combat1, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = ((level+(magLevel/2)*4.1)+math.random(5, 10))*0.75
-    local max = ((level+(magLevel/2)*4.5)+math.random(10, 15))*0.75
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = ((level+((level * 0.5)/2)*4.1)+math.random(5, 10))*0.75
+    local max = ((level+((level * 0.5)/2)*4.5)+math.random(10, 15))*0.75
 
 	local dano = math.random(min, max)
 	local atk = cf.atk

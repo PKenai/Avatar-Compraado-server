@@ -129,7 +129,7 @@ function onSay(cid, words, param, channel)
     elseif ((upgradeStones == 5) and playerLevel == 2) then
         lastDobra = "Water IceSpikes"
     elseif ((upgradeStones == 6) and playerLevel == 2) then
-        lastDobra = "Water Res"
+        lastDobra = "Water Freeze"
     elseif ((upgradeStones == 7) and playerLevel == 2) then
         lastDobra = "Water Shards"
     elseif ((upgradeStones == 8) and playerLevel == 2) then

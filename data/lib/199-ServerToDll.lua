@@ -65,7 +65,7 @@ waterSpells = { --[[MUITO IMPORTANTE: Tem que estar na ordem dos leveis.]]
   "waterheal",
   "waterjump",
   "watericeSpikes",
-  "waterres",
+  "waterfreeze",
   "watershards",
   "watersurf",
   "watercannon",
