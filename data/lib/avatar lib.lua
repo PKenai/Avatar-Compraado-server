@@ -1,8 +1,9 @@
 -- ============================================================================
 -- BALANCE DE DANO POR ELEMENTO E BEND LEVEL
 --
--- MODELO: quem escala o dano e' o LEVEL. O BEND LEVEL e' um bonus plano de
--- +1% por ponto (SPELL_BALANCE_BEND_PER_POINT), o mesmo para toda magia.
+-- MODELO: quem escala o dano e' o LEVEL, multiplicado pela curva de level
+-- (SPELL_BALANCE_LEVEL_CURVE, mais abaixo) e pelo BEND LEVEL, que multiplica
+-- +4% por ponto (SPELL_BALANCE_BEND_PER_POINT) -- o mesmo para toda magia.
 --
 -- Para isso as formulas das magias nao usam mais o parametro magLevel: ele
 -- virou magLevelUnused (segue na assinatura, sem uso) e o termo foi trocado
@@ -84,9 +85,100 @@ SPELL_BALANCE_LEVEL_GROWTH = {
 }
 SPELL_BALANCE_LEVEL_GROWTH_CAP = 0.25
 
--- Cada ponto de bend level aumenta o dano das dobras em 1%.
--- Em bend 50 o dano sai 1.5x; em bend 0 (personagem novo) sai 1.0x.
-SPELL_BALANCE_BEND_PER_POINT = 0.01
+-- Cada ponto de bend level aumenta o dano das dobras em 4%.
+-- Em bend 50 o dano sai 3.0x; em bend 25 sai 2.0x; em bend 0 (personagem
+-- novo) sai 1.0x.
+SPELL_BALANCE_BEND_PER_POINT = 0.04
+
+-- ============================================================================
+-- CURVA DE LEVEL - MEDIA DE DANO GERAL DO SERVIDOR
+--
+-- Meta de media de dano por level (uma aplicacao de magia, SEM bend):
+--
+--     level   1 ...... 20 ~~ 30
+--     level   5 ...... 30 ~~ 50
+--     level  10 ...... 50 ~~ 80
+--     level  50 ...... 100 ~~ 150
+--     level 100 ...... 200 ~~ 250
+--     level 150 ...... 300 ~~ 400
+--
+-- A tabela abaixo e' a CORRECAO aplicada para a media medida bater essa meta.
+-- E' medicao real, nao chute:
+--
+--     correcao = meta do level / mediana medida naquele level
+--
+-- Meta  = a meta acima interpolada em linha reta entre as faixas (o valor da
+--         faixa no proprio level, ex: level 100 = 225 = meio de 200 ~~ 250).
+-- Hoje  = mediana medida das 71 magias de dano, SEM bend, no level:
+--         perl tools/spell_balance_report.pl --level N --mag 0
+--
+--     level    meta hoje      hoje medido    correcao
+--     ---------------------------------------------------
+--         1      25     (20-30)      27.0       1.00  <- ja' batia
+--         5      40     (30-50)      43.4       1.00  <- ja' batia
+--        10      65     (50-80)      67.0       1.00  <- ja' batia
+--        25      87.5                132.1       0.66
+--        50     125    (100-150)     237.8       0.53
+--        75     175                  342.0       0.51
+--       100     225    (200-250)     452.1       0.50
+--       150     350    (300-400)     655.4       0.53
+--       200     475                  873.4       0.54
+--       400     975                 1709.1       0.57
+--
+-- Ou seja: ate' o level 10 a curva de hoje JA' e' a meta (a formula da propria
+-- magia entrega o valor, correcao 1.00); do 25 pra cima o servidor vinha
+-- entregando ~2x a meta, e e' isso que a correcao corta. Os pontos do 25, 75,
+-- 200 e 400 existem para a reta entre um ponto e outro nao fugir da meta (entre
+-- o 10 e o 50 a meta andava 1.5 por level e a curva de hoje 4.2). Entre dois
+-- pontos interpola em linha reta e depois do ultimo continua no passo do ultimo
+-- trecho (hoje +0.0005 por level: o corte fica estavel no fim da jornada).
+--
+-- Se a meta mudar, remeca a mediana e refaca a conta: mexer aqui mexe na media
+-- do servidor inteiro. Magia isolada continua se ajustando pelo atk em
+-- 201-spellsExausted.lua.
+-- ============================================================================
+SPELL_BALANCE_LEVEL_CURVE = {
+	[1]   = 1.00,
+	[5]   = 1.00,
+	[10]  = 1.00,
+	[25]  = 0.66,
+	[50]  = 0.53,
+	[75]  = 0.51,
+	[100] = 0.50,
+	[150] = 0.53,
+	[200] = 0.54,
+	[400] = 0.57,
+}
+
+-- Chaves da tabela em ordem: pairs() nao garante ordem em Lua, e a leitura
+-- abaixo anda pelos passos do menor para o maior.
+local SPELL_BALANCE_LEVEL_CURVE_STEPS = {}
+for spellCurveStep in pairs(SPELL_BALANCE_LEVEL_CURVE) do
+	SPELL_BALANCE_LEVEL_CURVE_STEPS[#SPELL_BALANCE_LEVEL_CURVE_STEPS + 1] = spellCurveStep
+end
+table.sort(SPELL_BALANCE_LEVEL_CURVE_STEPS)
+
+-- Le a correcao da curva em qualquer level: entre dois pontos interpola em linha
+-- reta, antes do primeiro devolve o primeiro e depois do ultimo continua no
+-- passo do ultimo trecho (a curva nao termina no 150).
+function getSpellLevelCurve(level)
+	local tabela = SPELL_BALANCE_LEVEL_CURVE
+	local passos = SPELL_BALANCE_LEVEL_CURVE_STEPS
+	if type(level) ~= "number" or level <= passos[1] then
+		return tabela[passos[1]]
+	end
+	for i = 2, #passos do
+		local levelDepois = passos[i]
+		if level <= levelDepois then
+			local levelAntes = passos[i - 1]
+			local antes, depois = tabela[levelAntes], tabela[levelDepois]
+			return antes + ((depois - antes) * (level - levelAntes) / (levelDepois - levelAntes))
+		end
+	end
+	local ultimo, penultimo = passos[#passos], passos[#passos - 1]
+	local passo = (tabela[ultimo] - tabela[penultimo]) / (ultimo - penultimo)
+	return tabela[ultimo] + ((level - ultimo) * passo)
+end
 
 -- vocacao (1-8, promovidas incluidas) -> elemento
 SPELL_BALANCE_VOCATION = {
@@ -153,6 +245,9 @@ function applySpellBalance(cid, value, element)
 		return value
 	end
 	factor = factor * getElementLevelScaling(cid, element)
+	-- correcao da curva de level: e' ela que faz a MEDIA de dano do servidor
+	-- seguir a meta por level (SPELL_BALANCE_LEVEL_CURVE, no comeco do arquivo)
+	factor = factor * getSpellLevelCurve(getPlayerLevel(cid))
 	-- o bend multiplica depois do fator por elemento (multiplicacao, a ordem
 	-- nao muda o resultado), mas so' chega aqui quem e' player
 	return value * factor * getBendDamageBonus(cid)

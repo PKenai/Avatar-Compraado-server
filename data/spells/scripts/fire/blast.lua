@@ -32,6 +32,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
 		dano = dano * (atk/100)
 		dano = dano+1
 	end
+	dano = remakeValue(1, dano, cid)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
@@ -49,6 +50,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
 		dano = dano * (atk/100)
 		dano = dano+1
 	end
+	dano = remakeValue(1, dano, cid)
     return -dano, -dano
 end
 setCombatCallback(combatFocus, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
@@ -81,6 +83,7 @@ local function createBlastStageCombat(area, minMult, maxMult)
             dano = dano * (atk/100)
             dano = dano+1
         end
+        dano = remakeValue(1, dano, cid)
         return -dano, -dano
     end
     setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")

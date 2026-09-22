@@ -219,9 +219,10 @@ sub load_balance {
     return \%table;
 }
 
-# O bend e' um bonus plano de +1% por ponto, aplicado dentro de
-# remakeValue/remakeAirEarth (data/lib/avatar lib.lua). O valor e' lido do
-# proprio arquivo para o relatorio nao mentir se alguem mexer no numero.
+# O bend e' um multiplicador por ponto (SPELL_BALANCE_BEND_PER_POINT: hoje 4%,
+# ou seja x3.0 em bend 50), aplicado dentro de remakeValue/remakeAirEarth
+# (data/lib/avatar lib.lua). O valor e' lido do proprio arquivo para o relatorio
+# nao mentir se alguem mexer no numero.
 sub load_bend_per_point {
     return 0.01 unless -f $BALANCE_LIB;
     my $txt = read_file($BALANCE_LIB);
@@ -274,6 +275,42 @@ sub load_level_growth_window {
     return ($base, $cap);
 }
 
+# Curva de level (SPELL_BALANCE_LEVEL_CURVE): a MEDIA de dano geral do servidor
+# tem que seguir a meta por level, e essa tabela e' o quanto multiplicar para
+# isso. Vale para todas as vocacoes. Lida do proprio lib para o relatorio nao
+# mentir se alguem mexer nos numeros.
+sub load_level_curve {
+    my %table;
+    return \%table unless -f $BALANCE_LIB;
+    my $txt = read_file($BALANCE_LIB);
+    if ($txt =~ /SPELL_BALANCE_LEVEL_CURVE\s*=\s*\{(.*?)\n\}\s*\n/s) {
+        my $block = $1;
+        while ($block =~ /\[\s*(\d+)\s*\]\s*=\s*([\d.]+)/g) {
+            $table{$1 + 0} = $2 + 0;
+        }
+    }
+    return \%table;
+}
+
+# Mesma leitura do getSpellLevelCurve do lib: interpola em linha reta entre os
+# pontos e depois do ultimo continua no passo do ultimo trecho.
+sub curve_factor {
+    my ($table, $level) = @_;
+    my @steps = sort { $a <=> $b } keys %$table;
+    return 1 unless @steps;
+    return $table->{$steps[0]} if $level <= $steps[0];
+    for my $i (1 .. $#steps) {
+        my ($antes, $depois) = ($steps[$i - 1], $steps[$i]);
+        if ($level <= $depois) {
+            my ($a, $b) = ($table->{$antes}, $table->{$depois});
+            return $a + (($b - $a) * ($level - $antes) / ($depois - $antes));
+        }
+    }
+    my ($ultimo, $penultimo) = ($steps[-1], $steps[-2]);
+    my $passo = ($table->{$ultimo} - $table->{$penultimo}) / ($ultimo - $penultimo);
+    return $table->{$ultimo} + (($level - $ultimo) * $passo);
+}
+
 sub load_spell_entries {
     my $txt = read_file($SPELLS_XML);
     my @entries;
@@ -284,7 +321,11 @@ sub load_spell_entries {
             $attrs{$1} = $2;
         }
         my @vocs = map { $_ + 0 } ($attrs_txt =~ /<vocation id="(\d+)"/g);
-        @vocs = grep { $_ >= 1 && $_ <= 4 } @vocs;
+        # vocacao promovida (5-8) e' a promocao da base (1-4): a magia continua
+        # sendo medida. Sem isso, magia declarada SO' para promovida ficava de
+        # fora do relatorio e do --emit (era o caso do Fire Blast, vocation 6).
+        @vocs = grep { $_ >= 1 && $_ <= 8 } @vocs;
+        @vocs = map { $_ > 4 ? $_ - 4 : $_ } @vocs;
         my $value = $attrs{value} // '';
         next unless @vocs && length $value;
         my @parts = split(m{/}, $value);
@@ -704,6 +745,7 @@ sub main {
     my $growth   = load_level_growth();
     my ($growth_base, $growth_cap) = load_level_growth_window();
     $BEND_PER_POINT = load_bend_per_point();
+    my $level_curve = load_level_curve();
     my $exausted = load_exausted();
     if (opt('bar')) {
         load_spellbar($info);
@@ -743,10 +785,14 @@ sub main {
         # So' leva o bonus de bend quem chama remakeValue/remakeAirEarth, que
         # e' o caso de toda magia de dano de player (ver measure_script).
         my $bend = $got->{remake} ? 1 + ($BEND_PER_POINT * opt('mag')) : 1;
+        # Correcao da curva de level: e' ela que faz a MEDIA do servidor seguir
+        # a meta por level (mesma conta do getSpellLevelCurve no lib).
+        my $curve = $got->{remake} ? curve_factor($level_curve, opt('level')) : 1;
         $row{factor}    = $factor;
         $row{lvl_bonus} = $lvl_bonus;
+        $row{curve}     = $curve;
         $row{bend}      = $bend;
-        $row{dmg_final} = $got->{dmg} * $factor * $lvl_bonus * $bend;
+        $row{dmg_final} = $got->{dmg} * $factor * $lvl_bonus * $curve * $bend;
         $row{dmg_cast}  = $row{dmg_final} * $got->{hits};
         $row{dps}       = $row{cd} ? $row{dmg_cast} / $row{cd} : undef;
         push @rows, \%row;
@@ -773,9 +819,10 @@ sub main {
 
     my $factors = join('  ', map { sprintf('%s=%.3f', $_, $balance->{$_}) } @ELEMENTS);
     print '=' x 104, "\n";
-    printf "SPELL BALANCE REPORT | level %d | bend(mag) %d | dobras %d | fatores: %s | bend: +%.0f%%/ponto (x%.2f)\n",
+    printf "SPELL BALANCE REPORT | level %d | bend(mag) %d | dobras %d | fatores: %s | bend: +%.0f%%/ponto (x%.2f) | curva de level x%.3f\n",
         opt('level'), opt('mag'), opt('dobras'), $factors,
-        $BEND_PER_POINT * 100, 1 + ($BEND_PER_POINT * opt('mag'));
+        $BEND_PER_POINT * 100, 1 + ($BEND_PER_POINT * opt('mag')),
+        curve_factor($level_curve, opt('level'));
     if (%$growth) {
         print 'correcao por level (teto +-', int($growth_cap * 100), '%): ', join('  ', map {
             my $g = $growth->{$_};
