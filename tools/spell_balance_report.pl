@@ -376,6 +376,17 @@ sub bend_factor {
     return 1 + ($BEND_GAIN * $b / ($b + $BEND_HALF));
 }
 
+# SPELL_BALANCE_GLOBAL_MULT (avatar lib.lua): ajuste geral de dano de magia de
+# player, aplicado no FIM de applySpellBalance. O --model calibra em dano BRUTO
+# (antes dele), entao o emissor NAO cancela este numero -- ele so' existe para o
+# relatorio mostrar o dano final que o jogador ve.
+sub load_global_mult {
+    return 1.0 unless -f $BALANCE_LIB;
+    my $txt = read_file($BALANCE_LIB);
+    return $1 + 0 if $txt =~ /SPELL_BALANCE_GLOBAL_MULT\s*=\s*([\d.]+)/;
+    return 1.0;
+}
+
 # Correcao por level (SPELL_BALANCE_LEVEL_GROWTH): cada elemento tem
 #     correcao(L) = 1 + b*(L-BASE) + c*(L-BASE)^2
 # (com teto em +-CAP). E' o que faz as quatro vocacoes baterem igual em toda a
@@ -983,6 +994,7 @@ sub main {
     $BEND_PER_POINT = load_bend_per_point();
     load_bend_model();
     my $level_curve = load_level_curve();
+    my $global_mult = load_global_mult();
     my $exausted = load_exausted();
     if (opt('bar')) {
         load_spellbar($info);
@@ -1038,7 +1050,7 @@ sub main {
         $row{lvl_bonus} = $lvl_bonus;
         $row{curve}     = $curve;
         $row{bend}      = $bend;
-        $row{dmg_final} = $got->{dmg} * $factor * $lvl_bonus * $curve * $bend;
+        $row{dmg_final} = $got->{dmg} * $factor * $lvl_bonus * $curve * $bend * $global_mult;
         $row{dmg_cast}  = $row{dmg_final} * $got->{hits};
         $row{dps}       = $row{cd} ? $row{dmg_cast} / $row{cd} : undef;
         push @rows, \%row;
@@ -1075,10 +1087,10 @@ sub main {
 
     my $factors = join('  ', map { sprintf('%s=%.3f', $_, $balance->{$_}) } @ELEMENTS);
     print '=' x 104, "\n";
-    printf "SPELL BALANCE REPORT | level %d | bend(mag) %d | dobras %d | fatores: %s | bend decrescente 1+%.1f*b/(b+%.0f) (x%.3f) | curva de level x%.3f\n",
+    printf "SPELL BALANCE REPORT | level %d | bend(mag) %d | dobras %d | fatores: %s | bend decrescente 1+%.1f*b/(b+%.0f) (x%.3f) | curva de level x%.3f | dano global x%.2f\n",
         opt('level'), opt('mag'), opt('dobras'), $factors,
         $BEND_GAIN, $BEND_HALF, bend_factor(opt('mag')),
-        curve_factor($level_curve, opt('level'));
+        curve_factor($level_curve, opt('level')), $global_mult;
     if (%$growth) {
         print 'correcao por level (teto +-', int($growth_cap * 100), '%): ', join('  ', map {
             my $g = $growth->{$_};

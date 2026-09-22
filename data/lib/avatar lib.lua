@@ -87,6 +87,25 @@ SPELL_BALANCE = {
 	earth = 0.95
 }
 
+-- ============================================================================
+-- MULTIPLICADOR GLOBAL DE DANO (ajuste de servidor)
+--
+-- 1.00 = modelo v2 puro (o que o emissor calibra). 2.00 = +100% em TODA magia
+-- de dano de player.
+--
+-- Entra no FIM de applySpellBalance, depois do fator de elemento, do bend e do
+-- eco do estagio ELITE -- ou seja, nao muda a hierarquia entre vocacoes nem o
+-- que o --model --emit enxerga (ele mede em dano BRUTO, antes deste numero).
+-- E' aqui que se sobe/desce o teto geral sem tocar em nenhum `atk`: mexer neste
+-- numero preserva a calibracao e NAO e' desfeito por um novo
+-- `perl tools/spell_balance_report.pl --model --emit --apply`.
+--
+-- Vale so' para magia de dano de player (remakeValue/remakeAirEarth). Nao pega
+-- heal (water heal / earth ingrain calculam cura por fora), monstro, summon nem
+-- dano de arma.
+-- ============================================================================
+SPELL_BALANCE_GLOBAL_MULT = 2.00
+
 -- Correcao por level, por elemento:
 --
 --   correcao(L) = 1 + b*(L-BASE) + c*(L-BASE)^2      (teto em +-CAP)
@@ -277,7 +296,8 @@ function applySpellBalance(cid, value, element)
 	end
 	-- o bend multiplica depois do fator por elemento (multiplicacao, a ordem
 	-- nao muda o resultado), mas so' chega aqui quem e' player
-	return value * factor * getBendDamageBonus(cid)
+	-- SPELL_BALANCE_GLOBAL_MULT: ajuste geral de servidor (1.00 = modelo v2)
+	return value * factor * getBendDamageBonus(cid) * SPELL_BALANCE_GLOBAL_MULT
 end
 
 function remakeAirEarth(cid, value)

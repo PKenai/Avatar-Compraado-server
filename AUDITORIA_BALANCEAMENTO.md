@@ -913,3 +913,34 @@ problemas.
 `water tsunami` são estimativas de pior caso (geometria/worker); as demais são
 contagens diretas de `for`/recursão. Se em jogo alguma ainda apagar alvo, o
 número em `%APPLICATIONS` é o único lugar a ajustar (e reemitir).
+
+## 17. Ajuste v5 — +100% de dano global (calibração preservada)
+
+O feedback de jogo foi que o dano por golpe ficou baixo demais no level alto
+(level 500 batendo ~80 nas magias de vários golpes, depois do corte da §16).
+A resposta **não** foi mexer em `atk` de novo — isso seria desfeito no próximo
+`--model --emit`. O corte virou um **ajuste de servidor**:
+
+- `data/lib/avatar lib.lua`: novo `SPELL_BALANCE_GLOBAL_MULT = 2.00`,
+  aplicado no **fim** de `applySpellBalance` (depois do fator de elemento, do
+  bend e do eco). 1.00 = modelo v2 puro; 2.00 = +100%.
+
+Por que ali: o `--model --emit` calibra o `atk` em dano **bruto** (antes deste
+multiplicador), então a calibração continua válida e um novo reemit **não
+desfaz** o buff. A hierarquia entre vocações (fogo 1.10 > ar 1.00 > terra 0.95
+> água 0.90) e a escada por classe/área também ficam intactas — tudo sobe 2x.
+
+Escopo: só magia de **dano** de player (`remakeValue`/`remakeAirEarth`). Não
+pega cura (`water heal`/`earth ingrain` calculam por fora), monstro, summon nem
+dano de arma.
+
+Verificação (`level 500, bend 80`): mediana de dano/cast subiu de ~1.4k para
+~2.8k no fogo e de ~1.8k para ~3.5k no ar; `check_lua_syntax.py` → 0
+problemas; `_validate_spells_exausted.pl` → balanceamento íntegro. O relatório
+passou a exibir `dano global x2.00` no cabeçalho e no medidor (`dmg_final`).
+
+**Ponto de atenção (pré-existente, não tocado aqui):** `air stormcall` mede
+~25k por cast no level 500 — ordens acima do orçamento da classe. É a
+aproximação do `%APPLICATIONS` (8) contra a fórmula real da magia em level alto,
+que o `--model` só calibra no level 100. Fica registrado para uma próxima
+passada de contagem.
