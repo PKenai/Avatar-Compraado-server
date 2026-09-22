@@ -136,6 +136,14 @@ sub class_name {
 # water dragon, water tsunami, air suffocation, air trap. Enquanto nao entram
 # aqui (ou enquanto o numero estiver subestimado) o total do cast passa do
 # orcamento da classe -- foi o caso de air fan/air wings, que rodavam com 1.
+#
+# v4: as 21 magias "com risco" (AUDITORIA secao 15) foram contadas linha a
+# linha no worker e entraram aqui (ver AUDITORIA secao 16). Contagem = pior caso
+# de um alvo parado dentro do cast. Nao entram: `air trap` (sem dano) e
+# `earth leech` (aplicacao unica; os "3" do scanner eram so' o helper).
+# `water clock` = 10: cada tile e' coberto por ~1 das 12 ray de combate, e cada
+# ray roda DUAS vezes (125*x e +1500) e encadeia doDrown(...,5) -> ~1x2x5.
+# `air suffocation` = 18: `for x = 1, 18` de sendDistanceEffect -> doCombat.
 my %APPLICATIONS = (
     'air vortex'        => 32,
     'air fan'           => 15,  # sequencia = 15 pulsos de area (fan.lua:97)
@@ -160,6 +168,26 @@ my %APPLICATIONS = (
     'air ball'          => 2,   # doCombat imediato + addEvent 250ms (ball.lua:57)
     'air gale'          => 1,
     'earth growth'      => 1,
+    # --- v4: contagem das magias "com risco" (AUDITORIA secao 16) ---
+    'air stormcall'     => 8,   # 4 rodadas de stormcallWork x 2 combates no mesmo tornado
+    'air bomb'          => 2,   # doCombat(combat) + doCombat(combat2) [combat2 = atk/2]
+    'air doom'          => 4,   # 4 posQuakeWork, 1 acerto por rodada
+    'air suffocation'   => 18,  # for x = 1, 18 (sendDistanceEffect.lua)
+    'earth quake'       => 5,   # spellStageCount(4) -> 5 rodadas no ELITE (L100+)
+    'earth cataclysm'   => 2,   # combo + combo2 [atk/2]
+    'earth fists'       => 2,   # combat imediato + combat2 (250ms)
+    'earth lavaball'    => 5,   # combo + doMelt(...,4)
+    'fire conflagration'=> 11,  # doConflagration recursiona 10x + o cast inicial
+    'fire thunderbolt'  => 8,   # combo(x3) + combat3(x2) + 6 doElectrify
+    'fire meteor'       => 5,   # 5 startWaves (area central)
+    'fire striker'      => 9,   # for x = 0, 8 -> sendDamage
+    'fire cannon'       => 2,   # 2 linhas (h=1,2) na direcao
+    'fire explosion'    => 2,   # combatSelf + 1 direcao
+    'water clock'       => 10,  # 2 ondas x doDrown(...,5) no tile coberto
+    'water bloodbending'=> 16,  # rollClock(8) x (combo area + combo2 alvo)
+    'water shards'      => 10,  # estados 1/3 alternados por 3s -> ~10 combat2 no alvo
+    'water dragon'      => 5,   # dragonWork id 0..3 + doCombat(combat) inicial
+    'water tsunami'     => 7,   # 7 areas cumulativas, uma por camada da onda
 );
 
 # Magias de alvo unico com eco no estagio ELITE (registerSpellStageEcho no

@@ -861,3 +861,55 @@ variavel (bomba com fuse, onda por distancia, worker que recursiona enquanto a
 tabela do cast existe), entao a contagem tem de vir do worker, nao do `for` do
 cast. Enquanto nao entram em `%APPLICATIONS`, cada uma leva o valor 1 e pode
 entregar N vezes o orcamento — e' o proximo item da fila.
+
+---
+
+## 16. Correção v4 — contagem das magias "com risco"
+
+**Feito:** as 21 magias do §15 foram contadas linha a linha no worker (pior caso
+de um alvo parado dentro do cast) e entraram em `%APPLICATIONS`
+(`tools/spell_balance_report.pl`); o `atk` das afetadas foi reemitido
+(`--model --emit --level 100 --mag 48 --apply`). A regra é a mesma do v3: o alvo
+da classe é o **total do cast**, então cada aplicação vale `orçamento/N`.
+
+**Onde estava o estouro:** não no `for` do cast, mas no **worker que se
+reagenda** — `addEvent` recursivo, ondas (2 passadas), ticks e cadeias de
+`onTargetTile`.
+
+| magia | cd | classe | aplic. | evidência | atk antes → depois |
+|---|---|---|---|---|---|
+| `air suffocation` | 35s | heavy | **18** | `for x = 1, 18` de `sendDistanceEffect` → `doCombat` (+eco → 36 no ELITE) | 120 → **7** |
+| `water clock` | 45s | heavy | **10** | cada ray de combate roda 2× (`125*x` e `+1500`) e encadeia `doDrown(...,5)` | 154 → **15** |
+| `water bloodbending` | 90s | ult | **16** | `rollClock(times=8)` × (`combat` área + `combat2` alvo) | 323 → **20** |
+| `fire conflagration` | 90s | ult | **11** | `doConflagration` recursiona `times=10` + o cast inicial | 336 → **31** |
+| `water shards` | 12s | core | **10** | estados 1/3 alternados por 3s → ~10 `combat2` no alvo | 67 → **7** |
+| `fire striker` | 45s | heavy | **9** | `for x = 0, 8` → `sendDamage` → `doCombat` | 83 → **9** |
+| `fire thunderbolt` | 15s | core | **8** | `doCombat(combat)` + `doCombat(combat3)` + `doElectrify(...,6)` | 113 → **14** |
+| `water tsunami` | 45s | heavy | **7** | 7 áreas cumulativas, cada uma com `onTargetTile` → `doCombat` | 130 → **19** |
+| `water dragon` | 25s | heavy | **5** | `dragonWork` id 0..3 + `doCombat(combat)` inicial | 127 → **25** |
+| `earth quake` | 45s | heavy | **5** | `spellStageCount(4)` → 5 rodadas no ELITE | 104 → **52** |
+| `earth lavaball` | 60s | ult | **5** | `doCombat(combat)` + `doMelt(...,4)` (+eco em `combat2`) | 173 → **35** |
+| `fire meteor` | 45s | heavy | **5** | 5 `startWaves` (área central) | 53 → **11** |
+| `air stormcall` | 45s | heavy | **8** | 4 `stormcallWork` × 2 combates no mesmo tornado | 72 → **9** |
+| `air doom` | 45s | heavy | **4** | 4 `posQuakeWork`, 1 acerto por rodada | 114 → **29** |
+| `air bomb` | 30s | heavy | **2** | `doCombat(combat)` + `doCombat(combat2)` [metade] | 204 → **102** |
+| `earth cataclysm` | 45s | heavy | **2** | `combat` + `combat2` [metade] | 204 → **102** |
+| `earth fists` | 15s | core | **2** | `combat` imediato + `combat2` (250ms) | 76 → **38** |
+| `fire cannon` | 8s | core | **2** | 2 linhas (`h=1,2`) na direção, +eco | 29 → **15** |
+| `fire explosion` | 25s | heavy | **2** | `combatSelf` + 1 direção, +eco | 37 → **18** |
+
+**Não precisaram de nada:** `earth leech` (aplicação única; os "3" do scanner
+eram o helper `getDamage`) e `air trap` (utilidade, sem dano). O scanner de
+`tools/spell_applications_report.pl` marcava as duas como CANDIDATA — é o falso
+positivo esperado (ele conta ramos de código, não golpes sequenciais).
+
+**Impacto:** o total do cast dessas magias caiu para o orçamento da classe. As
+demais 54 magias ficaram estáveis (o reemit é linear; o ±1 é o midpoint
+aleatório da fórmula). Validação: `tools/_validate_spells_exausted.pl` →
+"nenhuma vírgula faltando, balanceamento íntegro"; `check_lua_syntax.py` → 0
+problemas.
+
+**Ressalva:** as contagens de `water clock`, `air stormcall`, `fire meteor` e
+`water tsunami` são estimativas de pior caso (geometria/worker); as demais são
+contagens diretas de `for`/recursão. Se em jogo alguma ainda apagar alvo, o
+número em `%APPLICATIONS` é o único lugar a ajustar (e reemitir).
