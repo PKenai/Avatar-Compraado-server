@@ -8,9 +8,9 @@ local timeleft = 250
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_POISONDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = ((level+((level * 0.5)/2)*4.3)+math.random(15, 20))*0.6
-    local max = ((level+((level * 0.5)/2)*5.1)+math.random(20, 21))*0.6
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = ((level+(magLevel/2)*4.3)+math.random(15, 20))*0.6
+    local max = ((level+(magLevel/2)*5.1)+math.random(20, 21))*0.6
 
     if getPlayerInWaterWithUnderwater(cid) then 
         min = min*0.6
@@ -30,9 +30,9 @@ setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValu
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_POISONDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = ((level+((level * 0.5)/2)*4.3)+math.random(15, 20))*0.6
-    local max = ((level+((level * 0.5)/2)*5.1)+math.random(20, 21))*0.6
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = ((level+(magLevel/2)*4.3)+math.random(15, 20))*0.6
+    local max = ((level+(magLevel/2)*5.1)+math.random(20, 21))*0.6
     if getPlayerInWaterWithUnderwater(cid) then 
         min = min*0.6
 		max = max*0.6

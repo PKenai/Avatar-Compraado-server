@@ -1,5 +1,10 @@
 # VALIDAÇÃO MATEMÁTICA — MODELO DE DANO v2
 
+> **OBSOLETO (ver `AUDITORIA_BALANCEAMENTO.md` §18).** O modelo v2 descrito aqui
+> foi removido do servidor: dano e spellbar agora são os do servidor de referência
+> (`raava ot wind`) e o sistema de estágios não existe mais. Este documento fica
+> como registro da análise.
+
 Segunda etapa. Este documento existe para provar (ou derrubar) a fórmula proposta na auditoria antes de escrever qualquer linha de código.
 
 > **STATUS: o modelo v2 foi APLICADO** (com uma mudança de premissa) — ver

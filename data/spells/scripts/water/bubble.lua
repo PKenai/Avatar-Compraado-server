@@ -7,9 +7,9 @@ setCombatParam(combat, COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_ICE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, 75)
 
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*2.7)+5
-    local max = (level+((level * 0.5)/3)*3.0)+5
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*2.7)+5
+    local max = (level+(magLevel/3)*3.0)+5
 
     return -min, -max
 end

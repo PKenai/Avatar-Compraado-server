@@ -11,9 +11,9 @@ local cf = {atk = spellsInfo[spellName].atk}
 local combat=createCombatObject() 
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_PHYSICALDAMAGE) 
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/5)*7.1)+math.random(3, 7)
-    local max = (level+((level * 0.5)/5)*8.3)+math.random(7, 15)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/5)*7.1)+math.random(3, 7)
+    local max = (level+(magLevel/5)*8.3)+math.random(7, 15)
 	local dano = math.random(min, max)
 	if exhaustion.check(cid, "isFocusSkyfall") then 
 		dano = dano*2
@@ -27,7 +27,6 @@ function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
 		return -dano, -dano
  end
     setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
-    registerSpellStageEcho(combat)
 
 
     

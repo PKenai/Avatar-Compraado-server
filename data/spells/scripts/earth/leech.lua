@@ -17,14 +17,13 @@ setCombatArea(combat, createCombatArea(
           {0, 0, 1, 2, 1, 0, 0},
           {0, 0, 1, 1, 1, 0, 0}
       }))
-setCombatStageScaling(combat)
 
 
 local function getDamage(cid)
   local level = getPlayerLevel(cid)
-  local magLevel = level * 0.5
-  local min = (level/5 + ((level * 0.5)/4))
-	local max = (level/4 + ((level * 0.5)/4))
+  local magLevel = getPlayerMagLevel(cid)
+  local min = (level/5 + (magLevel/4))
+	local max = (level/4 + (magLevel/4))
     if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.6
 		max = max*0.6
@@ -55,7 +54,7 @@ function onTargetCreature(cid, target)
     random = random/2
   end
   doTargetCombatHealth(0, cid, COMBAT_HEALING, random, random, -1)
-  --doSendMagicEffect({x=mypos.x+1, y=mypos.y+1, z=mypos.z}, 428)
+  --doSendMagicEffect({x=mypos.x+1, y=mypos.y+1, z=mypos.z}, 130)
   if isMonster(target) then 
     doChallengeCreature(cid, target)
   end 
@@ -65,8 +64,7 @@ end
 setCombatCallback(combat, CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
 
 function onTargetTile(cid, pos)
-    -- efeito ancorado no tile do caster (sem offset), corrigindo o desalinhamento
-    return doSendMagicEffect({x=pos.x, y=pos.y, z=pos.z}, 428)
+    return doSendMagicEffect({x=pos.x+1, y=pos.y+1, z=pos.z}, 130)
 end
     setCombatCallback(combat, CALLBACK_PARAM_TARGETTILE, "onTargetTile")
 
@@ -85,6 +83,7 @@ function onCastSpell(cid, var)
         return false
     end
     if MyLocal.players[cid] == nil then
+     positionsimune = {}
          doPlayerAddExaust(cid, "earth", "leech", earthExausted.leech)
             if getPlayerHasStun(cid) then
                -- workAllCdAndAndPrevCd(cid, "earth", "leech", nil, 1)
@@ -93,7 +92,7 @@ function onCastSpell(cid, var)
 			doPlayerAddExaust(cid, "earth", "leech", earthExausted.leech)
 			exhaustion.set(cid, "cantEarthArmor", 4)
             MyLocal.players[cid] = 0
-            addEvent(removeTable, 1000, cid)
+            addEvent(removeTable, 250, cid)
             --workAllCdAndAndPrevCd(cid, "earth", "leech", nil, 1)
       local mypos = getCreaturePosition(cid)
 		exhaustion.set(cid, "canturecover", 3)

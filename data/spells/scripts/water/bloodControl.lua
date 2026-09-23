@@ -10,9 +10,9 @@ local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TARGETCASTERORTOPMOST, 1)
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_PHYSICALDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*3.0)
-    local max = (level+((level * 0.5)/3)*3.2)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*3.0)
+    local max = (level+(magLevel/3)*3.2)
 	
 	local dano = math.random(min, max)
 	local atk = cf.atk
@@ -35,9 +35,9 @@ setCombatArea(combat, area)
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_PHYSICALDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*3.0)
-    local max = (level+((level * 0.5)/3)*3.2)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*3.0)
+    local max = (level+(magLevel/3)*3.2)
 	
 	local dano = math.random(min, max)
 	local atk = cf.atk
@@ -144,7 +144,7 @@ function onCastSpell(cid)
 		return false
 	end
 
-   if MyLocal.playersCanUse[cid] == nil then
+   -- if MyLocal.playersCanUse[cid] == nil then
         if canUseWaterSpell(cid, 1, 3, false) then
             if getPlayerHasStun(cid) then
                 removeTable(cid)
@@ -170,8 +170,8 @@ function onCastSpell(cid)
         else
             return false
         end
-   else
-        doPlayerSendCancelEf(cid, "You're already using this fold.")
-        return false
-    end
+   -- else
+    --    doPlayerSendCancelEf(cid, "You're already using this fold.")
+    --    return false
+  --  end
 end

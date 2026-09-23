@@ -9,9 +9,9 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_DISTANCEEFFECT, 41)
 setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, -0.3, -30, -0.4, 0)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = level+((level * 0.5)/2)*1.04
-    local max = level+((level * 0.5)/2)*1.44
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = level+(magLevel/2)*1.04
+    local max = level+(magLevel/2)*1.44
 	
 	local dano = math.random(min, max) + math.random(6, 16)
 	local atk = cf.atk
@@ -38,25 +38,9 @@ function onCastSpell(cid, var)
     local checks = allSpellChecks(cid, "air ball", airExausted.ball+dif) --Nova func em beta :D
 
     if checks == "ready" then
-        local target = variantToNumber(var)
-        if target and isCreature(target) then
-            local casterPos = getCreaturePosition(cid)
-            local targetPos = getCreaturePosition(target)
-            if casterPos.z ~= targetPos.z then
-                return false
-            end
-        end
-		-- Estagios: mini (<50) e' o golpe seco, sem enfeite;
-		-- padrao (50-99) ganha o impacto de vento;
-		-- elite (100+) vira Vendaval: o golpe volta 450ms depois e o alvo trava.
-		local stage = getSpellStage(cid)
-		if stage ~= SPELL_STAGE_MINI and isCreature(target) then
-			doSendMagicEffect(getThingPos(target), 76)
-		end
 		if dif == 1 then 
 			addEvent(function() if isCreature(cid) and isCreature(variantToNumber(var)) and not isInPz(cid) and not isInPz(variantToNumber(var)) then doCombat(cid, combat, var) end end, 250)
 		end
-		spellStageElite(cid, "air", var, combat, target, 450)
         return doCombat(cid, combat, var)
     end
 

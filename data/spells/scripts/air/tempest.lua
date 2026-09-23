@@ -9,9 +9,9 @@ local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 --setCombatParam(combat, COMBAT_PARAM_EFFECT, 2)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = level+((level * 0.5)/4)*0.3
-    local max = level+((level * 0.5)/4)*0.7
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = level+(magLevel/4)*0.3
+    local max = level+(magLevel/4)*0.7
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -29,7 +29,6 @@ local arr ={{1, 1, 1},
            {1, 1, 1}}
 
  setCombatArea(combat, createCombatArea(arr))
- setCombatStageScaling(combat)
 
 
 function onTargetCreature(cid, target)
@@ -112,7 +111,7 @@ function onCastSpell(cid, var)
     end
 	if isPlayer(cid) and getPlayerStorageValue(cid, "nuncaUsouTempest") ~= 1 then
 		setPlayerStorageValue(cid, "nuncaUsouTempest", 1)
-		sendBlueMessage(cid, "Dica: Existe duas vers√µes da dobra Air Tempest. Utilize sem um alvo para afastar inimigos pr√≥ximos e com um alvo para usar de forma ofensiva.")
+		sendBlueMessage(cid, "Dica: Existe duas versıes da dobra Air Tempest. Utilize sem um alvo para afastar inimigos prÛximos e com um alvo para usar de forma ofensiva.")
 	end
 	return true
 end

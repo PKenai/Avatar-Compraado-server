@@ -13,17 +13,9 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
 --setCombatParam(combat, COMBAT_PARAM_HITEFFECT, 34)
 --setCombatParam(combat, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = ((level+((level * 0.5)/4)*2.6)+math.random(1, 2))*2.00
-    local max = ((level+((level * 0.5)/4)*3.1)+math.random(2, 3))*2.00
-	-- o atk da tabela e' o botao de calibragem desta dobra (padrao do earth
-	-- punch): sem isso o dano nao responde ao atk e a dobra fica fora do
-	-- balance da spellbar (tools/spell_balance_report.pl --bar)
-	local atk = cf.atk
-	if atk and type(atk) == "number" then
-		min = min * (atk/100)
-		max = max * (atk/100)
-	end
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = ((level+(magLevel/4)*2.6)+math.random(1, 2))*2.00
+    local max = ((level+(magLevel/4)*3.1)+math.random(2, 3))*2.00
 	min = remakeAirEarth(cid, min)
 	max = remakeAirEarth(cid, max)
 	if getPlayerInWaterWithUnderwater(cid) then 
@@ -32,7 +24,6 @@ function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
     return -min, -max
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
-registerSpellStageEcho(combat)
 
 
 function onTargetCreature(cid, target)
@@ -56,10 +47,7 @@ return getPlayerCanWalk({player = cid, position = pos, checkPZ = true, checkHous
 end 
 
 local function isProjectable(pos)
-	if not pos or not hasSqm(pos) then
-		return false
-	end
-	return isSightClear({x=pos.x-1, y=pos.y, z=pos.z}, {x=pos.x+1, y=pos.y, z=pos.z}, true) and not getTileInfo(pos).protection
+return isSightClear({x=pos.x-1, y=pos.y, z=pos.z}, {x=pos.x+1, y=pos.y, z=pos.z}, true) and not getTileInfo(pos).protection
 end 
 
 local function getAnotherDirs(dir)
@@ -79,13 +67,7 @@ local function getGrowPositions(mypos, dir)
 end
 
 function workGrow(cid, fromPos, nextPos, dir, times)
-	if times == 0 or not isCreature(cid) then
-		return false
-	end
-	local myPos = getCreaturePosition(cid)
-	if not hasSqm(nextPos) or (myPos and hasSqm(myPos) and getTileInfo(myPos).protection) or not isProjectable(nextPos) then
-		return false
-	end
+	if times == 0 or not isCreature(cid) or getTileInfo(getCreaturePosition(cid)).protection or getTileInfo(nextPos).protection or not isProjectable(nextPos) then return false end
 	doSendDistanceShoot(fromPos, nextPos, 38)
 	doSendMagicEffect(nextPos, 34)
 	doCombat(cid, combat, {type=2, pos=nextPos})

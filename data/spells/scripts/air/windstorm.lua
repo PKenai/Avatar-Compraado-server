@@ -21,16 +21,15 @@ setCombatArea(combat, createCombatArea(
           {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
       }))
-setCombatStageScaling(combat)
       
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 --setCombatParam(combat2, COMBAT_PARAM_DISTANCEEFFECT, 41)
 setCombatParam(combat2, COMBAT_PARAM_EFFECT, 77)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*2.1)+5
-    local max = (level+((level * 0.5)/3)*2.4)+5
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*2.1)+5
+    local max = (level+(magLevel/3)*2.4)+5
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 

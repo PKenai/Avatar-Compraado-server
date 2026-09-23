@@ -17,12 +17,11 @@ setCombatArea(combat2, createCombatArea(
           {0, 0, 1, 2, 1, 0, 0},
           {0, 0, 1, 1, 1, 0, 0}
       }))
-setCombatStageScaling(combat2)
 
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*2.16)+10
-    local max = (level+((level * 0.5)/3)*2.4)+10
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*2.16)+10
+    local max = (level+(magLevel/3)*2.4)+10
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -33,9 +32,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*2.16)+10
-    local max = (level+((level * 0.5)/3)*2.4)+10
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*2.16)+10
+    local max = (level+(magLevel/3)*2.4)+10
 	local dano = math.random(min, max)
 	local atk = (spellsInfo["air bomb"].atk)/2
 	if atk and type(atk) == "number" then 

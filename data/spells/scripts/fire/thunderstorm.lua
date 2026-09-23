@@ -62,9 +62,9 @@ setCombatArea(combat3, area3)
 local combats = {combat1, combat2, combat3}
 
 for x = 1, #combats do
-    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/2)*4.1)+math.random(3, 7)
-    local max = (level+((level * 0.5)/2)*5.3)+math.random(7, 15)
+    function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/2)*4.1)+math.random(3, 7)
+    local max = (level+(magLevel/2)*5.3)+math.random(7, 15)
 	if getPlayerInWaterWithUnderwater(cid) then 
         min = min*1.3
         max = max*1.3

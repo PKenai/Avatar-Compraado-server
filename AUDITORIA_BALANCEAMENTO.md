@@ -944,3 +944,116 @@ passou a exibir `dano global x2.00` no cabeçalho e no medidor (`dmg_final`).
 aproximação do `%APPLICATIONS` (8) contra a fórmula real da magia em level alto,
 que o `--model` só calibra no level 100. Fica registrado para uma próxima
 passada de contagem.
+
+---
+
+## 18. REVERSÃO — paridade com o servidor de referência (`raava ot wind`)
+
+> **As seções 6 a 17 deste documento estão OBSOLETAS.** Elas descrevem o modelo
+de balanceamento v2/v5, que foi **removido** do servidor. Servem agora apenas
+como histórico do que existiu. O modelo em vigor é o da seção abaixo.
+
+O alvo passou a ser **paridade literal** com o servidor de referência em
+`C:\Users\imfis\Desktop\raava ot wind`: mesmo dano por magia, mesma lista e
+mesmos nomes na spellbar. O sistema de estágios (mini/base/elite) foi removido.
+
+### 18.1 O que mudou
+
+| Camada | Antes (v2/v5) | Agora (= referência) |
+|---|---|---|
+| Fórmula de dano das magias | usava `(level * 0.5)` no lugar do bend | usa **`magLevel`** (o bend), como o original |
+| Multiplicador de dano | `applySpellBalance`: fator de elemento (fogo 1.10 · ar 1.00 · terra 0.95 · água 0.90), curva de level, bend decrescente (×1.45 em bend 48) e `SPELL_BALANCE_GLOBAL_MULT = 2.00` | **nenhum**. `remakeValue`/`remakeAirEarth` só aplicam reset 750+ (+15%), debuff de jump, órbita/cometa (±20%), item 90526i1 (+5%) e skull vermelha (÷4) |
+| `atk` de cada dobra (`spellsInfo`) | recalibrado pelo emissor (ex: `air suffocation` 7, `water bloodbending` 20) | **valores do raava** (100 = dano original da fórmula; ex: `air suffocation` 35, `water bloodbending` 100) |
+| Cooldowns (`*Exausted`) | `ball` 1→3s, `leech` 3→15s, `thunderbolt` 12→15s, `punch` 6→10s, `iceSpikes` 15→4s, `skyfall` 10→3s | voltaram aos do raava (1s, 3s, 12s, 6s, 15s, 10s) |
+| Estágios (mini/elite) | `spellStages.lua` + `registerSpellStageEcho`/`setCombatStageScaling` + eco de 0.5× no level 100+ | **sistema removido** (ver 18.3) |
+| Scripts de magia | 142 arquivos, 28 deles com código só do servidor atual | **os 142 são os do raava** (mais `air/furydown`, `air/furyup`, `water/res`; saíram `water/freeze` e o hook de estágio) |
+| Spellbar | `Fire Wave` (lvl1), `Fire Cinder`, `Water Wave` (lvl1), `Water Freeze` | `Fire Whip` (lvl1), `Fire Res`, `Water Whip` (lvl1), `Water Res`; `Fire Wave` (lvl 8) e `Water Wave` (lvl 16) voltam a ser as dobras cruzadas de voc 6 |
+| Ferramentas | `spell_balance_report.pl`, `apply_level_scaling.pl`, `spell_applications_report.pl`, `apply_spell_stages.py`, `fix_spell_stage_insert.py`, `report_spell_stages.py` | **removidas** (todas mediam/emitiam o modelo extinto) |
+
+### 18.2 Magias renomeadas na spellbar
+
+| Antes | Agora | Onde |
+|---|---|---|
+| `Fire Wave` (lvl 1, `fire/wave.lua`) | `Fire Whip` (lvl 1, `fire/whip.lua`) | `spells.xml`, `199-ServerToDll.lua` |
+| — | `Fire Wave` (lvl 8, voc 6, `fire/wave.lua`) | `spells.xml` |
+| `Fire Cinder` (`fire/res.lua`) | `Fire Res` (`fire/res.lua`, `direction=1` em vez de `needtarget`) | `spells.xml`, `199-ServerToDll.lua`, `201-spellsExausted.lua` |
+| `Water Wave` (lvl 1, `water/whip.lua`) | `Water Whip` (lvl 1, `water/whip.lua`) | `spells.xml`, `199-ServerToDll.lua` |
+| — | `Water Wave` (lvl 16, voc 6, `water/wave.lua`) | `spells.xml` |
+| `Water Freeze` (`water/freeze.lua`) | `Water Res` (`water/res.lua`, `direction=1`) | `spells.xml`, `199-ServerToDll.lua`, `201-spellsExausted.lua` |
+
+Outros alvos padrão voltaram ao original: `Fire Star` (sem `needtarget`/`range`),
+`Fire Voltage` e `Earth Crush` (`direction=1` em vez de `selftarget=1`).
+
+Os textos que citavam os nomes antigos foram atualizados: `data/lib/upgrade lib.lua`
+(upgrades 7 do fogo e 6 da água), `data/talkactions/scripts/stats.lua`,
+`data/npc/scripts/fireisland.lua`, `data/npc/scripts/waterisland.lua` e os tutoriais
+`data/talkactions/scripts/tutorial/fire whip.lua` / `water whip.lua`.
+
+### 18.3 O sistema de estágios foi removido
+
+- `data/spells/lib/spellStages.lua` **deletado** (era ele que sombrava o
+  `doCombat` global e ligava o eco).
+- Todas as chamadas `setCombatStageScaling(combat)`, `registerSpellStageEcho(combat)`,
+  `registerSpellStageCombats`, `spellStageElite/Echo/Flavor/Scale/Count/...`
+  saíram junto com os scripts (os do raava não as têm). Nada mais referencia esses
+  símbolos em `data/` — confirmado por varredura.
+- No motor (`sources/luascript.cpp`, `sources/combat.cpp|h`) a função
+  `setCombatStageScaling` e `Combat::getStageArea()` **continuam compiladas**, mas
+  agora são código morto: nenhum script as chama. Removê-las exigiria recompilar o
+  `theforgottenserver.exe`; não foi feito.
+
+### 18.4 Chaves de storage preservadas (progresso dos jogadores)
+
+Os nomes internos de progressão **não** foram renomeados, só o texto exibido:
+`levelWaterfreeze`/`expWaterfreeze`, `WaterfreezeLvL4` e `levelWaterfreeze`
+continuam iguais — mudou apenas o `storageName` mostrado ao jogador
+("Water Freeze" → "Water Res"). Assim ninguém perde nível de dobra.
+
+Já o `atk` de `spellsInfo` passou a responder pelas palavras novas (`fire res`,
+`water res`), que é o que os scripts do raava procuram.
+
+### 18.5 Diferença proposital em relação ao raava
+
+Uma só: **`remakeValue`/`remakeAirEarth` continuam aplicando o talento
+`talentBendDmgBonus`** (árvore de talentos do servidor atual). Sem talento o
+valor é 0 e o dano é idêntico ao raava; com talento, o jogador bate acima.
+Para paridade absoluta, apagar os dois blocos `talentBendDmgBonus` em
+`data/lib/avatar lib.lua`.
+
+### 18.6 O que se perdeu junto (features só do servidor atual)
+
+Os 28 scripts que divergiam do raava foram substituídos pelos do raava, então
+saíram junto com eles:
+
+- `earth/quake` e o dano de monstro lido do XML da criatura (via `monsterSpell`);
+- `fire/star` em 8 golpes com efeitos alternados e `fire/kick`/`fire/voltage`/
+  `water/iceSpikes`/`water/heal`/`water/whip` reescritos;
+- os hooks de talento dentro das fórmulas (`talentBendDmgBonus`).
+
+Tudo isso está no histórico do git (commit `dbe08cf`, o HEAD anterior) — dá para
+recuperar qualquer arquivo com `git show dbe08cf:"caminho"`.
+
+### 18.7 Verificação executada
+
+```
+python tools/check_lua_syntax.py data/spells/scripts data/spells/lib data/lib data/creaturescripts/scripts
+  -> 319 arquivo(s) verificado(s), 0 com problema
+perl tools/_validate_spells_exausted.pl data/lib/201-spellsExausted.lua
+  -> OK: nenhuma virgula faltando, balanceamento integro
+```
+
+Além disso: `spells.xml` continua XML válido (158 `<instant>`, sem nomes
+duplicados); toda palavra da spellbar (`199-ServerToDll.lua`, 100 entradas) tem
+uma magia correspondente no `spells.xml`, exceto as 4 entradas `*searcher`, que
+já não existiam no raava; toda chave lida pelos scripts (`spellsInfo["..."]`)
+existe na tabela, exceto `earth kick` (idem no raava); e nenhum arquivo do
+datapack cita mais `Fire Cinder`, `Water Freeze`, `firecinder` ou `waterfreeze`.
+
+**Não testado em servidor rodando** — a validação foi estática (sintaxe, XML,
+tabelas, referências cruzadas). O teste de jogo é o próximo passo.
+
+### 18.8 Como voltar atrás
+
+```
+git checkout dbe08cf -- data/lib data/spells data/creaturescripts data/npc data/talkactions tools
+```

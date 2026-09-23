@@ -7,14 +7,13 @@ MyLocal.chanceFrozzen = cf.chanceFrozzen
 
 local combat = createCombatObject()
 setCombatArea(combat, createCombatArea(AREA_CIRCLE3X3))
-setCombatStageScaling(combat)
 
 local combat1 = createCombatObject()
 setCombatParam(combat1, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*5.1)+5
-    local max = (level+((level * 0.5)/3)*5.9)+15
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*5.1)+5
+    local max = (level+(magLevel/3)*5.9)+15
 
 	
 	local dano = math.random(min, max)

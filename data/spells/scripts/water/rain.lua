@@ -53,7 +53,6 @@ end
 
 local combat = createCombatObject()
 setCombatArea(combat, createCombatArea(AREA_CROSS6X6))
-setCombatStageScaling(combat)
 
 function onTargetTile(cid, pos)
     table.insert(MyLocal.players[cid].poses, pos)
@@ -84,9 +83,9 @@ for x = 1, 3 do
     end
     setCombatCallback(combats[x], CALLBACK_PARAM_TARGETTILE, "onTargetTile")   
     
-    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-        local min = (level+((level * 0.5)/3)*5.1)+40
-        local max = (level+((level * 0.5)/3)*5.9)+50
+    function onGetPlayerMinMaxValues(cid, level, magLevel)
+        local min = (level+(magLevel/3)*5.1)+40
+        local max = (level+(magLevel/3)*5.9)+50
 
 	local dano = math.random(min, max)
 	local atk = cf.atk

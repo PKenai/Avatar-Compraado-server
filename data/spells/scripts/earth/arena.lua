@@ -22,7 +22,6 @@ local arr = {
 }
 
 setCombatArea(combat, createCombatArea(arr))
-setCombatStageScaling(combat)
 
 local function getDrewMap(map)
   local points = 0
@@ -48,7 +47,7 @@ local function zerarTable(cid)
 end
 
 function onTargetTile(cid, pos)  
-    if getPlayerCanWalk({player = cid, position = pos, checkPZ = true, checkHouse = true}) and not getTileInfo(pos).protection then
+    if getPlayerCanWalk({player = cid, position = pos, checkPZ = true, checkHouse = true}) then
       addEvent(doCreateItem, MyLocal.players[cid].number*15+50, MyLocal.earthId, pos)
       addEvent(removeTileItemById, cf.duracao, pos, MyLocal.earthId)
       doSendMagicEffect(pos, 34)

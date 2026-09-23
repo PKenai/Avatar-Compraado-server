@@ -8,9 +8,9 @@ local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, 76)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/4)*0.9)
-    local max = (level+((level * 0.5)/4)*1.2)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/4)*0.9)
+    local max = (level+(magLevel/4)*1.2)
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -64,7 +64,6 @@ arr[6] = {{1, 1, 1, 1, 1, 1, 1},
 
 for x = 1, 4 do
     setCombatArea(combats[x], createCombatArea(arr[x]))
-    setCombatStageScaling(combats[x])
     function onTargetTile(cid, pos)
         doCombat(cid, combat, {type=2, pos=pos})  
     end

@@ -7,5 +7,5 @@ function onCastSpell(cid, var)
         return false
     end
     
-    doShowTextDialog(cid, 1949, getLangString(cid, "Write here the player name que you are looking for.\nDo not forget to delete all the text.", "Escreva aqui o nome do player que vocÃª estÃ¡ procurando.\nNÃ£o esqueÃ§a de apagar todo esse texto."), true)
+    doShowTextDialog(cid, 1949, getLangString(cid, "Write here the player name que you are looking for.\nDo not forget to delete all the text.", "Escreva aqui o nome do player que você está procurando.\nNão esqueça de apagar todo esse texto."), true)
 end

@@ -12,10 +12,9 @@ local arr = {{0, 1, 1, 1, 0},
 
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_ICEDAMAGE)
 setCombatArea(combat, createCombatArea(arr))
-setCombatStageScaling(combat)
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-		local min = (level+((level * 0.5)/4)*0.3)*4.5
-		local max = (level+((level * 0.5)/4)*0.7)*5
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+		local min = (level+(magLevel/4)*0.3)*4.5
+		local max = (level+(magLevel/4)*0.7)*5
 		local dano = math.random(min, max)
 		local atk = cf.atk
 		if atk and type(atk) == "number" then 

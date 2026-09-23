@@ -17,16 +17,10 @@ function onCastSpell(cid, var)
       if getPlayerHasStun(cid) then
          return true
       end
-      doPlayerAddExaust(cid, "air", "scape", airExausted.scape)
+      doPlayerAddExaust(cid, "earth", "scape", earthExausted.scape)
       local newPosition = position
       newPosition.y = newPosition.y + 1
       newPosition.z = newPosition.z - 1
-
-      if not hasSqm(newPosition) or not getPlayerCanWalk({player = cid, position = newPosition, checkPZ = true, checkHouse = true}) then
-        doPlayerSendDefaultCancel(cid, RETURNVALUE_NOTPOSSIBLE)
-        doSendMagicEffect(position, CONST_ME_POFF)
-        return false
-      end
 
         posPlayer = getCreaturePosition(cid)
         doSendMagicEffect(getPlayerPosition(cid), 77)

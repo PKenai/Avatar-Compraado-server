@@ -85,11 +85,11 @@ else
           {0, 0, 1, 1, 1, 0, 0}
 		  }))
 end
- function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*2.7)+5
-    local max = (level+((level * 0.5)/3)*3.0)+5
+ function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*2.7)+5
+    local max = (level+(magLevel/3)*3.0)+5
 	local dano = math.random(min, max)
-	local atk = 175 -- congelado: era o atk de "air barrier" antes do balance da spellbar
+	local atk = spellsInfo["air barrier"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -141,11 +141,11 @@ else
           {0, 0, 1, 1, 1, 0, 0}
 		  }))
 end
- function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*2.7)+5
-    local max = (level+((level * 0.5)/3)*3.0)+5
+ function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*2.7)+5
+    local max = (level+(magLevel/3)*3.0)+5
 	local dano = math.random(min, max)
-	local atk = 175 -- congelado: era o atk de "air barrier" antes do balance da spellbar
+	local atk = spellsInfo["air barrier"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -294,11 +294,11 @@ end
 local combatMiniExp = createCombatObject()
 setCombatParam(combatMiniExp, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = level+((level * 0.5)/4)*0.3
-    local max = level+((level * 0.5)/4)*0.7
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = level+(magLevel/4)*0.3
+    local max = level+(magLevel/4)*0.7
 	local dano = math.random(min, max)
-	local atk = 214 -- congelado: era o atk de "air burst" antes do balance da spellbar
+	local atk = spellsInfo["air burst"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1

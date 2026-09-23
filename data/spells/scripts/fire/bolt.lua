@@ -8,7 +8,6 @@ local MyLocal = {}
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
 setCombatArea(combat, createCombatArea(AREA_CROSS1X1))
-setCombatStageScaling(combat)
 
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
@@ -22,14 +21,13 @@ setCombatParam(combatFocus2, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
 local combatFocus = createCombatObject()
 setCombatParam(combatFocus, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
 setCombatArea(combatFocus, createCombatArea(AREA_CROSS1X1))
-setCombatStageScaling(combatFocus)
 --setAttackFormula(combatFocus, COMBAT_FORMULA_LEVELMAGIC, 5, 5, 4, 7)
 
 local combats = {combat, combat2}
 for i = 1, #combats do 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/2)*3.0)+math.random(20, 25)
-    local max = (level+((level * 0.5)/2)*4.0)+math.random(25, 35)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/2)*3.0)+math.random(20, 25)
+    local max = (level+(magLevel/2)*4.0)+math.random(25, 35)
 	
     if getPlayerInWaterWithUnderwater(cid) then 
         min = min*1.3
@@ -49,9 +47,9 @@ end
 
 local combatsFocus = {combatFocus, combatFocus2}
 for i = 1, #combatsFocus do 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = ((level+((level * 0.5)/2)*3.0)+math.random(20, 25))*1.5
-    local max = ((level+((level * 0.5)/2)*4.0)+math.random(25, 35))*1.5
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = ((level+(magLevel/2)*3.0)+math.random(20, 25))*1.5
+    local max = ((level+(magLevel/2)*4.0)+math.random(25, 35))*1.5
     if getPlayerInWaterWithUnderwater(cid) then 
         min = min*1.3
         max = max*1.3

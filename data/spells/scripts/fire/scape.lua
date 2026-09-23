@@ -27,12 +27,6 @@ function onCastSpell(cid, var)
     newPosition.y = newPosition.y + 1
     newPosition.z = newPosition.z - 1
 
-    if not hasSqm(newPosition) or not getPlayerCanWalk({player = cid, position = newPosition, checkPZ = true, checkHouse = true}) then
-      doPlayerSendDefaultCancel(cid, RETURNVALUE_NOTPOSSIBLE)
-      doSendMagicEffect(position, CONST_ME_POFF)
-      return false
-    end
-
         posPlayer = getCreaturePosition(cid)
         doSendMagicEffect(position, CONST_ME_FIREAREA)
         doSendMagicEffect(toPosition(posPlayer.x+1,posPlayer.y,posPlayer.z), CONST_ME_FIREAREA)

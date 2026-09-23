@@ -3,7 +3,6 @@ local cf = {duracao = spellsInfo[spellName].duracao}
 
 local MyLocal = {}
 MyLocal.players = {}
-MyLocal.effectEvents = {}
 
 local function removeTable(cid, exaust)
     if exaust then
@@ -25,9 +24,8 @@ local function sendsProtectionEffect(cid, id)
     doSendMagicEffect({x=pos.x, y=pos.y, z=pos.z}, 75)
 
     if id < cf.duracao/250 then
-        MyLocal.effectEvents[cid] = addEvent(sendsProtectionEffect, 380, cid, id+1)
+        addEvent(sendsProtectionEffect, 380, cid, id+1)
     else
-        MyLocal.effectEvents[cid] = nil
         removeTable(cid, true) 
     end  
 end
@@ -51,10 +49,6 @@ function onCastSpell(cid, var)
         if getPlayerHasStun(cid) then
             return true
         end
-      if MyLocal.effectEvents[cid] then
-          stopEvent(MyLocal.effectEvents[cid])
-          MyLocal.effectEvents[cid] = nil
-      end
       sendsProtectionEffect(cid, 1)
       setPlayerHasImune(cid, cf.duracao/1000)
       return true

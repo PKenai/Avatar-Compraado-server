@@ -8,10 +8,6 @@ local spellInfos = {
 
     ["water"] = 
         {
-            -- Dobras de nome novo: "Wave" (a Water Wave da spellbar) e
-            -- "IceSpikes" (Water IceSpikes). Entram na lista ensinada e podem
-            -- ser pagas com 1 bender scroll como as demais.
-            {words = "Wave"}, {words = "IceSpikes"},
            {words = "BloodControl"},
             {words = "Punch"}, {words = "Dragon"}, {words = "Rain"}, {words = "Bubbles"}, {words = "Protect"},
             {words = "Icebolt"}, {words = "Flow"}, {words = "IceGolem"}, {words = "Tsunami"}, {words = "Clock"}, {words = "Blizzard"}, {words = "BloodBending"}

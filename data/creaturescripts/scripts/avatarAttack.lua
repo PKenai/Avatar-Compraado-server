@@ -8,15 +8,15 @@ AREA_SQUARE1X1 = {
 local promoteFireAtk = createCombatObject()
 setCombatParam(promoteFireAtk, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/2)*3.5)+math.random(20, 25)
-    local max = (level+((level * 0.5)/2)*5.0)+math.random(25, 35)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/2)*3.5)+math.random(20, 25)
+    local max = (level+(magLevel/2)*5.0)+math.random(25, 35)
     if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5
 	end
 	local dano = math.random(min, max)
-	local atk = 120 -- congelado: era o atk de "fire kick" antes do balance da spellbar
+	local atk = spellsInfo["fire kick"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -29,15 +29,15 @@ setCombatCallback(promoteFireAtk, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMi
 local promoteFireAtkBurn = createCombatObject()
 setCombatParam(promoteFireAtkBurn, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/2)*3.5)+math.random(20, 25)
-    local max = (level+((level * 0.5)/2)*5.0)+math.random(25, 35)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/2)*3.5)+math.random(20, 25)
+    local max = (level+(magLevel/2)*5.0)+math.random(25, 35)
     if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5
 	end
 	local dano = math.random(min, max)
-	local atk = 120 -- congelado: era o atk de "fire kick" antes do balance da spellbar
+	local atk = spellsInfo["fire kick"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -52,16 +52,16 @@ setCombatParam(combatEarth, COMBAT_PARAM_TYPE, COMBAT_PHYSICALDAMAGE)
 setCombatArea(combatEarth, createCombatArea(AREA_SQUARE1X1))
 setCombatParam(combatEarth, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/2)*3.1)+math.random(5, 10)
-    local max = (level+((level * 0.5)/2)*3.5)+math.random(10, 15)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/2)*3.1)+math.random(5, 10)
+    local max = (level+(magLevel/2)*3.5)+math.random(10, 15)
     if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.6
 		max = max*0.6
 	end
 
 	local dano = math.random(min, max)
-	local atk = 75 -- congelado: era o atk de "water shards" antes do balance da spellbar
+	local atk = spellsInfo["water shards"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -78,11 +78,11 @@ setCombatParam(combatWat, COMBAT_PARAM_EFFECT, 53)
 setCombatParam(combatWat, COMBAT_PARAM_DISTANCEEFFECT, 46)
 setCombatArea(combatWat, createCombatArea(AREA_SQUARE1X1))
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/4)*3.2)+(math.random(20, 25)/2)
-    local max = (level+((level * 0.5)/4)*3.5)+(math.random(25, 35)/2)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/4)*3.2)+(math.random(20, 25)/2)
+    local max = (level+(magLevel/4)*3.5)+(math.random(25, 35)/2)
 	local dano = math.random(min, max)
-	local atk = 173 -- congelado: era o atk de "water explosion" antes do balance da spellbar
+	local atk = spellsInfo["water explosion"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -96,11 +96,11 @@ local combatAir = createCombatObject()
 setCombatParam(combatAir, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 setCombatParam(combatAir, COMBAT_PARAM_DISTANCEEFFECT, 41)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/4)*3.2)+(math.random(20, 25)/2)
-    local max = (level+((level * 0.5)/4)*3.5)+(math.random(25, 35)/2)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/4)*3.2)+(math.random(20, 25)/2)
+    local max = (level+(magLevel/4)*3.5)+(math.random(25, 35)/2)
 	local dano = math.random(min, max)
-	local atk = 173 -- congelado: era o atk de "water explosion" antes do balance da spellbar
+	local atk = spellsInfo["water explosion"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -118,11 +118,11 @@ local combatIceSpikes = createCombatObject()
 setCombatParam(combatIceSpikes, COMBAT_PARAM_TYPE, COMBAT_ICEDAMAGE)
 setCombatParam(combatIceSpikes, COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_ICE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*3.1)+5
-    local max = (level+((level * 0.5)/3)*3.5)+5
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*3.1)+5
+    local max = (level+(magLevel/3)*3.5)+5
 	local dano = math.random(min, max)
-	local atk = 75 -- congelado: era o atk de "water shards" antes do balance da spellbar
+	local atk = spellsInfo["water shards"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -135,12 +135,12 @@ local combat1 = createCombatObject()
 setCombatParam(combat1, COMBAT_PARAM_TYPE, COMBAT_ICEDAMAGE)
 setCombatArea(combat1, createCombatArea(AREA_SQUARE1X1))
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/2)*3.1)+math.random(5, 10)
-    local max = (level+((level * 0.5)/2)*3.5)+math.random(10, 15)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/2)*3.1)+math.random(5, 10)
+    local max = (level+(magLevel/2)*3.5)+math.random(10, 15)
 
 	local dano = math.random(min, max)
-	local atk = 75 -- congelado: era o atk de "water shards" antes do balance da spellbar
+	local atk = spellsInfo["water shards"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -180,12 +180,12 @@ setCombatParam(combatBall, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 setCombatParam(combatBall, COMBAT_PARAM_DISTANCEEFFECT, 41)
 setCombatFormula(combatBall, COMBAT_FORMULA_LEVELMAGIC, -0.3, -30, -0.4, 0)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = level+((level * 0.5)/4)*1.04
-    local max = level+((level * 0.5)/4)*1.44
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = level+(magLevel/4)*1.04
+    local max = level+(magLevel/4)*1.44
 	
 	local dano = math.random(min, max) + math.random(6, 16)
-	local atk = 212 -- congelado: era o atk de "air ball" antes do balance da spellbar
+	local atk = spellsInfo["air ball"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -211,12 +211,12 @@ setCombatParam(combatRock, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
 setCombatParam(combatRock, COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_LARGEROCK)
 setCombatParam(combatRock, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = level+((level * 0.5)/4)*1.44
-    local max = level+((level * 0.5)/4)*2.44
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = level+(magLevel/4)*1.44
+    local max = level+(magLevel/4)*2.44
 	
 	local dano = math.random(min, max) + math.random(6, 16)
-	local atk = 216 -- congelado: era o atk de "earth rock" antes do balance da spellbar
+	local atk = spellsInfo["earth rock"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -242,15 +242,15 @@ end
 local combatKick = createCombatObject()
 setCombatParam(combatKick, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/2)*3.5)+math.random(20, 25)
-    local max = (level+((level * 0.5)/2)*5.0)+math.random(25, 35)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/2)*3.5)+math.random(20, 25)
+    local max = (level+(magLevel/2)*5.0)+math.random(25, 35)
     if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5
 	end
 	local dano = math.random(min, max)
-	local atk = 120 -- congelado: era o atk de "fire kick" antes do balance da spellbar
+	local atk = spellsInfo["fire kick"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -291,11 +291,11 @@ setCombatArea(combatWeapon, createCombatArea(
           {0, 0, 1, 3, 1, 0, 0},
           {0, 0, 1, 1, 1, 0, 0}
 		  }))
- function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*2.7)+5
-    local max = (level+((level * 0.5)/3)*3.0)+5
+ function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*2.7)+5
+    local max = (level+(magLevel/3)*3.0)+5
 	local dano = math.random(min, max)
-	local atk = 175 -- congelado: era o atk de "air barrier" antes do balance da spellbar
+	local atk = spellsInfo["air barrier"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1
@@ -305,11 +305,11 @@ setCombatArea(combatWeapon, createCombatArea(
 end
 setCombatCallback(combatWeapon, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
- function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*2.7)+5
-    local max = (level+((level * 0.5)/3)*3.0)+5
+ function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*2.7)+5
+    local max = (level+(magLevel/3)*3.0)+5
 	local dano = math.random(min, max)
-	local atk = 175 -- congelado: era o atk de "air barrier" antes do balance da spellbar
+	local atk = spellsInfo["air barrier"].atk
 	if atk and type(atk) == "number" then 
 		dano = dano * (atk/100)
 		dano = dano+1

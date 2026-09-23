@@ -60,7 +60,7 @@ function onCastSpell(cid, var)
          dismountPlayer(cid)
 
             doSendMagicEffect(position, 83)
-            if doPlayerAddUp(cid) then
+            if doPlayerAddUp(cid, false) then
                local stoneUid = doCreateItem(stoneId, 1, position)
                 addEvent(doCreateItem, itemDelay1, stoneId1, 1, position)
                 addEvent(removeTileItemById, 5000, position, stoneId1)

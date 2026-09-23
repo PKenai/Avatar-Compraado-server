@@ -2,8 +2,13 @@
 <spells>
 
 
-    <instant name="Fire Wave" words="fire wave" lvl="1" mana="2" direction="1" aggressive="1" exhaustion="800" event="script" value="fire/wave.lua">
+    <instant name="Fire Whip" words="fire whip" lvl="1" mana="2" direction="1" aggressive="1" exhaustion="800" event="script" value="fire/whip.lua">
 		<vocation id="1"/>
+	</instant>
+	
+	<!-- Dobra cruzada do promovido de Agua (voc 6), igual ao servidor de referencia -->
+	<instant name="Fire Wave" words="fire wave" lvl="8" mana="8" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="fire/wave.lua">
+		<vocation id="6"/>
 	</instant>
 	
     <instant name="Fire Recover" words="fire recover" lvl="5" mana="4" aggressive="0" exhaustion="800" groups="2, 1000" needlearn="0" event="script" value="fire/recover.lua">
@@ -38,11 +43,11 @@
 		<vocation id="1"/>
 	</instant>
 
-	<instant name="Fire Cinder" words="fire cinder" lvl="30" mana="30" aggressive="1" needtarget="1" exhaustion="800" range="5" needlearn="0" event="script" value="fire/res.lua">
+	<instant name="Fire Res" words="fire res" lvl="30" mana="30" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="fire/res.lua">
 		<vocation id="1"/>
 	</instant>
 
-	<instant name="Fire Star" words="fire star" lvl="36" mana="35" aggressive="1" needtarget="1" range="6" exhaustion="800" needlearn="0" event="script" value="fire/star.lua">
+	<instant name="Fire Star" words="fire star" lvl="36" mana="35" aggressive="1" exhaustion="800" needlearn="0" event="script" value="fire/star.lua">
 		<vocation id="1"/>
 	</instant>
 
@@ -90,7 +95,7 @@
 		<vocation id="1"/>
 	</instant>
 
-	<instant name="Fire Voltage" words="fire voltage" lvl="130" mana="95" aggressive="1" selftarget="1" exhaustion="800" needlearn="0" event="script" value="fire/voltage.lua">
+	<instant name="Fire Voltage" words="fire voltage" lvl="130" mana="95" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="fire/voltage.lua">
 		<vocation id="1"/>
 	</instant>
 
@@ -106,8 +111,13 @@
 		<vocation id="1"/>
 	</instant>
 	
-	<instant name="Water Wave" words="water wave" lvl="1" mana="2" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="water/whip.lua">
+	<instant name="Water Whip" words="water whip" lvl="1" mana="2" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="water/whip.lua">
 		<vocation id="2"/>
+	</instant>
+
+	<!-- Dobra cruzada da promovida de Agua (voc 6), igual ao servidor de referencia -->
+	<instant name="Water Wave" words="water wave" lvl="16" mana="16" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="water/wave.lua">
+		<vocation id="6"/>
 	</instant>
 
 	<instant name="Water Recover" words="water recover" lvl="5" mana="4" aggressive="0" exhaustion="800" groups="2, 1000" needlearn="0" event="script" value="water/recover.lua">
@@ -138,7 +148,7 @@
 		<vocation id="2"/>
 	</instant>
 
-	<instant name="Water Freeze" words="water freeze" lvl="25" mana="25" aggressive="1" needtarget="1" range="4" exhaustion="800" needlearn="0" event="script" value="water/freeze.lua">
+	<instant name="Water Res" words="water res" lvl="25" mana="25" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="water/res.lua">
 		<vocation id="2"/>
 	</instant>
 
@@ -325,7 +335,7 @@
 		<vocation id="3"/>
 	</instant>
 
-	<instant name="Earth Crush" words="earth crush" lvl="1" mana="2" aggressive="1" selftarget="1" exhaustion="800" needlearn="0" event="script" value="earth/crush.lua">
+	<instant name="Earth Crush" words="earth crush" lvl="1" mana="2" aggressive="1" direction="1" exhaustion="800" needlearn="0" event="script" value="earth/crush.lua">
 		<vocation id="4"/>
 	</instant>
 

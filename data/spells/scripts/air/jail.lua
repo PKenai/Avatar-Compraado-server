@@ -28,10 +28,6 @@ local function sendDistanceEffect(cid, finish, target)
             MyLocal.players[cid] = nil
             doPlayerAddExaust(cid, "air", "jail", airExausted.jail)
             if isCreature(target) then
-                if getCreatureNoMove(target) then
-                    doPlayerSendCancelEf(cid, "The target is already imprisoned.")
-                    return true
-                end
                 local posTarget = getCreaturePosition(target)
                 if getDistanceBetween(playerPos, posTarget) > 7 then
                     doPlayerSendCancelEf(cid, "The target is too far, the fold was failed.")

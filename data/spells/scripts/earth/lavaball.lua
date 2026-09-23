@@ -9,9 +9,9 @@ local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = ((level*1.3)+((level * 0.5)/4)*2.7)+5
-    local max = ((level*1.5)+((level * 0.5)/4)*3.5)+5
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = ((level*1.3)+(magLevel/4)*2.7)+5
+    local max = ((level*1.5)+(magLevel/4)*3.5)+5
 	
 	local dano = math.random(min, max)
 	local atk = cf.atk
@@ -23,7 +23,6 @@ function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
     return -dano, -dano
 end
 setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
-registerSpellStageEcho(combat2)
 
 
 local function doMelt(cid, combat, var, times)

@@ -73,7 +73,7 @@ function onSay(cid, words, param, channel)
     if (upgradeStones == 0) then
         lastDobra = "Você ainda não aprimorou nenhuma dobra"
     elseif ((upgradeStones == 1) and playerLevel == 1) then
-        lastDobra = "Fire Wave"
+        lastDobra = "Fire Whip"
     elseif ((upgradeStones == 2) and playerLevel == 1) then
         lastDobra = "Fire Kick"
     elseif ((upgradeStones == 3) and playerLevel == 1) then
@@ -85,7 +85,7 @@ function onSay(cid, words, param, channel)
     elseif ((upgradeStones == 6) and playerLevel == 1) then
         lastDobra = "Fire Bolt"
     elseif ((upgradeStones == 7) and playerLevel == 1) then
-        lastDobra = "Fire Cinder"
+        lastDobra = "Fire Res"
     elseif ((upgradeStones == 8) and playerLevel == 1) then
         lastDobra = "Fire Star"
     elseif ((upgradeStones == 9) and playerLevel == 1) then
@@ -119,7 +119,7 @@ function onSay(cid, words, param, channel)
     elseif ((upgradeStones == 23) and playerLevel == 1) then
         lastDobra = "Fire Conflagration"
     elseif ((upgradeStones == 1) and playerLevel == 2) then
-        lastDobra = "Water Wave"
+        lastDobra = "Water Whip"
     elseif ((upgradeStones == 2) and playerLevel == 2) then
         lastDobra = "Water Explosion"
     elseif ((upgradeStones == 3) and playerLevel == 2) then
@@ -129,7 +129,7 @@ function onSay(cid, words, param, channel)
     elseif ((upgradeStones == 5) and playerLevel == 2) then
         lastDobra = "Water IceSpikes"
     elseif ((upgradeStones == 6) and playerLevel == 2) then
-        lastDobra = "Water Freeze"
+        lastDobra = "Water Res"
     elseif ((upgradeStones == 7) and playerLevel == 2) then
         lastDobra = "Water Shards"
     elseif ((upgradeStones == 8) and playerLevel == 2) then

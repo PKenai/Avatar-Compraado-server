@@ -19,7 +19,6 @@ setCombatArea(combat, createCombatArea(
           {0, 0, 0, 1, 0, 0, 0},
           {0, 0, 0, 3, 0, 0, 0}
       }))
-setCombatStageScaling(combat)
 
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
@@ -28,14 +27,13 @@ setCombatArea(combat2, createCombatArea(
           {0, 0, 0, 0, 0, 0, 0},
           {0, 0, 1, 2, 1, 0, 0}
       }))
-setCombatStageScaling(combat2)
 
 local combats = {combat, combat2}
 
 for x = 1, #combats do
-    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-        local min = (level+((level * 0.5)/3)*5.2)+math.random(35, 45)
-        local max = (level+((level * 0.5)/3)*6.0)+math.random(45, 60)
+    function onGetPlayerMinMaxValues(cid, level, magLevel)
+        local min = (level+(magLevel/3)*5.2)+math.random(35, 45)
+        local max = (level+(magLevel/3)*6.0)+math.random(45, 60)
 	if getPlayerInWaterWithUnderwater(cid) then 
         min = min*1.3
         max = max*1.3

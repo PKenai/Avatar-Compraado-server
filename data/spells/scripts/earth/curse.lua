@@ -13,11 +13,10 @@ setCombatArea(combat2, createCombatArea(
           {0, 0, 1, 3, 1, 0, 0},
           {0, 0, 1, 1, 1, 0, 0}
       }))
-setCombatStageScaling(combat2)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*2.16)+10
-    local max = (level+((level * 0.5)/3)*2.4)+10
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*2.16)+10
+    local max = (level+(magLevel/3)*2.4)+10
 	local dano = math.random(min, max)
 	local atk = cf.atk/2
 	if atk and type(atk) == "number" then 
@@ -147,7 +146,7 @@ if not isCreature(cid) or not isCreature(target) or times < 1 then return false 
   end
     if not isInPz(cid) then 
 	  createTerra(bombPos, 500)
-      doCombat(cid, combat, {type=2, pos=bombPos})
+      doCombat(cid, combat2, {type=2, pos=bombPos})
 	end 
 return not isInPz(cid) and addEvent(doBomb, 1000, cid, combat, var, times-1)
 end
@@ -173,7 +172,7 @@ function onCastSpell(cid, var)
         return true
     end
 	doSendDistanceShoot(getCreaturePosition(cid), getCreaturePosition(variantToNumber(var)), 38)
-	doBomb(cid, combat2, var, 3)
+	doBomb(cid, combat, var, 3)
 	exhaustion.set(variantToNumber(var), "earthCursed", 5)
   return true 
 end

@@ -12,9 +12,9 @@ setCombatParam(combat, COMBAT_PARAM_TARGETCASTERORTOPMOST, 1)
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/4)*3.6)
-    local max = (level+((level * 0.5)/4)*3.9)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/4)*3.6)
+    local max = (level+(magLevel/4)*3.9)
   if getPlayerInWaterWithUnderwater(cid) then 
     min = min*0.6
 	max = max*0.6
@@ -29,7 +29,6 @@ function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
-registerSpellStageEcho(combat)
 
 local arr = {
 {0, 3, 0}

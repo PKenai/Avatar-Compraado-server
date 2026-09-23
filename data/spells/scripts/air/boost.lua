@@ -62,7 +62,7 @@ function onCastSpell(cid, var)
             return false
         end  
 		if exhaustion.check(cid, "isInCombat") then
-		--	doPlayerSendCancelEf(cid, getLangString(cid, "You cannot use this bend with recent PvP (damage combat with another player).", "VocÃª nÃ£o pode executar esta dobra com PvP recente (sofrido/causado dano contra outro jogador recentemente)."))
+		--	doPlayerSendCancelEf(cid, getLangString(cid, "You cannot use this bend with recent PvP (damage combat with another player).", "Você não pode executar esta dobra com PvP recente (sofrido/causado dano contra outro jogador recentemente)."))
 		--	return false
 		end
         if getSpellCancels(cid, "air") == true then

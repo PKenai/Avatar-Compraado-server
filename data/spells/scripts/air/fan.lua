@@ -85,11 +85,10 @@ for x = 1, #combats do
     setCombatParam(combats[x], COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
     setCombatParam(combats[x], COMBAT_PARAM_EFFECT, 76)
     setCombatArea(combats[x], createCombatArea(arrs[x]))
-    setCombatStageScaling(combats[x])
  
-    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-        local min = (level+((level * 0.5)/4.1)*0.8)
-        local max = (level+((level * 0.5)/4.1)*1.0)
+    function onGetPlayerMinMaxValues(cid, level, magLevel)
+        local min = (level+(magLevel/4.1)*0.8)
+        local max = (level+(magLevel/4.1)*1.0)
 		local dano = math.random(min, max)
 		local atk = cf.atk
 		if atk and type(atk) == "number" then 
@@ -102,7 +101,6 @@ for x = 1, #combats do
     setCombatCallback(combats[x], CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
  
     function onTargetCreature(cid, target)
-		if not MyLocal.players[cid] then return false end
 		if getTileInfo(getCreaturePosition(cid)).protection then return false end
         local playerDir = MyLocal.players[cid].dir or NORTH
         local times = MyLocal.players[cid].times

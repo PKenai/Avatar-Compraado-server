@@ -8,9 +8,9 @@ local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, 44)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/5)*5.0)+math.random(10, 15)
-    local max = (level+((level * 0.5)/5)*5.5)+math.random(15, 18)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/5)*5.0)+math.random(10, 15)
+    local max = (level+(magLevel/5)*5.5)+math.random(15, 18)
   if getPlayerInWaterWithUnderwater(cid) then 
     min = min*0.6
 	max = max*0.6
@@ -28,7 +28,6 @@ function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
-registerSpellStageEcho(combat)
 
 function onTargetCreature(cid, target)
   doSlow(cid, target, 15, 2000)    

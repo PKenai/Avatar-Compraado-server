@@ -38,10 +38,10 @@ setCombatParam(combat8, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 local combats = {combat1Focus, combat1, combat2, combat3, combat4, combat5, combat6, combat7, combat8}
 
 for x = 1, #combats do
-    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    function onGetPlayerMinMaxValues(cid, level, magLevel)
         local multipler = 1
-        local min = (level*2)+((level * 0.5)/3)*2
-        local max = (level*2.5)+((level * 0.5)/3)*3
+        local min = (level*2)+(magLevel/3)*2
+        local max = (level*2.5)+(magLevel/3)*3
         if x == 1 then
             multipler = 2
         end

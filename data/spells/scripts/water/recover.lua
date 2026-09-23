@@ -46,6 +46,6 @@ function onCastSpell(cid, var)
             return true
         end  
 
-		exhaustion.set(cid, "canturecover", 2) -- janela para o URecover (era 3s)
+		exhaustion.set(cid, "canturecover", 3)
     return doSendHealth(cid)
 end

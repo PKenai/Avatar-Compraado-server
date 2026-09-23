@@ -1,78 +1,15 @@
 local spellName = "earth quake"
 local cf = {atk = spellsInfo[spellName].atk}
 
---[[
-  DANO QUANDO QUEM CONJURA E' MONSTRO
-
-  Monstro nao tem level/(level * 0.5), entao o dano dele sempre vem do <attack> no
-  XML da criatura (mesma regra documentada em
-  data/spells/scripts/monster/monsterSpell.lua). Como getMonsterInfo() nao diz
-  o nome da spell de cada bloco de ataque, lemos o XML do proprio monstro e
-  casamos com name="earth quake" - assim o XML continua sendo o unico lugar
-  onde o dano mora, e mudar o min/max + /reload monsters ja' muda a quake na
-  hora (a leitura e' feita uma vez por cast, nao por alvo).
-
-  Sem o bloco no XML o dano fica no simbolico 10/20 de antes.
-]]--
 local MyLocal = {}
 MyLocal.players = {}
-MyLocal.monsterDamage = {}   -- [cid] = {min, max} do cast em andamento
-local warnedMissing = {}     -- [nome do monstro] = true (avisa so' uma vez)
 
-local function readMonsterQuake(name)
-  if type(name) ~= "string" then return nil end
-
-  local info = getMonsterInfo(name)
-  if not info or type(info.file) ~= "string" then return nil end
-
-  local file
-  for _, candidate in ipairs({
-    info.file,
-    getDataDir() .. info.file,
-    getDataDir() .. "monster/" .. info.file,
-  }) do
-    file = io.open(candidate, "r")
-    if file then break end
-  end
-
-  if not file then
-    if not warnedMissing[name] then
-      warnedMissing[name] = true
-      print("[earth quake] XML de " .. name .. " nao encontrado (" .. info.file .. ")")
-    end
-    return nil
-  end
-
-  local content = file:read("*a")
-  file:close()
-
-  -- atributos podem vir em qualquer ordem, entao isola a tag primeiro
-  local tag = content:match('<attack[^>]*name="earth quake"[^>]*>')
-  if not tag then return nil end
-
-  local min = tonumber(tag:match('min="(-?%d+)"'))
-  local max = tonumber(tag:match('max="(-?%d+)"'))
-  if not min or not max or min == 0 or max == 0 then return nil end
-
-  return {min = math.abs(min), max = math.abs(max)}
-end
-
-local function monsterDamage(cid)
-  local values = MyLocal.monsterDamage[cid] or readMonsterQuake(getCreatureName(cid))
-  if not values then
-    return 10, 20
-  end
-  return values.min, values.max
-end
 
 local function getMin(cid)
-	if not isPlayer(cid) then
-		local min = monsterDamage(cid)
-		return min
-	end
+	if not isPlayer(cid) then return 10 end
   local level = getPlayerLevel(cid)
-  local magLevel = level * 0.5
-  local min = ((level+((level * 0.5)/6)*2.5)+math.random(20, 30)) * 2,6
+  local magLevel = getPlayerMagLevel(cid)
+  local min = ((level+(magLevel/6)*2.5)+math.random(20, 30)) * 2,6
   	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.6
 	end
@@ -86,13 +23,10 @@ local function getMin(cid)
 end
 
 local function getMax(cid)
-	if not isPlayer(cid) then
-		local _, max = monsterDamage(cid)
-		return max
-	end
+	if not isPlayer(cid) then return 20 end
   local level = getPlayerLevel(cid)
-  local magLevel = level * 0.5
- local max = ((level+((level * 0.5)/6)*3.2)+math.random(30, 40))* 2,6
+  local magLevel = getPlayerMagLevel(cid)
+ local max = ((level+(magLevel/6)*3.2)+math.random(30, 40))* 2,6
  	if getPlayerInWaterWithUnderwater(cid) then 
 		max = max*0.6
 	end
@@ -107,19 +41,19 @@ end
 
 local combat1 = createCombatObject()
 setCombatParam(combat1, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
-setCombatParam(combat1, COMBAT_PARAM_EFFECT, 269)
+setCombatParam(combat1, COMBAT_PARAM_EFFECT, 34)
 
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
-setCombatParam(combat2, COMBAT_PARAM_EFFECT, 269)
+setCombatParam(combat2, COMBAT_PARAM_EFFECT, 34)
 
 local combat3 = createCombatObject()
 setCombatParam(combat3, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
-setCombatParam(combat3, COMBAT_PARAM_EFFECT, 269)
+setCombatParam(combat3, COMBAT_PARAM_EFFECT, 34)
 
 local combat4 = createCombatObject()
 setCombatParam(combat4, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
-setCombatParam(combat4, COMBAT_PARAM_EFFECT, 269)
+setCombatParam(combat4, COMBAT_PARAM_EFFECT, 34)
 
 local combats = {combat1, combat2, combat3, combat4}
 
@@ -133,7 +67,7 @@ function onTargetCreature1(cid, target)
 		end
 	end
 	  doSlow(cid, target, 15, 2000)   
-	doTargetCombatHealth(cid, target, COMBAT_EARTHDAMAGE, -getMin(cid), -getMax(cid), 269)
+	doTargetCombatHealth(cid, target, COMBAT_EARTHDAMAGE, -getMin(cid), -getMax(cid), 34)
 end
 
 setCombatCallback(combat1, CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature1")
@@ -273,12 +207,8 @@ local function posQuakeWork(cid, isEnd)
   end
   MyLocal.players[cid] = poses
 
-  -- Estagios: mini (<50) faz ondas mais espacadas, elite (100+) faz mais
-  -- ondas e mais rapidas - a terra quebra em sequencia
-  local waves = spellStageCount(cid, 4)
-  local waveDelay = spellStageScale(cid, 200, 1.25, 0.75)
-  for x = 1, waves do
-    addEvent(quakeWork, math.floor(waveDelay*x), cid, x == waves, isEnd)
+  for x = 1, 4 do
+    addEvent(quakeWork, 200*x, cid, x == 4, isEnd)
   end
 end
 
@@ -294,11 +224,6 @@ function onCastSpell(cid, var)
     if getPlayerExaust(cid, "earth", "quake") == false then
       return false
     end
-    -- monstro: guarda o dano do XML dele para as ondas (que rodam depois,
-    -- via addEvent, quando o min/max vivo do Monster ja' seria outro)
-    if not isPlayer(cid) then
-      MyLocal.monsterDamage[cid] = readMonsterQuake(getCreatureName(cid))
-    end
     if getPlayerHasStun(cid) then
 		if getDobrasLevel(cid) >= 18 then
           doPlayerAddExaust(cid, "earth", "quake", earthExausted.quake-9)
@@ -307,11 +232,8 @@ function onCastSpell(cid, var)
 		  end
           return true
       end
-      -- Estagios: rodadas do tremor (3 no mini / 4 no padrao / 5 no elite)
-      local rounds = spellStageCount(cid, 4)
-      local roundDelay = spellStageScale(cid, 1000, 1.25, 0.7)
-      for a = 0, rounds - 1 do
-        addEvent(posQuakeWork, math.floor(roundDelay*a), cid, a == rounds - 1)
+      for a = 0, 3 do
+        addEvent(posQuakeWork, 1000*a, cid, a == 3)
       end
       --workAllCdAndAndPrevCd(cid, "earth", "quake", 9*1000, 1)
 		if getDobrasLevel(cid) >= 18 then

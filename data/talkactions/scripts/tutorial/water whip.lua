@@ -53,7 +53,7 @@ function onSay(cid, words, param, channel)
 		return true
 	end
 
-	doCreatureSay(cid, "Water Wave", TALKTYPE_ORANGE_1, false, cid)
+	doCreatureSay(cid, "Water Whip", TALKTYPE_ORANGE_1, false, cid)
 	doCreatureAddMana(cid, -2, false)
 	setPlayerStorageValue(cid, "tutorialback", 1)
 	doCalculateEffect(cid, getCreatureLookDirection(cid))

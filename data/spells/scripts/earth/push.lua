@@ -7,9 +7,9 @@ local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
 setCombatParam(combat2, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
-    local min = (level+((level * 0.5)/3)*3.0)+math.random(2, 3)
-    local max = (level+((level * 0.5)/3)*3.3)+math.random(3, 4)
+function onGetPlayerMinMaxValues(cid, level, magLevel)
+    local min = (level+(magLevel/3)*3.0)+math.random(2, 3)
+    local max = (level+(magLevel/3)*3.3)+math.random(3, 4)
 
 	min = remakeAirEarth(cid, min)
 	max = remakeAirEarth(cid, max)
@@ -20,9 +20,6 @@ setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxVal
 function onTargetCreature(cid, target)
   local playerPos = getCreaturePos(cid)
   local targetPos = getCreaturePos(target)
-  if getDistanceBetween(playerPos, targetPos) > 7 then
-    return false
-  end
   doPushCreature(target, getDirectionTo(playerPos, targetPos))
   doCombat(cid, combat2, numberToVariant(target))
   doCreateItem(MyLocal.earthId, targetPos)

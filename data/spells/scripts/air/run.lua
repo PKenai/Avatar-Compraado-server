@@ -36,11 +36,7 @@ function onCastSpell(cid, var)
         return true
     end
 	if getDobrasLevel(cid) >= 3 then 
-		local ret = doCombat(cid, combatUp, var)
-		if ret then doCreatureAddBuff(cid, 2) end
-		return ret
+		return doCombat(cid, combatUp, var)
 	end 
-    local ret = doCombat(cid, combat, var)
-    if ret then doCreatureAddBuff(cid, 2) end
-    return ret
+    return doCombat(cid, combat, var)
 end
