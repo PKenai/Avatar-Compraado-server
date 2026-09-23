@@ -48,6 +48,7 @@ setCombatArea(combat, createCombatArea(
           {0, 0, 1, 1, 1, 0, 0},
           {0, 0, 1, 3, 1, 0, 0}
       }))
+setCombatStageScaling(combat)
 
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
@@ -60,13 +61,14 @@ setCombatArea(combat2, createCombatArea(
           {0, 0, 1, 1, 1, 0, 0},
           {0, 0, 1, 3, 1, 0, 0}
       }))
+setCombatStageScaling(combat2)
       
 local combats = {combat, combat2}
 
 for x = 1, #combats do
-    function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/5)*6.5)+math.random(35, 45)
-        local max = (level+(magLevel/5)*7.5)+math.random(45, 60)
+    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/5)*6.5)+math.random(35, 45)
+        local max = (level+((level * 0.5)/5)*7.5)+math.random(45, 60)
       if x > 0 then 
         min = min*1.5
 		max = max*1.5

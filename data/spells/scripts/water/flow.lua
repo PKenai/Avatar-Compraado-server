@@ -10,6 +10,7 @@ local combatHeal = createCombatObject()
 setCombatParam(combatHeal, COMBAT_PARAM_AGGRESSIVE, 0)
 setCombatParam(combatHeal, COMBAT_PARAM_EFFECT, CONST_ME_MAGIC_BLUE)
 setCombatArea(combatHeal, createCombatArea(AREA_SQUARE1X1))
+setCombatStageScaling(combatHeal)
 
 local combat1 = createCombatObject()
 setCombatParam(combat1, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
@@ -27,15 +28,16 @@ setCombatArea(combat1, createCombatArea(
           {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combat1)
 
 	  
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
 setCombatParam(combat2, COMBAT_PARAM_EFFECT, 152)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*3.1)+5
-    local max = (level+(magLevel/3)*3.9)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*3.1)+5
+    local max = (level+((level * 0.5)/3)*3.9)+15
 
 	
 	local dano = math.random(min, max)

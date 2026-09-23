@@ -30,7 +30,7 @@ function creatureSayCallback(cid, type, msg)
 		end
 		setPlayerStorageValue(cid, "jadissesim", 1)
 		selfSay("Show me what you can do.", cid) 		
-		doPlayerSendTextMessage(cid, 22, "Show to Izumi the bend Fire Whip. You can use it by clicking on the bending list, or by saying the word 'Fire Whip', that can be automatically sent with a shortcut using the hotkey system (CTRL+K).")
+		doPlayerSendTextMessage(cid, 22, "Show to Izumi the bend Fire Wave. You can use it by clicking on the bending list, or by saying the word 'Fire Wave', that can be automatically sent with a shortcut using the hotkey system (CTRL+K).")
 	else
 		selfSay("What are you waiting for?! Go back and talk with Rolf, he'll travel with you to the Fire Nation Capital.", cid)
 	end

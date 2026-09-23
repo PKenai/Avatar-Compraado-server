@@ -7,9 +7,9 @@ MyLocal.players = {}
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*2.1)+math.random(30, 40)
-    local max = (level+(magLevel/2)*2.7)+math.random(50, 60)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*2.1)+math.random(30, 40)
+    local max = (level+((level * 0.5)/2)*2.7)+math.random(50, 60)
     if getPlayerInWaterWithUnderwater(cid) then 
         min = min*0.5
         max = max*0.5
@@ -28,9 +28,9 @@ setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValu
 local combatFocus = createCombatObject()
 setCombatParam(combatFocus, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 
-function onGetPlayerMinMaxValuesFocus(cid, level, magLevel)
-    local min = ((level+(magLevel/2)*2.1)+math.random(30, 40))*1.3
-    local max = ((level+(magLevel/2)*2.7)+math.random(50, 60))*1.7
+function onGetPlayerMinMaxValuesFocus(cid, level, magLevelUnused)
+    local min = ((level+((level * 0.5)/2)*2.1)+math.random(30, 40))*1.3
+    local max = ((level+((level * 0.5)/2)*2.7)+math.random(50, 60))*1.7
     if getPlayerInWaterWithUnderwater(cid) then 
         min = min*0.5
         max = max*0.5
@@ -57,7 +57,9 @@ local arr = {
 }
 
 setCombatArea(combat, createCombatArea(arr))
+setCombatStageScaling(combat)
 setCombatArea(combatFocus, createCombatArea(arr))
+setCombatStageScaling(combatFocus)
 
 local function sendDamage(cid, finish, focus)
     if getTileInfo(getCreaturePosition(cid)).protection then return false end

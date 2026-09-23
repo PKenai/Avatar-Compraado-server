@@ -75,7 +75,7 @@ function onCastSpell(cid, var)
       end
       exhaustion.set(cid, "jumpdebuff", 5)
       setPlayerStorageValue(cid, "debuffValue", debuff)
-            if doPlayerAddUp(cid, false) then
+            if doPlayerAddUp(cid) then
         sendMagicEff(cid, getThingPos(cid))
                local stoneUid = doCreateItem(stoneId, 1, position)
                 addEvent(doCreateItem, itemDelay1, stoneId1, 1, position)

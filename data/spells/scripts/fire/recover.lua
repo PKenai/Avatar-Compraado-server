@@ -42,7 +42,7 @@ function onCastSpell(cid, var)
         if getPlayerHasStun(cid) then
             return true
         end
-		exhaustion.set(cid, "canturecover", 3)
+		exhaustion.set(cid, "canturecover", 2) -- janela para o URecover (era 3s)
         return doSendHealth(cid)
     --else
         --return false

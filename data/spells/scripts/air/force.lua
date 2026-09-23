@@ -8,10 +8,11 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, 2)
 setCombatParam(combat, COMBAT_PARAM_DISTANCEEFFECT, 41)
 setCombatArea(combat, createCombatArea(AREA_CROSS1X1))
+setCombatStageScaling(combat)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.56)+(math.random(30, 35)/2)
-    local max = (level+(magLevel/4)*2.8)+(math.random(35, 45)/2)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.56)+(math.random(30, 35)/2)
+    local max = (level+((level * 0.5)/4)*2.8)+(math.random(35, 45)/2)
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 

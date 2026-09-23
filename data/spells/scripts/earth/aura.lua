@@ -23,6 +23,7 @@ setCombatArea(combat, createCombatArea(
           {0, 0, 0, 0, 0, 0, 0},
           {0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combat)
       
 local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
@@ -36,6 +37,7 @@ setCombatArea(combat2, createCombatArea(
           {0, 0, 1, 1, 1, 0, 0},
           {0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combat2)
 
 local combat3 = createCombatObject()
 setCombatParam(combat3, COMBAT_PARAM_TYPE, COMBAT_EARTHDAMAGE)
@@ -49,6 +51,7 @@ setCombatArea(combat3, createCombatArea(
           {0, 1, 0, 0, 0, 1, 0},
           {0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combat3)
 
 
 local combat4 = createCombatObject()
@@ -62,11 +65,12 @@ setCombatArea(combat4, createCombatArea(
           {0, 0, 1, 1, 1, 0, 0},
           {0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combat4)
 
 	  
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/3)*5.2)+math.random(35, 45)
-        local max = (level+(magLevel/3)*6.0)+math.random(45, 60)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/3)*5.2)+math.random(35, 45)
+        local max = (level+((level * 0.5)/3)*6.0)+math.random(45, 60)
       if getPlayerInWaterWithUnderwater(cid) then 
         min = min*0.6 
         max = max*0.6
@@ -82,9 +86,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
  end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/3)*5.2)+math.random(35, 45)
-        local max = (level+(magLevel/3)*6.0)+math.random(45, 60)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/3)*5.2)+math.random(35, 45)
+        local max = (level+((level * 0.5)/3)*6.0)+math.random(45, 60)
       if getPlayerInWaterWithUnderwater(cid) then 
         min = min*0.6 
         max = max*0.6

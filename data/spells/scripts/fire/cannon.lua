@@ -11,9 +11,9 @@ local combatFocus = createCombatObject()
 setCombatParam(combatFocus, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 setCombatParam(combatFocus, COMBAT_PARAM_EFFECT, 79)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*4.1)+math.random(3, 7)
-    local max = (level+(magLevel/2)*5.3)+math.random(7, 15)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*4.1)+math.random(3, 7)
+    local max = (level+((level * 0.5)/2)*5.3)+math.random(7, 15)
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5
@@ -28,10 +28,11 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = ((level+(magLevel/2)*4.1)+math.random(3, 7))*1.5
-    local max = ((level+(magLevel/2)*4.3)+math.random(7, 15))*2.0
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = ((level+((level * 0.5)/2)*4.1)+math.random(3, 7))*1.5
+    local max = ((level+((level * 0.5)/2)*4.3)+math.random(7, 15))*2.0
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5
@@ -46,6 +47,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combatFocus, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combatFocus)
 
 function onTargetCreature(cid, target)
     if isNpc(target) then

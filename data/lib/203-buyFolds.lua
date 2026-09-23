@@ -8,6 +8,11 @@ local spellInfos = {
 
     ["water"] = 
         {
+            -- Dobras de nome novo ja entram na lista ensinada pelos Mentores
+            -- (pago com gold ou 1 bender scroll). "Wave" e' a Water Wave da
+            -- spellbar (por dentro continua "whip", ver getFoldSlot) e
+            -- "IceSpikes" e' a Water IceSpikes.
+            {words = "Wave"}, {words = "IceSpikes"},
            {words = "BloodControl"},
             {words = "Punch"}, {words = "Dragon"}, {words = "Rain"}, {words = "Bubbles"}, {words = "Protect"},
             {words = "Icebolt"}, {words = "Flow"}, {words = "IceGolem"}, {words = "Tsunami"}, {words = "Clock"}, {words = "Blizzard"}, {words = "BloodBending"}
@@ -49,6 +54,13 @@ local foldSlotTables = {
     earth = earthSpells
 }
 
+-- Nome interno -> palavra usada na lista ensinada. A dobra de level 1 da agua
+-- aparece como "Water Wave" na spellbar, mas por dentro segue "whip" (chaves
+-- de exaustao, som e pasta continuam as antigas).
+local foldWordAliases = {
+    water = {wave = "whip"}
+}
+
 -- Slot da dobra na spellbar, achado pelo NOME (nao pela posicao na lista
 -- ensinada): assim a lista do NPC pode crescer/reordenar sem bagunçar os
 -- marcadores "NPC" que o client recebe via "#j#<slot>;".
@@ -59,6 +71,11 @@ function getFoldSlot(element, words)
     end
 
     local word = words:lower()
+    local alias = foldWordAliases[element] and foldWordAliases[element][word]
+    if alias then
+        word = alias
+    end
+
     local target = (element..word):lower()
     for x = 1, #list do
         if list[x]:lower() == target then

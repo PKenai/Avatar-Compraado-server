@@ -54,11 +54,11 @@ end
 
 function onCastSpell(cid, var)
 	if getPlayerInWater(cid) then
-		doPlayerSendCancel(cid, getLangString(cid, "You can't use earth armor inside the water.", "Você não pode usar essa dobra na água."))
+		doPlayerSendCancel(cid, getLangString(cid, "You can't use earth armor inside the water.", "VocÃª nÃ£o pode usar essa dobra na Ã¡gua."))
 		return false
 	end
 	if getCreatureCondition(cid, CONDITION_OUTFIT) then
-		doPlayerSendCancel(cid, getLangString(cid, "You can't use earth armor right now.", "Você não pode utilizar a earth armor agora."))
+		doPlayerSendCancel(cid, getLangString(cid, "You can't use earth armor right now.", "VocÃª nÃ£o pode utilizar a earth armor agora."))
 		return false
 	end
 
@@ -98,7 +98,7 @@ function onCastSpell(cid, var)
 	end
 	if isPlayer(cid) and getPlayerStorageValue(cid, "nuncaUsouArmor") ~= 1 then
 		setPlayerStorageValue(cid, "nuncaUsouArmor", 1)
-		sendBlueMessage(cid, "Dica: Você pode sair do estado de defesa antes da duração acabar utilizando a dobra Earth Fury, Earth Track ou Earth Cataclysm. É importante informar também que esta dobra não pode ser usada imediatamente após o Earth Leech, haverá uma recarga pequena de 4 segundos.")
+		sendBlueMessage(cid, "Dica: VocÃª pode sair do estado de defesa antes da duraÃ§Ã£o acabar utilizando a dobra Earth Fury, Earth Track ou Earth Cataclysm. Ã‰ importante informar tambÃ©m que esta dobra nÃ£o pode ser usada imediatamente apÃ³s o Earth Leech, haverÃ¡ uma recarga pequena de 4 segundos.")
 	end
      return true
 end 

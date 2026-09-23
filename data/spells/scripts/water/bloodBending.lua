@@ -59,9 +59,9 @@ function onTargetCreature(cid, target)
 end
 setCombatCallback(combat3, CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.2)+5
-    local max = (level+(magLevel/4)*3.8)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.2)+5
+    local max = (level+((level * 0.5)/4)*3.8)+15
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -73,9 +73,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*2.2)+5
-    local max = (level+(magLevel/4)*3.8)+15
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*2.2)+5
+    local max = (level+((level * 0.5)/4)*3.8)+15
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -88,6 +88,7 @@ end
 setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
 
 setCombatArea(combat, createCombatArea(arr))
+setCombatStageScaling(combat)
 function onTargetTile(cid, pos)
 	addEvent(doSendMagicEffect, getDistanceBetween(pos, centerPoses[cid]) * 100, pos, 138)
 	doCombat(cid, combat3, {type=2, pos=pos})
@@ -102,6 +103,9 @@ setCombatCallback(combat, CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
 
 local function rollClock(cid, target, times)
 	if not isCreature(cid) or not isCreature(target) or isInPz(cid) or isInPz(target) then
+		return false
+	end
+	if isPlayer(target) and cantReceiveDisable(cid, target) then
 		return false
 	end
 	local targpos = getCreaturePosition(target)

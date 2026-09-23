@@ -61,6 +61,9 @@ end
 local combat=createCombatObject() 
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE) 
 
+-- Avatar: efeito de explosao de cada sqm da area (antes era o 378)
+local SKYFALL_EXPLOSION_EFFECT = 409
+
 
 local spellName = "fire skyfall"
 local cf = {atk = spellsInfo[spellName].atk}
@@ -72,9 +75,9 @@ function onTargetTile(cid, pos)
 end
     setCombatCallback(combat, CALLBACK_PARAM_TARGETTILE, "onTargetTile")]]
 	
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*4.1)+math.random(3, 7)
-    local max = (level+(magLevel/2)*5.3)+math.random(7, 15)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*4.1)+math.random(3, 7)
+    local max = (level+((level * 0.5)/2)*5.3)+math.random(7, 15)
 	local dano = math.random(min, max)
 	if exhaustion.check(cid, "isFocusSkyfall") then 
 		dano = dano*2
@@ -88,6 +91,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 		return -dano, -dano
  end
     setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+    registerSpellStageEcho(combat)
     
 function onTargetCreature(cid, target)
     if isNpc(target) then
@@ -115,12 +119,12 @@ local function startExplosion(cid, poses)
 				if player.uid > 0 then 
 					if isPlayer(player.uid) then 
 						if not isImune(cid, player.uid) and getPlayerStorageValue(player.uid, "playerOnAir") == 1 then
-						 local level, magLevel = 50, 30
+						 local level, magLevel = 50, 50 * 0.5
 						 if isPlayer(cid) then 
-							level, magLevel = getPlayerLevel(cid), getPlayerMagLevel(cid)
+							level, magLevel = getPlayerLevel(cid), (getPlayerLevel(cid)) * 0.5
 						  end 
-						 local min = (level+(magLevel/2)*4.1)+math.random(3, 7)
-						 local max = (level+(magLevel/2)*5.3)+math.random(7, 15)
+						 local min = (level+((level * 0.5)/2)*4.1)+math.random(3, 7)
+						 local max = (level+((level * 0.5)/2)*5.3)+math.random(7, 15)
 					     local dano = math.random(min, max)
 						 if exhaustion.check(cid, "isFocusSkyfall") then 
 							dano = dano*2
@@ -137,7 +141,7 @@ local function startExplosion(cid, poses)
 					end 
 				end 
 				local random = 200+(-20*i)
-				addEvent(doSendMagicEffect, random+50, posHit, 6)
+				addEvent(doSendMagicEffect, random+50, posHit, SKYFALL_EXPLOSION_EFFECT)
 			end
         end 
 end
@@ -172,7 +176,11 @@ function onCastSpell(cid, var)
 	if getPlayerOverPower(cid, "fire", true, true) then
 		exhaustion.set(cid, "isFocusSkyfall", 2)
 	end
-    local mypos = getThingPos(cid)
+	local target = getCreatureTarget(cid)
+	local mypos = getThingPos(cid)
+	if isCreature(target) then
+		mypos = getThingPos(target)
+	end
 	local poses = getPositionsByTable(mypos, area, 0, 9, 1)
 	poses = poses[1]
     doSendMagicEffect(mypos, 48)

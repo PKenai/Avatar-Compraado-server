@@ -6,12 +6,15 @@ MyLocal.fireId = 13025
 MyLocal.totalTime = cf.segundos
 MyLocal.players = {}
 
+-- Avatar: a magia inteira solta UM unico efeito, este (visual novo).
+local SUFFOCATION_EFFECT = 392
+
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*3.3)+math.random(5, 10)
-    local max = (level+(magLevel/3)*3.7)+math.random(10, 15)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*3.3)+math.random(5, 10)
+    local max = (level+((level * 0.5)/3)*3.7)+math.random(10, 15)
 
 	local dano = math.random(min, max)
 	local atk = cf.atk
@@ -23,6 +26,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
 local function sendFiresAround(cid)
     local playerPos = getCreaturePosition(cid)
@@ -38,10 +42,9 @@ end
 
 local function sendDistanceEffect(cid, finish, target)
     if isCreature(cid) and isCreature(target) and not isInPz(cid) and not isInPz(target) then
-        local playerPos = getCreaturePosition(target)
-        local inPos = {x=playerPos.x+math.random(-1, 1),y=playerPos.y+math.random(-1, 1),z=playerPos.z}
-        doSendDistanceShoot(playerPos, inPos, 41)
-		local mypos = getCreaturePosition(cid)
+        -- Avatar: o visual antigo (distance shoot 41 a cada tick + 211 no final)
+        -- saiu; agora so' existe o efeito 392 mandado uma vez, no cast.
+        local mypos = getCreaturePosition(cid)
 		doSlow(cid, target, 10, 750)
 		doCombat(cid, combat, numberToVariant(target))
         
@@ -58,8 +61,6 @@ local function sendDistanceEffect(cid, finish, target)
 					exhaustion.set(target, "stopDashs", 2) 
 				end 
                 --sendFiresAround(target)
-                doSendMagicEffect(posTarget, 120)
-				doSendAnimatedText(posTarget, "Suffocated!", 215)
             else
                 doPlayerSendCancelEf(cid, "The target is gone, the fold was failed.")
                 return true
@@ -68,10 +69,37 @@ local function sendDistanceEffect(cid, finish, target)
     end
 end
 
+local AIR_FLOAT_OPCODE = 114
+
+local function sendFloatToTarget(target, duration)
+    local specs = getSpectators(getCreaturePosition(target), 12, 12)
+    if specs then
+        local payload = "float|" .. target .. "|" .. duration
+        for _, spec in ipairs(specs) do
+            if isPlayer(spec) then
+                doSendPlayerExtendedOpcode(spec, AIR_FLOAT_OPCODE, payload)
+            end
+        end
+    end
+end
+
+local function sendStopFloatToTarget(target)
+    if not isCreature(target) then return end
+    local specs = getSpectators(getCreaturePosition(target), 12, 12)
+    if specs then
+        local payload = "stopfloat|" .. target
+        for _, spec in ipairs(specs) do
+            if isPlayer(spec) then
+                doSendPlayerExtendedOpcode(spec, AIR_FLOAT_OPCODE, payload)
+            end
+        end
+    end
+end
+
 function onCastSpell(cid, var)
     if getSpellCancels(cid, "air") == true then
         return false
-    end 
+    end
   --  if MyLocal.players[cid] == nil then
         if getPlayerExaust(cid, "air", "suffocation") == false then
             return false
@@ -93,13 +121,29 @@ function onCastSpell(cid, var)
         end
 
         local target = getCreatureTarget(cid)
-        doCreatureSetMoveImmuneTime(target, 2701)
+        local totalDuration = 150 * 18  -- 18 ticks * 150ms = 2700ms
+
+        -- Trava o movimento do alvo desde o início
+        doCreatureSetMoveImmuneTime(target, totalDuration + 200)
+
+        -- Levita o alvo durante todo o tempo de dano
+        sendFloatToTarget(target, totalDuration + 200)
+
+        -- Interrompe a levitação ao fim do dano
+        addEvent(sendStopFloatToTarget, totalDuration + 200, target)
+
         MyLocal.players[cid] = true
+
+        -- Avatar: unico efeito da magia (392), no alvo
+        if isCreature(target) then
+            doSendMagicEffect(getCreaturePosition(target), SUFFOCATION_EFFECT)
+        end
+
         for x = 1, 18 do
             addEvent(sendDistanceEffect, 150*x, cid, x == 18, target)
         end
         workAllCdAndAndPrevCd(cid, "air", "suffocation", nil, 1)
-		
+
 			if getDobrasLevel(cid) >= 11 then
 				doPlayerAddExaust(cid, "air", "suffocation", airExausted.suffocation-7)
 			else

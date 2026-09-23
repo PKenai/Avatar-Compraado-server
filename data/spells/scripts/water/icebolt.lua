@@ -8,9 +8,9 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_DISTANCEEFFECT, 44)
 setAttackFormula(combat, COMBAT_FORMULA_LEVELMAGIC, 100, 100, 20, 10)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*7.5)+math.random(40, 50)
-    local max = (level+(magLevel/2)*8.0)+math.random(50, 55)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*7.5)+math.random(40, 50)
+    local max = (level+((level * 0.5)/2)*8.0)+math.random(50, 55)
 
 	local dano = math.random(min, max)
 	local atk = cf.atk
@@ -22,6 +22,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
 
 function onCastSpell(cid, var)

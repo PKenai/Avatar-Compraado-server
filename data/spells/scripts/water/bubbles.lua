@@ -10,9 +10,9 @@ local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_DROWNDAMAGE)
 setCombatParam(combat2, COMBAT_PARAM_EFFECT, 25)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*2.7)+5
-    local max = (level+(magLevel/2)*3.0)+5
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*2.7)+5
+    local max = (level+((level * 0.5)/2)*3.0)+5
 	
 	local dano = math.random(min, max)
 	local atk = cf.atk
@@ -24,9 +24,10 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*2.7)+5
-    local max = (level+(magLevel/2)*3.0)+5
+registerSpellStageEcho(combat)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*2.7)+5
+    local max = (level+((level * 0.5)/2)*3.0)+5
 	min = min * 0.4
 	max = max * 0.4
 	
@@ -40,6 +41,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat2)
 
 
 local function doDrown(cid, combat, var, times)

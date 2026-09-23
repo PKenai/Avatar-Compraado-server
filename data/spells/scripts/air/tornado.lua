@@ -12,9 +12,9 @@ local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 --setCombatParam(combat2, COMBAT_PARAM_EFFECT, 77)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*4.5)+5
-    local max = (level+(magLevel/3)*5.0)+10
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*4.5)+5
+    local max = (level+((level * 0.5)/3)*5.0)+10
 
 	local dano = math.random(min, max)
 	local atk = cf.atk
@@ -35,10 +35,11 @@ local arr ={{1, 1, 1},
           {1, 3, 1},
           {1, 1, 1}}
     setCombatArea(combat3, createCombatArea(arr))
+    setCombatStageScaling(combat3)
 	
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*4.5)+5
-    local max = (level+(magLevel/3)*5.0)+10
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*4.5)+5
+    local max = (level+((level * 0.5)/3)*5.0)+10
 
 	local dano = math.random(min, max)
 	local atk = cf.atk

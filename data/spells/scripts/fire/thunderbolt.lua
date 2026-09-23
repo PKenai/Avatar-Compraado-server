@@ -26,11 +26,12 @@ setCombatArea(combat3, createCombatArea(
           {0, 0, 1, 2, 1, 0, 0},
           {0, 0, 0, 1, 0, 0, 0}
       }))
+setCombatStageScaling(combat3)
 
       
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*2.7)+5
-    local max = (level+(magLevel/3)*3.0)+5
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*2.7)+5
+    local max = (level+((level * 0.5)/3)*3.0)+5
     if getPlayerInWaterWithUnderwater(cid) then 
         min = min*1.3
         max = max*1.3
@@ -50,9 +51,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano*cf.multiplicadorImpacto, -dano*cf.multiplicadorImpacto
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*2.7)+5
-    local max = (level+(magLevel/3)*3.0)+5
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*2.7)+5
+    local max = (level+((level * 0.5)/3)*3.0)+5
       if exhaustion.check(cid, "isFocusThunderbolt") then 
         min = min*2
         max = max*2
@@ -68,9 +69,9 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano*cf.multiplicadorElectrify, -dano*cf.multiplicadorElectrify
 end
 setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/3)*2.7)+5
-    local max = (level+(magLevel/3)*3.0)+5
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/3)*2.7)+5
+    local max = (level+((level * 0.5)/3)*3.0)+5
     if getPlayerInWaterWithUnderwater(cid) then 
         min = min*1.3
         max = max*1.3

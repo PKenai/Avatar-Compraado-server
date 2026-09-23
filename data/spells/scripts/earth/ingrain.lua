@@ -40,6 +40,9 @@ local function healingIngrain(info)
       heal = heal * (atk/100)
     end
 
+      -- Estagios: mini cura menos (70%), elite cura bem mais (160%)
+      heal = spellStageScale(cid, heal, 0.7, 1.6)
+
       doCreatureAddHealth(cid, heal)
       doSendMagicEffect({x=pos.x+1, y=pos.y+1, z=pos.z}, magicEffect)
       if timeEnd <= os.time() then
@@ -70,13 +73,15 @@ function onCastSpell(cid, var)
       end
       local position = getCreaturePosition(cid)
       local magicEffect = 50
-     -- setCreatureNoMoveTime(cid, (MyLocal.time+MyLocal.interval)*1000)
+      -- Estagios: a raiz dura 60% no mini e 160% no elite
+      local duration = spellStageSeconds(cid, cf.segundos)
+     -- setCreatureNoMoveTime(cid, (duration+MyLocal.interval)*1000)
     --doPlayerCancelFollow(cid)
-  exhaustion.set(cid, "AirBarrierReduction", (MyLocal.time+MyLocal.interval))
+  exhaustion.set(cid, "AirBarrierReduction", (duration+MyLocal.interval))
       --workAllCdAndAndPrevCd(cid, "earth", "ingrain", (MyLocal.time+MyLocal.interval)*1000, 1)
      -- doCreateItem(MyLocal.threeId, position)
       MyLocal.playersCantUse[cid] = true
-      addEvent(healingIngrain, 200, {cid = cid, timeEnd = os.time()+MyLocal.time, pos = position, magicEffect = magicEffect})
+      addEvent(healingIngrain, 200, {cid = cid, timeEnd = os.time()+duration, pos = position, magicEffect = magicEffect})
       doCombat(cid, combat, var)
           MyLocal.playersCantUse[cid] = nil
       if getDobrasLevel(cid) >= 14 then

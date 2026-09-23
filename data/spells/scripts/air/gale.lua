@@ -38,17 +38,26 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_AIRDAMAGE)
 --setCombatParam(combat, COMBAT_PARAM_HITEFFECT, 34)
 --setCombatParam(combat, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = ((level+(magLevel/3)*2.6)+math.random(1, 2))*1.68
-    local max = ((level+(magLevel/3)*3.1)+math.random(2, 3))*1.68
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = ((level+((level * 0.5)/3)*2.6)+math.random(1, 2))*1.68
+    local max = ((level+((level * 0.5)/3)*3.1)+math.random(2, 3))*1.68
 
 	min = min*1.5
 	max = max*1.5
+	-- o atk da tabela e' o botao de calibragem desta dobra (padrao do earth
+	-- punch): sem isso o dano nao responde ao atk e a dobra fica fora do
+	-- balance da spellbar (tools/spell_balance_report.pl --bar)
+	local atk = cf.atk
+	if atk and type(atk) == "number" then
+		min = min * (atk/100)
+		max = max * (atk/100)
+	end
 	min = remakeAirEarth(cid, min)
 	max = remakeAirEarth(cid, max)
     return -min, -max
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
 local function getAnotherDirs(dir)
 if dir == 0 or dir == 2 then 
@@ -105,10 +114,20 @@ local function getGalePositions(mypos, dir)
 	 end
 end
 
+-- Avatar: visual novo da Air Gale.
+-- A area e o dano continuam os mesmos (3 trilhas de 4 sqm andando pra frente),
+-- mas a magia agora solta UM unico efeito, no sqm da frente do dobrador, e o id
+-- muda conforme a direcao que ele esta' olhando:
+--   390 = direita (leste) | 391 = cima (norte) | 393 = baixo (sul) | 394 = esquerda (oeste)
+local GALE_FRONT_EFFECT = {
+	[0] = 391, -- norte / cima
+	[1] = 390, -- leste / direita
+	[2] = 393, -- sul / baixo
+	[3] = 394, -- oeste / esquerda
+}
+
 local function workGale(cid, fromPos, nextPos, dir, times)
 	if times == 0 or not isCreature(cid) or (hasSqm(getCreaturePosition(cid)) and getTileInfo(getCreaturePosition(cid)).protection) or not nextPos or (hasSqm(nextPos) and getTileInfo(nextPos).protection) or not isProjectable(nextPos) then return false end
-	doSendDistanceShoot(fromPos, nextPos, 45)
-	doSendMagicEffect(nextPos, 77)
 	doCombat(cid, combat, {type=2, pos=nextPos})
 	local newPos = getPositionByDirection({x=nextPos.x, y=nextPos.y, z=nextPos.z}, dir, 1)
 	addEvent(workGale, 125, cid, nextPos, newPos, dir, times-1)
@@ -143,6 +162,14 @@ function onCastSpell(cid, var)
 			haveSpell = true
 		end 
 	end 
+
+	-- Avatar: unico efeito da magia, no sqm imediatamente a' frente do dobrador
+	if haveSpell then
+		local frontPos = getPositionByDirection({x=mypos.x, y=mypos.y, z=mypos.z}, dir, 1)
+		if frontPos then
+			doSendMagicEffect(frontPos, GALE_FRONT_EFFECT[dir] or GALE_FRONT_EFFECT[0])
+		end
+	end
 
   if haveSpell then
 		if getDobrasLevel(cid) >= 7 then

@@ -38,6 +38,7 @@ setCombatArea(combat, createCombatArea(
           {0, 0, 0, 0, 0, 0, 0},
           {0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combat)
       
       
 local combat2 = createCombatObject()
@@ -64,6 +65,7 @@ setCombatArea(combats[i], createCombatArea(
           {0, 1, 1, 1, 1, 1, 0},
           {0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combats[i])
 elseif i == 3 then 
 setCombatArea(combats[i], createCombatArea(
       {
@@ -74,6 +76,7 @@ setCombatArea(combats[i], createCombatArea(
           {1, 1, 1, 1, 1, 1, 0},
       {0, 1, 1, 1, 1, 1, 0}
       }))
+setCombatStageScaling(combats[i])
 elseif i == 4 then 
 setCombatArea(combats[i], createCombatArea(
       {
@@ -84,6 +87,7 @@ setCombatArea(combats[i], createCombatArea(
           {0, 1, 0, 0, 0, 1, 1},
           {0, 1, 1, 1, 1, 1, 1}
       }))
+setCombatStageScaling(combats[i])
 elseif i == 1 then 
 setCombatArea(combats[i], createCombatArea(
       {
@@ -95,10 +99,11 @@ setCombatArea(combats[i], createCombatArea(
           {0, 0, 1, 1, 1, 1, 1, 0},
           {0, 0, 1, 1, 1, 1, 1, 0}
       }))
+setCombatStageScaling(combats[i])
 end 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/3)*4.16)+math.random(35, 45)
-        local max = (level+(magLevel/3)*4.8)+math.random(45, 60)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/3)*4.16)+math.random(35, 45)
+        local max = (level+((level * 0.5)/3)*4.8)+math.random(45, 60)
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -144,10 +149,11 @@ setCombatArea(combats2[i], createCombatArea(
           {0, 0, 0, 0, 0, 0, 0},
           {0, 0, 0, 0, 0, 0, 0}
       }))
+setCombatStageScaling(combats2[i])
       
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/3)*5.2)+math.random(35, 45)
-        local max = (level+(magLevel/3)*6.0)+math.random(45, 60)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/3)*5.2)+math.random(35, 45)
+        local max = (level+((level * 0.5)/3)*6.0)+math.random(45, 60)
       if getPlayerInWaterWithUnderwater(cid) then 
         min = min*0.6 
         max = max*0.6
@@ -253,7 +259,7 @@ local tornados = getTornados(getThingPos(cid))
 for i = 1, #tornados do 
 if isProjectable({x=tornados[i].x, y=tornados[i].y, z=tornados[i].z}) then return false end 
 end 
-doPlayerSendCancel(cid, "Você precisa de espaço para executar esta dobra.")
+doPlayerSendCancel(cid, "VocÃª precisa de espaÃ§o para executar esta dobra.")
 --doSendMagicEffect(getThingPos(cid), CONST_ME_POFF)
 return true
 end 

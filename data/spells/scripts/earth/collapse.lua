@@ -72,9 +72,9 @@ function onTargetTile(cid, pos)
 end
     setCombatCallback(combat, CALLBACK_PARAM_TARGETTILE, "onTargetTile")]]
 	
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*4.1)+math.random(3, 7)
-    local max = (level+(magLevel/2)*5.3)+math.random(7, 15)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*4.1)+math.random(3, 7)
+    local max = (level+((level * 0.5)/2)*5.3)+math.random(7, 15)
 	local dano = math.random(min, max)
 	local atk = cf.atk
 	if atk and type(atk) == "number" then 
@@ -85,6 +85,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
 	return -dano, -dano
  end
     setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+    registerSpellStageEcho(combat)
     
 function onTargetCreature(cid, target)
     if isNpc(target) then
@@ -112,19 +113,19 @@ local function startExplosion(cid, poses)
 				if player.uid > 0 then 
 					if isPlayer(player.uid) then 
 						if not isImune(cid, player.uid) and getPlayerStorageValue(player.uid, "playerOnAir") == 1 then
-						 local level, magLevel = 50, 30
+						 local level, magLevel = 50, 50 * 0.5
 						 if isPlayer(cid) then 
-							level, magLevel = getPlayerLevel(cid), getPlayerMagLevel(cid)
+							level, magLevel = getPlayerLevel(cid), (getPlayerLevel(cid)) * 0.5
 						  end 
-						 local min = (level+(magLevel/2)*4.1)+math.random(3, 7)
-						 local max = (level+(magLevel/2)*5.3)+math.random(7, 15)
+						 local min = (level+((level * 0.5)/2)*4.1)+math.random(3, 7)
+						 local max = (level+((level * 0.5)/2)*5.3)+math.random(7, 15)
 					     local dano = math.random(min, max)
 					     local atk = cf.atk
 					 	 if atk and type(atk) == "number" then 
 							dano = dano * (atk/100)
 							dano = dano+1
 						 end
-							dano = remakeValue(1, dano)
+							dano = remakeAirEarth(cid, dano) -- earth: o fator por elemento sai da vocacao do conjurador
 							doTargetCombatHealth(cid, player.uid, COMBAT_EARTHDAMAGE, -dano, -dano, -1)
 							doPushCreature(player.uid, math.random(0, 3), 1, 500, false, true)
 						end

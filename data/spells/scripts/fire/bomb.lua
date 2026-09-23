@@ -18,9 +18,9 @@ setCombatParam(combatFocus, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 setCombatParam(combatFocus, COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_FIRE)
 setAttackFormula(combatFocus, COMBAT_FORMULA_LEVELMAGIC, 5, 5, 4, 7)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/2)*7.5)+math.random(40, 50)
-    local max = (level+(magLevel/2)*8.0)+math.random(50, 55)
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/2)*7.5)+math.random(40, 50)
+    local max = (level+((level * 0.5)/2)*8.0)+math.random(50, 55)
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5
@@ -35,10 +35,11 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = ((level+(magLevel/2)*7.5)+math.random(40, 50))*1.5
-    local max = ((level+(magLevel/2)*8.0)+math.random(50, 55))*2.0
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = ((level+((level * 0.5)/2)*7.5)+math.random(40, 50))*1.5
+    local max = ((level+((level * 0.5)/2)*8.0)+math.random(50, 55))*2.0
 	if getPlayerInWaterWithUnderwater(cid) then 
 		min = min*0.5
 		max = max*0.5
@@ -53,6 +54,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combatFocus, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combatFocus)
 
 function onCastSpell(cid, var)
     if getSpellCancels(cid, "fire") == true then
@@ -73,6 +75,12 @@ function onCastSpell(cid, var)
     end
 
     local target = getCreatureTarget(cid)
+    if not isCreature(target) then
+        return false
+    end
+    if cantReceiveDisable(cid, target) then
+        return false
+    end
 	local targpos = getThingPos(target)
 	doSendMagicEffect({x=targpos.x+1, y=targpos.y+1, z=targpos.z}, 118)
     if getPlayerOverPower(cid, "fire", true, true) == true then

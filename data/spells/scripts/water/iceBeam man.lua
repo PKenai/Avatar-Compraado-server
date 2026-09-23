@@ -19,9 +19,9 @@ setCombatParam(combat2, COMBAT_PARAM_EFFECT, 86)
 local combats = {combat1, combat2}
 
 for x = 1, #combats do
-    function onGetPlayerMinMaxValues(cid, level, magLevel)
-        local min = (level+(magLevel/3)*5.2)+math.random(35, 45)
-        local max = (level+(magLevel/3)*6.0)+math.random(45, 60)
+    function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+        local min = (level+((level * 0.5)/3)*5.2)+math.random(35, 45)
+        local max = (level+((level * 0.5)/3)*6.0)+math.random(45, 60)
 
 	local dano = math.random(min, max)
 	local atk = cf.atk

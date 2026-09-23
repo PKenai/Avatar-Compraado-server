@@ -13,9 +13,9 @@ local combat2 = createCombatObject()
 setCombatParam(combat2, COMBAT_PARAM_TYPE, COMBAT_PHYSICALDAMAGE)
 setCombatParam(combat2, COMBAT_PARAM_EFFECT, 34)
 
-function onGetPlayerMinMaxValues(cid, level, magLevel)
-    local min = (level+(magLevel/4)*5)+5
-    local max = (level+(magLevel/4)*5.5)+10
+function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
+    local min = (level+((level * 0.5)/4)*5)+5
+    local max = (level+((level * 0.5)/4)*5.5)+10
 
 	local dano = math.random(min, max)
 	local atk = cf.atk
@@ -27,6 +27,7 @@ function onGetPlayerMinMaxValues(cid, level, magLevel)
     return -dano, -dano
 end
 setCombatCallback(combat2, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetPlayerMinMaxValues")
+registerSpellStageEcho(combat2)
 
 local function removeMark(cid) -- getCreatureNoMove(cid)
   MyLocal.players[cid] = nil  
