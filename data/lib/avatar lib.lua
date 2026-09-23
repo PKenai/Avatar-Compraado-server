@@ -86,10 +86,10 @@
 -- antigos (fire 1.10 / air 1.00 / earth 0.95 / water 0.90) descreviam a
 -- intencao, mas a mediana real ia de 359 (terra) a 665 (ar): 85% de diferenca.
 SPELL_BALANCE = {
-	fire  = 1.0441,
-	water = 0.8953,
-	air   = 0.7933,
-	earth = 1.3956
+	fire  = 1.0422,
+	water = 0.8937,
+	air   = 0.7974,
+	earth = 1.3934
 }
 
 -- ============================================================================
@@ -133,10 +133,10 @@ SPELL_BALANCE_GLOBAL_MULT = 2.00
 -- conta. O teto existe porque fora da faixa medida o quadratico diverge.
 SPELL_BALANCE_LEVEL_BASE = 100
 SPELL_BALANCE_LEVEL_GROWTH = {
-	fire  = {b = 2.328632e-04, c = -3.470510e-07},
-	water = {b = -4.477009e-05, c = 6.794450e-08},
-	air   = {b = -5.627562e-06, c = 1.093442e-08},
-	earth = {b = -2.632917e-04, c = 3.907051e-07}
+	fire  = {b = 1.937376e-04, c = -2.972547e-07},
+	water = {b = -8.157671e-05, c = 1.146718e-07},
+	air   = {b = 1.112759e-04, c = -1.372479e-07},
+	earth = {b = -3.009164e-04, c = 4.397701e-07}
 }
 SPELL_BALANCE_LEVEL_GROWTH_CAP = 0.25
 

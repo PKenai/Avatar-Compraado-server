@@ -23,7 +23,7 @@ spellsInfo =
 ["air suffocation"] = {atk = 7, segundos = 3},
 ["air jump"] = {duracao = 5000},
 ["air run"] = {duracao = 30000},
-["air stormcall"] = {atk = 9},
+["air stormcall"] = {atk = 12}, -- era 9, mas o atk nunca era aplicado (bug de sombreamento no script): media 7,63x o orcamento e matava player do MESMO level num cast. 12 = alvo do modelo (11 no L100, 13 no L300). Ver secao 23.
 ["air tempest"] = {atk = 21},
 ["air tornado"] = {atk = 40, segundos = 2},
 ["air trap"] = {segundos = 15},

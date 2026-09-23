@@ -9,7 +9,12 @@ MyLocal.players = {}
 MyLocal.positions = {}
 MyLocal.tornados = {}
 
-local cf = {
+-- ATENCAO: era `local cf` aqui, e isso sombreava o `cf` do topo (o que carrega
+-- o atk). Resultado: `local atk = cf.atk` virava nil no callback de dano, o
+-- `if atk and type(atk) == "number"` nao entrava e a magia saia com o dano CRU
+-- -- ~7,6x o orcamento da classe, o suficiente para matar um player do mesmo
+-- level num cast (ver AUDITORIA_BALANCEAMENTO.md secao 23).
+local fx = {
 missile = 43,
 effect = 76
 }
@@ -154,6 +159,13 @@ setCombatStageScaling(combats2[i])
 function onGetPlayerMinMaxValues(cid, level, magLevelUnused)
         local min = (level+((level * 0.5)/3)*5.2)+math.random(35, 45)
         local max = (level+((level * 0.5)/3)*6.0)+math.random(45, 60)
+      -- o atk vale para os dois conjuntos de combate desta magia; sem isto o
+      -- segundo (os tornados) saia cru enquanto o primeiro era calibrado
+      local atk = cf.atk
+      if atk and type(atk) == "number" then 
+        min = min * (atk/100)
+        max = max * (atk/100)
+      end 
       if getPlayerInWaterWithUnderwater(cid) then 
         min = min*0.6 
         max = max*0.6

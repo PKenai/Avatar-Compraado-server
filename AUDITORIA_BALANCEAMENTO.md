@@ -1463,3 +1463,85 @@ exatos; a extrapolação fora deles fica em ~1,2x.
 **Não testado em servidor rodando** — a verificação é o relatório (que lê a
 fórmula de cada script, o `atk` da tabela e o XML) e a checagem de sintaxe (319
 arquivos, 0 problemas).
+
+---
+
+## 23. One-shot: a magia que matava em um cast
+
+### 23.1 Sintoma e medição
+
+Relato: "level 250 dá HS num level 300". Medido: para cada magia, o dano por cast
+contra a vida de um player do MESMO level (`150 + 30·(L-1)`):
+
+| level | vida do alvo | mediana das magias | maior cast | mata em 1? |
+|---|---|---|---|---|
+| 100 | 3.120 | 526 | **air stormcall 4.213** | **sim (1,35x)** |
+| 250 | 7.620 | 1.338 | **air stormcall 10.042** | **sim (1,32x)** |
+| 300 | 9.120 | 1.619 | **air stormcall 12.024** | **sim (1,32x)** |
+| 500 | 15.120 | 2.766 | **air stormcall 20.181** | **sim (1,33x)** |
+
+Uma magia só: as outras 72 ficavam entre 0,40x e 0,44x da vida (2 a 3 casts), e
+com crítico (x1,30) o stormcall chegava a **1,71x** a vida. Isso fecha o ponto de
+atenção que a §17 tinha deixado aberto ("air stormcall mede ~25k por cast no level
+500 - ordens acima do orçamento"): não era aproximação da ferramenta, era bug.
+
+### 23.2 Causa: `cf` sombreado no script
+
+`data/spells/scripts/air/stormcall.lua` declara o atk no topo, como todas as
+outras magias:
+
+```lua
+local cf = {atk = spellsInfo[spellName].atk}
+```
+
+e **37 linhas depois** redeclara a mesma variável local com outra coisa:
+
+```lua
+local cf = { missile = 43, effect = 76 }   -- <- sombreia o de cima
+```
+
+O callback de dano faz `local atk = cf.atk` — que passou a ser `nil` — e o guard
+`if atk and type(atk) == "number"` simplesmente **pulou a multiplicação**: a magia
+saia com o dano CRU da fórmula, ~9x o que o `atk = 9` pedia. O segundo callback
+dela (os tornados) nunca aplicou atk nenhum, nem antes.
+
+O relatório não pegou isso na hora porque ele interpreta o script: vendo
+`cf.atk` como `nil`, ele media o dano sem atk — o que aparecia como "7,63x o
+orçamento da classe" em vez de desconfiar da tabela. Foi por isso que a sugestão
+dele era `atk 1` (matematicamente correto só se o atk **estivesse** sendo aplicado).
+
+### 23.3 Correção
+
+| onde | o que mudou |
+|---|---|
+| `air/stormcall.lua` | `local cf = {missile, effect}` -> **`local fx`** (os dois usos de `cf.effect` estavam em linhas comentadas) |
+| `air/stormcall.lua` | o callback dos tornados agora **também** aplica o atk (`min`/`max` x atk/100) |
+| `201-spellsExausted.lua` | `air stormcall` `atk` 9 -> **12** (alvo do próprio modelo: 11 no level 100, 13 no level 300) |
+| `avatar lib.lua` | refeita a conta da §22 com o stormcall já corrigido |
+
+O último item foi necessário porque o stormcall fica perto da mediana do ar: tirar
+o excesso puxou a mediana do ar ~4% e desalinhou o nivelamento da §22. Refiz o
+solve dos quatro fatores e dos oito coeficientes (mesmo procedimento da §22.5).
+
+### 23.4 Resultado
+
+| level | fire | water | air | earth | spread | maior cast | mata em 1? |
+|---|---|---|---|---|---|---|---|
+| 100 | 526 | 526 | 526 | 526 | 1,00x | earth lavaball 1.320 (0,42x) | **não** |
+| 250 | 1.338 | 1.342 | 1.340 | 1.346 | 1,01x | earth lavaball 3.310 (0,43x) | **não** |
+| 300 | 1.619 | 1.619 | 1.619 | 1.619 | 1,00x | earth lavaball 3.974 (0,44x) | **não** |
+| 500 | 2.766 | 2.766 | 2.766 | 2.766 | 1,00x | earth lavaball 6.759 (0,45x) | **não** |
+
+Com crítico x1,30 o maior cast chega a 0,55-0,58x a vida: **nenhuma magia de
+player mata um player do mesmo level num cast**, em nenhum desses levels. O teto
+implica 2 casts (ou 2 com crítico, se o alvo estiver ferido) — que era a intenção
+do orçamento por classe.
+
+### 23.5 O que isso muda na leitura do balanceamento
+
+Num servidor onde o dano por cast chega perto da vida, **cooldown deixa de ser
+o eixo**: quem decide o resultado do PvP é o dano do PRIMEIRO cast. Por isso a
+medição desta seção é "x vida do alvo por cast" e não DPS. A §22.4 continua
+válida como registro, mas o número que importa aqui é este.
+
+**Não testado em servidor rodando.**
