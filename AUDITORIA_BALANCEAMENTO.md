@@ -1545,3 +1545,131 @@ medição desta seção é "x vida do alvo por cast" e não DPS. A §22.4 contin
 válida como registro, mas o número que importa aqui é este.
 
 **Não testado em servidor rodando.**
+
+---
+
+## 24. Ferramenta de ajuste de força — `tools/spell_power_tool.py`
+
+### 24.1 O que é
+
+Interface de linha de comando que **lista as magias e pergunta quanto aumentar ou
+diminuir a força, em porcentagem**, grava o valor em `data/lib/201-spellsExausted.lua`
+e faz o servidor **recarregar as magias em jogo, sem restart**. Para quem joga no
+Windows, o atalho é dar dois cliques em `tools/forca_das_magias.bat`.
+
+- Lista as **79 magias com valor de dano/cura**, agrupadas por elemento e na ordem
+do level de cada uma, com o número para escolher.
+- Aceita escolher por **número da lista**, pelo **nome do jogo** (`Fire Wave`) ou pela
+**chave do atk** (`fire whip`), e mais de uma de uma vez (`43,44`).
+- Pergunta "aumentar ou diminuir?" (`a`/`d`), depois "quantos por cento?", mostra
+`atk 23 -> 29` e espera a confirmação (ENTER confirma, `n` cancela).
+- `--medir <magia>` roda o `spell_balance_report.pl` e mostra a linha daquela magia
+com o dano medido.
+
+O que ele mexe é o `atk` (dano) ou o `heal` (cura) da magia na tabela do
+`201-spellsExausted.lua`. Esse valor **é a porcentagem do dano que a fórmula da
+própria magia calcula** (100 = dano original da fórmula, 50 = metade, 0 = 1 de
+dano), então +25% no atk é +25% no dano final — a fórmula, o elemento, o bend, o
+crítico e o escalonamento por level não são tocados.
+
+| comando | efeito |
+|---|---|
+| `python tools/spell_power_tool.py` | abre a interface |
+| `--list` | só lista (79 vivas + 3 fora de uso) |
+| `--spell "fire whip" --set 25` | +25%, sem perguntar nada |
+| `--spell "fire whip" --set -15` | -15% |
+| `--spell "fire whip" --exact 30` | crava o atk em 30 |
+| `--medir "fire whip"` | dano medido pelo relatório |
+| `--undo` | volta o backup da última sessão |
+
+### 24.2 Nome do jogo não é a chave do dano
+
+Esse foi o detalhe que a ferramenta precisou resolver para não mirar errado: o
+`spells.xml` chama a magia pelo nome que o jogador vê, mas o script procura o atk
+por **outro** nome.
+
+| no jogo | script | `spellName` do script (= chave do atk) |
+|---|---|---|
+| Fire Wave | `fire/wave.lua` | `fire whip` |
+| Water Wave | `water/whip.lua` | `water whip` |
+| Water IceBeam Man | `water/icebeam.lua` | `water icebeam` |
+
+A ponte é o `spellName` declarado dentro de cada script: a ferramenta lê os 107
+scripts que têm essa linha, cruza com os 116 scripts referenciados pelo
+`spells.xml` (nome do jogo + level) e só então sabe qual chave editar. Quando os
+dois nomes diferem, a lista mostra os dois — `Fire Wave (fire whip)`.
+
+### 24.3 Chaves fora de uso
+
+Três chaves do `spellsInfo` não são pedidas por nenhum script do `spells.xml`
+(sobraram de magia renomeada/removida) e por isso **não mudam dano nenhum em jogo**:
+`fire wave` (220), `water wave` (115), `earth storm` (60). Elas aparecem numa
+seção separada no fim da lista, e a ferramenta avisa ao editar ("editar aqui nao
+muda nada em jogo"). Chegar nelas só pelo número ou por `buscar <texto>`: se o
+texto casar também com uma magia viva (é o caso de "fire wave"), **a magia viva
+ganha** — sem essa regra o ajuste sairia nas duas.
+
+### 24.4 O reload automático (conferido no código do motor)
+
+`data/globalevents/scripts/spellPowerHotReload.lua`, registrado em
+`globalevents.xml` com `interval="500"`. Ele lê o `201-spellsExausted.lua` a cada
+meio segundo e, quando o conteúdo muda, chama
+`doReloadInfo(RELOAD_SPELLS, 0)`. O caminho no motor:
+
+```
+doReloadInfo  (luascript.cpp:11740)
+  -> Scheduler::addEvent(...)          -- deferido de proposito, para o reload
+                                          nao destruir o lua_State no meio da call
+  -> Game::reloadInfo(RELOAD_SPELLS)   (game.cpp:6679)
+  -> g_spells->reload()                (BaseEvents::reload, baseevents.cpp:159)
+  -> Spells::clear()  -> m_interface.reInitState()   (spells.cpp:117)
+  -> loadDirectory("lib/")             -- rele o 201-spellsExausted.lua
+  -> loadFromXml()                     -- re-executa os scripts, que releem o atk
+```
+
+Detalhes que eu confirmei antes de escrever isso: `RELOAD_SPELLS = 18` não vem do
+motor para o Lua — **o datapack define** em `data/lib/000-constant.lua:634` (mesmo
+valor do enum em `game.h:106`), e a `lib/` é carregada em toda interface
+(`luascript.cpp:919`), inclusive a dos globalevents. Os caminhos usam
+`getDataDir()` = `data/` e `getLogsDir()` = `data/logs/` (`config.lua:228-229`),
+que é onde a ferramenta procura o log de confirmação.
+
+**Efeitos colaterais reais do reload** (é o caminho do `/reload spells`, não um
+atalho novo): ele roda `g_monsters.reload()` também, e o `reInitState()` cria um
+Lua state novo para a interface de magias — ou seja, **perde o que os scripts
+guardam em memória** (os tornados do `air stormcall`, canais como o `water heal`,
+bufs em andamento). Não ajuste magia com gente canalizando ou em PvP.
+
+### 24.5 Segurança da gravação
+
+| proteção | como |
+|---|---|
+| backup | `201-spellsExausted.lua.bak` criado na primeira gravação da sessão; `--undo` restaura (conferido byte a byte) |
+| gravação atômica | escreve em `.tmp`, `fsync` e `os.replace` — o vigilante nunca lê arquivo pela metade |
+| troca cirúrgica | substitui **só o número do campo daquela linha**, preservando EOL/CRLF e o resto do arquivo |
+| sem reload duplo | o vigilante exige **dois tiques com o mesmo conteúdo novo** antes de disparar |
+| verde/vermelho | avisa quando o ajuste passa de 20% numa magia só, para você medir depois |
+
+O `.bak` fica em `data/lib/` mas **não é carregado**: o `loadDirectory` do motor só
+aceita nome terminado em `.lua` (`luascript.cpp:796`).
+
+### 24.6 Instalar / armar
+
+O valor gravado vale no próximo restart por si só. Para o reload **em jogo**
+funcionar desde já, o vigilante precisa ser carregado uma vez: `/reload globalevents`
+(access 5) ou um restart. Depois disso, qualquer gravação no
+`201-spellsExausted.lua` — inclusive salvar no editor — dispara o reload; a
+ferramenta não é obrigatória para isso.
+
+### 24.7 Verificação
+
+- `check_lua_syntax.py` no vigilante: 0 problemas; `py_compile` no `.py`: OK.
+- Catálogo: **79 chaves vivas + 3 fora de uso**, 0 chave duplicada no `spellsInfo`
+  (duplicata seria o pior caso: a ferramenta editaria uma linha e o Lua usaria outra).
+- Fluxo testado de ponta a ponta no servidor real: aumentar, diminuir, escolha
+  múltipla por número, aviso de chave fora de uso, e `--undo` devolvendo o arquivo
+  **idêntico** ao original (`diff` vazio). As mudanças de teste foram revertidas.
+
+**Não testado com o servidor rodando**: o vigilante foi verificado lendo o caminho
+no código do motor, não em execução. O que ainda não vi com os olhos é o
+`[spellPower] ... recarregando as magias (reload #N)` no console.

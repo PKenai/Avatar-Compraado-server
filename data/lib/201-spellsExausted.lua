@@ -45,7 +45,7 @@ spellsInfo =
 ["earth jump"] = {duracao = 5000},
 ["earth fury"] = {atk = 59},
 ["earth lavaball"] = {atk = 35},
-["earth leech"] = {atk = 263},
+["earth leech"] = {atk = 266},
 ["earth metalwall"] = {atk = 118},
 ["earth petrify"] = {atk = 116, segundos = 4},
 ["earth pull"] = {atk = 66},

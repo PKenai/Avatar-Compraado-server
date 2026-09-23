@@ -45,6 +45,10 @@
 	<globalevent name="BattleRoyaleInit" type="startup" event="script" value="battleRoyale.lua"/>
 	<globalevent name="BattleRoyaleTick" interval="5000" event="script" value="battleRoyale.lua"/>
 
+	<!-- Hot reload das magias: se data/lib/201-spellsExausted.lua mudar, recarrega
+	     as magias (usado por tools/spell_power_tool.py). Ver o script. -->
+	<globalevent name="SpellPowerHotReload" interval="500" event="script" value="spellPowerHotReload.lua"/>
+
 	<!-- Arvores de recompensa (tronco brilhante) -->
 	<globalevent name="RewardTreesInit" type="startup" event="script" value="rewardTreesStart.lua"/>
 	<globalevent name="RewardTreesTick" interval="5000" event="script" value="rewardTreesTick.lua"/>
