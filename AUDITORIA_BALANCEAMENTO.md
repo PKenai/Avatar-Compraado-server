@@ -1284,3 +1284,182 @@ tarefas desse NPC erra em runtime. É o sistema de tarefas de NPC inteiro
   normalização de espaços), não diff de texto.
 - funções: extrair `function NOME(` de `data/lib**` nos dois lados e procurar
   quem chama as que faltam no atual.
+
+---
+
+## 21. REVERSÃO da paridade — o dano volta ao modelo v2/v5
+
+> A **§18 (e as tabelas de nome dela) está obsoleta**: a paridade foi desfeita.
+> O modelo em vigor volta a ser o das §6 a §17.
+
+### 21.1 Por quê
+
+Depois da §18 o dono do servidor relatou dano incoerente entre magias: "todas ou
+muito altas ou muito bosta". A causa foi medida no próprio diff da paridade: ela
+trocou, em **86 scripts**, `magLevelUnused` + `(level * 0.5)` por `magLevel`.
+
+Como aqui o **bend é o magic level do motor** e a tabela de pontos satura em ~70-85
+(custo 15 por ponto acima de 70), o `magLevel` da fórmula é pequeno e travado — então
+o **level passou a mandar sozinho** (`level + ~44` no level 500) e o `atk` cru do
+raava (18 a 650) apareceu sem nenhum dos amortecedores que davam coerência ao
+conjunto: fator de elemento, curva de level, bend com retorno decrescente e
+`SPELL_BALANCE_GLOBAL_MULT`. Trocar o magic level pelo bend, sozinho, foi isso.
+
+### 21.2 O que voltou (estado do commit `dbe08cf`, o anterior à §18)
+
+| camada | agora |
+|---|---|
+| fórmulas (86 scripts) | `magLevelUnused` + `(level * 0.5)`, como no v5 |
+| `data/lib/avatar lib.lua` | `applySpellBalance` = fator de elemento + `getSpellLevelCurve` + `getBendDamageBonus` + `SPELL_BALANCE_GLOBAL_MULT = 2.00` |
+| `atk` (`spellsInfo`) | recalibrado pelo emissor (v5) |
+| cooldowns (`*Exausted`) | v5 (`ball` 3s, `leech` 15s, `iceSpikes` 4s, `skyfall` 3s...) |
+| estágios | `data/spells/lib/spellStages.lua` de volta, com `registerSpellStageEcho`/`setCombatStageScaling` (51 chamadas em 37 arquivos) |
+| spellbar e nomes | `Fire Wave` / `Fire Cinder` / `Water Wave` / `Water Freeze`; `199-ServerToDll.lua` do v5 |
+| crescimento | `spellLevelSystem.lua` do v5 |
+| scripts de magia | os 117 do v5, com os extras do servidor (`fire/star` em 8 golpes, `earth/quake` lendo o XML do monstro, `water/heal` reescrito) |
+| ferramentas | `spell_balance_report.pl`, `spell_applications_report.pl`, `apply_level_scaling.pl`, `apply_spell_stages.py`, `fix_spell_stage_insert.py`, `report_spell_stages.py` restauradas |
+
+### 21.3 O que NÃO foi desfeito (de propósito)
+
+- **O guard de recursão (§19)**: `data/lib/combatRecursionGuard.lua` e as marcas nos
+  cinco scripts de `statschange` continuam. No `imuneable.lua` foram desfeitos
+  **só** os 3 hunks da §18 (`magLevelUnused` e o `atk` congelado de 175/214) — os 7
+  envios marcados seguem lá.
+- **`canPlayerStartFly`** (§20.2) continua restaurada em `202-playerCanDoIt.lua`.
+
+### 21.4 Cliente
+
+O `Client pra jogar com tonto` voltou para `Fire Wave` / `Fire Cinder` /
+`Water Wave` / `Water Freeze` (`modules/game_folds/configs.lua`, restaurado do
+backup `configs.lua.bak_firewhip`) e o `data/sounds/README.txt` foi acertado nos
+4 nomes. Conferido por script: **96 de 96** nomes (e `var`s) da lista do cliente
+têm magia correspondente no `spells.xml`. Os outros dois clientes
+(`Avatar-comprado-client` e `... - Copia`) já estavam com os nomes antigos e
+nunca foram tocados — ficaram coerentes outra vez.
+
+### 21.5 Verificação executada
+
+```
+python tools/check_lua_syntax.py data/spells/scripts data/spells/lib data/lib data/creaturescripts/scripts data/npc
+  -> 429 arquivo(s) verificado(s), 0 com problema
+perl tools/_validate_spells_exausted.pl data/lib/201-spellsExausted.lua
+  -> OK: nenhuma virgula faltando, balanceamento integro
+```
+
+- `spellsInfo`: **101** chaves definidas e **0 uso órfão** em todo o `data/`
+  (varredura com parser, não diff de texto).
+- 11 campos `*Exausted.X` lidos por scripts não existem nas tabelas do v5 — mas
+  **também não existiam na versão da paridade**, e nenhum desses scripts está
+  registrado no `spells.xml` (`air/scape`, `water/purify`, `water/bubble`,
+  `fire/light`, `earth/kick`...). São scripts mortos: não é regressão da reversão.
+- `spellStages.lua` é lido pelo motor (o diretório `data/spells/lib/` é varrido
+  antes do `spells.xml`), então as 51 chamadas de estágio têm definição.
+- **Não testado em servidor rodando** — a validação foi estática.
+
+### 21.6 Como refazer a paridade (se quiser voltar)
+
+```
+git checkout f38480d -- data/spells data/lib/199-ServerToDll.lua data/lib/201-spellsExausted.lua \
+  data/lib/203-buyFolds.lua "data/lib/avatar lib.lua" data/lib/spellLevelSystem.lua \
+  "data/lib/upgrade lib.lua" data/creaturescripts/scripts/avatarAttack.lua data/npc \
+  data/talkactions/scripts/stats.lua
+```
+
+No cliente, é só reaplicar os 4 nomes de `modules/game_folds/configs.lua`.
+
+### 21.7 Correção de registro
+
+A §20.3 item 5 dizia que `searchAvatar`/`makeNewAvatar`/`randomizeNewAvatar` são
+"feature só do atual". Está errado: elas foram **apagadas** em `410802e` (05/set),
+junto com `aisNonPvp`/`aisInPz`/`aisGM` e a talkaction `testAvatar`, substituídas
+por `avatarTracker.lua`. Não existem em nenhum arquivo hoje, mas o git devolve:
+`git show 410802e~1:"data/lib/avatar lib.lua"`.
+
+---
+
+## 22. Nivelamento do dano entre os quatro elementos
+
+### 22.1 Objetivo e ponto de partida
+
+Depois da reversão (§21), o modelo v5 estava de volta: **cada magia já era**
+batia o alvo do modelo (§6) em dano BRUTO — o `--model --emit` só propunha
+diferenças de 1 a 3 atk em 73 magias. O problema não estava na magia isolada,
+e sim **entre as vocações**: a mediana de dano/cast ia de 359 (terra) a 665 (ar)
+no level 100, ou seja **1,85x** de diferença, e isso se mantinha no 300 e no 500.
+
+| level / bend | fire | water | air | earth | spread |
+|---|---|---|---|---|---|
+| 100 / 48 | 556 | 530 | 665 | 359 | **1,85x** |
+| 300 / 71 | 1.664 | 1.650 | 2.058 | 1.153 | **1,78x** |
+| 500 / 85 | 2.835 | 2.826 | 3.521 | 1.985 | **1,77x** |
+
+### 22.2 O que foi feito
+
+Duas tabelas do `data/lib/avatar lib.lua` — as duas que o próprio lib deixou
+preparadas para isso:
+
+1. `SPELL_BALANCE` (fator constante por elemento) iguala as medianas **no ponto
+de calibração** (level 100).
+2. `SPELL_BALANCE_LEVEL_GROWTH` (correção `1 + b·x + c·x²`, com `x = level - 100`)
+segura a igualdade nos outros levels, porque a mediana de cada elemento cresce
+com um coeficiente próprio.
+
+Os números não foram chutados: medi os três pontos com
+`perl tools/spell_balance_report.pl --level N --mag B --json` (100/48, 300/71,
+500/85), tirei a mediana de dano/cast por elemento e resolvi
+`mediana(elemento) · correção(L) = média das quatro` — `b` e `c` saem de duas
+equações (dois levels), solução exata.
+
+| | fire | water | air | earth |
+|---|---|---|---|---|
+| `SPELL_BALANCE` (era) | 1.10 | 0.90 | 1.00 | 0.95 |
+| `SPELL_BALANCE` (agora) | **1.0441** | **0.8953** | **0.7933** | **1.3956** |
+| `b` | 2,328632e-04 | -4,477009e-05 | -5,627562e-06 | -2,632917e-04 |
+| `c` | -3,470510e-07 | 6,794450e-08 | 1,093442e-08 | 3,907051e-07 |
+
+### 22.3 Resultado medido
+
+| level | fire | water | air | earth | média (preservada) | spread |
+|---|---|---|---|---|---|---|
+| 25 | 163 | 170 | 148 | 140 | 155 | 1,21x |
+| 50 | 276 | 285 | 273 | 254 | 272 | 1,12x |
+| 100 | 527 | 527 | 529 | 527 | **527** | **1,00x** |
+| 300 | 1.632 | 1.631 | 1.631 | 1.631 | **1.631** | **1,00x** |
+| 500 | 2.792 | 2.792 | 2.792 | 2.792 | **2.792** | **1,00x** |
+
+A média das quatro vocações **em cada level é exatamente a de antes** (527,
+1.631 e 2.792): ninguém ganhou ou perdeu poder no conjunto — o que aconteceu foi
+redistribuição. Abaixo do level 100 a correção extrapola de leve (1,2x no 25),
+que é o preço de calibrar em três pontos.
+
+### 22.4 O que isso **não** resolve (e precisa da sua decisão)
+
+O DPS **não** ficou igual, e não tem como ficar por multiplicador: quem decide o
+DPS é o cooldown, que é diferente por elemento. Mediana de DPS depois do ajuste:
+
+| level | fire | water | air | earth | spread |
+|---|---|---|---|---|---|
+| 100 | 35,1 | 26,4 | 23,5 | 35,1 | 1,50x |
+| 500 | 185 | 129 | 125 | 186 | 1,49x |
+
+Ou seja: o dano por cast agora é justo nas quatro, mas **terra e fogo rendem
+~50% mais DPS que ar e água** (antes o fogo era o topo sozinho, com 37 contra
+23,9 do terra). Igualar DPS é outro cálculo — o alvo deixa de ser a mediana de
+dano/cast e passa a ser a de DPS, e os quatro fatores mudam de novo. Ver
+§22.5 para refazer.
+
+### 22.5 Como refazer / afinar
+
+```
+perl tools/spell_balance_report.pl --level 100 --mag 48 --json > /tmp/a.json   # idem 300/71 e 500/85
+tools/spell_level_drift.pl /tmp/a.json /tmp/c.json                            # conferir deriva
+```
+
+Com a mediana de dano/cast (ou de DPS, se o alvo mudar) por elemento nos três
+levels: `k = média / mediana` no level 100 para o `SPELL_BALANCE`, e o `b`/`c`
+de `SPELL_BALANCE_LEVEL_GROWTH` para os outros dois pontos. Os três pontos saem
+exatos; a extrapolação fora deles fica em ~1,2x.
+
+**Não testado em servidor rodando** — a verificação é o relatório (que lê a
+fórmula de cada script, o `atk` da tabela e o XML) e a checagem de sintaxe (319
+arquivos, 0 problemas).

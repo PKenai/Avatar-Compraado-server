@@ -80,11 +80,16 @@
 -- Historico: 1.00 / air 1.06 / earth 0.81 / water 0.78 era a hierarquia antiga
 -- (ar acima do fogo); 0.9827 / 1.0847 / 1.1915 / 1.0453 era a compensacao de
 -- mix da spellbar, que forcava as quatro a baterem o MESMO dano.
+-- Recalibrado pela secao 22: cada numero e' o fator que faz a MEDIANA de
+-- dano/cast do elemento bater a media das quatro vocacoes em level 100, 300 e
+-- 500 (o resto da curva vem do SPELL_BALANCE_LEVEL_GROWTH abaixo). Os valores
+-- antigos (fire 1.10 / air 1.00 / earth 0.95 / water 0.90) descreviam a
+-- intencao, mas a mediana real ia de 359 (terra) a 665 (ar): 85% de diferenca.
 SPELL_BALANCE = {
-	fire  = 1.10,
-	water = 0.90,
-	air   = 1.00,
-	earth = 0.95
+	fire  = 1.0441,
+	water = 0.8953,
+	air   = 0.7933,
+	earth = 1.3956
 }
 
 -- ============================================================================
@@ -110,20 +115,28 @@ SPELL_BALANCE_GLOBAL_MULT = 2.00
 --
 --   correcao(L) = 1 + b*(L-BASE) + c*(L-BASE)^2      (teto em +-CAP)
 --
--- Esta' VAZIA de proposito. Ela existia quando o alvo era igualar a MEDIANA de
--- dano das quatro vocacoes (um numero por vocacao). O alvo hoje e' outro: cada
--- dobra da spellbar bater o mesmo que as outras tres daquele mesmo level, dobra
--- por dobra -- e quem garante isso e' o atk de cada uma em 201-spellsExausted.lua
--- (ver o cabecalho). Uma correcao POR VOCACAO em cima disso so' desalinharia de
--- novo (em level diferente de 100), porque ela empurra a vocacao inteira.
+-- PREENCHIDA (secao 22). Ela segura a igualdade das medianas DEPOIS do ponto
+-- de calibracao: o `atk` de cada magia e' uma constante, entao a mediana de cada
+-- elemento cresce com um coeficiente proprio e as quatro se descolam com o
+-- level (medido: ate +4,4% do terra para o fogo entre o level 100 e o 500).
 --
--- Se algum dia voltar a querer mediana igual (e nao dobra igual), o caminho e'
--- preencher a tabela: rode perl tools/spell_balance_report.pl em varios --level,
--- veja a mediana por elemento e de' b/c NEGATIVO para quem esta' acima,
--- POSITIVO para quem esta' abaixo. Elemento ausente = sem correcao (1.0x).
--- O teto existe porque fora da faixa medida o quadratico diverge.
+-- Como os coeficientes foram achados: rode
+--     perl tools/spell_balance_report.pl --level 100 --mag 48 --json
+--     perl tools/spell_balance_report.pl --level 300 --mag 71 --json
+--     perl tools/spell_balance_report.pl --level 500 --mag 85 --json
+-- tire a mediana de dano/cast por elemento, e resolva b/c para
+-- `mediana(elemento) * correcao(L) = media das quatro` nos tres pontos (b e c
+-- tem solucao exata: sao duas equacoes, dois niveis). O fator constante de
+-- cada elemento fica no SPELL_BALANCE acima.
+--
+-- Se mexer no `atk` de varias magias, as duas tabelas ficam velhas: refaca a
+-- conta. O teto existe porque fora da faixa medida o quadratico diverge.
 SPELL_BALANCE_LEVEL_BASE = 100
 SPELL_BALANCE_LEVEL_GROWTH = {
+	fire  = {b = 2.328632e-04, c = -3.470510e-07},
+	water = {b = -4.477009e-05, c = 6.794450e-08},
+	air   = {b = -5.627562e-06, c = 1.093442e-08},
+	earth = {b = -2.632917e-04, c = 3.907051e-07}
 }
 SPELL_BALANCE_LEVEL_GROWTH_CAP = 0.25
 
