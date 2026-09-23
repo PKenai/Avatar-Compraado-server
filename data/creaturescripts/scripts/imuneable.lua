@@ -467,19 +467,26 @@ function onStatsChange(cid, attacker, type, combat, value)
   -- === END GRIEVOUS WOUNDS ===
 
   if not isCreature(attacker) then return true end
-    if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and isPlayer(attacker) and getCreatureTarget(attacker) ~= cid and getPlayerStorageValue(cid, "antiloopDois") == -1 then 
+
+  -- Dano gerado por script (outro handler deste evento): nao reprocessar.
+  -- Sao os reenvios cruzados (reducao -> dano extra -> reducao -> ...) que
+  -- estouravam o limite de 21 chamadas Lua simultaneas do motor, que entao
+  -- imprimia "Call stack overflow" e pulava o evento. Ver combatRecursionGuard.lua.
+  local scriptedDamage = CombatRecursionGuard.isInside()
+
+    if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and isPlayer(attacker) and getCreatureTarget(attacker) ~= cid and getPlayerStorageValue(cid, "antiloopDois") == -1 and not scriptedDamage then 
     setPlayerStorageValue(cid, "antiloopDois", 1)	
 	if value < 0 then 
 		value = 1
 	end
-    doTargetCombatHealth(attacker, cid, combat, -value, -value, -1) 
+    CombatRecursionGuard.run(doTargetCombatHealth, attacker, cid, combat, -value, -value, -1) 
     return false 
   elseif isPlayer(cid) and getPlayerStorageValue(cid, "antiloopDois") == 1 then 
     setPlayerStorageValue(cid, "antiloopDois", -1)
   end 
 
 
-  if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and haveReduction(cid) and getPlayerStorageValue(cid, "antiloop") == -1 then 
+  if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and haveReduction(cid) and getPlayerStorageValue(cid, "antiloop") == -1 and not scriptedDamage then 
 	value = getValueAfterReduction(cid, value, isPlayer(attacker))
 	if isPlayer(attacker) then 
 		value = value*3
@@ -488,13 +495,13 @@ function onStatsChange(cid, attacker, type, combat, value)
 	if value < 0 then 
 		value = 1
 	end
-    doTargetCombatHealth(attacker, cid, combat, -value, -value, -1) 
+    CombatRecursionGuard.run(doTargetCombatHealth, attacker, cid, combat, -value, -value, -1) 
     return false 
   elseif isPlayer(cid) and getPlayerStorageValue(cid, "antiloop") == 1 then 
     setPlayerStorageValue(cid, "antiloop", -1)
   end 
   
-  	if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and exhaustion.check(cid, "BendReflection") then 
+  	if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and exhaustion.check(cid, "BendReflection") and not scriptedDamage then 
 		local refletido = value * 0.3
 		local refCombat = COMBAT_AIRDAMAGE
 		if getPlayerElement(cid) ~= "air" then 
@@ -505,10 +512,10 @@ function onStatsChange(cid, attacker, type, combat, value)
 			if getPlayerStorageValue(attacker, "mandeiReflect") ~= 1 then -- nao refletir uma reflexao
 				refletido = refletido*2 -- garante dano correto por causa do pvp reduct
 				setPlayerStorageValue(cid, "mandeiReflect", 1)
-				doTargetCombatHealth(cid, attacker, refCombat, -refletido, -refletido, -1)
+				CombatRecursionGuard.run(doTargetCombatHealth, cid, attacker, refCombat, -refletido, -refletido, -1)
 			end
 		else
-			doTargetCombatHealth(cid, attacker, refCombat, -refletido, -refletido, -1) 
+			CombatRecursionGuard.run(doTargetCombatHealth, cid, attacker, refCombat, -refletido, -refletido, -1) 
 		end
 	end
 	if isPlayer(attacker) and getPlayerStorageValue(attacker, "mandeiReflect") == 1 then
@@ -518,12 +525,12 @@ function onStatsChange(cid, attacker, type, combat, value)
 	if isPlayer(cid) and type == STATSCHANGE_HEALTHLOSS then
 		setPlayerStorageValue(cid, "lastHit", attacker)
 	end
-    if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and (tonumber(getPlayerStorageValue(cid, "belzeAtivo")) or -1) > os.time() and isCreature(attacker) and not isPlayer(attacker) then 
+    if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and (tonumber(getPlayerStorageValue(cid, "belzeAtivo")) or -1) > os.time() and isCreature(attacker) and not isPlayer(attacker) and not scriptedDamage then 
 	if value < 0 then 
 		value = 1
 	end
 	local reflected = value * 0.4
-    doTargetCombatHealth(cid, attacker, combat, -reflected, -reflected, -1) 
+    CombatRecursionGuard.run(doTargetCombatHealth, cid, attacker, combat, -reflected, -reflected, -1) 
   end 
 --  if type == STATSCHANGE_HEALTHLOSS and isPlayer(cid) and getPlayerStorageValue(cid, "canPotion") == 1 then 
 --    setPlayerStorageValue(cid, "canPotion", -1)
@@ -555,14 +562,14 @@ function onStatsChange(cid, attacker, type, combat, value)
         doSendMagicEffect(getThingPos(cid), CONST_ME_POFF)
         return false
       end
-		if math.random(1, 100) >= 10 and havePassiveChest(cid) and not exhaustion.check(cid, "setPassiveExh") then
+		if math.random(1, 100) >= 10 and havePassiveChest(cid) and not exhaustion.check(cid, "setPassiveExh") and not scriptedDamage then
 			exhaustion.set(cid, "setPassiveExh", 12)
 			local theSetPos = getCreaturePosition(cid)
 			if havePassiveSet(cid) then
-				doCombat(cid, combatSetByElement[getPlayerVocation(cid)], {type=2, pos=theSetPos})
+				CombatRecursionGuard.run(doCombat, cid, combatSetByElement[getPlayerVocation(cid)], {type=2, pos=theSetPos})
 				exhaustion.set(cid, "AirBarrierReduction", 2)
 			else
-				doCombat(cid, combatChestByElement[getPlayerVocation(cid)], {type=2, pos=theSetPos})
+				CombatRecursionGuard.run(doCombat, cid, combatChestByElement[getPlayerVocation(cid)], {type=2, pos=theSetPos})
 				exhaustion.set(cid, "AirBarrierReduction", 1)
 			end
 		end

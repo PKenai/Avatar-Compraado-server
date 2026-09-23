@@ -7,3 +7,19 @@ function canPlayerMoveItens(cid)
   
   return true
 end
+
+-- Restaurada do servidor de referencia (raava ot wind). A magia air/furyup.lua
+-- chama esta funcao; sem ela o cast estoura "attempt to call a nil value".
+function canPlayerStartFly(cid)
+    if isPlayerPzLocked(cid) or isPlayerBattle(cid) then
+        doPlayerSendCancelEf(cid, getLangString(cid, "You can't fly with battle active.", "Você não pode voar com battle ativo."))
+        return false
+    end
+
+    if getThingPos(cid).z > 7 then
+        doPlayerSendCancelEf(cid, getLangString(cid, "You can't fly up there.", "Você não pode voar aqui."))
+        return false
+    end
+
+  return true
+end

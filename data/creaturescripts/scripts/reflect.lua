@@ -43,10 +43,12 @@ function onStatsChange(cid, attacker,type,	combat,	value)
 		porcentagem = 20
 	end
 	if getMatchSet(cid) or getMatchSet2(cid) then		
-		if (combat == STATSCHANGE_HEALTHLOSS) then
+		-- Dano gerado por script (outro handler): nao refletir de novo.
+		-- Ver data/lib/combatRecursionGuard.lua.
+		if (combat == STATSCHANGE_HEALTHLOSS) and not CombatRecursionGuard.isInside() then
 			local damage = math.ceil((value/100)*porcentagem)
 			doSendAnimatedText(getThingPos(attacker), damage,143)
-			doCreatureAddHealth(attacker, -damage)
+			CombatRecursionGuard.run(doCreatureAddHealth, attacker, -damage)
 			doPlayerSendTextMessage(cid,MESSAGE_EVENT_DEFAULT,"You reflected "..damage.." by damage from a " .. getCreatureName(attacker) .. ".")
 		end
 	end

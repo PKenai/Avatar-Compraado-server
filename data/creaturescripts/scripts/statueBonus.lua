@@ -14,6 +14,11 @@
     no pior caso, ele so' perde os 5%.
   - A guarda de reentrada (storage) impede que o proprio dano extra dispare o
     bonus de novo. Mesma ideia do "antiloop" do imuneable.lua/proficiencyCombat.
+  - A trava compartilhada CombatRecursionGuard (data/lib/combatRecursionGuard.lua)
+    marca ESTE dano extra como "dano de script": a reducao do imuneable/
+    proficiency e a reflexao do reflect nao voltam a mexer nele - era esse
+    ping-pong que estourava o limite de 21 chamadas Lua do motor. O bonus abaixo
+    continua valendo integralmente no hit original.
   - PvP fica de fora de proposito (o pedido era "so' monstros").
 ================================================================================
 ]]
@@ -47,6 +52,12 @@ function onStatsChange(cid, attacker, statType, combat, value)
         return true
     end
 
+    -- O extra enviado no fim deste script vai dentro de CombatRecursionGuard.run():
+    -- a passagem fica marcada como "dano de script" e nem a reducao
+    -- (imuneable/proficiency) nem a reflexao (reflect) voltam a mexer nela.
+    -- Era esse ping-pong que estourava o limite de 21 chamadas Lua do motor.
+    -- Ver data/lib/combatRecursionGuard.lua.
+
     -- reentrada: este e' o dano extra que nos mesmos mandamos
     if getPlayerStorageValue(attacker, LOOP_KEY) == 1 then
         setPlayerStorageValue(attacker, LOOP_KEY, -1)
@@ -60,6 +71,6 @@ function onStatsChange(cid, attacker, statType, combat, value)
     end
 
     setPlayerStorageValue(attacker, LOOP_KEY, 1)
-    doTargetCombatHealth(attacker, cid, combat, -extra, -extra, -1)
+    CombatRecursionGuard.run(doTargetCombatHealth, attacker, cid, combat, -extra, -extra, -1)
     return true
 end

@@ -34,6 +34,11 @@
   - A guarda de reentrada (storage no atacante) impede que o proprio dano extra
     dispare este script de novo e vire bola de neve. Mesma ideia do
     statueBonus.lua / reflect.lua / proficiencyCombat.lua.
+  - A trava compartilhada CombatRecursionGuard (data/lib/combatRecursionGuard.lua)
+    marca ESTE dano extra como "dano de script": a reducao do
+    imuneable/proficiency e a reflexao do reflect nao voltam a mexer nele. Era
+    esse ping-pong que estourava o limite de 21 chamadas Lua do motor. O
+    percentual abaixo continua valendo integralmente no hit original.
   - Alvo de SKULL PRETA fica de fora: nesse caso o motor nao divide por 2, e
     somar o extra daria dano dobrado. E' a mesma condicao que o motor usa.
 
@@ -81,6 +86,12 @@ function onStatsChange(cid, attacker, statType, combat, value)
         return true
     end
 
+    -- O extra enviado no fim deste script vai dentro de CombatRecursionGuard.run():
+    -- a passagem fica marcada como "dano de script" e nem a reducao
+    -- (imuneable/proficiency) nem a reflexao (reflect) voltam a mexer nela.
+    -- Era esse ping-pong que estourava o limite de 21 chamadas Lua do motor.
+    -- Ver data/lib/combatRecursionGuard.lua.
+
     -- reentrada: este e' o dano extra que nos mesmos mandamos
     if getPlayerStorageValue(attacker, LOOP_KEY) == 1 then
         setPlayerStorageValue(attacker, LOOP_KEY, -1)
@@ -102,7 +113,7 @@ function onStatsChange(cid, attacker, statType, combat, value)
     end
 
     setPlayerStorageValue(attacker, LOOP_KEY, 1)
-    doTargetCombatHealth(attacker, cid, combat, -extra, -extra, -1)
+    CombatRecursionGuard.run(doTargetCombatHealth, attacker, cid, combat, -extra, -extra, -1)
     setPlayerStorageValue(attacker, LOOP_KEY, -1)
     return true
 end

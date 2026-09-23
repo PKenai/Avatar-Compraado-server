@@ -101,6 +101,16 @@ function onStatsChange(cid, attacker, statType, combat, value)
         end
 
         if totalReduction > 0 then
+            -- Dano gerado por script (outro handler): nao reduzir de novo.
+            -- Sao esses reenvios cruzados que estouravam o limite de 21 chamadas
+            -- Lua simultaneas do motor. Ver data/lib/combatRecursionGuard.lua.
+            if CombatRecursionGuard.isInside() then
+                if getPlayerStorageValue(cid, REDUCTION_LOOP_KEY) == 1 then
+                    setPlayerStorageValue(cid, REDUCTION_LOOP_KEY, -1)
+                end
+                return true
+            end
+
             -- Reentrada: este e' o dano reduzido que nos mesmos reenviamos.
             if getPlayerStorageValue(cid, REDUCTION_LOOP_KEY) == 1 then
                 setPlayerStorageValue(cid, REDUCTION_LOOP_KEY, -1)
@@ -114,7 +124,7 @@ function onStatsChange(cid, attacker, statType, combat, value)
             end
 
             setPlayerStorageValue(cid, REDUCTION_LOOP_KEY, 1)
-            doTargetCombatHealth(attacker, cid, combat, -reduced, -reduced, -1)
+            CombatRecursionGuard.run(doTargetCombatHealth, attacker, cid, combat, -reduced, -reduced, -1)
             return false
         end
     end

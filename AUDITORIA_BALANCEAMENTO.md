@@ -1057,3 +1057,230 @@ tabelas, referências cruzadas). O teste de jogo é o próximo passo.
 ```
 git checkout dbe08cf -- data/lib data/spells data/creaturescripts data/npc data/talkactions tools
 ```
+
+---
+
+## 19. Correção — recursão no `statschange` ("Call stack overflow")
+
+### 19.1 Sintoma
+
+Em partidas com muita coisa acontecendo ao mesmo tempo (PvP com redução e
+reflexão ativas, AoE em vários alvos, avatar mode), o console imprime:
+
+```
+[Error - CreatureEvent::executeStatsChange] Call stack overflow.
+```
+
+Não é crash: **o evento é pulado em silêncio** — enquanto a cadeia está no teto,
+a magia/AoE deixa de aplicar o dano.
+
+### 19.2 O que o motor faz
+
+`sources/luascript.h:250-267` — `reserveEnv()`/`releaseEnv()` são um contador
+**estático (global)** de execuções Lua **simultâneas**:
+
+```cpp
+static bool reserveEnv() {
+    if(++m_scriptEnvIndex > 20) { --m_scriptEnvIndex; return false; }
+    return true;
+}
+```
+
+- 21 slots (`m_scriptEnv[21]`, índice começa em -1), compartilhados por magia,
+  action, movement, creature event, `addEvent`, talkaction, NPC, weapon e
+  callback de dano.
+- O teto existe porque cada nível de aninhamento também é recursão C++ real
+  (Lua -> C++ -> Lua); subir o número sem tratar a cadeia apenas troca "evento
+  ignorado" por "servidor cai".
+
+### 19.3 A causa neste datapack
+
+`data/creaturescripts/creaturescripts.xml` registra **7** eventos em
+`statschange`. Cinco deles causam dano de DENTRO do próprio `onStatsChange`, e
+essas chamadas (`doTargetCombatHealth`, `doCombat`, `doCreatureAddHealth`
+negativo) são **síncronas**: disparam um `statschange` completo dentro do handler
+que ainda está rodando.
+
+| script | o que gera dano dentro do handler |
+|---|---|
+| `imuneable.lua:482,498` | dano reduzido (PvP e buffs de redução) |
+| `imuneable.lua:515,517` | reflexão (`BendReflection`) |
+| `imuneable.lua:532` | reflexão (`belzeAtivo`) |
+| `imuneable.lua:568,571` | procs do armor chest/set |
+| `proficiencyCombat.lua:127` | dano reduzido (proficiency + talento de armadura) |
+| `statueBonus.lua:76` | +5% da nação (PvE) |
+| `pvpDamageBonus.lua:118` | +200% do PvP |
+| `reflect.lua:51` | dano refletido |
+
+Cada script protegia apenas a **própria** reentrada (flag em storage própria:
+`antiloop`, `antiloopDois`, `REDUCTION_LOOP_KEY`, `LOOP_KEY`), e essas flags são
+**limpas dentro da passagem aninhada**:
+
+```lua
+elseif isPlayer(cid) and getPlayerStorageValue(cid, "antiloop") == 1 then
+    setPlayerStorageValue(cid, "antiloop", -1)   -- libera a trava no nivel de baixo
+end
+```
+
+Resultado: dois scripts diferentes se alimentavam mutuamente (reduz -> o dano
+reduzido recebe +X% -> o dano com bônus é reduzido de novo -> ...), **+1 nível por
+rodada** até estourar os 21.
+
+### 19.4 A correção
+
+Nova lib **`data/lib/combatRecursionGuard.lua`** (auto-carregada pelo
+`loadDirectory` de `lib/`; todos os creature events compartilham a mesma
+interface/Lua state, então a tabela global enxerga os 5 scripts):
+
+```lua
+CombatRecursionGuard.isInside()      -- estamos dentro de dano gerado por script?
+CombatRecursionGuard.run(fn, ...)    -- marca o dano que ESTE script gera
+```
+
+Quem **bloqueia** (usa `isInside()`): `imuneable.lua` (5 pontos),
+`proficiencyCombat.lua`, `reflect.lua` — exatamente os handlers que
+**reduzem/cancelam** ou **refletem**. Aplicar isso em cima de dano já gerado por
+script era o que alimentava o ciclo.
+
+Quem apenas **marca** (`run()` no envio): `statueBonus.lua` e
+`pvpDamageBonus.lua`. São amplificadores, e o percentual deles (`+5%`, `+200%` —
+este último existe para compensar o `/2` que o motor aplica em player x player)
+continua valendo integralmente no hit original. Decisão consciente: bloquear os
+amplificadores também derrubaria o dano de PvP contra quem tem redução em
+~metade, sem o dono do servidor ter pedido.
+
+Teto de aninhamento depois da correção: `cast/movement` (1) -> `statschange` (2)
+-> reenvio marcado (3) -> amplificador, limitado pela trava própria (4) -> fim.
+
+### 19.5 Arquivos
+
+```
+data/lib/combatRecursionGuard.lua                    (novo)
+data/creaturescripts/scripts/imuneable.lua           5 travas + 7 envios marcados
+data/creaturescripts/scripts/proficiencyCombat.lua   1 trava + 1 envio marcado
+data/creaturescripts/scripts/statueBonus.lua         envio marcado
+data/creaturescripts/scripts/pvpDamageBonus.lua      envio marcado
+data/creaturescripts/scripts/reflect.lua             1 trava + 1 envio marcado
+```
+
+### 19.6 Verificação executada
+
+```
+python tools/check_lua_syntax.py data/lib/combatRecursionGuard.lua \
+  data/creaturescripts/scripts/imuneable.lua data/creaturescripts/scripts/proficiencyCombat.lua \
+  data/creaturescripts/scripts/statueBonus.lua data/creaturescripts/scripts/pvpDamageBonus.lua \
+  data/creaturescripts/scripts/reflect.lua
+  -> 6 arquivo(s) verificado(s), 0 com problema
+
+luaparser (parser Lua real) nos 6 arquivos            -> sintaxe OK
+git diff --stat                                       -> 5 arquivos, +58/-17
+```
+
+Nenhum arquivo foi reescrito por EOL: `pvpDamageBonus.lua` continua CRLF
+(119 linhas / 119 CRs) e os demais continuam LF. O `cat -A` de cada ponto
+alterado foi conferido (sem linha colada).
+
+**Não testado em servidor rodando** — a validação foi estática.
+
+### 19.7 Bugs de motor encontrados (NÃO corrigidos aqui)
+
+`sources/combat.cpp` tem três caminhos que reservam um slot de env e retornam
+**sem devolvê-lo**:
+
+```
+combat.cpp:1255-1256  ValueCallback::getMinMaxValues  if(!env->setCallbackId(...)) return;
+combat.cpp:1351-1352  TileCallback::onTileCombat      if(!env->setCallbackId(...)) return;
+combat.cpp:1376-1377  TargetCallback::onTargetCombat  if(!env->setCallbackId(...)) return;
+```
+
+`setCallbackId` falha quando o slot já tem callback e imprime `Nested callbacks!`.
+Cada falha **nunca devolve o slot**: o contador sobe e não desce, e depois de 21
+vazamentos *todo* evento scriptado do servidor passa a responder "Call stack
+overflow" até reiniciar. Neste datapack só o de `ValueCallback` é alcançável
+(`imuneable.lua` registra `setCombatCallback(... CALLBACK_PARAM_LEVELMAGICVALUE ...)`) —
+se aparecer `Nested callbacks!` no console, é este vazamento. A correção exige
+recompilar o servidor.
+
+### 19.8 Como voltar atrás
+
+```
+git checkout -- data/creaturescripts/scripts
+rm data/lib/combatRecursionGuard.lua
+```
+
+---
+
+## 20. Auditoria de paridade — camada de magias (`raava ot wind` -> atual)
+
+Medição feita arquivo por arquivo + comparação **estrutural** (tabela por tabela,
+spell por spell) entre `C:\Users\imfis\Desktop\raava ot wind` e
+`C:\Users\imfis\Desktop\Avatar-Compraado-server`, neutralizando acentos (o raava
+é Latin-1) e quebras de linha.
+
+### 20.1 Veredito por camada
+
+| camada | resultado |
+|---|---|
+| `data/spells/scripts/**` (146 arquivos) | **idênticos** ao raava, 0 diferenças. O atual tem 1 arquivo extra (`monster/monsterSpell.lua`, feature própria) |
+| `data/spells/lib/**` | **idêntico** (0 diferenças) |
+| `data/spells/spells.xml` | as **117** magias do raava estão todas presentes, com atributos (`words`, `lvl`, `mana`, `exhaustion`, `aggressive`, `event`, `value`) e `<vocation>` **idênticos**. O atual tem 159 entradas = 117 + 42 extras (48 com `enabled="0"` são magias de monstro da feature própria) |
+| `spellsInfo` (`201-spellsExausted.lua`) | **101 magias**, 0 faltando, 0 campos diferentes |
+| tabelas de cooldown `airExausted` / `earthExausted` / `fireExausted` / `waterExausted` | **idênticas** (81 / 87 / 81 / 87 campos) |
+| `199-ServerToDll.lua` (lista da spellbar) | **idêntico** |
+| `248-Spells Info.lua`, `100-shortcut.lua` | **idênticos** |
+| `data/weapons/**` | **idêntico** |
+| `avatar lib.lua` (dano) | raava **+** `talentBendDmgBonus` (2 pontos, §18). As 6 funções de escolha de Avatar do raava não existem no atual (aqui o Avatar vem de item/battle royale) |
+| `spellLevelSystem.lua` (crescimento) | idêntico em **todos** os `needLevel` / `porcentageDamage` / `needStorage`. Única diferença: chaves de storage do `res` (`levelWaterfreeze`/`WaterfreezeLvL4` no atual vs `levelWaterres`/`WaterresLvL4` no raava) - mantidas de propósito para ninguém perder progresso |
+| `upgrade lib.lua` (pedras de aprimoramento) | idêntico (após 20.2) |
+| `203-serverToOTC.lua` | atual **mais defensivo** (nil-checks em `refreshSpellsFunc`); nada perdido |
+| `203-buyFolds.lua` | atual tem 4 helpers extras (`getFoldDisplayName`, `getFoldSlot`, `foldSlotTables`, `displayName` em `getListLearnFold`) e **não exige resets** para aprender dobra (o raava exige 100, 150 na última) - ver 20.3 |
+| `247-Extra Funcs.lua` | nada de magia/dano faltando (as diferenças são `paragonRewards`/`applyFloat`) |
+| scripts referenciados pelo `spells.xml` | 118 referências, **todas existem no disco** (0 faltando) |
+
+Verificação cruzada de identificadores: `spellsInfo["..."]` usados pelos scripts
+existem na tabela; campos `*Exausted.<campo>` usados pelos scripts (122) existem
+no raava e no atual com o mesmo conjunto.
+
+### 20.2 O que faltava e foi corrigido
+
+**(a) `canPlayerStartFly` - função de magia quebrada.** O raava define em
+`data/lib/202-playerCanDoIt.lua`; o atual não tinha, mas
+`data/spells/scripts/air/furyup.lua:13` chama a função. Restaurada (com os mesmos
+avisos, usando `doPlayerSendCancelEf` + `getLangString`, que existem nos dois).
+Observação: `air/furyup.lua` não é referenciada por nenhum XML/script em nenhum
+dos dois servidores, então o defeito era **latente** (só apareceria quando alguém
+registrasse a magia), mas a paridade agora é total.
+
+**(b) Texto de aprimoramento errado.** `upgrade lib.lua:84` dizia
+`Water IceSpikes ... de 4s para 1s`. O valor real é o da tabela
+(`waterExausted.iceSpikes = 15`) e o script aplica `waterExausted.iceSpikes-3`,
+ou seja **15s -> 12s** (exatamente o texto do raava). Corrigido.
+
+Auditoria automática de funções Lua: o raava define **398** funções em
+`data/lib**`, o atual **448**; 58 do raava não existem no atual e, dessas, apenas
+**uma** ainda era chamada (a `canPlayerStartFly`, agora resolvida).
+
+### 20.3 Divergências intencionais (não são falhas de port)
+
+1. `talentBendDmgBonus` no dano (§18) - única diferença proposital de balanceamento.
+2. Chaves de storage do `res` no `spellLevelSystem` - preserva o nível das dobras de quem já jogava.
+3. `203-buyFolds.lua` sem a exigência de resets (o raava pede 100/150 resets + pedras) - **isto é diferença de progressão**: no atual dá para aprender dobra só com pedras. Decisão do dono do servidor; para voltar ao raava é reinserir o bloco `counter`.
+4. Magias de monstro (`enabled="0"` + `monster/monsterSpell.lua` + `tools/gen_monster_spells.py` + `lib/monsterSpellBook.lua`) - feature só do atual.
+5. Escolha de Avatar por sorteio (raava: `searchAvatar`/`makeNewAvatar`/`randomizeNewAvatar` + broadcast no login) não existe no atual; aqui o `isAvatar` é setado por item de pergaminho e por battle royale. Leitura de `isAvatar` continua funcionando (revive do `imuneable`, `avatarAttack`, `onSee`).
+
+### 20.4 Pendência fora de magia (não corrigida)
+
+`data/npc/scripts/itemMissions.lua:140` chama `getTasksCompleted`, que só existe
+no raava (`data/lib/isoled/152-npcTaskSystem.lua`; o atual tem só
+`150-npcSystem.lua`). O NPC `Palomino.xml` usa esse script, então o ramo de
+tarefas desse NPC erra em runtime. É o sistema de tarefas de NPC inteiro
+(1000+ linhas) - não é magia e **não foi portado**; precisa de decisão.
+
+### 20.5 Como repetir a auditoria
+
+- scripts/xml: `diff -rq --strip-trailing-cr` entre as duas árvores.
+- `spells.xml`: parse por `name`, comparando `attrib` + filhos `<vocation>`.
+- `spellsInfo` e `*Exausted`: parser de tabela Lua (casamento de chaves e
+  normalização de espaços), não diff de texto.
+- funções: extrair `function NOME(` de `data/lib**` nos dois lados e procurar
+  quem chama as que faltam no atual.
