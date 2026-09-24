@@ -261,7 +261,7 @@ class Player : public Creature, public Cylinder
 
 		void generateReservedStorage();
 		bool transferMoneyTo(const std::string& name, uint64_t amount);
-		void increaseCombatValues(int32_t& min, int32_t& max, bool useCharges, bool countWeapon);
+		void increaseCombatValues(int32_t& min, int32_t& max, bool useCharges, bool countWeapon, bool countSpellAttack = false);
 
 		void setGroupId(int32_t newId);
 		int32_t getGroupId() const {return groupId;}
@@ -501,6 +501,7 @@ class Player : public Creature, public Cylinder
 		virtual int32_t getArmor() const;
 		virtual int32_t getCriticalHitChance() const;
 		virtual int32_t getDefense() const;
+		int32_t getPvpSpellArmorDefense() const;
 		virtual float getAttackFactor() const;
 		virtual float getDefenseFactor() const;
 		int32_t getStanceDamagePct() const;

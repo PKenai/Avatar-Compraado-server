@@ -22,6 +22,9 @@
 		<attack name="poison" interval="2000" chance="30" range="3" min="-5" max="-10"/>
 	</attacks>
 	<defenses armor="0" defense="0"/>
+	<loot>
+		<item id="2148" countmax="15" chance="100000"/><!-- moedas: sempre 1 a 15 -->
+	</loot>
 <script>
 <event name="mobsKill"/>
 </script>

@@ -1,12 +1,9 @@
+-- NAO entrega mais arma classica (crystalline sword/club/axe). Arma classica
+-- tem ataque E defesa: entraria nos dois lados do see-saw de uma vez
+-- (bonus de ataque nas magias + corte de defesa no PvP, ver sources/combat.cpp).
 function onUse(cid, item, fromPosition, itemEx, toPosition)
-	local rewards = {13136, 12862, 13132}
-	
 	if getPlayerStorageValue(cid, item.uniqueid) == -1 then
-		doPlayerAddItem(cid, rewards[math.random(#rewards)])
 		setPlayerStorageValue(cid, item.uniqueid, 1)
-		return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "You have found an item.", "Você encontrou um item."))
-	else
-		return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The chest is empty.", "Esse chest está vazio."))
 	end
-	return true
+	return doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, getLangString(cid, "The chest is empty.", "Esse chest está vazio."))
 end

@@ -7,9 +7,9 @@ local initialItens = {
         {itemid=13412, amount=1, slot = CONST_SLOT_RIGHT},
         {itemid=2389, amount=7, slot = CONST_SLOT_LEFT},
         {itemid=1998, amount=1, slot = CONST_SLOT_BACKPACK},
-        {itemid=7379, amount=1, slot = CONST_SLOT_BACKPACK},
-        {itemid=3963, amount=1, slot = CONST_SLOT_BACKPACK},
-        {itemid=2428, amount=1, slot = CONST_SLOT_BACKPACK},
+        -- Armas classicas (club/axe/sword com attack + defense) sairam: a arma
+        -- corpo-a-corpo inicial agora e a luva (fist), que so tem attack.
+        {itemid=19098, amount=1, slot = CONST_SLOT_BACKPACK},
         {itemid=2002, amount=1, slot = CONST_SLOT_BACKPACK},
     },
     vocItens = {

@@ -90,7 +90,7 @@ bool Combat::getMinMaxValues(Creature* creature, Creature* target, CombatParams&
 					if(maxc && std::abs(max) < std::abs(maxc))
 						max = maxc;
 
-					player->increaseCombatValues(min, max, params.useCharges, true);
+					player->increaseCombatValues(min, max, params.useCharges, true, true);
 					return true;
 				}
 
@@ -603,6 +603,21 @@ CallBack* Combat::getCallback(CallBackParam_t key)
 	return NULL;
 }
 
+// ============================================================================
+// REDUCAO DE DANO DE PVP POR ARM/DEF DOS EQUIPAMENTOS (so' magia de player)
+// ----------------------------------------------------------------------------
+// Cada 1 ponto de ARM/DEF de tudo que o DEFENSOR tem equipado corta
+// PVP_SPELL_ARMOR_DEF_REDUCTION de dano, quando quem bate e quem leva sao
+// players (PvP). Monstro batendo = dano normal, e dano de arma branca tambem
+// fica de fora: o corte so' pega dano de MAGIA, identificado pelo valueCallback
+// (os danos extras que os scripts de PvP mandam de volta - pvpDamageBonus,
+// statueBonus, reflect, burn - nao tem valueCallback, entao nao entram).
+//
+// O numero do defensor sai de Player::getPvpSpellArmorDefense() (player.cpp).
+// Para calibrar: so' mexer no valor abaixo e recompilar.
+// ============================================================================
+static const int32_t PVP_SPELL_ARMOR_DEF_REDUCTION = 2;
+
 bool Combat::CombatHealthFunc(Creature* caster, Creature* target, const CombatParams& params, void* data)
 {
 	int32_t change = 0;
@@ -633,6 +648,29 @@ bool Combat::CombatHealthFunc(Creature* caster, Creature* target, const CombatPa
 
 	if(_params.element.damage && _params.element.type != COMBAT_NONE)
 		g_game.combatBlockHit(_params.element.type, caster, target, _params.element.damage, _params.blockedByShield, _params.blockedByArmor, _params.itemId != 0, true);
+
+	// Corta o dano pela ARM/DEF do defensor ANTES do /2 do PvP (bloco abaixo).
+	// A ordem importa: o pvpDamageBonus.lua devolve o que o motor cortou, entao
+	// reduzir aqui faz o corte valer 1x. Reduzindo depois do /2, o mesmo corte
+	// voltaria dobrado pelo bonus de PvP.
+	if(change < 0 && params.valueCallback && caster && target && caster != target)
+	{
+		if(caster->getPlayer() && target->getPlayer())
+		{
+			int32_t reduction = target->getPlayer()->getPvpSpellArmorDefense() * PVP_SPELL_ARMOR_DEF_REDUCTION;
+			if(reduction > 0)
+			{
+				// Piso de 1 de dano. No PvP o bloco de baixo divide por 2, entao o
+				// piso tem que ser -2 pra sobrar 1 de dano final (alvo de skull
+				// preta nao passa pelo /2).
+				int32_t minimum = (target->getSkull() != SKULL_BLACK) ? -2 : -1;
+
+				change += reduction;
+				if(change > minimum)
+					change = minimum;
+			}
+		}
+	}
 
 	if(caster && caster->getPlayer() && target->getPlayer() && target->getSkull() != SKULL_BLACK)
 	{
@@ -1328,7 +1366,7 @@ void ValueCallback::getMinMaxValues(Player* player, CombatParams& params, int32_
 		params.element.damage = LuaInterface::popNumber(L);
 		max = LuaInterface::popNumber(L);
 		min = LuaInterface::popNumber(L);
-		player->increaseCombatValues(min, max, params.useCharges, type != FORMULA_SKILL);
+		player->increaseCombatValues(min, max, params.useCharges, type != FORMULA_SKILL, type == FORMULA_LEVELMAGIC);
 	}
 	else
 		LuaInterface::error(NULL, std::string(LuaInterface::popString(L)));

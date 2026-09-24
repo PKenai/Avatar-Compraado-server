@@ -44,6 +44,18 @@ struct LootBlock
 	std::string text;
 	LootItems childLoot;
 
+	// Gold (2148), platinum (2152) and crystal (2160) coins are treated as money
+	// loot: they ignore the chance/rate roll and are always dropped.
+	bool isCoinLoot() const
+	{
+		for(std::vector<uint16_t>::const_iterator it = ids.begin(); it != ids.end(); ++it)
+		{
+			if(*it == 2148 || *it == 2152 || *it == 2160)
+				return true;
+		}
+		return false;
+	}
+
 	LootBlock()
 	{
 		count = 1;

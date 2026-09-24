@@ -97,11 +97,14 @@ ItemList MonsterType::createLoot(const LootBlock& lootBlock)
 		item = lootBlock.ids[random_range((size_t)0, lootBlock.ids.size() - 1)];
 
 	ItemList items;
+	// Money must ALWAYS drop: for coin loot the chance/rate roll is skipped and
+	// only the amount stays random (1 .. count).
+	bool alwaysDrop = lootBlock.isCoinLoot();
 	uint32_t lootChance = lootBlock.chance;
 	if (lootChance > 1 && lootChance < 10000 && !this->lootPercent)
 		lootChance = (uint32_t)std::ceil((double)lootChance * 0.5);
-	if((!this->lootPercent && random < lootChance) || (this->lootPercent && random < lootChance*1000))
-		count = random % lootBlock.count + 1;
+	if(alwaysDrop || (!this->lootPercent && random < lootChance) || (this->lootPercent && random < lootChance*1000))
+		count = lootBlock.count ? (random % lootBlock.count + 1) : 1;
 
 	Item* tmpItem = NULL;
 	while(count > 0)
@@ -189,25 +192,31 @@ uint16_t Monsters::getLootRandom(bool lootPercent)
 
 void MonsterType::dropLoot(Container* corpse)
 {
-	ItemList items;
-	for(LootItems::const_iterator it = lootItems.begin(); it != lootItems.end() && !corpse->full(); ++it)
-	{
-		items = createLoot(*it);
-		if(items.empty())
-			continue;
-
-		for(ItemList::iterator iit = items.begin(); iit != items.end(); ++iit)
+	// Two passes: money first, so a corpse that fills up can never eat the coins.
+	for(int32_t pass = 1; pass >= 0 && !corpse->full(); --pass)
+	{		ItemList items;
+		for(LootItems::const_iterator it = lootItems.begin(); it != lootItems.end() && !corpse->full(); ++it)
 		{
-			Item* tmpItem = *iit;
-			if(Container* container = tmpItem->getContainer())
+			if((pass == 1) != it->isCoinLoot())
+				continue;
+
+			items = createLoot(*it);
+			if(items.empty())
+				continue;
+
+			for(ItemList::iterator iit = items.begin(); iit != items.end(); ++iit)
 			{
-				if(createChildLoot(container, *it))
-					corpse->__internalAddThing(tmpItem);
+				Item* tmpItem = *iit;
+				if(Container* container = tmpItem->getContainer())
+				{
+					if(createChildLoot(container, *it))
+						corpse->__internalAddThing(tmpItem);
+					else
+						delete container;
+				}
 				else
-					delete container;
+					corpse->__internalAddThing(tmpItem);
 			}
-			else
-				corpse->__internalAddThing(tmpItem);
 		}
 	}
 

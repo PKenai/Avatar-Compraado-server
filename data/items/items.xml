@@ -15776,7 +15776,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="2"/>
-	<attribute key="defense" value="1"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="10"/>
 	<attribute key="healthGain" value="1"/>
@@ -15786,7 +15785,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="3"/>
-	<attribute key="defense" value="2"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="12"/>
 	<attribute key="healthGain" value="2"/>
@@ -15796,7 +15794,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="5"/>
-	<attribute key="defense" value="2"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="18"/>
 	<attribute key="lifesteal" value="1"/>
@@ -15805,7 +15802,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="6"/>
-	<attribute key="defense" value="3"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="20"/>
 	<attribute key="criticalhitchance" value="2"/>
@@ -15814,7 +15810,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="7"/>
-	<attribute key="defense" value="3"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="25"/>
 	<attribute key="healthGain" value="3"/>
@@ -15824,7 +15819,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="6"/>
-	<attribute key="defense" value="3"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="20"/>
 	<attribute key="criticalhitchance" value="2"/>
@@ -15833,7 +15827,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="6"/>
-	<attribute key="defense" value="3"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxmanapoints" value="15"/>
 	<attribute key="lifesteal" value="1"/>
@@ -15842,7 +15835,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="8"/>
-	<attribute key="defense" value="4"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxmanapoints" value="20"/>
 	<attribute key="lifesteal" value="2"/>
@@ -15851,7 +15843,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="12"/>
-	<attribute key="defense" value="5"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxmanapoints" value="35"/>
 	<attribute key="criticalhitchance" value="3"/>
@@ -15860,7 +15851,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="11"/>
-	<attribute key="defense" value="5"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="40"/>
 	<attribute key="extraAttack" value="2"/>
@@ -15869,7 +15859,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="13"/>
-	<attribute key="defense" value="6"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="45"/>
 	<attribute key="lifesteal" value="2"/>
@@ -15878,7 +15867,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="15"/>
-	<attribute key="defense" value="7"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="50"/>
 	<attribute key="criticalhitchance" value="4"/>
@@ -15887,13 +15875,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="18"/>
-	<attribute key="defense" value="8"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxmanapoints" value="60"/>
 	<attribute key="extraAttack" value="2"/>
 	<attribute key="criticalhitchance" value="2"/>
 	<attribute key="lifesteal" value="2"/>
-	<attribute key="armor" value="2"/>
 	<attribute key="increasemagicpercent" value="105"/>
 	<attribute key="description" value="[+5% Bend Damage]"/>
 </item>
@@ -15901,13 +15887,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="20"/>
-	<attribute key="defense" value="9"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="65"/>
 	<attribute key="extraAttack" value="2"/>
 	<attribute key="criticalhitchance" value="3"/>
 	<attribute key="lifesteal" value="2"/>
-	<attribute key="armor" value="2"/>
 	<attribute key="increasemagicpercent" value="106"/>
 	<attribute key="description" value="[+6% Bend Damage]"/>
 </item>
@@ -15915,13 +15899,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="22"/>
-	<attribute key="defense" value="10"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxmanapoints" value="70"/>
 	<attribute key="extraAttack" value="3"/>
 	<attribute key="criticalhitchance" value="3"/>
 	<attribute key="lifesteal" value="2"/>
-	<attribute key="armor" value="2"/>
 	<attribute key="increasemagicpercent" value="107"/>
 	<attribute key="description" value="[+7% Bend Damage]"/>
 </item>
@@ -15929,13 +15911,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="22"/>
-	<attribute key="defense" value="10"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="75"/>
 	<attribute key="extraAttack" value="3"/>
 	<attribute key="criticalhitchance" value="3"/>
 	<attribute key="lifesteal" value="2"/>
-	<attribute key="armor" value="2"/>
 	<attribute key="increasemagicpercent" value="108"/>
 	<attribute key="description" value="[+8% Bend Damage]"/>
 </item>
@@ -15943,7 +15923,6 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="24"/>
-	<attribute key="defense" value="11"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="80"/>
 	<attribute key="speed" value="10"/>
@@ -15956,13 +15935,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="26"/>
-	<attribute key="defense" value="12"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="85"/>
 	<attribute key="extraAttack" value="3"/>
 	<attribute key="criticalhitchance" value="4"/>
 	<attribute key="lifesteal" value="3"/>
-	<attribute key="armor" value="3"/>
 	<attribute key="increasemagicpercent" value="109"/>
 	<attribute key="description" value="[+9% Bend Damage]"/>
 </item>
@@ -15970,13 +15947,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="28"/>
-	<attribute key="defense" value="13"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxmanapoints" value="90"/>
 	<attribute key="extraAttack" value="4"/>
 	<attribute key="criticalhitchance" value="5"/>
 	<attribute key="lifesteal" value="3"/>
-	<attribute key="armor" value="3"/>
 	<attribute key="increasemagicpercent" value="110"/>
 	<attribute key="description" value="[+10% Bend Damage]"/>
 </item>
@@ -15984,13 +15959,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="34"/>
-	<attribute key="defense" value="15"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="130"/>
 	<attribute key="extraAttack" value="5"/>
 	<attribute key="criticalhitchance" value="6"/>
 	<attribute key="lifesteal" value="4"/>
-	<attribute key="armor" value="4"/>
 	<attribute key="increasemagicpercent" value="111"/>
 	<attribute key="description" value="[+11% Bend Damage]"/>
 </item>
@@ -15998,13 +15971,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="36"/>
-	<attribute key="defense" value="16"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxmanapoints" value="140"/>
 	<attribute key="extraAttack" value="6"/>
 	<attribute key="criticalhitchance" value="7"/>
 	<attribute key="lifesteal" value="5"/>
-	<attribute key="armor" value="4"/>
 	<attribute key="increasemagicpercent" value="112"/>
 	<attribute key="description" value="[+12% Bend Damage]"/>
 </item>
@@ -16012,13 +15983,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="38"/>
-	<attribute key="defense" value="17"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="150"/>
 	<attribute key="extraAttack" value="7"/>
 	<attribute key="criticalhitchance" value="7"/>
 	<attribute key="lifesteal" value="5"/>
-	<attribute key="armor" value="5"/>
 	<attribute key="increasemagicpercent" value="112"/>
 	<attribute key="description" value="[+12% Bend Damage]"/>
 </item>
@@ -16026,13 +15995,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="40"/>
-	<attribute key="defense" value="18"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxmanapoints" value="160"/>
 	<attribute key="extraAttack" value="8"/>
 	<attribute key="criticalhitchance" value="8"/>
 	<attribute key="lifesteal" value="6"/>
-	<attribute key="armor" value="5"/>
 	<attribute key="increasemagicpercent" value="113"/>
 	<attribute key="description" value="[+13% Bend Damage]"/>
 </item>
@@ -16040,13 +16007,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="42"/>
-	<attribute key="defense" value="20"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="180"/>
 	<attribute key="extraAttack" value="9"/>
 	<attribute key="criticalhitchance" value="9"/>
 	<attribute key="lifesteal" value="7"/>
-	<attribute key="armor" value="6"/>
 	<attribute key="increasemagicpercent" value="114"/>
 	<attribute key="description" value="[+14% Bend Damage]"/>
 </item>
@@ -16054,13 +16019,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="50"/>
-	<attribute key="defense" value="24"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="240"/>
 	<attribute key="extraAttack" value="11"/>
 	<attribute key="criticalhitchance" value="11"/>
 	<attribute key="lifesteal" value="9"/>
-	<attribute key="armor" value="8"/>
 	<attribute key="increasemagicpercent" value="115"/>
 	<attribute key="description" value="[+15% Bend Damage]"/>
 </item>
@@ -16068,13 +16031,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="54"/>
-	<attribute key="defense" value="26"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxmanapoints" value="260"/>
 	<attribute key="extraAttack" value="12"/>
 	<attribute key="criticalhitchance" value="12"/>
 	<attribute key="lifesteal" value="10"/>
-	<attribute key="armor" value="9"/>
 	<attribute key="increasemagicpercent" value="117"/>
 	<attribute key="description" value="[+17% Bend Damage]"/>
 </item>
@@ -16082,13 +16043,11 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="56"/>
-	<attribute key="defense" value="28"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="280"/>
 	<attribute key="extraAttack" value="13"/>
 	<attribute key="criticalhitchance" value="13"/>
 	<attribute key="lifesteal" value="12"/>
-	<attribute key="armor" value="10"/>
 	<attribute key="increasemagicpercent" value="118"/>
 	<attribute key="description" value="[+18% Bend Damage]"/>
 </item>
@@ -16096,14 +16055,12 @@
 	<attribute key="weaponType" value="fist"/>
 	<attribute key="slotType" value="hand"/>
 	<attribute key="attack" value="60"/>
-	<attribute key="defense" value="30"/>
 	<attribute key="weight" value="200"/>
 	<attribute key="maxhealthpoints" value="350"/>
 	<attribute key="maxmanapoints" value="300"/>
 	<attribute key="extraAttack" value="15"/>
 	<attribute key="criticalhitchance" value="15"/>
 	<attribute key="lifesteal" value="14"/>
-	<attribute key="armor" value="12"/>
 	<attribute key="increasemagicpercent" value="120"/>
 	<attribute key="description" value="[+20% Bend Damage]"/>
 </item>
@@ -16225,7 +16182,7 @@
 <!-- === CAPAS (Tadeu) === -->
 <item id="19158" article="a" name="Traveler's Cape">
 	<attribute key="weight" value="1800" />
-	<attribute key="armor" value="8" />
+	<attribute key="armor" value="18" />
 	<attribute key="maxhealthpoints" value="100" />
 	<attribute key="maxmanapoints" value="50" />
 	<attribute key="speed" value="10" />
@@ -16233,7 +16190,7 @@
 </item>
 <item id="19159" article="a" name="Reinforced Cape">
 	<attribute key="weight" value="2200" />
-	<attribute key="armor" value="12" />
+	<attribute key="armor" value="22" />
 	<attribute key="maxhealthpoints" value="180" />
 	<attribute key="maxmanapoints" value="40" />
 	<attribute key="absorbPercentAll" value="1" />
@@ -16241,7 +16198,7 @@
 </item>
 <item id="19160" article="a" name="Tough Cape">
 	<attribute key="weight" value="1700" />
-	<attribute key="armor" value="7" />
+	<attribute key="armor" value="17" />
 	<attribute key="increasemagicpercent" value="102" />
 	<attribute key="maxhealthpoints" value="80" />
 	<attribute key="maxmanapoints" value="200" />
@@ -16250,7 +16207,7 @@
 </item>
 <item id="19161" article="a" name="Improved Cape">
 	<attribute key="weight" value="1800" />
-	<attribute key="armor" value="10" />
+	<attribute key="armor" value="20" />
 	<attribute key="criticalhitchance" value="3" />
 	<attribute key="maxhealthpoints" value="180" />
 	<attribute key="maxmanapoints" value="120" />
@@ -16259,7 +16216,7 @@
 </item>
 <item id="19162" article="a" name="Noble Cape">
 	<attribute key="weight" value="2400" />
-	<attribute key="armor" value="15" />
+	<attribute key="armor" value="25" />
 	<attribute key="maxhealthpoints" value="400" />
 	<attribute key="maxmanapoints" value="100" />
 	<attribute key="absorbPercentAll" value="2" />
@@ -16267,7 +16224,7 @@
 </item>
 <item id="19163" article="a" name="Protective Cape">
 	<attribute key="weight" value="1700" />
-	<attribute key="armor" value="10" />
+	<attribute key="armor" value="20" />
 	<attribute key="increasemagicpercent" value="104" />
 	<attribute key="maxhealthpoints" value="200" />
 	<attribute key="maxmanapoints" value="450" />
@@ -16277,7 +16234,7 @@
 </item>
 <item id="19164" article="a" name="Majestic Cape">
 	<attribute key="weight" value="1900" />
-	<attribute key="armor" value="13" />
+	<attribute key="armor" value="23" />
 	<attribute key="criticalhitchance" value="8" />
 	<attribute key="increasemagicpercent" value="103" />
 	<attribute key="maxhealthpoints" value="350" />
@@ -16287,7 +16244,7 @@
 </item>
 <item id="19165" article="a" name="Glorious Cape">
 	<attribute key="weight" value="1600" />
-	<attribute key="armor" value="11" />
+	<attribute key="armor" value="21" />
 	<attribute key="increasemagicpercent" value="107" />
 	<attribute key="criticalhitchance" value="4" />
 	<attribute key="maxhealthpoints" value="250" />
@@ -16297,7 +16254,7 @@
 </item>
 <item id="19166" article="a" name="Sovereign Cape">
 	<attribute key="weight" value="2600" />
-	<attribute key="armor" value="20" />
+	<attribute key="armor" value="30" />
 	<attribute key="maxhealthpoints" value="800" />
 	<attribute key="maxmanapoints" value="150" />
 	<attribute key="absorbPercentAll" value="4" />
@@ -16306,7 +16263,7 @@
 </item>
 <item id="19167" article="a" name="Nations Cape">
 	<attribute key="weight" value="2500" />
-	<attribute key="armor" value="18" />
+	<attribute key="armor" value="28" />
 	<attribute key="increasemagicpercent" value="105" />
 	<attribute key="criticalhitchance" value="5" />
 	<attribute key="maxhealthpoints" value="500" />
@@ -16321,7 +16278,7 @@
 <!-- === CALCAS (Tadeu / Robson) === -->
 <item id="19169" article="a" name="Traveler's Pants">
 	<attribute key="weight" value="1400" />
-	<attribute key="armor" value="6" />
+	<attribute key="armor" value="16" />
 	<attribute key="maxhealthpoints" value="75" />
 	<attribute key="maxmanapoints" value="40" />
 	<attribute key="speed" value="8" />
@@ -16329,7 +16286,7 @@
 </item>
 <item id="19170" article="a" name="Reinforced Pants">
 	<attribute key="weight" value="1700" />
-	<attribute key="armor" value="9" />
+	<attribute key="armor" value="19" />
 	<attribute key="maxhealthpoints" value="135" />
 	<attribute key="maxmanapoints" value="30" />
 	<attribute key="absorbPercentAll" value="1" />
@@ -16337,7 +16294,7 @@
 </item>
 <item id="19171" article="a" name="Tough Pants">
 	<attribute key="weight" value="1300" />
-	<attribute key="armor" value="5" />
+	<attribute key="armor" value="15" />
 	<attribute key="maxhealthpoints" value="60" />
 	<attribute key="maxmanapoints" value="150" />
 	<attribute key="healthGain" value="1" />
@@ -16347,7 +16304,7 @@
 </item>
 <item id="19172" article="a" name="Improved Pants">
 	<attribute key="weight" value="1400" />
-	<attribute key="armor" value="8" />
+	<attribute key="armor" value="18" />
 	<attribute key="maxhealthpoints" value="135" />
 	<attribute key="maxmanapoints" value="90" />
 	<attribute key="healthGain" value="2" />
@@ -16357,7 +16314,7 @@
 </item>
 <item id="19173" article="a" name="Noble Pants">
 	<attribute key="weight" value="1800" />
-	<attribute key="armor" value="11" />
+	<attribute key="armor" value="21" />
 	<attribute key="maxhealthpoints" value="300" />
 	<attribute key="maxmanapoints" value="75" />
 	<attribute key="absorbPercentAll" value="2" />
@@ -16365,7 +16322,7 @@
 </item>
 <item id="19174" article="a" name="Protective Pants">
 	<attribute key="weight" value="1300" />
-	<attribute key="armor" value="8" />
+	<attribute key="armor" value="18" />
 	<attribute key="maxhealthpoints" value="150" />
 	<attribute key="maxmanapoints" value="340" />
 	<attribute key="manaGain" value="2" />
@@ -16375,7 +16332,7 @@
 </item>
 <item id="19175" article="a" name="Majestic Pants">
 	<attribute key="weight" value="1500" />
-	<attribute key="armor" value="10" />
+	<attribute key="armor" value="20" />
 	<attribute key="maxhealthpoints" value="260" />
 	<attribute key="maxmanapoints" value="150" />
 	<attribute key="healthGain" value="2" />
@@ -16386,7 +16343,7 @@
 </item>
 <item id="19176" article="a" name="Glorious Pants">
 	<attribute key="weight" value="1200" />
-	<attribute key="armor" value="8" />
+	<attribute key="armor" value="18" />
 	<attribute key="maxhealthpoints" value="190" />
 	<attribute key="maxmanapoints" value="525" />
 	<attribute key="manaGain" value="3" />
@@ -16397,7 +16354,7 @@
 </item>
 <item id="19177" article="a" name="Sovereign Pants">
 	<attribute key="weight" value="2000" />
-	<attribute key="armor" value="15" />
+	<attribute key="armor" value="25" />
 	<attribute key="maxhealthpoints" value="600" />
 	<attribute key="maxmanapoints" value="110" />
 	<attribute key="absorbPercentAll" value="3" />
@@ -16408,7 +16365,7 @@
 </item>
 <item id="19178" article="a" name="Nations Pants">
 	<attribute key="weight" value="1900" />
-	<attribute key="armor" value="14" />
+	<attribute key="armor" value="24" />
 	<attribute key="maxhealthpoints" value="375" />
 	<attribute key="maxmanapoints" value="300" />
 	<attribute key="absorbPercentAll" value="2" />
@@ -16424,21 +16381,21 @@
 <!-- === CAPACETES (Bend + Mana + Regen) === -->
 <item id="19180" article="um" name="Traveler's Helmet">
 	<attribute key="weight" value="900" />
-	<attribute key="armor" value="4" />
+	<attribute key="armor" value="14" />
 	<attribute key="maxmanapoints" value="60" />
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="head" />
 </item>
 <item id="19181" article="um" name="Reinforced Helmet">
 	<attribute key="weight" value="1100" />
-	<attribute key="armor" value="6" />
+	<attribute key="armor" value="16" />
 	<attribute key="maxmanapoints" value="45" />
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="head" />
 </item>
 <item id="19182" article="um" name="Tough Helmet">
 	<attribute key="weight" value="800" />
-	<attribute key="armor" value="3" />
+	<attribute key="armor" value="13" />
 	<attribute key="maxmanapoints" value="160" />
 	<attribute key="manaGain" value="2" />
 	<attribute key="manaTicks" value="2000" />
@@ -16447,7 +16404,7 @@
 </item>
 <item id="19183" article="um" name="Improved Helmet">
 	<attribute key="weight" value="900" />
-	<attribute key="armor" value="5" />
+	<attribute key="armor" value="15" />
 	<attribute key="maxmanapoints" value="100" />
 	<attribute key="manaGain" value="2" />
 	<attribute key="manaTicks" value="2000" />
@@ -16456,14 +16413,14 @@
 </item>
 <item id="19184" article="um" name="Noble Helmet">
 	<attribute key="weight" value="1300" />
-	<attribute key="armor" value="8" />
+	<attribute key="armor" value="18" />
 	<attribute key="maxmanapoints" value="85" />
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="head" />
 </item>
 <item id="19185" article="um" name="Protective Helmet">
 	<attribute key="weight" value="800" />
-	<attribute key="armor" value="5" />
+	<attribute key="armor" value="15" />
 	<attribute key="maxmanapoints" value="380" />
 	<attribute key="manaGain" value="3" />
 	<attribute key="manaTicks" value="2000" />
@@ -16472,7 +16429,7 @@
 </item>
 <item id="19186" article="um" name="Majestic Helmet">
 	<attribute key="weight" value="1000" />
-	<attribute key="armor" value="7" />
+	<attribute key="armor" value="17" />
 	<attribute key="maxmanapoints" value="180" />
 	<attribute key="manaGain" value="3" />
 	<attribute key="manaTicks" value="2000" />
@@ -16481,7 +16438,7 @@
 </item>
 <item id="19187" article="um" name="Glorious Helmet">
 	<attribute key="weight" value="700" />
-	<attribute key="armor" value="5" />
+	<attribute key="armor" value="15" />
 	<attribute key="maxmanapoints" value="550" />
 	<attribute key="manaGain" value="4" />
 	<attribute key="manaTicks" value="2000" />
@@ -16490,7 +16447,7 @@
 </item>
 <item id="19188" article="um" name="Sovereign Helmet">
 	<attribute key="weight" value="1500" />
-	<attribute key="armor" value="10" />
+	<attribute key="armor" value="20" />
 	<attribute key="maxmanapoints" value="120" />
 	<attribute key="absorbPercentAll" value="2" />
 	<attribute key="healthGain" value="3" />
@@ -16499,7 +16456,7 @@
 </item>
 <item id="19189" article="um" name="Nations Helmet">
 	<attribute key="weight" value="1400" />
-	<attribute key="armor" value="8" />
+	<attribute key="armor" value="18" />
 	<attribute key="maxmanapoints" value="340" />
 	<attribute key="manaGain" value="3" />
 	<attribute key="manaTicks" value="2000" />
@@ -16512,21 +16469,21 @@
 <!-- === BOTAS (Speed + HP/Armor) === -->
 <item id="19191" article="a" name="Traveler's Boots">
 	<attribute key="weight" value="700" />
-	<attribute key="armor" value="3" />
+	<attribute key="armor" value="13" />
 	<attribute key="maxhealthpoints" value="40" />
 	<attribute key="speed" value="8" />
 	<attribute key="slotType" value="feet" />
 </item>
 <item id="19192" article="a" name="Reinforced Boots">
 	<attribute key="weight" value="900" />
-	<attribute key="armor" value="5" />
+	<attribute key="armor" value="15" />
 	<attribute key="speed" value="6" />
 	<attribute key="absorbPercentAll" value="1" />
 	<attribute key="slotType" value="feet" />
 </item>
 <item id="19193" article="a" name="Tough Boots">
 	<attribute key="weight" value="600" />
-	<attribute key="armor" value="2" />
+	<attribute key="armor" value="12" />
 	<attribute key="maxhealthpoints" value="70" />
 	<attribute key="healthGain" value="1" />
 	<attribute key="healthTicks" value="2000" />
@@ -16535,7 +16492,7 @@
 </item>
 <item id="19194" article="a" name="Improved Boots">
 	<attribute key="weight" value="700" />
-	<attribute key="armor" value="4" />
+	<attribute key="armor" value="14" />
 	<attribute key="maxhealthpoints" value="50" />
 	<attribute key="healthGain" value="2" />
 	<attribute key="healthTicks" value="2000" />
@@ -16544,14 +16501,14 @@
 </item>
 <item id="19195" article="a" name="Noble Boots">
 	<attribute key="weight" value="1100" />
-	<attribute key="armor" value="7" />
+	<attribute key="armor" value="17" />
 	<attribute key="speed" value="10" />
 	<attribute key="absorbPercentAll" value="2" />
 	<attribute key="slotType" value="feet" />
 </item>
 <item id="19196" article="a" name="Protective Boots">
 	<attribute key="weight" value="600" />
-	<attribute key="armor" value="3" />
+	<attribute key="armor" value="13" />
 	<attribute key="maxhealthpoints" value="160" />
 	<attribute key="healthGain" value="2" />
 	<attribute key="healthTicks" value="2000" />
@@ -16561,7 +16518,7 @@
 </item>
 <item id="19197" article="a" name="Majestic Boots">
 	<attribute key="weight" value="800" />
-	<attribute key="armor" value="5" />
+	<attribute key="armor" value="15" />
 	<attribute key="maxhealthpoints" value="100" />
 	<attribute key="healthGain" value="3" />
 	<attribute key="healthTicks" value="2000" />
@@ -16571,7 +16528,7 @@
 </item>
 <item id="19198" article="a" name="Glorious Boots">
 	<attribute key="weight" value="500" />
-	<attribute key="armor" value="3" />
+	<attribute key="armor" value="13" />
 	<attribute key="maxhealthpoints" value="280" />
 	<attribute key="healthGain" value="3" />
 	<attribute key="healthTicks" value="2000" />
@@ -16581,7 +16538,7 @@
 </item>
 <item id="19199" article="a" name="Sovereign Boots">
 	<attribute key="weight" value="1200" />
-	<attribute key="armor" value="9" />
+	<attribute key="armor" value="19" />
 	<attribute key="speed" value="12" />
 	<attribute key="absorbPercentAll" value="3" />
 	<attribute key="manaGain" value="3" />
@@ -16590,7 +16547,7 @@
 </item>
 <item id="19200" article="a" name="Nations Boots">
 	<attribute key="weight" value="1100" />
-	<attribute key="armor" value="6" />
+	<attribute key="armor" value="16" />
 	<attribute key="maxhealthpoints" value="180" />
 	<attribute key="healthGain" value="2" />
 	<attribute key="healthTicks" value="2000" />

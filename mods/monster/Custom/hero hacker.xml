@@ -52,5 +52,7 @@
 		<voice sentence="Me not stink!"/>
 		<voice sentence="Me other char is highlevel!"/>
 	</voices>
-	
+	<loot>
+		<item id="2148" countmax="15" chance="100000"/><!-- moedas: sempre 1 a 15 -->
+	</loot>
 </monster>

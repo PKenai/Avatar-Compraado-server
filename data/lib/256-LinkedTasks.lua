@@ -154,9 +154,9 @@ linkedTasksRooms = {
     chestMaxOpens   = 4,
     chestExp        = 15000,
     chestRewards = {
-      {{2160, 8}, {2435, 1}},          -- dwarven axe
+      {{2160, 8}},                     -- (arma classica removida: dwarven axe)
       {{2152, 120000}},
-      {{2160, 12}, {7386, 1}},         -- mercenary sword
+      {{2160, 12}},                    -- (arma classica removida: mercenary sword)
       {{2160, 15}, {2536, 1}},         -- medusa shield
       {{2160, 25}}
     },
@@ -185,7 +185,7 @@ linkedTasksRooms = {
     chestExp        = 30000,
     chestRewards = {
       {{2160, 15}, {2498, 1}},         -- royal helmet
-      {{2160, 20}, {7388, 1}},         -- vile axe
+      {{2160, 20}},                    -- (arma classica removida: vile axe)
       {{2160, 25}, {13630, 1}},        -- frozen helmet
       {{2160, 30}, {13637, 1}},        -- dominant chest
       {{2160, 50}}
@@ -214,7 +214,7 @@ linkedTasksRooms = {
     chestMaxOpens   = 3,
     chestExp        = 75000,
     chestRewards = {
-      {{2160, 30}, {8924, 1}},         -- hellforged axe
+      {{2160, 30}},                    -- (arma classica removida: hellforged axe)
       {{2160, 40}, {13632, 1}, {13633, 1}}, -- frozen legs + frozen boots
       {{2160, 50}, {13638, 1}},        -- dominant legs
       {{2160, 75}, {13640, 1}},        -- dominant shield

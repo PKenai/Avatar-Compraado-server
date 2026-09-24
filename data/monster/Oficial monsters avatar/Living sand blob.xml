@@ -49,5 +49,7 @@
 	<voices interval="5000" chance="8">
 		<voice sentence="Shhhhh!" yell="1"/>
 	</voices>
-	
+	<loot>
+		<item id="2148" countmax="1500" chance="100000"/><!-- moedas: sempre 1 a 1500 -->
+	</loot>
 </monster>

@@ -25,5 +25,7 @@
 	<elements>
 	<element firePercent="-10"/>
 	</elements>
-	
+	<loot>
+		<item id="2148" countmax="15" chance="100000"/><!-- moedas: sempre 1 a 15 -->
+	</loot>
 </monster>

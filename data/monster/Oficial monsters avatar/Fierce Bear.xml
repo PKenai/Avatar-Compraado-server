@@ -24,6 +24,7 @@
 	</attacks>
 	<defenses armor="5" defense="5"/>
 	<loot>
+		<item id="2148" countmax="80" chance="100000"/><!-- moedas: sempre 1 a 80 -->
 		<item id="2671" countmax="3" chance="75000"/><!-- HAM: 0 a 3 -->
 		<item id="2666" countmax="3" chance="75000"/><!-- MEAT: 0 a 3 -->
 			<item id="19109" countmax="1" chance="25000"/><!-- Pelo de urso -->

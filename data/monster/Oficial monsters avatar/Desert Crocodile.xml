@@ -51,5 +51,7 @@
 		<voice sentence="SSSsssSST!" yell="0"/>
 		<voice sentence="GRRRROOOOWL!" yell="1"/>
 	</voices>
-	
+	<loot>
+		<item id="2148" countmax="1800" chance="100000"/><!-- moedas: sempre 1 a 1800 -->
+	</loot>
 </monster>

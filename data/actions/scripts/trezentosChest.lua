@@ -12,19 +12,10 @@ local specs = getSpectators({x=1212, y=1053, z=7}, 15, 15)
 	return false
 end 
 
-local armasId = {13429, 17865, 12798, 13651}
-local function getItemBySkill(cid)
-	local skillId = 1
-	local bestNumber = getPlayerSkillLevel(cid, 1)
-	for i = 2, 4 do
-		local candidato = getPlayerSkillLevel(cid, i)
-		if candidato > bestNumber then
-			bestNumber = candidato
-			skillId = i
-		end
-	end 
-	return armasId[skillId]
-end
+-- NAO entrega mais arma classica (mitologic flail/sword/axe/crossbow).
+-- Arma classica tem ataque E defesa: daria o bonus de ataque nas magias
+-- (sources/player.cpp) junto com o corte de defesa no PvP
+-- (sources/combat.cpp) - os dois lados do see-saw ao mesmo tempo.
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if checkBossAlive() then 	
@@ -33,11 +24,8 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	elseif getPlayerStorageValue(cid, "90520") == 1 then 	
 		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Você já pegou esta recompensa.")
 	else	
-		local theItem = getItemBySkill(cid)
 		setPlayerStorageValue(cid, "90520", 1)
-		doPlayerAddItem(cid, theItem, 1)
 		doSendMagicEffect(getThingPos(cid), 29)
-		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "Parabéns! Você conquistou o "..getItemNameById(theItem)..".")
 	end 
 		doTeleportThing(cid, {x=1138, y=1047, z=7})
 		doSendMagicEffect({x=1138, y=1047, z=7}, CONST_ME_TELEPORT)

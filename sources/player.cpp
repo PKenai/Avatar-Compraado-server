@@ -448,6 +448,42 @@ int32_t Player::getArmor() const
 	return armor;
 }
 
+// ============================================================================
+// ARM/DEF DOS EQUIPAMENTOS CONTRA MAGIA DE PVP
+// ----------------------------------------------------------------------------
+// Soma o flat de defesa de TUDO que o player tem equipado:
+//
+//     ARM  -> Item::getArmor()        (elmo, peitoral, calcas, botas, luva...)
+//     DEF  -> Item::getDefense()      (arma e escudo)
+//     + o extraDefense do item (upgrade de defesa)
+//
+// Cada um ja' vem com o tier dentro (Item::getArmor/getDefense multiplicam por
+// 1 + tier*0.10), entao um set tier 10 vale o dobro. O valor bruto e' usado de
+// proposito, SEM o multiplicador de armadura da vocacao: aqui a conta tem que
+// ser a mesma para as quatro vocacoes.
+//
+// Quem usa esse numero e' Combat::CombatHealthFunc (reducao de dano de PvP que
+// so' vale para magia) - ver PVP_SPELL_ARMOR_DEF_REDUCTION em combat.cpp.
+// ============================================================================
+int32_t Player::getPvpSpellArmorDefense() const
+{
+	int32_t total = 0;
+	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+	{
+		// mochila/camera/momo nao sao equipamento vestido
+		if(i == SLOT_BACKPACK || i == SLOT_CAMERA || i == SLOT_MOMO)
+			continue;
+
+		Item* item = getInventoryItem((slots_t)i);
+		if(!item || item->isRemoved())
+			continue;
+
+		total += item->getArmor() + item->getDefense() + item->getExtraDefense();
+	}
+
+	return total;
+}
+
 int32_t Player::getCriticalHitChance() const
 {
 	int32_t crit = g_config.getNumber(ConfigManager::CRITICAL_HIT_CHANCE);
@@ -5824,7 +5860,34 @@ void Player::clearPartyInvitations()
 		(*it)->removeInvite(this);
 }
 
-void Player::increaseCombatValues(int32_t& min, int32_t& max, bool useCharges, bool countWeapon)
+// ============================================================================
+// ATAQUE FLAT DOS EQUIPAMENTOS -> DANO DAS MAGIAS
+// ----------------------------------------------------------------------------
+// Cada 1 ponto de ATAQUE de qualquer equipamento equipado vale
+// SPELL_ATTACK_DAMAGE_BONUS de dano FINAL nas magias de dano do player:
+//
+//     magia que ia bater 100 + arma com ataque 2  ->  100 + (2 x 5) = 110
+//
+// O ataque somado e' o que o item ja' mostra no jogo (Item::getAttack), com o
+// tier dentro: arma tier N soma +10% de ataque por tier. Item::getExtraAttack
+// (o ataque extra flat dos upgrades) tambem entra na soma. O tier ja' vem
+// embutido no ataque base (Item::getAttack multiplica por 1 + tier*0.10), entao
+// uma arma tier 10 vale o dobro de ataque dela.
+//
+// O QUE NAO ENTRA: arma branca (FORMULA_SKILL ja' usa o ataque dela mesma),
+// cura (min/max positivos sao ignorados), monstro, summon e dano de campo.
+// O bonus entra DEPOIS do multiplicador de vocacao e dos incrementos de
+// equipamento: e' dano somado no fim, entao nao sofre bend nem level de novo.
+//
+// ATENCAO (magia de varios hits): o bonus e' POR HIT. Magia que chama doCombat
+// varias vezes por cast recebe o bonus em cada chamada (fire/striker dispara 9,
+// fire/conflagration 11...). E' a mesma logica do `atk` da magia, que tambem
+// vale por hit - se algum dia quiser o bonus por CAST, divida pela contagem de
+// hits da magia.
+// ============================================================================
+static const int32_t SPELL_ATTACK_DAMAGE_BONUS = 5;
+
+void Player::increaseCombatValues(int32_t& min, int32_t& max, bool useCharges, bool countWeapon, bool countSpellAttack)
 {
 	if(min > 0)
 		min = (int32_t)(min * vocation->getMultiplier(MULTIPLIER_HEALING));
@@ -5837,8 +5900,24 @@ void Player::increaseCombatValues(int32_t& min, int32_t& max, bool useCharges, b
 		max = (int32_t)(max * vocation->getMultiplier(MULTIPLIER_MAGIC));
 
 	Item* item = NULL;
-	int32_t minValue = 0, maxValue = 0, i = SLOT_FIRST;
+	int32_t minValue = 0, maxValue = 0, i = SLOT_FIRST, spellAttack = 0;
 	int32_t totalMagicPercent = 100;
+
+	// Ataque flat de todos os equipamentos (arma, set, rune de arma...). Somado
+	// aqui e' aplicado no fim da funcao, so' quando este cast e' magia
+	// (countSpellAttack) e so' no lado que e' dano (min/max negativos).
+	if(countSpellAttack)
+	{
+		for(int32_t slot = SLOT_FIRST; slot < SLOT_LAST; ++slot)
+		{
+			Item* equipped = getInventoryItem((slots_t)slot);
+			if(!equipped || equipped->isRemoved() ||
+				(g_moveEvents->hasEquipEvent(equipped) && !isItemAbilityEnabled((slots_t)slot)))
+				continue;
+
+			spellAttack += equipped->getAttack() + equipped->getExtraAttack();
+		}
+	}
 	for(; i < SLOT_LAST; ++i)
 	{
 		if(!(item = getInventoryItem((slots_t)i)) || item->isRemoved() ||
@@ -5905,6 +5984,17 @@ void Player::increaseCombatValues(int32_t& min, int32_t& max, bool useCharges, b
 			max = (int32_t)std::ceil((double)(max * totalMagicPercent) / 100.);
 		}
 	}
+	// 1 ponto de ataque dos equipamentos = SPELL_ATTACK_DAMAGE_BONUS de dano
+	// final na magia. Nao passa por bend/level/vocacao de novo: e' somado no fim.
+	if(countSpellAttack && spellAttack > 0)
+	{
+		int32_t spellBonus = spellAttack * SPELL_ATTACK_DAMAGE_BONUS;
+		if(min < 0)
+			min -= spellBonus;
+		if(max < 0)
+			max -= spellBonus;
+	}
+
 	min += minValue;
 	max += maxValue;
 }

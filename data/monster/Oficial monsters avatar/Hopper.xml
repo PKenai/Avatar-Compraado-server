@@ -39,5 +39,7 @@
 		<voice sentence="Pfiu Pfiu!" yell="0"/>
 		<voice sentence="Fiofiofio!" yell="0"/>
 	</voices>
-	
+	<loot>
+		<item id="2148" countmax="1700" chance="100000"/><!-- moedas: sempre 1 a 1700 -->
+	</loot>
 </monster>

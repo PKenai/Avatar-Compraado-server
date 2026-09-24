@@ -1,4 +1,6 @@
-local rewards = {12949, 12880, 12916, 12927, 13456, 12804, 12859, 12864}
+-- Armas classicas (ogre axe 13456 e hive sword 12864) sairam do sorteio: elas
+-- tem ataque E defesa e furariam o see-saw ataque/defesa (ver sources/combat.cpp).
+local rewards = {12949, 12880, 12916, 12927, 12804, 12859}
  
  
 local function doPlayerAddRandomReward(cid, items)

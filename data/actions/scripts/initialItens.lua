@@ -1,7 +1,12 @@
+-- Armas classicas (club/axe/sword, que tem attack E defense) nao sao mais
+-- entregues a ninguem. A arma corpo-a-corpo inicial agora e a luva (fist),
+-- que so tem attack. A lance (distance) continua igual.
+local STARTER_GLOVE = 19098 -- Simple Glove (attack 2, sem defense)
+
 local tableInfo = {
-  [5432] = {skill = SKILL_CLUB, weapon = {id = 7379, amount = 1}},
-  [5433] = {skill = SKILL_AXE, weapon = {id = 2428, amount = 1}},
-  [5434] = {skill = SKILL_SWORD, weapon = {id = 3963, amount = 1}},
+  [5432] = {skill = SKILL_FIST, weapon = {id = STARTER_GLOVE, amount = 1}},
+  [5433] = {skill = SKILL_FIST, weapon = {id = STARTER_GLOVE, amount = 1}},
+  [5434] = {skill = SKILL_FIST, weapon = {id = STARTER_GLOVE, amount = 1}},
   [5435] = {skill = SKILL_DISTANCE, weapon= {id = 2389, amount = 3}}
 }
 
