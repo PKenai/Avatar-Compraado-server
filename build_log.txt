@@ -1,0 +1,3 @@
+
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: The intermediate directory (theforgottenserver.dir\Release\) contains files shared from another project (theforgottenserver.vcxproj).  This can lead to incorrect clean and rebuild behavior. [C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\build\theforgottenserver.vcxproj]
+  theforgottenserver.vcxproj -> C:\Users\imfis\Desktop\Avatar-Compraado-server\sources\build\Release\theforgottenserver.exe

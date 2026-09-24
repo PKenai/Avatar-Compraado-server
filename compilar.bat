@@ -14,8 +14,8 @@ rem    compilar.bat /clean     Rebuild - recompila tudo do zero
 rem    compilar.bat /check     so confere o ambiente e os caminhos, nao compila
 rem
 rem  O script:
-rem     1. acha sozinho a solucao, o MSBuild/Visual Studio, o Windows SDK
-rem        e o vcpkg;
+rem     1. acha sozinho a solucao, o MSBuild/Visual Studio, o Windows SDK,
+rem        o toolset C++ e o vcpkg;
 rem     2. ajusta os caminhos absolutos que o CMake gravou dentro dos
 rem        .vcxproj (o projeto foi gerado em outra maquina);
 rem     3. compila em Release/Win32 e loga tudo em build_log.txt;
@@ -25,10 +25,14 @@ rem  Se o vcpkg nao estiver em C:\vcpkg, mude VCPKG_ROOT abaixo.
 rem =====================================================================
 
 setlocal enabledelayedexpansion
+rem ATENCAO: o loop de argumentos usa SHIFT, e no cmd o SHIFT tambem mexe
+rem no %0 - ou seja, a pasta do script (%~dp0) deixa de valer depois disso.
+rem Por isso ela e guardada aqui, antes de qualquer shift.
+set "SCRIPT_DIR=%~dp0"
 set "PF86=%ProgramFiles(x86)%"
 set "PF=%ProgramFiles%"
 set "PSEXE=powershell -NoProfile -ExecutionPolicy Bypass"
-set "LOG=%~dp0build_log.txt"
+set "LOG=%SCRIPT_DIR%build_log.txt"
 
 rem ------------------------ CONFIGURACAO ------------------------------
 if not defined VCPKG_ROOT set "VCPKG_ROOT=C:\vcpkg"
@@ -67,12 +71,12 @@ echo.
 echo [1/6] Procurando a solucao (theforgottenserver.sln)...
 set "SLN="
 for %%P in (
-  "%~dp0theforgottenserver.sln"
-  "%~dp0sources\build\theforgottenserver.sln"
-  "%~dp0build\theforgottenserver.sln"
-  "%~dp0..\sources\build\theforgottenserver.sln"
-  "%~dp0..\build\theforgottenserver.sln"
-  "%~dp0..\..\sources\build\theforgottenserver.sln"
+  "%SCRIPT_DIR%theforgottenserver.sln"
+  "%SCRIPT_DIR%sources\build\theforgottenserver.sln"
+  "%SCRIPT_DIR%build\theforgottenserver.sln"
+  "%SCRIPT_DIR%..\sources\build\theforgottenserver.sln"
+  "%SCRIPT_DIR%..\build\theforgottenserver.sln"
+  "%SCRIPT_DIR%..\..\sources\build\theforgottenserver.sln"
 ) do if not defined SLN if exist "%%~fP" set "SLN=%%~fP"
 
 if not defined SLN (
@@ -89,8 +93,8 @@ echo [2/6] Procurando a raiz do servidor ^(onde fica o config.lua^)...
 set "SERVER_ROOT="
 if exist "%SLN_DIR%..\..\config.lua" set "SERVER_ROOT=%SLN_DIR%..\.."
 if not defined SERVER_ROOT if exist "%SLN_DIR%..\config.lua" set "SERVER_ROOT=%SLN_DIR%.."
-if not defined SERVER_ROOT if exist "%~dp0config.lua" set "SERVER_ROOT=%~dp0"
-if not defined SERVER_ROOT set "SERVER_ROOT=%~dp0"
+if not defined SERVER_ROOT if exist "%SCRIPT_DIR%config.lua" set "SERVER_ROOT=%SCRIPT_DIR%"
+if not defined SERVER_ROOT set "SERVER_ROOT=%SCRIPT_DIR%"
 for %%I in ("%SERVER_ROOT%") do set "SERVER_ROOT=%%~fI"
 if not exist "%SERVER_ROOT%\config.lua" (
   echo    [AVISO] Nao achei config.lua em %SERVER_ROOT%
@@ -140,9 +144,15 @@ echo    VS      : !VS_PATH!
 echo    MSBuild : !MSBUILD!
 
 echo.
-echo [4/6] Checando o Windows SDK...
+echo [4/6] Checando o Windows SDK e o toolset C++...
 set "SDK_WANTED="
-for /f "tokens=2 delims=<>" %%V in ('findstr /i "WindowsTargetPlatformVersion" "!SLN_DIR!theforgottenserver.vcxproj"') do if not defined SDK_WANTED set "SDK_WANTED=%%V"
+rem no vcxproj a linha vem com recuo e o valor fica depois do sinal de maior,
+rem entao o valor e o 3o token com delimitador menor/maior. O filtro [0-9]
+rem evita casar com linhas que so citam a tag, tipo Condition=Win32.
+for /f "tokens=3 delims=<>" %%V in ('findstr /i /r /c:"WindowsTargetPlatformVersion>[0-9]" "!SLN_DIR!theforgottenserver.vcxproj"') do if not defined SDK_WANTED set "SDK_WANTED=%%V"
+rem se o que foi lido nao comecar com numero, ignora e usa o SDK padrao.
+echo !SDK_WANTED!| findstr /r /c:"^[0-9]" >nul 2>&1
+if errorlevel 1 set "SDK_WANTED="
 set "SDK_ARGS="
 if defined SDK_WANTED if not exist "!PF86!\Windows Kits\10\Include\!SDK_WANTED!" (
   set "SDK_USE="
@@ -158,6 +168,34 @@ if defined SDK_WANTED if not exist "!PF86!\Windows Kits\10\Include\!SDK_WANTED!"
   )
 ) else (
   if defined SDK_WANTED (echo    SDK !SDK_WANTED! [ok]) else (echo    Nao li a versao no vcxproj, sigo com a padrao.)
+)
+
+echo.
+rem O projeto foi gerado pedindo um toolset C++ fixo. Se essa versao nao
+rem estiver instalada, o MSBuild aborta com MSB8020. Aqui eu vejo quais
+rem toolsets o Visual Studio tem e, se preciso, ja compilo com o mais novo.
+set "TOOLSETS="
+set "NEWEST_TOOLSET="
+for /f "tokens=3 delims=." %%T in ('dir /b /o-n "!VS_PATH!\VC\Auxiliary\Build\Microsoft.VCToolsVersion.v1*.default.txt" 2^>nul') do (
+  if not defined NEWEST_TOOLSET set "NEWEST_TOOLSET=%%T"
+  set "TOOLSETS=!TOOLSETS!%%T "
+)
+set "PROJ_TOOLSET="
+for /f "tokens=3 delims=<>" %%V in ('findstr /i /r /c:"PlatformToolset>v[0-9]" "!SLN_DIR!theforgottenserver.vcxproj"') do if not defined PROJ_TOOLSET set "PROJ_TOOLSET=%%V"
+set "TOOLSET_ARG="
+set "TOOLSET_OK="
+if defined TOOLSETS if defined PROJ_TOOLSET (
+  echo !TOOLSETS!| findstr /i /c:"!PROJ_TOOLSET! " >nul 2>&1
+  if not errorlevel 1 set "TOOLSET_OK=1"
+)
+if defined TOOLSET_OK (
+  echo    Toolset !PROJ_TOOLSET! [ok]
+) else if not defined PROJ_TOOLSET (
+  echo    Toolset nao lido no vcxproj, sigo com o padrao do Visual Studio.
+) else if defined NEWEST_TOOLSET (
+  echo    [AVISO] O projeto pede o toolset !PROJ_TOOLSET! e o VS tem: !TOOLSETS!
+  echo            Vou compilar com o toolset !NEWEST_TOOLSET!.
+  set "TOOLSET_ARG=/p:PlatformToolset=!NEWEST_TOOLSET!"
 )
 
 echo.
@@ -194,10 +232,17 @@ rem O .vcxproj foi gerado em outra maquina e tem caminhos fixos
 rem (C:\Users\imfis\..., C:\vcpkg, ...\Visual Studio\2022\Community\...cmake.exe).
 rem Sem isso o build quebra com MSB3073 no "Building Custom Rule".
 if defined DO_PATCH (
-  set "PATCHPS=$d='!SLN_DIR!';$newRoot='!SERVER_ROOT!';$newVS='!VS_PATH!';$newVP='!VCPKG_ROOT!';foreach($f in (Get-ChildItem -LiteralPath $d -Filter *.vcxproj -File)){ $t=[IO.File]::ReadAllText($f.FullName); $o=$t; $m=[regex]::Match($t,'([A-Za-z]:[\\/][^;<>|]*?)[\\/]sources[\\/]CMakeLists\.txt'); if($m.Success){$a=$m.Groups[1].Value; if($a -ne $newRoot){ $t=$t.Replace($a,$newRoot); $t=$t.Replace($a.Replace('\','/'),$newRoot.Replace('\','/')); Write-Host ('    raiz do projeto : '+$a+'  ->  '+$newRoot) }}; $m=[regex]::Match($t,'([A-Za-z]:[\\/][^<>|]*?)[\\/]Common7[\\/]IDE[\\/]CommonExtensions[\\/]Microsoft[\\/]CMake[\\/]CMake[\\/]bin[\\/]cmake\.exe'); if($m.Success){$a=$m.Groups[1].Value; if($a -ne $newVS){ $t=$t.Replace($a,$newVS); $t=$t.Replace($a.Replace('\','/'),$newVS.Replace('\','/')); Write-Host ('    Visual Studio   : '+$a+'  ->  '+$newVS) }}; $m=[regex]::Match($t,'([A-Za-z]:[\\/][^;<>|]*?)[\\/]installed[\\/]x86-windows'); if($m.Success){$a=$m.Groups[1].Value; if($a -ne $newVP){ $t=$t.Replace($a,$newVP); $t=$t.Replace($a.Replace('\','/'),$newVP.Replace('\','/')); Write-Host ('    vcpkg           : '+$a+'  ->  '+$newVP) }}; if($t -ne $o){ Copy-Item -LiteralPath $f.FullName -Destination ($f.FullName+'.bak-portable') -Force; [IO.File]::WriteAllText($f.FullName,$t,(New-Object System.Text.UTF8Encoding($true))); Write-Host ('    atualizado      : '+$f.Name) } }"
-  rem ^<nul evita que o PowerShell fique esperando entrada se algo der errado
-  %PSEXE% -Command "!PATCHPS!" <nul
+  set "PATCHPS=$d='!SLN_DIR!';$newRoot='!SERVER_ROOT!';$newVS='!VS_PATH!';$newVP='!VCPKG_ROOT!';$nq=[char]94;foreach($f in (Get-ChildItem -LiteralPath $d -Filter *.vcxproj -File)){ $t=[IO.File]::ReadAllText($f.FullName); $o=$t; $m=[regex]::Match($t,'([A-Za-z]:[\\/][' + $nq + ';<>|\x22\r\n]*?)[\\/]sources[\\/]CMakeLists[.]txt'); if($m.Success){$a=$m.Groups[1].Value; if($a -ne $newRoot){ $t=$t.Replace($a,$newRoot); $t=$t.Replace($a.Replace('\','/'),$newRoot.Replace('\','/')); Write-Host ('    raiz do projeto : '+$a+'  ->  '+$newRoot) }}; $m=[regex]::Match($t,'([A-Za-z]:[\\/][' + $nq + '<>|\x22\r\n]*?)[\\/]Common7[\\/]IDE[\\/]CommonExtensions[\\/]Microsoft[\\/]CMake[\\/]CMake[\\/]bin[\\/]cmake[.]exe'); if($m.Success){$a=$m.Groups[1].Value; if($a -ne $newVS){ $t=$t.Replace($a,$newVS); $t=$t.Replace($a.Replace('\','/'),$newVS.Replace('\','/')); Write-Host ('    Visual Studio   : '+$a+'  ->  '+$newVS) }}; $m=[regex]::Match($t,'([A-Za-z]:[\\/][' + $nq + ';<>|\x22\r\n]*?)[\\/]installed[\\/]x86-windows'); if($m.Success){$a=$m.Groups[1].Value; if($a -ne $newVP){ $t=$t.Replace($a,$newVP); $t=$t.Replace($a.Replace('\','/'),$newVP.Replace('\','/')); Write-Host ('    vcpkg           : '+$a+'  ->  '+$newVP) }}; if($t -ne $o){ Copy-Item -LiteralPath $f.FullName -Destination ($f.FullName+'.bak-portable') -Force; [IO.File]::WriteAllText($f.FullName,$t,(New-Object System.Text.UTF8Encoding($true))); Write-Host ('    atualizado      : '+$f.Name) } }"
+  rem O comando tem centenas de caracteres, com barras e sinais que o cmd
+  rem interpreta. Mandar tudo direto em -Command faz o cmd consumir parte do
+  rem texto e o ajuste falha em silencio. Gravando num .ps1 e chamando com
+  rem -File o texto chega intacto ao PowerShell.
+  set "PSFILE=%TEMP%\compilar_ajusta_caminhos.ps1"
+  if not defined TEMP set "PSFILE=%SCRIPT_DIR%compilar_ajusta_caminhos.ps1"
+  > "!PSFILE!" echo !PATCHPS!
+  %PSEXE% -File "!PSFILE!"
   if errorlevel 1 echo    [AVISO] Nao consegui rodar o ajuste de caminhos. Sigo tentando compilar.
+  del "!PSFILE!" >nul 2>&1
   rem marca os stamps do CMake como atualizados, senao o MSBuild tenta
   rem reconfigurar o projeto chamando o cmake da instalacao antiga.
   if exist "!SLN_DIR!CMakeFiles" (
@@ -235,7 +280,7 @@ echo.
 if defined IDE_BUILD (
   "!DEVENVCOM!" "!SLN!" /Build "%CONFIG%|%PLATFORM%" > "%LOG%" 2>&1
 ) else (
-  "!MSBUILD!" "!SLN!" /t:%TARGET% /p:Configuration=%CONFIG% /p:Platform=%PLATFORM% !SDK_ARGS! /m /nologo /v:minimal > "%LOG%" 2>&1
+  "!MSBUILD!" "!SLN!" /t:%TARGET% /p:Configuration=%CONFIG% /p:Platform=%PLATFORM% !SDK_ARGS! !TOOLSET_ARG! /m /nologo /v:minimal > "%LOG%" 2>&1
 )
 set "ERRO=!errorlevel!"
 echo ------------------------------------------------------------
@@ -248,13 +293,13 @@ if not "!ERRO!"=="0" (
   echo    [ERRO] O build falhou ^(codigo !ERRO!^).
   echo    Abra o log e procure por "error":
   echo      %LOG%
-  rem tentativa extra: se o erro foi o toolset v143 nao instalado,
-  rem tenta o toolset mais novo do proprio Visual Studio, o v144.
+  rem tentativa extra: se o erro foi toolset do projeto faltando, tento o
+  rem mais novo que este Visual Studio tem. Se ja usei um, nao repito.
   findstr /i /c:"MSB8020" "%LOG%" >nul 2>&1
-  if not errorlevel 1 if not defined IDE_BUILD (
+  if not errorlevel 1 if not defined TOOLSET_ARG if defined NEWEST_TOOLSET (
     echo.
-    echo    Toolset v143 ausente - tentando novamente com PlatformToolset=v144...
-    "!MSBUILD!" "!SLN!" /t:%TARGET% /p:Configuration=%CONFIG% /p:Platform=%PLATFORM% /p:PlatformToolset=v144 !SDK_ARGS! /m /nologo /v:minimal > "%LOG%" 2>&1
+    echo    Toolset do projeto ausente - tentando de novo com !NEWEST_TOOLSET!...
+    "!MSBUILD!" "!SLN!" /t:%TARGET% /p:Configuration=%CONFIG% /p:Platform=%PLATFORM% /p:PlatformToolset=!NEWEST_TOOLSET! !SDK_ARGS! /m /nologo /v:minimal > "%LOG%" 2>&1
     set "ERRO=!errorlevel!"
     type "%LOG%"
   )

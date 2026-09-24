@@ -282,7 +282,7 @@ pvpBlessingThreshold = 40
 fairFightTimeRange = 60
 
 experienceStages = false
-rateExperience = 200
+rateExperience = 1
 rateExperienceFromPlayers = 0.3
 rateSkill = 1
 rateMagic = 1
@@ -294,7 +294,7 @@ rateLootPercent = 0.1
 rateSpawnMin = 1
 rateSpawnMax = 1
 
-rateMonsterHealth = 1.0
+rateMonsterHealth = 1.2
 rateMonsterMana = 1.0
 rateMonsterAttack = 1.0
 rateMonsterDefense = 1.0
@@ -324,9 +324,9 @@ experienceShareActivity = 2 * 60 * 1000
 globalSaveEnabled = true
 globalSaveHour = 7
 globalSaveMinute = 0
-shutdownAtGlobalSave = false
+shutdownAtGlobalSave = true
 cleanMapAtGlobalSave = false
-closeInstanceOnShutdown = false
+closeInstanceOnShutdown = true
 
 deSpawnRange = 2
 deSpawnRadius = 50
@@ -340,7 +340,7 @@ teleportPlayerSummons = true
 statusPort = 9194
 ownerName = "Sirius"
 ownerEmail = "otavatartibia@gmail.com"
-url = "tibiaavatar.com"
+url = "avatareclipse.online"
 location = "Brazil"
 displayGamemastersWithOnlineCommand = false
 
