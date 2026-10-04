@@ -15,7 +15,7 @@ local cf = {atk = spellsInfo[spellName].atk}
 
 -- Atk usado pela Fire Wave do Fire Bender (o fallback e' o atk do proprio
 -- Water Whip, caso a entrada da Fire Wave deixe de existir no spellsInfo).
-local fireWaveAtk = (spellsInfo["fire whip"] and spellsInfo["fire whip"].atk) or cf.atk
+local fireWaveAtk = (spellsInfo["fire wave"] and spellsInfo["fire wave"].atk) or cf.atk
 
 -- Fracao do dano da Fire Wave que o Water Whip causa. 0.8 = 20% menos.
 local DAMAGE_SCALE = 0.8

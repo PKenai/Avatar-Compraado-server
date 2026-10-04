@@ -52,7 +52,14 @@
 	<action itemid="18121-18122;18124-18125;18127-18128" event="script" value="runesWeapon.lua"/>
 	<action actionid="43888" event="script" value="electricReward.lua"/>
 
+	<!-- Avatar: autoloot removido. Abrir o cadaver puxava TODOS os itens do corpo
+	     direto para a mochila do jogador (sem ele escolher nada), inclusive para
+	     quem nao tem Momo Pouch. O actionid 49631 continua sendo gravado no
+	     cadaver pela source (monster.cpp) porque e o marcador que o Momo Pouch
+	     usa para achar o corpo - mas sem script ligado aqui o corpo agora abre
+	     normalmente e o loot fica nele.
 	<action actionid="49631" event="script" value="autoloot.lua"/>
+	-->
 
 	<action actionid="36241" event="script" value="darkSubsolo/start.lua"/>
 	<action actionid="53614-53615" event="script" value="darkSubsolo/chest.lua"/>

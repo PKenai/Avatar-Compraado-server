@@ -1,5 +1,6 @@
 <#
-  subir_vps.ps1 - envia o servidor compilado aqui para a VPS (C:\Avatar),
+  subir_vps.ps1 - envia o servidor compilado aqui para a VPS, para a pasta do
+  servidor que esta' no ar (a copia da Area de Trabalho do Administrador),
   substituindo os arquivos antigos e reiniciando o servidor.
 
   Normalmente voce nao chama este .ps1 direto: use o subir_vps.bat na raiz.
@@ -21,7 +22,10 @@ param(
     [string]$Flags = '',
     [string]$Computer = '89.213.41.202',
     [string]$User = 'Administrador',
-    [string]$Destino = 'C:\Avatar',
+    # Pasta do servidor que esta' NO AR na VPS. O antigo C:\Avatar era uma copia
+    # paralela que ninguem usava (foi apagada); o servidor de verdade sempre
+    # rodou desta pasta da Area de Trabalho.
+    [string]$Destino = 'C:\Users\Administrador\Desktop\Avatar-Compraado-server',
     [string]$Tarefa = 'Avatar Server',
     [int]$Porta = 9191
 )
@@ -135,7 +139,14 @@ try {
         }
         # data\logs e' coisa que o servidor escreve NA VPS (log de console, crash).
         # Se eu mandasse a versao local por cima, eu apagaria o log de la.
-        $locais = @($locais | Where-Object { $_.Rel -notlike 'data/logs/*' })
+        # *.vps.lua e' o espelho do tool de magias e *.bak sao backups: NUNCA vao
+        # para a VPS. O engine carrega TODO *.lua de data/lib, e o
+        # 201-spellsExausted.vps.lua sobrescreveria a tabela spellsInfo inteira la'.
+        $locais = @($locais | Where-Object {
+            $_.Rel -notlike 'data/logs/*' -and
+            $_.Rel -notlike '*.vps.lua' -and
+            $_.Rel -notlike '*.bak'
+        })
 
         $mapa = @{}
         foreach ($linha in $remotos) {
@@ -155,6 +166,29 @@ try {
 
         foreach ($m in $mudados) {
             if ($m.Rel -match '^[\x20-\x7E]+$') { $enviar.Add($m.Rel) } else { $viaCopia.Add($m.Cheio) }
+        }
+    }
+
+    # Se um espelho do tool subiu numa deploy antiga, o engine o carrega e a tabela
+    # spellsInfo inteira passa a vir dele. Remove qualquer *.vps.lua de data/lib na
+    # VPS (nunca deveria existir la').
+    if (($Data -or $OnlyData) -and -not $Check) {
+        $intrusos = Invoke-Command -Session $s -ArgumentList $Destino -ScriptBlock {
+            param($d)
+            $alvo = Join-Path $d 'data\lib'
+            if (Test-Path $alvo) {
+                Get-ChildItem $alvo -File -Filter '*.vps.lua' -ErrorAction SilentlyContinue |
+                    ForEach-Object { $_.FullName }
+            }
+        }
+        if ($intrusos) {
+            Invoke-Command -Session $s -ArgumentList $intrusos -ScriptBlock {
+                param($lista)
+                foreach ($p in $lista) { Remove-Item $p -Force -ErrorAction SilentlyContinue }
+            }
+            foreach ($p in $intrusos) {
+                Write-Host ('   removido na VPS (artefato do tool, nunca deve existir la): ' + $p) -ForegroundColor Yellow
+            }
         }
     }
 
@@ -236,7 +270,7 @@ try {
         }
         if (-not $ok) {
             Write-Host '   [AVISO] o servidor nao abriu a porta a tempo; veja o log na VPS:' -ForegroundColor Yellow
-            Write-Host '           C:\Avatar\data\logs\output.log'
+            Write-Host ('           ' + $Destino + '\data\logs\output.log')
         }
         Invoke-Command -Session $s -ArgumentList $Destino -ScriptBlock {
             param($d) Get-Content (Join-Path $d 'data\logs\output.log') -Tail 3 -ErrorAction SilentlyContinue

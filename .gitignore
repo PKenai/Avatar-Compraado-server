@@ -4,3 +4,11 @@
 .vs/
 browse.vc.db
 browse.vc.vc.db
+
+# cache do Python (o forca_das_magias cria tools/__pycache__)
+__pycache__/
+*.pyc
+
+# artefatos do forca_das_magias / modo --vps (copias puxadas da VPS)
+data/lib/201-spellsExausted.vps.lua
+data/lib/201-spellsExausted.vps.lua.bak

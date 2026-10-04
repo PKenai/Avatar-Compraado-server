@@ -1,13 +1,15 @@
 local spellName = "fire explosion"
-local cf = {atk = spellsInfo[spellName].atk}
 
-local MyLocal = {}
-
+-- Um unico cf: antes havia dois "local cf" e o segundo (efeitos) sombreava o
+-- primeiro, entao cf.atk ficava nil e o atk de spellsInfo nunca era aplicado.
 local cf = {
+atk = spellsInfo[spellName].atk,
 effect = 369,
 effectExplo = 369,
 extraDano = 80
 }
+
+local MyLocal = {}
 local combatNorth = createCombatObject()
 setCombatParam(combatNorth, COMBAT_PARAM_TYPE, COMBAT_FIREDAMAGE)
 local combatSouth = createCombatObject()

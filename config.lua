@@ -255,7 +255,11 @@ saveGlobalStorage = true
 storePlayerDirection = false
 savePlayerData = true
 
-checkCorpseOwner = false
+-- Avatar: ligado. Quem bloqueava abrir o corpo dos outros era o autoloot.lua
+-- (removido de actions.xml); sem ele a checagem do Lua foi embora junto e o
+-- engine sozinho so barra se esta opcao estiver true. O dono ja e gravado no
+-- corpo pela source (monster.cpp), entao aqui so restauramos a protecao.
+checkCorpseOwner = true
 monsterLootMessage = 0
 monsterLootMessageType = 29
 

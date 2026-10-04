@@ -17,6 +17,27 @@ local cf = {atk = (spellsInfo[spellName] and spellsInfo[spellName].atk) or 500}
 local MyLocal = {}
 
 -- ===== IMUNIDADES E ALVOS VÁLIDOS =====
+-- Helpers locais: outras magias (ar/vortex, fogo/meteor) definem estes aqui.
+-- A Voltage chamava isInSameGuild como global e estourava em runtime.
+local function isInPvpZone(cid)
+    local pos = getCreaturePosition(cid)
+    if getTileInfo(pos).hardcore then
+        return true
+    end
+    return false
+end
+
+local function isInSameGuild(cid, target)
+    if isPlayer(target) and not (isInPvpZone(target) and not castleWar.isOnCastle(target)) then
+        local cidGuild = getPlayerGuildId(cid)
+        local targGuild = getPlayerGuildId(target)
+        if cidGuild > 0 and cidGuild == targGuild then
+            return true
+        end
+    end
+    return false
+end
+
 local skulls = {1, 3, 4, 5, 6}
 local function isImune(cid, creature)
     if not isCreature(creature) or not isCreature(cid) then

@@ -1,14 +1,15 @@
 -- ==========================================================
--- HUNT WAYPOINT - configuração de uma hunt
+-- HUNT WAYPOINT - configuracao de uma hunt
 -- ----------------------------------------------------------
--- O NOME DESTE ARQUIVO é o nome da criatura: "terra_beetle.lua"
--- vira a hunt "Terra beetle" (hífens/underscores = espaços).
+-- O NOME DESTE ARQUIVO e' o nome do monstro em monsters.xml:
+-- "Elephant.lua" -> hunt "Elephant". Variacoes de escrita
+-- (hifen/underscore/espaco/acento, maiusculas) sao toleradas.
 --
--- Name, sprite (looktype) e exp são buscados automaticamente do
--- monstro no servidor. O único campo obrigatório é a Location
+-- Name, sprite (looktype) e exp sao buscados automaticamente do
+-- monstro no servidor. O unico campo obrigatorio e' a Location
 -- (copie do mapa e cole).
 --
--- Campos opcionais que sobrescrevem o automático / completam o card:
+-- Campos opcionais que sobrescrevem o automatico / completam o card:
 --   ["Creature exp"] = 1500            (exp exibida)
 --   ["Recomended level"] = "25-35"     (faixa de level exibida no card)
 -- ==========================================================

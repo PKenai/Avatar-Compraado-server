@@ -13,13 +13,18 @@
 --     "path|nome~x~y~z"   ou   "nopath|nome"
 --
 -- CONFIGURAÇÃO (um arquivo .lua por hunt em data/huntwaypoint/):
---   O NOME DO ARQUIVO é o nome da criatura (hífens/underscores viram
---   espaços). Ex.: terra_beetle.lua -> "Terra beetle".
+--   O NOME DO ARQUIVO é o nome do monstro em monsters.xml:
+--   "Elephant.lua" -> hunt "Elephant". Variações de escrita são
+--   toleradas (hífen/underscore/espaço/acento, maiúsculas) —
+--   ver HuntWaypoint.resolveMonster().
 --   Name, looktype (apparence) e exp são buscados AUTOMATICAMENTE do
 --   monstro no servidor. O único campo obrigatório é a Location.
 --   Campos explícitos, se existirem, sobrescrevem o automático.
 --
---   Exemplo (terra_beetle.lua):
+--   O nome exibido no card é SEMPRE o nome do monstro (em inglês),
+--   igual ao que o jogador vê no jogo.
+--
+--   Exemplo (Elephant.lua):
 --     HuntWaypoint.register({
 --       ["Location"] = {x = 448, y = 336, z = 7},
 --     })
@@ -31,7 +36,74 @@
 HuntWaypoint = {
   opcode = 169,
   configs = {},
+  monsterIndex = {},   -- chave normalizada -> nome exato em monsters.xml
 }
+
+-- Acentos que podem aparecer no nome do arquivo da hunt.
+local ACCENT_MAP = {
+  ["á"] = "a", ["à"] = "a", ["ã"] = "a", ["â"] = "a", ["ä"] = "a", ["Á"] = "a", ["À"] = "a", ["Ã"] = "a", ["Â"] = "a", ["Ä"] = "a",
+  ["é"] = "e", ["è"] = "e", ["ê"] = "e", ["ë"] = "e", ["É"] = "e", ["È"] = "e", ["Ê"] = "e", ["Ë"] = "e",
+  ["í"] = "i", ["ì"] = "i", ["î"] = "i", ["ï"] = "i", ["Í"] = "i", ["Ì"] = "i", ["Î"] = "i", ["Ï"] = "i",
+  ["ó"] = "o", ["ò"] = "o", ["õ"] = "o", ["ô"] = "o", ["ö"] = "o", ["Ó"] = "o", ["Ò"] = "o", ["Õ"] = "o", ["Ô"] = "o", ["Ö"] = "o",
+  ["ú"] = "u", ["ù"] = "u", ["û"] = "u", ["ü"] = "u", ["Ú"] = "u", ["Ù"] = "u", ["Û"] = "u", ["Ü"] = "u",
+  ["ç"] = "c", ["Ç"] = "c", ["ñ"] = "n", ["Ñ"] = "n",
+}
+
+-- Remove acentos (byte a byte, para não quebrar o UTF-8 no meio de um char).
+local function deaccent(s)
+  return (s:gsub("[%z\1-\127\194-\244][\128-\191]*", function(ch)
+    return ACCENT_MAP[ch] or ch
+  end))
+end
+
+-- Chave de comparação: "Rock-Eating Cockroach" == "rock_eating_cockroach"
+-- == "Rock Eating Cockroach". Sobra só [a-z0-9].
+local function nameKey(name)
+  if type(name) ~= "string" then
+    return ""
+  end
+  return (deaccent(name):lower():gsub("[^%w]", ""))
+end
+
+-- Índice chave-normalizada -> nome exato. Usa getMonsterTypeList() deste
+-- servidor (LuaInterface); se a função não existir, o índice fica vazio e
+-- só o casamento exato de nome continua funcionando.
+function HuntWaypoint.buildMonsterIndex()
+  local index = {}
+  local ok, list = pcall(getMonsterTypeList)
+  if not ok or type(list) ~= "table" then
+    print("[HuntWaypoint] getMonsterTypeList() indisponivel: so casamento exato")
+    return index
+  end
+  for _, name in ipairs(list) do
+    index[nameKey(name)] = name
+  end
+  return index
+end
+
+-- getMonsterInfo() pelo nome direto e, se não achar, pela chave normalizada
+-- (tolera "Rock Eating Cockroach.lua" para o monstro "Rock-Eating Cockroach").
+-- Obs.: getMonsterInfo devolve false — não nil — quando o monstro não existe.
+function HuntWaypoint.resolveMonster(monsterName)
+  if type(monsterName) ~= "string" or monsterName == "" then
+    return nil
+  end
+
+  local ok, info = pcall(getMonsterInfo, monsterName)
+  if ok and type(info) == "table" then
+    return info
+  end
+
+  local exact = HuntWaypoint.monsterIndex[nameKey(monsterName)]
+  if exact and exact ~= monsterName then
+    ok, info = pcall(getMonsterInfo, exact)
+    if ok and type(info) == "table" then
+      return info
+    end
+  end
+
+  return nil
+end
 
 -- Aceita Location nos formatos:
 --   {x = 448, y = 336, z = 7}          (copia do mapa e cola direto)
@@ -58,7 +130,7 @@ function HuntWaypoint.parseLocation(loc)
 end
 
 -- Nome da criatura a partir do nome do arquivo do config.
--- Ex.: "terra_beetle.lua" -> "Terra beetle"
+-- Ex.: "Elephant.lua" -> "Elephant"
 function HuntWaypoint.fileMonsterName()
   -- O registro roda no topo de cada arquivo de config; o nome vem do ARQUIVO.
   -- Mas entre o config e esta funcao ha frames do proprio lib (register) e do
@@ -90,21 +162,27 @@ function HuntWaypoint.register(c)
     monsterName = "?"
   end
 
-  -- dados do monstro (case-insensitive)
+  -- dados do monstro (casamento exato ou por chave normalizada)
   local name = monsterName
   local apparence = tonumber(c["Creature apparence"] or c.apparence) or 0
   local exp = tostring(c["Creature exp"] or c.exp or "")
-  local ok, info = pcall(getMonsterInfo, monsterName)
-  if ok and type(info) == "table" then
-    if info.name and info.name ~= "" then
-      name = info.name
-    end
+  local info = HuntWaypoint.resolveMonster(monsterName)
+  if info then
     if apparence == 0 and info.outfit then
       apparence = tonumber(info.outfit.lookType) or 0
     end
     if exp == "" and info.experience then
       exp = tostring(info.experience)
     end
+    -- O card mostra o nome do MONSTRO (em inglês), igual ao que o jogador vê
+    -- no jogo — "elephant.lua" aparece como "Elephant".
+    if info.name and info.name ~= "" then
+      name = info.name
+    end
+  else
+    -- Sem monstro correspondente: mostra o nome do arquivo mesmo (só
+    -- capitalizando a 1a letra) e o resumo do loadConfigs avisa no console.
+    name = (name:gsub("^%l", string.upper))
   end
 
   local x, y, z = HuntWaypoint.parseLocation(c["Location"] or c.location)
@@ -121,10 +199,25 @@ end
 
 function HuntWaypoint.loadConfigs()
   HuntWaypoint.configs = {}
+  HuntWaypoint.monsterIndex = HuntWaypoint.buildMonsterIndex()
   local ok, err = pcall(dodirectory, getDataDir() .. "huntwaypoint")
   if not ok then
     print("[HuntWaypoint] erro ao carregar configs: " .. tostring(err))
   end
+
+  -- resumo no console: mostra na hora se alguma hunt ficou sem sprite
+  -- (arquivo com nome que nao casa com nenhum monstro de monsters.xml).
+  local semSprite = {}
+  for _, h in ipairs(HuntWaypoint.configs) do
+    if h.apparence == 0 then
+      table.insert(semSprite, h.name)
+    end
+  end
+  print(string.format("[HuntWaypoint] %d hunt(s) carregada(s)", #HuntWaypoint.configs))
+  if #semSprite > 0 then
+    print("[HuntWaypoint] sem sprite/exp (use o nome do monstro no arquivo): " .. table.concat(semSprite, ", "))
+  end
+
   -- grade sempre em ordem de level recomendado (menor faixa primeiro)
   table.sort(HuntWaypoint.configs, function(a, b)
     local va = HuntWaypoint.levelValue(a)

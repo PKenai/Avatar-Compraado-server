@@ -51,7 +51,7 @@ local earthStones = {
 }
 
 local fireStones = {
-[1]="Você aprimorou a dobra Fire Whip! Sua área de acerto agora será sempre ao redor.",--d
+[1]="Você aprimorou a dobra Fire Wave! Sua área de acerto agora será sempre ao redor.",--d
 [2]="Você aprimorou a dobra Fire Kick! Seu dano foi aumentado em 20%.",--d
 [3]="Você aprimorou a dobra Fire Skyfall! Seu cooldown foi reduzido de 10s para 8s.",--d
 [4]="Você aprimorou a dobra Fire Jump! Sua penalidade de dano foi alterada de -30% para -20% por 5s.",--d

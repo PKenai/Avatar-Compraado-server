@@ -15780,6 +15780,8 @@
 	<attribute key="maxhealthpoints" value="10"/>
 	<attribute key="healthGain" value="1"/>
 	<attribute key="healthTicks" value="1000"/>
+	<attribute key="manaGain" value="1"/>
+	<attribute key="manaTicks" value="1000"/>
 </item>
 <item id="19100" article="a" name="Sticky Glove">
 	<attribute key="weaponType" value="fist"/>

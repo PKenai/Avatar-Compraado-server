@@ -63,7 +63,7 @@ spellsInfo =
 ["fire conflagration"] = {atk = 31},
 ["fire clock"] = {atk = 51},
 ["fire discharge"] = {atk = 22},
-["fire explosion"] = {atk = 18},
+["fire explosion"] = {atk = 50}, -- 50% do dano atual (atk voltou a valer com o cf unificado)
 ["fire impulse"] = {segundos = 30},
 ["fire kick"] = {atk = 11},
 ["fire jump"] = {duracao = 5000},
@@ -76,7 +76,7 @@ spellsInfo =
 ["fire striker"] = {atk = 9},
 ["fire thunderbolt"] = {atk = 14},
 ["fire thunderstorm"] = {atk = 16},
-["fire voltage"] = {atk = 500},
+["fire voltage"] = {atk = 9}, -- ~= fire striker x1.45 no L100 (striker atk=9)
 ["fire wave"] = {atk = 220},
 ["fire whip"] = {atk = 23},
 ["fire wrath"] = {segundos = 2},

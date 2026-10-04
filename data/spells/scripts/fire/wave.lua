@@ -1,9 +1,9 @@
 -- Fire Wave: cone na direcao que o player olha (norte, sul, leste, oeste),
--- 4 direcoes apenas. Mesmo dano do antigo Fire Whip: a chave "fire whip" em
--- spellsInfo (atk 115), fireExausted e o sistema de level da magia
--- (levelFireWhip / expFireWhip) continuam valendo; mudaram so' a area e o
--- efeito.
-local spellName = "fire whip"
+-- 4 direcoes apenas. O atk vem da chave "fire wave" em spellsInfo (nome da
+-- magia; a antiga chave "fire whip" foi removida). O id interno "whip" segue
+-- valendo: fireExausted.whip, o CD da spellbar (199-ServerToDll.lua, "firewhip")
+-- e o sistema de level da magia (levelFireWhip / expFireWhip).
+local spellName = "fire wave"
 local cf = {atk = spellsInfo[spellName].atk}
 
 -- Efeito 36 em cada SQM atingido pelo cone: COMBAT_PARAM_EFFECT manda um
@@ -62,7 +62,7 @@ local areaWave = createCombatArea(AREA_WAVE)
 local areaWaveBig = createCombatArea(AREA_WAVE_BIG)
 local areaWaveElite = createCombatArea(AREA_WAVE_ELITE)
 
--- Estagio 1 (mini, <50)   : o cone curto, o Fire Whip de sempre
+-- Estagio 1 (mini, <50)   : o cone curto de sempre
 -- Estagio 2 (50-99)       : AREA_WAVE4, o cone grande
 -- Estagio 3 (elite, 100+) : o leque de 5 fileiras
 local combatWave = createWaveCombat(areaWave, 1)
